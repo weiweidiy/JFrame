@@ -1,0 +1,12 @@
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/bin/Debug/net6.0/JFrame2.0.deps.json
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/bin/Debug/net6.0/JFrame2.0.dll
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/bin/Debug/net6.0/JFrame2.0.pdb
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.csproj.AssemblyReference.cache
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.AssemblyInfoInputs.cache
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.AssemblyInfo.cs
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.csproj.CoreCompileInputs.cache
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.dll
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/refint/JFrame2.0.dll
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/JFrame2.0.pdb
+/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/obj/Debug/net6.0/ref/JFrame2.0.dll

@@ -656,6 +656,16 @@
             "related": ".xml"
           }
         }
+      },
+      "JFrame2.0/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/JFrame2.0.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/JFrame2.0.dll": {}
+        }
       }
     }
   },
@@ -2423,10 +2433,16 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
+    },
+    "JFrame2.0/1.0.0": {
+      "type": "project",
+      "path": "../JFrame2.0/JFrame2.0.csproj",
+      "msbuildProject": "../JFrame2.0/JFrame2.0.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "JFrame2.0 >= 1.0.0",
       "MSTest.TestAdapter >= 2.2.10",
       "MSTest.TestFramework >= 2.2.10",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
@@ -2459,7 +2475,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/JFrame2.0.csproj": {
+              "projectPath": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame2.0/JFrame2.0.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
