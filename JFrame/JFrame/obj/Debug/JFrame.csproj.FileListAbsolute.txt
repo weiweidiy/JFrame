@@ -1,0 +1,6 @@
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\JFrame.csproj.AssemblyReference.cache
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\JFrame.csproj.CoreCompileInputs.cache
+D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\JFrame.dll
+D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\JFrame.dll
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\JFrame.pdb
