@@ -43,7 +43,7 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        public TView Open<TView>(string goLocation, TGameObject parent) where TView : IUIView
+        public TView Open<TView>(string goLocation, TGameObject parent) where TView : IUIView, new()
         {
             //创建游戏对象
             var go = Instantiate(goLocation, parent);
@@ -58,7 +58,7 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        public async Task<TView> OpenAsync<TView>(string goLocation, TGameObject parent) where TView : IUIView
+        public async Task<TView> OpenAsync<TView>(string goLocation, TGameObject parent) where TView : IUIView, new()
         {
             //创建游戏对象
             var go = await InstantiateAsync(goLocation, parent);
@@ -72,9 +72,9 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="go"></param>
         /// <returns></returns>
-        private T BindView<T>(TGameObject go) where T : IUIView
+        private TView BindView<TView>(TGameObject go) where TView : IUIView ,new()
         {
-            return _viewBinder.BindView<T, TGameObject>(go);
+            return _viewBinder.BindView<TView, TGameObject>(go);
         }
 
         /// <summary>

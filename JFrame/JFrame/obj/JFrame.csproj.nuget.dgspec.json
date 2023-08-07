@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {}
+    "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/JFrame.csproj": {}
   },
   "projects": {
-    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+    "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/JFrame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectUniqueName": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/JFrame.csproj",
         "projectName": "JFrame",
-        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
-        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\obj\\",
+        "projectPath": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/JFrame.csproj",
+        "packagesPath": "/Users/jichunwei/.nuget/packages/",
+        "outputPath": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/jichunwei/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -57,11 +56,12 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
         }
       }
     }

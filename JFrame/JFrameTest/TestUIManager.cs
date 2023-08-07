@@ -15,15 +15,16 @@ namespace JFrameTest
 
             var instantiator = Substitute.For<IInstantiator<int>>();
             instantiator.Instantiate(prefabName, parent).Returns(2);
-            var viewBinder = Substitute.For<IViewBinder>();
+            var viewBinder = new ViewBinder();
             var uiManager = Substitute.For<UIManager<int>>(instantiator, viewBinder);
 
             //Act
-            var uiView = uiManager.Open<IUIView>(prefabName, parent);
+            var uiView = uiManager.Open<UIView>(prefabName, parent);
 
             //Assert
             instantiator.Received().Instantiate(prefabName, parent);
-            viewBinder.Received().BindView<IUIView, int>(2);
+            viewBinder.Received().BindView<UIView, int>(2);
+            uiView.Received().Bind(1);
         }
 
         /// <summary>
@@ -42,11 +43,11 @@ namespace JFrameTest
             var uiManager = Substitute.For<UIManager<int>>(instantiator, viewBinder);
 
             //Act
-            var uiView = uiManager.Open<IUIView>(prefabName, parent);
+            var uiView = uiManager.Open<UIView>(prefabName, parent);
 
             //Assert
             instantiator.Received().Instantiate(prefabName, parent);
-            viewBinder.Received().BindView<IUIView, int>(2);
+            viewBinder.Received().BindView<UIView, int>(2);
         }
     }
 }

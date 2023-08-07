@@ -6,16 +6,6 @@
     /// <typeparam name="TGameObject"></typeparam>
     public interface IViewBinder
     {
-        TScript BindView<TScript, TGameObject>(TGameObject go) where TScript : IView; 
-    }
-
-    public class ViewBinder : IViewBinder
-    {
-        public TScript BindView<TScript, TGameObject>(TGameObject go) where TScript : IView
-        {
-            var view = default(TScript);
-            view.Bind(go);
-            return view;
-        }
+        TScript BindView<TScript, TGameObject>(TGameObject go) where TScript : IView , new(); 
     }
 }

@@ -1,17 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "/NkQsKmA86tMcNsbaf7YZ5RWlFSEUxCaUjsMc4PFMXHNVc6PatDVXiuT7MXKwgjAPYvqtxw/me+m9nOPKue4Rw==",
+  "dgSpecHash": "xzKsTGE3lPzfRMNsSqc/8Ox4Kl27bQLXeCkLLhhipPvCfzieb1InpSf0fGlVyKoY9k9OJxMf+BqhmM6AOIvn/w==",
   "success": true,
-  "projectFilePath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+  "projectFilePath": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrameTest/JFrameTest.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\castle.core\\5.0.0\\castle.core.5.0.0.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\microsoft.net.test.sdk\\16.5.0\\microsoft.net.test.sdk.16.5.0.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\nsubstitute\\5.0.0\\nsubstitute.5.0.0.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512",
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512"
+    "/Users/jichunwei/.nuget/packages/castle.core/5.0.0/castle.core.5.0.0.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/microsoft.net.test.sdk/16.5.0/microsoft.net.test.sdk.16.5.0.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.3/microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.3/microsoft.netframework.referenceassemblies.net472.1.0.3.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/nsubstitute/5.0.0/nsubstitute.5.0.0.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/nunit/3.12.0/nunit.3.12.0.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/nunit3testadapter/3.16.1/nunit3testadapter.3.16.1.nupkg.sha512",
+    "/Users/jichunwei/.nuget/packages/system.threading.tasks.extensions/4.3.0/system.threading.tasks.extensions.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }
