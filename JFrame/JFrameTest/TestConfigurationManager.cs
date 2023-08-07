@@ -3,9 +3,14 @@ using JFrame.Configuration;
 using System.Text;
 using System;
 using JFrame.Core;
+using System.Collections.Generic;
 
 namespace JFrameTest
 {
+    public class Name
+    {
+        public string name;
+    }
     public class TestConfigurationManager
     {
 
@@ -27,7 +32,7 @@ namespace JFrameTest
             sb.Append("</App>");
             AppConfigContent = sb.ToString();
 
-            Console.WriteLine(AppConfigContent);
+            //Console.WriteLine(AppConfigContent);
         }
 
 
@@ -57,12 +62,31 @@ namespace JFrameTest
             var manager = new ConfigurationManager();
 
             //Act
+            manager.Load("App", AppConfigContent,"");
+
+            //Assert
+            Assert.AreEqual("a1", manager["App"]["ConfigArr"][0].GetValue());
+ 
+        }
+
+        /// <summary>
+        /// 从文件中加载
+        /// </summary>
+        [Test]
+        public void TestLoadConfigFromFile()
+        {
+            //Arrange
+            var manager = new ConfigurationManager();
+
+            //Act
             manager.Load("App", "D:/App.json", new LocalReader(), new JsonNetParaser());
 
             //Assert
-            //Assert.AreEqual("123", manager["App"]["Config"].GetValue());
             Assert.AreEqual(1, manager["App"]["MyData"]["1"].GetValue<int>("ID"));
             Assert.AreEqual("1", manager["App"]["MyData"]["2"][0].GetValue<string>("name"));
+            //var names = manager["App"]["MyData"]["2"].ToObject<List<Name>>();
         }
+
+
     }
 }

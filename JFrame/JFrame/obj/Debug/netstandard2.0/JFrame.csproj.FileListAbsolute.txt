@@ -6,3 +6,4 @@ D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
 D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache

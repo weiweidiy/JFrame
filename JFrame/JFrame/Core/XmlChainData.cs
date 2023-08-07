@@ -7,9 +7,25 @@ using System.Linq;
 
 namespace JFrame.Core
 {
+    /// <summary>
+    /// 有问题，数组索引会报错
+    /// </summary>
     public class XmlChainData : IChainData
     {
-        public IChainData this[object key] => new XmlChainData(_xmlElement[(string)key]);
+        public IChainData this[object key]
+        {
+            get
+            {
+                if (key is int)
+                {
+                    //数组索引
+                    var nodes = _xmlElement.ChildNodes;
+                    var node = nodes[(int)key];
+                    return new XmlChainData((XmlElement)node);
+                }
+                return new XmlChainData(_xmlElement[(string)key]);
+            }
+        }
 
         /// <summary>
         /// xml元素
@@ -19,6 +35,7 @@ namespace JFrame.Core
         public XmlChainData(XmlElement xmlElement)
         {
             _xmlElement = xmlElement;
+            //_xmlElement.SelectNodes
         }
 
         public override string ToString()
@@ -43,6 +60,16 @@ namespace JFrame.Core
         public object GetValue()
         {
             return _xmlElement.InnerText;
+        }
+
+        public T GetValue<T>(object attributeName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetValue<T>()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -102,14 +129,6 @@ namespace JFrame.Core
             throw new NotImplementedException();
         }
 
-        public T GetValue<T>(object key)
-        {
-            throw new NotImplementedException();
-        }
 
-        public T GetValue<T>()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
