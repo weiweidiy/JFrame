@@ -1,7 +1,7 @@
-﻿using HiplayEngine.Common.Interface;
+﻿using JFrame.Core.Interface;
 using System.Collections.Generic;
 
-namespace HiplayEngine.Configuration
+namespace JFrame.Configuration
 {
     public class Configuration : IChainData
     {

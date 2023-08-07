@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using HiplayEngine.Common.Interface;
+using JFrame.Core.Interface;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     public class GZiper : ICompress , IProcesser
     {

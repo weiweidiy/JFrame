@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using HiplayEngine.Common.Interface;
+using JFrame.Core.Interface;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     /// <summary>
     /// 本地文件删除器

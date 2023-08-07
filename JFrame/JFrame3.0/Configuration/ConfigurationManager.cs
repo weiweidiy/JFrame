@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using HiplayEngine.Common.Interface;
-using HiplayEngine.Common;
+using JFrame.Core.Interface;
+using JFrame.Core;
 
-namespace HiplayEngine.Configuration
+namespace JFrame.Configuration
 {
     /// <summary>
     /// 配置表管理器
@@ -159,8 +159,7 @@ namespace HiplayEngine.Configuration
         /// <param name="location">该配置表的源路径</param>
         /// <param name="reader">用于加载该配置表的加载器，默认为管理器自身</param>
         /// <returns></returns>
-        public ConfigurationManager RegistConfiguration(object key, string location, IReader reader = null, IParaser paraser = null 
-                                                    , IWriter writer = null)
+        public ConfigurationManager RegistConfiguration(object key, string location, IReader reader = null, IParaser paraser = null , IWriter writer = null)
         {
             IReader targetReader = reader ?? _defaultReader;
             IParaser targetParaser = paraser ?? _defaultParaser;
@@ -309,34 +308,81 @@ namespace HiplayEngine.Configuration
         public void Load(object key, string filePath, IReader reader = null, IParaser paraser = null
                                         , IWriter writer = null)
         {
-            //没注册过就注册
+            Load(key, "", filePath, reader, paraser, writer);
+            ////没注册过就注册
+            //if (!Registed(key))
+            //    RegistConfiguration(key, filePath, reader, paraser, writer);
+
+            //IReader targetReader = reader == null ? GetReader(key) : reader;
+            //IParaser targetParaser = paraser == null ? GetParaser(key) : paraser;
+
+            //if (targetReader == null)
+            //    throw new Exception("the targetReader is null, you should call SetDefaultFileReader method to set a default reader. ");
+
+            //if (targetParaser == null)
+            //    throw new Exception("the targetParaser is null, you should call SetDefaultContentParaser method to set a default paraser. ");
+
+            //byte[] bytes = null;
+            //try
+            //{
+            //    bytes = targetReader.Read(filePath);
+            //}
+            //catch(Exception e)
+            //{
+            //    throw e;
+            //}
+            
+            //if (bytes == null)
+            //    return;
+
+            //string content = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            ////Console.WriteLine(content);
+            ////更新配置数据
+            //UpdateConfiguration(key, new Configuration(content, targetParaser));
+        }
+
+        /// <summary>
+        /// 直接加载一段文本
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="text"></param>
+        /// <param name="reader"></param>
+        /// <param name="paraser"></param>
+        /// <param name="writer"></param>
+        public void Load(object key, string content, string filePath = "", IReader reader = null, IParaser paraser = null, IWriter writer = null)
+        {
             if (!Registed(key))
                 RegistConfiguration(key, filePath, reader, paraser, writer);
 
-            IReader targetReader = reader == null ? GetReader(key) : reader;
+            //获取目标解析器
             IParaser targetParaser = paraser == null ? GetParaser(key) : paraser;
 
-            if (targetReader == null)
-                throw new Exception("the targetReader is null, you should call SetDefaultFileReader method to set a default reader. ");
-
-            if (targetParaser == null)
-                throw new Exception("the targetParaser is null, you should call SetDefaultContentParaser method to set a default paraser. ");
-
-            byte[] bytes = null;
-            try
+            if (content == null || content == "")
             {
-                bytes = targetReader.Read(filePath);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-            
-            if (bytes == null)
-                return;
+                IReader targetReader = reader == null ? GetReader(key) : reader;
 
-            string content = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-            //Console.WriteLine(content);
+                if (targetReader == null)
+                    throw new Exception("the targetReader is null, you should call SetDefaultFileReader method to set a default reader. ");
+
+                if (targetParaser == null)
+                    throw new Exception("the targetParaser is null, you should call SetDefaultContentParaser method to set a default paraser. ");
+
+                byte[] bytes = null;
+                try
+                {
+                    bytes = targetReader.Read(filePath);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+                if (bytes == null)
+                    return;
+
+                content = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            }
+               
             //更新配置数据
             UpdateConfiguration(key, new Configuration(content, targetParaser));
         }
@@ -448,6 +494,15 @@ namespace HiplayEngine.Configuration
             string content = configuration.ToString();
 
             targetWriter.Write(targetLocation, content , Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// 获取注册的数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetRegistCount()
+        {
+            return _dicFilePath.Count;
         }
 
         #region 私有方法

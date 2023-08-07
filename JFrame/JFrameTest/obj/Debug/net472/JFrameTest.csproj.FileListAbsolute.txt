@@ -1,0 +1,17 @@
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\NUnit3.TestAdapter.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\NUnit3.TestAdapter.pdb
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\nunit.engine.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\nunit.engine.api.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrameTest.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrameTest.pdb
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\nunit.framework.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame3.0.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame3.0.pdb
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.AssemblyReference.cache
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.AssemblyInfoInputs.cache
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.AssemblyInfo.cs
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.CoreCompileInputs.cache
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.CopyComplete
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.pdb

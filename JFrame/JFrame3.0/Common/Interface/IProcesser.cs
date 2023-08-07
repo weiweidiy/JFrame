@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HiplayEngine.Common.Interface
+namespace JFrame.Core.Interface
 {
     /// <summary>
     /// 数据加工器

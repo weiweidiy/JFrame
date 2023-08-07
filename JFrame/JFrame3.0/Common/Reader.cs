@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using HiplayEngine.Common.Interface;
+using JFrame.Core.Interface;
 using System.Linq;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     public abstract class Reader : IReader
     {

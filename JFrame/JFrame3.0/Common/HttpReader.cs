@@ -1,4 +1,4 @@
-﻿using HiplayEngine.Common.Interface;
+﻿using JFrame.Core.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     /// <summary>
     /// 远程Http加载配置 to do: 添加httpRequest类 负责实际的请求

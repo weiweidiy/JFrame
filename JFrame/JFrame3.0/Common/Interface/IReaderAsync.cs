@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HiplayEngine.Common.Interface
+namespace JFrame.Core.Interface
 {
     public interface IReaderAsync
     {

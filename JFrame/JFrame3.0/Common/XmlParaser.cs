@@ -1,11 +1,11 @@
-﻿using HiplayEngine.Common.Interface;
+﻿using JFrame.Core.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     public class XmlParaser : IParaser
     {

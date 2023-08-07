@@ -1,4 +1,4 @@
-﻿using HiplayEngine.Common.Interface;
+﻿using JFrame.Core.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     /// <summary>
     /// 本地文件加载器

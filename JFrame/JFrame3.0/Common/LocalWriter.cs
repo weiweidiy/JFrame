@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HiplayEngine.Common.Interface;
+using JFrame.Core.Interface;
 
-namespace HiplayEngine.Common
+namespace JFrame.Core
 {
     public class LocalWriter : Writer
     {
