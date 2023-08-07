@@ -16,3 +16,6 @@ D:\JcwProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.pdb
 D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\Newtonsoft.Json.dll
 D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\Castle.Core.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\NSubstitute.dll
+D:\JcwProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Threading.Tasks.Extensions.dll
