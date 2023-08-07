@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JFrame3.0\JFrame3.0.csproj" />
+    <ProjectReference Include="..\JFrame\JFrame.csproj" />
   </ItemGroup>
 
 </Project>

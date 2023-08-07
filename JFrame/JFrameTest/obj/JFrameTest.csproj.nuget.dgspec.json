@@ -4,14 +4,71 @@
     "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {}
   },
   "projects": {
-    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\JFrame3.0.csproj": {
+    "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\JFrame3.0.csproj",
-        "projectName": "JFrame3.0",
-        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\JFrame3.0.csproj",
+        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+        "projectName": "JFrameTest",
+        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
         "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\obj\\",
+        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {
+              "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+                "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.16.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectName": "JFrame",
+        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
+        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +102,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -57,63 +118,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-        "projectName": "JFrameTest",
-        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net472"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net472": {
-            "targetAlias": "net472",
-            "projectReferences": {
-              "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\JFrame3.0.csproj": {
-                "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame3.0\\JFrame3.0.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net472": {
-          "targetAlias": "net472",
-          "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.5.0, )"
-            },
-            "NUnit": {
-              "target": "Package",
-              "version": "[3.12.0, )"
-            },
-            "NUnit3TestAdapter": {
-              "target": "Package",
-              "version": "[3.16.1, )"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
         }
       }

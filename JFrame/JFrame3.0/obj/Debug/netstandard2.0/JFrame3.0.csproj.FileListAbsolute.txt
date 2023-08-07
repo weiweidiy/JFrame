@@ -1,9 +1,0 @@
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\bin\Debug\netstandard2.0\JFrame3.0.deps.json
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\bin\Debug\netstandard2.0\JFrame3.0.dll
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\bin\Debug\netstandard2.0\JFrame3.0.pdb
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.csproj.AssemblyReference.cache
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.AssemblyInfoInputs.cache
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.AssemblyInfo.cs
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.csproj.CoreCompileInputs.cache
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.dll
-D:\JcwProjects\JFrame\JFrame\JFrame3.0\obj\Debug\netstandard2.0\JFrame3.0.pdb

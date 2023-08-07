@@ -2,6 +2,7 @@ using NUnit.Framework;
 using JFrame.Configuration;
 using System.Text;
 using System;
+using JFrame.Core;
 
 namespace JFrameTest
 {
@@ -56,11 +57,12 @@ namespace JFrameTest
             var manager = new ConfigurationManager();
 
             //Act
-            manager.Load("App", AppConfigContent,"");
+            manager.Load("App", "D:/App.json", new LocalReader(), new JsonNetParaser());
 
             //Assert
             //Assert.AreEqual("123", manager["App"]["Config"].GetValue());
-            Assert.AreEqual("456", manager["App"]["ConfigArr"]["0"].ToString());
+            Assert.AreEqual(1, manager["App"]["MyData"]["1"].GetValue<int>("ID"));
+            Assert.AreEqual("1", manager["App"]["MyData"]["2"][0].GetValue<string>("name"));
         }
     }
 }
