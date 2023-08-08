@@ -6,7 +6,16 @@ namespace JFrameTest
 {
     public interface UnityGameObject
     {
+        void AddChild(UnityGameObject go);
+    }
 
+    public class UnityUIManager : UIManager<UnityGameObject>
+    {
+        public UnityUIManager(IInstantiator<UnityGameObject> instantiator, IViewBinder<UnityGameObject> viewBinder) : base(instantiator, viewBinder) { }
+        protected override void SetRelationship(UnityGameObject parent, IUIView child)
+        {
+            //parent.AddChild(child);
+        }
     }
 
     public class TestUIManager
@@ -54,6 +63,7 @@ namespace JFrameTest
             var go = Substitute.For<UnityGameObject>();
             var parent = Substitute.For<UnityGameObject>();   
             
+            
             //模拟实例化器
             var instantiator = Substitute.For<IInstantiator<UnityGameObject>>();
             instantiator.Instantiate(prefabName, parent).Returns(go);
@@ -62,7 +72,7 @@ namespace JFrameTest
             viewBinder.BindView<IUIView>(go).Returns(view);
             //模拟ui管理器
             var uiManager = Substitute.For<UIManager<UnityGameObject>>(instantiator, viewBinder);
-            
+
 
             //Act
             var ui = uiManager.Open<IUIView>(prefabName, parent);
