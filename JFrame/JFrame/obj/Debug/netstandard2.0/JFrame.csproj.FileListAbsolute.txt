@@ -1,12 +1,3 @@
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.AssemblyInfoInputs.cache
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.AssemblyInfo.cs
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.csproj.CoreCompileInputs.cache
-D:/JcwProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.deps.json
-D:/JcwProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.dll
-D:/JcwProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.pdb
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.dll
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.pdb
-D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.csproj.AssemblyReference.cache
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.deps.json
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.dll
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/bin/Debug/netstandard2.0/JFrame.pdb
@@ -17,3 +8,12 @@ D:/JcwProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.csproj.Assem
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.csproj.CoreCompileInputs.cache
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.dll
 /Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/obj/Debug/netstandard2.0/JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfoInputs.cache
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfo.cs
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.CoreCompileInputs.cache
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.deps.json
+D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
+D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache

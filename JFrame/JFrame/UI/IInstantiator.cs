@@ -2,9 +2,9 @@
 
 namespace JFrame.UI
 {
-    public interface IInstantiator<TGameObject>
+    public interface IInstantiator
     {
-        TGameObject Instantiate(string location , TGameObject parent);
-        Task<TGameObject> InstantiateAsync(string goLocation, TGameObject parent);
+        IGameObject Instantiate(string location , IGameObject parent);
+        Task<IGameObject> InstantiateAsync(string goLocation, IGameObject parent);
     }
 }

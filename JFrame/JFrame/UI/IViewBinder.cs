@@ -6,6 +6,19 @@
     /// <typeparam name="TGameObject"></typeparam>
     public interface IViewBinder
     {
-        TScript BindView<TScript, TGameObject>(TGameObject go) where TScript : IView , new(); 
+        /// <summary>
+        /// 绑定游戏对象和脚本
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="go"></param>
+        /// <returns></returns>
+        T BindView<T>(IGameObject go) where T : IView;
+
+        /// <summary>
+        /// 创建脚本
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T Create<T>() where T : IView;
     }
 }

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pTel7H+OSNbNkoECYUJEOiR3krpyil6BR3yW0d0mJgXNMlb4s1HrG0ALMkusxt3FjFeJUwPUGW1KTwxBZ1iU8g==",
+  "dgSpecHash": "F4zSNOo8q20QJ2Q9HtsvEkVKrYcu/cwGz7ps5HasGWlekegzk836eluhDqRLx7/UqdyQWkl7yPf8Waco4rbrrQ==",
   "success": true,
-  "projectFilePath": "/Users/jichunwei/Desktop/MyProjects/JFrame/JFrame/JFrame/JFrame.csproj",
+  "projectFilePath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
   "expectedPackageFiles": [
-    "/Users/jichunwei/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "/Users/jichunwei/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512",
-    "/Users/jichunwei/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\JiChunWei\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\JiChunWei\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\JiChunWei\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

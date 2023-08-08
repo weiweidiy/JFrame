@@ -4,50 +4,81 @@ using NSubstitute;
 
 namespace JFrameTest
 {
+    //public class realGo
+    //{
+
+    //}
+
+    //public class UnityUIView : UIView<realGo>
+    //{
+
+    //}
+
+    //public class UnityGameObject : JGameObject<realGo>
+    //{
+
+    //}
+
     public class TestUIManager
     {
+
+        /// <summary>
+        /// 打开ui，并进行正确的调用
+        /// </summary>
         [Test]
         public void TestOpenUI()
         {
+
             //Arrange
             string prefabName = "login";
-            int parent = 1;
-
-            var instantiator = Substitute.For<IInstantiator<int>>();
-            instantiator.Instantiate(prefabName, parent).Returns(2);
-            var viewBinder = new ViewBinder();
-            var uiManager = Substitute.For<UIManager<int>>(instantiator, viewBinder);
+            var parent = Substitute.For<IGameObject>();
+            var view = Substitute.For<IUIView>();
+            var go = Substitute.For<IGameObject>();
+            //模拟实例化器
+            var instantiator = Substitute.For<IInstantiator>();
+            instantiator.Instantiate(prefabName, parent).Returns(go);
+            //模拟绑定器
+            var viewBinder = Substitute.For<IViewBinder>();
+            viewBinder.BindView<IUIView>(go).Returns(view);
+            //模拟ui管理器
+            var uiManager = Substitute.For<UIManager>(instantiator, viewBinder);
 
             //Act
-            var uiView = uiManager.Open<UIView>(prefabName, parent);
+            uiManager.Open<IUIView>(prefabName, parent);
 
             //Assert
             instantiator.Received().Instantiate(prefabName, parent);
-            viewBinder.Received().BindView<UIView, int>(2);
-            uiView.Received().Bind(1);
+            viewBinder.Received().BindView<IUIView>(go);
+
         }
 
         /// <summary>
-        /// 测试正确打开，并正确的层级
+        /// 测试正确打开，并正确的父节点和子节点
         /// </summary>
         [Test]
         public void TestOpenUIAndCorrectRecorgenize()
         {
             //Arrange
             string prefabName = "login";
-            int parent = 1;
-
-            var instantiator = Substitute.For<IInstantiator<int>>();
-            instantiator.Instantiate(prefabName, parent).Returns(2);
+            var view = Substitute.For<IUIView>();
+            var go = Substitute.For<IGameObject>();
+            var parent = Substitute.For<IGameObject>();   
+            
+            //模拟实例化器
+            var instantiator = Substitute.For<IInstantiator>();
+            instantiator.Instantiate(prefabName, parent).Returns(go);
+            //模拟绑定器
             var viewBinder = Substitute.For<IViewBinder>();
-            var uiManager = Substitute.For<UIManager<int>>(instantiator, viewBinder);
+            viewBinder.BindView<IUIView>(go).Returns(view);
+            //模拟ui管理器
+            var uiManager = Substitute.For<UIManager>(instantiator, viewBinder);
 
             //Act
-            var uiView = uiManager.Open<UIView>(prefabName, parent);
+            var ui = uiManager.Open<IUIView>(prefabName, parent);
 
             //Assert
-            instantiator.Received().Instantiate(prefabName, parent);
-            viewBinder.Received().BindView<UIView, int>(2);
+            view.Received().Parent = parent;
+            parent.Received().AddChild(view);
         }
     }
 }
