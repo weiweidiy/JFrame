@@ -40,7 +40,6 @@ namespace JFrameTest
             //Assert
             instantiator.Received().Instantiate(prefabName, parent);
             viewBinder.Received().BindView<IUIView>(go);
-
         }
 
         /// <summary>
@@ -63,6 +62,7 @@ namespace JFrameTest
             viewBinder.BindView<IUIView>(go).Returns(view);
             //模拟ui管理器
             var uiManager = Substitute.For<UIManager<UnityGameObject>>(instantiator, viewBinder);
+            
 
             //Act
             var ui = uiManager.Open<IUIView>(prefabName, parent);

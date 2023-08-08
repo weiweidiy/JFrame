@@ -9,22 +9,22 @@ namespace JFrame.UI
     /// UI管理器
     /// </summary>
     /// <typeparam name="TGameObject">游戏对象类型，例：Unity的就是 GameObject </typeparam>
-    public abstract class UIManager<TGameObject> : IUIManager<TGameObject>
+    public abstract class UIManager<TGameObject> : IUIManager<TGameObject> , IDisposable
     {
         /// <summary>
         /// 实例化器
         /// </summary>
-        IInstantiator<TGameObject> _instantiator;
+        IInstantiator<TGameObject> instantiator;
 
         /// <summary>
         /// 脚本绑定器
         /// </summary>
-        IViewBinder<TGameObject> _viewBinder;
+        IViewBinder<TGameObject> viewBinder;
 
         /// <summary>
         /// UIRoot
         /// </summary>
-        TGameObject _root;
+        protected TGameObject root;
 
         /// <summary>
         /// 构造函数
@@ -33,8 +33,27 @@ namespace JFrame.UI
         /// <param name="viewBinder"></param>
         public UIManager(IInstantiator<TGameObject> instantiator, IViewBinder<TGameObject> viewBinder)
         {
-            _instantiator = instantiator;
-            _viewBinder = viewBinder;
+            this.instantiator = instantiator;
+            this.viewBinder = viewBinder;
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="root"></param>
+        public void Initialize(TGameObject root)
+        {
+            this.root = root;
+        }
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            root = default(TGameObject);
+            instantiator = null;
+            viewBinder = null;
         }
 
         /// <summary>
@@ -76,8 +95,6 @@ namespace JFrame.UI
         /// </summary>
         protected abstract void SetRelationship(TGameObject parent, IUIView child);
 
-
-
         /// <summary>
         /// 实例化一个可视对象
         /// </summary>
@@ -85,7 +102,7 @@ namespace JFrame.UI
         /// <returns></returns>
         private TGameObject Instantiate(string goLocation, TGameObject parent)
         {
-            return _instantiator.Instantiate(goLocation, parent);
+            return instantiator.Instantiate(goLocation, parent);
         }
 
         /// <summary>
@@ -95,7 +112,7 @@ namespace JFrame.UI
         /// <returns></returns>
         private Task<TGameObject> InstantiateAsync(string goLocation, TGameObject parent)
         {
-            return _instantiator.InstantiateAsync(goLocation, parent);
+            return instantiator.InstantiateAsync(goLocation, parent);
         }
 
         /// <summary>
@@ -106,10 +123,8 @@ namespace JFrame.UI
         /// <returns></returns>
         private T BindView<T>(TGameObject go) where T : IUIView
         {
-            return _viewBinder.BindView<T>(go);
+            return viewBinder.BindView<T>(go);
         }
-
-        
 
 
     }
