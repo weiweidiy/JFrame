@@ -17,9 +17,9 @@ namespace JFrameTest
         public void TestBinderGameObject()
         {
             //Arrange
-            var go = Substitute.For<IGameObject>();
+            var go = Substitute.For<UnityGameObject>();
             var view = Substitute.For<IView>();
-            var binder = Substitute.For<ViewBinder>();
+            var binder = Substitute.For<ViewBinder<UnityGameObject>>();
             binder.Create<IView>().Returns(view);
 
             //Act

@@ -2,9 +2,27 @@
 
 namespace JFrame.UI
 {
-    public interface IInstantiator
+    public interface IInstantiator<T>
     {
-        IGameObject Instantiate(string location , IGameObject parent);
-        Task<IGameObject> InstantiateAsync(string goLocation, IGameObject parent);
+        T Instantiate(string location , T parent);
+        Task<T> InstantiateAsync(string goLocation, T parent);
     }
+
+    //public class UnityIns : IInstantiator<Go>
+    //{
+    //    public Go Instantiate(string location, Go parent)
+    //    {
+    //        throw new System.NotImplementedException();
+    //    }
+
+    //    public Task<Go> InstantiateAsync(string goLocation, Go parent)
+    //    {
+    //        throw new System.NotImplementedException();
+    //    }
+    //}
+
+    //public class Go
+    //{
+
+    //}
 }

@@ -9,29 +9,29 @@ namespace JFrame.UI
     /// UI管理器
     /// </summary>
     /// <typeparam name="TGameObject">游戏对象类型，例：Unity的就是 GameObject </typeparam>
-    public abstract class UIManager
+    public abstract class UIManager<TGameObject> : IUIManager<TGameObject>
     {
         /// <summary>
         /// 实例化器
         /// </summary>
-        IInstantiator _instantiator;
+        IInstantiator<TGameObject> _instantiator;
 
         /// <summary>
         /// 脚本绑定器
         /// </summary>
-        IViewBinder _viewBinder;
+        IViewBinder<TGameObject> _viewBinder;
 
         /// <summary>
         /// UIRoot
         /// </summary>
-        IGameObject _root;
+        TGameObject _root;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="instantiator"></param>
         /// <param name="viewBinder"></param>
-        public UIManager(IInstantiator instantiator, IViewBinder viewBinder)
+        public UIManager(IInstantiator<TGameObject> instantiator, IViewBinder<TGameObject> viewBinder)
         {
             _instantiator = instantiator;
             _viewBinder = viewBinder;
@@ -43,7 +43,7 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        public T Open<T>(string goLocation, IGameObject parent) where T : IUIView
+        public T Open<T>(string goLocation, TGameObject parent) where T : IUIView
         {
             //创建游戏对象
             var go = Instantiate(goLocation, parent);
@@ -63,7 +63,7 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        public async Task<T> OpenAsync<T>(string goLocation, IGameObject parent) where T : IUIView, new()
+        public async Task<T> OpenAsync<T>(string goLocation, TGameObject parent) where T : IUIView, new()
         {
             //创建游戏对象
             var go = await InstantiateAsync(goLocation, parent);
@@ -71,13 +71,19 @@ namespace JFrame.UI
             return BindView<T>(go);
         }
 
+        /// <summary>
+        /// 设置父子关系,子类实现
+        /// </summary>
+        protected abstract void SetRelationship(TGameObject parent, IUIView child);
+
+
 
         /// <summary>
         /// 实例化一个可视对象
         /// </summary>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        private IGameObject Instantiate(string goLocation, IGameObject parent)
+        private TGameObject Instantiate(string goLocation, TGameObject parent)
         {
             return _instantiator.Instantiate(goLocation, parent);
         }
@@ -87,11 +93,10 @@ namespace JFrame.UI
         /// </summary>
         /// <param name="goLocation"></param>
         /// <returns></returns>
-        private Task<IGameObject> InstantiateAsync(string goLocation, IGameObject parent)
+        private Task<TGameObject> InstantiateAsync(string goLocation, TGameObject parent)
         {
             return _instantiator.InstantiateAsync(goLocation, parent);
         }
-
 
         /// <summary>
         /// 绑定游戏对象和脚本的接口
@@ -99,18 +104,13 @@ namespace JFrame.UI
         /// <typeparam name="T"></typeparam>
         /// <param name="go"></param>
         /// <returns></returns>
-        private T BindView<T>(IGameObject go) where T : IUIView
+        private T BindView<T>(TGameObject go) where T : IUIView
         {
             return _viewBinder.BindView<T>(go);
         }
 
-        /// <summary>
-        /// 设置父子关系
-        /// </summary>
-        private void SetRelationship(IGameObject parent, IGameObject child)
-        {
-            child.Parent = parent;
-            parent.AddChild(child);
-        }
+        
+
+
     }
 }
