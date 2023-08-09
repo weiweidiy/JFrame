@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Core.Interface;
-using JFrame.Core;
+using JFrame.Common.Interface;
+using JFrame.Common;
 
 namespace JFrame.Configuration
 {

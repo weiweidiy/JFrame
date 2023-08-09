@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using JFrame.Core.Interface;
+using JFrame.Common.Interface;
 using Newtonsoft.Json;
 
-namespace JFrame.Core
+namespace JFrame.Common
 {
     public class JsonNetChainData : IChainData
     {

@@ -1,4 +1,4 @@
-﻿using JFrame.Core.Interface;
+﻿using JFrame.Common.Interface;
 using System.Collections.Generic;
 
 namespace JFrame.Configuration

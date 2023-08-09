@@ -2,7 +2,7 @@ using NUnit.Framework;
 using JFrame.Configuration;
 using System.Text;
 using System;
-using JFrame.Core;
+using JFrame.Common;
 using System.Collections.Generic;
 
 namespace JFrameTest
