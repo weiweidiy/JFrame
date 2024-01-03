@@ -8,10 +8,14 @@
           "System.Configuration"
         ],
         "compile": {
-          "lib/net462/Castle.Core.dll": {}
+          "lib/net462/Castle.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net462/Castle.Core.dll": {}
+          "lib/net462/Castle.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.CodeCoverage/16.5.0": {
@@ -43,10 +47,14 @@
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NSubstitute/5.0.0": {
@@ -56,19 +64,27 @@
           "System.Threading.Tasks.Extensions": "4.3.0"
         },
         "compile": {
-          "lib/net462/NSubstitute.dll": {}
+          "lib/net462/NSubstitute.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net462/NSubstitute.dll": {}
+          "lib/net462/NSubstitute.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NUnit/3.12.0": {
         "type": "package",
         "compile": {
-          "lib/net45/nunit.framework.dll": {}
+          "lib/net45/nunit.framework.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/nunit.framework.dll": {}
+          "lib/net45/nunit.framework.dll": {
+            "related": ".pdb;.xml"
+          }
         },
         "build": {
           "build/NUnit.props": {}
@@ -83,10 +99,14 @@
       "System.Threading.Tasks.Extensions/4.3.0": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {}
+          "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {}
+          "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "JFrame/1.0.0": {
@@ -318,19 +338,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "projectUniqueName": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
       "projectName": "JFrameTest",
-      "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-      "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-      "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrameTest\\obj\\",
+      "projectPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -344,8 +364,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
-              "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+            "E:\\UnityGames\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+              "projectPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
             }
           }
         }
@@ -377,7 +397,7 @@
             "version": "[3.16.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.426\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
