@@ -338,19 +338,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\JiChunWei\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "projectUniqueName": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
       "projectName": "JFrameTest",
-      "projectPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrameTest\\obj\\",
+      "projectPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
+      "outputPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -364,8 +364,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "E:\\UnityGames\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
-              "projectPath": "E:\\UnityGames\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+            "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+              "projectPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
             }
           }
         }
@@ -397,7 +397,7 @@
             "version": "[3.16.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

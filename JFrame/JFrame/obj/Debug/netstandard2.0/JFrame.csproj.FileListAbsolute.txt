@@ -17,3 +17,14 @@ D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.deps.json
 D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
 D:\JcwProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.deps.json
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GeneratedMSBuildEditorConfig.editorconfig
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfoInputs.cache
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfo.cs
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.CoreCompileInputs.cache
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
+D:\JcwProjects\JFrameCompany\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using JFrame.Common.Interface;
 
 namespace JFrame
 {
-
     /// <summary>
     /// 事件管理器：
     /// 1-按添加监听的顺序分发事件
@@ -28,6 +28,12 @@ namespace JFrame
         /// 用于查询委托
         /// </summary>
         Dictionary<Delegate, HandlerWrapper> lookup = new Dictionary<Delegate, HandlerWrapper>();
+
+        /// <summary>
+        /// 事件对象池
+        /// </summary>
+        protected IObjectPool eventsPool = null;
+
 
         /// <summary>
         /// 添加事件监听
@@ -89,6 +95,33 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 获取空的事件对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetEvent<T>() where T : Event, new()
+        {
+            if (eventsPool != null)
+                return eventsPool.Get<T>((e) => 
+                { 
+                    e.Body = null;
+                    e.Handled = false;
+                });
+
+            return new T();
+        }
+
+        /// <summary>
+        /// 返还事件对象
+        /// </summary>
+        /// <param name="e"></param>
+        void ReturnEvent(Event e)
+        {
+            if (eventsPool != null)
+                eventsPool.Return(e);
+        }
+
+        /// <summary>
         /// 发出事件
         /// </summary>
         /// <param name="e"></param>
@@ -114,6 +147,8 @@ namespace JFrame
                     }
                 }
             }
+
+            ReturnEvent(e);
         }
 
         /// <summary>
@@ -134,6 +169,13 @@ namespace JFrame
                 return 0;
             }
         }
+
+        public EventManager(IObjectPool eventsPool)
+        {
+            this.eventsPool = eventsPool;
+        }
+
+        public EventManager() : this(null) { }
     }
 
     /// <summary>
