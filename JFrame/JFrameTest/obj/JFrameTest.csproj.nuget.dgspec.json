@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {}
+    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {}
   },
   "projects": {
-    "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
+    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
         "projectName": "JFrameTest",
-        "projectPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
         "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrameTest\\obj\\",
+        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net472": {
             "targetAlias": "net472",
             "projectReferences": {
-              "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
-                "projectPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+              "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+                "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
               }
             }
           }
@@ -65,14 +65,14 @@
         }
       }
     },
-    "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+    "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
         "projectName": "JFrame",
-        "projectPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
         "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "D:\\JcwProjects\\JFrameCompany\\JFrame\\JFrame\\JFrame\\obj\\",
+        "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",

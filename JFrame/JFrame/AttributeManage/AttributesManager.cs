@@ -6,6 +6,7 @@ using System.Text;
 
 namespace JFrame.AttributeManage
 {
+
     public class AttributesManager
     {
         /// <summary>
