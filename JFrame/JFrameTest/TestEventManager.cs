@@ -18,6 +18,7 @@ namespace JFrameTest
         [Test]
         public void TestRecieveEventCorrect()
         {
+            
             //arrange
             var eventManager = new EventManager();
             bool called = false;
