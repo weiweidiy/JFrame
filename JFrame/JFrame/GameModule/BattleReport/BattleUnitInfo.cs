@@ -9,4 +9,10 @@ namespace JFrame
         public int hp;
         public int atk;
     }
+
+    public struct BattleUnitAttribute
+    {
+        public int hp;
+        public int atk;
+    }
 }

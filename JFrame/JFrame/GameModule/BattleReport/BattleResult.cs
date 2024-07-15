@@ -5,9 +5,18 @@
     /// </summary>
     public class BattleResult
     {
+        BattleTeam leftTeam;
+        BattleTeam rightTeam;
+
+        public BattleResult(BattleTeam left, BattleTeam right)
+        {
+            leftTeam = left;
+            rightTeam = right;
+        }
+
         public bool IsOver()
         {
-            return false;
+            return leftTeam.IsAllDead() || rightTeam.IsAllDead();
         }
 
         public BattleTeam GetWinner()

@@ -2,7 +2,9 @@
 //using NUnit.Framework;
 using JFrame;
 using NSubstitute;
+using NSubstitute.Core.Arguments;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace JFrameTest
@@ -18,9 +20,9 @@ namespace JFrameTest
         public void SetUp()
         {
             battle = new PVPBattleManager();
-            attacker.Add(new BattlePoint(1), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 10, id = 1, hp = 20 });
-            attacker.Add(new BattlePoint(2), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 8, id = 2, hp = 16 });
-            defence.Add(new BattlePoint(3), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 12, id = 2, hp = 18 });
+            attacker.Add(new BattlePoint(1, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 10, id = 1, hp = 20 });
+            attacker.Add(new BattlePoint(2, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 8, id = 2, hp = 16 });
+            defence.Add(new BattlePoint(3, PVPBattleManager.Team.Defence), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 12, id = 3, hp = 190 });
         }
 
         [TearDown]
@@ -35,9 +37,9 @@ namespace JFrameTest
         public void InitializeBattleSuccess()
         {
             //arrange
-
+            var cfg = new ActionConfig();
             //action
-            battle.Initialize(attacker, defence);
+            battle.Initialize(attacker, defence, cfg);
 
             //expect
             Assert.AreEqual(2, battle.GetUnitCount(PVPBattleManager.Team.Attacker));
@@ -48,10 +50,13 @@ namespace JFrameTest
         public void TestFindTarget()
         {
             //arrange
+            var cfg = new ActionConfig();
+            battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(0f);
-            BattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1), null);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
             BattleFrame frame = Substitute.For<BattleFrame>();
-            var normalAction = Substitute.For<NormalAttack>(trigger, finder);
+            var actionId = 1;
+            var normalAction = Substitute.For<NormalAttack>(actionId, trigger, finder);
 
             //action
             normalAction.Update(frame);
@@ -65,10 +70,13 @@ namespace JFrameTest
         public void TestUnderTriggerCd()
         {
             //arrange
+            var cfg = new ActionConfig();
+            battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f);
-            BattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1), null);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
             BattleFrame frame = new BattleFrame();
-            var normalAction = Substitute.For<NormalAttack>(trigger, finder);
+            var actionId = 1;
+            var normalAction = Substitute.For<NormalAttack>(actionId,trigger, finder);
 
             //action
             normalAction.Update(frame);
@@ -102,10 +110,13 @@ namespace JFrameTest
         public void TestUnderTriggerDelay()
         {
             //arrange
+            var cfg = new ActionConfig();
+            battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f,1f);
-            BattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1), null);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
             BattleFrame frame = new BattleFrame();
-            var normalAction = Substitute.For<NormalAttack>(trigger, finder);
+            var actionId = 1;
+            var normalAction = Substitute.For<NormalAttack>(actionId, trigger, finder);
 
             //action
             frame.NextFrame();
@@ -132,18 +143,106 @@ namespace JFrameTest
             finder.Received(1).FindTargets();
         }
 
-        //[Test]
-        //public void BattleGetResultAndUpdateCall()
-        //{
-        //    //arrange
 
-        //    //action
-        //    battle.Initialize(attacker, defence);
-        //    var report = battle.GetResult();
+        [Test]
+        public void TestAddReport()
+        {
+            //arrange
+            var reporter = new BattleReporter();
+            var hostUID = Guid.NewGuid().ToString();
+            var targetUID = "333";
+            //action
+            var reportUid = reporter.AddReportMainData(1,0f, hostUID,1,new List<string>() { targetUID });
+            var reportData = reporter.GetReportData(reportUid);
+            reporter.AddReportResultData(reportUid, targetUID, 1, 4, -1);
 
-        //    //expect
+            //expect
+            Assert.AreEqual(hostUID, reportData.CasterUID);
+            Assert.AreEqual(4, reportData.TargetsAttribute[targetUID]);
+        }
 
-        //}
+        [Test]
+        public void TestUpdateReport()
+        {
+            //arrange
+            var reporter = new BattleReporter();
+            var hostUID = Guid.NewGuid().ToString();
+            var targetUID = "333";
+            //action
+            var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
+            var reportData = reporter.GetReportData(reportUid);
+            var values = new Dictionary<string, int>
+            {
+                { targetUID, 5 }
+            };
+            reporter.UpdateReportResultData(reportUid, values, null, null);
+
+            //expect
+            Assert.AreEqual(hostUID, reportData.CasterUID);
+            Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
+        }
+
+        [Test]
+        public void TestAddResultReport()
+        {
+            //arrange
+            var reporter = new BattleReporter();
+            var hostUID = Guid.NewGuid().ToString();
+            var targetUID = "333";
+            //action
+            var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
+            var reportData = reporter.GetReportData(reportUid);
+            var values = 5;
+            reporter.AddReportResultData(reportUid, targetUID, values, 5, -1);
+
+            //expect
+            Assert.AreEqual(hostUID, reportData.CasterUID);
+            Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
+        }
+
+        [Test]
+        public void TestActionCast()
+        {
+            //arrange
+            var cfg = Substitute.For<ActionConfig>();
+            cfg.GetTriggerArg(Arg.Any<int>()).Returns(0);
+            cfg.GetTriggerType(Arg.Any<int>()).Returns(1);
+            cfg.GetDuration(Arg.Any<int>()).Returns(0);
+            cfg.GetFinderType(Arg.Any<int>()).Returns(1);
+            //action
+            battle.Initialize(attacker, defence, cfg);
+            battle.Update();
+            var reporter = battle.GetReporter();
+            var lstData = reporter.GetAllReportData();
+
+            //expect
+            Assert.AreEqual(3, lstData.Count);
+            var unit = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
+            Assert.AreEqual(172, unit.HP);
+        }
+
+        [Test]
+        public void TestGetResult()
+        {
+            //arrange
+            var cfg = new ActionConfig();
+            //action
+            battle.Initialize(attacker, defence, cfg);
+            var lstData = battle.GetResult();
+            //var reporter = battle.GetReporter();
+            //var lstData = reporter.GetAllReportData();
+
+            //expect
+            Assert.AreEqual(12, lstData.Count);
+            var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
+            Assert.AreEqual(118, unit3.HP);
+
+            var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
+            Assert.AreEqual(0, unit1.HP);
+
+            var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
+            Assert.AreEqual(0, unit2.HP);
+        }
     }
 
     //public class TestBattleAction

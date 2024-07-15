@@ -5,7 +5,7 @@
         /// <summary>
         /// 当前帧数
         /// </summary>
-        public int FrameCount { get; private set; }
+        public int CurFrame { get; private set; }
 
         /// <summary>
         /// 每一逻辑帧流逝时间
@@ -24,7 +24,7 @@
         /// </summary>
         public void NextFrame()
         {
-            FrameCount++;
+            CurFrame++;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@
         /// <returns></returns>
         public float GetDeltaTime(int frame)
         {
-            return FrameCount * _deltaTime;
+            return CurFrame * _deltaTime;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@
         /// <returns></returns>
         public bool IsMaxFrame()
         {
-            return FrameCount >= GetMaxFrameCount();
+            return CurFrame >= GetMaxFrameCount();
         }
     }
 }

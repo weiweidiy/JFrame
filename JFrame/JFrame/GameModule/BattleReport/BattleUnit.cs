@@ -9,29 +9,80 @@ namespace JFrame
         /// <summary>
         /// 有动作准备完毕，可以释放了
         /// </summary>
-        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionReady;
+        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+
+        /// <summary>
+        /// 获取战斗对象名字，暂时用ID代替
+        /// </summary>
+        public string Name => battleUnitInfo.id.ToString();
+
+        /// <summary>
+        /// 唯一ID
+        /// </summary>
+        public string UID { get; private set; }
+
+        public int Atk
+        {
+            get { return battleUnitAttribute.atk; }
+            set { battleUnitAttribute.atk = Math.Max(0, value); }
+        }
+
+        public int HP 
+        {
+            get { return battleUnitAttribute.hp; }
+            set { battleUnitAttribute.hp = Math.Min(battleUnitInfo.hp, Math.Max(0, value)); ; } 
+        }
 
         /// <summary>
         /// 所有动作列表
         /// </summary>
         List<IBattleAction> actions = null;
 
+        /// <summary>
+        /// 战斗单位原始数据
+        /// </summary>
+        BattleUnitInfo battleUnitInfo = default;
+
+        /// <summary>
+        /// 战斗单位属性
+        /// </summary>
+        BattleUnitAttribute battleUnitAttribute = default;
+
         public BattleUnit(BattleUnitInfo info, List<IBattleAction> actions)
         {
+            this.UID = Guid.NewGuid().ToString();
+            battleUnitInfo = info;
             this.actions = actions;      
             foreach(var action in actions) {
-                action.onReady += Action_onReady;
+                action.onTriggerOn += Action_onTriggerOn;
+                action.onDone += Action_onDone;
             }
+
+            HP = info.hp;
+            Atk = info.atk; 
         }
+
 
         /// <summary>
         /// 动作已经准备好了
         /// </summary>
         /// <param name="obj"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void Action_onReady(IBattleAction action, List<IBattleUnit> targets)
+        private void Action_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
         {
-            onActionReady?.Invoke(this, action, targets);
+            onActionTriggerOn?.Invoke(this, action, targets);
+        }
+
+        /// <summary>
+        /// 动作释放完成
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Action_onDone(IBattleAction arg1, IBattleUnit arg2)
+        {
+            onActionDone?.Invoke(this, arg1,arg2);
         }
 
         /// <summary>
@@ -50,7 +101,7 @@ namespace JFrame
 
         public bool IsAlive()
         {
-            throw new NotImplementedException();
+            return HP > 0;
         }
     }
 }

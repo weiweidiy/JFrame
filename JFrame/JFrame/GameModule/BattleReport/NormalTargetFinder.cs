@@ -3,9 +3,9 @@
 namespace JFrame
 {
     /// <summary>
-    /// 通过自身战位获取目标(先打前排)
+    /// 通过自身战位获取目标(先打前排),只找一个目标
     /// </summary>
-    public class NormalTargetFinder : BattleTargetFinder
+    public class NormalTargetFinder : IBattleTargetFinder
     {
         BattlePoint selfPoint;
         PVPBattleManager manger;
@@ -20,18 +20,27 @@ namespace JFrame
         /// 获取攻击目标
         /// </summary>
         /// <returns></returns>
-        public override List<IBattleUnit> FindTargets()
+        public List<IBattleUnit> FindTargets()
         {
             var result = new List<IBattleUnit>();
 
-            //foreach(var key in targetsPoint.Keys)
-            //{
-            //    //to do:获取随机前排，如果没有则随机获取后排
-            //    IBattleUnit target = targetsPoint[key];
-            //    result.Add(target);
-            //}
+            var units = manger.GetUnits(manger.GetOppoTeam(selfPoint.Team));
+
+            //debug
+            foreach(var unit in units)
+            {
+                if(unit.IsAlive())
+                {
+                    result.Add(unit);
+                    return result;
+                }
+                    
+            }
+
 
             return result;
         }
+
+
     }
 }

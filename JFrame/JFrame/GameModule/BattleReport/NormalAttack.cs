@@ -9,16 +9,22 @@ namespace JFrame
         /// <summary>
         /// 准备好了，也找到目标了，可以释放
         /// </summary>
-        public event Action<IBattleAction, List<IBattleUnit>> onReady;
+        public event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
+        public event Action<IBattleAction, IBattleUnit> onDone;
 
+        /// <summary>
+        /// 动作名称
+        /// </summary>
+        public string Name => nameof(NormalAttack);
+
+        public int Id { get; private set; }
 
         BattleTrigger trigger;
-        BattleTargetFinder finder;
+        IBattleTargetFinder finder;
 
-
-
-        public NormalAttack(BattleTrigger trigger, BattleTargetFinder finder)
+        public NormalAttack(int id, BattleTrigger trigger, IBattleTargetFinder finder)
         {
+            this.Id = id;
             this.trigger = trigger;
             this.trigger.onTrigger += Trigger_onTrigger;
             this.finder = finder;
@@ -36,7 +42,7 @@ namespace JFrame
                 return;
             }
 
-            onReady?.Invoke(this, targets);
+            onTriggerOn?.Invoke(this, targets);
         }
 
         //cd管理
@@ -50,9 +56,18 @@ namespace JFrame
         /// </summary>
         /// <param name="units"></param>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void Cast(List<IBattleUnit> units)
+        public void Cast(IBattleUnit caster,  List<IBattleUnit> units, BattleReporter reporter, string reportUID)
         {
-            //trigger.
+            foreach(var unit in units)
+            {
+                var dmg = caster.Atk;
+                //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
+                unit.HP -= dmg;
+
+                reporter.AddReportResultData(reportUID, unit.UID, dmg, unit.HP, -1);
+
+                onDone?.Invoke(this, unit);
+            }
         }
     }
 }

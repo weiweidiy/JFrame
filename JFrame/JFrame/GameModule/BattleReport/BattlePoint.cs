@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using static JFrame.PVPBattleManager;
+
+namespace JFrame
 {
     public class BattlePoint
     {
@@ -10,9 +12,12 @@
 
         public int Point { get; private set; }
 
-        public BattlePoint(int point)
+        public Team Team { get; private set; }
+
+        public BattlePoint(int point, Team team)
         {
             this.Point = point;
+            this.Team = team;
         }
 
         public PointType GetPointType()

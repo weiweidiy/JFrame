@@ -8,7 +8,17 @@ namespace JFrame
     /// </summary>
     public interface IBattleUnit
     {
-        event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionReady;
+        event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+
+        string UID { get; }
+
+        string Name { get; }
+
+        int Atk { get; }
+
+        int HP { get; set; }
+
 
         /// <summary>
         /// 是否活着

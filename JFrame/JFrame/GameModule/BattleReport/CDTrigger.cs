@@ -14,6 +14,9 @@ namespace JFrame
         /// </summary>
         float delay;
 
+        /// <summary>
+        /// 是否已经延迟过了
+        /// </summary>
         bool delayed;
 
         /// <summary>
@@ -27,6 +30,7 @@ namespace JFrame
             this.delay = delay;
             delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
         }
+
 
         public override void Update(BattleFrame frame)
         {
