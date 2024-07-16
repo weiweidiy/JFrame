@@ -53,10 +53,11 @@ namespace JFrameTest
             var cfg = new ActionConfig();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(0f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
+            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = Substitute.For<BattleFrame>();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAttack>(actionId, trigger, finder);
+            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
 
             //action
             normalAction.Update(frame);
@@ -73,10 +74,11 @@ namespace JFrameTest
             var cfg = new ActionConfig();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
+            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAttack>(actionId,trigger, finder);
+            var normalAction = Substitute.For<NormalAction>(actionId,trigger, finder, excutor);
 
             //action
             normalAction.Update(frame);
@@ -113,10 +115,11 @@ namespace JFrameTest
             var cfg = new ActionConfig();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f,1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle);
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
+            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAttack>(actionId, trigger, finder);
+            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
 
             //action
             frame.NextFrame();
@@ -209,6 +212,7 @@ namespace JFrameTest
             cfg.GetTriggerType(Arg.Any<int>()).Returns(1);
             cfg.GetDuration(Arg.Any<int>()).Returns(0);
             cfg.GetFinderType(Arg.Any<int>()).Returns(1);
+            cfg.GetExcutorType(Arg.Any<int>()).Returns(1);
             //action
             battle.Initialize(attacker, defence, cfg);
             battle.Update();

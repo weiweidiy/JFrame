@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// pvp战报对象
     /// </summary>
-    public class BattleReporter
+    public class BattleReporter : IBattleReporter
     {
         List<BattleReportData> reports = new List<BattleReportData>();
 

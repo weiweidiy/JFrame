@@ -235,11 +235,12 @@ namespace JFrame
         {
             var actions = new List<IBattleAction>();
             foreach (var id in ids)
-            {
-                //debug 全是普攻,周期触发
-                BattleTrigger trigger = CreateTrigger(cfgAction.GetTriggerType(id), cfgAction.GetTriggerArg(id), 0f);
-                IBattleTargetFinder finder = CreateTargetFinder(cfgAction.GetFinderType(id), battlePoint);
-                var action = new NormalAttack(id, trigger, finder);
+            {                
+                var action = new NormalAction(id, 
+                        CreateTrigger(cfgAction.GetTriggerType(id), cfgAction.GetTriggerArg(id), 0f)
+                        , CreateTargetFinder(cfgAction.GetFinderType(id), battlePoint, cfgAction.GetFinderArg(id))
+                        , CreateExcutor(cfgAction.GetExcutorType(id) , cfgAction.GetExcutorArg(id)));
+
                 actions.Add(action);
             }
             return actions;
@@ -258,7 +259,7 @@ namespace JFrame
                 case 1:
                     return new CDTrigger(arg, delay);
                 default:
-                    throw new Exception(triggerType + " 技能未实现的action triiger " + triggerType);
+                    throw new Exception(triggerType + " 技能未实现的 trigger type " + triggerType);
             }
         }
 
@@ -269,14 +270,25 @@ namespace JFrame
         /// <param name="point"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        IBattleTargetFinder CreateTargetFinder(int finderType, BattlePoint point)
+        IBattleTargetFinder CreateTargetFinder(int finderType, BattlePoint point, float arg)
         {
             switch (finderType)
             {
                 case 1:
-                    return new NormalTargetFinder(point, this);
+                    return new NormalTargetFinder(point, this, arg);
                 default:
                     throw new Exception("没有实现目标finder type " + finderType);
+            }
+        }
+
+        IBattleExcutor CreateExcutor(int excutorType, float arg)
+        {
+            switch (excutorType)
+            {
+                case 1:
+                    return new BattleDamage(arg);
+                default:
+                    throw new Exception("没有实现指定的 excutor type " + excutorType);
             }
         }
         #endregion

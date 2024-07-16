@@ -9,11 +9,13 @@ namespace JFrame
     {
         BattlePoint selfPoint;
         PVPBattleManager manger;
+        float arg;
 
-        public NormalTargetFinder(BattlePoint selfPoint, PVPBattleManager manger)
+        public NormalTargetFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg)
         {
             this.selfPoint = selfPoint;
             this.manger = manger;
+            this.arg = arg;
         }
 
         /// <summary>
@@ -32,11 +34,10 @@ namespace JFrame
                 if(unit.IsAlive())
                 {
                     result.Add(unit);
-                    return result;
-                }
-                    
+                    if(result.Count >= this.arg)
+                        return result; 
+                }                 
             }
-
 
             return result;
         }

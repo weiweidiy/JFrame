@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
-    public class NormalAttack : IBattleAction
+    public class NormalAction : IBattleAction
     {
         /// <summary>
         /// 准备好了，也找到目标了，可以释放
@@ -15,19 +15,31 @@ namespace JFrame
         /// <summary>
         /// 动作名称
         /// </summary>
-        public string Name => nameof(NormalAttack);
+        public string Name => nameof(NormalAction);
 
+        /// <summary>
+        /// 动作ID
+        /// </summary>
         public int Id { get; private set; }
 
         BattleTrigger trigger;
         IBattleTargetFinder finder;
+        IBattleExcutor exutor;
 
-        public NormalAttack(int id, BattleTrigger trigger, IBattleTargetFinder finder)
+        /// <summary>
+        /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="trigger"></param>
+        /// <param name="finder"></param>
+        /// <param name="exutor"></param>
+        public NormalAction(int id, BattleTrigger trigger, IBattleTargetFinder finder, IBattleExcutor exutor)
         {
             this.Id = id;
             this.trigger = trigger;
             this.trigger.onTrigger += Trigger_onTrigger;
             this.finder = finder;
+            this.exutor = exutor;
         }
 
         /// <summary>
@@ -60,12 +72,7 @@ namespace JFrame
         {
             foreach(var unit in units)
             {
-                var dmg = caster.Atk;
-                //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-                unit.HP -= dmg;
-
-                reporter.AddReportResultData(reportUID, unit.UID, dmg, unit.HP, -1);
-
+                exutor.Cast(caster, unit, reporter, reportUID);
                 onDone?.Invoke(this, unit);
             }
         }
