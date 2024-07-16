@@ -2,10 +2,10 @@
 {
     public class ActionConfig
     {
-        public virtual float GetDuration(int id) //没有用
-        {
-            return 0f;
-        }
+        //public virtual float GetDuration(int id) //没有用
+        //{
+        //    return 0f;
+        //}
 
 
 
@@ -64,9 +64,9 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual float GetExcutorArg(int id)
+        public virtual float[] GetExcutorArg(int id)
         {
-            return 1f;
+            return new float[] { 1f };
         }
     }
 }

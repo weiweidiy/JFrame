@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-
+    /// <summary>
+    /// 普通的一次行动逻辑
+    /// </summary>
     public class NormalAction : IBattleAction
     {
         /// <summary>
@@ -24,7 +26,7 @@ namespace JFrame
 
         BattleTrigger trigger;
         IBattleTargetFinder finder;
-        IBattleExcutor exutor;
+        IBattleExecutor exutor;
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -33,7 +35,7 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public NormalAction(int id, BattleTrigger trigger, IBattleTargetFinder finder, IBattleExcutor exutor)
+        public NormalAction(int id, BattleTrigger trigger, IBattleTargetFinder finder, IBattleExecutor exutor)
         {
             this.Id = id;
             this.trigger = trigger;
@@ -61,6 +63,7 @@ namespace JFrame
         public void Update(BattleFrame frame)
         {
             trigger.Update(frame);
+            //exutor.Update(frame);
         }
 
         /// <summary>
@@ -68,11 +71,14 @@ namespace JFrame
         /// </summary>
         /// <param name="units"></param>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void Cast(IBattleUnit caster,  List<IBattleUnit> units, BattleReporter reporter, string reportUID)
+        public void Cast(IBattleUnit caster,  List<IBattleUnit> units, BattleReporter reporter)
         {
+            //添加动作战报
+            reporter.AddReportActionData(caster.UID, nameof(NormalAction), units[0].UID);
+
             foreach(var unit in units)
             {
-                exutor.Cast(caster, unit, reporter, reportUID);
+                exutor.Execute(caster, unit, reporter);
                 onDone?.Invoke(this, unit);
             }
         }

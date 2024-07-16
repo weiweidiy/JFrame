@@ -54,7 +54,7 @@ namespace JFrameTest
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(0f);
             IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = Substitute.For<BattleFrame>();
             var actionId = 1;
             var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
@@ -75,7 +75,7 @@ namespace JFrameTest
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f);
             IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
             var normalAction = Substitute.For<NormalAction>(actionId,trigger, finder, excutor);
@@ -116,7 +116,7 @@ namespace JFrameTest
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f,1f);
             IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExcutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
             var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
@@ -151,57 +151,57 @@ namespace JFrameTest
         public void TestAddReport()
         {
             //arrange
-            var reporter = new BattleReporter();
-            var hostUID = Guid.NewGuid().ToString();
-            var targetUID = "333";
+            var reporter = new BattleReporter(Substitute.For<BattleFrame>());
+            var casterUID = Guid.NewGuid().ToString();
+            var targetUID = Guid.NewGuid().ToString();
             //action
-            var reportUid = reporter.AddReportMainData(1,0f, hostUID,1,new List<string>() { targetUID });
+            var reportUid = reporter.AddReportActionData(casterUID,"test", targetUID);
             var reportData = reporter.GetReportData(reportUid);
-            reporter.AddReportResultData(reportUid, targetUID, 1, 4, -1);
+            reporter.AddReportResultData(casterUID, "dmg", 10);
 
             //expect
-            Assert.AreEqual(hostUID, reportData.CasterUID);
-            Assert.AreEqual(4, reportData.TargetsAttribute[targetUID]);
+            Assert.AreEqual(casterUID, reportData.CasterUID);
+            Assert.AreEqual(2, reporter.GetAllReportData().Count);
         }
 
-        [Test]
-        public void TestUpdateReport()
-        {
-            //arrange
-            var reporter = new BattleReporter();
-            var hostUID = Guid.NewGuid().ToString();
-            var targetUID = "333";
-            //action
-            var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
-            var reportData = reporter.GetReportData(reportUid);
-            var values = new Dictionary<string, int>
-            {
-                { targetUID, 5 }
-            };
-            reporter.UpdateReportResultData(reportUid, values, null, null);
+        //[Test]
+        //public void TestUpdateReport()
+        //{
+        //    //arrange
+        //    var reporter = new BattleReporter(null);
+        //    var hostUID = Guid.NewGuid().ToString();
+        //    var targetUID = "333";
+        //    //action
+        //    var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
+        //    var reportData = reporter.GetReportData(reportUid);
+        //    var values = new Dictionary<string, int>
+        //    {
+        //        { targetUID, 5 }
+        //    };
+        //    reporter.UpdateReportResultData(reportUid, values, null, null);
 
-            //expect
-            Assert.AreEqual(hostUID, reportData.CasterUID);
-            Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
-        }
+        //    //expect
+        //    Assert.AreEqual(hostUID, reportData.CasterUID);
+        //    Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
+        //}
 
-        [Test]
-        public void TestAddResultReport()
-        {
-            //arrange
-            var reporter = new BattleReporter();
-            var hostUID = Guid.NewGuid().ToString();
-            var targetUID = "333";
-            //action
-            var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
-            var reportData = reporter.GetReportData(reportUid);
-            var values = 5;
-            reporter.AddReportResultData(reportUid, targetUID, values, 5, -1);
+        //[Test]
+        //public void TestAddResultReport()
+        //{
+        //    //arrange
+        //    var reporter = new BattleReporter();
+        //    var hostUID = Guid.NewGuid().ToString();
+        //    var targetUID = "333";
+        //    //action
+        //    var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
+        //    var reportData = reporter.GetReportData(reportUid);
+        //    var values = 5;
+        //    reporter.AddReportResultData(reportUid, targetUID, values, 5, -1);
 
-            //expect
-            Assert.AreEqual(hostUID, reportData.CasterUID);
-            Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
-        }
+        //    //expect
+        //    Assert.AreEqual(hostUID, reportData.CasterUID);
+        //    Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
+        //}
 
         [Test]
         public void TestActionCast()
@@ -210,7 +210,7 @@ namespace JFrameTest
             var cfg = Substitute.For<ActionConfig>();
             cfg.GetTriggerArg(Arg.Any<int>()).Returns(0);
             cfg.GetTriggerType(Arg.Any<int>()).Returns(1);
-            cfg.GetDuration(Arg.Any<int>()).Returns(0);
+            //cfg.GetDuration(Arg.Any<int>()).Returns(0);
             cfg.GetFinderType(Arg.Any<int>()).Returns(1);
             cfg.GetExcutorType(Arg.Any<int>()).Returns(1);
             //action
@@ -220,7 +220,7 @@ namespace JFrameTest
             var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(3, lstData.Count);
+            Assert.AreEqual(6, lstData.Count);
             var unit = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
             Assert.AreEqual(172, unit.HP);
         }
@@ -237,7 +237,7 @@ namespace JFrameTest
             //var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(12, lstData.Count);
+            Assert.AreEqual(24, lstData.Count);
             var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
             Assert.AreEqual(118, unit3.HP);
 

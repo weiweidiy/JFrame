@@ -19,7 +19,7 @@ namespace JFrame
         /// <summary>
         /// 战斗日志
         /// </summary>
-        BattleReporter pvpReporter = new BattleReporter();
+        BattleReporter pvpReporter;
 
         /// <summary>
         /// 战斗结果
@@ -56,9 +56,8 @@ namespace JFrame
             {
                 uids.Add(target.UID);
             }
-
-            var reportUID = pvpReporter.AddReportMainData(frame.CurFrame, frame.GetDeltaTime(frame.CurFrame), caster.UID, action.Id, uids);
-            action.Cast(caster, targets, pvpReporter, reportUID);
+            //var reportUID = pvpReporter.AddReportActionData(caster.UID, action.Id, uids);
+            action.Cast(caster, targets, pvpReporter);
         }
 
         /// <summary>
@@ -146,7 +145,7 @@ namespace JFrame
         /// 获取战斗播报对象
         /// </summary>
         /// <returns></returns>
-        public List<BattleReportData> GetResult()
+        public List<IBattleReportData> GetResult()
         {
             //如果战斗没有决出胜负，则继续战斗
             while (!battleResult.IsOver() && !frame.IsMaxFrame())
@@ -203,6 +202,7 @@ namespace JFrame
             teams.Add(Team.Defence, defenceTeam);
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
+            pvpReporter = new BattleReporter(frame);
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace JFrame
             }
         }
 
-        IBattleExcutor CreateExcutor(int excutorType, float arg)
+        IBattleExecutor CreateExcutor(int excutorType, float[] arg)
         {
             switch (excutorType)
             {

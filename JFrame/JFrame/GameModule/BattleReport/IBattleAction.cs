@@ -23,6 +23,6 @@ namespace JFrame
 
         void Update(BattleFrame frame);
 
-        void Cast(IBattleUnit caster, List<IBattleUnit> units, BattleReporter reporter, string reportUID);
+        void Cast(IBattleUnit caster, List<IBattleUnit> units, BattleReporter reporter);
     }
 }
