@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using static System.Collections.Specialized.BitVector32;
 
 namespace JFrame
 {
-
     /// <summary>
     /// pvp战斗管理
     /// </summary>
@@ -20,6 +20,8 @@ namespace JFrame
         /// 战斗日志
         /// </summary>
         BattleReporter pvpReporter;
+
+        PVPBattleReport report = new PVPBattleReport();
 
         /// <summary>
         /// 战斗结果
@@ -145,7 +147,7 @@ namespace JFrame
         /// 获取战斗播报对象
         /// </summary>
         /// <returns></returns>
-        public List<IBattleReportData> GetResult()
+        public PVPBattleReport GetResult()
         {
             //如果战斗没有决出胜负，则继续战斗
             while (!battleResult.IsOver() && !frame.IsMaxFrame())
@@ -158,8 +160,9 @@ namespace JFrame
                 frame.NextFrame();
             }
 
+            report.report = pvpReporter.GetAllReportData();
             //Debug.Log("战斗结束 " + frame.FrameCount);
-            return pvpReporter.GetAllReportData();
+            return report;
         }
 
         /// <summary>
@@ -203,6 +206,8 @@ namespace JFrame
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
             pvpReporter = new BattleReporter(frame);
+            report.attacker = attacker;
+            report.defence = defence;
         }
 
         /// <summary>

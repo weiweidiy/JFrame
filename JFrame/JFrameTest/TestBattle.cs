@@ -237,7 +237,7 @@ namespace JFrameTest
             //var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(24, lstData.Count);
+            Assert.AreEqual(24, lstData.report.Count);
             var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
             Assert.AreEqual(118, unit3.HP);
 
@@ -246,6 +246,23 @@ namespace JFrameTest
 
             var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
             Assert.AreEqual(0, unit2.HP);
+        }
+
+        [Test]
+        public void TestReportParser()
+        {
+            //arrange
+            var cfg = new ActionConfig();
+            battle.Initialize(attacker, defence, cfg);
+            var lstData = battle.GetResult();
+            var parser = new PVPBattleReportParser(lstData.report);
+
+            //action
+            Assert.AreEqual(24, parser.Count());
+
+            var result =  parser.GetData(3);
+            Assert.AreEqual(6, result.Count);
+            Assert.AreEqual(18, parser.Count());
         }
     }
 

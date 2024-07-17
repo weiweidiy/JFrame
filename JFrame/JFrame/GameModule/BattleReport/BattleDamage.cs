@@ -77,7 +77,7 @@
     //}
 
     /// <summary>
-    /// 多段伤害效果
+    /// 伤害效果
     /// </summary>
     public class BattleDamage : IBattleExecutor
     {
