@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -7,7 +8,8 @@ namespace JFrame
     /// </summary>
     public interface IBattleExecutor
     {
-        void Execute(IBattleUnit caster, IBattleUnit unit, BattleReporter reporter/*, string reportUID*/);
+        event Action onExecute;
+        void Execute(IBattleUnit caster, IBattleAction action, IBattleUnit unit, BattleReporter reporter/*, string reportUID*/);
         void Update(BattleFrame frame);
     }
 }

@@ -10,7 +10,11 @@ namespace JFrame
         /// 有动作准备完毕，可以释放了
         /// </summary>
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
 
         /// <summary>
         /// 获取战斗对象名字，暂时用ID代替
@@ -31,8 +35,12 @@ namespace JFrame
         public int HP 
         {
             get { return battleUnitAttribute.hp; }
-            set { battleUnitAttribute.hp = Math.Min(battleUnitInfo.hp, Math.Max(0, value)); ; } 
+            set {
+                battleUnitAttribute.hp = Math.Min(MaxHP, Math.Max(0, value)); 
+            } 
         }
+
+        public int MaxHP { get => battleUnitInfo.hp; }
 
         /// <summary>
         /// 所有动作列表
@@ -49,19 +57,22 @@ namespace JFrame
         /// </summary>
         BattleUnitAttribute battleUnitAttribute = default;
 
-        public BattleUnit(BattleUnitInfo info, List<IBattleAction> actions)
+        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions)
         {
-            this.UID = Guid.NewGuid().ToString();
+            this.UID = info.uid;
             battleUnitInfo = info;
             this.actions = actions;      
             foreach(var action in actions) {
                 action.onTriggerOn += Action_onTriggerOn;
-                action.onDone += Action_onDone;
+                action.onStartCast += Action_onCast;
+                action.onHitTarget += Action_onDone;
             }
 
             HP = info.hp;
             Atk = info.atk; 
         }
+
+
 
 
         /// <summary>
@@ -72,6 +83,19 @@ namespace JFrame
         private void Action_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
         {
             onActionTriggerOn?.Invoke(this, action, targets);
+        }
+
+        /// <summary>
+        /// 发动
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        /// <param name="arg4"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Action_onCast(IBattleAction action, IBattleUnit firstTarget)
+        {
+            onActionCast?.Invoke(this, action,firstTarget);
         }
 
         /// <summary>
@@ -99,9 +123,55 @@ namespace JFrame
             //Console.WriteLine("unit update");
         }
 
+        /// <summary>
+        /// 是否活着
+        /// </summary>
+        /// <returns></returns>
         public bool IsAlive()
         {
             return HP > 0;
         }
+
+        /// <summary>
+        /// 受到了伤害
+        /// </summary>
+        /// <param name="damage"></param>
+        public void OnDamage(IBattleUnit hitter, IBattleAction action, int damage)
+        {
+            HP -= damage;
+
+            onDamage?.Invoke(hitter, action, this, damage);
+
+            if (HP <= 0)
+            {
+                OnDead(hitter, action);
+               
+            }
+
+
+        }
+
+        /// <summary>
+        /// 受到治疗
+        /// </summary>
+        /// <param name="heal"></param>
+        public void OnHeal(int heal)
+        {
+            HP += heal;
+        }
+
+        /// <summary>
+        /// 死亡了
+        /// </summary>
+        private void OnDead(IBattleUnit hitter, IBattleAction action)
+        {
+            foreach (var a in actions)
+            {
+                a.SetEnable(false);
+            }
+
+            onDead?.Invoke(hitter, action, this);
+        }
+
     }
 }

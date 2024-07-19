@@ -20,9 +20,9 @@ namespace JFrameTest
         public void SetUp()
         {
             battle = new PVPBattleManager();
-            attacker.Add(new BattlePoint(1, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 10, id = 1, hp = 20 });
-            attacker.Add(new BattlePoint(2, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 8, id = 2, hp = 16 });
-            defence.Add(new BattlePoint(3, PVPBattleManager.Team.Defence), new BattleUnitInfo() { actionsId = new List<int>() { 1 }, atk = 12, id = 3, hp = 190 });
+            attacker.Add(new BattlePoint(1, PVPBattleManager.Team.Attacker), new BattleUnitInfo() {uid = Guid.NewGuid().ToString(), actionsId = new List<int>() { 1 }, atk = 10, id = 1, hp = 20 });
+            attacker.Add(new BattlePoint(2, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { uid = Guid.NewGuid().ToString(), actionsId = new List<int>() { 1 }, atk = 8, id = 2, hp = 16 });
+            defence.Add(new BattlePoint(3, PVPBattleManager.Team.Defence), new BattleUnitInfo() { uid = Guid.NewGuid().ToString(), actionsId = new List<int>() { 1 }, atk = 12, id = 3, hp = 190 });
         }
 
         [TearDown]
@@ -37,7 +37,7 @@ namespace JFrameTest
         public void InitializeBattleSuccess()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             //action
             battle.Initialize(attacker, defence, cfg);
 
@@ -50,14 +50,14 @@ namespace JFrameTest
         public void TestFindTarget()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(0f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1,1,1));
             BattleFrame frame = Substitute.For<BattleFrame>();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
+            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, new List<IBattleExecutor>() { excutor });
 
             //action
             normalAction.Update(frame);
@@ -71,14 +71,14 @@ namespace JFrameTest
         public void TestUnderTriggerCd()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1,1,1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAction>(actionId,trigger, finder, excutor);
+            var normalAction = Substitute.For<NormalAction>(actionId,trigger, finder, new List<IBattleExecutor>() { excutor });
 
             //action
             normalAction.Update(frame);
@@ -105,21 +105,21 @@ namespace JFrameTest
             //expect
             //trigger.Received(1).Update(frame);
             finder.Received(2).FindTargets();
-            Assert.AreEqual(true, trigger.GetState()); //开关只要没关就一直update
+            Assert.AreEqual(true, trigger.GetEnable()); //开关只要没关就一直update
         }
 
         [Test]
         public void TestUnderTriggerDelay()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             battle.Initialize(attacker, defence, cfg);
             BattleTrigger trigger = new CDTrigger(1f,1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1));
-            IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1));
+            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleExecutor excutor = Substitute.For<BattleDamage>( cfg.GetExcutorArg(1,1, 1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
-            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, excutor);
+            var normalAction = Substitute.For<NormalAction>(actionId, trigger, finder, new List<IBattleExecutor>() { excutor });
 
             //action
             frame.NextFrame();
@@ -151,13 +151,13 @@ namespace JFrameTest
         public void TestAddReport()
         {
             //arrange
-            var reporter = new BattleReporter(Substitute.For<BattleFrame>());
+            var reporter = new BattleReporter(Substitute.For<BattleFrame>(), battle.GetTeams());
             var casterUID = Guid.NewGuid().ToString();
             var targetUID = Guid.NewGuid().ToString();
             //action
-            var reportUid = reporter.AddReportActionData(casterUID,"test", targetUID);
+            var reportUid = reporter.AddReportData(casterUID,ReportType.Action, targetUID,new float[] { 1 });
             var reportData = reporter.GetReportData(reportUid);
-            reporter.AddReportResultData(casterUID, "dmg", 10);
+            reporter.AddReportData(casterUID, ReportType.Damage, targetUID, new float[] {1});
 
             //expect
             Assert.AreEqual(casterUID, reportData.CasterUID);
@@ -207,12 +207,12 @@ namespace JFrameTest
         public void TestActionCast()
         {
             //arrange
-            var cfg = Substitute.For<ActionConfig>();
-            cfg.GetTriggerArg(Arg.Any<int>()).Returns(0);
-            cfg.GetTriggerType(Arg.Any<int>()).Returns(1);
+            var cfg = Substitute.For<DataSource>();
+            cfg.GetTriggerArg(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+            cfg.GetTriggerType(Arg.Any<int>(), Arg.Any<int>()).Returns(1);
             //cfg.GetDuration(Arg.Any<int>()).Returns(0);
-            cfg.GetFinderType(Arg.Any<int>()).Returns(1);
-            cfg.GetExcutorType(Arg.Any<int>()).Returns(1);
+            cfg.GetFinderType(Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            cfg.GetExcutorType(Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1});
             //action
             battle.Initialize(attacker, defence, cfg);
             battle.Update();
@@ -229,7 +229,7 @@ namespace JFrameTest
         public void TestGetResult()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             //action
             battle.Initialize(attacker, defence, cfg);
             var lstData = battle.GetResult();
@@ -237,9 +237,9 @@ namespace JFrameTest
             //var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(24, lstData.report.Count);
+            Assert.AreEqual(22, lstData.report.Count);
             var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-            Assert.AreEqual(118, unit3.HP);
+            Assert.AreEqual(138, unit3.HP);
 
             var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
             Assert.AreEqual(0, unit1.HP);
@@ -252,17 +252,17 @@ namespace JFrameTest
         public void TestReportParser()
         {
             //arrange
-            var cfg = new ActionConfig();
+            var cfg = new DataSource();
             battle.Initialize(attacker, defence, cfg);
             var lstData = battle.GetResult();
             var parser = new PVPBattleReportParser(lstData.report);
 
             //action
-            Assert.AreEqual(24, parser.Count());
+            Assert.AreEqual(22, parser.Count());
 
             var result =  parser.GetData(3);
-            Assert.AreEqual(6, result.Count);
-            Assert.AreEqual(18, parser.Count());
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(19, parser.Count());
         }
     }
 

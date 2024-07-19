@@ -47,7 +47,7 @@ namespace JFrame
             }
                 
             //更新cd
-            if (delta >= duration && GetState())
+            if (delta >= duration && GetEnable())
             {
                 //通知外部已触发
                 NotifyOnTrigger();

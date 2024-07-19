@@ -1,22 +1,69 @@
-﻿using System;
+﻿using JFrame.Common;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace JFrame
 {
+    public enum ReportType
+    {
+        Action, //英雄动作
+        Damage, //受伤
+        Heal,   //治疗回血
+        Dead,   //死亡
+    }
+
+
     /// <summary>
     /// pvp战报对象
     /// </summary>
     public class BattleReporter /*: IBattleReporter*/
     {
+        public class Comp : IComparer<IBattleReportData>
+        {
+            public int Compare(IBattleReportData x, IBattleReportData y)
+            {
+                if (x.EscapeTime == y.EscapeTime) return 0;
+                if (x.EscapeTime < y.EscapeTime) return -1;
+                return 1;
+            }
+        }
+
+        Utility utility = new Utility();
+
         List<IBattleReportData> reports = new List<IBattleReportData>();
 
         BattleFrame frame;
 
-        public BattleReporter(BattleFrame frame) {
+        Dictionary<PVPBattleManager.Team, BattleTeam> teams;
+
+        public BattleReporter(BattleFrame frame, Dictionary<PVPBattleManager.Team, BattleTeam> teams) {
             this.frame = frame;
+            this.teams = teams;
+            foreach(var team in this.teams.Values)
+            {
+                team.onActionCast += Team_onActionCast;
+                team.onDamage += Team_onDamage;
+                team.onDead += Team_onDead;
+            }
+
         }
 
+
+        private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            AddReportData(caster.UID, ReportType.Action, target.UID, new float[] { action.Id });
+        }
+
+        private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int dmg)
+        {
+            AddReportData(caster.UID, ReportType.Damage, target.UID, new float[] { dmg, target.HP, target.MaxHP });
+        }
+
+        private void Team_onDead(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            AddReportData(caster.UID, ReportType.Dead, target.UID, new float[] {0});
+        }
 
         public List<IBattleReportData> GetAllReportData()
         {
@@ -29,43 +76,27 @@ namespace JFrame
         /// <param name="frame"></param>
         /// <param name="escapeTime"></param>
         /// <param name="casterUID"></param>
-        /// <param name="actionName"></param>
+        /// <param name="reportType"></param>
         /// <param name="targetUID"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string AddReportActionData(string casterUID, string actionName, string targetUID)
+        public string AddReportData(string casterUID, ReportType reportType, string targetUID, float[] arg , float timeOffset = 0f)
         {
-            var data = new BattleReportActionData(frame.CurFrame,frame.GetDeltaTime(frame.CurFrame), casterUID, actionName, targetUID);
+            //to do: 增加一个流逝时间偏移量，可以延迟播放
+            var data = new BattleReportData(frame.CurFrame,frame.GetDeltaTime(frame.CurFrame) + timeOffset, casterUID, reportType, targetUID, arg);
 
             if (ContainsReport(data))
-                throw new Exception("已经存在战报" + frame + " " + casterUID + " " + actionName);
+                throw new Exception("已经存在战报" + frame + " " + casterUID + " " + reportType);
 
-            reports.Add(data);
-
+            utility.BinarySearchInsert(reports, data, new Comp());
             return data.UID;
         }
 
         /// <summary>
-        /// 添加一个效果类型战报
+        /// 是否已经存在
         /// </summary>
-        /// <param name="frame"></param>
-        /// <param name="escapeTime"></param>
-        /// <param name="casterUID"></param>
-        /// <param name="actionName"></param>
-        /// <param name="value"></param>
+        /// <param name="report"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public string AddReportResultData(string casterUID, string actionName, int value)
-        {
-            var data = new BattleReportResultData(frame.CurFrame, frame.GetDeltaTime(frame.CurFrame),  casterUID, actionName, value);
-
-            if (ContainsReport(data))
-                throw new Exception("已经存在战报" + frame + " " + casterUID + " " + actionName);
-
-            reports.Add(data);
-            return data.UID;
-        }
-
         bool ContainsReport(IBattleReportData report)
         {
             foreach (var data in reports)
@@ -92,56 +123,5 @@ namespace JFrame
             return null;
         }
 
-    }
-
-    /// <summary>
-    /// 掉血，添加了buff, 复活等结果数据
-    /// </summary>
-    public class BattleReportResultData : IBattleReportData
-    {
-        /// <summary>
-        /// 战报数据类型
-        /// </summary>
-        public string DataType => nameof(BattleReportResultData); 
-        public string UID { get; private set; }
-        public int Frame { get; private set; }
-        public float EscapeTime { get; private set; } //从战斗开始到现在流逝的时间
-        public string CasterUID { get; private set; } //效果触发者
-        public string ActionName { get; private set; } // 1, 受伤， 2， 加血， 3，加buff， 4，移除buff,
-        public int Value { get; private set; } //根据id代表不同含义
-
-        public BattleReportResultData(int frame, float escapeTime, string casterUID, string actionName, int value)
-        {
-            UID = Guid.NewGuid().ToString();
-            Frame = frame;
-            EscapeTime = escapeTime;
-            CasterUID = casterUID;
-            ActionName = actionName;
-            Value = value;
-        }
-    }
-
-    /// <summary>
-    /// 动作战报数据，谁什么时间向谁使用了什么动作
-    /// </summary>
-    public class BattleReportActionData : IBattleReportData
-    {
-        public string DataType => nameof(BattleReportActionData);
-        public string UID { get; private set; }
-        public int Frame { get; private set; }
-        public float EscapeTime { get; private set; } //从战斗开始到现在流逝的时间
-        public string CasterUID { get; private set; } //行动者UID
-        public string ActionName { get; private set; } //SkillId
-        public string TargetUID { get; private set; } //目标UID
-
-        public BattleReportActionData(int frame, float escapeTime, string casterUID, string actionName, string targetUID)
-        {
-            UID = Guid.NewGuid().ToString();
-            Frame = frame;
-            EscapeTime = escapeTime;
-            CasterUID = casterUID;
-            ActionName = actionName;
-            TargetUID = targetUID;
-        }
     }
 }

@@ -13,9 +13,14 @@ namespace JFrame
         event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
 
         /// <summary>
-        /// 释放完成
+        /// 触发了，群体也只会返回首目标
         /// </summary>
-        event Action<IBattleAction, IBattleUnit> onDone; //动作对象， 目标对象，值，buff
+        event Action<IBattleAction, IBattleUnit> onStartCast;
+
+        /// <summary>
+        /// 释放完成，每一个目标都会触发1次
+        /// </summary>
+        event Action<IBattleAction, IBattleUnit> onHitTarget; 
 
         string Name { get; }
 
@@ -24,5 +29,11 @@ namespace JFrame
         void Update(BattleFrame frame);
 
         void Cast(IBattleUnit caster, List<IBattleUnit> units, BattleReporter reporter);
+
+        /// <summary>
+        /// 设置这个动作是否可触发
+        /// </summary>
+        /// <param name="active"></param>
+        void SetEnable(bool active);
     }
 }

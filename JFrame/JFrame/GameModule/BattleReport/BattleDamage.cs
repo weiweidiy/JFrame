@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System;
+
+namespace JFrame
 {
     //public abstract class BaseBattleExecutor : IBattleExecutor
     //{
@@ -81,29 +83,52 @@
     /// </summary>
     public class BattleDamage : IBattleExecutor
     {
-        float count; //攻击次数
-        float dmgRate; //伤害倍率
+
+        public event Action onExecute;
+
+
+        float count = 1; //攻击次数
+        float dmgRate = 1f; //伤害倍率
+        float delay = 0f; //延迟
 
         public BattleDamage(float[] args)
         {
-            if (args != null && args.Length >= 2)
+            if (args != null && args.Length >= 3)
             {
-
                 count = args[0];
                 dmgRate = args[1];
+                delay = args[2];
             }
 
         }
-        public void Execute(IBattleUnit caster, IBattleUnit target, BattleReporter reporter)
+
+
+
+        /// <summary>
+        /// 执行效果
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="target"></param>
+        /// <param name="reporter"></param>
+        public void Execute(IBattleUnit caster, IBattleAction action, IBattleUnit target, BattleReporter reporter)
         {
-
-            var dmg = caster.Atk;
+            var dmg = caster.Atk * dmgRate;
             //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-            target.HP -= dmg;
+            target.OnDamage(caster, action, (int)dmg);
 
-            reporter.AddReportResultData(target.UID, nameof(BattleDamage),dmg);
+            //to do: 移除战报数据
+            //reporter.AddReportData(caster.UID, ReportType.Damage,target.UID, new float[] { dmg, target.HP , target.MaxHP}, delay);
+
+            //如果目标已死亡，则添加死亡战报
+            //if(target.HP <= 0) {
+            //    reporter.AddReportData(caster.UID, ReportType.Dead, target.UID, new float[] { 0 }, delay);
+            //}
         }
 
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
             

@@ -15,9 +15,13 @@
         int Frame { get; }
         float EscapeTime { get; }
         string CasterUID { get; }
+        string TargetUID {  get; }
+        ReportType ReportType { get; }
 
-        string DataType { get; }
+        /// <summary>
+        /// 对应id
+        /// </summary>
+        float[] Arg {  get; } //如果reportType = action , arg = action id, 如果是damage , Arg = damage
 
-        string ActionName { get; }
     }
 }

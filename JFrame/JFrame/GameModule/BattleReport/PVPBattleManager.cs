@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http.Headers;
 using static System.Collections.Specialized.BitVector32;
 
@@ -21,6 +20,9 @@ namespace JFrame
         /// </summary>
         BattleReporter pvpReporter;
 
+        /// <summary>
+        /// 最终的战报对象
+        /// </summary>
         PVPBattleReport report = new PVPBattleReport();
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace JFrame
         /// <summary>
         /// 配置表
         /// </summary>
-        ActionConfig cfgAction = null;
+        DataSource dataSource = null;
 
         #region 响应方法：战斗规则
         /// <summary>
@@ -173,6 +175,15 @@ namespace JFrame
         {
             return pvpReporter;
         }
+
+        /// <summary>
+        /// 获取所有队伍
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<Team, BattleTeam> GetTeams()
+        {
+            return teams;
+        }
         #endregion
 
         #region 帮助方法
@@ -195,9 +206,9 @@ namespace JFrame
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defence"></param>
-        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionConfig cfgAction)
+        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, DataSource cfgAction)
         {
-            this.cfgAction = cfgAction;
+            this.dataSource = cfgAction;
             teams.Clear();
             var attackTeam = CreateTeam(Team.Attacker, attacker);
             teams.Add(Team.Attacker, attackTeam);
@@ -205,7 +216,7 @@ namespace JFrame
             teams.Add(Team.Defence, defenceTeam);
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
-            pvpReporter = new BattleReporter(frame);
+            pvpReporter = new BattleReporter(frame, teams);
             report.attacker = attacker;
             report.defence = defence;
         }
@@ -220,7 +231,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActions(info.actionsId, slot));
+                var battleUnit = new BattleUnit(info, CreateActions(info.id, info.actionsId, slot));
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -236,66 +247,21 @@ namespace JFrame
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<IBattleAction> CreateActions(List<int> ids, BattlePoint battlePoint)
+        List<IBattleAction> CreateActions(int unitId, List<int> actionIds, BattlePoint battlePoint)
         {
-            var actions = new List<IBattleAction>();
-            foreach (var id in ids)
-            {                
-                var action = new NormalAction(id, 
-                        CreateTrigger(cfgAction.GetTriggerType(id), cfgAction.GetTriggerArg(id), 0f)
-                        , CreateTargetFinder(cfgAction.GetFinderType(id), battlePoint, cfgAction.GetFinderArg(id))
-                        , CreateExcutor(cfgAction.GetExcutorType(id) , cfgAction.GetExcutorArg(id)));
+            var factory = new ActionFactory(unitId, dataSource, battlePoint,this);
 
+            var actions = new List<IBattleAction>();
+            foreach (var actionId in actionIds)
+            {
+                // to do: 根据actionID,创建不同的类实例
+                var action = factory.Create(actionId);
                 actions.Add(action);
             }
             return actions;
         }
 
-        /// <summary>
-        /// 创建触发器
-        /// </summary>
-        /// <param name="triggerType"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        BattleTrigger CreateTrigger(int triggerType, float arg, float delay = 0)
-        {
-            switch (triggerType)
-            {
-                case 1:
-                    return new CDTrigger(arg, delay);
-                default:
-                    throw new Exception(triggerType + " 技能未实现的 trigger type " + triggerType);
-            }
-        }
-
-        /// <summary>
-        /// 创建目标搜索器
-        /// </summary>
-        /// <param name="finderType"></param>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        IBattleTargetFinder CreateTargetFinder(int finderType, BattlePoint point, float arg)
-        {
-            switch (finderType)
-            {
-                case 1:
-                    return new NormalTargetFinder(point, this, arg);
-                default:
-                    throw new Exception("没有实现目标finder type " + finderType);
-            }
-        }
-
-        IBattleExecutor CreateExcutor(int excutorType, float[] arg)
-        {
-            switch (excutorType)
-            {
-                case 1:
-                    return new BattleDamage(arg);
-                default:
-                    throw new Exception("没有实现指定的 excutor type " + excutorType);
-            }
-        }
+        
         #endregion
 
     }

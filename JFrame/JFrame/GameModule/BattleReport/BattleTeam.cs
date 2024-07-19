@@ -8,7 +8,11 @@ namespace JFrame
     public class BattleTeam
     {
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
 
         Dictionary<BattlePoint, IBattleUnit> units = new Dictionary<BattlePoint, IBattleUnit>();
 
@@ -23,9 +27,15 @@ namespace JFrame
             {
                 var unit = units[key];
                 unit.onActionTriggerOn += Unit_onActionTriggerOn;
+                unit.onActionCast += Unit_onActionCast;
                 unit.onActionDone += Unit_onActionDone;
+                unit.onDamage += Unit_onDamage;
+                unit.onDead += Unit_onDead;
             }
         }
+
+
+
 
 
         #region 响应事件
@@ -34,10 +44,28 @@ namespace JFrame
             onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
         }
 
+        private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
+        {
+            onActionCast?.Invoke(team, arg1, arg2, arg3);
+        }
+
+
         private void Unit_onActionDone(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
         {
             onActionDone?.Invoke(team,arg1, arg2,arg3);
         }
+
+        private void Unit_onDamage(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        {
+            onDamage?.Invoke(team,arg1 , arg2, arg3, arg4);
+        }
+        private void Unit_onDead(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
+        {
+            onDead?.Invoke(team, arg1 , arg2, arg3);
+        }
+
+
+
         #endregion
         /// <summary>
         /// 获取指定位置战斗单位

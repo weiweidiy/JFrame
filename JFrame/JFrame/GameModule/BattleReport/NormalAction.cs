@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 普通的一次行动逻辑
+    /// 普通的一次行动逻辑 (瞬时动作类型)
     /// </summary>
     public class NormalAction : IBattleAction
     {
@@ -12,7 +12,8 @@ namespace JFrame
         /// 准备好了，也找到目标了，可以释放
         /// </summary>
         public event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
-        public event Action<IBattleAction, IBattleUnit> onDone;
+        public event Action<IBattleAction, IBattleUnit> onStartCast;
+        public event Action<IBattleAction, IBattleUnit> onHitTarget;
 
         /// <summary>
         /// 动作名称
@@ -26,7 +27,7 @@ namespace JFrame
 
         BattleTrigger trigger;
         IBattleTargetFinder finder;
-        IBattleExecutor exutor;
+        List<IBattleExecutor> exutors;
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -35,14 +36,20 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public NormalAction(int id, BattleTrigger trigger, IBattleTargetFinder finder, IBattleExecutor exutor)
+        public NormalAction(int id, BattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
         {
             this.Id = id;
             this.trigger = trigger;
             this.trigger.onTrigger += Trigger_onTrigger;
             this.finder = finder;
-            this.exutor = exutor;
+            this.exutors = exutors;
+
+            foreach(var e  in exutors)
+            {
+                e.onExecute += E_onExecute;
+            }
         }
+
 
         /// <summary>
         /// 触发了，可以攻击了
@@ -73,14 +80,33 @@ namespace JFrame
         /// <exception cref="System.NotImplementedException"></exception>
         public void Cast(IBattleUnit caster,  List<IBattleUnit> units, BattleReporter reporter)
         {
-            //添加动作战报
-            reporter.AddReportActionData(caster.UID, nameof(NormalAction), units[0].UID);
+            //添加动作战报,第一个目标作为对象
+            //reporter.AddReportData(caster.UID, ReportType.Action, units[0].UID, new float[] { Id });
+            onStartCast?.Invoke(this, units[0]);
 
-            foreach(var unit in units)
+            foreach (var unit in units)
             {
-                exutor.Execute(caster, unit, reporter);
-                onDone?.Invoke(this, unit);
+                foreach(var e in exutors)
+                {
+                    e.Execute(caster,this, unit, reporter);
+                }
+                onHitTarget?.Invoke(this, unit);
             }
+        }
+
+
+        private void E_onExecute()
+        {
+            
+        }
+
+        /// <summary>
+        /// 设置动作是否可用
+        /// </summary>
+        /// <param name="enable"></param>
+        public void SetEnable(bool enable)
+        {
+            trigger.SetEnable(enable);
         }
     }
 }

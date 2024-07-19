@@ -14,8 +14,8 @@ namespace JFrame
         /// 影响是否触发，如果设置为false , 则不会触发
         /// </summary>
         /// <param name="isOn"></param>
-        public void SetState(bool isOn) => this.isOn = isOn;
-        public bool GetState() => isOn;
+        public void SetEnable(bool isOn) => this.isOn = isOn;
+        public bool GetEnable() => isOn;
 
         public void NotifyOnTrigger()
         {
