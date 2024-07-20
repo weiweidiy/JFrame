@@ -2,82 +2,6 @@
 
 namespace JFrame
 {
-    //public abstract class BaseBattleExecutor : IBattleExecutor
-    //{
-    //    /// <summary>
-    //    /// 首次延迟
-    //    /// </summary>
-    //    float delay;
-
-    //    /// <summary>
-    //    /// 是否已经延迟过了
-    //    /// </summary>
-    //    bool delayed;
-
-    //    /// <summary>
-    //    /// 临时变量
-    //    /// </summary>
-    //    float delta;
-
-    //    /// <summary>
-    //    /// 是否正在释放
-    //    /// </summary>
-    //    bool isCasting = false;
-
-    //    /// <summary>
-    //    /// 战报记录器
-    //    /// </summary>
-    //    BattleReporter reporter;
-
-    //    IBattleUnit caster;
-
-    //    IBattleUnit target;
-
-    //    /// <summary>
-    //    /// 开始释放
-    //    /// </summary>
-    //    /// <param name="caster"></param>
-    //    /// <param name="unit"></param>
-    //    /// <param name="reporter"></param>
-    //    public void Execute(IBattleUnit caster, IBattleUnit target, BattleReporter reporter/*, string reportUID*/)
-    //    {
-    //        isCasting = true;
-    //        this.reporter = reporter;
-    //    }
-
-    //    public void Update(BattleFrame frame) 
-    //    {
-    //        if (!isCasting) return;
-
-    //        delta += frame.DeltaTime;
-
-    //        //延迟指定时间
-    //        if (!delayed) 
-    //        {
-    //            if (delta - delay > 0f)
-    //            {
-    //                delta -= delay;
-    //                delayed = true;
-    //            }
-    //            return;
-    //        }
-
-    //        //延迟结束，可以执行效果
-    //        DoEffect();
-
-    //        isCasting = false;
-    //    }
-
-    //    public abstract void DoEffect();
-    //    //{
-    //    //    var dmg = caster.Atk;
-    //    //    //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-    //    //    target.HP -= dmg;
-
-    //    //    reporter.AddReportResultData(caster.UID,)
-    //    //}
-    //}
-
     /// <summary>
     /// 伤害效果
     /// </summary>
@@ -86,43 +10,86 @@ namespace JFrame
 
         public event Action onExecute;
 
+        /// <summary>
+        /// 是否激活
+        /// </summary>
+        public bool Active { get; set; }
 
-        float count = 1; //攻击次数
-        float dmgRate = 1f; //伤害倍率
-        float delay = 0f; //延迟
+        /// <summary>
+        /// 攻击次数
+        /// </summary>
+        float count = 1;
+
+        /// <summary>
+        /// 攻击间隔
+        /// </summary>
+        float interval = 0.25f;
+
+        /// <summary>
+        /// 伤害倍率
+        /// </summary>
+        float dmgRate = 1f;
+
+        /// <summary>
+        /// 延迟命中
+        /// </summary>
+        float delay = 0f;
+
+        /// <summary>
+        /// 是否已经延迟过了
+        /// </summary>
+        bool delayed;
+        /// <summary>
+        /// 临时变量
+        /// </summary>
+        float delta;
+
+        /// <summary>
+        /// 临时计数
+        /// </summary>
+        int tempCount;
+
+        /// <summary>
+        /// 执行对象相关缓存
+        /// </summary>
+        IBattleUnit caster;
+        IBattleAction action;
+        IBattleUnit target;
 
         public BattleDamage(float[] args)
         {
-            if (args != null && args.Length >= 3)
+            if (args != null && args.Length >= 4)
             {
                 count = args[0];
                 dmgRate = args[1];
                 delay = args[2];
+                interval = args[3];
             }
-
         }
 
-
-
         /// <summary>
-        /// 执行效果
+        /// 执行命中
         /// </summary>
         /// <param name="caster"></param>
         /// <param name="target"></param>
         /// <param name="reporter"></param>
-        public void Execute(IBattleUnit caster, IBattleAction action, IBattleUnit target, BattleReporter reporter)
+        public void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            var dmg = caster.Atk * dmgRate;
+            var dmg = GetValue(caster,action,target);
             //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
             target.OnDamage(caster, action, (int)dmg);
+        }
 
-            //to do: 移除战报数据
-            //reporter.AddReportData(caster.UID, ReportType.Damage,target.UID, new float[] { dmg, target.HP , target.MaxHP}, delay);
-
-            //如果目标已死亡，则添加死亡战报
-            //if(target.HP <= 0) {
-            //    reporter.AddReportData(caster.UID, ReportType.Dead, target.UID, new float[] { 0 }, delay);
-            //}
+        /// <summary>
+        /// 获取执行效果的值
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            return caster.Atk * dmgRate;
         }
 
         /// <summary>
@@ -131,7 +98,57 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
-            
+            if (!Active)
+                return;
+
+            delta += frame.DeltaTime;
+
+            if (!delayed)
+            {
+                if (delta - delay > 0f)
+                {
+                    delta -= delay;
+                    delayed = true;
+                }
+                return;
+            }
+
+            if (delta < interval)
+                return;
+
+            delta = 0f;
+            //延迟完成了
+            Hit(caster, action, target);
+
+            tempCount++;
+
+            if (tempCount >= count)
+            {
+                Active = false;
+                delayed = false;
+                tempCount = 0;
+            }
+        }
+
+
+        /// <summary>
+        /// 准备释放
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="target"></param>
+        /// <exception cref="Exception"></exception>
+        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            if (Active)
+                throw new Exception("执行器正在执行中，无法再次执行");
+
+            //激活
+            Active = true;
+
+            this.caster = caster;
+            this.action = action;
+            this.target = target;
         }
     }
 }

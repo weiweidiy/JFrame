@@ -14,6 +14,10 @@ namespace JFrame
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
 
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferCast;
+
         Dictionary<BattlePoint, IBattleUnit> units = new Dictionary<BattlePoint, IBattleUnit>();
 
         PVPBattleManager.Team team;
@@ -28,9 +32,12 @@ namespace JFrame
                 var unit = units[key];
                 unit.onActionTriggerOn += Unit_onActionTriggerOn;
                 unit.onActionCast += Unit_onActionCast;
-                unit.onActionDone += Unit_onActionDone;
+                unit.onActionHitTarget += Unit_onActionDone;
                 unit.onDamage += Unit_onDamage;
                 unit.onDead += Unit_onDead;
+                unit.onBufferAdded += Unit_onBufferAdded;
+                unit.onBufferRemoved += Unit_onBufferRemoved;
+                unit.onBufferCast += Unit_onBufferCast;
             }
         }
 
@@ -64,7 +71,18 @@ namespace JFrame
             onDead?.Invoke(team, arg1 , arg2, arg3);
         }
 
-
+        private void Unit_onBufferAdded(IBattleUnit arg1, IBuffer arg2)
+        {
+            onBufferAdded?.Invoke(team, arg1, arg2);
+        }
+        private void Unit_onBufferCast(IBattleUnit arg1, IBuffer arg2)
+        {
+            onBufferCast?.Invoke(team, arg1, arg2);
+        }
+        private void Unit_onBufferRemoved(IBattleUnit arg1, IBuffer arg2)
+        {
+            onBufferRemoved?.Invoke(team, arg1, arg2);
+        }
 
         #endregion
         /// <summary>

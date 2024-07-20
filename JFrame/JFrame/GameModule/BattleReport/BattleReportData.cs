@@ -13,11 +13,11 @@ namespace JFrame
         public string CasterUID { get; private set; } //行动者UID
         //public string ActionName { get; private set; } //SkillId
         public string TargetUID { get; private set; } //目标UID
-        public float[] Arg { get; private set; }   //动作ID
+        public object[] Arg { get; private set; }   //动作ID
 
         public ReportType ReportType { get; private set; }
 
-        public BattleReportData(int frame, float escapeTime, string casterUID, ReportType reportType, string targetUID, float[] arg)
+        public BattleReportData(int frame, float escapeTime, string casterUID, ReportType reportType, string targetUID, object[] arg)
         {
             UID = Guid.NewGuid().ToString();
             Frame = frame;

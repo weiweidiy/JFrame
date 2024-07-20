@@ -45,6 +45,9 @@ namespace JFrame
         /// </summary>
         DataSource dataSource = null;
 
+        BufferDataSource bufferDataSource = null;
+
+
         #region 响应方法：战斗规则
         /// <summary>
         /// 有动作准备好了
@@ -206,9 +209,11 @@ namespace JFrame
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defence"></param>
-        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, DataSource cfgAction)
+        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, DataSource dataSource, BufferDataSource bufferDataSource)
         {
-            this.dataSource = cfgAction;
+          
+            this.dataSource = dataSource;
+            this.bufferDataSource = bufferDataSource;
             teams.Clear();
             var attackTeam = CreateTeam(Team.Attacker, attacker);
             teams.Add(Team.Attacker, attackTeam);
@@ -231,7 +236,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActions(info.id, info.actionsId, slot));
+                var battleUnit = new BattleUnit(info, CreateActions(info.id, info.actionsId, slot), CreateBufferManager());
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -240,6 +245,15 @@ namespace JFrame
             battleTeam.onActionTriggerOn += BattleTeam_onActionTriggerOn;
             battleTeam.onActionDone += BattleTeam_onActionDone;
             return battleTeam;
+        }
+
+        /// <summary>
+        /// 创建 buff管理器
+        /// </summary>
+        /// <returns></returns>
+        BaseBufferManager CreateBufferManager()
+        {
+            return new BaseBufferManager(bufferDataSource, new BufferFactory(bufferDataSource));
         }
 
         /// <summary>

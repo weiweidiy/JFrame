@@ -11,6 +11,9 @@ namespace JFrame
         Damage, //受伤
         Heal,   //治疗回血
         Dead,   //死亡
+        AddBuffer,
+        RemoveBuffer,
+        CastBuffer,
     }
 
 
@@ -45,25 +48,47 @@ namespace JFrame
                 team.onActionCast += Team_onActionCast;
                 team.onDamage += Team_onDamage;
                 team.onDead += Team_onDead;
+                team.onBufferAdded += Team_onBufferAdded;
+                team.onBufferRemoved += Team_onBufferRemoved;
+                team.onBufferCast += Team_onBufferCast;
             }
 
         }
 
 
+
         private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            AddReportData(caster.UID, ReportType.Action, target.UID, new float[] { action.Id });
+            AddReportData(caster.UID, ReportType.Action, target.UID, new object[] { action.Id });
         }
 
         private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int dmg)
         {
-            AddReportData(caster.UID, ReportType.Damage, target.UID, new float[] { dmg, target.HP, target.MaxHP });
+            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { dmg, target.HP, target.MaxHP });
         }
 
         private void Team_onDead(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            AddReportData(caster.UID, ReportType.Dead, target.UID, new float[] {0});
+            AddReportData(caster.UID, ReportType.Dead, target.UID, new object[] {0});
         }
+
+        private void Team_onBufferAdded(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
+        {
+            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] { buffer.Id });
+        }
+
+        private void Team_onBufferCast(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
+        {
+            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.Id });
+        }
+
+        private void Team_onBufferRemoved(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
+        {
+            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.Id });
+        }
+
+
+
 
         public List<IBattleReportData> GetAllReportData()
         {
@@ -80,7 +105,7 @@ namespace JFrame
         /// <param name="targetUID"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string AddReportData(string casterUID, ReportType reportType, string targetUID, float[] arg , float timeOffset = 0f)
+        public string AddReportData(string casterUID, ReportType reportType, string targetUID, object[] arg , float timeOffset = 0f)
         {
             //to do: 增加一个流逝时间偏移量，可以延迟播放
             var data = new BattleReportData(frame.CurFrame,frame.GetDeltaTime(frame.CurFrame) + timeOffset, casterUID, reportType, targetUID, arg);

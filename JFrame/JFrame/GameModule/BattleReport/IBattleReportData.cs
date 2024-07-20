@@ -21,7 +21,7 @@
         /// <summary>
         /// 对应id
         /// </summary>
-        float[] Arg {  get; } //如果reportType = action , arg = action id, 如果是damage , Arg = damage
+        object[] Arg {  get; } //如果reportType = action , arg = action id, 如果是damage , Arg = damage
 
     }
 }

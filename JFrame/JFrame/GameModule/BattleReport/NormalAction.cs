@@ -12,7 +12,13 @@ namespace JFrame
         /// 准备好了，也找到目标了，可以释放
         /// </summary>
         public event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
+        /// <summary>
+        /// 开始释放了
+        /// </summary>
         public event Action<IBattleAction, IBattleUnit> onStartCast;
+        /// <summary>
+        /// 对目标起效了（多个目标时，每个目标调用一次)
+        /// </summary>
         public event Action<IBattleAction, IBattleUnit> onHitTarget;
 
         /// <summary>
@@ -25,9 +31,20 @@ namespace JFrame
         /// </summary>
         public int Id { get; private set; }
 
+        /// <summary>
+        /// 触发器
+        /// </summary>
         BattleTrigger trigger;
+
+        /// <summary>
+        /// 目标搜索器
+        /// </summary>
         IBattleTargetFinder finder;
-        List<IBattleExecutor> exutors;
+
+        /// <summary>
+        /// 效果执行器
+        /// </summary>
+        List<IBattleExecutor> exeutors;
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -42,7 +59,7 @@ namespace JFrame
             this.trigger = trigger;
             this.trigger.onTrigger += Trigger_onTrigger;
             this.finder = finder;
-            this.exutors = exutors;
+            this.exeutors = exutors;
 
             foreach(var e  in exutors)
             {
@@ -66,11 +83,19 @@ namespace JFrame
             onTriggerOn?.Invoke(this, targets);
         }
 
-        //cd管理
+
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
             trigger.Update(frame);
             //exutor.Update(frame);
+            foreach (var e in exeutors)
+            {
+                e.Update(frame);
+            }
         }
 
         /// <summary>
@@ -86,19 +111,18 @@ namespace JFrame
 
             foreach (var unit in units)
             {
-                foreach(var e in exutors)
+                foreach(var e in exeutors)
                 {
-                    e.Execute(caster,this, unit, reporter);
+                    e.ReadyToExecute(caster,this, unit);
                 }
                 onHitTarget?.Invoke(this, unit);
             }
         }
 
-
-        private void E_onExecute()
-        {
-            
-        }
+        /// <summary>
+        /// 执行效果触发
+        /// </summary>
+        private void E_onExecute() { }
 
         /// <summary>
         /// 设置动作是否可用

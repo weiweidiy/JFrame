@@ -21,9 +21,11 @@ namespace JFrame
     public class JFrameTimerUtils : ITimerUtils
     {
         PETimer pt = new PETimer();
-
+        Action action;
         public ITimer Regist(float interval, int loopTimes, Action action, bool immediatly = false, bool useRealTime = false)
         {
+            this.action = action; 
+
             int count = loopTimes == -1? 0 : loopTimes;
 
             int tempID = pt.AddTimeTask((int tid) => {
@@ -31,6 +33,14 @@ namespace JFrame
             }, interval, PETimeUnit.Second, count);
 
             return new JFrameTimer(pt, tempID);
+        }
+
+        /// <summary>
+        /// 手动调用
+        /// </summary>
+        public void Call()
+        {
+            action?.Invoke();
         }
 
         public void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+
     public class ActionFactory
     {
         int unitId;
@@ -35,7 +36,7 @@ namespace JFrame
         {
             switch (triggerType)
             {
-                case 1:
+                case 1: //周期性触发器
                     return new CDTrigger(arg, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 trigger type " + triggerType);
@@ -53,13 +54,21 @@ namespace JFrame
         {
             switch (finderType)
             {
-                case 1:
-                    return new NormalTargetFinder(point, pvpBattleManager, arg);
+                case 1: //顺序找目标（可复数）
+                    return new OrderTargetFinder(point, pvpBattleManager, arg);
+                case 2: //倒序找目标（可复数）
+                    return new ReverseOrderTargetFinder(point, pvpBattleManager, arg);
                 default:
                     throw new Exception("没有实现目标finder type " + finderType);
             }
         }
 
+        /// <summary>
+        /// 创建执行器
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
         List<IBattleExecutor> CreateExecutors(int unitId, int actionId)
         {
             var result = new List<IBattleExecutor>();
@@ -73,11 +82,18 @@ namespace JFrame
             return result;
         }
 
+        /// <summary>
+        /// 创建执行器
+        /// </summary>
+        /// <param name="excutorType"></param>
+        /// <param name="arg"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         IBattleExecutor CreateExcutor( int excutorType, float[] arg)
         {
             switch (excutorType)
             {
-                case 1:
+                case 1: //伤害执行器（可多段伤害）
                     return new BattleDamage(arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);

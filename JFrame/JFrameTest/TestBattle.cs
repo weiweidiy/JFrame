@@ -19,6 +19,7 @@ namespace JFrameTest
         [SetUp]
         public void SetUp()
         {
+            //var cfg = new DataSource();
             battle = new PVPBattleManager();
             attacker.Add(new BattlePoint(1, PVPBattleManager.Team.Attacker), new BattleUnitInfo() {uid = Guid.NewGuid().ToString(), actionsId = new List<int>() { 1 }, atk = 10, id = 1, hp = 20 });
             attacker.Add(new BattlePoint(2, PVPBattleManager.Team.Attacker), new BattleUnitInfo() { uid = Guid.NewGuid().ToString(), actionsId = new List<int>() { 1 }, atk = 8, id = 2, hp = 16 });
@@ -38,8 +39,9 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
+            var timer = new JFrameTimerUtils();
             //action
-            battle.Initialize(attacker, defence, cfg);
+            battle.Initialize(attacker, defence, cfg,null);
 
             //expect
             Assert.AreEqual(2, battle.GetUnitCount(PVPBattleManager.Team.Attacker));
@@ -51,9 +53,10 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
-            battle.Initialize(attacker, defence, cfg);
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null);
             BattleTrigger trigger = new CDTrigger(0f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleTargetFinder finder = Substitute.For<OrderTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
             IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1,1,1));
             BattleFrame frame = Substitute.For<BattleFrame>();
             var actionId = 1;
@@ -72,9 +75,10 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
-            battle.Initialize(attacker, defence, cfg);
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null);
             BattleTrigger trigger = new CDTrigger(1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleTargetFinder finder = Substitute.For<OrderTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
             IBattleExecutor excutor = Substitute.For<BattleDamage>(cfg.GetExcutorArg(1,1,1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
@@ -113,9 +117,10 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
-            battle.Initialize(attacker, defence, cfg);
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null);
             BattleTrigger trigger = new CDTrigger(1f,1f);
-            IBattleTargetFinder finder = Substitute.For<NormalTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
+            IBattleTargetFinder finder = Substitute.For<OrderTargetFinder>(Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker), battle, cfg.GetFinderArg(1,1));
             IBattleExecutor excutor = Substitute.For<BattleDamage>( cfg.GetExcutorArg(1,1, 1));
             BattleFrame frame = new BattleFrame();
             var actionId = 1;
@@ -155,53 +160,15 @@ namespace JFrameTest
             var casterUID = Guid.NewGuid().ToString();
             var targetUID = Guid.NewGuid().ToString();
             //action
-            var reportUid = reporter.AddReportData(casterUID,ReportType.Action, targetUID,new float[] { 1 });
+            var reportUid = reporter.AddReportData(casterUID,ReportType.Action, targetUID,new object[] { 1 });
             var reportData = reporter.GetReportData(reportUid);
-            reporter.AddReportData(casterUID, ReportType.Damage, targetUID, new float[] {1});
+            reporter.AddReportData(casterUID, ReportType.Damage, targetUID, new object[] {1});
 
             //expect
             Assert.AreEqual(casterUID, reportData.CasterUID);
             Assert.AreEqual(2, reporter.GetAllReportData().Count);
         }
 
-        //[Test]
-        //public void TestUpdateReport()
-        //{
-        //    //arrange
-        //    var reporter = new BattleReporter(null);
-        //    var hostUID = Guid.NewGuid().ToString();
-        //    var targetUID = "333";
-        //    //action
-        //    var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
-        //    var reportData = reporter.GetReportData(reportUid);
-        //    var values = new Dictionary<string, int>
-        //    {
-        //        { targetUID, 5 }
-        //    };
-        //    reporter.UpdateReportResultData(reportUid, values, null, null);
-
-        //    //expect
-        //    Assert.AreEqual(hostUID, reportData.CasterUID);
-        //    Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
-        //}
-
-        //[Test]
-        //public void TestAddResultReport()
-        //{
-        //    //arrange
-        //    var reporter = new BattleReporter();
-        //    var hostUID = Guid.NewGuid().ToString();
-        //    var targetUID = "333";
-        //    //action
-        //    var reportUid = reporter.AddReportMainData(1, 0f, hostUID, 1, new List<string>() { targetUID });
-        //    var reportData = reporter.GetReportData(reportUid);
-        //    var values = 5;
-        //    reporter.AddReportResultData(reportUid, targetUID, values, 5, -1);
-
-        //    //expect
-        //    Assert.AreEqual(hostUID, reportData.CasterUID);
-        //    Assert.AreEqual(5, reportData.TargetsValue[targetUID]);
-        //}
 
         [Test]
         public void TestActionCast()
@@ -214,15 +181,18 @@ namespace JFrameTest
             cfg.GetFinderType(Arg.Any<int>(), Arg.Any<int>()).Returns(1);
             cfg.GetExcutorType(Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1});
             //action
-            battle.Initialize(attacker, defence, cfg);
-            battle.Update();
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null);      
+            battle.Update();    
+            //timer.Call();
+            //timer.Call();
             var reporter = battle.GetReporter();
             var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(6, lstData.Count);
+            Assert.AreEqual(3, lstData.Count);
             var unit = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-            Assert.AreEqual(172, unit.HP);
+            Assert.AreEqual(190, unit.HP);
         }
 
         [Test]
@@ -230,8 +200,9 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
+            var timer = new JFrameTimerUtils();
             //action
-            battle.Initialize(attacker, defence, cfg);
+            battle.Initialize(attacker, defence, cfg, null);
             var lstData = battle.GetResult();
             //var reporter = battle.GetReporter();
             //var lstData = reporter.GetAllReportData();
@@ -253,7 +224,8 @@ namespace JFrameTest
         {
             //arrange
             var cfg = new DataSource();
-            battle.Initialize(attacker, defence, cfg);
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null);
             var lstData = battle.GetResult();
             var parser = new PVPBattleReportParser(lstData.report);
 
@@ -263,6 +235,92 @@ namespace JFrameTest
             var result =  parser.GetData(3);
             Assert.AreEqual(3, result.Count);
             Assert.AreEqual(19, parser.Count());
+        }
+
+        [Test]
+        public void TestAddBuffAndCallOnAttach()
+        {
+            //arrange
+            var buffDataSource = Substitute.For<BufferDataSource>();
+            var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
+            var buffer = Substitute.For<JFrame.Buffer>("1",1,1,new float[] { });
+            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
+            var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<List<IBattleAction>>(), buffManager);
+
+            //action
+            buffManager.AddBuffer(unit, 1, 1);
+
+            //expect
+            buffer.Received().OnAttach(unit);
+        }
+
+        [Test]
+        public void TestRemoveBuffAndCallOnDettach()
+        {
+            //arrange
+            string bufferUID = "1";
+            var buffDataSource = Substitute.For<BufferDataSource>();
+            var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
+            var buffer = Substitute.For<JFrame.Buffer>(bufferUID, 1, 1, new float[] { });
+            buffer.UID.Returns(bufferUID);
+            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
+            var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<List<IBattleAction>>(), buffManager);
+
+            //action
+            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.RemoveBuffer(bufferUID);
+
+            //expect
+            buffer.Received(1).OnDettach();
+        }
+
+        [Test]
+        public void TesUpdateDurationBuffAndCallOnDettach()
+        {
+            //arrange
+            string bufferUID = "1";
+            var buffDataSource = Substitute.For<BufferDataSource>();
+            var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
+            //var buffer = new DurationBuffer("1", 1, 1, new float[] {1});
+            var buffer = Substitute.For<JFrame.DurationBuffer>(bufferUID, 1, 1, new float[] { 1f});
+            buffer.UID.Returns(bufferUID);
+            buffer.IsValid().Returns(false);
+            buffer.GetDuration().Returns(1f);
+            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
+            var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<List<IBattleAction>>(), buffManager);
+            var frame = new BattleFrame();
+
+            //action
+            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.Update(frame);
+
+            //expect
+            buffer.Received(1).Update(frame);
+            buffer.Received(1).OnDettach();
+        }
+
+        [Test]
+        public void TesAddAtkUpBuffAndAtkChanged()
+        {
+            //arrange
+            string bufferUID = "1";
+            var buffDataSource = Substitute.For<BufferDataSource>();
+            var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
+            //var buffer = new DurationBuffer("1", 1, 1, new float[] {1});
+            var buffer = new BufferAttackUp(bufferUID, 1, 1, new float[] { 1f });// Substitute.For<BufferAttackUp>(bufferUID, 1, 1, new float[] { 1f });            
+            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
+            var unit = new BattleUnit(new BattleUnitInfo() { atk = 5}, Substitute.For<List<IBattleAction>>(), buffManager);
+            var frame = new BattleFrame();
+
+            //action
+            buffManager.AddBuffer(unit, 1, 1);
+
+            //expect
+            Assert.AreEqual(15, unit.Atk);
         }
     }
 

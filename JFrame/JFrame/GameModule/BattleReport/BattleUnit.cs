@@ -11,10 +11,13 @@ namespace JFrame
         /// </summary>
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
+        public event Action<IBattleUnit, IBuffer> onBufferAdded;
+        public event Action<IBattleUnit, IBuffer> onBufferRemoved;
+        public event Action<IBattleUnit, IBuffer> onBufferCast;
 
         /// <summary>
         /// 获取战斗对象名字，暂时用ID代替
@@ -29,15 +32,31 @@ namespace JFrame
         public int Atk
         {
             get { return battleUnitAttribute.atk; }
-            set { battleUnitAttribute.atk = Math.Max(0, value); }
+            private set { battleUnitAttribute.atk = Math.Max(0, value); }
+        }
+
+        /// <summary>
+        /// 攻击提升
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public int AtkUpgrade(int value)
+        {
+            if (value < 0)
+                throw new Exception("攻击提升数值不能为负数 " + value);
+
+            Atk += value;
+            return value;
         }
 
         public int HP 
         {
             get { return battleUnitAttribute.hp; }
-            set {
-                battleUnitAttribute.hp = Math.Min(MaxHP, Math.Max(0, value)); 
-            } 
+            private set
+            {
+                battleUnitAttribute.hp = Math.Min(MaxHP, Math.Max(0, value));
+            }
         }
 
         public int MaxHP { get => battleUnitInfo.hp; }
@@ -57,7 +76,12 @@ namespace JFrame
         /// </summary>
         BattleUnitAttribute battleUnitAttribute = default;
 
-        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions)
+        /// <summary>
+        /// buff管理器
+        /// </summary>
+        BaseBufferManager bufferManager = null;
+
+        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions, BaseBufferManager bufferManager)
         {
             this.UID = info.uid;
             battleUnitInfo = info;
@@ -70,10 +94,39 @@ namespace JFrame
 
             HP = info.hp;
             Atk = info.atk; 
+            this.bufferManager = bufferManager;
+            this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
+            this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
+            this.bufferManager.onBufferCast += BufferManager_onBufferCast;
         }
 
+        #region 响应事件
+        /// <summary>
+        /// buffer添加了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferAdded(IBuffer obj)
+        {
+            onBufferAdded?.Invoke(this, obj);
+        }
 
+        /// <summary>
+        /// buffer触发了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferCast(IBuffer obj)
+        {
+            onBufferCast?.Invoke(this, obj);
+        }
 
+        /// <summary>
+        /// buffer移除了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferRemoved(IBuffer obj)
+        {
+            onBufferRemoved?.Invoke(this, obj);
+        }
 
         /// <summary>
         /// 动作已经准备好了
@@ -106,30 +159,7 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         private void Action_onDone(IBattleAction arg1, IBattleUnit arg2)
         {
-            onActionDone?.Invoke(this, arg1,arg2);
-        }
-
-        /// <summary>
-        /// 更新帧了
-        /// </summary>
-        /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
-        {
-            foreach (var action in actions)
-            {
-                action.Update(frame);
-            }
-
-            //Console.WriteLine("unit update");
-        }
-
-        /// <summary>
-        /// 是否活着
-        /// </summary>
-        /// <returns></returns>
-        public bool IsAlive()
-        {
-            return HP > 0;
+            onActionHitTarget?.Invoke(this, arg1,arg2);
         }
 
         /// <summary>
@@ -144,11 +174,8 @@ namespace JFrame
 
             if (HP <= 0)
             {
-                OnDead(hitter, action);
-               
+                OnDead(hitter, action);           
             }
-
-
         }
 
         /// <summary>
@@ -172,6 +199,52 @@ namespace JFrame
 
             onDead?.Invoke(hitter, action, this);
         }
+
+        #endregion
+
+        /// <summary>
+        /// 更新帧了
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            foreach (var action in actions)
+            {
+                action.Update(frame);
+            }
+
+            bufferManager.Update(frame);
+        }
+
+        /// <summary>
+        /// 是否活着
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAlive()
+        {
+            return HP > 0;
+        }
+
+        /// <summary>
+        /// 添加buffer
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <param name="foldCout"></param>
+        /// <returns></returns>
+        public IBuffer AddBuffer(int bufferId, int foldCout = 1)
+        {
+            return bufferManager.AddBuffer(this, bufferId, foldCout);
+        }
+
+        /// <summary>
+        /// 移除buffer
+        /// </summary>
+        /// <param name="bufferUID"></param>
+        public void RemoveBuffer(string bufferUID)
+        {
+            bufferManager.RemoveBuffer(bufferUID);
+        }
+
 
     }
 }

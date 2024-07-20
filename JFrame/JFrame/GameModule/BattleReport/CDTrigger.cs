@@ -31,7 +31,10 @@ namespace JFrame
             delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
         }
 
-
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        /// <param name="frame"></param>
         public override void Update(BattleFrame frame)
         {
             delta += frame.DeltaTime;

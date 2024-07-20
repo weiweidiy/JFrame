@@ -9,7 +9,12 @@ namespace JFrame
     public interface IBattleExecutor
     {
         event Action onExecute;
-        void Execute(IBattleUnit caster, IBattleAction action, IBattleUnit unit, BattleReporter reporter/*, string reportUID*/);
+
+        bool Active { get; set; }
+        void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit unit);
+
+        void ReadyToExecute(IBattleUnit caster, IBattleAction action, IBattleUnit unit);
+
         void Update(BattleFrame frame);
     }
 }
