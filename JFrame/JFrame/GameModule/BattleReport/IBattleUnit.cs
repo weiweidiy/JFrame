@@ -19,6 +19,8 @@ namespace JFrame
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
         event Action<IBattleUnit, IBuffer> onBufferCast;
 
+        void Update(BattleFrame frame);
+
         string UID { get; }
 
         string Name { get; }
@@ -26,7 +28,7 @@ namespace JFrame
         /// <summary>
         /// 当前攻击力
         /// </summary>
-        int Atk { get; }
+        int Atk { get; set; }
 
         /// <summary>
         /// 攻击力提升，返回实际提升的值
@@ -71,6 +73,12 @@ namespace JFrame
         /// <param name="foldCout"></param>
         /// <returns></returns>
         IBuffer AddBuffer(int bufferId, int foldCout = 1);
+
+        /// <summary>
+        /// 获取所有buffers
+        /// </summary>
+        /// <returns></returns>
+        IBuffer[] GetBuffers();
 
         /// <summary>
         /// 移除buffer

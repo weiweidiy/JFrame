@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// pvp战斗管理
     /// </summary>
-    public class PVPBattleManager
+    public class PVPBattleManager : IPVPBattleManager
     {
         public enum Team
         {
@@ -18,7 +18,7 @@ namespace JFrame
         /// <summary>
         /// 战斗日志
         /// </summary>
-        BattleReporter pvpReporter;
+        IBattleReporter pvpReporter;
 
         /// <summary>
         /// 最终的战报对象
@@ -43,7 +43,7 @@ namespace JFrame
         /// <summary>
         /// 配置表
         /// </summary>
-        DataSource dataSource = null;
+        ActionDataSource dataSource = null;
 
         BufferDataSource bufferDataSource = null;
 
@@ -174,7 +174,7 @@ namespace JFrame
         /// 获取战报
         /// </summary>
         /// <returns></returns>
-        public BattleReporter GetReporter()
+        public IBattleReporter GetReporter()
         {
             return pvpReporter;
         }
@@ -209,7 +209,7 @@ namespace JFrame
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defence"></param>
-        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, DataSource dataSource, BufferDataSource bufferDataSource)
+        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter)
         {
           
             this.dataSource = dataSource;
@@ -221,16 +221,33 @@ namespace JFrame
             teams.Add(Team.Defence, defenceTeam);
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
-            pvpReporter = new BattleReporter(frame, teams);
+            pvpReporter = reporter == null?  new BattleReporter(frame, teams) : reporter ;
             report.attacker = attacker;
             report.defence = defence;
+        }
+
+        public void Release()
+        {
+            battleResult = null;
+            pvpReporter = null;
+        }
+
+
+        /// <summary>
+        /// 添加一个队伍
+        /// </summary>
+        /// <param name="team"></param>
+        /// <param name="teamObj"></param>
+        public void AddTeam(Team team, BattleTeam teamObj)
+        {
+            teams.Add(team, teamObj);
         }
 
         /// <summary>
         /// 初始化队伍数据
         /// </summary>
         /// <param name="units"></param>
-        BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units)
+        public virtual BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units)
         {
             var dicUnits = new Dictionary<BattlePoint, IBattleUnit>();
             foreach (var slot in units.Keys)
@@ -275,7 +292,8 @@ namespace JFrame
             return actions;
         }
 
-        
+
+
         #endregion
 
     }

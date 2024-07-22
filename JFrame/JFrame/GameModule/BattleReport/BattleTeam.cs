@@ -5,7 +5,7 @@ using System.Linq;
 namespace JFrame
 {
 
-    public class BattleTeam
+    public class BattleTeam : IBattleTeam
     {
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
@@ -22,27 +22,28 @@ namespace JFrame
 
         PVPBattleManager.Team team;
 
-        public BattleTeam(PVPBattleManager.Team team,  Dictionary<BattlePoint, IBattleUnit> units)
+        public BattleTeam(PVPBattleManager.Team team, Dictionary<BattlePoint, IBattleUnit> units)
         {
             this.team = team;
             this.units = units;
 
-            foreach(var key in units.Keys)
+            if(this.units != null)
             {
-                var unit = units[key];
-                unit.onActionTriggerOn += Unit_onActionTriggerOn;
-                unit.onActionCast += Unit_onActionCast;
-                unit.onActionHitTarget += Unit_onActionDone;
-                unit.onDamage += Unit_onDamage;
-                unit.onDead += Unit_onDead;
-                unit.onBufferAdded += Unit_onBufferAdded;
-                unit.onBufferRemoved += Unit_onBufferRemoved;
-                unit.onBufferCast += Unit_onBufferCast;
+                foreach (var key in units.Keys)
+                {
+                    var unit = units[key];
+                    unit.onActionTriggerOn += Unit_onActionTriggerOn;
+                    unit.onActionCast += Unit_onActionCast;
+                    unit.onActionHitTarget += Unit_onActionDone;
+                    unit.onDamage += Unit_onDamage;
+                    unit.onDead += Unit_onDead;
+                    unit.onBufferAdded += Unit_onBufferAdded;
+                    unit.onBufferRemoved += Unit_onBufferRemoved;
+                    unit.onBufferCast += Unit_onBufferCast;
+                }
             }
+
         }
-
-
-
 
 
         #region 响应事件
@@ -59,16 +60,16 @@ namespace JFrame
 
         private void Unit_onActionDone(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
         {
-            onActionDone?.Invoke(team,arg1, arg2,arg3);
+            onActionDone?.Invoke(team, arg1, arg2, arg3);
         }
 
         private void Unit_onDamage(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
         {
-            onDamage?.Invoke(team,arg1 , arg2, arg3, arg4);
+            onDamage?.Invoke(team, arg1, arg2, arg3, arg4);
         }
         private void Unit_onDead(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
         {
-            onDead?.Invoke(team, arg1 , arg2, arg3);
+            onDead?.Invoke(team, arg1, arg2, arg3);
         }
 
         private void Unit_onBufferAdded(IBattleUnit arg1, IBuffer arg2)
@@ -85,6 +86,21 @@ namespace JFrame
         }
 
         #endregion
+
+        /// <summary>
+        /// 添加一个单位
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="unit"></param>
+        public void AddUnit(BattlePoint point, IBattleUnit unit)
+        {
+            if (units == null)
+                units = new Dictionary<BattlePoint, IBattleUnit>();
+
+            units.Add(point, unit);
+        }
+
+
         /// <summary>
         /// 获取指定位置战斗单位
         /// </summary>
@@ -93,7 +109,7 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public IBattleUnit GetUnit(BattlePoint point)
         {
-            if(units.ContainsKey(point)) 
+            if (units.ContainsKey(point))
                 return units[point];
 
             throw new Exception("没有找到对应的点位 " + point.Point);
@@ -107,9 +123,9 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public IBattleUnit GetUnit(int point)
         {
-            foreach(var btPoint in units.Keys)
+            foreach (var btPoint in units.Keys)
             {
-                if(btPoint.Point == point) 
+                if (btPoint.Point == point)
                     return units[btPoint];
             }
 
@@ -127,9 +143,13 @@ namespace JFrame
 
         public void Update(BattleFrame frame)
         {
-            foreach (var unit in units.Values)
+            var collection = GetUnits();
+            if(collection == null)
+                return;
+
+            foreach (var unit in collection)
             {
-                (unit as BattleUnit).Update(frame);
+                unit.Update(frame);
             }
         }
 
@@ -140,7 +160,7 @@ namespace JFrame
 
         public bool IsAllDead()
         {
-            foreach(var unit in units.Values)
+            foreach (var unit in units.Values)
             {
                 if (unit.IsAlive())
                     return false;
@@ -148,5 +168,7 @@ namespace JFrame
 
             return true;
         }
+
+
     }
 }

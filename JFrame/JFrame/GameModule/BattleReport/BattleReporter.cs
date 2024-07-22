@@ -1,7 +1,7 @@
-﻿using JFrame.Common;
+﻿
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 
 namespace JFrame
 {
@@ -16,11 +16,10 @@ namespace JFrame
         CastBuffer,
     }
 
-
     /// <summary>
     /// pvp战报对象
     /// </summary>
-    public class BattleReporter /*: IBattleReporter*/
+    public class BattleReporter : IBattleReporter
     {
         public class Comp : IComparer<IBattleReportData>
         {
@@ -32,7 +31,7 @@ namespace JFrame
             }
         }
 
-        Utility utility = new Utility();
+        //Utility utility = new Utility();
 
         List<IBattleReportData> reports = new List<IBattleReportData>();
 
@@ -74,17 +73,17 @@ namespace JFrame
 
         private void Team_onBufferAdded(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] { buffer.Id });
+            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.UID,  buffer.Id });
         }
 
         private void Team_onBufferCast(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.Id });
+            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
         }
 
         private void Team_onBufferRemoved(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.Id });
+            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
         }
 
 
@@ -113,7 +112,8 @@ namespace JFrame
             if (ContainsReport(data))
                 throw new Exception("已经存在战报" + frame + " " + casterUID + " " + reportType);
 
-            utility.BinarySearchInsert(reports, data, new Comp());
+            reports.Add(data);
+            //utility.BinarySearchInsert(reports, data, new Comp());
             return data.UID;
         }
 

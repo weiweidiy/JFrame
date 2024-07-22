@@ -1,0 +1,248 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace JFrame
+{
+
+    public class BaseBufferManager
+    {
+        public event Action<IBuffer> onBufferUpdated;
+        public event Action<IBuffer> onBufferAdded;
+        public event Action<IBuffer> onBufferRemoved;
+        public event Action<IBuffer> onBufferCast;//buff触发效果了
+
+        protected List<IBuffer> buffers = new List<IBuffer>();
+
+        BufferDataSource dataSource = null;
+
+        BufferFactory factory = null;
+
+        public BaseBufferManager(BufferDataSource dataSource, BufferFactory factory)
+        {
+            this.dataSource = dataSource;
+            this.factory = factory;
+        }
+
+        /// <summary>
+        /// 添加buff,目前只能给玩家加
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <param name="buffArg"></param>
+        /// <returns></returns>
+        public virtual IBuffer AddBuffer(IBattleUnit target, int bufferId,  int foldCout = 1)
+        {
+            //如果是共存的，则直接添加， 如果是叠加的，则获取原有BUFFER对象，添加层数       
+            IBuffer buffer = null;
+
+            buffer = GetBuffer(bufferId);
+            var foldType = dataSource.GetFoldType(bufferId);
+
+            if (buffer != null)
+            {
+                if (foldType == BufferFoldType.Fold)//可叠加的,且已经存在的
+                {
+                    buffer.FoldCount += foldCout;
+                    onBufferUpdated?.Invoke(buffer);
+                    return buffer;
+                }
+
+                if (foldType == BufferFoldType.Replace) //替换（刷新周期） 
+                {
+                    //to do:刷新周期
+                    onBufferUpdated?.Invoke(buffer);
+                    return buffer;
+                }
+            }
+
+            //不可叠加的，可共存的
+            string uid = Guid.NewGuid().ToString();
+
+            buffer = factory.Create(bufferId, foldCout);    
+            buffer.OnAttach(target);
+            buffer.onCast += Buffer_onCast;
+            buffers.Add(buffer);
+
+            onBufferAdded?.Invoke(buffer);
+            return buffer;
+        }
+
+        /// <summary>
+        /// buff触发效果了，比如复活，中毒，恢复等
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Buffer_onCast(IBuffer obj)
+        {
+            onBufferCast?.Invoke(obj);
+        }
+
+        /// <summary>
+        /// 删除buffer
+        /// </summary>
+        /// <param name="uid"></param>
+        public bool RemoveBuffer(string uid)
+        {
+            var buffer = GetBuffer(uid);
+            if (buffer == null)
+                return false;
+           
+            var result = buffers.Remove(buffer);
+
+            if(result)
+            {
+                buffer.OnDettach();
+                onBufferRemoved?.Invoke(buffer);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            for(int i= buffers.Count-1; i>=0; i--)
+            {
+                var buffer = buffers[i];
+                buffer.Update(frame);
+
+                //如果buffer失效了，则移除
+                if(!buffer.IsValid())
+                {
+                    if (!RemoveBuffer(buffer.UID))
+                        throw new InvalidOperationException("删除buff失败，参数错误" + buffer.UID);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新buff
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="arg"></param>
+        public void UpdateBuffer(string uid, float[] args)
+        {
+            var buffer = GetBuffer(uid);
+            //Debug.Assert(buffer != null, " buffer is null");
+            buffer.Args = args;
+            onBufferUpdated?.Invoke(buffer);
+        }
+
+
+        /// <summary>
+        /// 获取buffer对象
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public IBuffer GetBuffer(string uid)
+        {
+            return buffers.Where(buffer => buffer.UID.Equals(uid)).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 获取buffer对象
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <returns></returns>
+        public IBuffer[] GetBuffers(int bufferId)
+        {
+            return buffers.Where(buffer => buffer.Id.Equals(bufferId)).ToArray();
+        }
+
+        /// <summary>
+        /// 获取所有buffers
+        /// </summary>
+        /// <returns></returns>
+        public IBuffer[] GetBuffers()
+        {
+            return buffers.ToArray();
+        }
+
+        /// <summary>
+        /// 获取首个buff
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <returns></returns>
+        public IBuffer GetBuffer(int bufferId)
+        {
+            return buffers.Where(buffer => buffer.Id.Equals(bufferId)).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 获取所有buff或者debuff
+        /// </summary>
+        /// <param name="isBuff"></param>
+        /// <returns></returns>
+        public IBuffer[] GetBuffers(bool isBuff)
+        {
+            return buffers.Where(buffer => IsBuff(buffer.Id).Equals(isBuff)).ToArray();
+        }
+
+        bool IsBuff(int buffId)
+        {
+            return dataSource.IsBuff(buffId);
+        }
+
+        /// <summary>
+        /// 是否有buff
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <returns></returns>
+        public bool HasBuffer(int bufferId)
+        {
+            return buffers.Where(buffer => buffer.Id.Equals(bufferId)).SingleOrDefault() != null;
+        }
+
+        /// <summary>
+        /// 是否有buff
+        /// </summary>
+        /// <param name="bufferType"></param>
+        /// <returns></returns>
+        public bool HasBuffer(BufferTriggerType bufferType)
+        {
+            return buffers.Where(buffer => GetBufferTriggerType(buffer.Id).Equals(bufferType)).SingleOrDefault() != null;
+        }
+
+        BufferTriggerType GetBufferTriggerType(int bufferId)
+        {
+            return dataSource.GetTriigerType(bufferId);
+        }
+
+        ///// <summary>
+        ///// 调用指定类型的buff
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <param name="origin"></param>
+        ///// <returns></returns>
+        //public int CallBuff(BufferType type, int origin)
+        //{
+        //    var value = origin;
+        //    var buffers = this.buffers.Where(buffer => buffer.BufferType.Equals(type)).ToList();
+        //    foreach (var buffer in buffers)
+        //    {
+        //        value = buffer.Buff(value);
+        //    }
+        //    return value;
+        //}
+
+        ///// <summary>
+        ///// 获取buff值效果
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <param name="origin"></param>
+        ///// <returns></returns>
+        //public float CallBuff(BufferType type, float origin)
+        //{
+        //    var value = origin;
+        //    var buffers = this.buffers.Where(buffer => buffer.BufferType.Equals(type)).ToList();
+        //    foreach (var buffer in buffers)
+        //    {
+        //        value = buffer.Buff(value);
+        //    }
+        //    return value;
+        //}
+    }
+}

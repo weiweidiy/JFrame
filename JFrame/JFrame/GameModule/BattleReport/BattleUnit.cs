@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using static System.Collections.Specialized.BitVector32;
 
 namespace JFrame
@@ -27,12 +28,12 @@ namespace JFrame
         /// <summary>
         /// 唯一ID
         /// </summary>
-        public string UID { get; private set; }
+        public string UID { get; set; }
 
         public int Atk
         {
             get { return battleUnitAttribute.atk; }
-            private set { battleUnitAttribute.atk = Math.Max(0, value); }
+            set { battleUnitAttribute.atk = Math.Max(0, value); }
         }
 
         /// <summary>
@@ -234,6 +235,15 @@ namespace JFrame
         public IBuffer AddBuffer(int bufferId, int foldCout = 1)
         {
             return bufferManager.AddBuffer(this, bufferId, foldCout);
+        }
+
+        /// <summary>
+        /// 获取所有buffers
+        /// </summary>
+        /// <returns></returns>
+        public IBuffer[] GetBuffers()
+        {
+            return bufferManager.GetBuffers();
         }
 
         /// <summary>
