@@ -22,6 +22,8 @@ namespace JFrame
         /// </summary>
         event Action<IBattleAction, IBattleUnit> onHitTarget; 
 
+        IBattleUnit Owner { get;  }
+
         string Name { get; }
 
         int Id { get; }
@@ -35,5 +37,7 @@ namespace JFrame
         /// </summary>
         /// <param name="active"></param>
         void SetEnable(bool active);
+
+        void OnAttach(IBattleUnit owner);
     }
 }

@@ -17,7 +17,15 @@ namespace JFrame
             this.manger = manger;
             this.arg = arg;
         }
+
+        public IBattleAction Owner { get; private set; }
+
         public abstract List<IBattleUnit> FindTargets();
+
+        public void OnAttach(IBattleAction action)
+        {
+            Owner = action;
+        }
     }
 
 

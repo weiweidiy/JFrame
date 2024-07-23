@@ -25,7 +25,7 @@ namespace JFrame
         public DurationBuffer(string UID, int id, int foldCount, float[] args) : base(UID,id, foldCount,args)
         {
             if (args == null || args.Length == 0)
-                throw new ArgumentException("durationbuffer 参数不能为空" + id);
+                throw new ArgumentException("durationbuffer 参数不能为空 ，需要有个持续时间参数" + id);
 
         }
 

@@ -12,6 +12,7 @@ namespace JFrame
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
@@ -36,6 +37,7 @@ namespace JFrame
                     unit.onActionCast += Unit_onActionCast;
                     unit.onActionHitTarget += Unit_onActionDone;
                     unit.onDamage += Unit_onDamage;
+                    unit.onHeal += Unit_onHeal;
                     unit.onDead += Unit_onDead;
                     unit.onBufferAdded += Unit_onBufferAdded;
                     unit.onBufferRemoved += Unit_onBufferRemoved;
@@ -44,6 +46,7 @@ namespace JFrame
             }
 
         }
+
 
 
         #region 响应事件
@@ -67,6 +70,14 @@ namespace JFrame
         {
             onDamage?.Invoke(team, arg1, arg2, arg3, arg4);
         }
+
+        private void Unit_onHeal(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        {
+            onHeal?.Invoke(team,arg1, arg2, arg3, arg4);
+        }
+
+
+
         private void Unit_onDead(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
         {
             onDead?.Invoke(team, arg1, arg2, arg3);

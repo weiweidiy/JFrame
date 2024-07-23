@@ -2,58 +2,32 @@
 
 namespace JFrame
 {
-    public class CDTrigger : BattleTrigger
+    /// <summary>
+    /// 周期触发：arg = CD周期 type = 1
+    /// </summary>
+    public class CDTrigger : BaseBattleTrigger
     {
-        /// <summary>
-        /// 触发周期
-        /// </summary>
-        float duration;
+
+        public CDTrigger(PVPBattleManager pVPBattleManager, float duration, float delay = 0f) : base( pVPBattleManager, duration, delay) { }
 
         /// <summary>
-        /// 首次延迟
+        /// 获取周期
         /// </summary>
-        float delay;
-
-        /// <summary>
-        /// 是否已经延迟过了
-        /// </summary>
-        bool delayed;
-
-        /// <summary>
-        /// 临时变量
-        /// </summary>
-        float delta;
-
-        public CDTrigger(float duration, float delay = 0f)
+        /// <returns></returns>
+        float GetDuration()
         {
-            this.duration = duration;
-            this.delay = delay;
-            delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
+            return this.arg;
         }
 
         /// <summary>
-        /// 更新帧
+        /// 延迟完成
         /// </summary>
-        /// <param name="frame"></param>
-        public override void Update(BattleFrame frame)
+        protected override void OnDelayComplete()
         {
-            if (!GetEnable())
-                return;
+            base.OnDelayComplete();
 
-            delta += frame.DeltaTime;
-
-            if (!delayed)
-            {
-                if (delta - delay > 0f)
-                {
-                    delta -= delay;
-                    delayed = true;
-                }
-                return;
-            }
-                
             //更新cd
-            if (delta >= duration && GetEnable())
+            if (delta >= GetDuration() && GetEnable())
             {
                 //通知外部已触发
                 NotifyOnTrigger();

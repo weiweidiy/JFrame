@@ -4,10 +4,12 @@ namespace JFrame
 {
     public class ActionDataSource
     {
-        //public virtual float GetDuration(int id) //没有用
-        //{
-        //    return 0f;
-        //}
+        protected PVPBattleManager pvpManager { get; }
+
+        public ActionDataSource(PVPBattleManager pvpManager)
+        {
+            this.pvpManager = pvpManager;
+        }
 
 
 
@@ -16,7 +18,7 @@ namespace JFrame
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual int GetTriggerType(int unitId, int actionId)
+        public virtual int GetTriggerType(string unitUID, int unitId, int actionId)
         {
             return 1; //CDTrigger
         }
@@ -26,7 +28,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetTriggerArg(int unitId, int actionId)
+        public virtual float GetTriggerArg(string unitUID, int unitId, int actionId)
         {
             return 3f; //to do: 计算数值
         }
@@ -36,7 +38,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual int GetFinderType(int unitId, int actionId)
+        public virtual int GetFinderType(string unitUID, int unitId, int actionId)
         {
             return 1; //normaltargetfinder
         }
@@ -46,7 +48,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetFinderArg(int unitId, int actionId)
+        public virtual float GetFinderArg(string unitUID, int unitId, int actionId)
         {
             return 1f;
         }
@@ -56,7 +58,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual List<int> GetExcutorTypes(int unitId, int actionId)
+        public virtual List<int> GetExcutorTypes(string unitUID, int unitId, int actionId)
         {
             return new List<int>() { 1 };
         }
@@ -66,9 +68,9 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float[] GetExcutorArg(int unitId, int actionId, int executorType)
+        public virtual float[] GetExcutorArg(string unitUID, int unitId, int actionId, int executorType)
         {
-            return new float[] { 1f , 0.5f,0.25f, 1f };//1:次数, 3：延迟 4:多段攻击间隔 4:倍率：
+            return new float[] { 1f , 0.5f,0.25f, 1f };//1:次数, 2：延迟 3:多段攻击间隔 4:倍率：
         }
     }
 }

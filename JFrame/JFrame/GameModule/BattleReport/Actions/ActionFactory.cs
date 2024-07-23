@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace JFrame
 {
@@ -7,23 +8,26 @@ namespace JFrame
     public class ActionFactory
     {
         int unitId;
+        string unitUID;
         ActionDataSource actionDataSource;
         BattlePoint battlePoint;
         PVPBattleManager pvpBattleManager;
-        public ActionFactory(int unitId, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager)
+        public ActionFactory(string unitUID, int unitId, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager)
         {
+            this.unitUID = unitUID;
             this.unitId = unitId;
             this.actionDataSource = dataSource;
             this.battlePoint = battlePoint;
             this.pvpBattleManager = pvpBattleManager;
         }
 
+
         public IBattleAction Create(int actionId)
         {
             return new NormalAction(actionId,
-                        CreateTrigger(actionDataSource.GetTriggerType(unitId, actionId), actionDataSource.GetTriggerArg(unitId, actionId), 0f)
-                        , CreateTargetFinder(actionDataSource.GetFinderType(unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitId, actionId))
-                        , CreateExecutors(unitId, actionId));
+                        CreateTrigger(actionDataSource.GetTriggerType(unitUID, unitId, actionId), actionDataSource.GetTriggerArg(unitUID, unitId, actionId), 0f)
+                        , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
+                        , CreateExecutors(unitUID, unitId, actionId));
         }
 
         /// <summary>
@@ -32,12 +36,16 @@ namespace JFrame
         /// <param name="triggerType"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        BattleTrigger CreateTrigger(int triggerType, float arg, float delay = 0)
+        BaseBattleTrigger CreateTrigger(int triggerType, float arg, float delay = 0)
         {
             switch (triggerType)
             {
                 case 1: //周期性触发器
-                    return new CDTrigger(arg, delay);
+                    return new CDTrigger(pvpBattleManager, arg, delay);
+                case 2: //自身死亡触发
+                    return new DeathTrigger(pvpBattleManager, arg, delay);
+                case 3: //战斗开始触发
+                    return new BattleStartTrigger(pvpBattleManager, arg, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 trigger type " + triggerType);
             }
@@ -55,11 +63,19 @@ namespace JFrame
             switch (finderType)
             {
                 case 1: //顺序找目标（可复数）
-                    return new OrderTargetFinder(point, pvpBattleManager, arg);
+                    return new OrderOppoFinder(point, pvpBattleManager, arg);
                 case 2: //倒序找目标（可复数）
-                    return new ReverseOrderTargetFinder(point, pvpBattleManager, arg);
+                    return new ReverseOrderOppoFinder(point, pvpBattleManager, arg);
+                case 3: //正序找自己队伍非满血目标（可复数）
+                    return new OrderFriendsHurtFinder(point, pvpBattleManager, arg);
+                case 4: //随机敌方
+                    return new RandomOppoFinder(point, pvpBattleManager, arg);
+                case 7: //顺序己方（可复数）
+                    return new OrderFriendsFinder(point, pvpBattleManager, arg);
+                case 8: //顺序敌方攻击最高的
+                    return new OrderOppoTopAtkFinder(point, pvpBattleManager, arg);
                 default:
-                    throw new Exception("没有实现目标finder type " + finderType);
+                    throw new Exception("没有实现目标 finder type " + finderType);
             }
         }
 
@@ -69,14 +85,14 @@ namespace JFrame
         /// <param name="unitId"></param>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        List<IBattleExecutor> CreateExecutors(int unitId, int actionId)
+        List<IBattleExecutor> CreateExecutors(string unitUID, int unitId, int actionId)
         {
             var result = new List<IBattleExecutor>();
-            var executors = actionDataSource.GetExcutorTypes(unitId, actionId);
+            var executors = actionDataSource.GetExcutorTypes(unitUID, unitId, actionId);
 
             foreach (var executorId in executors)
             {
-                var e = CreateExcutor( executorId, actionDataSource.GetExcutorArg(unitId, actionId, executorId));
+                var e = CreateExcutor(executorId, actionDataSource.GetExcutorArg(unitUID, unitId, actionId, executorId));
                 result.Add(e);
             }
             return result;
@@ -89,14 +105,22 @@ namespace JFrame
         /// <param name="arg"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        IBattleExecutor CreateExcutor( int excutorType, float[] arg)
+        IBattleExecutor CreateExcutor(int excutorType, float[] arg)
         {
             switch (excutorType)
             {
-                case 1: //伤害执行器（可多段伤害）
-                    return new BattleDamage(arg);
-                case 2: //给目标添加buffer的执行器
-                    return new BattleTargetAddBuffer(arg);
+                case 1: //按释放者攻击力对目标伤害（可多段伤害）
+                    return new ExecutorDamage(arg);
+                case 2: //给目标添加buffer
+                    return new ExecutorTargetAddBuffer(arg);
+                case 3: //给目标回血（加值）
+                    return new ExecutorHeal(arg);
+                case 4: //按目标血量百分比伤害
+                    return new ExecutorHpDamage(arg);
+                case 5://提升生命上限
+                    return new ExecutorMaxHpUp(arg);
+                case 6://自己添加buffer
+                    return new ExecutorSelfAddBuffer(arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

@@ -15,7 +15,9 @@ namespace JFrame
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
+
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
         public event Action<IBattleUnit, IBuffer> onBufferCast;
@@ -51,6 +53,17 @@ namespace JFrame
             return value;
         }
 
+        /// <summary>
+        /// 攻击速度
+        /// </summary>
+        public float AtkSpeed {
+            get { return battleUnitAttribute.atkSpeed; }
+            set { battleUnitAttribute.atkSpeed = Math.Max(0, value); }
+        }
+
+        /// <summary>
+        /// 生命值
+        /// </summary>
         public int HP 
         {
             get { return battleUnitAttribute.hp; }
@@ -60,7 +73,17 @@ namespace JFrame
             }
         }
 
-        public int MaxHP { get => battleUnitInfo.hp; }
+        /// <summary>
+        /// 最大生命值
+        /// </summary>
+        public int MaxHP { get => battleUnitAttribute.maxHp; private set => battleUnitAttribute.maxHp = value; }
+        public int MaxHPUpgrade(int value)
+        {
+            if (value < 0)
+                throw new Exception("最大生命提升数值不能为负数 " + value);
+            MaxHP += value;
+            return value;
+        }
 
         /// <summary>
         /// 所有动作列表
@@ -91,10 +114,12 @@ namespace JFrame
                 action.onTriggerOn += Action_onTriggerOn;
                 action.onStartCast += Action_onCast;
                 action.onHitTarget += Action_onDone;
+                action.OnAttach(this);
             }
 
             HP = info.hp;
-            Atk = info.atk; 
+            Atk = info.atk;
+            MaxHP = info.hp;
             this.bufferManager = bufferManager;
             this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
             this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
@@ -167,11 +192,13 @@ namespace JFrame
         /// 受到了伤害
         /// </summary>
         /// <param name="damage"></param>
-        public void OnDamage(IBattleUnit hitter, IBattleAction action, int damage)
+        public void OnDamage(IBattleUnit hitter, IBattleAction action, IntValue damage)
         {
-            HP -= damage;
+            //to do: 添加一个预伤害事件，可以修改值
 
-            onDamage?.Invoke(hitter, action, this, damage);
+            HP -= damage.Value;
+
+            onDamage?.Invoke(hitter, action, this, damage.Value);
 
             if (HP <= 0)
             {
@@ -183,9 +210,14 @@ namespace JFrame
         /// 受到治疗
         /// </summary>
         /// <param name="heal"></param>
-        public void OnHeal(int heal)
+        public void OnHeal(IBattleUnit caster, IBattleAction action, IntValue heal)
         {
-            HP += heal;
+            //to do: 添加一个预治疗事件，可以修改值
+
+            HP += heal.Value;
+
+            onHeal?.Invoke(caster, action, this, heal.Value);
+
         }
 
         /// <summary>
@@ -224,6 +256,15 @@ namespace JFrame
         public bool IsAlive()
         {
             return HP > 0;
+        }
+
+        /// <summary>
+        /// 是否满血
+        /// </summary>
+        /// <returns></returns>
+        public bool IsHpFull()
+        {
+            return HP == MaxHP;
         }
 
         /// <summary>

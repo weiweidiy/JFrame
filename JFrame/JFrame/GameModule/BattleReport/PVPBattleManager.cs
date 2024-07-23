@@ -253,7 +253,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActions(info.id, info.actionsId, slot), CreateBufferManager());
+                var battleUnit = new BattleUnit(info, CreateActions(info.uid, info.id, info.actionsId, slot), CreateBufferManager());
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -278,9 +278,9 @@ namespace JFrame
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<IBattleAction> CreateActions(int unitId, List<int> actionIds, BattlePoint battlePoint)
+        List<IBattleAction> CreateActions(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
         {
-            var factory = new ActionFactory(unitId, dataSource, battlePoint,this);
+            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint,this);
 
             var actions = new List<IBattleAction>();
             foreach (var actionId in actionIds)

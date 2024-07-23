@@ -9,11 +9,14 @@ namespace JFrame
         public List<int> actionsId;
         public int hp;
         public int atk;
+        public float atkSpeed;
     }
 
     public struct BattleUnitAttribute
     {
         public int hp;
+        public int maxHp;
         public int atk;
+        public float atkSpeed;
     }
 }

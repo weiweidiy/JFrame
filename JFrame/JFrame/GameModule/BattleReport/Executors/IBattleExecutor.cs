@@ -14,6 +14,9 @@ namespace JFrame
         /// 是否激活
         /// </summary>
         bool Active { get; }
+
+        IBattleAction Owner { get; }
+
         /// <summary>
         ///  命中效果
         /// </summary>
@@ -35,5 +38,7 @@ namespace JFrame
         /// </summary>
         /// <param name="frame"></param>
         void Update(BattleFrame frame);
+
+        void OnAttach(IBattleAction action);
     }
 }

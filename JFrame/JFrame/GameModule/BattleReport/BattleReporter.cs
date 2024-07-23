@@ -46,6 +46,7 @@ namespace JFrame
             {
                 team.onActionCast += Team_onActionCast;
                 team.onDamage += Team_onDamage;
+                team.onHeal += Team_onHeal;
                 team.onDead += Team_onDead;
                 team.onBufferAdded += Team_onBufferAdded;
                 team.onBufferRemoved += Team_onBufferRemoved;
@@ -55,16 +56,21 @@ namespace JFrame
         }
 
 
-
         private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
             AddReportData(caster.UID, ReportType.Action, target.UID, new object[] { action.Id });
         }
 
-        private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int dmg)
+        private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
-            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { dmg, target.HP, target.MaxHP });
+            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { value, target.HP, target.MaxHP });
         }
+
+        private void Team_onHeal(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
+        {
+            AddReportData(caster.UID, ReportType.Heal, target.UID, new object[] { value, target.HP, target.MaxHP });
+        }
+
 
         private void Team_onDead(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {

@@ -8,11 +8,18 @@ namespace JFrame
     /// </summary>
     public interface IBattleUnit
     {
+        /// <summary>
+        /// 行动时主动事件
+        /// </summary>
         event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionCast; //执行效果之前，只有首目标
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
 
+        /// <summary>
+        /// 被动事件
+        /// </summary>
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage; //受到伤害之后
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
 
         event Action<IBattleUnit, IBuffer> onBufferAdded;
@@ -38,6 +45,11 @@ namespace JFrame
         int AtkUpgrade(int value);
 
         /// <summary>
+        /// 攻击速度
+        /// </summary>
+        float AtkSpeed { get; set; } 
+
+        /// <summary>
         /// 当前生命值
         /// </summary>
         int HP { get; }
@@ -48,23 +60,35 @@ namespace JFrame
         int MaxHP { get; }
 
         /// <summary>
+        /// 最大生命提升
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        int MaxHPUpgrade(int value);
+
+        /// <summary>
         /// 受到伤害了
         /// </summary>
         /// <param name="damage"></param>
-        void OnDamage(IBattleUnit caster, IBattleAction action, int damage);
+        void OnDamage(IBattleUnit caster, IBattleAction action, IntValue damage);
 
         /// <summary>
         /// 受到治疗了
         /// </summary>
         /// <param name="heal"></param>
-        void OnHeal(int heal);
-
+        void OnHeal(IBattleUnit caster, IBattleAction action, IntValue heal);
 
         /// <summary>
         /// 是否活着
         /// </summary>
         /// <returns></returns>
         bool IsAlive();
+
+        /// <summary>
+        /// 是否满血
+        /// </summary>
+        /// <returns></returns>
+        bool IsHpFull();
 
         /// <summary>
         /// 添加buffer
