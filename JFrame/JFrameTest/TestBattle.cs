@@ -218,72 +218,72 @@ namespace JFrameTest
         }
 
 
-        //[Test]
-        //public void TestActionCast()
-        //{
-        //    //arrange
-        //    var cfg = Substitute.For<ActionDataSource>(battle);
-        //    cfg.GetTriggerArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
-        //    cfg.GetTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
-        //    //cfg.GetDuration(Arg.Any<int>()).Returns(0);
-        //    cfg.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
-        //    cfg.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1 });
-        //    cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[] { 1,0,0,1 });
-        //    //action
-        //    battle.Initialize(attacker, defence, cfg, null,null);
-        //    battle.Update();
-        //    //timer.Call();
-        //    //timer.Call();
-        //    var reporter = battle.GetReporter();
-        //    var lstData = reporter.GetAllReportData();
+        [Test]
+        public void TestActionCast()
+        {
+            //arrange
+            var cfg = Substitute.For<ActionDataSource>(battle);
+            cfg.GetTriggerArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
+            cfg.GetTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            //cfg.GetDuration(Arg.Any<int>()).Returns(0);
+            cfg.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            cfg.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1 });
+            cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[] { 1, 0, 0, 1 });
+            //action
+            battle.Initialize(attacker, defence, cfg, null, null);
+            battle.Update();
+            //timer.Call();
+            //timer.Call();
+            var reporter = battle.GetReporter();
+            var lstData = reporter.GetAllReportData();
 
-        //    //expect
-        //    Assert.AreEqual(3, lstData.Count);
-        //    var unit = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-        //    Assert.AreEqual(190, unit.HP);
-        //}
+            //expect
+            Assert.AreEqual(3, lstData.Count);
+            var unit = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
+            Assert.AreEqual(190, unit.HP);
+        }
 
-        //[Test]
-        //public void TestGetResult()
-        //{
-        //    //arrange
-        //    var cfg = new ActionDataSource(battle);
-        //    var timer = new JFrameTimerUtils();
-        //    //action
-        //    battle.Initialize(attacker, defence, cfg, null, null);
-        //    var lstData = battle.GetResult();
-        //    //var reporter = battle.GetReporter();
-        //    //var lstData = reporter.GetAllReportData();
+        [Test]
+        public void TestGetResult()
+        {
+            //arrange
+            var cfg = new ActionDataSource(battle);
+            var timer = new JFrameTimerUtils();
+            //action
+            battle.Initialize(attacker, defence, cfg, null, null);
+            var lstData = battle.GetResult();
+            //var reporter = battle.GetReporter();
+            //var lstData = reporter.GetAllReportData();
 
-        //    //expect
-        //    Assert.AreEqual(22, lstData.report.Count);
-        //    var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-        //    Assert.AreEqual(138, unit3.HP);
+            //expect
+            Assert.AreEqual(22, lstData.report.Count);
+            var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
+            Assert.AreEqual(138, unit3.HP);
 
-        //    var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
-        //    Assert.AreEqual(0, unit1.HP);
+            var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
+            Assert.AreEqual(0, unit1.HP);
 
-        //    var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
-        //    Assert.AreEqual(0, unit2.HP);
-        //}
+            var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
+            Assert.AreEqual(0, unit2.HP);
+        }
 
-        //[Test]
-        //public void TestReportParser()
-        //{
-        //    //arrange
-        //    var cfg = new ActionDataSource(battle);
-        //    var timer = new JFrameTimerUtils();
-        //    battle.Initialize(attacker, defence, cfg, null, null);
-        //    var lstData = battle.GetResult();
-        //    var parser = new PVPBattleReportParser(lstData.report);
+        [Test]
+        public void TestReportParser()
+        {
+            //arrange
+            var cfg = new ActionDataSource(battle);
+            var timer = new JFrameTimerUtils();
+            battle.Initialize(attacker, defence, cfg, null, null);
+            var lstData = battle.GetResult();
+            var parser = new PVPBattleReportParser(lstData.report);
 
-        //    //action
-        //    Assert.AreEqual(22, parser.Count());
+            //action
+            Assert.AreEqual(22, parser.Count());
 
-        //    var result = parser.GetData(3);
-        //    Assert.AreEqual(3, result.Count);
-        //    Assert.AreEqual(19, parser.Count());
-        //}
+            var result = parser.GetData(3);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(19, parser.Count());
+        }
 
         [Test]
         public void TestAddBuffAndCallOnAttach()
@@ -401,38 +401,38 @@ namespace JFrameTest
             Assert.AreEqual(1, buffers.Count);
         }
 
-        //[Test]
-        //public void TestExecuteAddBufferAndReportAddedBuffer()
-        //{
-        //    //arrange
-        //    var cfg = Substitute.For<ActionDataSource>(battle);
-        //    cfg.GetTriggerArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
-        //    cfg.GetTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
-        //    cfg.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
-        //    cfg.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1, 2 });
-        //    cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[] { 1, 0, 0, 1, 1 });
+        [Test]
+        public void TestExecuteAddBufferAndReportAddedBuffer()
+        {
+            //arrange
+            var cfg = Substitute.For<ActionDataSource>(battle);
+            cfg.GetTriggerArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            cfg.GetTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            cfg.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
+            cfg.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1, 2 });
+            cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[] { 1, 0, 0, 1, 1 });
 
-        //    var buffData = Substitute.For<BufferDataSource>();
-        //    buffData.GetArgs(Arg.Any<int>()).Returns(new float[] { 10f, 10f });
+            var buffData = Substitute.For<BufferDataSource>();
+            buffData.GetArgs(Arg.Any<int>()).Returns(new float[] { 10f, 10f });
 
-        //    var timer = new JFrameTimerUtils();
-        //    //action
-        //    battle.Initialize(attacker, defence, cfg, buffData, null);
-        //    var lstData = battle.GetResult();
-        //    //var reporter = battle.GetReporter();
-        //    //var lstData = reporter.GetAllReportData();
+            var timer = new JFrameTimerUtils();
+            //action
+            battle.Initialize(attacker, defence, cfg, buffData, null);
+            var lstData = battle.GetResult();
+            //var reporter = battle.GetReporter();
+            //var lstData = reporter.GetAllReportData();
 
-        //    //expect
-        //    Assert.AreEqual(15, lstData.report.Count);
-        //    var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-        //    Assert.AreEqual(164, unit3.HP);
+            //expect
+            Assert.AreEqual(15, lstData.report.Count);
+            var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
+            Assert.AreEqual(164, unit3.HP);
 
-        //    var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
-        //    Assert.AreEqual(0, unit1.HP);
+            var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
+            Assert.AreEqual(0, unit1.HP);
 
-        //    var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
-        //    Assert.AreEqual(0, unit2.HP);
-        //}
+            var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
+            Assert.AreEqual(0, unit2.HP);
+        }
     }
 
     //public class TestBattleAction

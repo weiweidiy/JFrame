@@ -117,9 +117,10 @@ namespace JFrame
                 action.OnAttach(this);
             }
 
-            HP = info.hp;
+
             Atk = info.atk;
             MaxHP = info.hp;
+            HP = info.hp;
             this.bufferManager = bufferManager;
             this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
             this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
