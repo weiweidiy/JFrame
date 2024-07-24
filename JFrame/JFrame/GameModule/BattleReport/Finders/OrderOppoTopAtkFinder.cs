@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class OrderOppoTopAtkFinder : BaseTargetFinder
     {
-        public OrderOppoTopAtkFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
+        public OrderOppoTopAtkFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
         {
         }
 

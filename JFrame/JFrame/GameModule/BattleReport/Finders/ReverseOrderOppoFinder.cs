@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class ReverseOrderOppoFinder : BaseTargetFinder
     {
-        public ReverseOrderOppoFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg):base(selfPoint, manger, arg) { }
+        public ReverseOrderOppoFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg):base(selfPoint, manger, arg) { }
 
         /// <summary>
         /// 获取攻击目标

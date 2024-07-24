@@ -8,7 +8,7 @@ namespace JFrame
     public class OrderOppoFinder : BaseTargetFinder
     {
 
-        public OrderOppoFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg) : base(selfPoint, manger, arg) { }
+        public OrderOppoFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg) { }
 
         /// <summary>
         /// 获取攻击目标

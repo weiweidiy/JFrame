@@ -14,5 +14,9 @@ namespace JFrame
         void Update();
 
         void AddTeam(Team team, BattleTeam teamObj);
+
+        List<IBattleUnit> GetUnits(Team team);
+
+        Team GetOppoTeam(Team team);
     }
 }

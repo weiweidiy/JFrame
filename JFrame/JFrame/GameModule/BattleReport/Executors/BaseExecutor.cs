@@ -27,6 +27,8 @@ namespace JFrame
                 delay = 0;
                 interval = 0.25f;
             }
+
+            delayed = delay == 0f;
         }
 
         /// <summary>
@@ -86,7 +88,7 @@ namespace JFrame
 
             if (!delayed)
             {
-                if (delta - delay > 0f)
+                if (delta - delay >= 0f)
                 {
                     delta -= delay;
                     delayed = true;

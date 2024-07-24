@@ -11,7 +11,7 @@ namespace JFrame
         /// </summary>
         public IBattleAction Owner { get; private set; }
 
-        protected PVPBattleManager battleManager;
+        protected IPVPBattleManager battleManager;
 
         /// <summary>
         /// 参数
@@ -37,7 +37,7 @@ namespace JFrame
         /// </summary>
         bool isOn = true;
 
-        public BaseBattleTrigger(PVPBattleManager battleManager, float arg, float delay = 0)
+        public BaseBattleTrigger(IPVPBattleManager battleManager, float arg, float delay = 0)
         {
             this.battleManager = battleManager;
             this.arg = arg;

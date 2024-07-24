@@ -8,7 +8,7 @@ namespace JFrame
     public class CDTrigger : BaseBattleTrigger
     {
 
-        public CDTrigger(PVPBattleManager pVPBattleManager, float duration, float delay = 0f) : base( pVPBattleManager, duration, delay) { }
+        public CDTrigger(IPVPBattleManager pVPBattleManager, float duration, float delay = 0f) : base( pVPBattleManager, duration, delay) { }
 
         /// <summary>
         /// 获取周期

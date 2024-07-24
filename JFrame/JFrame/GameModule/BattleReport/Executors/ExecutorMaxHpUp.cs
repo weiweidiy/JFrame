@@ -16,7 +16,7 @@ namespace JFrame
         {
             base.OnAttach(action);
 
-            hpValue = action.Owner.MaxHP * (int)arg;
+            hpValue = (int)(action.Owner.MaxHP * arg);
         }
 
         /// <summary>

@@ -6,7 +6,7 @@
     public class DeathTrigger : BaseBattleTrigger
     {
         bool valid = true;
-        public DeathTrigger( PVPBattleManager pvpBattleManager, float arg, float delay = 0):base(pvpBattleManager, arg, delay)
+        public DeathTrigger( IPVPBattleManager pvpBattleManager, float arg, float delay = 0):base(pvpBattleManager, arg, delay)
         { }
 
         public override void OnAttach(IBattleAction action)

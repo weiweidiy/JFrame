@@ -11,7 +11,7 @@
         /// 每一逻辑帧流逝时间
         /// </summary>
         float _deltaTime = 0.25f; //固定逻辑帧时间
-        public float DeltaTime { get => _deltaTime; }
+        public virtual float DeltaTime { get => _deltaTime; }
 
         /// <summary>
         /// 战斗最大时长

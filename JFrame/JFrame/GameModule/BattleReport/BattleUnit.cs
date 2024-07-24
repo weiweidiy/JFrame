@@ -76,12 +76,20 @@ namespace JFrame
         /// <summary>
         /// 最大生命值
         /// </summary>
-        public int MaxHP { get => battleUnitAttribute.maxHp; private set => battleUnitAttribute.maxHp = value; }
+        public int MaxHP { get => battleUnitAttribute.maxHp;
+            private set { 
+                battleUnitAttribute.maxHp = value;
+                if(HP > value)
+                    HP = value;
+            }
+        }
         public int MaxHPUpgrade(int value)
         {
             if (value < 0)
                 throw new Exception("最大生命提升数值不能为负数 " + value);
+
             MaxHP += value;
+            HP += value; //当前生命也要上升
             return value;
         }
 
@@ -110,21 +118,27 @@ namespace JFrame
             this.UID = info.uid;
             battleUnitInfo = info;
             this.actions = actions;      
-            foreach(var action in actions) {
-                action.onTriggerOn += Action_onTriggerOn;
-                action.onStartCast += Action_onCast;
-                action.onHitTarget += Action_onDone;
-                action.OnAttach(this);
+            if(actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action.onTriggerOn += Action_onTriggerOn;
+                    action.onStartCast += Action_onCast;
+                    action.onHitTarget += Action_onDone;
+                    action.OnAttach(this);
+                }
             }
-
 
             Atk = info.atk;
             MaxHP = info.hp;
             HP = info.hp;
             this.bufferManager = bufferManager;
-            this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
-            this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
-            this.bufferManager.onBufferCast += BufferManager_onBufferCast;
+            if(this.bufferManager != null)
+            {
+                this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
+                this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
+                this.bufferManager.onBufferCast += BufferManager_onBufferCast;
+            }
         }
 
         #region 响应事件
@@ -226,10 +240,14 @@ namespace JFrame
         /// </summary>
         private void OnDead(IBattleUnit hitter, IBattleAction action)
         {
-            foreach (var a in actions)
+            if(action != null)
             {
-                a.SetEnable(false);
+                foreach (var a in actions)
+                {
+                    a.SetEnable(false);
+                }
             }
+
 
             onDead?.Invoke(hitter, action, this);
         }

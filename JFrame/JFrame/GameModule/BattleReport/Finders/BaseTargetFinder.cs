@@ -8,10 +8,10 @@ namespace JFrame
     public abstract class BaseTargetFinder : IBattleTargetFinder
     {
         protected BattlePoint selfPoint;
-        protected PVPBattleManager manger;
+        protected IPVPBattleManager manger;
         protected float arg;
 
-        public BaseTargetFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg)
+        public BaseTargetFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg)
         {
             this.selfPoint = selfPoint;
             this.manger = manger;

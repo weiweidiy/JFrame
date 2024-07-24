@@ -102,7 +102,7 @@ namespace JFrame
         /// </summary>
         /// <param name="team"></param>
         /// <returns></returns>
-        public List<IBattleUnit> GetUnits(Team team)
+        public virtual List<IBattleUnit> GetUnits(Team team)
         {
             var battleTeam = GetTeam(team);
             return battleTeam.GetUnits();

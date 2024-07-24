@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class OrderFriendsFinder : BaseTargetFinder
     {
-        public OrderFriendsFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
+        public OrderFriendsFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
         {
         }
 

@@ -6,7 +6,7 @@
     public class BattleStartTrigger : BaseBattleTrigger
     {
         bool valid = true;
-        public BattleStartTrigger(PVPBattleManager battleManager, float arg, float delay = 0) : base(battleManager, arg, delay)
+        public BattleStartTrigger(IPVPBattleManager battleManager, float arg, float delay = 0) : base(battleManager, arg, delay)
         {
         }
 

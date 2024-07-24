@@ -1,0 +1,76 @@
+﻿//using JFrame.UI;
+//using NUnit.Framework;
+using JFrame;
+using NSubstitute;
+using NUnit.Framework;
+using System.Collections.Generic;
+
+namespace JFrameTest
+{
+    public class TestFinder
+    {
+        BattleFrame frame = Substitute.For<BattleFrame>();
+        IPVPBattleManager simBattle = Substitute.For<PVPBattleManager>();
+
+        [SetUp]
+        public void SetUp()
+        {
+
+        }
+
+
+        [TearDown]
+        public void Clear()
+        {
+
+        }
+
+        /// <summary>
+        /// 搜索敌对最大攻击力的单位
+        /// </summary>
+        [Test]
+        public void TestOrderOppoTopAtkFinder()
+        {
+            //arrange
+            var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
+            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 1 }, null, null);
+            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 }, null, null);
+            simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
+            var finder = new OrderOppoTopAtkFinder(battlePoint, simBattle, 1);
+
+            //action
+            var result = finder.FindTargets();
+
+            //expect
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result[0].Atk);
+
+        }
+
+        /// <summary>
+        /// 测试寻找友方受伤队员
+        /// </summary>
+        [Test]
+        public void TestOrderFriendsHurtFinder()
+        {
+            //arrange
+            var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
+            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 10, uid = "2" }, null, null);
+            unit1.OnDamage(null, null, new IntValue() { Value = 1 });
+            unit2.OnDamage(null, null, new IntValue() { Value = 2 });
+            simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
+            var finder = new OrderFriendsHurtFinder(battlePoint, simBattle, 2);
+
+            //action
+            var result = finder.FindTargets();
+
+            //expect
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("1", result[0].UID);
+
+        }
+    }
+
+    
+}

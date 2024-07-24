@@ -11,7 +11,7 @@ namespace JFrame
     /// </summary>
     public class RandomOppoFinder : BaseTargetFinder
     {
-        public RandomOppoFinder(BattlePoint selfPoint, PVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
+        public RandomOppoFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
         {
         }
 
