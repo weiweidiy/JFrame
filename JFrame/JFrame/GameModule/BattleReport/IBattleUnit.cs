@@ -35,7 +35,7 @@ namespace JFrame
         /// <summary>
         /// 当前攻击力
         /// </summary>
-        int Atk { get; set; }
+        int Atk { get;  }
 
         /// <summary>
         /// 攻击力提升，返回实际提升的值
@@ -43,6 +43,12 @@ namespace JFrame
         /// <param name="value"></param>
         /// <returns></returns>
         int AtkUpgrade(int value);
+        /// <summary>
+        /// 攻击力降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        int AtkReduce(int value);
 
         /// <summary>
         /// 攻击速度

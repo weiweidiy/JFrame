@@ -377,7 +377,7 @@ namespace JFrameTest
         public void TestExecuteAddBufferAndBufferAddedToUnit()
         {
             //arrange
-            var addBufferExecutor = Substitute.For<ExecutorTargetAddBuffer>(new float[5] { 1, 0, 0, 1, 1 });
+            var addBufferExecutor = Substitute.For<ExecutorTargetAddBuffer>(new float[6] { 1, 0, 0, 1, 1 ,1});
 
 
             var buffer = Substitute.For<IBuffer>();
@@ -412,10 +412,10 @@ namespace JFrameTest
             cfg.GetTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
             cfg.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1);
             cfg.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() { 1, 2 });
-            cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[] { 1, 0, 0, 1, 1 });
+            cfg.GetExcutorArg(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new float[6] { 1, 0, 0, 999, 1,1 });
 
             var buffData = Substitute.For<BufferDataSource>();
-            buffData.GetArgs(Arg.Any<int>()).Returns(new float[] { 10f, 10f });
+            buffData.GetArgs(Arg.Any<int>()).Returns(new float[] { 10f, 0.1f });
 
             var timer = new JFrameTimerUtils();
             //action
@@ -425,15 +425,15 @@ namespace JFrameTest
             //var lstData = reporter.GetAllReportData();
 
             //expect
-            Assert.AreEqual(15, lstData.report.Count);
+            Assert.AreEqual(4, lstData.report.Count);
             var unit3 = battle.GetUnit(PVPBattleManager.Team.Defence, 3);
-            Assert.AreEqual(164, unit3.HP);
+            Assert.AreEqual(0, unit3.HP);
 
             var unit1 = battle.GetUnit(PVPBattleManager.Team.Attacker, 1);
-            Assert.AreEqual(0, unit1.HP);
+            Assert.AreEqual(20, unit1.HP);
 
             var unit2 = battle.GetUnit(PVPBattleManager.Team.Attacker, 2);
-            Assert.AreEqual(0, unit2.HP);
+            Assert.AreEqual(16, unit2.HP);
         }
 
         

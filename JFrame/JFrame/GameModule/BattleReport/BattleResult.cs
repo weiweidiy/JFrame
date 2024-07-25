@@ -21,7 +21,7 @@
 
         public BattleTeam GetWinner()
         {
-            return null;
+            return rightTeam.IsAllDead() ? leftTeam : rightTeam;
         }
     }
 }

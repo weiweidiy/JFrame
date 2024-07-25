@@ -121,6 +121,8 @@ namespace JFrame
                     return new ExecutorMaxHpUp(arg);
                 case 6://自己添加buffer
                     return new ExecutorSelfAddBuffer(arg);
+                case 7://递增伤害
+                    return new ExecutorIncrementalDamage(arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

@@ -2,6 +2,9 @@
 
 namespace JFrame
 {
+    /// <summary>
+    /// 周期buffer 参数 1：持续时间
+    /// </summary>
     public class DurationBuffer : Buffer
     {
         /// <summary>
@@ -67,6 +70,10 @@ namespace JFrame
             }
         }
 
+        /// <summary>
+        /// 添加到unit上时
+        /// </summary>
+        /// <param name="unit"></param>
         public override void OnAttach(IBattleUnit unit)
         {
             base.OnAttach(unit);

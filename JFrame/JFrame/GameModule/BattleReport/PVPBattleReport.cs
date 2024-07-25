@@ -7,5 +7,6 @@ namespace JFrame
         public Dictionary<BattlePoint, BattleUnitInfo> attacker;
         public Dictionary<BattlePoint, BattleUnitInfo> defence;
         public List<IBattleReportData> report;
+        public int winner;
     }
 }

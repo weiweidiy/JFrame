@@ -27,6 +27,11 @@ namespace JFrame
         /// </summary>
         public float[] Args { get; set; }
 
+        /// <summary>
+        /// 目标对象
+        /// </summary>
+        protected IBattleUnit target;
+
         public Buffer(string UID, int id, int foldCount, float[] args)
         {
             Id = id;
@@ -45,9 +50,9 @@ namespace JFrame
         /// <summary>
         /// 被添加上时
         /// </summary>
-        public virtual void OnAttach(IBattleUnit unit)
+        public virtual void OnAttach(IBattleUnit target)
         {
-
+            this.target = target;
         }
 
         /// <summary>

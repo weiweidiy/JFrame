@@ -166,6 +166,7 @@ namespace JFrame
             }
 
             report.report = pvpReporter.GetAllReportData();
+            report.winner = battleResult.GetWinner().Team == Team.Attacker ? 1 : 0 ; //1:挑战成功 0：挑战失败
             //Debug.Log("战斗结束 " + frame.FrameCount);
             return report;
         }

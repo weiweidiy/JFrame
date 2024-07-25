@@ -35,7 +35,7 @@ namespace JFrame
         public int Atk
         {
             get { return battleUnitAttribute.atk; }
-            set { battleUnitAttribute.atk = Math.Max(0, value); }
+            private set { battleUnitAttribute.atk = Math.Max(0, value); }
         }
 
         /// <summary>
@@ -51,6 +51,22 @@ namespace JFrame
 
             Atk += value;
             return value;
+        }
+
+        /// <summary>
+        /// 攻击力降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public int AtkReduce(int value)
+        {
+            if (value < 0)
+                throw new Exception("攻击降低数值不能为负数 " + value);
+
+            var realValue = Math.Min(value, Atk); //防止减成负数
+            Atk -= realValue;
+            return realValue;
         }
 
         /// <summary>
@@ -111,9 +127,9 @@ namespace JFrame
         /// <summary>
         /// buff管理器
         /// </summary>
-        BaseBufferManager bufferManager = null;
+        IBufferManager bufferManager = null;
 
-        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions, BaseBufferManager bufferManager)
+        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions, IBufferManager bufferManager)
         {
             this.UID = info.uid;
             battleUnitInfo = info;
@@ -294,6 +310,9 @@ namespace JFrame
         /// <returns></returns>
         public IBuffer AddBuffer(int bufferId, int foldCout = 1)
         {
+            if (bufferManager == null)
+                throw new Exception("没有设置bufferManager 不能AddBuffer " + Name);
+
             return bufferManager.AddBuffer(this, bufferId, foldCout);
         }
 
@@ -314,7 +333,6 @@ namespace JFrame
         {
             bufferManager.RemoveBuffer(bufferUID);
         }
-
 
     }
 }

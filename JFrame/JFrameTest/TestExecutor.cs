@@ -3,6 +3,7 @@
 using JFrame;
 using NSubstitute;
 using NUnit.Framework;
+using System;
 
 namespace JFrameTest
 {
@@ -141,6 +142,62 @@ namespace JFrameTest
             Assert.AreEqual(110, target.HP);
             
         }
+
+        /// <summary>
+        /// 给目标添加buff
+        /// </summary>
+        [Test]
+        public void TestExecutorTargetAddBuffer()
+        {
+            //arrange
+            var executor = new ExecutorTargetAddBuffer(new float[6] { 1, 0, 0, 999,1,1 });
+            var bufferManager = Substitute.For<IBufferManager>();
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, bufferManager);
+
+            //action
+            executor.Hit(null, null, target);
+
+            //expect
+            bufferManager.Received(1).AddBuffer(target, 999, 1);
+        }
+
+        /// <summary>
+        /// 给本体添加buffer 
+        /// </summary>
+        [Test]
+        public void TestExecutorSelfAddBuffer()
+        {
+            //arrange
+            var executor = new ExecutorSelfAddBuffer(new float[6] { 1, 0, 0, 999, 1, 1 });
+            var bufferManager = Substitute.For<IBufferManager>();
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, bufferManager);
+
+            //action
+            executor.Hit(target, null, null);
+
+            //expect
+            bufferManager.Received(1).AddBuffer(target, 999, 1);
+        }
+
+        /// <summary>
+        /// 递增伤害
+        /// </summary>
+        [Test]
+        public void TestExecutorIncrementalDamage()
+        {
+            //arrange
+            var executor = new ExecutorIncrementalDamage(new float[6] { 1, 0, 0, 1 , 3, 0.5f});
+            var caster = Substitute.For<IBattleUnit>();
+            caster.Atk.Returns(1);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+
+            //action
+            executor.Hit(caster, null, target);
+
+            //expect
+            Assert.AreEqual(9, target.HP);
+        }
+
     }
 
 

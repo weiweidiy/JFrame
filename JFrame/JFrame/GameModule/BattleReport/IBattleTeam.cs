@@ -28,5 +28,7 @@ namespace JFrame
         bool IsAllDead();
 
         void Update(BattleFrame frame);
+
+        PVPBattleManager.Team Team { get; } 
     }
 }

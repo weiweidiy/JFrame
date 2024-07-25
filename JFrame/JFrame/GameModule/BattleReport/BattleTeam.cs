@@ -22,6 +22,7 @@ namespace JFrame
         Dictionary<BattlePoint, IBattleUnit> units = new Dictionary<BattlePoint, IBattleUnit>();
 
         PVPBattleManager.Team team;
+        public PVPBattleManager.Team Team { get => team; }
 
         public BattleTeam(PVPBattleManager.Team team, Dictionary<BattlePoint, IBattleUnit> units)
         {

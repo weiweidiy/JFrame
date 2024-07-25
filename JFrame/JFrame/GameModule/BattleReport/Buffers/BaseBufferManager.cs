@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace JFrame
 {
-
-    public class BaseBufferManager
+    public class BaseBufferManager : IBufferManager
     {
         public event Action<IBuffer> onBufferUpdated;
         public event Action<IBuffer> onBufferAdded;

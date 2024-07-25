@@ -10,6 +10,7 @@ namespace JFrame
         public int hp;
         public int atk;
         public float atkSpeed;
+        
     }
 
     public struct BattleUnitAttribute
