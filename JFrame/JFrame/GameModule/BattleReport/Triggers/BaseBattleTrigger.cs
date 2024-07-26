@@ -82,11 +82,11 @@ namespace JFrame
         /// </summary>
         /// <param name="isOn"></param>
         public void SetEnable(bool isOn) => this.isOn = isOn;
-        public bool GetEnable() => isOn;
+        public virtual bool GetEnable() => isOn;
 
         public void NotifyOnTrigger()
         {
-            if (isOn)
+            if (GetEnable())
                 onTrigger?.Invoke();
         }
 

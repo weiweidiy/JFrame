@@ -98,6 +98,19 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 清理所有buff，会触发onDettach
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Clear()
+        {
+            for(int i = buffers.Count -1; i >= 0; i --)
+            {
+                var buff = buffers[i];
+                RemoveBuffer(buff.UID);
+            }
+        }
+
+        /// <summary>
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
@@ -209,6 +222,8 @@ namespace JFrame
         {
             return dataSource.GetTriigerType(bufferId);
         }
+
+
 
         ///// <summary>
         ///// 调用指定类型的buff

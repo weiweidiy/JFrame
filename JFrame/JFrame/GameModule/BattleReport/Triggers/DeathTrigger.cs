@@ -9,6 +9,11 @@
         public DeathTrigger( IPVPBattleManager pvpBattleManager, float arg, float delay = 0):base(pvpBattleManager, arg, delay)
         { }
 
+        public override bool GetEnable()
+        {
+            return base.GetEnable() || valid;
+        }
+
         public override void OnAttach(IBattleAction action)
         {
             base.OnAttach(action);

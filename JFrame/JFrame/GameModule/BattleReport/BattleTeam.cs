@@ -14,6 +14,7 @@ namespace JFrame
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onReborn;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
@@ -39,6 +40,7 @@ namespace JFrame
                     unit.onActionHitTarget += Unit_onActionDone;
                     unit.onDamage += Unit_onDamage;
                     unit.onHeal += Unit_onHeal;
+                    unit.onRebord += Unit_onRebord;
                     unit.onDead += Unit_onDead;
                     unit.onBufferAdded += Unit_onBufferAdded;
                     unit.onBufferRemoved += Unit_onBufferRemoved;
@@ -47,6 +49,7 @@ namespace JFrame
             }
 
         }
+
 
 
 
@@ -77,6 +80,10 @@ namespace JFrame
             onHeal?.Invoke(team,arg1, arg2, arg3, arg4);
         }
 
+        private void Unit_onRebord(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        {
+            onReborn?.Invoke(team, arg1, arg2, arg3, arg4);
+        }
 
 
         private void Unit_onDead(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)

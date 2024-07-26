@@ -12,6 +12,7 @@ namespace JFrame
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
+        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onReborn;
 
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;

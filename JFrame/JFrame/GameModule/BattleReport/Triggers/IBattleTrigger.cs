@@ -10,6 +10,8 @@ namespace JFrame
 
         void SetEnable(bool isOn);
 
+        bool GetEnable();
+
         void Update(BattleFrame frame);
 
         void OnAttach(IBattleAction action);

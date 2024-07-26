@@ -11,9 +11,11 @@ namespace JFrame
         Damage, //受伤
         Heal,   //治疗回血
         Dead,   //死亡
+        Reborn, //复活
         AddBuffer,
         RemoveBuffer,
         CastBuffer,
+
     }
 
     /// <summary>
@@ -42,18 +44,22 @@ namespace JFrame
         public BattleReporter(BattleFrame frame, Dictionary<PVPBattleManager.Team, BattleTeam> teams) {
             this.frame = frame;
             this.teams = teams;
-            foreach(var team in this.teams.Values)
+            if(teams != null)
             {
-                team.onActionCast += Team_onActionCast;
-                team.onDamage += Team_onDamage;
-                team.onHeal += Team_onHeal;
-                team.onDead += Team_onDead;
-                team.onBufferAdded += Team_onBufferAdded;
-                team.onBufferRemoved += Team_onBufferRemoved;
-                team.onBufferCast += Team_onBufferCast;
+                foreach (var team in this.teams.Values)
+                {
+                    team.onActionCast += Team_onActionCast;
+                    team.onDamage += Team_onDamage;
+                    team.onHeal += Team_onHeal;
+                    team.onReborn += Team_onReborn;
+                    team.onDead += Team_onDead;
+                    team.onBufferAdded += Team_onBufferAdded;
+                    team.onBufferRemoved += Team_onBufferRemoved;
+                    team.onBufferCast += Team_onBufferCast;
+                }
             }
-
         }
+
 
 
         private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
@@ -71,7 +77,10 @@ namespace JFrame
             AddReportData(caster.UID, ReportType.Heal, target.UID, new object[] { value, target.HP, target.MaxHP });
         }
 
-
+        private void Team_onReborn(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
+        {
+            AddReportData(caster.UID, ReportType.Reborn, target.UID, new object[] { value, target.HP, target.MaxHP });
+        }
         private void Team_onDead(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
             AddReportData(caster.UID, ReportType.Dead, target.UID, new object[] {0});

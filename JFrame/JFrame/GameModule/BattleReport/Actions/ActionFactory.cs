@@ -70,6 +70,8 @@ namespace JFrame
                     return new OrderFriendsHurtFinder(point, pvpBattleManager, arg);
                 case 4: //随机敌方
                     return new RandomOppoFinder(point, pvpBattleManager, arg);
+                case 6: //本体
+                    return new SelfFinder(point, pvpBattleManager, arg);
                 case 7: //顺序己方（可复数）
                     return new OrderFriendsFinder(point, pvpBattleManager, arg);
                 case 8: //顺序敌方攻击最高的
@@ -123,6 +125,8 @@ namespace JFrame
                     return new ExecutorSelfAddBuffer(arg);
                 case 7://递增伤害
                     return new ExecutorIncrementalDamage(arg);
+                case 8://复活
+                    return new ExecutorReborn(arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

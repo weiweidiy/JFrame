@@ -198,6 +198,24 @@ namespace JFrameTest
             Assert.AreEqual(9, target.HP);
         }
 
+        /// <summary>
+        /// 复活
+        /// </summary>
+        [Test]
+        public void TestExecutorReborn()
+        {
+            //arrange
+            var executor = new ExecutorReborn(new float[4] { 1, 0, 0, 0.5f });
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+                    
+            //action
+            target.OnDamage(null, null, new IntValue() { Value = 10 });
+            executor.Hit(null, null, target);
+
+            //expect
+            Assert.AreEqual(5, target.HP);
+        }
+
     }
 
 

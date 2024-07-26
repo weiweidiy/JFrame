@@ -1,0 +1,30 @@
+﻿
+using System;
+
+namespace JFrame
+{
+    /// <summary>
+    /// 复活 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：加血量（百分比）  type = 8
+    /// </summary>
+    public class ExecutorReborn : ExecutorHeal
+    {
+        public ExecutorReborn(float[] args) : base(args) { }
+
+        public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            return target.MaxHP * arg; //是个生命百分比
+        }
+
+        public override void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            var heal = GetValue(caster, action, target);
+            //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
+            var needHp = target.MaxHP - target.HP;
+
+            heal = Math.Min(heal, needHp);
+
+            target.OnReborn(caster, action, new IntValue() { Value = (int)heal });
+        }
+
+    }
+}

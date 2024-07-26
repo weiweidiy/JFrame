@@ -21,6 +21,7 @@ namespace JFrame
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage; //受到伤害之后
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
 
         event Action<IBattleUnit, IBuffer> onBufferAdded;
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -83,6 +84,14 @@ namespace JFrame
         /// </summary>
         /// <param name="heal"></param>
         void OnHeal(IBattleUnit caster, IBattleAction action, IntValue heal);
+
+        /// <summary>
+        /// 复活了
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="heal"></param>
+        void OnReborn(IBattleUnit caster, IBattleAction action, IntValue heal);
 
         /// <summary>
         /// 是否活着

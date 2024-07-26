@@ -17,6 +17,7 @@ namespace JFrame
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
 
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -99,6 +100,13 @@ namespace JFrame
                     HP = value;
             }
         }
+
+        /// <summary>
+        /// 最大生命升级
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public int MaxHPUpgrade(int value)
         {
             if (value < 0)
@@ -252,6 +260,28 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 复活
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="heal"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnReborn(IBattleUnit caster, IBattleAction action, IntValue heal)
+        {
+            HP += heal.Value;
+
+            if (action != null)
+            {
+                foreach (var a in actions)
+                {
+                    a.SetEnable(true);
+                }
+            }
+
+            onRebord?.Invoke(caster, action, this, heal.Value);
+        }
+
+        /// <summary>
         /// 死亡了
         /// </summary>
         private void OnDead(IBattleUnit hitter, IBattleAction action)
@@ -264,9 +294,13 @@ namespace JFrame
                 }
             }
 
+            if (bufferManager != null)
+                bufferManager.Clear();
 
             onDead?.Invoke(hitter, action, this);
         }
+
+
 
         #endregion
 
@@ -333,6 +367,7 @@ namespace JFrame
         {
             bufferManager.RemoveBuffer(bufferUID);
         }
+
 
     }
 }

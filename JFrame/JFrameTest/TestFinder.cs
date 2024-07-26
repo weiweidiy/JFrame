@@ -70,6 +70,31 @@ namespace JFrameTest
             Assert.AreEqual("1", result[0].UID);
 
         }
+
+        /// <summary>
+        /// 本体，不管死活
+        /// </summary>
+        [Test]
+        public void TestSelfFinder()
+        {
+            //arrange
+            var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
+            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 1 }, null, null);
+            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 }, null, null);
+            simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
+            var finder = new SelfFinder(battlePoint, simBattle, 1);
+            var action = Substitute.For<IBattleAction>();
+            action.Owner.Returns(unit1);
+
+            //action
+            finder.OnAttach(action);
+            var result = finder.FindTargets();
+
+            //expect
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(unit1, result[0]);
+
+        }
     }
 
     
