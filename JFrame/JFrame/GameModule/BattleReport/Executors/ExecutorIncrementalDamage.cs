@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace JFrame
 {
     /// <summary>
@@ -36,9 +38,9 @@ namespace JFrame
             return base.GetValue(caster, action, target);
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
-            base.Hit(caster, action, target);
+            base.Hit(caster, action, targets);
 
             if (curCount < incrementCount)
             {

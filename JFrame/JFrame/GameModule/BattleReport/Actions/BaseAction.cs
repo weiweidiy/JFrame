@@ -16,7 +16,7 @@ namespace JFrame
         /// <summary>
         /// 开始释放了
         /// </summary>
-        public event Action<IBattleAction, IBattleUnit> onStartCast;
+        public event Action<IBattleAction, List<IBattleUnit>> onStartCast;
         /// <summary>
         /// 对目标起效了（多个目标时，每个目标调用一次)
         /// </summary>
@@ -125,20 +125,20 @@ namespace JFrame
         /// <exception cref="System.NotImplementedException"></exception>
         public void Cast(IBattleUnit caster,  List<IBattleUnit> units, IBattleReporter reporter)
         {
-            //添加动作战报,第一个目标作为对象
-            //reporter.AddReportData(caster.UID, ReportType.Action, units[0].UID, new float[] { Id });
-            onStartCast?.Invoke(this, units[0]);
+            onStartCast?.Invoke(this, units);
 
-            ///触发器不可用
-            //SetEnable(false);
+            //foreach (var unit in units)
+            //{
+            //    foreach(var e in exeutors)
+            //    {
+            //        e.ReadyToExecute(caster,this, unit);
+            //    }
+            //    onHitTarget?.Invoke(this, unit);
+            //}
 
-            foreach (var unit in units)
+            foreach (var e in exeutors)
             {
-                foreach(var e in exeutors)
-                {
-                    e.ReadyToExecute(caster,this, unit);
-                }
-                onHitTarget?.Invoke(this, unit);
+                e.ReadyToExecute(caster, this, units);
             }
         }
 

@@ -11,7 +11,7 @@ namespace JFrame
         /// 有动作准备完毕，可以释放了
         /// </summary>
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
+        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
@@ -211,9 +211,9 @@ namespace JFrame
         /// <param name="arg3"></param>
         /// <param name="arg4"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void Action_onCast(IBattleAction action, IBattleUnit firstTarget)
+        private void Action_onCast(IBattleAction action, List<IBattleUnit> targets)
         {
-            onActionCast?.Invoke(this, action,firstTarget);
+            onActionCast?.Invoke(this, action,targets);
         }
 
         /// <summary>

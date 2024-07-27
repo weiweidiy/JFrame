@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -72,7 +73,7 @@ namespace JFrame
         /// </summary>
         IBattleUnit caster;
         IBattleAction action;
-        IBattleUnit target;
+        List<IBattleUnit> targets;
 
 
         /// <summary>
@@ -101,7 +102,7 @@ namespace JFrame
 
             delta = 0f;
             //延迟完成了
-            Hit(caster, action, target);
+            Hit(caster, action, targets);
 
             tempCount++;
 
@@ -119,7 +120,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        public abstract void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target);
+        public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target);
 
         /// <summary>
         /// 准备释放
@@ -128,7 +129,7 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="target"></param>
         /// <exception cref="Exception"></exception>
-        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
             if (Active)
                 throw new Exception("执行器正在执行中，无法再次执行" + this.GetType().ToString());
@@ -138,7 +139,7 @@ namespace JFrame
 
             this.caster = caster;
             this.action = action;
-            this.target = target;
+            this.targets = targets;
         }
 
         public virtual void OnAttach(IBattleAction action)

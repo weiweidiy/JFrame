@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -15,15 +16,19 @@ namespace JFrame
             return arg; //是个加值
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
-            var heal = GetValue(caster, action, target);
-            //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-            var needHp = target.MaxHP - target.HP;
+            foreach (var target in targets)
+            {
+                var heal = GetValue(caster, action, target);
+                //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
+                var needHp = target.MaxHP - target.HP;
 
-            heal = Math.Min(heal, needHp);
+                heal = Math.Min(heal, needHp);
 
-            target.OnHeal(caster, action, new IntValue() { Value = (int)heal });
+                target.OnHeal(caster, action, new IntValue() { Value = (int)heal });
+            }
+            
         }
     }
 }

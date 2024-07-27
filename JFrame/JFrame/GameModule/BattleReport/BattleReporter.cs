@@ -62,9 +62,14 @@ namespace JFrame
 
 
 
-        private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
-            AddReportData(caster.UID, ReportType.Action, target.UID, new object[] { action.Id });
+            List<string> lstUID = new List<string>();
+            for (int i = 1; i < targets.Count; i ++)
+            {
+                lstUID.Add(targets[i].UID);
+            }
+            AddReportData(caster.UID, ReportType.Action, targets[0].UID, new object[] { action.Id, lstUID });
         }
 
         private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)

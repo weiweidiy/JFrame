@@ -15,7 +15,7 @@ namespace JFrame
         /// <summary>
         /// 触发了，群体也只会返回首目标
         /// </summary>
-        event Action<IBattleAction, IBattleUnit> onStartCast;
+        event Action<IBattleAction, List<IBattleUnit>> onStartCast;
 
         /// <summary>
         /// 释放完成，每一个目标都会触发1次

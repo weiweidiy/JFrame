@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace JFrame
 {
     /// <summary>
@@ -32,9 +34,13 @@ namespace JFrame
         }
 
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
-            target.MaxHPUpgrade(hpValue);
+            foreach(var target in targets)
+            {
+                target.MaxHPUpgrade((int)GetValue(caster, action , target));
+            }
+            
         }
 
 

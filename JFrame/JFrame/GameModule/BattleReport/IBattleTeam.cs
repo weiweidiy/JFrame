@@ -6,7 +6,7 @@ namespace JFrame
     public interface IBattleTeam
     {
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
+        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;

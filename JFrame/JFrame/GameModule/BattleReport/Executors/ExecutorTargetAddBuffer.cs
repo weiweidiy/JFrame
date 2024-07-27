@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -36,14 +37,18 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        public override void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
         {
-            var r = new Random().NextDouble();
-            if (r >= rate)
-                return;
+            foreach(IBattleUnit target in targets)
+            {
+                var r = new Random().NextDouble();
+                if (r >= rate)
+                    return;
 
-            //添加buff
-            target.AddBuffer(bufferId, foldCount);
+                //添加buff
+                target.AddBuffer(bufferId, foldCount);
+            }
+   
         }
     }
 }

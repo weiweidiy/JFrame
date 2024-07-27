@@ -23,15 +23,15 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        void Hit(IBattleUnit caster, IBattleAction action, IBattleUnit target);
+        void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target);
 
         /// <summary>
         /// 准备开始执行
         /// </summary>
         /// <param name="caster"></param>
         /// <param name="action"></param>
-        /// <param name="target"></param>
-        void ReadyToExecute(IBattleUnit caster, IBattleAction action, IBattleUnit target);
+        /// <param name="targets"></param>
+        void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets);
 
         /// <summary>
         /// 更新帧，可以延迟命中

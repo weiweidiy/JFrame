@@ -4,6 +4,7 @@ using JFrame;
 using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace JFrameTest
 {
@@ -34,14 +35,15 @@ namespace JFrameTest
             //arrange
             var executor = Substitute.For<BaseExecutor>(new float[3] { 1, 0, 0 });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
             frame.DeltaTime.Returns(1);
 
             //action
-            executor.ReadyToExecute(null, null, target);
+            executor.ReadyToExecute(null, null, targets);
             executor.Update(frame); 
 
             //expect
-            executor.Received(1).Hit(null, null, target);
+            executor.Received(1).Hit(null, null, targets);
         }
 
         /// <summary>
@@ -53,15 +55,16 @@ namespace JFrameTest
             //arrange
             var executor = Substitute.For<BaseExecutor>(new float[3] { 1, 2, 0 }); //延迟2秒
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
             frame.DeltaTime.Returns(1);
 
             //action
-            executor.ReadyToExecute(null, null, target);
+            executor.ReadyToExecute(null, null, targets);
             executor.Update(frame);
             executor.Update(frame);
             executor.Update(frame);
             //expect
-            executor.Received(1).Hit(null, null, target);
+            executor.Received(1).Hit(null, null, targets);
         }
 
         /// <summary>
@@ -75,12 +78,35 @@ namespace JFrameTest
             var caster = Substitute.For<IBattleUnit>();
             caster.Atk.Returns(1);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
 
             //action
-            executor.Hit(caster, null, target);
+            executor.Hit(caster, null, targets);
 
             //expect
             Assert.AreEqual(9, target.HP);
+        }
+
+        /// <summary>
+        /// 普通伤害多单位
+        /// </summary>
+        [Test]
+        public void TestExecutorDamageMultTargets()
+        {
+            //arrange
+            var executor = new ExecutorDamage(new float[4] { 1, 0, 0, 1 });
+            var caster = Substitute.For<IBattleUnit>();
+            caster.Atk.Returns(1);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var target2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 20, uid = "2" }, null, null);
+            var targets = new List<IBattleUnit>() { target , target2 };
+
+            //action
+            executor.Hit(caster, null, targets);
+
+            //expect
+            Assert.AreEqual(9, target.HP);
+            Assert.AreEqual(19, target2.HP);
         }
 
         /// <summary>
@@ -92,10 +118,11 @@ namespace JFrameTest
             //arrange
             var executor = new ExecutorHeal(new float[4] { 1, 0, 0, 1 });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
 
             //action
             target.OnDamage(null, null, new IntValue() { Value = 3 });
-            executor.Hit(null, null, target);
+            executor.Hit(null, null, targets);
 
             //expect
             Assert.AreEqual(8, target.HP);
@@ -110,9 +137,10 @@ namespace JFrameTest
             //arrange
             var executor = new ExecutorHpDamage(new float[4] { 1, 0, 0, 0.1f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
 
             //action
-            executor.Hit(null, null, target);
+            executor.Hit(null, null, targets);
 
             //expect
             Assert.AreEqual(90, target.HP);
@@ -127,7 +155,7 @@ namespace JFrameTest
             //arrange
             var executor = new ExecutorMaxHpUp(new float[4] { 1, 0, 0, 0.1f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
-
+            var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
             caster.MaxHP.Returns(100);
             var action = Substitute.For<IBattleAction>();
@@ -135,7 +163,7 @@ namespace JFrameTest
             executor.OnAttach(action);
 
             //action
-            executor.Hit(caster, action, target);
+            executor.Hit(caster, action, targets);
 
             //expect
             Assert.AreEqual(110, target.MaxHP);
@@ -153,9 +181,9 @@ namespace JFrameTest
             var executor = new ExecutorTargetAddBuffer(new float[6] { 1, 0, 0, 999,1,1 });
             var bufferManager = Substitute.For<IBufferManager>();
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, bufferManager);
-
+            var targets = new List<IBattleUnit>() { target };
             //action
-            executor.Hit(null, null, target);
+            executor.Hit(null, null, targets);
 
             //expect
             bufferManager.Received(1).AddBuffer(target, 999, 1);
@@ -190,9 +218,9 @@ namespace JFrameTest
             var caster = Substitute.For<IBattleUnit>();
             caster.Atk.Returns(1);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-
+            var targets = new List<IBattleUnit>() { target };
             //action
-            executor.Hit(caster, null, target);
+            executor.Hit(caster, null, targets);
 
             //expect
             Assert.AreEqual(9, target.HP);
@@ -207,10 +235,10 @@ namespace JFrameTest
             //arrange
             var executor = new ExecutorReborn(new float[4] { 1, 0, 0, 0.5f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-                    
+            var targets = new List<IBattleUnit>() { target };
             //action
             target.OnDamage(null, null, new IntValue() { Value = 10 });
-            executor.Hit(null, null, target);
+            executor.Hit(null, null, targets);
 
             //expect
             Assert.AreEqual(5, target.HP);

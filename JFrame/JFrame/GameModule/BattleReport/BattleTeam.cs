@@ -8,7 +8,7 @@ namespace JFrame
     public class BattleTeam : IBattleTeam
     {
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionCast;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
@@ -59,7 +59,7 @@ namespace JFrame
             onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
         }
 
-        private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
+        private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
         {
             onActionCast?.Invoke(team, arg1, arg2, arg3);
         }

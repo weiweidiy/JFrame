@@ -389,14 +389,17 @@ namespace JFrameTest
                 .Do(x => buffers.Add(buffer));
 
             var target = Substitute.For<IBattleUnit>();
+
             target.When(x => x.AddBuffer(Arg.Any<int>(), Arg.Any<int>()))
                 .Do(x => { buffManager.AddBuffer(target, 1, 1); Console.WriteLine("11111"); });
 
-            addBufferExecutor.When(x => x.Hit(null, null, target))
+            var targets = new List<IBattleUnit>() { target };
+
+            addBufferExecutor.When(x => x.Hit(null, null, targets))
                 .Do(x => target.AddBuffer(1, 1));
 
             //action
-            addBufferExecutor.Hit(null, null, target);
+            addBufferExecutor.Hit(null, null, targets);
 
 
             //expect
