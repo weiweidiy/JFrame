@@ -38,6 +38,11 @@ namespace JFrame
         public IBattleUnit Owner { get; private set; }
 
         /// <summary>
+        /// 唯一ID
+        /// </summary>
+        public string Uid { get; private set; }
+
+        /// <summary>
         /// 触发器
         /// </summary>
         IBattleTrigger trigger;
@@ -59,8 +64,9 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(int id, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
+        public BaseAction(string UID, int id, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
         {
+            this.Uid = UID;
             this.Id = id;
             this.trigger = trigger;
             this.trigger.onTrigger += Trigger_onTrigger;

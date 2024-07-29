@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 
 namespace JFrame
 {
-
     public class ActionFactory
     {
         int unitId;
@@ -24,7 +23,7 @@ namespace JFrame
 
         public IBattleAction Create(int actionId)
         {
-            return new NormalAction(actionId,
+            return new NormalAction(Guid.NewGuid().ToString(), actionId,
                         CreateTrigger(actionDataSource.GetTriggerType(unitUID, unitId, actionId), actionDataSource.GetTriggerArg(unitUID, unitId, actionId), 0f)
                         , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
                         , CreateExecutors(unitUID, unitId, actionId));

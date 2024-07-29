@@ -254,7 +254,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActions(info.uid, info.id, info.actionsId, slot), CreateBufferManager());
+                var battleUnit = new BattleUnit(info, CreateActionManager(info.uid, info.id, info.actionsId, slot), CreateBufferManager());
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -272,6 +272,23 @@ namespace JFrame
         BaseBufferManager CreateBufferManager()
         {
             return new BaseBufferManager(bufferDataSource, new BufferFactory(bufferDataSource));
+        }
+
+
+        ActionManager CreateActionManager(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
+        {
+            var manager = new ActionManager();
+            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint, this);
+
+            //var actions = new List<IBattleAction>();
+            foreach (var actionId in actionIds)
+            {
+                // to do: 根据actionID,创建不同的类实例
+                var action = factory.Create(actionId);
+                manager.Add(action);
+                //actions.Add(action);
+            }
+            return manager;
         }
 
         /// <summary>

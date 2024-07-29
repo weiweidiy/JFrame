@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public interface IBattleAction
+    public interface IBattleAction : IUnique
     {
-
-
         /// <summary>
         /// 可以触发了
         /// </summary>

@@ -120,7 +120,7 @@ namespace JFrame
         /// <summary>
         /// 所有动作列表
         /// </summary>
-        List<IBattleAction> actions = null;
+        ActionManager actionManager = null;
 
         /// <summary>
         /// 战斗单位原始数据
@@ -137,14 +137,14 @@ namespace JFrame
         /// </summary>
         IBufferManager bufferManager = null;
 
-        public BattleUnit( BattleUnitInfo info, List<IBattleAction> actions, IBufferManager bufferManager)
+        public BattleUnit( BattleUnitInfo info, ActionManager actionManager, IBufferManager bufferManager)
         {
             this.UID = info.uid;
             battleUnitInfo = info;
-            this.actions = actions;      
-            if(actions != null)
+            this.actionManager = actionManager;      
+            if(actionManager != null && actionManager.GetAll() != null)
             {
-                foreach (var action in actions)
+                foreach (var action in actionManager.GetAll())
                 {
                     action.onTriggerOn += Action_onTriggerOn;
                     action.onStartCast += Action_onCast;
@@ -272,7 +272,7 @@ namespace JFrame
 
             if (action != null)
             {
-                foreach (var a in actions)
+                foreach (var a in actionManager.GetAll())
                 {
                     a.SetEnable(true);
                 }
@@ -288,7 +288,7 @@ namespace JFrame
         {
             if(action != null)
             {
-                foreach (var a in actions)
+                foreach (var a in actionManager.GetAll())
                 {
                     a.SetEnable(false);
                 }
@@ -310,10 +310,7 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
-            foreach (var action in actions)
-            {
-                action.Update(frame);
-            }
+            actionManager.Update(frame);
 
             bufferManager.Update(frame);
         }
