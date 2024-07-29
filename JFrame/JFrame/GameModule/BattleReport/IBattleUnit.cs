@@ -11,9 +11,9 @@ namespace JFrame
         /// <summary>
         /// 行动时主动事件
         /// </summary>
-        event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        //event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast; //执行效果之前，只有首目标
-        event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
+        //event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
 
         /// <summary>
         /// 被动事件

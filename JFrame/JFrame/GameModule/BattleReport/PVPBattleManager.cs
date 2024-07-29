@@ -49,35 +49,35 @@ namespace JFrame
 
 
         #region 响应方法：战斗规则
-        /// <summary>
-        /// 有动作准备好了
-        /// </summary>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <exception cref="System.NotImplementedException"></exception>
-        private void BattleTeam_onActionTriggerOn(Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
-        {
-            var uids = new List<string>();
-            foreach (var target in targets)
-            {
-                uids.Add(target.UID);
-            }
-            //var reportUID = pvpReporter.AddReportActionData(caster.UID, action.Id, uids);
-            action.Cast(caster, targets, pvpReporter);
-        }
+        ///// <summary>
+        ///// 有动作准备好了
+        ///// </summary>
+        ///// <param name="arg1"></param>
+        ///// <param name="arg2"></param>
+        ///// <param name="arg3"></param>
+        ///// <exception cref="System.NotImplementedException"></exception>
+        //private void BattleTeam_onActionTriggerOn(Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        //{
+        //    //var uids = new List<string>();
+        //    //foreach (var target in targets)
+        //    //{
+        //    //    uids.Add(target.UID);
+        //    //}
+        //    //var reportUID = pvpReporter.AddReportActionData(caster.UID, action.Id, uids);
+        //    //action.Cast(caster, targets, pvpReporter);
+        //}
 
-        /// <summary>
-        /// 动作生效了, 单个目标调用1次，AOE在1次action中会调用多次
-        /// </summary>
-        /// <param name="team"></param>
-        /// <param name="caster"></param>
-        /// <param name="action"></param>
-        /// <param name="target"></param>
-        private void BattleTeam_onActionDone(Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
-        {
-            //Console.WriteLine("Frame " + frame.CurFrame + "~ 队伍：" + team.ToString() + "~ 单位 ： " + caster.Name + " ~对目标 " + target.Name + " ~执行动作：" + action.Name);
-        }
+        ///// <summary>
+        ///// 动作生效了, 单个目标调用1次，AOE在1次action中会调用多次
+        ///// </summary>
+        ///// <param name="team"></param>
+        ///// <param name="caster"></param>
+        ///// <param name="action"></param>
+        ///// <param name="target"></param>
+        //private void BattleTeam_onActionDone(Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        //{
+        //    //Console.WriteLine("Frame " + frame.CurFrame + "~ 队伍：" + team.ToString() + "~ 单位 ： " + caster.Name + " ~对目标 " + target.Name + " ~执行动作：" + action.Name);
+        //}
 
 
 
@@ -260,8 +260,8 @@ namespace JFrame
             }
 
             var battleTeam = new BattleTeam(team, dicUnits);
-            battleTeam.onActionTriggerOn += BattleTeam_onActionTriggerOn;
-            battleTeam.onActionDone += BattleTeam_onActionDone;
+            //battleTeam.onActionTriggerOn += BattleTeam_onActionTriggerOn;
+            //battleTeam.onActionDone += BattleTeam_onActionDone;
             return battleTeam;
         }
 
@@ -291,24 +291,24 @@ namespace JFrame
             return manager;
         }
 
-        /// <summary>
-        /// 根据id创建技能实例
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        List<IBattleAction> CreateActions(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
-        {
-            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint,this);
+        ///// <summary>
+        ///// 根据id创建技能实例
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //List<IBattleAction> CreateActions(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
+        //{
+        //    var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint,this);
 
-            var actions = new List<IBattleAction>();
-            foreach (var actionId in actionIds)
-            {
-                // to do: 根据actionID,创建不同的类实例
-                var action = factory.Create(actionId);
-                actions.Add(action);
-            }
-            return actions;
-        }
+        //    var actions = new List<IBattleAction>();
+        //    foreach (var actionId in actionIds)
+        //    {
+        //        // to do: 根据actionID,创建不同的类实例
+        //        var action = factory.Create(actionId);
+        //        actions.Add(action);
+        //    }
+        //    return actions;
+        //}
 
 
 

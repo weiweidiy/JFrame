@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using static System.Collections.Specialized.BitVector32;
 
 namespace JFrame
 {
@@ -8,6 +9,10 @@ namespace JFrame
     /// </summary>
     public class ActionManager : BaseContainer<IBattleAction>, IActionManager
     {
+        //event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
+
+        event Action<IBattleAction, List<IBattleUnit>> onStartCast;
+
         public override void Add(IBattleAction member)
         {
             base.Add(member);
@@ -16,14 +21,16 @@ namespace JFrame
         }
 
 
-        private void Member_onTriggerOn(IBattleAction arg1, List<IBattleUnit> arg2)
+        private void Member_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
         {
-            
+            //onTriggerOn?.Invoke(action, targets);
+
+            action.Cast(action.Owner, targets);
         }
 
-        private void Member_onStartCast(IBattleAction arg1, List<IBattleUnit> arg2)
+        private void Member_onStartCast(IBattleAction action, List<IBattleUnit> targets)
         {
-            
+            onStartCast?.Invoke(action,targets);
         }
 
         public override bool Remove(string uid)

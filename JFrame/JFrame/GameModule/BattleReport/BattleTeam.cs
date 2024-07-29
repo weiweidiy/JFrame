@@ -7,9 +7,9 @@ namespace JFrame
 
     public class BattleTeam : IBattleTeam
     {
-        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
-        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+        //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
@@ -35,9 +35,9 @@ namespace JFrame
                 foreach (var key in units.Keys)
                 {
                     var unit = units[key];
-                    unit.onActionTriggerOn += Unit_onActionTriggerOn;
+                    //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                     unit.onActionCast += Unit_onActionCast;
-                    unit.onActionHitTarget += Unit_onActionDone;
+                    //unit.onActionHitTarget += Unit_onActionDone;
                     unit.onDamage += Unit_onDamage;
                     unit.onHeal += Unit_onHeal;
                     unit.onRebord += Unit_onRebord;
@@ -54,10 +54,10 @@ namespace JFrame
 
 
         #region 响应事件
-        private void Unit_onActionTriggerOn(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
-        {
-            onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
-        }
+        //private void Unit_onActionTriggerOn(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
+        //{
+        //    onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
+        //}
 
         private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
         {
@@ -65,10 +65,10 @@ namespace JFrame
         }
 
 
-        private void Unit_onActionDone(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
-        {
-            onActionDone?.Invoke(team, arg1, arg2, arg3);
-        }
+        //private void Unit_onActionDone(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
+        //{
+        //    onActionDone?.Invoke(team, arg1, arg2, arg3);
+        //}
 
         private void Unit_onDamage(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
         {

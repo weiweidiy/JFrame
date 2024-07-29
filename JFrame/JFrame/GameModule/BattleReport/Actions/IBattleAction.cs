@@ -15,10 +15,10 @@ namespace JFrame
         /// </summary>
         event Action<IBattleAction, List<IBattleUnit>> onStartCast;
 
-        /// <summary>
-        /// 释放完成，每一个目标都会触发1次
-        /// </summary>
-        event Action<IBattleAction, IBattleUnit> onHitTarget; 
+        ///// <summary>
+        ///// 释放完成，每一个目标都会触发1次
+        ///// </summary>
+        //event Action<IBattleAction, IBattleUnit> onHitTarget; 
 
         IBattleUnit Owner { get;  }
 
@@ -28,7 +28,7 @@ namespace JFrame
 
         void Update(BattleFrame frame);
 
-        void Cast(IBattleUnit caster, List<IBattleUnit> units, IBattleReporter reporter);
+        void Cast(IBattleUnit caster, List<IBattleUnit> units);
 
         /// <summary>
         /// 设置这个动作是否可触发

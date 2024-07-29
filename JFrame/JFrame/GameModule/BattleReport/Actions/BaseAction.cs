@@ -116,8 +116,10 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
+            //条件触发器更新
             trigger.Update(frame);
-            //exutor.Update(frame);
+            
+            //执行器更新
             foreach (var e in exeutors)
             {
                 e.Update(frame);
@@ -129,7 +131,7 @@ namespace JFrame
         /// </summary>
         /// <param name="units"></param>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void Cast(IBattleUnit caster,  List<IBattleUnit> units, IBattleReporter reporter)
+        public void Cast(IBattleUnit caster,  List<IBattleUnit> units)
         {
             onStartCast?.Invoke(this, units);
 

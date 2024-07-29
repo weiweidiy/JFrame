@@ -10,9 +10,9 @@ namespace JFrame
         /// <summary>
         /// 有动作准备完毕，可以释放了
         /// </summary>
-        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        //public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
+        //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
@@ -146,9 +146,9 @@ namespace JFrame
             {
                 foreach (var action in actionManager.GetAll())
                 {
-                    action.onTriggerOn += Action_onTriggerOn;
+                    //action.onTriggerOn += Action_onTriggerOn;
                     action.onStartCast += Action_onCast;
-                    action.onHitTarget += Action_onDone;
+                    //action.onHitTarget += Action_onDone;
                     action.OnAttach(this);
                 }
             }
@@ -193,15 +193,15 @@ namespace JFrame
             onBufferRemoved?.Invoke(this, obj);
         }
 
-        /// <summary>
-        /// 动作已经准备好了
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void Action_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
-        {
-            onActionTriggerOn?.Invoke(this, action, targets);
-        }
+        ///// <summary>
+        ///// 动作已经准备好了
+        ///// </summary>
+        ///// <param name="obj"></param>
+        ///// <exception cref="NotImplementedException"></exception>
+        //private void Action_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
+        //{
+        //    onActionTriggerOn?.Invoke(this, action, targets);
+        //}
 
         /// <summary>
         /// 发动
@@ -216,16 +216,16 @@ namespace JFrame
             onActionCast?.Invoke(this, action,targets);
         }
 
-        /// <summary>
-        /// 动作释放完成
-        /// </summary>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void Action_onDone(IBattleAction arg1, IBattleUnit arg2)
-        {
-            onActionHitTarget?.Invoke(this, arg1,arg2);
-        }
+        ///// <summary>
+        ///// 动作释放完成
+        ///// </summary>
+        ///// <param name="arg1"></param>
+        ///// <param name="arg2"></param>
+        ///// <exception cref="NotImplementedException"></exception>
+        //private void Action_onDone(IBattleAction arg1, IBattleUnit arg2)
+        //{
+        //    onActionHitTarget?.Invoke(this, arg1,arg2);
+        //}
 
         /// <summary>
         /// 受到了伤害
