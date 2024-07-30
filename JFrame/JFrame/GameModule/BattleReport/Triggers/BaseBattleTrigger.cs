@@ -11,6 +11,14 @@ namespace JFrame
         /// </summary>
         public IBattleAction Owner { get; private set; }
 
+        /// <summary>
+        /// 触发器类型
+        /// </summary>
+        public virtual BattleTriggerType TriggerType { get => BattleTriggerType.Normal; }
+
+        /// <summary>
+        /// 战斗管理器
+        /// </summary>
         protected IPVPBattleManager battleManager;
 
         /// <summary>

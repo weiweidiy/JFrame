@@ -12,7 +12,7 @@ namespace JFrame
         /// 行动时主动事件
         /// </summary>
         //event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast; //执行效果之前，只有首目标
+        event Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float> onActionCast; //执行效果之前，只有首目标
         //event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
 
         /// <summary>
@@ -22,6 +22,7 @@ namespace JFrame
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
 
         event Action<IBattleUnit, IBuffer> onBufferAdded;
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -92,6 +93,14 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="heal"></param>
         void OnReborn(IBattleUnit caster, IBattleAction action, IntValue heal);
+
+        /// <summary>
+        /// 生命上限增加
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="value"></param>
+        void OnMaxHpUp(IBattleUnit caster, IBattleAction action, IntValue hp);
 
         /// <summary>
         /// 是否活着

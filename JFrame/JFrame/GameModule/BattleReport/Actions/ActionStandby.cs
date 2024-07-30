@@ -11,7 +11,7 @@
         {
             base.OnEnter(context); //要先调用
 
-            if(context.ConditionTrigger != null)
+            if(NeedUpdate())
                 context.ConditionTrigger.Restart();
         }
 
@@ -26,13 +26,19 @@
         {
             base.Update(frame);
 
-            context.ConditionTrigger.Update(frame);
+            if (NeedUpdate())
+                context.ConditionTrigger.Update(frame);
 
-            if (context.CanCast())
+            if (NeedUpdate() && context.CanCast())
             {
                 //通知动作管理器，能释放
                 context.NotifyCanCast();
             }
+        }
+
+        bool NeedUpdate()
+        {
+            return context.ConditionTrigger != null && (context.ConditionTrigger.TriggerType == BattleTriggerType.Normal || context.ConditionTrigger.TriggerType == BattleTriggerType.All);
         }
     }
 }

@@ -38,7 +38,8 @@ namespace JFrame
         {
             foreach(var target in targets)
             {
-                target.MaxHPUpgrade((int)GetValue(caster, action , target));
+                target.OnMaxHpUp(caster, action, new IntValue() { Value = (int)GetValue(caster, action, target) });
+                //target.MaxHPUpgrade((int)GetValue(caster, action , target));
             }
             
         }

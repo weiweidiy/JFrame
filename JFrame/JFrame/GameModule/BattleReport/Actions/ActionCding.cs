@@ -14,6 +14,7 @@
             base.OnEnter(context); //要先调用
 
             //cd触发器开始运行
+            if(NeedUpdate())
             context.cdTrigger.Restart();
         }
 
@@ -28,9 +29,10 @@
         {
             base.Update(frame);
 
-            context.cdTrigger.Update(frame);
+            if (NeedUpdate())
+                context.cdTrigger.Update(frame);
 
-            if (context.IsCDComplete())
+            if (NeedUpdate() && context.IsCDComplete())
             {
                 //通知动作管理器，CD完成了
                 //context.NotifyCdComplete();
@@ -41,6 +43,11 @@
                 //动作进入待机状态
                 context.Standby();
             }
+        }
+
+        bool NeedUpdate()
+        {
+            return context.cdTrigger != null && (context.cdTrigger.TriggerType == BattleTriggerType.Normal || context.cdTrigger.TriggerType == BattleTriggerType.All);
         }
     }
 }

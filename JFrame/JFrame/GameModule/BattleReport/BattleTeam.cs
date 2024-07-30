@@ -8,13 +8,14 @@ namespace JFrame
     public class BattleTeam : IBattleTeam
     {
         //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
         //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onReborn;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
@@ -41,6 +42,7 @@ namespace JFrame
                     unit.onDamaged += Unit_onDamage;
                     unit.onHealed += Unit_onHeal;
                     unit.onRebord += Unit_onRebord;
+                    unit.onMaxHpUp += Unit_onMaxHpUp;
                     unit.onDead += Unit_onDead;
                     unit.onBufferAdded += Unit_onBufferAdded;
                     unit.onBufferRemoved += Unit_onBufferRemoved;
@@ -53,15 +55,17 @@ namespace JFrame
 
 
 
+
+
         #region 响应事件
         //private void Unit_onActionTriggerOn(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
         //{
         //    onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
         //}
 
-        private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
+        private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3, float duration)
         {
-            onActionCast?.Invoke(team, arg1, arg2, arg3);
+            onActionCast?.Invoke(team, arg1, arg2, arg3, duration);
         }
 
 
@@ -78,6 +82,11 @@ namespace JFrame
         private void Unit_onHeal(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
         {
             onHeal?.Invoke(team,arg1, arg2, arg3, arg4);
+        }
+
+        private void Unit_onMaxHpUp(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        {
+            onMaxHpUp?.Invoke(team,arg1,arg2, arg3, arg4);
         }
 
         private void Unit_onRebord(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)

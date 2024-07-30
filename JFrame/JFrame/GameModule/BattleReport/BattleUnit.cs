@@ -11,13 +11,14 @@ namespace JFrame
         /// 有动作准备完毕，可以释放了
         /// </summary>
         //public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
-        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
+        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
         //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamaged;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;        //复活
 
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -143,15 +144,7 @@ namespace JFrame
         {
             this.UID = info.uid;
             battleUnitInfo = info;
-            this.actionManager = actionManager;      
-            if(actionManager != null && actionManager.GetAll() != null)
-            {
-                foreach (var action in actionManager.GetAll())
-                {
-                    action.onStartCast += Action_onCast;
-                    action.OnAttach(this);
-                }
-            }
+ 
 
             Atk = info.atk;
             MaxHP = info.hp;
@@ -162,6 +155,13 @@ namespace JFrame
                 this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
                 this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
                 this.bufferManager.onBufferCast += BufferManager_onBufferCast;
+            }
+
+            this.actionManager = actionManager;
+            if(actionManager != null)
+            {
+                actionManager.Initialize(this);
+                actionManager.onStartCast += Action_onCast;
             }
         }
 
@@ -211,9 +211,9 @@ namespace JFrame
         /// <param name="arg3"></param>
         /// <param name="arg4"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void Action_onCast(IBattleAction action, List<IBattleUnit> targets)
+        private void Action_onCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
-            onActionCast?.Invoke(this, action,targets);
+            onActionCast?.Invoke(this, action,targets, duration);
         }
 
         ///// <summary>
@@ -263,6 +263,19 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 生命上限提高
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="hp"></param>
+        public void OnMaxHpUp(IBattleUnit caster, IBattleAction action, IntValue hp)
+        {
+            MaxHPUpgrade(hp.Value);
+
+            onMaxHpUp?.Invoke(caster,action, this, hp.Value);
+        }
+
+        /// <summary>
         /// 复活
         /// </summary>
         /// <param name="caster"></param>
@@ -277,7 +290,7 @@ namespace JFrame
             {
                 foreach (var a in actionManager.GetAll())
                 {
-                    a.SetEnable(true);
+                    a.SetDead(false);
                 }
             }
 
@@ -289,13 +302,16 @@ namespace JFrame
         /// </summary>
         private void OnDead(IBattleUnit hitter, IBattleAction action)
         {
-            if(action != null)
-            {
-                foreach (var a in actionManager.GetAll())
-                {
-                    a.SetEnable(false);
-                }
-            }
+            //if(action != null)
+            //{
+            //    foreach (var a in actionManager.GetAll())
+            //    {
+            //        a.SetDead(false);
+            //    }
+            //}
+
+            if(actionManager != null)
+                actionManager.OnDead();
 
             if (bufferManager != null)
                 bufferManager.Clear();

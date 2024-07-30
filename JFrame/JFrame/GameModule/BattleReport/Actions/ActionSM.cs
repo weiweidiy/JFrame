@@ -13,7 +13,8 @@ namespace JFrame
             Disable = 0,
             Standby,
             Execute,
-            CD
+            CD,
+            Dead
         }
 
         StateMachine<ActionState, Trigger> machine;
@@ -28,10 +29,12 @@ namespace JFrame
             var standbyState = new ActionStandby();
             var executingState = new ActionExecuting();
             var cdingState = new ActionCding();
+            var deadState = new ActionDead();
             disableState.Fsm = this;
             standbyState.Fsm = this;
             executingState.Fsm = this;
             cdingState.Fsm = this;
+            deadState.Fsm = this;
 
             //配置游戏状态机
             machine = new StateMachine<ActionState, Trigger>(disableState /*() => _state, s => _state = s*/);
@@ -48,6 +51,7 @@ namespace JFrame
                 .OnEntry(() => { OnEnterStandby(standbyState); })
                 .OnExit(() => { OnExitStandby(standbyState); })
                 .Permit(Trigger.Disable, disableState)
+                .Permit(Trigger.Dead, deadState)
                 .Permit(Trigger.Execute, executingState);
 
             //释放中
@@ -55,6 +59,7 @@ namespace JFrame
                 .OnEntry(() => { OnEnterExecuting(executingState); })
                 .OnExit(() => { OnExitExecuting(executingState); })
                 .Permit(Trigger.Disable, disableState)
+                .Permit(Trigger.Dead, deadState)
                 .Permit(Trigger.CD, cdingState);
 
             //cd中
@@ -62,9 +67,23 @@ namespace JFrame
                 .OnEntry(() => { OnEnterCding(cdingState); })
                 .OnExit(() => { OnExitCding(cdingState); })
                 .Permit(Trigger.Disable, disableState)
+                .Permit(Trigger.Dead, deadState)
                 .Permit(Trigger.Standby, standbyState);
 
+            machine.Configure(deadState)
+                .OnEntry(() => { OnEnterDead(deadState); })
+                .OnExit(() => { OnExitDead(deadState); })
+                .Permit(Trigger.Disable, disableState)
+                .Permit(Trigger.CD, cdingState)
+                .Permit(Trigger.Execute, executingState);
+
+
         }
+
+
+
+
+      
 
         /// <summary>
         /// 切换到游戏状态
@@ -91,6 +110,11 @@ namespace JFrame
         {
             //Debug.LogError("SwitchToEnding");
             machine.Fire(Trigger.CD);
+        }
+
+        public void SwitchToDead()
+        {
+            machine.Fire(Trigger.Dead);
         }
 
 
@@ -121,6 +145,12 @@ namespace JFrame
              endingState.OnEnter(context);
         }
 
+        private void OnEnterDead(ActionDead deadState)
+        {
+            deadState.OnEnter(context);
+        }
+
+
         /// <summary>
         /// 退出事件
         /// </summary>
@@ -144,6 +174,11 @@ namespace JFrame
         private  void OnExitCding(ActionCding endingState)
         {
              endingState.OnExit();
+        }
+
+        private void OnExitDead(ActionDead deadState)
+        {
+            deadState.OnExit();
         }
 
         public void Update(BattleFrame frame)

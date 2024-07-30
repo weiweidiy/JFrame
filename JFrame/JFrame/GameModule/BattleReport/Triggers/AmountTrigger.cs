@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿
+
+namespace JFrame
 {
     /// <summary>
     /// 次数冷却：arg = 可触发次数 type = 2
@@ -6,6 +8,9 @@
     public class AmountTrigger : BaseBattleTrigger
     {
         int amount = 0;
+
+        public override BattleTriggerType TriggerType => BattleTriggerType.All;
+
         public AmountTrigger(IPVPBattleManager pVPBattleManager, float[] amount, float delay = 0f) : base(pVPBattleManager, amount, delay) { }
 
 
@@ -29,7 +34,7 @@
             base.OnDelayCompleteEveryFrame();
 
             //如果当前次数小于使用次数，则通知
-            if(amount <= GetAmount())
+            if(amount < GetAmount())
             {
                 isOn = true;
             }

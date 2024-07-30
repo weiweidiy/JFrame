@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System;
-using static System.Collections.Specialized.BitVector32;
 
 
 namespace JFrame
@@ -10,13 +9,30 @@ namespace JFrame
     /// </summary>
     public class ActionManager : BaseContainer<IBattleAction>, IActionManager
     {
-        event Action<IBattleAction, List<IBattleUnit>> onStartCast;
+        public event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
         public bool IsBusy { get; private set; }
 
-        float curDuration = 1f;
+        float curDuration = 0f;
 
         float deltaTime = 0f;
+
+        IBattleUnit owner;
+
+        public void Initialize(IBattleUnit owner)
+        {
+            this.owner = owner;
+
+            var actions = GetAll();
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action.OnAttach(owner);
+                }
+            }
+
+        }
 
         /// <summary>
         /// 添加到管理器
@@ -25,9 +41,9 @@ namespace JFrame
         public override void Add(IBattleAction member)
         {
             base.Add(member);
-         
+
             member.onCanCast += Member_onCanCast;
-            member.onStartCast += Member_onStartCast;     
+            member.onStartCast += Member_onStartCast;
         }
 
         /// <summary>
@@ -70,18 +86,18 @@ namespace JFrame
         /// <param name="frame"></param>
         public void UpdateDuration(BattleFrame frame)
         {
-            if(IsBusy)
+            if (IsBusy)
             {
                 deltaTime += frame.DeltaTime;
 
-                if(deltaTime >= curDuration)
+                if (deltaTime >= curDuration)
                 {
                     IsBusy = false;
                     deltaTime = 0f;
                 }
             }
         }
-        
+
 
         /// <summary>
         /// 技能能释放了
@@ -90,7 +106,7 @@ namespace JFrame
         private void Member_onCanCast(IBattleAction action)
         {
             //如果正在释放其他技能，则返回，否则立即释放
-            if(!IsBusy)
+            if (!IsBusy)
             {
                 curDuration = action.Cast();
                 IsBusy = true;
@@ -102,13 +118,31 @@ namespace JFrame
         /// </summary>
         /// <param name="action"></param>
         /// <param name="targets"></param>
-        private void Member_onStartCast(IBattleAction action, List<IBattleUnit> targets)
+        private void Member_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
-            onStartCast?.Invoke(action,targets);
+            onStartCast?.Invoke(action, targets, duration);
         }
 
+        /// <summary>
+        /// 角色死亡了
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnDead()
+        {
+            var actions = GetAll();
+            if (actions != null)
+            {
+                foreach (var a in actions)
+                {
+                    a.SetDead(true);
+                }
+            }
 
+            IsBusy = false;
 
+            curDuration = 0f;
 
+            deltaTime = 0f;
+        }
     }
 }

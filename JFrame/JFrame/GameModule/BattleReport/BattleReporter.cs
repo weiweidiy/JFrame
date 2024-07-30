@@ -1,4 +1,5 @@
 ﻿
+//using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ namespace JFrame
         Heal,   //治疗回血
         Dead,   //死亡
         Reborn, //复活
+        MaxHpUp, //最大生命提升
         AddBuffer,
         RemoveBuffer,
         CastBuffer,
@@ -52,6 +54,7 @@ namespace JFrame
                     team.onDamage += Team_onDamage;
                     team.onHeal += Team_onHeal;
                     team.onReborn += Team_onReborn;
+                    team.onMaxHpUp += Team_onMaxHpUp;
                     team.onDead += Team_onDead;
                     team.onBufferAdded += Team_onBufferAdded;
                     team.onBufferRemoved += Team_onBufferRemoved;
@@ -62,14 +65,14 @@ namespace JFrame
 
 
 
-        private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        private void Team_onActionCast(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, float duration)
         {
             List<string> lstUID = new List<string>();
-            for (int i = 1; i < targets.Count; i ++)
+            for (int i = 0; i < targets.Count; i ++)
             {
                 lstUID.Add(targets[i].UID);
             }
-            AddReportData(caster.UID, ReportType.Action, targets[0].UID, new object[] { action.Id, lstUID });
+            AddReportData(caster.UID, ReportType.Action, targets[0].UID, new object[] { action.Id, lstUID , duration });
         }
 
         private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
@@ -80,6 +83,11 @@ namespace JFrame
         private void Team_onHeal(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
             AddReportData(caster.UID, ReportType.Heal, target.UID, new object[] { value, target.HP, target.MaxHP });
+        }
+
+        private void Team_onMaxHpUp(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
+        {
+            AddReportData(caster.UID, ReportType.MaxHpUp, target.UID, new object[] { value, target.HP, target.MaxHP });
         }
 
         private void Team_onReborn(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)

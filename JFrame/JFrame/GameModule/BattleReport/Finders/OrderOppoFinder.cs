@@ -23,11 +23,9 @@ namespace JFrame
             //debug
             foreach (var unit in units)
             {
-                if (unit.IsAlive())
+                if (unit.IsAlive() && result.Count < arg)
                 {
                     result.Add(unit);
-                    if (result.Count >= arg)
-                        return result;
                 }
             }
 

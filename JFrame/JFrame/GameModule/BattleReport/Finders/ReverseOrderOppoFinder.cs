@@ -24,11 +24,9 @@ namespace JFrame
             {
                 var unit = units[i];
 
-                if (unit.IsAlive())
+                if (unit.IsAlive() && result.Count < arg)
                 {
                     result.Add(unit);
-                    if (result.Count >= this.arg)
-                        return result;
                 }
             }
 

@@ -18,7 +18,7 @@ namespace JFrame
         /// <summary>
         /// 开始释放了
         /// </summary>
-        public event Action<IBattleAction, List<IBattleUnit>> onStartCast;
+        public event Action<IBattleAction, List<IBattleUnit>,float> onStartCast;
 
 
         /// <summary>
@@ -180,16 +180,16 @@ namespace JFrame
         /// <summary>
         /// 设置动作是否可用
         /// </summary>
-        /// <param name="enable"></param>
-        public void SetEnable(bool enable)
+        /// <param name="dead"></param>
+        public void SetDead(bool dead)
         {
-            if (enable)
+            if (!dead)
             {
                 sm.SwitchToCding(); //直接进入cd
             }
             else
             {
-                sm.SwitchToDisable();
+                sm.SwitchToDead();
             }
         }
 
@@ -199,9 +199,9 @@ namespace JFrame
             onCanCast?.Invoke(this);
         }
 
-        public void NotifyStartCast(List<IBattleUnit> targets)
+        public void NotifyStartCast(List<IBattleUnit> targets, float duration)
         {
-            onStartCast(this, targets);
+            onStartCast(this, targets, duration);
         }
 
 

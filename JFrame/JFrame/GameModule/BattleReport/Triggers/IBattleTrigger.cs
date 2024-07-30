@@ -2,9 +2,15 @@
 
 namespace JFrame
 {
+    public enum BattleTriggerType
+    {
+        All,
+        Normal,    
+        AfterDead, //死亡后触发
+    }
     public interface IBattleTrigger
     {
-        //event Action onTrigger;
+        BattleTriggerType TriggerType { get; }
 
         IBattleAction Owner { get; }
 

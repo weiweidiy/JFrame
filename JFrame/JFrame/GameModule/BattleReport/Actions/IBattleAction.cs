@@ -13,7 +13,7 @@ namespace JFrame
         /// <summary>
         /// 触发了，群体也只会返回首目标
         /// </summary>
-        event Action<IBattleAction, List<IBattleUnit>> onStartCast;
+        event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
 
         IBattleUnit Owner { get;  }
@@ -46,7 +46,7 @@ namespace JFrame
         /// 设置这个动作是否可触发
         /// </summary>
         /// <param name="active"></param>
-        void SetEnable(bool active);
+        void SetDead(bool active);
 
         void OnAttach(IBattleUnit owner);
 
@@ -75,7 +75,7 @@ namespace JFrame
         /// <summary>
         /// 通知开始释放
         /// </summary>
-        void NotifyStartCast(List<IBattleUnit> targets);
+        void NotifyStartCast(List<IBattleUnit> targets, float duration);
 
         /// <summary>
         /// 搜索目标

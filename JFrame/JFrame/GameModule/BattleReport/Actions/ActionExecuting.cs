@@ -25,8 +25,10 @@ namespace JFrame
             if (targets == null || targets.Count == 0)
                 throw new Exception("释放时，没有找到目标 " + context.Id);
 
+            duration = context.GetCastDuration();
+
             //通知开始触发
-            context.NotifyStartCast(targets);
+            context.NotifyStartCast(targets, duration);
 
             //准备执行效果
             context.ReadyToExecute(context.Owner, context, targets);
