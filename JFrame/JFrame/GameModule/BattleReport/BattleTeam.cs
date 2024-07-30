@@ -38,8 +38,8 @@ namespace JFrame
                     //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                     unit.onActionCast += Unit_onActionCast;
                     //unit.onActionHitTarget += Unit_onActionDone;
-                    unit.onDamage += Unit_onDamage;
-                    unit.onHeal += Unit_onHeal;
+                    unit.onDamaged += Unit_onDamage;
+                    unit.onHealed += Unit_onHeal;
                     unit.onRebord += Unit_onRebord;
                     unit.onDead += Unit_onDead;
                     unit.onBufferAdded += Unit_onBufferAdded;

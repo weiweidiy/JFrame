@@ -23,10 +23,31 @@ namespace JFrame
 
         public IBattleAction Create(int actionId)
         {
-            return new NormalAction(Guid.NewGuid().ToString(), actionId,
-                        CreateTrigger(actionDataSource.GetTriggerType(unitUID, unitId, actionId), actionDataSource.GetTriggerArg(unitUID, unitId, actionId), 0f)
+            return new NormalAction(Guid.NewGuid().ToString(), actionId, actionDataSource.GetDuration(unitUID, unitId, actionId),
+                        CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
                         , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
-                        , CreateExecutors(unitUID, unitId, actionId));
+                        , CreateExecutors(unitUID, unitId, actionId), CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId),0f), new ActionSM());
+        }
+
+        /// <summary>
+        /// CD触发器
+        /// </summary>
+        /// <param name="triggerType"></param>
+        /// <param name="args"></param>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private IBattleTrigger CreateCDTrigger(int triggerType, float[] args, float delay = 0)
+        {
+            switch (triggerType)
+            {
+                case 1: //周期性触发器
+                    return new CDTimeTrigger(pvpBattleManager, args, delay);
+                case 2://次数触发器
+                    return new AmountTrigger(pvpBattleManager, args, delay);
+                default:
+                    throw new Exception(triggerType + " 技能未实现的 CDTrigger type " + triggerType);
+            }
         }
 
         /// <summary>
@@ -35,18 +56,18 @@ namespace JFrame
         /// <param name="triggerType"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        BaseBattleTrigger CreateTrigger(int triggerType, float arg, float delay = 0)
+        BaseBattleTrigger CreateConditionTrigger(int triggerType, float arg, float delay = 0)
         {
             switch (triggerType)
             {
-                case 1: //周期性触发器
-                    return new CDTrigger(pvpBattleManager, arg, delay);
+                case 1: //无
+                    return new NoneTrigger(pvpBattleManager, new float[1] { arg }, delay);
                 case 2: //自身死亡触发
-                    return new DeathTrigger(pvpBattleManager, arg, delay);
+                    return new DeathTrigger(pvpBattleManager, new float[1] { arg }, delay);
                 case 3: //战斗开始触发
-                    return new BattleStartTrigger(pvpBattleManager, arg, delay);
+                    return new BattleStartTrigger(pvpBattleManager, new float[1] { arg }, delay);
                 default:
-                    throw new Exception(triggerType + " 技能未实现的 trigger type " + triggerType);
+                    throw new Exception(triggerType + " 技能未实现的 ConditionTrigger type " + triggerType);
             }
         }
 

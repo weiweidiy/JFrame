@@ -5,20 +5,16 @@
     /// </summary>
     public class BattleStartTrigger : BaseBattleTrigger
     {
-        bool valid = true;
-        public BattleStartTrigger(IPVPBattleManager battleManager, float arg, float delay = 0) : base(battleManager, arg, delay)
+        public BattleStartTrigger(IPVPBattleManager battleManager, float[] arg, float delay = 0) : base(battleManager, arg, delay)
         {
+
         }
 
-        protected override void OnDelayComplete()
+        protected override void OnDelayCompleteEveryFrame()
         {
-            base.OnDelayComplete();
+            base.OnDelayCompleteEveryFrame();
 
-            if(valid)
-            {
-                NotifyOnTrigger();
-                valid = false;
-            }
+            isOn = true;
         }
     }
 }

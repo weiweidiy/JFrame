@@ -4,7 +4,7 @@ namespace JFrame
 {
     public abstract class BaseBattleTrigger : IBattleTrigger
     {
-        public event Action onTrigger;
+        //public event Action onTrigger;
 
         /// <summary>
         /// 拥有者
@@ -16,7 +16,7 @@ namespace JFrame
         /// <summary>
         /// 参数
         /// </summary>
-        protected float arg;
+        protected float[] args;
 
         /// <summary>
         /// 延迟触发
@@ -33,16 +33,22 @@ namespace JFrame
         protected float delta;
 
         /// <summary>
+        /// 触发状态
+        /// </summary>
+        protected bool isOn;
+
+        /// <summary>
         /// 是否可用
         /// </summary>
-        bool isOn = true;
+        bool isEnable = true;
 
-        public BaseBattleTrigger(IPVPBattleManager battleManager, float arg, float delay = 0)
+        public BaseBattleTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0)
         {
             this.battleManager = battleManager;
-            this.arg = arg;
+            this.args = args;
             this.delay = delay;
             this.delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
+            this.isOn = false;
         }
 
  
@@ -68,31 +74,59 @@ namespace JFrame
                 return;
             }
 
-            OnDelayComplete();
+            OnDelayCompleteEveryFrame();
         }
 
-        protected virtual void OnDelayComplete()
-        {
-
-        }
+        protected virtual void OnDelayCompleteEveryFrame() { }
     
 
         /// <summary>
         /// 影响是否触发，如果设置为false , 则不会触发
         /// </summary>
         /// <param name="isOn"></param>
-        public void SetEnable(bool isOn) => this.isOn = isOn;
-        public virtual bool GetEnable() => isOn;
+        public void SetEnable(bool isOn) => this.isEnable = isOn;
+        public virtual bool GetEnable() => isEnable;
 
-        public void NotifyOnTrigger()
-        {
-            if (GetEnable())
-                onTrigger?.Invoke();
-        }
+        //public void NotifyOnTrigger()
+        //{
+        //    if (GetEnable())
+        //    {
+        //        isValid = true;
+        //        //onTrigger?.Invoke();
+        //    }
+                
+        //}
 
         public virtual void OnAttach(IBattleAction action)
         {
             Owner = action;
+        }
+
+        /// <summary>
+        /// 重新启动
+        /// </summary>
+        public virtual void Restart()
+        {
+            SetEnable(true);
+            delta = 0f;
+            isOn = false;
+        }
+
+        /// <summary>
+        /// 是否生效
+        /// </summary>
+        /// <returns></returns>
+        public bool IsOn()
+        {
+            return isOn;
+        }
+
+        /// <summary>
+        /// 设置无效
+        /// </summary>
+        public void SetInValid()
+        {
+            isOn = false;
         }
     }
 }

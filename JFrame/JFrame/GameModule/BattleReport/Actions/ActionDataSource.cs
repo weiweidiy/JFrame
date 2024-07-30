@@ -18,7 +18,7 @@ namespace JFrame
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual int GetTriggerType(string unitUID, int unitId, int actionId)
+        public virtual int GetConditionTriggerType(string unitUID, int unitId, int actionId)
         {
             return 1; //CDTrigger
         }
@@ -28,7 +28,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetTriggerArg(string unitUID, int unitId, int actionId)
+        public virtual float GetConditionTriggerArg(string unitUID, int unitId, int actionId)
         {
             return 3f; //to do: 计算数值
         }
@@ -71,6 +71,31 @@ namespace JFrame
         public virtual float[] GetExcutorArg(string unitUID, int unitId, int actionId, int executorType)
         {
             return new float[] { 1f , 0.5f,0.25f, 1f };//1:次数, 2：延迟 3:多段攻击间隔 4:倍率：
+        }
+
+        /// <summary>
+        /// 获取触发器类型
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual int GetCDTriggerType(string unitUID, int unitId, int actionId)
+        {
+            return 1; //CDTrigger
+        }
+
+        /// <summary>
+        /// 获取触发器参数
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public virtual float[] GetCDTriggerArg(string unitUID, int unitId, int actionId)
+        {
+            return new float[] { 3f }; //to do: 计算数值
+        }
+
+        public virtual float GetDuration(string unitUID, int unitId, int actionId)
+        {
+            return 1f;
         }
     }
 }

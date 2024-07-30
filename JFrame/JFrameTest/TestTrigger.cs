@@ -34,22 +34,23 @@ namespace JFrameTest
         public void TestDeathTrigger()
         {
             //arrange
-            var trigger = new DeathTrigger(simBattle, 0);
+            var trigger = new DeathTrigger(simBattle, new float[] { 0 });
             var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var action = Substitute.For<IBattleAction>();
             action.Owner.Returns(unit1);
-            bool triggerOn = false;
-            int count = 0;
-            trigger.onTrigger += () => { triggerOn = true; count++; };
+            //bool triggerOn = false;
+            //int count = 0;
+            //trigger.onTrigger += () => { triggerOn = true; count++; };
 
             //action
             trigger.OnAttach(action);
             unit1.OnDamage(null, null, new IntValue() { Value = 10 });
             unit1.OnDamage(null, null, new IntValue() { Value = 10 });
+            trigger.Update(frame);
 
             //expect
-            Assert.AreEqual(true, triggerOn);
-            Assert.AreEqual(1, count);
+            Assert.AreEqual(true, trigger.IsOn());
+            //Assert.AreEqual(1, count);
         }
 
         /// <summary>
@@ -59,19 +60,20 @@ namespace JFrameTest
         public void TestCDTrigger()
         {
             //arrange
-            var trigger = new CDTrigger(simBattle, 3);
+            var trigger = new CDTimeTrigger(simBattle, new float[] { 3 });
             bool triggerOn = false;
             int count = 0;
-            trigger.onTrigger += () => { triggerOn = true; count++; };
+            //trigger.onTrigger += () => { triggerOn = true; count++; };
             frame.DeltaTime.Returns(3);
 
             //action
             trigger.Update(frame);
+            trigger.Restart();
             trigger.Update(frame);
 
             //expect
-            Assert.AreEqual(true, triggerOn);
-            Assert.AreEqual(2, count);
+            Assert.AreEqual(true, trigger.IsOn());
+            //Assert.AreEqual(2, count); //因为只会触
         }
 
         /// <summary>
@@ -81,10 +83,10 @@ namespace JFrameTest
         public void TestBattleStartTrigger()
         {
             //arrange
-            var trigger = new BattleStartTrigger(simBattle, 3, 1);
-            bool triggerOn = false;
-            int count = 0;
-            trigger.onTrigger += () => { triggerOn = true; count++; };
+            var trigger = new BattleStartTrigger(simBattle, new float[] { 3 }, 1);
+            //bool triggerOn = false;
+            //int count = 0;
+            //trigger.onTrigger += () => { triggerOn = true; count++; };
             frame.DeltaTime.Returns(2);
 
             //action
@@ -92,8 +94,8 @@ namespace JFrameTest
             trigger.Update(frame);
 
             //expect
-            Assert.AreEqual(true, triggerOn);
-            Assert.AreEqual(1, count);
+            Assert.AreEqual(true, trigger.IsOn());
+            //Assert.AreEqual(1, count);
         }
     }
 

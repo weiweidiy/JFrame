@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class NormalAction : BaseAction
     {
-        public NormalAction(string UID, int id, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(UID, id, trigger, finder, exutors)
+        public NormalAction(string UID, int id, float duration, IBattleTrigger conditionTrigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger, ActionSM sm) : base(UID, id, duration, conditionTrigger, finder, exutors, cdTrigger, sm)
         {
         }
     }

@@ -4,7 +4,7 @@ namespace JFrame
 {
     public interface IBattleTrigger
     {
-        event Action onTrigger;
+        //event Action onTrigger;
 
         IBattleAction Owner { get; }
 
@@ -15,5 +15,14 @@ namespace JFrame
         void Update(BattleFrame frame);
 
         void OnAttach(IBattleAction action);
+
+        void Restart();
+
+        bool IsOn();
+
+        /// <summary>
+        /// 设置无效
+        /// </summary>
+        void SetInValid();
     }
 }

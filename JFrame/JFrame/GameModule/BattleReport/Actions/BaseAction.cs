@@ -9,18 +9,17 @@ namespace JFrame
     /// </summary>
     public abstract class BaseAction : IBattleAction
     {
+ 
         /// <summary>
-        /// 准备好了，也找到目标了，可以释放
+        /// 可以触发了
         /// </summary>
-        public event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
+        public event Action<IBattleAction> onCanCast;
+
         /// <summary>
         /// 开始释放了
         /// </summary>
         public event Action<IBattleAction, List<IBattleUnit>> onStartCast;
-        /// <summary>
-        /// 对目标起效了（多个目标时，每个目标调用一次)
-        /// </summary>
-        public event Action<IBattleAction, IBattleUnit> onHitTarget;
+
 
         /// <summary>
         /// 动作名称
@@ -43,19 +42,31 @@ namespace JFrame
         public string Uid { get; private set; }
 
         /// <summary>
-        /// 触发器
+        /// 是否持续时间
         /// </summary>
-        IBattleTrigger trigger;
+        float castDuration;
+
+        /// <summary>
+        /// 条件触发器
+        /// </summary>
+        public IBattleTrigger ConditionTrigger { get; private set; }
+
+        /// <summary>
+        /// 冷却触发器
+        /// </summary>
+        public IBattleTrigger cdTrigger { get; private set; }
 
         /// <summary>
         /// 目标搜索器
         /// </summary>
-        IBattleTargetFinder finder;
+        public IBattleTargetFinder finder { get; private set; }
 
         /// <summary>
         /// 效果执行器
         /// </summary>
-        List<IBattleExecutor> exeutors;
+        public List<IBattleExecutor> exeutors { get; private set; }
+
+        ActionSM sm;
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -64,20 +75,18 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
+        public BaseAction(string UID, int id, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
         {
+            this.castDuration = duration;
             this.Uid = UID;
             this.Id = id;
-            this.trigger = trigger;
-            this.trigger.onTrigger += Trigger_onTrigger;
+            this.ConditionTrigger = trigger;
             this.finder = finder;
             this.exeutors = exutors;
-            
+            this.cdTrigger = cdTrigger;
 
-            foreach (var e  in exutors)
-            {
-                e.onExecute += E_onExecute;
-            }
+            this.sm = sm;
+            this.sm.Initialize(this);
         }
 
         /// <summary>
@@ -86,27 +95,74 @@ namespace JFrame
         /// <param name="owner"></param>
         public void OnAttach(IBattleUnit owner)
         {
-            this.Owner = owner;
-            this.trigger.OnAttach(this);
-            this.finder.OnAttach(this);
-            foreach(var executor in  exeutors)
-            {  executor.OnAttach(this); }
+            Owner = owner;
+            if (ConditionTrigger != null)
+                ConditionTrigger.OnAttach(this);
+
+            if (finder != null)
+                finder.OnAttach(this);
+
+            if (cdTrigger != null)
+                cdTrigger.OnAttach(this);
+
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.OnAttach(this);
+                }
+            }
+
+            sm.SwitchToStandby();
+        }
+
+        #region 状态切换
+        /// <summary>
+        /// 进入待机状态
+        /// </summary>
+        public void Standby()
+        {
+            sm.SwitchToStandby();
         }
 
 
         /// <summary>
-        /// 触发了，可以攻击了
+        /// 向指定目标释放
         /// </summary>
-        private void Trigger_onTrigger()
+        /// <param name="units"></param>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public float Cast()
         {
-            var targets = finder.FindTargets(); //第一个是首要目标
-            if(targets == null || targets.Count == 0)
-            {
-                //没有找到合适的目标:不管，也不进入CD
-                return;
-            }
+            sm.SwitchToExecuting();
+            return GetCastDuration();
+        }
 
-            onTriggerOn?.Invoke(this, targets);
+        /// <summary>
+        /// 进入CD
+        /// </summary>
+        public void EnterCD()
+        {
+            sm.SwitchToCding();
+        }
+        #endregion
+
+        
+        /// <summary>
+        /// 是否cd完成
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCDComplete()
+        {
+            return cdTrigger.IsOn();
+        }
+
+        /// <summary>
+        /// 是否满足释放条件
+        /// </summary>
+        /// <returns></returns>
+        public bool CanCast()
+        {
+            return ConditionTrigger.IsOn();
         }
 
 
@@ -116,44 +172,10 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
-            //条件触发器更新
-            trigger.Update(frame);
-            
-            //执行器更新
-            foreach (var e in exeutors)
-            {
-                e.Update(frame);
-            }
+            sm.Update(frame);
         }
 
-        /// <summary>
-        /// 向指定目标释放
-        /// </summary>
-        /// <param name="units"></param>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public void Cast(IBattleUnit caster,  List<IBattleUnit> units)
-        {
-            onStartCast?.Invoke(this, units);
 
-            //foreach (var unit in units)
-            //{
-            //    foreach(var e in exeutors)
-            //    {
-            //        e.ReadyToExecute(caster,this, unit);
-            //    }
-            //    onHitTarget?.Invoke(this, unit);
-            //}
-
-            foreach (var e in exeutors)
-            {
-                e.ReadyToExecute(caster, this, units);
-            }
-        }
-
-        /// <summary>
-        /// 执行效果触发
-        /// </summary>
-        private void E_onExecute() {/* SetEnable(true); */}
 
         /// <summary>
         /// 设置动作是否可用
@@ -161,9 +183,64 @@ namespace JFrame
         /// <param name="enable"></param>
         public void SetEnable(bool enable)
         {
-            trigger.SetEnable(enable);
+            if (enable)
+            {
+                sm.SwitchToCding(); //直接进入cd
+            }
+            else
+            {
+                sm.SwitchToDisable();
+            }
         }
 
 
+        public void NotifyCanCast()
+        {
+            onCanCast?.Invoke(this);
+        }
+
+        public void NotifyStartCast(List<IBattleUnit> targets)
+        {
+            onStartCast(this, targets);
+        }
+
+
+        //public void NotifyCdComplete()
+        //{
+        //    onCdComplete?.Invoke(this);
+        //}
+
+        /// <summary>
+        /// 搜索目标
+        /// </summary>
+        /// <returns></returns>
+        public List<IBattleUnit> FindTargets()
+        {
+            return finder.FindTargets();
+        }
+
+        /// <summary>
+        /// 准备执行效果
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="targets"></param>
+        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        {
+            foreach (var e in exeutors)
+            {
+                e.ReadyToExecute(caster, this, targets);
+            }
+        }
+
+        public float GetCastDuration()
+        {
+            return castDuration;
+        }
+
+        public string GetCurState()
+        {
+            return sm.GetCurState();
+        }
     }
 }

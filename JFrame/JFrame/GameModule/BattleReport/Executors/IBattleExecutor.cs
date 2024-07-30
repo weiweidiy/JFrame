@@ -40,5 +40,7 @@ namespace JFrame
         void Update(BattleFrame frame);
 
         void OnAttach(IBattleAction action);
+
+        void Restart();
     }
 }

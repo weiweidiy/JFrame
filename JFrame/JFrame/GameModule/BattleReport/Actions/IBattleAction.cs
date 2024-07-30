@@ -6,19 +6,15 @@ namespace JFrame
     public interface IBattleAction : IUnique
     {
         /// <summary>
-        /// 可以触发了
+        /// 通知可以释放了
         /// </summary>
-        event Action<IBattleAction, List<IBattleUnit>> onTriggerOn;
+        event Action<IBattleAction> onCanCast;
 
         /// <summary>
         /// 触发了，群体也只会返回首目标
         /// </summary>
         event Action<IBattleAction, List<IBattleUnit>> onStartCast;
 
-        ///// <summary>
-        ///// 释放完成，每一个目标都会触发1次
-        ///// </summary>
-        //event Action<IBattleAction, IBattleUnit> onHitTarget; 
 
         IBattleUnit Owner { get;  }
 
@@ -28,7 +24,23 @@ namespace JFrame
 
         void Update(BattleFrame frame);
 
-        void Cast(IBattleUnit caster, List<IBattleUnit> units);
+        /// <summary>
+        /// 待机状态
+        /// </summary>
+        void Standby();
+
+        /// <summary>
+        /// 释放技能，返回释放周期
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="units"></param>
+        /// <returns></returns>
+        float Cast();
+
+        /// <summary>
+        /// 进入CD
+        /// </summary>
+        void EnterCD();
 
         /// <summary>
         /// 设置这个动作是否可触发
@@ -37,5 +49,54 @@ namespace JFrame
         void SetEnable(bool active);
 
         void OnAttach(IBattleUnit owner);
+
+        /// <summary>
+        /// 是否冷却完成了
+        /// </summary>
+        /// <returns></returns>
+        bool IsCDComplete();
+
+        /// <summary>
+        /// 是否满足了触发条件
+        /// </summary>
+        /// <returns></returns>
+        bool CanCast();
+
+        /// <summary>
+        /// 通知条件满足，可以释放
+        /// </summary>
+        void NotifyCanCast();
+
+        ///// <summary>
+        ///// 通知cd完成了
+        ///// </summary>
+        //void NotifyCdComplete();
+
+        /// <summary>
+        /// 通知开始释放
+        /// </summary>
+        void NotifyStartCast(List<IBattleUnit> targets);
+
+        /// <summary>
+        /// 搜索目标
+        /// </summary>
+        /// <returns></returns>
+        List<IBattleUnit> FindTargets();
+
+        /// <summary>
+        /// 准备执行效果
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="targets"></param>
+        void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets);
+
+        /// <summary>
+        /// 获取执行周期
+        /// </summary>
+        /// <returns></returns>
+        float GetCastDuration();
+
+        string GetCurState();
     }
 }

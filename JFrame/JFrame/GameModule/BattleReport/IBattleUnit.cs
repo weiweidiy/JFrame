@@ -18,8 +18,8 @@ namespace JFrame
         /// <summary>
         /// 被动事件
         /// </summary>
-        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage; //受到伤害之后
-        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamaged; //受到伤害之后
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
 

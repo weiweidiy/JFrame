@@ -146,5 +146,13 @@ namespace JFrame
         {
             Owner = action;
         }
+
+        public void Restart()
+        {
+            Active = true;
+            delayed = true;
+            tempCount = 0;
+            delta = 0;
+        }
     }
 }

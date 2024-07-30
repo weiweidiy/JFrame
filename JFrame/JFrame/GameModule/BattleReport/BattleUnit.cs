@@ -14,8 +14,8 @@ namespace JFrame
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionCast;
         //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;        //回血
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamaged;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
 
@@ -137,6 +137,8 @@ namespace JFrame
         /// </summary>
         IBufferManager bufferManager = null;
 
+
+
         public BattleUnit( BattleUnitInfo info, ActionManager actionManager, IBufferManager bufferManager)
         {
             this.UID = info.uid;
@@ -146,9 +148,7 @@ namespace JFrame
             {
                 foreach (var action in actionManager.GetAll())
                 {
-                    //action.onTriggerOn += Action_onTriggerOn;
                     action.onStartCast += Action_onCast;
-                    //action.onHitTarget += Action_onDone;
                     action.OnAttach(this);
                 }
             }
@@ -235,9 +235,12 @@ namespace JFrame
         {
             //to do: 添加一个预伤害事件，可以修改值
 
+            if (HP <= 0)
+                return;
+
             HP -= damage.Value;
 
-            onDamage?.Invoke(hitter, action, this, damage.Value);
+            onDamaged?.Invoke(hitter, action, this, damage.Value);
 
             if (HP <= 0)
             {
@@ -255,7 +258,7 @@ namespace JFrame
 
             HP += heal.Value;
 
-            onHeal?.Invoke(caster, action, this, heal.Value);
+            onHealed?.Invoke(caster, action, this, heal.Value);
 
         }
 
