@@ -19,7 +19,7 @@ namespace JFrame
         /// 伤害效果，1：执行段数，2：延迟执行 3: 段数间隔 4：伤害倍率
         /// </summary>
         /// <param name="args"></param>
-        public ExecutorDamage(float[] args):base(args)
+        public ExecutorDamage(FormulaManager formulaManager, float[] args):base(formulaManager, args)
         {
             if (args != null && args.Length >= 4)
             {
@@ -41,9 +41,18 @@ namespace JFrame
         {
             foreach(var target in targets) {
 
-                var dmg = GetValue(caster, action, target);
+                bool isCri = false;
+                bool isBlock = false;
+                var baseValue = (int)GetValue(caster, action, target);
+
+                int dmg = 0;
+                if(Owner.Type == 1) //普通攻击
+                    dmg = formulaManager.GetNormalDamageValue(baseValue, caster, action, target, out isCri, out isBlock);
+                else
+                    dmg = formulaManager.GetSkillDamageValue(baseValue, caster, action, target, out isCri);
+
                 //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-                target.OnDamage(caster, action, new IntValue() { Value = (int)dmg });
+                target.OnDamage(caster, action, new ExecuteInfo() { Value = (int)dmg , IsCri = isCri, IsBlock = isBlock});
             }
 
         }
@@ -53,11 +62,15 @@ namespace JFrame
         /// </summary>
         /// <param name="caster"></param>
         /// <param name="action"></param>
+        /// <param name="actionArg">动作加成值</param>
         /// <param name="target"></param>
+        /// <param name="isCri"></param>
+        /// <param name="isBlock"></param>
         /// <returns></returns>
         public virtual float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
             return caster.Atk * arg;
+   
         }
     }
 }

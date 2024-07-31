@@ -44,8 +44,8 @@ namespace JFrameTest
 
             //action
             trigger.OnAttach(action);
-            unit1.OnDamage(null, null, new IntValue() { Value = 10 });
-            unit1.OnDamage(null, null, new IntValue() { Value = 10 });
+            unit1.OnDamage(null, null, new ExecuteInfo() { Value = 10 });
+            unit1.OnDamage(null, null, new ExecuteInfo() { Value = 10 });
             trigger.Update(frame);
 
             //expect

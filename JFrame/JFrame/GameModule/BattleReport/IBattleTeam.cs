@@ -9,11 +9,12 @@ namespace JFrame
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
         //event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
 
-        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamage;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onReborn;
         event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
+        event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;
 
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;

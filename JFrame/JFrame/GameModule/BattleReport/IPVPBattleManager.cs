@@ -5,7 +5,7 @@ namespace JFrame
 {
     public interface IPVPBattleManager
     {
-        void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter);
+        void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter, FormulaManager formulaManager);
 
         void Release();
 

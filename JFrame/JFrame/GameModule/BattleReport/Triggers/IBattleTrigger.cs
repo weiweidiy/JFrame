@@ -26,6 +26,8 @@ namespace JFrame
 
         bool IsOn();
 
+        float GetCD();
+
         /// <summary>
         /// 设置无效
         /// </summary>

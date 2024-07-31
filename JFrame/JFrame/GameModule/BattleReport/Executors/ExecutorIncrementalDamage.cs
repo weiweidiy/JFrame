@@ -23,7 +23,7 @@ namespace JFrame
         /// </summary>
         int curCount = 0;
 
-        public ExecutorIncrementalDamage(float[] args) : base(args)
+        public ExecutorIncrementalDamage(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
             if(args.Length >= 6)
             {

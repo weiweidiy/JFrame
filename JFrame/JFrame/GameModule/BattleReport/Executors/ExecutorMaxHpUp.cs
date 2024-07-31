@@ -10,7 +10,7 @@ namespace JFrame
     {
         int hpValue;
 
-        public ExecutorMaxHpUp(float[] args) : base(args)
+        public ExecutorMaxHpUp(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
         }
 
@@ -38,7 +38,7 @@ namespace JFrame
         {
             foreach(var target in targets)
             {
-                target.OnMaxHpUp(caster, action, new IntValue() { Value = (int)GetValue(caster, action, target) });
+                target.OnMaxHpUp(caster, action, new ExecuteInfo() { Value = (int)GetValue(caster, action, target) });
                 //target.MaxHPUpgrade((int)GetValue(caster, action , target));
             }
             

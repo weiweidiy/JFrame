@@ -11,6 +11,8 @@ namespace JFrame
     {
         public event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
+        public event Action<IBattleAction, float> onStartCD;
+
         public bool IsBusy { get; private set; }
 
         float curDuration = 0f;
@@ -44,7 +46,10 @@ namespace JFrame
 
             member.onCanCast += Member_onCanCast;
             member.onStartCast += Member_onStartCast;
+            member.onStartCD += Member_onStartCD;
         }
+
+
 
         /// <summary>
         /// 从管理器移除
@@ -121,6 +126,17 @@ namespace JFrame
         private void Member_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
             onStartCast?.Invoke(action, targets, duration);
+        }
+
+        /// <summary>
+        /// 进入CD了
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Member_onStartCD(IBattleAction action, float cd)
+        {
+            onStartCD?.Invoke(action,cd);
         }
 
         /// <summary>

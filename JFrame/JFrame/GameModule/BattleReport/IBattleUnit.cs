@@ -13,16 +13,18 @@ namespace JFrame
         /// </summary>
         //event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         event Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float> onActionCast; //执行效果之前，只有首目标
+        event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
         //event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
 
         /// <summary>
         /// 被动事件
         /// </summary>
-        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamaged; //受到伤害之后
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaged; //受到伤害之后
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;    //状态抵抗
 
         event Action<IBattleUnit, IBuffer> onBufferAdded;
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -32,8 +34,12 @@ namespace JFrame
 
         string UID { get; }
 
+        /// <summary>
+        /// 名字
+        /// </summary>
         string Name { get; }
 
+        #region 属性
         /// <summary>
         /// 当前攻击力
         /// </summary>
@@ -75,16 +81,65 @@ namespace JFrame
         int MaxHPUpgrade(int value);
 
         /// <summary>
+        /// 暴击率 0~1的值 百分比
+        /// </summary>
+        float Cri { get; }
+
+        /// <summary>
+        /// //暴击伤害加成百分比
+        /// </summary>
+        float CriDmgRate { get; }
+        /// <summary>
+        /// //暴击伤害抵抗百分比
+        /// </summary>
+        float CriDmgAnti { get; }
+        /// <summary>
+        /// //技能伤害加成百分比
+        /// </summary>
+        float SkillDmgRate { get; }
+        /// <summary>
+        /// //技能伤害抵抗百分比
+        /// </summary>
+        float SkillDmgAnti { get; }
+        /// <summary>
+        /// //伤害加成百分比
+        /// </summary>
+        float DmgRate { get; }
+        /// <summary>
+        /// //伤害抵抗百分比
+        /// </summary>
+        float DmgAnti { get; } 
+        /// <summary>
+        /// //0~1异常状态命中百分比
+        /// </summary>
+        float DebuffHit { get; }
+        /// <summary>
+        /// //0~1异常状态抵抗百分比
+        /// </summary>
+        float DebuffAnti { get; }
+        /// <summary>
+        /// //穿透 0~1 百分比
+        /// </summary>
+        float Penetrate { get; }
+        /// <summary>
+        ///  //格挡 0~1 百分比
+        /// </summary>
+        float Block { get; }    
+
+
+
+        #endregion
+        /// <summary>
         /// 受到伤害了
         /// </summary>
         /// <param name="damage"></param>
-        void OnDamage(IBattleUnit caster, IBattleAction action, IntValue damage);
+        void OnDamage(IBattleUnit caster, IBattleAction action, ExecuteInfo damage);
 
         /// <summary>
         /// 受到治疗了
         /// </summary>
         /// <param name="heal"></param>
-        void OnHeal(IBattleUnit caster, IBattleAction action, IntValue heal);
+        void OnHeal(IBattleUnit caster, IBattleAction action, ExecuteInfo heal);
 
         /// <summary>
         /// 复活了
@@ -92,7 +147,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="heal"></param>
-        void OnReborn(IBattleUnit caster, IBattleAction action, IntValue heal);
+        void OnReborn(IBattleUnit caster, IBattleAction action, ExecuteInfo heal);
 
         /// <summary>
         /// 生命上限增加
@@ -100,7 +155,12 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="value"></param>
-        void OnMaxHpUp(IBattleUnit caster, IBattleAction action, IntValue hp);
+        void OnMaxHpUp(IBattleUnit caster, IBattleAction action, ExecuteInfo hp);
+
+        /// <summary>
+        /// 抵抗控制
+        /// </summary>
+        void OnDebuffAnti(IBattleUnit caster, IBattleAction action, int debuffId);
 
         /// <summary>
         /// 是否活着

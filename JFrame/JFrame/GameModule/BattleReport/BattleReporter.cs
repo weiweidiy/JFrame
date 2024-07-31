@@ -17,6 +17,8 @@ namespace JFrame
         AddBuffer,
         RemoveBuffer,
         CastBuffer,
+        DebuffAnti, //状态抵抗
+        ActionCD, //动作CD
 
     }
 
@@ -51,9 +53,11 @@ namespace JFrame
                 foreach (var team in this.teams.Values)
                 {
                     team.onActionCast += Team_onActionCast;
+                    team.onActionStartCD += Team_onActionStartCD;
                     team.onDamage += Team_onDamage;
                     team.onHeal += Team_onHeal;
                     team.onReborn += Team_onReborn;
+                    team.onDebuffAnti += Team_onDebuffAnti;
                     team.onMaxHpUp += Team_onMaxHpUp;
                     team.onDead += Team_onDead;
                     team.onBufferAdded += Team_onBufferAdded;
@@ -75,10 +79,16 @@ namespace JFrame
             AddReportData(caster.UID, ReportType.Action, targets[0].UID, new object[] { action.Id, lstUID , duration });
         }
 
-        private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
+        private void Team_onActionStartCD(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, float cd)
         {
-            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { value, target.HP, target.MaxHP });
+            AddReportData(caster.UID, ReportType.ActionCD, action.Uid, new object[] { action.Id, cd});
         }
+
+        private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, ExecuteInfo value)
+        {
+            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { value.Value, target.HP, target.MaxHP , value.IsCri, value.IsBlock});
+        }
+
 
         private void Team_onHeal(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
@@ -114,7 +124,10 @@ namespace JFrame
             AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
         }
 
-
+        private void Team_onDebuffAnti(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int debuffId)
+        {
+            AddReportData(target.UID, ReportType.DebuffAnti, target.UID, new object[] { debuffId });
+        }
 
 
         public List<IBattleReportData> GetAllReportData()

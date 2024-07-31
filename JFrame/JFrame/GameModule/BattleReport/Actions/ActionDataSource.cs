@@ -97,5 +97,17 @@ namespace JFrame
         {
             return 1f;
         }
+
+        /// <summary>
+        /// 技能类型：区分普通和技能
+        /// </summary>
+        /// <param name="unitUID"></param>
+        /// <param name="unitId"></param>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public virtual int GetType(string unitUID, int unitId, int actionId)
+        {
+            return 1;
+        }
     }
 }

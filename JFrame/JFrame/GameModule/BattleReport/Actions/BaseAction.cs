@@ -20,6 +20,26 @@ namespace JFrame
         /// </summary>
         public event Action<IBattleAction, List<IBattleUnit>,float> onStartCast;
 
+        /// <summary>
+        /// 开始CD了
+        /// </summary>
+        public event Action<IBattleAction, float> onStartCD;
+
+        public void NotifyCanCast()
+        {
+            onCanCast?.Invoke(this);
+        }
+
+        public void NotifyStartCast(List<IBattleUnit> targets, float duration)
+        {
+            onStartCast?.Invoke(this, targets, duration);
+        }
+
+        public void NotifyStartCD(float cd)
+        {
+            onStartCD?.Invoke(this, cd);
+        }
+
 
         /// <summary>
         /// 动作名称
@@ -30,6 +50,8 @@ namespace JFrame
         /// 动作ID
         /// </summary>
         public int Id { get; private set; }
+
+        public virtual int Type { get; private set; }
 
         /// <summary>
         /// 拥有者
@@ -66,6 +88,8 @@ namespace JFrame
         /// </summary>
         public List<IBattleExecutor> exeutors { get; private set; }
 
+ 
+
         ActionSM sm;
 
         /// <summary>
@@ -75,8 +99,9 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
+        public BaseAction(string UID, int id, int type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
         {
+            this.Type = type;
             this.castDuration = duration;
             this.Uid = UID;
             this.Id = id;
@@ -194,21 +219,7 @@ namespace JFrame
         }
 
 
-        public void NotifyCanCast()
-        {
-            onCanCast?.Invoke(this);
-        }
 
-        public void NotifyStartCast(List<IBattleUnit> targets, float duration)
-        {
-            onStartCast(this, targets, duration);
-        }
-
-
-        //public void NotifyCdComplete()
-        //{
-        //    onCdComplete?.Invoke(this);
-        //}
 
         /// <summary>
         /// 搜索目标
@@ -242,5 +253,7 @@ namespace JFrame
         {
             return sm.GetCurState();
         }
+
+
     }
 }

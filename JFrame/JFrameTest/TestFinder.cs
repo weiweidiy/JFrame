@@ -57,8 +57,8 @@ namespace JFrameTest
             var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
             var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 10, uid = "2" }, null, null);
-            unit1.OnDamage(null, null, new IntValue() { Value = 1 });
-            unit2.OnDamage(null, null, new IntValue() { Value = 2 });
+            unit1.OnDamage(null, null, new ExecuteInfo() { Value = 1 });
+            unit2.OnDamage(null, null, new ExecuteInfo() { Value = 2 });
             simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
             var finder = new OrderFriendsHurtFinder(battlePoint, simBattle, 2);
 

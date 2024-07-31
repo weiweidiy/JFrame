@@ -29,7 +29,7 @@ namespace JFrameTest
             var sm = new ActionSM();
 
             //action
-            sm.Initialize(Substitute.For<BaseAction>("uid", 1,1f, null, null,null,null, sm));
+            sm.Initialize(Substitute.For<BaseAction>("uid", 1, 1, 1f, null, null,null,null, sm));
             sm.SwitchToStandby();
 
             //expect
@@ -41,7 +41,7 @@ namespace JFrameTest
         {
             //arrange
             var sm = new ActionSM();
-            var action = Substitute.For<BaseAction>("uid",1,1f, null,null,null,null, sm);
+            var action = Substitute.For<BaseAction>("uid",1, 1, 1f, null,null,null,null, sm);
 
             //action
             action.OnAttach(null);

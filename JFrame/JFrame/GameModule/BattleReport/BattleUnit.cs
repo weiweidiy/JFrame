@@ -12,13 +12,15 @@ namespace JFrame
         /// </summary>
         //public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
+        public event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
         //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDamaged;
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaged;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
-        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;        //复活
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;       //复活
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;    //状态抵抗
 
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
@@ -34,6 +36,288 @@ namespace JFrame
         /// </summary>
         public string UID { get; set; }
 
+   
+
+        /// <summary>
+        /// 所有动作列表
+        /// </summary>
+        ActionManager actionManager = null;
+
+        /// <summary>
+        /// 战斗单位原始数据
+        /// </summary>
+        BattleUnitInfo battleUnitInfo = default;
+
+        /// <summary>
+        /// 战斗单位属性
+        /// </summary>
+        BattleUnitAttribute battleUnitAttribute = default;
+
+        /// <summary>
+        /// buff管理器
+        /// </summary>
+        IBufferManager bufferManager = null;
+
+
+
+        public BattleUnit( BattleUnitInfo info, ActionManager actionManager, IBufferManager bufferManager)
+        {
+            this.UID = info.uid;
+            battleUnitInfo = info;
+ 
+
+            Atk = info.atk;
+            MaxHP = info.hp;
+            HP = info.hp;
+            AtkSpeed = info.atkSpeed;
+            Cri = info.cri;
+            CriDmgRate = info.criDmgRate;
+            CriDmgAnti = info.criDmgAnti;
+            SkillDmgRate = info.skillDmgRate;
+            SkillDmgAnti = info.skillDmgAnti;
+            DmgRate = info.dmgRate;
+            DmgAnti = info.dmgAnti;
+            DebuffHit = info.debuffHit;
+            DebuffAnti = info.debuffAnti;
+            Penetrate = info.penetrate;
+            Block = info.block;
+
+
+            this.bufferManager = bufferManager;
+            if(this.bufferManager != null)
+            {
+                this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
+                this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
+                this.bufferManager.onBufferCast += BufferManager_onBufferCast;
+            }
+
+            this.actionManager = actionManager;
+            if(actionManager != null)
+            {
+                actionManager.Initialize(this);
+                actionManager.onStartCast += Action_onCast;
+                actionManager.onStartCD += ActionManager_onStartCD;
+            }
+        }
+
+
+
+        #region 响应事件
+        /// <summary>
+        /// buffer添加了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferAdded(IBuffer obj)
+        {
+            onBufferAdded?.Invoke(this, obj);
+        }
+
+        /// <summary>
+        /// buffer触发了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferCast(IBuffer obj)
+        {
+            onBufferCast?.Invoke(this, obj);
+        }
+
+        /// <summary>
+        /// buffer移除了
+        /// </summary>
+        /// <param name="obj"></param>
+        private void BufferManager_onBufferRemoved(IBuffer obj)
+        {
+            onBufferRemoved?.Invoke(this, obj);
+        }
+
+        /// <summary>
+        /// 发动
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        /// <param name="arg4"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Action_onCast(IBattleAction action, List<IBattleUnit> targets, float duration)
+        {
+            onActionCast?.Invoke(this, action,targets, duration);
+        }
+
+        /// <summary>
+        /// 进入CD了
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="cd"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ActionManager_onStartCD(IBattleAction action, float cd)
+        {
+            onActionStartCD?.Invoke(this, action, cd);
+        }
+
+        /// <summary>
+        /// 受到了伤害
+        /// </summary>
+        /// <param name="damage"></param>
+        public void OnDamage(IBattleUnit hitter, IBattleAction action, ExecuteInfo damage)
+        {
+            //to do: 添加一个预伤害事件，可以修改值
+
+            if (HP <= 0)
+                return;
+
+            HP -= damage.Value;
+
+            onDamaged?.Invoke(hitter, action, this, damage);
+
+            if (HP <= 0)
+            {
+                OnDead(hitter, action);           
+            }
+        }
+
+        /// <summary>
+        /// 受到治疗
+        /// </summary>
+        /// <param name="heal"></param>
+        public void OnHeal(IBattleUnit caster, IBattleAction action, ExecuteInfo heal)
+        {
+            //to do: 添加一个预治疗事件，可以修改值
+
+            HP += heal.Value;
+
+            onHealed?.Invoke(caster, action, this, heal.Value);
+
+        }
+
+        /// <summary>
+        /// 生命上限提高
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="hp"></param>
+        public void OnMaxHpUp(IBattleUnit caster, IBattleAction action, ExecuteInfo hp)
+        {
+            MaxHPUpgrade(hp.Value);
+
+            onMaxHpUp?.Invoke(caster,action, this, hp.Value);
+        }
+
+        /// <summary>
+        /// 复活
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="heal"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnReborn(IBattleUnit caster, IBattleAction action, ExecuteInfo heal)
+        {
+            HP += heal.Value;
+
+            //to do: 移到actionmanager中
+            if (action != null)
+            {
+                foreach (var a in actionManager.GetAll())
+                {
+                    a.SetDead(false);
+                }
+            }
+
+            onRebord?.Invoke(caster, action, this, heal.Value);
+        }
+
+        /// <summary>
+        /// 死亡了
+        /// </summary>
+        private void OnDead(IBattleUnit hitter, IBattleAction action)
+        {
+            if(actionManager != null)
+                actionManager.OnDead();
+
+            if (bufferManager != null)
+                bufferManager.Clear();
+
+            onDead?.Invoke(hitter, action, this);
+        }
+
+        /// <summary>
+        /// 状态抵抗了
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="info"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnDebuffAnti(IBattleUnit caster, IBattleAction action,  int debuffId)
+        {
+            onDebuffAnti?.Invoke(caster,action,this, debuffId);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 更新帧了
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            actionManager.Update(frame);
+
+            bufferManager.Update(frame);
+        }
+
+        /// <summary>
+        /// 是否活着
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAlive()
+        {
+            return HP > 0;
+        }
+
+        /// <summary>
+        /// 是否满血
+        /// </summary>
+        /// <returns></returns>
+        public bool IsHpFull()
+        {
+            return HP == MaxHP;
+        }
+
+        #region buff
+        /// <summary>
+        /// 添加buffer
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <param name="foldCout"></param>
+        /// <returns></returns>
+        public IBuffer AddBuffer(int bufferId, int foldCout = 1)
+        {
+            if (bufferManager == null)
+                throw new Exception("没有设置bufferManager 不能AddBuffer " + Name);
+
+            return bufferManager.AddBuffer(this, bufferId, foldCout);
+        }
+
+        /// <summary>
+        /// 获取所有buffers
+        /// </summary>
+        /// <returns></returns>
+        public IBuffer[] GetBuffers()
+        {
+            return bufferManager.GetBuffers();
+        }
+
+        /// <summary>
+        /// 移除buffer
+        /// </summary>
+        /// <param name="bufferUID"></param>
+        public void RemoveBuffer(string bufferUID)
+        {
+            bufferManager.RemoveBuffer(bufferUID);
+        }
+
+        #endregion
+
+        #region 属性
         public int Atk
         {
             get { return battleUnitAttribute.atk; }
@@ -74,7 +358,8 @@ namespace JFrame
         /// <summary>
         /// 攻击速度
         /// </summary>
-        public float AtkSpeed {
+        public float AtkSpeed
+        {
             get { return battleUnitAttribute.atkSpeed; }
             set { battleUnitAttribute.atkSpeed = Math.Max(0, value); }
         }
@@ -82,7 +367,7 @@ namespace JFrame
         /// <summary>
         /// 生命值
         /// </summary>
-        public int HP 
+        public int HP
         {
             get { return battleUnitAttribute.hp; }
             private set
@@ -94,10 +379,13 @@ namespace JFrame
         /// <summary>
         /// 最大生命值
         /// </summary>
-        public int MaxHP { get => battleUnitAttribute.maxHp;
-            private set { 
+        public int MaxHP
+        {
+            get => battleUnitAttribute.maxHp;
+            private set
+            {
                 battleUnitAttribute.maxHp = value;
-                if(HP > value)
+                if (HP > value)
                     HP = value;
             }
         }
@@ -118,272 +406,108 @@ namespace JFrame
             return value;
         }
 
-        /// <summary>
-        /// 所有动作列表
-        /// </summary>
-        ActionManager actionManager = null;
-
-        /// <summary>
-        /// 战斗单位原始数据
-        /// </summary>
-        BattleUnitInfo battleUnitInfo = default;
-
-        /// <summary>
-        /// 战斗单位属性
-        /// </summary>
-        BattleUnitAttribute battleUnitAttribute = default;
-
-        /// <summary>
-        /// buff管理器
-        /// </summary>
-        IBufferManager bufferManager = null;
-
-
-
-        public BattleUnit( BattleUnitInfo info, ActionManager actionManager, IBufferManager bufferManager)
+        public float Cri
         {
-            this.UID = info.uid;
-            battleUnitInfo = info;
- 
-
-            Atk = info.atk;
-            MaxHP = info.hp;
-            HP = info.hp;
-            this.bufferManager = bufferManager;
-            if(this.bufferManager != null)
+            get { return battleUnitAttribute.cri; }
+            private set
             {
-                this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
-                this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
-                this.bufferManager.onBufferCast += BufferManager_onBufferCast;
-            }
-
-            this.actionManager = actionManager;
-            if(actionManager != null)
-            {
-                actionManager.Initialize(this);
-                actionManager.onStartCast += Action_onCast;
+                battleUnitAttribute.cri = value;
             }
         }
 
-        #region 响应事件
-        /// <summary>
-        /// buffer添加了
-        /// </summary>
-        /// <param name="obj"></param>
-        private void BufferManager_onBufferAdded(IBuffer obj)
+        public float CriDmgRate
         {
-            onBufferAdded?.Invoke(this, obj);
-        }
-
-        /// <summary>
-        /// buffer触发了
-        /// </summary>
-        /// <param name="obj"></param>
-        private void BufferManager_onBufferCast(IBuffer obj)
-        {
-            onBufferCast?.Invoke(this, obj);
-        }
-
-        /// <summary>
-        /// buffer移除了
-        /// </summary>
-        /// <param name="obj"></param>
-        private void BufferManager_onBufferRemoved(IBuffer obj)
-        {
-            onBufferRemoved?.Invoke(this, obj);
-        }
-
-        ///// <summary>
-        ///// 动作已经准备好了
-        ///// </summary>
-        ///// <param name="obj"></param>
-        ///// <exception cref="NotImplementedException"></exception>
-        //private void Action_onTriggerOn(IBattleAction action, List<IBattleUnit> targets)
-        //{
-        //    onActionTriggerOn?.Invoke(this, action, targets);
-        //}
-
-        /// <summary>
-        /// 发动
-        /// </summary>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <param name="arg4"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void Action_onCast(IBattleAction action, List<IBattleUnit> targets, float duration)
-        {
-            onActionCast?.Invoke(this, action,targets, duration);
-        }
-
-        ///// <summary>
-        ///// 动作释放完成
-        ///// </summary>
-        ///// <param name="arg1"></param>
-        ///// <param name="arg2"></param>
-        ///// <exception cref="NotImplementedException"></exception>
-        //private void Action_onDone(IBattleAction arg1, IBattleUnit arg2)
-        //{
-        //    onActionHitTarget?.Invoke(this, arg1,arg2);
-        //}
-
-        /// <summary>
-        /// 受到了伤害
-        /// </summary>
-        /// <param name="damage"></param>
-        public void OnDamage(IBattleUnit hitter, IBattleAction action, IntValue damage)
-        {
-            //to do: 添加一个预伤害事件，可以修改值
-
-            if (HP <= 0)
-                return;
-
-            HP -= damage.Value;
-
-            onDamaged?.Invoke(hitter, action, this, damage.Value);
-
-            if (HP <= 0)
+            get { return battleUnitAttribute.criDmgRate; }
+            private set
             {
-                OnDead(hitter, action);           
+                battleUnitAttribute.criDmgRate = value;
             }
         }
 
-        /// <summary>
-        /// 受到治疗
-        /// </summary>
-        /// <param name="heal"></param>
-        public void OnHeal(IBattleUnit caster, IBattleAction action, IntValue heal)
+        public float CriDmgAnti
         {
-            //to do: 添加一个预治疗事件，可以修改值
-
-            HP += heal.Value;
-
-            onHealed?.Invoke(caster, action, this, heal.Value);
-
-        }
-
-        /// <summary>
-        /// 生命上限提高
-        /// </summary>
-        /// <param name="caster"></param>
-        /// <param name="action"></param>
-        /// <param name="hp"></param>
-        public void OnMaxHpUp(IBattleUnit caster, IBattleAction action, IntValue hp)
-        {
-            MaxHPUpgrade(hp.Value);
-
-            onMaxHpUp?.Invoke(caster,action, this, hp.Value);
-        }
-
-        /// <summary>
-        /// 复活
-        /// </summary>
-        /// <param name="caster"></param>
-        /// <param name="action"></param>
-        /// <param name="heal"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void OnReborn(IBattleUnit caster, IBattleAction action, IntValue heal)
-        {
-            HP += heal.Value;
-
-            if (action != null)
+            get { return battleUnitAttribute.criDmgAnti; }
+            private set
             {
-                foreach (var a in actionManager.GetAll())
-                {
-                    a.SetDead(false);
-                }
+                battleUnitAttribute.criDmgAnti = value;
             }
-
-            onRebord?.Invoke(caster, action, this, heal.Value);
         }
 
-        /// <summary>
-        /// 死亡了
-        /// </summary>
-        private void OnDead(IBattleUnit hitter, IBattleAction action)
+        public float SkillDmgRate
         {
-            //if(action != null)
-            //{
-            //    foreach (var a in actionManager.GetAll())
-            //    {
-            //        a.SetDead(false);
-            //    }
-            //}
-
-            if(actionManager != null)
-                actionManager.OnDead();
-
-            if (bufferManager != null)
-                bufferManager.Clear();
-
-            onDead?.Invoke(hitter, action, this);
+            get { return battleUnitAttribute.skillDmgRate; }
+            private set
+            {
+                battleUnitAttribute.skillDmgRate = value;
+            }
         }
+
+        public float SkillDmgAnti
+        {
+            get { return battleUnitAttribute.skillDmgAnti; }
+            private set
+            {
+                battleUnitAttribute.skillDmgAnti = value;
+            }
+        }
+
+        public float DmgRate
+        {
+            get { return battleUnitAttribute.dmgRate; }
+            private set
+            {
+                battleUnitAttribute.dmgRate = value;
+            }
+        }
+
+        public float DmgAnti
+        {
+            get { return battleUnitAttribute.dmgAnti; }
+            private set
+            {
+                battleUnitAttribute.dmgAnti = value;
+            }
+        }
+
+        public float DebuffHit
+        {
+            get { return battleUnitAttribute.debuffHit; }
+            private set
+            {
+                battleUnitAttribute.debuffHit = value;
+            }
+        }
+
+        public float DebuffAnti
+        {
+            get { return battleUnitAttribute.debuffAnti; }
+            private set
+            {
+                battleUnitAttribute.debuffAnti = value;
+            }
+        }
+
+        public float Penetrate
+        {
+            get { return battleUnitAttribute.penetrate; }
+            private set
+            {
+                battleUnitAttribute.penetrate = value;
+            }
+        }
+
+        public float Block
+        {
+            get { return battleUnitAttribute.block; }
+            private set
+            {
+                battleUnitAttribute.block = value;
+            }
+        }
+
 
 
 
         #endregion
-
-        /// <summary>
-        /// 更新帧了
-        /// </summary>
-        /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
-        {
-            actionManager.Update(frame);
-
-            bufferManager.Update(frame);
-        }
-
-        /// <summary>
-        /// 是否活着
-        /// </summary>
-        /// <returns></returns>
-        public bool IsAlive()
-        {
-            return HP > 0;
-        }
-
-        /// <summary>
-        /// 是否满血
-        /// </summary>
-        /// <returns></returns>
-        public bool IsHpFull()
-        {
-            return HP == MaxHP;
-        }
-
-        /// <summary>
-        /// 添加buffer
-        /// </summary>
-        /// <param name="bufferId"></param>
-        /// <param name="foldCout"></param>
-        /// <returns></returns>
-        public IBuffer AddBuffer(int bufferId, int foldCout = 1)
-        {
-            if (bufferManager == null)
-                throw new Exception("没有设置bufferManager 不能AddBuffer " + Name);
-
-            return bufferManager.AddBuffer(this, bufferId, foldCout);
-        }
-
-        /// <summary>
-        /// 获取所有buffers
-        /// </summary>
-        /// <returns></returns>
-        public IBuffer[] GetBuffers()
-        {
-            return bufferManager.GetBuffers();
-        }
-
-        /// <summary>
-        /// 移除buffer
-        /// </summary>
-        /// <param name="bufferUID"></param>
-        public void RemoveBuffer(string bufferUID)
-        {
-            bufferManager.RemoveBuffer(bufferUID);
-        }
-
-
     }
 }

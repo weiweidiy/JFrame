@@ -66,7 +66,7 @@ namespace JFrameTest
             actionDataSource.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() {1}); //返回 battleDamage
 
             //action
-            simBattle.Initialize(attacker, defence, actionDataSource, actionBufferDataSource,reporter);
+            simBattle.Initialize(attacker, defence, actionDataSource, actionBufferDataSource,reporter,Substitute.For<FormulaManager>());
 
             //expect
             simBattle.Received(1).CreateTeam(PVPBattleManager.Team.Attacker, attacker);
@@ -377,7 +377,7 @@ namespace JFrameTest
         public void TestExecuteAddBufferAndBufferAddedToUnit()
         {
             //arrange
-            var addBufferExecutor = Substitute.For<ExecutorTargetAddBuffer>(new float[6] { 1, 0, 0, 1, 1 ,1});
+            var addBufferExecutor = Substitute.For<ExecutorTargetAddBuffer>(new FormulaManager(), new float[6] { 1, 0, 0, 1, 1 ,1});
 
 
             var buffer = Substitute.For<IBuffer>();

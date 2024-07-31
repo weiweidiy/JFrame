@@ -7,15 +7,19 @@
     {
         public override string Name => nameof(ActionCding);
 
-      
+
 
         public override void OnEnter(BaseAction context)
         {
             base.OnEnter(context); //要先调用
 
             //cd触发器开始运行
-            if(NeedUpdate())
-            context.cdTrigger.Restart();
+            if (NeedUpdate())
+            {
+                context.cdTrigger.Restart();
+                context.NotifyStartCD(context.cdTrigger.GetCD());
+            }
+                
         }
 
 
@@ -34,9 +38,6 @@
 
             if (NeedUpdate() && context.IsCDComplete())
             {
-                //通知动作管理器，CD完成了
-                //context.NotifyCdComplete();
-
                 //设置触发器无效
                 context.cdTrigger.SetInValid();
 

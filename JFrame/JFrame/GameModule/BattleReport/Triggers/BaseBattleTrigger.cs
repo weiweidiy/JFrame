@@ -136,5 +136,14 @@ namespace JFrame
         {
             isOn = false;
         }
+
+        /// <summary>
+        /// 获取CD
+        /// </summary>
+        /// <returns></returns>
+        public virtual float GetCD()
+        {
+            return 0f;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace JFrame
         /// 第四个参数是bufferID, 第5个参数是buffer值
         /// </summary>
         /// <param name="args"></param>
-        public ExecutorTargetAddBuffer(float[] args) : base(args)
+        public ExecutorTargetAddBuffer(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
             if (args != null && args.Length >= 6)
             {
@@ -41,14 +41,46 @@ namespace JFrame
         {
             foreach(IBattleUnit target in targets)
             {
-                var r = new Random().NextDouble();
-                if (r >= rate)
+                if (!HitRate())
                     return;
 
-                //添加buff
-                target.AddBuffer(bufferId, foldCount);
+                //如果是减溢，则进行抵抗
+                if (HitAnti(caster, action, target))
+                {
+                    //通知抵抗
+                    target.OnDebuffAnti(caster, action, bufferId);
+                    return;
+                }
+                    
+
+                AddBuff( caster,  action, target);
             }
    
+        }
+
+        protected virtual void AddBuff(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {
+            //添加buff
+            target.AddBuffer(bufferId, foldCount);
+        }
+
+        /// <summary>
+        /// 是否命中
+        /// </summary>
+        /// <returns></returns>
+        protected bool HitRate()
+        {
+            var r = new Random().NextDouble();
+            return r < rate;
+        }
+
+        /// <summary>
+        /// 是否抵抗
+        /// </summary>
+        /// <returns></returns>
+        protected bool HitAnti(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        {     
+            return formulaManager.IsDebuffAnti(caster, action, target); ;
         }
     }
 }

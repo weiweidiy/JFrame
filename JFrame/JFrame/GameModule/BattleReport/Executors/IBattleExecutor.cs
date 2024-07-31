@@ -41,6 +41,14 @@ namespace JFrame
 
         void OnAttach(IBattleAction action);
 
-        void Restart();
+        /// <summary>
+        /// 重新激活技能
+        /// </summary>
+        void Reset();
+
+        /// <summary>
+        /// 暂停执行
+        /// </summary>
+        void StopExecute();
     }
 }

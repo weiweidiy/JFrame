@@ -9,7 +9,7 @@ namespace JFrame
     /// </summary>
     public class ExecutorHeal : ExecutorDamage
     {
-        public ExecutorHeal(float[] args) : base(args) { }
+        public ExecutorHeal(FormulaManager formulaManager, float[] args) : base(formulaManager, args) { }
 
         public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
@@ -26,7 +26,7 @@ namespace JFrame
 
                 heal = Math.Min(heal, needHp);
 
-                target.OnHeal(caster, action, new IntValue() { Value = (int)heal });
+                target.OnHeal(caster, action, new ExecuteInfo() { Value = (int)heal });
             }
             
         }

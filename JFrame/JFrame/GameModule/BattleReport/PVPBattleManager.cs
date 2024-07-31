@@ -41,11 +41,19 @@ namespace JFrame
         Dictionary<Team, BattleTeam> teams = new Dictionary<Team, BattleTeam>();
 
         /// <summary>
-        /// 配置表
+        /// 动作配置表
         /// </summary>
         ActionDataSource dataSource = null;
 
+        /// <summary>
+        /// buff数据源
+        /// </summary>
         BufferDataSource bufferDataSource = null;
+
+        /// <summary>
+        /// 公式管理
+        /// </summary>
+        FormulaManager formulaManager;
 
 
         #region 响应方法：战斗规则
@@ -210,9 +218,9 @@ namespace JFrame
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defence"></param>
-        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter)
+        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter, FormulaManager formulaManager)
         {
-          
+            this.formulaManager = formulaManager;
             this.dataSource = dataSource;
             this.bufferDataSource = bufferDataSource;
             teams.Clear();
@@ -278,7 +286,7 @@ namespace JFrame
         ActionManager CreateActionManager(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
         {
             var manager = new ActionManager();
-            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint, this);
+            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint, this, formulaManager);
 
             //var actions = new List<IBattleAction>();
             foreach (var actionId in actionIds)

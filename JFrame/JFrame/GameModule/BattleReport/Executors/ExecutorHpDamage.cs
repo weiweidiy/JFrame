@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class ExecutorHpDamage : ExecutorDamage
     {
-        public ExecutorHpDamage(float[] args) : base(args) { }
+        public ExecutorHpDamage(FormulaManager formulaManager, float[] args) : base(formulaManager, args) { }
 
         public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {

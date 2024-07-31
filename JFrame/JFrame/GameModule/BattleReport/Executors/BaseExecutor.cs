@@ -10,11 +10,15 @@ namespace JFrame
     {
         public event Action onExecute;
 
+        protected FormulaManager formulaManager;
+
         /// <summary>
         /// 参数：1：执行段数，2：延迟执行 3: 段数间隔
         /// </summary>
         /// <param name="args"></param>
-        public BaseExecutor(float[] args) {
+        public BaseExecutor(FormulaManager formulaManager, float[] args) {
+
+            this.formulaManager = formulaManager;
 
             if (args != null && args.Length >= 3)
             {
@@ -37,7 +41,7 @@ namespace JFrame
         /// </summary>
         public bool Active { get; private set; }
 
-        public IBattleAction Owner { get; private set; }
+        public virtual IBattleAction Owner { get; private set; }
 
         /// <summary>
         /// 攻击次数
@@ -147,12 +151,20 @@ namespace JFrame
             Owner = action;
         }
 
-        public void Restart()
+        /// <summary>
+        /// 重置
+        /// </summary>
+        public void Reset()
         {
-            Active = true;
+            Active = false;
             delayed = true;
             tempCount = 0;
             delta = 0;
+        }
+
+        public void StopExecute()
+        {
+            Active = false;
         }
     }
 }

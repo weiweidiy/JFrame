@@ -9,13 +9,14 @@ namespace JFrame
     {
         //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
-        //public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction,  float> onActionStartCD;
 
-        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDamage;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamage;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onHeal;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onDead;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onReborn;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;
 
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
@@ -38,10 +39,12 @@ namespace JFrame
                     var unit = units[key];
                     //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                     unit.onActionCast += Unit_onActionCast;
+                    unit.onActionStartCD += Unit_onActionStartCD;
                     //unit.onActionHitTarget += Unit_onActionDone;
                     unit.onDamaged += Unit_onDamage;
                     unit.onHealed += Unit_onHeal;
                     unit.onRebord += Unit_onRebord;
+                    unit.onDebuffAnti += Unit_onDebuffAnti;
                     unit.onMaxHpUp += Unit_onMaxHpUp;
                     unit.onDead += Unit_onDead;
                     unit.onBufferAdded += Unit_onBufferAdded;
@@ -57,24 +60,24 @@ namespace JFrame
 
 
 
+
+
+
         #region 响应事件
-        //private void Unit_onActionTriggerOn(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3)
-        //{
-        //    onActionTriggerOn?.Invoke(team, arg1, arg2, arg3);
-        //}
+
 
         private void Unit_onActionCast(IBattleUnit arg1, IBattleAction arg2, List<IBattleUnit> arg3, float duration)
         {
             onActionCast?.Invoke(team, arg1, arg2, arg3, duration);
         }
+        private void Unit_onActionStartCD(IBattleUnit arg1, IBattleAction arg2, float arg3)
+        {
+            onActionStartCD?.Invoke(team,arg1, arg2, arg3);
+        }
 
 
-        //private void Unit_onActionDone(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3)
-        //{
-        //    onActionDone?.Invoke(team, arg1, arg2, arg3);
-        //}
 
-        private void Unit_onDamage(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        private void Unit_onDamage(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, ExecuteInfo arg4)
         {
             onDamage?.Invoke(team, arg1, arg2, arg3, arg4);
         }
@@ -112,6 +115,12 @@ namespace JFrame
         {
             onBufferRemoved?.Invoke(team, arg1, arg2);
         }
+
+        private void Unit_onDebuffAnti(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
+        {
+            onDebuffAnti?.Invoke(team,arg1,arg2, arg3, arg4);
+        }
+
 
         #endregion
 

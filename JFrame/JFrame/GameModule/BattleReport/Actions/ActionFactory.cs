@@ -11,19 +11,21 @@ namespace JFrame
         ActionDataSource actionDataSource;
         BattlePoint battlePoint;
         PVPBattleManager pvpBattleManager;
-        public ActionFactory(string unitUID, int unitId, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager)
+        FormulaManager formulaManager;
+        public ActionFactory(string unitUID, int unitId, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager, FormulaManager formulaManager)
         {
             this.unitUID = unitUID;
             this.unitId = unitId;
             this.actionDataSource = dataSource;
             this.battlePoint = battlePoint;
             this.pvpBattleManager = pvpBattleManager;
+            this.formulaManager = formulaManager;
         }
 
 
         public IBattleAction Create(int actionId)
         {
-            return new NormalAction(Guid.NewGuid().ToString(), actionId, actionDataSource.GetDuration(unitUID, unitId, actionId),
+            return new NormalAction(Guid.NewGuid().ToString(), actionId, actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
                         CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
                         , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
                         , CreateExecutors(unitUID, unitId, actionId), CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId),0f), new ActionSM());
@@ -132,21 +134,21 @@ namespace JFrame
             switch (excutorType)
             {
                 case 1: //按释放者攻击力对目标伤害（可多段伤害）
-                    return new ExecutorDamage(arg);
+                    return new ExecutorDamage(formulaManager, arg);
                 case 2: //给目标添加buffer
-                    return new ExecutorTargetAddBuffer(arg);
+                    return new ExecutorTargetAddBuffer(formulaManager, arg);
                 case 3: //给目标回血（加值）
-                    return new ExecutorHeal(arg);
+                    return new ExecutorHeal(formulaManager, arg);
                 case 4: //按目标血量百分比伤害
-                    return new ExecutorHpDamage(arg);
+                    return new ExecutorHpDamage(formulaManager, arg);
                 case 5://提升生命上限
-                    return new ExecutorMaxHpUp(arg);
+                    return new ExecutorMaxHpUp(formulaManager, arg);
                 case 6://自己添加buffer
-                    return new ExecutorSelfAddBuffer(arg);
+                    return new ExecutorSelfAddBuffer(formulaManager, arg);
                 case 7://递增伤害
-                    return new ExecutorIncrementalDamage(arg);
+                    return new ExecutorIncrementalDamage(formulaManager, arg);
                 case 8://复活
-                    return new ExecutorReborn(arg);
+                    return new ExecutorReborn(formulaManager, arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

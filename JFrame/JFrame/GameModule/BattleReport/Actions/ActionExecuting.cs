@@ -27,16 +27,17 @@ namespace JFrame
 
             duration = context.GetCastDuration();
 
-            //通知开始触发
-            context.NotifyStartCast(targets, duration);
+            //重置动作
+            foreach (var e in context.exeutors)
+            {
+                e.Reset();
+            }
 
             //准备执行效果
             context.ReadyToExecute(context.Owner, context, targets);
+            //通知开始触发
+            context.NotifyStartCast(targets, duration);
 
-            foreach (var e in context.exeutors)
-            {
-                e.Restart();
-            }
         }
 
 

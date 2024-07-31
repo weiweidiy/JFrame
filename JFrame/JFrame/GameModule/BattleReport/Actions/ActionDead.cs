@@ -8,6 +8,11 @@
         {
             base.OnEnter(context); //要先调用
 
+            foreach (var e in context.exeutors)
+            {
+                e.StopExecute();
+            }
+
             if (NeedUpdate())
                 context.ConditionTrigger.Restart();
         }

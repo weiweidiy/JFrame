@@ -9,18 +9,51 @@ namespace JFrame
         /// 通知可以释放了
         /// </summary>
         event Action<IBattleAction> onCanCast;
+        /// <summary>
+        /// 通知条件满足，可以释放
+        /// </summary>
+        void NotifyCanCast();
 
         /// <summary>
         /// 触发了，群体也只会返回首目标
         /// </summary>
         event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
+        /// <summary>
+        /// 通知开始释放
+        /// </summary>
+        void NotifyStartCast(List<IBattleUnit> targets, float duration);
 
+        /// <summary>
+        /// 开始进入冷却
+        /// </summary>
+        event Action<IBattleAction, float> onStartCD;
+
+        /// <summary>
+        /// 通知进入冷却
+        /// </summary>
+        /// <param name="cd"></param>
+        void NotifyStartCD(float cd);
+
+        /// <summary>
+        /// 持有者
+        /// </summary>
         IBattleUnit Owner { get;  }
 
+        /// <summary>
+        /// 名字
+        /// </summary>
         string Name { get; }
 
+        /// <summary>
+        /// id
+        /// </summary>
         int Id { get; }
+
+        /// <summary>
+        /// 类型 区分普通动作和技能动作
+        /// </summary>
+        int Type { get; }
 
         void Update(BattleFrame frame);
 
@@ -48,6 +81,10 @@ namespace JFrame
         /// <param name="active"></param>
         void SetDead(bool active);
 
+        /// <summary>
+        /// 附加到持有者上时调用
+        /// </summary>
+        /// <param name="owner"></param>
         void OnAttach(IBattleUnit owner);
 
         /// <summary>
@@ -61,21 +98,6 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         bool CanCast();
-
-        /// <summary>
-        /// 通知条件满足，可以释放
-        /// </summary>
-        void NotifyCanCast();
-
-        ///// <summary>
-        ///// 通知cd完成了
-        ///// </summary>
-        //void NotifyCdComplete();
-
-        /// <summary>
-        /// 通知开始释放
-        /// </summary>
-        void NotifyStartCast(List<IBattleUnit> targets, float duration);
 
         /// <summary>
         /// 搜索目标
@@ -97,6 +119,10 @@ namespace JFrame
         /// <returns></returns>
         float GetCastDuration();
 
+        /// <summary>
+        /// 获取当前状态
+        /// </summary>
+        /// <returns></returns>
         string GetCurState();
     }
 }
