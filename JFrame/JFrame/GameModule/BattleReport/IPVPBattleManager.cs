@@ -18,5 +18,8 @@ namespace JFrame
         List<IBattleUnit> GetUnits(Team team);
 
         Team GetOppoTeam(Team team);
+
+        Team GetFriendTeam(IBattleUnit unit);
+
     }
 }

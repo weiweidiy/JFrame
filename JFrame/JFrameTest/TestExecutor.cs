@@ -123,16 +123,18 @@ namespace JFrameTest
         public void TestExecutorHeal()
         {
             //arrange
-            var executor = new ExecutorHeal(new FormulaManager(), new float[4] { 1, 0, 0, 1 });
+            var executor = new ExecutorHeal(new FormulaManager(), new float[4] { 1, 0, 0, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
+            var caster = Substitute.For<IBattleUnit>();
+            caster.MaxHP.Returns(20);
 
             //action
-            target.OnDamage(null, null, new ExecuteInfo() { Value = 3 });
-            executor.Hit(null, null, targets);
+            target.OnDamage(null, null, new ExecuteInfo() { Value = 5 });
+            executor.Hit(caster, null, targets);
 
             //expect
-            Assert.AreEqual(8, target.HP);
+            Assert.AreEqual(9, target.HP);
         }
 
         /// <summary>

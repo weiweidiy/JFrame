@@ -97,6 +97,31 @@ namespace JFrameTest
             Assert.AreEqual(true, trigger.IsOn());
             //Assert.AreEqual(1, count);
         }
+
+        [Test]
+        public void TestFriendHurtTrigger()
+        {
+            //arrange
+            var trigger = new FriendsHurtTrigger(simBattle, new float[] { 1 });
+            var friend = Substitute.For<IBattleUnit>();
+            friend.IsHpFull().Returns(false);
+            friend.IsAlive().Returns(true);
+            var friend2 = Substitute.For<IBattleUnit>();
+            friend2.IsHpFull().Returns(true);
+            friend2.IsAlive().Returns(true);
+            simBattle.GetUnits(Arg.Any<Team>()).Returns(new List<IBattleUnit>() { friend , friend2 });
+            simBattle.GetFriendTeam(Arg.Any<IBattleUnit>()).Returns(Team.Attacker);
+            frame.DeltaTime.Returns(2);
+            var action = Substitute.For<IBattleAction>();
+            action.Owner.Returns(friend2);
+
+            //action
+            trigger.OnAttach(action);
+            trigger.Update(frame);
+
+            //expect
+            Assert.AreEqual(true, trigger.IsOn());
+        }
     }
 
     

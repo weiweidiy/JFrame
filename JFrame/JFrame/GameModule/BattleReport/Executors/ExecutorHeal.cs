@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 治疗效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：加血量（加值）  type = 3
+    /// 治疗效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：加血量施法者血量上限百分比  type = 3
     /// </summary>
     public class ExecutorHeal : ExecutorDamage
     {
@@ -13,7 +13,7 @@ namespace JFrame
 
         public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            return arg; //是个加值
+            return caster.MaxHP * arg; 
         }
 
         public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)

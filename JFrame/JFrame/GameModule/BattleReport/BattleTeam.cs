@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace JFrame
@@ -167,6 +168,17 @@ namespace JFrame
             }
 
             throw new Exception("没有找到对应的点位 " + point);
+        }
+
+
+        public BattlePoint GetPoint(IBattleUnit unit)
+        {
+            foreach (var item in units)
+            {
+                if (item.Value.UID == unit.UID)
+                    return item.Key;
+            }
+            return null;
         }
 
         /// <summary>

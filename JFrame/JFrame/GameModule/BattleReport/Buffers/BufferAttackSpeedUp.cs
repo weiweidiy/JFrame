@@ -16,7 +16,7 @@
         public override void OnAttach(IBattleUnit unit)
         {
             base.OnAttach(unit);
-            value = unit.AtkUpgrade((int)GetValue());
+            //value = unit.AtkUpgrade((int)GetValue());
         }
 
         public override void OnDettach()
@@ -24,7 +24,7 @@
             base.OnDettach();
 
             //如果直接减，会有问题
-            target.AtkReduce(value);
+            //target.AtkReduce(value);
         }
     }
 }

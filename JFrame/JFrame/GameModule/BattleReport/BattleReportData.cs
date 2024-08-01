@@ -27,5 +27,10 @@ namespace JFrame
             TargetUID = targetUID;
             Arg = arg;
         }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

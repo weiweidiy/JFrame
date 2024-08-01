@@ -12,10 +12,12 @@ namespace JFrame
         BattlePoint battlePoint;
         PVPBattleManager pvpBattleManager;
         FormulaManager formulaManager;
-        public ActionFactory(string unitUID, int unitId, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager, FormulaManager formulaManager)
+        BattleUnitInfo unitInfo = default;
+        public ActionFactory(BattleUnitInfo unitInfo, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager, FormulaManager formulaManager)
         {
-            this.unitUID = unitUID;
-            this.unitId = unitId;
+            this.unitInfo = unitInfo;
+            this.unitUID = unitInfo.uid;
+            this.unitId = unitInfo.id;
             this.actionDataSource = dataSource;
             this.battlePoint = battlePoint;
             this.pvpBattleManager = pvpBattleManager;
@@ -28,7 +30,22 @@ namespace JFrame
             return new NormalAction(Guid.NewGuid().ToString(), actionId, actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
                         CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
                         , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
-                        , CreateExecutors(unitUID, unitId, actionId), CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId),0f), new ActionSM());
+                        , CreateExecutors(unitUID, unitId, actionId)
+                        , CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f), new ActionSM());
+        }
+
+        float[] GetCDTriggerArg(int actionId)
+        {
+            var actionType = actionDataSource.GetType(unitUID, unitId, actionId);
+            if(actionType == 1) //普通攻击，cd参数需要附加atkspeed属性
+            {
+                var cd = actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId)[0];
+                var atkSpeed = unitInfo.atkSpeed;
+                var arg = cd + 1 / atkSpeed;
+                return new float[] { arg };
+            }
+
+            return actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId);
         }
 
         /// <summary>
@@ -68,6 +85,8 @@ namespace JFrame
                     return new DeathTrigger(pvpBattleManager, new float[1] { arg }, delay);
                 case 3: //战斗开始触发
                     return new BattleStartTrigger(pvpBattleManager, new float[1] { arg }, delay);
+                case 4: //己方有非满血成员
+                    return new FriendsHurtTrigger(pvpBattleManager, new float[1] { arg }, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 ConditionTrigger type " + triggerType);
             }

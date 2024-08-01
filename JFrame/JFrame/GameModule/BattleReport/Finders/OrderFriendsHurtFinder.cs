@@ -18,12 +18,9 @@ namespace JFrame
             //debug
             foreach (var unit in units)
             {
-                if (unit.IsAlive() && !unit.IsHpFull())
+                if (unit.IsAlive() && !unit.IsHpFull() && result.Count < arg)
                 {
                     result.Add(unit);
-                    //有效数量校验
-                    if (result.Count >= this.arg)
-                        return result;
                 }
             }
 

@@ -262,7 +262,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActionManager(info.uid, info.id, info.actionsId, slot), CreateBufferManager());
+                var battleUnit = new BattleUnit(info, CreateActionManager(info, info.actionsId, slot), CreateBufferManager());
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -283,10 +283,13 @@ namespace JFrame
         }
 
 
-        ActionManager CreateActionManager(string unitUID, int unitId, List<int> actionIds, BattlePoint battlePoint)
+        ActionManager CreateActionManager(BattleUnitInfo unitInfo , List<int> actionIds, BattlePoint battlePoint)
         {
+            string unitUID = unitInfo.uid;
+            int unitId = unitInfo.id;
+
             var manager = new ActionManager();
-            var factory = new ActionFactory(unitUID, unitId, dataSource, battlePoint, this, formulaManager);
+            var factory = new ActionFactory(unitInfo, dataSource, battlePoint, this, formulaManager);
 
             //var actions = new List<IBattleAction>();
             foreach (var actionId in actionIds)
@@ -297,6 +300,25 @@ namespace JFrame
                 //actions.Add(action);
             }
             return manager;
+        }
+
+        /// <summary>
+        /// 获取自身队伍
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public virtual Team GetFriendTeam(IBattleUnit unit)
+        {
+            var atkTeam =  GetTeam(Team.Attacker);
+            BattlePoint point = null;
+            point = atkTeam.GetPoint(unit);
+            if (point != null) return point.Team;
+
+            var defTeam = GetTeam(Team.Defence);
+            point = defTeam.GetPoint(unit);
+            if (point != null) return point.Team;
+
+            throw new System.Exception("没有找到指定单位的队伍 " + unit.Name);
         }
 
         ///// <summary>

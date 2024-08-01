@@ -4,13 +4,16 @@ namespace JFrame
 {
     public class PVPBattleReportParser
     {
-        List<IBattleReportData> report;
+        List<IBattleReportData> report = new List<IBattleReportData>();
         public PVPBattleReportParser(List<IBattleReportData> report)
         {
-            this.report = report;
+            foreach (var data in report)
+            {
+                this.report.Add(data.Clone() as IBattleReportData);
+            }
+            //this.report = report;
             this.report.Reverse();
         }
-
 
         public List<IBattleReportData> GetData(float escapeTime)
         {
