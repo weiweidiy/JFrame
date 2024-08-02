@@ -5,6 +5,7 @@ namespace JFrame
 {
     public interface IBattleAction : IUnique
     {
+        #region 委托事件
         /// <summary>
         /// 通知可以释放了
         /// </summary>
@@ -35,6 +36,20 @@ namespace JFrame
         /// <param name="cd"></param>
         void NotifyStartCD(float cd);
 
+        #endregion
+
+        #region 生命周期
+        /// <summary>
+        /// 附加到持有者上时调用
+        /// </summary>
+        /// <param name="owner"></param>
+        void OnAttach(IBattleUnit owner);
+
+        void Update(BattleFrame frame);
+
+        #endregion
+
+        #region 属性
         /// <summary>
         /// 持有者
         /// </summary>
@@ -55,8 +70,9 @@ namespace JFrame
         /// </summary>
         int Type { get; }
 
-        void Update(BattleFrame frame);
+        #endregion
 
+        #region 状态切换
         /// <summary>
         /// 待机状态
         /// </summary>
@@ -80,13 +96,9 @@ namespace JFrame
         /// </summary>
         /// <param name="active"></param>
         void SetDead(bool active);
+        #endregion
 
-        /// <summary>
-        /// 附加到持有者上时调用
-        /// </summary>
-        /// <param name="owner"></param>
-        void OnAttach(IBattleUnit owner);
-
+        #region 查询
         /// <summary>
         /// 是否冷却完成了
         /// </summary>
@@ -99,6 +111,27 @@ namespace JFrame
         /// <returns></returns>
         bool CanCast();
 
+
+        /// <summary>
+        /// 获取执行周期
+        /// </summary>
+        /// <returns></returns>
+        float GetCastDuration();
+
+        /// <summary>
+        /// 获取当前状态
+        /// </summary>
+        /// <returns></returns>
+        string GetCurState();
+
+        /// <summary>
+        /// 获取冷却触发器
+        /// </summary>
+        /// <returns></returns>
+        IBattleTrigger GetCDTrigger();
+        #endregion
+
+        #region 功能接口
         /// <summary>
         /// 搜索目标
         /// </summary>
@@ -112,17 +145,8 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="targets"></param>
         void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets);
+        #endregion
 
-        /// <summary>
-        /// 获取执行周期
-        /// </summary>
-        /// <returns></returns>
-        float GetCastDuration();
 
-        /// <summary>
-        /// 获取当前状态
-        /// </summary>
-        /// <returns></returns>
-        string GetCurState();
     }
 }

@@ -17,7 +17,7 @@
             if (NeedUpdate())
             {
                 context.cdTrigger.Restart();
-                context.NotifyStartCD(context.cdTrigger.GetCD());
+                context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
             }
                 
         }

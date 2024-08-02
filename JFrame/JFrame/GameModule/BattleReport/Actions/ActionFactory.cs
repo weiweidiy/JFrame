@@ -133,9 +133,11 @@ namespace JFrame
             var result = new List<IBattleExecutor>();
             var executors = actionDataSource.GetExcutorTypes(unitUID, unitId, actionId);
 
-            foreach (var executorId in executors)
+            //foreach (var executorId in executors)
+            for(int i = 0; i < executors.Count;i ++)
             {
-                var e = CreateExcutor(executorId, actionDataSource.GetExcutorArg(unitUID, unitId, actionId, executorId));
+                var executorId = executors[i];
+                var e = CreateExcutor(executorId, actionDataSource.GetExcutorArg(unitUID, unitId, actionId, i));
                 result.Add(e);
             }
             return result;

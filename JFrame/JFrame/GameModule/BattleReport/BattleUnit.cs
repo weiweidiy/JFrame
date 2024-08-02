@@ -15,6 +15,7 @@ namespace JFrame
         public event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
         //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
 
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaging; //即将受到伤害
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaged;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         public event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;
@@ -100,6 +101,39 @@ namespace JFrame
             }
         }
 
+        /// <summary>
+        /// 更新帧了
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            actionManager.Update(frame);
+
+            bufferManager.Update(frame);
+        }
+
+        /// <summary>
+        /// 是否活着
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAlive()
+        {
+            return HP > 0;
+        }
+
+        /// <summary>
+        /// 是否满血
+        /// </summary>
+        /// <returns></returns>
+        public bool IsHpFull()
+        {
+            return HP == MaxHP;
+        }
+
+        public IBattleAction[] GetActions()
+        {
+            return actionManager.GetAll().ToArray();
+        }
 
 
         #region 响应事件
@@ -161,8 +195,9 @@ namespace JFrame
         public void OnDamage(IBattleUnit hitter, IBattleAction action, ExecuteInfo damage)
         {
             //to do: 添加一个预伤害事件，可以修改值
+            onDamaging?.Invoke(hitter, action,this, damage);
 
-            if (HP <= 0)
+            if (HP <= 0 || damage.Value == 0)
                 return;
 
             HP -= damage.Value;
@@ -252,35 +287,6 @@ namespace JFrame
         }
 
         #endregion
-
-        /// <summary>
-        /// 更新帧了
-        /// </summary>
-        /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
-        {
-            actionManager.Update(frame);
-
-            bufferManager.Update(frame);
-        }
-
-        /// <summary>
-        /// 是否活着
-        /// </summary>
-        /// <returns></returns>
-        public bool IsAlive()
-        {
-            return HP > 0;
-        }
-
-        /// <summary>
-        /// 是否满血
-        /// </summary>
-        /// <returns></returns>
-        public bool IsHpFull()
-        {
-            return HP == MaxHP;
-        }
 
         #region buff
         /// <summary>
@@ -406,6 +412,8 @@ namespace JFrame
             return value;
         }
 
+
+
         public float Cri
         {
             get { return battleUnitAttribute.cri; }
@@ -485,6 +493,25 @@ namespace JFrame
             {
                 battleUnitAttribute.debuffAnti = value;
             }
+        }
+
+        public float DebuffAntiUpgrade(float value)
+        {
+            if (value < 0)
+                throw new Exception("攻击提升数值不能为负数 " + value);
+
+            DebuffAnti += value;
+            return value;
+        }
+
+        public float DebuffAntiReduce(float value)
+        {
+            if (value < 0)
+                throw new Exception("攻击降低数值不能为负数 " + value);
+
+            var realValue = Math.Min(value, DebuffAnti); //防止减成负数
+            DebuffAnti -= realValue;
+            return realValue;
         }
 
         public float Penetrate

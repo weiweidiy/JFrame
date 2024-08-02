@@ -15,6 +15,8 @@ namespace JFrame
         public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
 
 
+
+
         protected override void OnDelayCompleteEveryFrame()
         {
             base.OnDelayCompleteEveryFrame();

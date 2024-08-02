@@ -122,6 +122,8 @@ namespace JFrameTest
             //expect
             Assert.AreEqual(true, trigger.IsOn());
         }
+
+
     }
 
     

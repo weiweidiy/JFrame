@@ -14,6 +14,10 @@ namespace JFrame
         {
             switch(buffId)
             {
+                case 101: //增加攻速
+                    return new BufferAttackSpeedUp(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 103: //增加状态抵抗
+                    return new BufferDebuffAntiUpgrade(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 999:
                     return new BufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 default:
@@ -23,3 +27,9 @@ namespace JFrame
         
     }
 }
+
+
+//var type = Type.GetType("JFrame.BufferAttackDown");
+//object[] args = new object[4] { Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId) };
+//var buff = (Buffer) Activator.CreateInstance(type, args);
+//return buff;

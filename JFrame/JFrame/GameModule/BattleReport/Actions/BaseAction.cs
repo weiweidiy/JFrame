@@ -254,6 +254,14 @@ namespace JFrame
             return sm.GetCurState();
         }
 
-
+        /// <summary>
+        /// 冷却触发器
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IBattleTrigger GetCDTrigger()
+        {
+            return cdTrigger;
+        }
     }
 }

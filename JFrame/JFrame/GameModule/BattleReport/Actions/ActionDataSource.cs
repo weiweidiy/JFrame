@@ -68,7 +68,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float[] GetExcutorArg(string unitUID, int unitId, int actionId, int executorType)
+        public virtual float[] GetExcutorArg(string unitUID, int unitId, int actionId, int executorIndex)
         {
             return new float[] { 1f , 0.5f,0.25f, 1f };//1:次数, 2：延迟 3:多段攻击间隔 4:倍率：
         }

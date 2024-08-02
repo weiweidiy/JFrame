@@ -160,5 +160,40 @@ namespace JFrame
 
             deltaTime = 0f;
         }
+
+        /// <summary>
+        /// 根据actionType获取action对象
+        /// </summary>
+        /// <param name="actionType"></param>
+        /// <returns></returns>
+        public IBattleAction GetByActionType(int actionType)
+        {
+            var actions = GetAll();
+            if (actions != null)
+            {
+                foreach(var a in actions)
+                {
+                    if(a.Type == actionType)
+                        return a;
+                }
+            }
+
+            return null;
+        }
+
+        public IBattleAction GetAction(int actionId)
+        {
+            var actions = GetAll();
+            if (actions != null)
+            {
+                foreach (var a in actions)
+                {
+                    if (a.Id == actionId)
+                        return a;
+                }
+            }
+
+            return null;
+        }
     }
 }

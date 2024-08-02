@@ -26,7 +26,18 @@ namespace JFrame
 
         bool IsOn();
 
-        float GetCD();
+        /// <summary>
+        /// 获取CD
+        /// </summary>
+        /// <returns></returns>
+        float[] GetArgs();
+
+        /// <summary>
+        /// 设置cd
+        /// </summary>
+        /// <param name="cd"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        void SetArgs(float[] args);
 
         /// <summary>
         /// 设置无效

@@ -42,14 +42,14 @@ namespace JFrame
             foreach(IBattleUnit target in targets)
             {
                 if (!HitRate())
-                    return;
+                    continue;
 
                 //如果是减溢，则进行抵抗
                 if (HitAnti(caster, action, target))
                 {
                     //通知抵抗
                     target.OnDebuffAnti(caster, action, bufferId);
-                    return;
+                    continue;
                 }
                     
 
@@ -80,7 +80,7 @@ namespace JFrame
         /// <returns></returns>
         protected bool HitAnti(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {     
-            return formulaManager.IsDebuffAnti(caster, action, target); ;
+            return formulaManager.IsDebuffAnti(caster, action, target); 
         }
     }
 }

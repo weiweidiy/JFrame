@@ -8,6 +8,7 @@
         public int Value { get; set; }
         public bool IsCri { get; set; }
         public bool IsBlock { get;set; }
+        public bool IsGuard { get; set; }
     }
 }
 

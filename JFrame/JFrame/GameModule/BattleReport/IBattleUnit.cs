@@ -19,7 +19,9 @@ namespace JFrame
         /// <summary>
         /// 被动事件
         /// </summary>
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaging; //即将受到伤害
         event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaged; //受到伤害之后
+        
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
         event Action<IBattleUnit, IBattleAction, IBattleUnit> onDead;        //死亡
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onRebord;        //复活
@@ -118,6 +120,18 @@ namespace JFrame
         /// </summary>
         float DebuffAnti { get; }
         /// <summary>
+        /// 抵抗数值提升
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        float DebuffAntiUpgrade(float value);
+        /// <summary>
+        /// 抵抗数值降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        float DebuffAntiReduce(float value);
+        /// <summary>
         /// //穿透 0~1 百分比
         /// </summary>
         float Penetrate { get; }
@@ -193,6 +207,12 @@ namespace JFrame
         /// </summary>
         /// <param name="bufferId"></param>
         void RemoveBuffer(string bufferUID);
+
+        /// <summary>
+        /// 获取所有技能
+        /// </summary>
+        /// <returns></returns>
+        IBattleAction[] GetActions();
     }
 }
 

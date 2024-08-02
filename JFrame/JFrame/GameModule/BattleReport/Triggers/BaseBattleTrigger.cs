@@ -141,9 +141,19 @@ namespace JFrame
         /// 获取CD
         /// </summary>
         /// <returns></returns>
-        public virtual float GetCD()
+        public float[] GetArgs()
         {
-            return 0f;
+            return args;
+        }
+
+        /// <summary>
+        /// 设置cd
+        /// </summary>
+        /// <param name="cd"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void SetArgs(float[] args)
+        {
+            this.args = args;
         }
     }
 }

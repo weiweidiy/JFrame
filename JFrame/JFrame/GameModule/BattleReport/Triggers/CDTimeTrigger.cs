@@ -10,10 +10,6 @@ namespace JFrame
 
         public CDTimeTrigger(IPVPBattleManager pVPBattleManager, float[] args, float delay = 0f) : base( pVPBattleManager, args, delay) { }
 
-        public override float GetCD()
-        {
-            return GetDuration();
-        }
 
         /// <summary>
         /// 获取周期
@@ -21,8 +17,10 @@ namespace JFrame
         /// <returns></returns>
         public float GetDuration()
         {
-            return this.args[0];
+            return args[0];
         }
+
+
 
         /// <summary>
         /// 延迟完成
