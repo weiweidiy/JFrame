@@ -18,8 +18,16 @@ namespace JFrame
                     return new BufferAttackSpeedUp(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 103: //增加状态抵抗
                     return new BufferDebuffAntiUpgrade(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 104:
+                    return new BufferSkillDmgUp(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 201:
+                    return new BufferShield(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 202:
+                    return new DeBufferStunning(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 998:
+                    return new DeBufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 999:
-                    return new BufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new DeBufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 default:
                     throw new Exception("没有实现指定的技能buff " + buffId);
             }

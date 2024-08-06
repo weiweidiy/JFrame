@@ -10,7 +10,7 @@
 
             foreach (var e in context.exeutors)
             {
-                e.StopExecute();
+                e.Reset();
             }
 
             if (NeedUpdate())

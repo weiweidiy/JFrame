@@ -9,7 +9,7 @@ namespace JFrame
     /// </summary>
     public abstract class BaseAction : IBattleAction
     {
- 
+        #region 委托
         /// <summary>
         /// 可以触发了
         /// </summary>
@@ -25,6 +25,11 @@ namespace JFrame
         /// </summary>
         public event Action<IBattleAction, float> onStartCD;
 
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        public event Action<IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget;
+
         public void NotifyCanCast()
         {
             onCanCast?.Invoke(this);
@@ -39,8 +44,9 @@ namespace JFrame
         {
             onStartCD?.Invoke(this, cd);
         }
+        #endregion
 
-
+        #region 属性字段
         /// <summary>
         /// 动作名称
         /// </summary>
@@ -51,7 +57,10 @@ namespace JFrame
         /// </summary>
         public int Id { get; private set; }
 
-        public virtual int Type { get; private set; }
+        /// <summary>
+        /// 动作类型
+        /// </summary>
+        public virtual ActionType Type { get; private set; }
 
         /// <summary>
         /// 拥有者
@@ -87,10 +96,13 @@ namespace JFrame
         /// 效果执行器
         /// </summary>
         public List<IBattleExecutor> exeutors { get; private set; }
-
- 
-
+         
+        /// <summary>
+        /// 状态机
+        /// </summary>
         ActionSM sm;
+
+#endregion
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -99,7 +111,7 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, int type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
+        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
         {
             this.Type = type;
             this.castDuration = duration;
@@ -112,6 +124,15 @@ namespace JFrame
 
             this.sm = sm;
             this.sm.Initialize(this);
+
+            if(exeutors !=null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.onHittingTarget += Executor_onHittingTarget;
+                }
+            }
+
         }
 
         /// <summary>
@@ -139,6 +160,25 @@ namespace JFrame
             }
 
             sm.SwitchToStandby();
+        }
+
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Executor_onHittingTarget(IBattleUnit target, ExecuteInfo obj)
+        {
+            onHittingTarget?.Invoke(this, target, obj);
+        }
+
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            sm.Update(frame);
         }
 
         #region 状态切换
@@ -182,6 +222,19 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 动作是否在执行中
+        /// </summary>
+        /// <returns></returns>
+        public bool IsExecuting()
+        {
+            foreach(var executor in exeutors)
+            {
+                if(executor.Active) return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 是否满足释放条件
         /// </summary>
         /// <returns></returns>
@@ -190,20 +243,8 @@ namespace JFrame
             return ConditionTrigger.IsOn();
         }
 
-
         /// <summary>
-        /// 更新帧
-        /// </summary>
-        /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
-        {
-            sm.Update(frame);
-        }
-
-
-
-        /// <summary>
-        /// 设置动作是否可用
+        /// 设置是否是死亡状态（有些触发器要在死亡状态生效）
         /// </summary>
         /// <param name="dead"></param>
         public void SetDead(bool dead)
@@ -217,9 +258,6 @@ namespace JFrame
                 sm.SwitchToDead();
             }
         }
-
-
-
 
         /// <summary>
         /// 搜索目标
@@ -244,11 +282,19 @@ namespace JFrame
             }
         }
 
+        /// <summary>
+        /// 获取释放周期
+        /// </summary>
+        /// <returns></returns>
         public float GetCastDuration()
         {
             return castDuration;
         }
 
+        /// <summary>
+        /// 获取当前状态
+        /// </summary>
+        /// <returns></returns>
         public string GetCurState()
         {
             return sm.GetCurState();
@@ -262,6 +308,25 @@ namespace JFrame
         public IBattleTrigger GetCDTrigger()
         {
             return cdTrigger;
+        }
+
+        /// <summary>
+        /// 打断
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Interrupt()
+        {
+            //进入CD状态
+            EnterCD();
+        }
+
+        /// <summary>
+        /// 设置动作是否可用
+        /// </summary>
+        /// <param name="enable"></param>
+        public void SetEnable(bool enable)
+        {
+           ConditionTrigger.SetEnable(enable);
         }
     }
 }

@@ -193,7 +193,7 @@ namespace JFrame
             return buffers.Where(buffer => IsBuff(buffer.Id).Equals(isBuff)).ToArray();
         }
 
-        bool IsBuff(int buffId)
+        public bool IsBuff(int buffId)
         {
             return dataSource.IsBuff(buffId);
         }

@@ -80,7 +80,7 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction>();
-            action.Type.Returns(1);
+            action.Type.Returns(ActionType.Normal);
 
 
             //action
@@ -105,7 +105,7 @@ namespace JFrameTest
             var target2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 20, uid = "2" }, null, null);
             var targets = new List<IBattleUnit>() { target , target2 };
             var action = Substitute.For<IBattleAction>();
-            action.Type.Returns(1);
+            action.Type.Returns(ActionType.Normal);
 
             //action
             executor.OnAttach(action);
@@ -148,7 +148,7 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction>();
-            action.Type.Returns(1);
+            action.Type.Returns(ActionType.Normal);
 
             //action
             executor.OnAttach(action);
@@ -195,8 +195,11 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, bufferManager);
             var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
+            var action = Substitute.For<IBattleAction>();
+            action.Owner.Returns(caster);
 
             //action
+            executor.OnAttach(action);
             executor.Hit(caster, null, targets);
 
             //expect

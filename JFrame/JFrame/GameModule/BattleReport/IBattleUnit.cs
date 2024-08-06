@@ -14,7 +14,7 @@ namespace JFrame
         //event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
         event Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float> onActionCast; //执行效果之前，只有首目标
         event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
-        //event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //执行效果之后消息，每个命中目标调用1次
+        event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget; //动作命中对方,一个目标1次调用
 
         /// <summary>
         /// 被动事件
@@ -177,6 +177,19 @@ namespace JFrame
         void OnDebuffAnti(IBattleUnit caster, IBattleAction action, int debuffId);
 
         /// <summary>
+        /// 眩晕
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="action"></param>
+        /// <param name="duration"></param>
+        void OnStunning(float duration);
+
+        /// <summary>
+        /// 眩晕恢复
+        /// </summary>
+        void OnResumeFromStunning();
+
+        /// <summary>
         /// 是否活着
         /// </summary>
         /// <returns></returns>
@@ -201,6 +214,14 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         IBuffer[] GetBuffers();
+
+        /// <summary>
+        /// 是否是增益
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <returns></returns>
+        bool IsBuffer(int bufferId);
+
 
         /// <summary>
         /// 移除buffer

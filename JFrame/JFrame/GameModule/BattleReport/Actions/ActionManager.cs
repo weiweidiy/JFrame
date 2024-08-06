@@ -4,6 +4,12 @@ using System;
 
 namespace JFrame
 {
+    public enum ActionType
+    {
+        None = 0,
+        Normal,
+        Skill,
+    }
     /// <summary>
     /// 动作管理器
     /// </summary>
@@ -11,7 +17,15 @@ namespace JFrame
     {
         public event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
+        public event Action<List<IBattleAction>, float> onInterrupt;
+
         public event Action<IBattleAction, float> onStartCD;
+
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        public event Action<IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget;
+
 
         public bool IsBusy { get; private set; }
 
@@ -47,7 +61,9 @@ namespace JFrame
             member.onCanCast += Member_onCanCast;
             member.onStartCast += Member_onStartCast;
             member.onStartCD += Member_onStartCD;
+            member.onHittingTarget += Member_onHittingTarget;
         }
+
 
 
 
@@ -140,6 +156,18 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 即将命中
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        private void Member_onHittingTarget(IBattleAction arg1, IBattleUnit arg2, ExecuteInfo arg3)
+        {
+            onHittingTarget?.Invoke(arg1, arg2, arg3);
+        }
+
+
+        /// <summary>
         /// 角色死亡了
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
@@ -161,12 +189,14 @@ namespace JFrame
             deltaTime = 0f;
         }
 
+
+
         /// <summary>
         /// 根据actionType获取action对象
         /// </summary>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public IBattleAction GetByActionType(int actionType)
+        public IBattleAction GetActionByType(ActionType actionType)
         {
             var actions = GetAll();
             if (actions != null)
@@ -181,6 +211,36 @@ namespace JFrame
             return null;
         }
 
+        /// <summary>
+        /// 根据actionType获取所有action对象
+        /// </summary>
+        /// <param name="actionType"></param>
+        /// <returns></returns>
+        public virtual List<IBattleAction> GetActionsByType(ActionType actionType)
+        {
+            var result = new List<IBattleAction>();
+
+            var actions = GetAll();
+            if (actions != null)
+            {
+                if (actionType == ActionType.None)
+                    return actions;
+
+                foreach (var a in actions)
+                {
+                    if (a.Type == actionType)
+                        result.Add(a);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 根据动作ID获取动作
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
         public IBattleAction GetAction(int actionId)
         {
             var actions = GetAll();
@@ -195,5 +255,66 @@ namespace JFrame
 
             return null;
         }
+
+        /// <summary>
+        /// 打断技能释放
+        /// </summary>
+        /// <param name="actions"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<IBattleAction> Interrupt(List<IBattleAction> actions)
+        {
+            if (actions == null)
+                throw new ArgumentNullException("打断的技能列表不能为null");
+
+            var result = new List<IBattleAction>();
+
+            foreach(var action in actions)
+            {
+                if(action.IsExecuting())
+                {
+                    action.Interrupt(); //打断，立即进入冷却
+                    result.Add(action);
+                }                 
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 眩晕时候调用，打断技能
+        /// </summary>
+        public void OnStunning(float duration)
+        {
+            var actions = GetActionsByType(ActionType.None);
+            var result = Interrupt(actions);
+
+            foreach (var action in actions)
+            {
+                action.SetEnable(false);
+            }
+
+            //to do:通知被打断的技能None·
+            onInterrupt?.Invoke(result, duration);
+        }
+
+        /// <summary>
+        /// 恢复眩晕
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnResumeFromStunning()
+        {
+            var actions = GetActionsByType(ActionType.None);
+            foreach(var action in actions)
+            {
+                action.SetEnable(true);
+            }
+        }
+
+        public void OnSilence()
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

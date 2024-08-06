@@ -94,6 +94,14 @@ namespace JFrame
         #region Get方法
 
         /// <summary>
+        /// 战斗最大时长
+        /// </summary>
+        /// <returns></returns>
+        public float GetBattleTimeLimit()
+        {
+            return frame.AllTime;
+        }
+        /// <summary>
         /// 获取指定位置单位
         /// </summary>
         /// <param name="team"></param>

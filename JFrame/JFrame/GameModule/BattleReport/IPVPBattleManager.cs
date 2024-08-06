@@ -21,5 +21,7 @@ namespace JFrame
 
         Team GetFriendTeam(IBattleUnit unit);
 
+        float GetBattleTimeLimit();
+
     }
 }

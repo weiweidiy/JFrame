@@ -34,6 +34,13 @@ namespace JFrame
         IBuffer[] GetBuffers();
 
         /// <summary>
+        /// 是否是增益
+        /// </summary>
+        /// <param name="buffId"></param>
+        /// <returns></returns>
+        bool IsBuff(int buffId);
+
+        /// <summary>
         /// 清理所有buffers
         /// </summary>
         void Clear();

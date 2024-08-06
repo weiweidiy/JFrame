@@ -36,6 +36,11 @@ namespace JFrame
         /// <param name="cd"></param>
         void NotifyStartCD(float cd);
 
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        event Action<IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget;
+
         #endregion
 
         #region 生命周期
@@ -68,7 +73,7 @@ namespace JFrame
         /// <summary>
         /// 类型 区分普通动作和技能动作
         /// </summary>
-        int Type { get; }
+        ActionType Type { get; }
 
         #endregion
 
@@ -104,6 +109,11 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         bool IsCDComplete();
+
+        /// <summary>
+        /// 是否正在执行
+        /// </summary>
+        bool IsExecuting();
 
         /// <summary>
         /// 是否满足了触发条件
@@ -145,6 +155,17 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="targets"></param>
         void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets);
+
+        /// <summary>
+        /// 打断
+        /// </summary>
+        void Interrupt();
+
+        /// <summary>
+        /// 设置是否可用
+        /// </summary>
+        void SetEnable(bool enable);
+
         #endregion
 
 

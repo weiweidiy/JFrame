@@ -10,11 +10,12 @@ namespace JFrame
         /// <summary>
         /// 有动作准备完毕，可以释放了
         /// </summary>
-        //public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>> onActionTriggerOn;
+        //主体事件
         public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
         public event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
-        //public event Action<IBattleUnit, IBattleAction, IBattleUnit> onActionHitTarget; //动作命中对方
+        public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget; //动作命中对方
 
+        //受体事件
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaging; //即将受到伤害
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onDamaged;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onHealed;        //回血
@@ -98,8 +99,11 @@ namespace JFrame
                 actionManager.Initialize(this);
                 actionManager.onStartCast += Action_onCast;
                 actionManager.onStartCD += ActionManager_onStartCD;
+                actionManager.onHittingTarget += ActionManager_onHittingTarget;
             }
         }
+
+
 
         /// <summary>
         /// 更新帧了
@@ -119,6 +123,17 @@ namespace JFrame
         public bool IsAlive()
         {
             return HP > 0;
+        }
+
+        /// <summary>
+        /// 是否是增益
+        /// </summary>
+        /// <param name="bufferId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public bool IsBuffer(int bufferId)
+        {
+            return bufferManager.IsBuff(bufferId);
         }
 
         /// <summary>
@@ -186,6 +201,18 @@ namespace JFrame
         private void ActionManager_onStartCD(IBattleAction action, float cd)
         {
             onActionStartCD?.Invoke(this, action, cd);
+        }
+
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="target"></param>
+        /// <param name="info"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ActionManager_onHittingTarget(IBattleAction action, IBattleUnit target, ExecuteInfo info)
+        {
+            onHittingTarget?.Invoke(this, action, target,info);
         }
 
         /// <summary>
@@ -284,6 +311,27 @@ namespace JFrame
         public void OnDebuffAnti(IBattleUnit caster, IBattleAction action,  int debuffId)
         {
             onDebuffAnti?.Invoke(caster,action,this, debuffId);
+        }
+
+        /// <summary>
+        /// 眩晕了
+        /// </summary>
+        /// <param name="duration"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnStunning(float duration)
+        {
+            if(actionManager != null)
+                actionManager.OnStunning(duration);
+        }
+
+        /// <summary>
+        /// 眩晕恢复
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnResumeFromStunning()
+        {
+            if (actionManager != null)
+                actionManager.OnResumeFromStunning();
         }
 
         #endregion
@@ -513,6 +561,7 @@ namespace JFrame
             DebuffAnti -= realValue;
             return realValue;
         }
+
 
         public float Penetrate
         {

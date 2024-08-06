@@ -45,7 +45,9 @@ namespace JFrame
                     continue;
 
                 //如果是减溢，则进行抵抗
-                if (HitAnti(caster, action, target))
+                
+
+                if (!Owner.Owner.IsBuffer(bufferId) &&   HitAnti(caster, action, target))
                 {
                     //通知抵抗
                     target.OnDebuffAnti(caster, action, bufferId);

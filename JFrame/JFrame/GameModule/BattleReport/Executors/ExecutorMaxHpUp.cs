@@ -38,7 +38,11 @@ namespace JFrame
         {
             foreach(var target in targets)
             {
-                target.OnMaxHpUp(caster, action, new ExecuteInfo() { Value = (int)GetValue(caster, action, target) });
+                var info = new ExecuteInfo() { Value = (int)GetValue(caster, action, target) };
+                //广播，可以改变这个值
+                NotifyHitTarget(target, info);
+
+                target.OnMaxHpUp(caster, action, info);
                 //target.MaxHPUpgrade((int)GetValue(caster, action , target));
             }
             

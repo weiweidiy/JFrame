@@ -115,7 +115,7 @@ namespace JFrame
         /// </summary>
         public virtual void Restart()
         {
-            SetEnable(true);
+            //SetEnable(true);
             delta = 0f;
             isOn = false;
         }

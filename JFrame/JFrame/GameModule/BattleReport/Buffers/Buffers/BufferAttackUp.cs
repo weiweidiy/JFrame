@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using Newtonsoft.Json.Linq;
+
+namespace JFrame
 {
 
     /// <summary>// 还没生效

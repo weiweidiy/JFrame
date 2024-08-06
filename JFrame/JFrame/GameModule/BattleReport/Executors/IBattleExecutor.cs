@@ -8,7 +8,10 @@ namespace JFrame
     /// </summary>
     public interface IBattleExecutor
     {
-        event Action onExecute;
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        event Action<IBattleUnit, ExecuteInfo> onHittingTarget;
 
         /// <summary>
         /// 是否激活
@@ -46,9 +49,11 @@ namespace JFrame
         /// </summary>
         void Reset();
 
-        /// <summary>
-        /// 暂停执行
-        /// </summary>
-        void StopExecute();
+        ///// <summary>
+        ///// 打断
+        ///// </summary>
+        //void Interrupt();
+
+
     }
 }

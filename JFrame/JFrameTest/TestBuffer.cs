@@ -4,6 +4,7 @@ using NUnit.Framework;
 using JFrame;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
 
 namespace JFrameTest
 {
@@ -31,7 +32,7 @@ namespace JFrameTest
         public void TestBufferAttackDown()
         {
             //arrange
-            var buffer = new BufferAttackDown("1", 1, 1, new float[2] { 10, 0.2f });
+            var buffer = new DeBufferAttackDown("1", 1, 1, new float[2] { 10, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -45,7 +46,7 @@ namespace JFrameTest
         public void TestDettachBufferAttackDown()
         {
             //arrange
-            var buffer = new BufferAttackDown("1", 1, 1, new float[2] { 10, 20f });
+            var buffer = new DeBufferAttackDown("1", 1, 1, new float[2] { 10, 20f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -60,7 +61,7 @@ namespace JFrameTest
         public void TestBufferAttackDownFold()
         {
             //arrange
-            var buffer = new BufferAttackDown("1", 1, 2, new float[2] { 10, 0.2f });
+            var buffer = new DeBufferAttackDown("1", 1, 2, new float[2] { 10, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -79,7 +80,7 @@ namespace JFrameTest
             var target = Substitute.For<IBattleUnit>();          
             var action = Substitute.For<IBattleAction>();
             var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
-            action.Type.Returns(1);
+            action.Type.Returns(ActionType.Normal);
             action.GetCDTrigger().Returns(cdTrigger);
             target.GetActions().Returns(new IBattleAction[] { action });
 
@@ -89,6 +90,27 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(value ,  cdTrigger.GetArgs()[0]);
+        }
+
+        [Test]
+        public void TestDeBufferAttackSpeedDown()
+        {
+            //arrange
+            var value = 20;
+            var buffer = new DebufferAttackSpeedDown("1", 101, 1, new float[2] { 10, 0.5f });
+            var target = Substitute.For<IBattleUnit>();
+            var action = Substitute.For<IBattleAction>();
+            var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
+            action.Type.Returns(ActionType.Normal);
+            action.GetCDTrigger().Returns(cdTrigger);
+            target.GetActions().Returns(new IBattleAction[] { action });
+
+
+            //action
+            buffer.OnAttach(target);
+
+            //expect
+            Assert.AreEqual(value, cdTrigger.GetArgs()[0]);
         }
 
         [Test]
@@ -121,7 +143,47 @@ namespace JFrameTest
             //expect
             Assert.AreEqual(90, target.HP);
         }
+
+        [Test]
+        public void TestBufferStunning()
+        {
+            //arrange
+            var buffer = new DeBufferStunning("1", 1, 1, new float[1] { 10 });
+            var actionManager = Substitute.For<ActionManager>();
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1" }, actionManager, null);
+            var action = Substitute.For<IBattleAction>();
+            action.IsExecuting().Returns(true);
+            var actions = new List<IBattleAction>() { action };
+            actionManager.GetActionsByType(Arg.Any<ActionType>()).Returns(actions);
+
+            //action
+            buffer.OnAttach(target);
+
+
+            //expect
+            action.Received(1).Interrupt();
+        }
+
+        [Test]
+        public void TestBufferSkillDmgUp()
+        {
+            //arrange
+            var buffer = new BufferSkillDmgUp("1", 1, 1, new float[2] { 10, 2 });
+            var target = Substitute.For< IBattleUnit>();
+            var info = new ExecuteInfo() { Value = 10 };
+            var action = Substitute.For<IBattleAction>();
+            action.Type.Returns(ActionType.Skill);
+
+            //action
+            buffer.OnAttach(target);
+            target.onHittingTarget += Raise.Event<Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo>>(null, action, null, info);
+
+            //expect
+            Assert.AreEqual(30, info.Value);
+        }
     }
 
 
 }
+
+//action1.onCanCast += Raise.Event<Action<IBattleAction>>(action1);

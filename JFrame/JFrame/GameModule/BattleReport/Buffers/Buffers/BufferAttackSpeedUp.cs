@@ -1,5 +1,6 @@
 ﻿namespace JFrame
 {
+
     /// <summary>
     /// 攻击速度提升（只对普通攻击生效）： arg[1] ：百分比
     /// </summary>
@@ -9,6 +10,16 @@
 
         public BufferAttackSpeedUp(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
         {
+        }
+
+        /// <summary>
+        /// 计算CD
+        /// </summary>
+        /// <param name="originValue"></param>
+        /// <returns></returns>
+        protected virtual float CalcCD(float originValue)
+        {
+            return originValue / (1 + GetValue());
         }
 
         /// <summary>
@@ -27,7 +38,7 @@
             var actions = target.GetActions();
             foreach (var action in actions)
             {
-                if (action.Type == 1) //普通攻击
+                if (action.Type == ActionType.Normal) //普通攻击
                 {
                     var cdTrigger = action.GetCDTrigger();
                     var cdTimeTrigger = cdTrigger as CDTimeTrigger;
@@ -36,7 +47,7 @@
                         var args = cdTimeTrigger.GetArgs();
                         value = args[0];
 
-                        var cd = value / (1 + GetValue());
+                        var cd = CalcCD(value);
                         args[0] = cd;
                         cdTimeTrigger.SetArgs(args);
 
@@ -44,7 +55,6 @@
                     }
                 }
             }
-
         }
 
         public override void OnDettach()
@@ -54,7 +64,7 @@
             var actions = target.GetActions();
             foreach (var action in actions)
             {
-                if (action.Type == 1) //普通攻击
+                if (action.Type == ActionType.Normal) //普通攻击
                 {
                     var cdTrigger = action.GetCDTrigger();
                     var cdTimeTrigger = cdTrigger as CDTimeTrigger;

@@ -46,13 +46,17 @@ namespace JFrame
                 var baseValue = (int)GetValue(caster, action, target);
 
                 int dmg = 0;
-                if(Owner.Type == 1) //普通攻击
+                if(Owner.Type == ActionType.Normal) //普通攻击
                     dmg = formulaManager.GetNormalDamageValue(baseValue, caster, action, target, out isCri, out isBlock);
                 else
                     dmg = formulaManager.GetSkillDamageValue(baseValue, caster, action, target, out isCri);
 
-                //to do: unit.getbuffvalue(bufftype, dmg) 返回最终受伤值
-                target.OnDamage(caster, action, new ExecuteInfo() { Value = (int)dmg , IsCri = isCri, IsBlock = isBlock});
+                var info = new ExecuteInfo() { Value = (int)dmg, IsCri = isCri, IsBlock = isBlock };
+
+                //广播，可以改变这个值
+                NotifyHitTarget(target,info);
+
+                target.OnDamage(caster, action, info);
             }
 
         }

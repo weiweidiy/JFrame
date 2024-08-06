@@ -27,7 +27,7 @@ namespace JFrame
 
         public IBattleAction Create(int actionId)
         {
-            return new NormalAction(Guid.NewGuid().ToString(), actionId, actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
+            return new NormalAction(Guid.NewGuid().ToString(), actionId, (ActionType)actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
                         CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
                         , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
                         , CreateExecutors(unitUID, unitId, actionId)

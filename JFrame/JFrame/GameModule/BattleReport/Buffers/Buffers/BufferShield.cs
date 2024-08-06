@@ -1,5 +1,6 @@
 ﻿namespace JFrame
 {
+
     /// <summary>
     /// 护盾 参数 1： 持续时间， 参数2： 抵抗次数
     /// </summary>
@@ -49,7 +50,7 @@
         /// <returns></returns>
         public override bool IsValid()
         {
-            return base.IsValid() && amount == 0;
+            return base.IsValid() && amount != 0;
         }
 
 

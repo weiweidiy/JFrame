@@ -8,7 +8,13 @@ namespace JFrame
     /// </summary>
     public abstract class BaseExecutor : IBattleExecutor
     {
-        public event Action onExecute;
+        public event Action<IBattleUnit, ExecuteInfo> onHittingTarget;
+
+        protected void NotifyHitTarget(IBattleUnit target, ExecuteInfo info)
+        {
+            onHittingTarget?.Invoke(target, info);
+        }
+
 
         protected FormulaManager formulaManager;
 
@@ -162,9 +168,12 @@ namespace JFrame
             delta = 0;
         }
 
-        public void StopExecute()
-        {
-            Active = false;
-        }
+        ///// <summary>
+        ///// 暂停执行
+        ///// </summary>
+        //public void Interrupt()
+        //{
+        //    Active = false;
+        //}
     }
 }
