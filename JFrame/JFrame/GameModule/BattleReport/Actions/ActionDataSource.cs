@@ -109,5 +109,17 @@ namespace JFrame
         {
             return 1;
         }
+
+        /// <summary>
+        /// 1：主动技能 2： 被动技能
+        /// </summary>
+        /// <param name="unitUID"></param>
+        /// <param name="unitId"></param>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public virtual ActionMode GetActionMode(string unitUID, int unitId, int actionId)
+        {
+            return ActionMode.Active;
+        }
     }
 }

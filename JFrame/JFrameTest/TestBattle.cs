@@ -293,13 +293,13 @@ namespace JFrameTest
             //arrange
             var buffDataSource = Substitute.For<BufferDataSource>();
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
-            var buffer = Substitute.For<JFrame.Buffer>("1", 1, 1, new float[] { });
-            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffer = Substitute.For<JFrame.Buffer>(null, "1", 1, 1, new float[] { });
+            buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<ActionManager>(), buffManager);
 
             //action
-            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.AddBuffer(null, unit, 1, 1);
 
             //expect
             buffer.Received().OnAttach(unit);
@@ -312,14 +312,14 @@ namespace JFrameTest
             string bufferUID = "1";
             var buffDataSource = Substitute.For<BufferDataSource>();
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
-            var buffer = Substitute.For<JFrame.Buffer>(bufferUID, 1, 1, new float[] { });
+            var buffer = Substitute.For<JFrame.Buffer>(null, bufferUID, 1, 1, new float[] { });
             buffer.UID.Returns(bufferUID);
-            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<ActionManager>(), buffManager);
 
             //action
-            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.AddBuffer(null, unit, 1, 1);
             buffManager.RemoveBuffer(bufferUID);
 
             //expect
@@ -334,17 +334,17 @@ namespace JFrameTest
             var buffDataSource = Substitute.For<BufferDataSource>();
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
             //var buffer = new DurationBuffer("1", 1, 1, new float[] {1});
-            var buffer = Substitute.For<JFrame.DurationBuffer>(bufferUID, 1, 1, new float[] { 1f });
+            var buffer = Substitute.For<JFrame.DurationBuffer>(null, bufferUID, 1, 1, new float[] { 1f });
             buffer.UID.Returns(bufferUID);
             buffer.IsValid().Returns(false);
             buffer.GetDuration().Returns(1f);
-            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<ActionManager>(), buffManager);
             var frame = new BattleFrame();
 
             //action
-            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.AddBuffer(null, unit, 1, 1);
             buffManager.Update(frame);
 
             //expect
@@ -360,14 +360,14 @@ namespace JFrameTest
             var buffDataSource = Substitute.For<BufferDataSource>();
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
             //var buffer = new DurationBuffer("1", 1, 1, new float[] {1});
-            var buffer = new BufferAttackUp(bufferUID, 1, 1, new float[] { 1f, 10f });// Substitute.For<BufferAttackUp>(bufferUID, 1, 1, new float[] { 1f });            
-            buffFactory.Create(Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
+            var buffer = new BufferAttackUp(null,bufferUID, 1, 1, new float[] { 1f, 10f });// Substitute.For<BufferAttackUp>(bufferUID, 1, 1, new float[] { 1f });            
+            buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo() { atk = 5 }, Substitute.For<ActionManager>(), buffManager);
             var frame = new BattleFrame();
 
             //action
-            buffManager.AddBuffer(unit, 1, 1);
+            buffManager.AddBuffer(null, unit, 1, 1);
 
             //expect
             Assert.AreEqual(15, unit.Atk);
@@ -385,18 +385,18 @@ namespace JFrameTest
             List<IBuffer> buffers = new List<IBuffer>();
 
             var buffManager = Substitute.For<BaseBufferManager>(null, null);
-            buffManager.When(x => x.AddBuffer(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()))
+            buffManager.When(x => x.AddBuffer(Arg.Any<IBattleUnit>(), Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()))
                 .Do(x => buffers.Add(buffer));
 
             var target = Substitute.For<IBattleUnit>();
 
-            target.When(x => x.AddBuffer(Arg.Any<int>(), Arg.Any<int>()))
-                .Do(x => { buffManager.AddBuffer(target, 1, 1); Console.WriteLine("11111"); });
+            target.When(x => x.AddBuffer(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()))
+                .Do(x => { buffManager.AddBuffer(null, target, 1, 1); Console.WriteLine("11111"); });
 
             var targets = new List<IBattleUnit>() { target };
 
             addBufferExecutor.When(x => x.Hit(null, null, targets))
-                .Do(x => target.AddBuffer(1, 1));
+                .Do(x => target.AddBuffer(null, 1, 1));
 
             //action
             addBufferExecutor.Hit(null, null, targets);

@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace JFrame
 {
@@ -57,9 +58,13 @@ namespace JFrame
                 NotifyHitTarget(target,info);
 
                 target.OnDamage(caster, action, info);
+
+                OnTargetHit(caster, action, target, info);
             }
 
         }
+
+        protected virtual void OnTargetHit(IBattleUnit caster, IBattleAction action, IBattleUnit target, ExecuteInfo info) { }
 
         /// <summary>
         /// 获取执行效果的值

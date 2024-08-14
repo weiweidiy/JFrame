@@ -7,8 +7,10 @@
     public class BufferShield : DurationBuffer
     {
         int amount;
-        public BufferShield(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
+        public BufferShield(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
         {
+            if (args.Length < 2)
+                throw new System.Exception("BufferShield 参数不能少于2个");
         }
 
 

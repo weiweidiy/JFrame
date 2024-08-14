@@ -1,5 +1,6 @@
 ﻿namespace JFrame
 {
+
     /// <summary>
     /// 战斗开始触发，只触发1次  arg: 没用 type = 3
     /// </summary>

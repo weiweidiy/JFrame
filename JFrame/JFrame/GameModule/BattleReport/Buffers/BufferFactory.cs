@@ -10,24 +10,28 @@ namespace JFrame
             this.dataSource = dataSource;
         }
 
-        public virtual Buffer Create(int buffId, int foldCount = 1)
+        public virtual Buffer Create(IBattleUnit caster, int buffId, int foldCount = 1)
         {
             switch(buffId)
             {
                 case 101: //增加攻速
-                    return new BufferAttackSpeedUp(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new BufferAttackSpeedUp(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 102:
+                    return new BufferCriUp(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 103: //增加状态抵抗
-                    return new BufferDebuffAntiUpgrade(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new BufferDebuffAntiUpgrade(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 104:
-                    return new BufferSkillDmgUp(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new BufferSkillDmgUp(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 201:
-                    return new BufferShield(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new BufferShield(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 202:
-                    return new DeBufferStunning(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new DeBufferStunning(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                case 203:
+                    return new DebufferDisarm(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 998:
-                    return new DeBufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new DebufferAttackSpeedDown(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 case 999:
-                    return new DeBufferAttackDown(Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
+                    return new DeBufferAttackDown(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId));
                 default:
                     throw new Exception("没有实现指定的技能buff " + buffId);
             }

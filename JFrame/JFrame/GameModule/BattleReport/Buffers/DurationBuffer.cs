@@ -25,7 +25,7 @@ namespace JFrame
         /// <param name="foldCount"></param>
         /// <param name="args"></param>
         /// <exception cref="ArgumentException"></exception>
-        public DurationBuffer(string UID, int id, int foldCount, float[] args) : base(UID,id, foldCount,args)
+        public DurationBuffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID,id, foldCount,args)
         {
             if (args == null || args.Length == 0)
                 throw new ArgumentException("durationbuffer 参数不能为空 ，需要有个持续时间参数" + id);

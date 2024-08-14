@@ -203,7 +203,7 @@ namespace JFrameTest
             executor.Hit(caster, null, targets);
 
             //expect
-            bufferManager.Received(1).AddBuffer(target, 999, 1);
+            bufferManager.Received(1).AddBuffer(Arg.Any<IBattleUnit>(), target, 999, 1);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace JFrameTest
             executor.Hit(target, null, null);
 
             //expect
-            bufferManager.Received(1).AddBuffer(target, 999, 1);
+            bufferManager.Received(1).AddBuffer(Arg.Any<IBattleUnit>(),  target, 999, 1);
         }
 
         /// <summary>
@@ -266,6 +266,29 @@ namespace JFrameTest
             Assert.AreEqual(5, target.HP);
         }
 
+
+        /// <summary>
+        /// 吸血
+        /// </summary>
+        [Test]
+        public void TestExecutorSuckHp()
+        {
+            //arrange
+            var executor = new ExecutorSuckHp(new FormulaManager(), new float[5] { 1, 0, 0, 1f,1f });
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
+            var caster = new BattleUnit(new BattleUnitInfo() { atk = 20, hp = 100, uid = "2" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
+            var action = Substitute.For<IBattleAction>();
+            action.Type.Returns(ActionType.Normal);
+
+            //action
+            caster.OnDamage(target, null, new ExecuteInfo() { Value = 50 });
+            executor.OnAttach(action);
+            executor.Hit(caster, action, targets);
+
+            //expect
+            Assert.AreEqual(70, caster.HP);
+        }
     }
 
 

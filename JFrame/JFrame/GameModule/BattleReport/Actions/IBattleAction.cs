@@ -75,6 +75,11 @@ namespace JFrame
         /// </summary>
         ActionType Type { get; }
 
+        /// <summary>
+        /// 动作模式：主动，被动
+        /// </summary>
+        ActionMode Mode { get; }
+
         #endregion
 
         #region 状态切换

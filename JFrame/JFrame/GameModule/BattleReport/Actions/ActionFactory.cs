@@ -27,11 +27,31 @@ namespace JFrame
 
         public IBattleAction Create(int actionId)
         {
-            return new NormalAction(Guid.NewGuid().ToString(), actionId, (ActionType)actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
-                        CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
-                        , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
-                        , CreateExecutors(unitUID, unitId, actionId)
-                        , CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f), new ActionSM());
+            var uid = Guid.NewGuid().ToString();
+            var type = (ActionType)actionDataSource.GetType(unitUID, unitId, actionId);
+            var duration = actionDataSource.GetDuration(unitUID, unitId, actionId);
+            var conditionTrigger = CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f);
+            var targetFinder = CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId));
+            var executors = CreateExecutors(unitUID, unitId, actionId);
+            var cdTrigger = CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f);
+            var sm = new ActionSM();
+
+            switch (actionDataSource.GetActionMode(unitUID, unitId, actionId))
+            {
+                case ActionMode.Active:
+                    return new ActiveAction(uid, actionId, type, duration, conditionTrigger, targetFinder, executors,cdTrigger, sm);
+                case ActionMode.Passive:
+                    return new PassiveAction(uid, actionId, type, duration, conditionTrigger, targetFinder, executors, cdTrigger, sm);
+                default:
+                    throw new Exception("没有实现技能模式 " + actionId);
+
+            }
+
+            //return new ActiveAction(Guid.NewGuid().ToString(), actionId, (ActionType)actionDataSource.GetType(unitUID, unitId, actionId), actionDataSource.GetDuration(unitUID, unitId, actionId),
+            //            CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f)
+            //            , CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId))
+            //            , CreateExecutors(unitUID, unitId, actionId)
+            //            , CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f), new ActionSM());
         }
 
         float[] GetCDTriggerArg(int actionId)
@@ -170,6 +190,8 @@ namespace JFrame
                     return new ExecutorIncrementalDamage(formulaManager, arg);
                 case 8://复活
                     return new ExecutorReborn(formulaManager, arg);
+                case 9: //吸血
+                    return new ExecutorSuckHp(formulaManager, arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

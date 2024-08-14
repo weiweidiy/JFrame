@@ -22,7 +22,13 @@ namespace JFrame
         /// <summary>
         /// 叠加层数
         /// </summary>
-         int FoldCount { get; set; }
+         int FoldCount { get;  }
+
+        /// <summary>
+        /// 添加buffer层数
+        /// </summary>
+        /// <param name="foldCount"></param>
+         void AddFoldCount(int foldCount);
 
         /// <summary>
         /// 参数列表

@@ -63,6 +63,11 @@ namespace JFrame
         public virtual ActionType Type { get; private set; }
 
         /// <summary>
+        /// 技能模式
+        /// </summary>
+        public abstract ActionMode Mode { get; }
+
+        /// <summary>
         /// 拥有者
         /// </summary>
         public IBattleUnit Owner { get; private set; }
@@ -96,7 +101,9 @@ namespace JFrame
         /// 效果执行器
         /// </summary>
         public List<IBattleExecutor> exeutors { get; private set; }
-         
+
+       
+
         /// <summary>
         /// 状态机
         /// </summary>
@@ -317,6 +324,9 @@ namespace JFrame
         public void Interrupt()
         {
             //进入CD状态
+            if (GetCurState() == nameof(ActionCding))
+                return;
+
             EnterCD();
         }
 

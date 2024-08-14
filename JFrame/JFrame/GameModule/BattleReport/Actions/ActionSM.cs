@@ -52,6 +52,7 @@ namespace JFrame
                 .OnExit(() => { OnExitStandby(standbyState); })
                 .Permit(Trigger.Disable, disableState)
                 .Permit(Trigger.Dead, deadState)
+                .Permit(Trigger.CD, cdingState)
                 .Permit(Trigger.Execute, executingState);
 
             //释放中

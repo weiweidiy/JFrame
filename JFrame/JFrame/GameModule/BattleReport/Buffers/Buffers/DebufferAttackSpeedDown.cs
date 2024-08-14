@@ -5,8 +5,10 @@
     /// </summary>
     public class DebufferAttackSpeedDown : BufferAttackSpeedUp
     {
-        public DebufferAttackSpeedDown(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
+        public DebufferAttackSpeedDown(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
         {
+            if (args.Length < 2)
+                throw new System.Exception("DebufferAttackSpeedDown 参数不能少于2个");
         }
 
         protected override float CalcCD(float originValue)
@@ -15,7 +17,7 @@
             if (x == 0) 
                 throw new System.Exception("减少攻速公式分母不能为0 ");
 
-            return originValue / (1 - GetValue());
+            return originValue * (1 + GetValue());
         }
     }
 }

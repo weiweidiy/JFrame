@@ -34,8 +34,8 @@ namespace JFrame
 
         public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            arg += curCount * incrementRate;
-            return base.GetValue(caster, action, target);
+            var value = arg + curCount * incrementRate;
+            return caster.Atk * value;
         }
 
         public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)

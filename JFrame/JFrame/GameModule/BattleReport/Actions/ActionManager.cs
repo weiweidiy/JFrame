@@ -6,10 +6,20 @@ namespace JFrame
 {
     public enum ActionType
     {
-        None = 0,
+        All = 0,
         Normal,
         Skill,
     }
+
+    /// <summary>
+    /// 动作模式，Active, Passive
+    /// </summary>
+    public enum ActionMode
+    {
+        Active, //会占用施放线程
+        Passive, //条件满足立即触发
+    }
+
     /// <summary>
     /// 动作管理器
     /// </summary>
@@ -121,16 +131,24 @@ namespace JFrame
 
 
         /// <summary>
-        /// 技能能释放了
+        /// 技能能释放了(每一帧会一直调用）
         /// </summary>
         /// <param name="action"></param>
         private void Member_onCanCast(IBattleAction action)
         {
-            //如果正在释放其他技能，则返回，否则立即释放
-            if (!IsBusy)
+            //如果正在释放其他主动技能，则返回，否则立即释放
+            if (!IsBusy && action.Mode == ActionMode.Active)
             {
                 curDuration = action.Cast();
                 IsBusy = true;
+                return;
+            }
+            
+            //被动技能直接释放
+            if(action.Mode == ActionMode.Passive)
+            {
+                action.Cast();
+                return;
             }
         }
 
@@ -223,7 +241,7 @@ namespace JFrame
             var actions = GetAll();
             if (actions != null)
             {
-                if (actionType == ActionType.None)
+                if (actionType == ActionType.All)
                     return actions;
 
                 foreach (var a in actions)
@@ -283,9 +301,9 @@ namespace JFrame
         /// <summary>
         /// 眩晕时候调用，打断技能
         /// </summary>
-        public void OnStunning(float duration)
+        public void OnStunning(ActionType actionType, float duration)
         {
-            var actions = GetActionsByType(ActionType.None);
+            var actions = GetActionsByType(actionType);
             var result = Interrupt(actions);
 
             foreach (var action in actions)
@@ -301,9 +319,9 @@ namespace JFrame
         /// 恢复眩晕
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public void OnResumeFromStunning()
+        public void OnResumeFromStunning(ActionType actionType)
         {
-            var actions = GetActionsByType(ActionType.None);
+            var actions = GetActionsByType(actionType);
             foreach(var action in actions)
             {
                 action.SetEnable(true);
@@ -315,6 +333,9 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
-
+        IBattleAction[] IActionManager.GetAll()
+        {
+            return GetAll().ToArray();
+        }
     }
 }

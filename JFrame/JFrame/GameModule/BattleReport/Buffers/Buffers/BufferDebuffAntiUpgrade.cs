@@ -6,8 +6,10 @@
     public class BufferDebuffAntiUpgrade : DurationBuffer
     {
         float value;
-        public BufferDebuffAntiUpgrade(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
+        public BufferDebuffAntiUpgrade(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
         {
+            if (args.Length < 2)
+                throw new System.Exception("BufferDebuffAntiUpgrade 参数不能少于2个");
         }
 
         public override void OnAttach(IBattleUnit unit)

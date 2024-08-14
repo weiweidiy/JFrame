@@ -22,6 +22,7 @@ namespace JFrame
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferAdded;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
         public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferCast;
+        public event Action<PVPBattleManager.Team, IBattleUnit, IBuffer,int, float[]> onBufferUpdate;
 
         Dictionary<BattlePoint, IBattleUnit> units = new Dictionary<BattlePoint, IBattleUnit>();
 
@@ -51,11 +52,11 @@ namespace JFrame
                     unit.onBufferAdded += Unit_onBufferAdded;
                     unit.onBufferRemoved += Unit_onBufferRemoved;
                     unit.onBufferCast += Unit_onBufferCast;
+                    unit.onBufferUpdate += Unit_onBufferUpdate;
                 }
             }
 
         }
-
 
 
 
@@ -116,6 +117,14 @@ namespace JFrame
         {
             onBufferRemoved?.Invoke(team, arg1, arg2);
         }
+
+        private void Unit_onBufferUpdate(IBattleUnit arg1, IBuffer arg2, int arg3, float[] arg4)
+        {
+            onBufferUpdate?.Invoke(team, arg1, arg2, arg3, arg4);
+        }
+
+
+
 
         private void Unit_onDebuffAnti(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, int arg4)
         {

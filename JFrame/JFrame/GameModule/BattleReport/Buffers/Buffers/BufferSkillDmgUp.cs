@@ -5,8 +5,10 @@
     /// </summary>
     public class BufferSkillDmgUp : DurationBuffer
     {
-        public BufferSkillDmgUp(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
+        public BufferSkillDmgUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
         {
+            if (args.Length < 2)
+                throw new System.Exception("BufferSkillDmgUp 参数不能少于2个");
         }
 
         public override void OnAttach(IBattleUnit unit)

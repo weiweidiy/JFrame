@@ -4,7 +4,7 @@ namespace JFrame
 {
     public interface IBufferManager
     {
-         event Action<IBuffer> onBufferUpdated;
+         event Action<IBuffer, int, float[]> onBufferUpdated;
          event Action<IBuffer> onBufferAdded;
          event Action<IBuffer> onBufferRemoved;
          event Action<IBuffer> onBufferCast;//buff触发效果了
@@ -16,7 +16,7 @@ namespace JFrame
         /// <param name="bufferId"></param>
         /// <param name="foldCout"></param>
         /// <returns></returns>
-        IBuffer AddBuffer(IBattleUnit target, int bufferId, int foldCout = 1);
+        IBuffer AddBuffer(IBattleUnit caster, IBattleUnit target, int bufferId, int foldCout = 1);
 
         /// <summary>
         /// 移除一个指定buffer

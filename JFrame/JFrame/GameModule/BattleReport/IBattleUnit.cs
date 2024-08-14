@@ -31,6 +31,7 @@ namespace JFrame
         event Action<IBattleUnit, IBuffer> onBufferAdded;
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
         event Action<IBattleUnit, IBuffer> onBufferCast;
+        event Action<IBattleUnit, IBuffer, int, float[]> onBufferUpdate;
 
         void Update(BattleFrame frame);
 
@@ -88,9 +89,23 @@ namespace JFrame
         float Cri { get; }
 
         /// <summary>
+        /// 暴击率提升
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        float CriUpgrade(float value);
+        /// <summary>
+        /// 暴击率降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        float CriReduce(float value);
+
+        /// <summary>
         /// //暴击伤害加成百分比
         /// </summary>
         float CriDmgRate { get; }
+
         /// <summary>
         /// //暴击伤害抵抗百分比
         /// </summary>
@@ -182,12 +197,12 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="duration"></param>
-        void OnStunning(float duration);
+        void OnStunning(ActionType actionType, float duration);
 
         /// <summary>
         /// 眩晕恢复
         /// </summary>
-        void OnResumeFromStunning();
+        void OnResumeFromStunning(ActionType actionType);
 
         /// <summary>
         /// 是否活着
@@ -207,7 +222,7 @@ namespace JFrame
         /// <param name="bufferId"></param>
         /// <param name="foldCout"></param>
         /// <returns></returns>
-        IBuffer AddBuffer(int bufferId, int foldCout = 1);
+        IBuffer AddBuffer( IBattleUnit caster, int bufferId, int foldCout = 1);
 
         /// <summary>
         /// 获取所有buffers

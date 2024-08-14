@@ -6,7 +6,7 @@ namespace JFrame
 {
     public class BaseBufferManager : IBufferManager
     {
-        public event Action<IBuffer> onBufferUpdated;
+        public event Action<IBuffer,int, float[]> onBufferUpdated;
         public event Action<IBuffer> onBufferAdded;
         public event Action<IBuffer> onBufferRemoved;
         public event Action<IBuffer> onBufferCast;//buff触发效果了
@@ -29,7 +29,7 @@ namespace JFrame
         /// <param name="bufferId"></param>
         /// <param name="buffArg"></param>
         /// <returns></returns>
-        public virtual IBuffer AddBuffer(IBattleUnit target, int bufferId,  int foldCout = 1)
+        public virtual IBuffer AddBuffer(IBattleUnit caster, IBattleUnit target, int bufferId,  int foldCout = 1)
         {
             //如果是共存的，则直接添加， 如果是叠加的，则获取原有BUFFER对象，添加层数       
             IBuffer buffer = null;
@@ -41,23 +41,24 @@ namespace JFrame
             {
                 if (foldType == BufferFoldType.Fold)//可叠加的,且已经存在的
                 {
-                    buffer.FoldCount += foldCout;
-                    onBufferUpdated?.Invoke(buffer);
+                    buffer.AddFoldCount(foldCout);
+                    onBufferUpdated?.Invoke(buffer, buffer.FoldCount, buffer.Args);
                     return buffer;
                 }
 
                 if (foldType == BufferFoldType.Replace) //替换（刷新周期） 
                 {
                     //to do:刷新周期
-                    onBufferUpdated?.Invoke(buffer);
-                    return buffer;
+                    throw new Exception("还没有实现替换类型的buff");
+                    //onBufferUpdated?.Invoke(buffer, buffer.FoldCount, buffer.Args);
+                    //return buffer;
                 }
             }
 
             //不可叠加的，可共存的
             string uid = Guid.NewGuid().ToString();
 
-            buffer = factory.Create(bufferId, foldCout);    
+            buffer = factory.Create(caster, bufferId, foldCout);    
             buffer.OnAttach(target);
             buffer.onCast += Buffer_onCast;
             buffers.Add(buffer);
@@ -140,7 +141,7 @@ namespace JFrame
             var buffer = GetBuffer(uid);
             //Debug.Assert(buffer != null, " buffer is null");
             buffer.Args = args;
-            onBufferUpdated?.Invoke(buffer);
+            onBufferUpdated?.Invoke(buffer, buffer.FoldCount, buffer.Args);
         }
 
 

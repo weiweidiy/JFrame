@@ -163,7 +163,7 @@ namespace JFrame
         public void Reset()
         {
             Active = false;
-            delayed = true;
+            delayed = delay == 0f;
             tempCount = 0;
             delta = 0;
         }

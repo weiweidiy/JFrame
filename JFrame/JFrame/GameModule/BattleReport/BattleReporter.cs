@@ -14,9 +14,10 @@ namespace JFrame
         Dead,   //死亡
         Reborn, //复活
         MaxHpUp, //最大生命提升
-        AddBuffer,
-        RemoveBuffer,
-        CastBuffer,
+        AddBuffer, //buff添加了
+        RemoveBuffer, //buff移除了
+        CastBuffer, //buff触发了
+        UpdateBuffer,//更新
         DebuffAnti, //状态抵抗
         ActionCD, //动作CD
 
@@ -63,6 +64,7 @@ namespace JFrame
                     team.onBufferAdded += Team_onBufferAdded;
                     team.onBufferRemoved += Team_onBufferRemoved;
                     team.onBufferCast += Team_onBufferCast;
+                    team.onBufferUpdate += Team_onBufferUpdate;
                 }
             }
         }
@@ -122,6 +124,11 @@ namespace JFrame
         private void Team_onBufferRemoved(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
             AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
+        }
+
+        private void Team_onBufferUpdate(PVPBattleManager.Team arg1, IBattleUnit target, IBuffer buffer, int foldCount, float[] args)
+        {
+            AddReportData(target.UID, ReportType.UpdateBuffer, target.UID, new object[] { buffer.UID, buffer.Id , foldCount, args});
         }
 
         private void Team_onDebuffAnti(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int debuffId)

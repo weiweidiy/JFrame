@@ -23,7 +23,11 @@ namespace JFrame
             //获取目标 to do:不用再找，通过standby
             var targets = context.FindTargets();
             if (targets == null || targets.Count == 0)
-                throw new Exception("释放时，没有找到目标 " + context.Id);
+            {
+                return;
+                //throw new Exception("释放时，没有找到目标 " + context.Id);
+            }
+
 
             duration = context.GetCastDuration();
 

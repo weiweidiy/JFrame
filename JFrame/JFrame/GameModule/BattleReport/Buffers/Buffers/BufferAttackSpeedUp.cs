@@ -1,15 +1,19 @@
 ﻿namespace JFrame
 {
-
     /// <summary>
     /// 攻击速度提升（只对普通攻击生效）： arg[1] ：百分比
     /// </summary>
     public class BufferAttackSpeedUp : DurationBuffer
     {
+        /// <summary>
+        /// 提升的差值
+        /// </summary>
         float value;
 
-        public BufferAttackSpeedUp(string UID, int id, int foldCount, float[] args) : base(UID, id, foldCount, args)
+        public BufferAttackSpeedUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
         {
+            if (args.Length < 2)
+                throw new System.Exception("BufferAttackSpeedUp 参数不能少于2个");
         }
 
         /// <summary>
@@ -45,9 +49,10 @@
                     if (cdTimeTrigger != null)
                     {
                         var args = cdTimeTrigger.GetArgs();
-                        value = args[0];
+                        var originValue = args[0];
 
-                        var cd = CalcCD(value);
+                        var cd = CalcCD(originValue);
+                        value = originValue - cd;
                         args[0] = cd;
                         cdTimeTrigger.SetArgs(args);
 
@@ -71,7 +76,7 @@
                     if (cdTimeTrigger != null)
                     {
                         var args = cdTimeTrigger.GetArgs();
-                        args[0] = value;
+                        args[0] += value;
 
                         cdTimeTrigger.SetArgs(args);
 

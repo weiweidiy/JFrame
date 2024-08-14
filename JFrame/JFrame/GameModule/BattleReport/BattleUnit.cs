@@ -27,6 +27,7 @@ namespace JFrame
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
         public event Action<IBattleUnit, IBuffer> onBufferCast;
+        public event Action<IBattleUnit, IBuffer, int, float[]> onBufferUpdate;
 
         /// <summary>
         /// 获取战斗对象名字，暂时用ID代替
@@ -43,7 +44,7 @@ namespace JFrame
         /// <summary>
         /// 所有动作列表
         /// </summary>
-        ActionManager actionManager = null;
+        IActionManager actionManager = null;
 
         /// <summary>
         /// 战斗单位原始数据
@@ -62,7 +63,7 @@ namespace JFrame
 
 
 
-        public BattleUnit( BattleUnitInfo info, ActionManager actionManager, IBufferManager bufferManager)
+        public BattleUnit( BattleUnitInfo info, IActionManager actionManager, IBufferManager bufferManager)
         {
             this.UID = info.uid;
             battleUnitInfo = info;
@@ -91,6 +92,7 @@ namespace JFrame
                 this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
                 this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
                 this.bufferManager.onBufferCast += BufferManager_onBufferCast;
+                this.bufferManager.onBufferUpdated += BufferManager_onBufferUpdated;
             }
 
             this.actionManager = actionManager;
@@ -102,6 +104,8 @@ namespace JFrame
                 actionManager.onHittingTarget += ActionManager_onHittingTarget;
             }
         }
+
+
 
 
 
@@ -147,7 +151,7 @@ namespace JFrame
 
         public IBattleAction[] GetActions()
         {
-            return actionManager.GetAll().ToArray();
+            return actionManager.GetAll();
         }
 
 
@@ -177,6 +181,18 @@ namespace JFrame
         private void BufferManager_onBufferRemoved(IBuffer obj)
         {
             onBufferRemoved?.Invoke(this, obj);
+        }
+
+        /// <summary>
+        /// buffer更新了
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void BufferManager_onBufferUpdated(IBuffer arg1, int arg2, float[] arg3)
+        {
+            onBufferUpdate?.Invoke(this, arg1, arg2, arg3);
         }
 
         /// <summary>
@@ -245,6 +261,9 @@ namespace JFrame
         {
             //to do: 添加一个预治疗事件，可以修改值
 
+            if (!IsAlive())
+                return;
+
             HP += heal.Value;
 
             onHealed?.Invoke(caster, action, this, heal.Value);
@@ -259,6 +278,10 @@ namespace JFrame
         /// <param name="hp"></param>
         public void OnMaxHpUp(IBattleUnit caster, IBattleAction action, ExecuteInfo hp)
         {
+
+            if (!IsAlive())
+                return;
+
             MaxHPUpgrade(hp.Value);
 
             onMaxHpUp?.Invoke(caster,action, this, hp.Value);
@@ -273,6 +296,10 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         public void OnReborn(IBattleUnit caster, IBattleAction action, ExecuteInfo heal)
         {
+
+            if (IsAlive())
+                return;
+
             HP += heal.Value;
 
             //to do: 移到actionmanager中
@@ -318,20 +345,20 @@ namespace JFrame
         /// </summary>
         /// <param name="duration"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void OnStunning(float duration)
+        public void OnStunning(ActionType actionType, float duration)
         {
             if(actionManager != null)
-                actionManager.OnStunning(duration);
+                actionManager.OnStunning(actionType, duration);
         }
 
         /// <summary>
         /// 眩晕恢复
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public void OnResumeFromStunning()
+        public void OnResumeFromStunning(ActionType actionType)
         {
             if (actionManager != null)
-                actionManager.OnResumeFromStunning();
+                actionManager.OnResumeFromStunning(actionType);
         }
 
         #endregion
@@ -343,12 +370,12 @@ namespace JFrame
         /// <param name="bufferId"></param>
         /// <param name="foldCout"></param>
         /// <returns></returns>
-        public IBuffer AddBuffer(int bufferId, int foldCout = 1)
+        public IBuffer AddBuffer(IBattleUnit caster, int bufferId, int foldCout = 1)
         {
             if (bufferManager == null)
                 throw new Exception("没有设置bufferManager 不能AddBuffer " + Name);
 
-            return bufferManager.AddBuffer(this, bufferId, foldCout);
+            return bufferManager.AddBuffer(caster, this, bufferId, foldCout);
         }
 
         /// <summary>
@@ -471,6 +498,25 @@ namespace JFrame
             }
         }
 
+        public float CriUpgrade(float value)
+        {
+            if (value < 0)
+                throw new Exception("暴击提升数值不能为负数 " + value);
+
+            Cri += value;
+            return value;
+        }
+
+        public float CriReduce(float value)
+        {
+            if (value < 0)
+                throw new Exception("暴击降低数值不能为负数 " + value);
+
+            var realValue = Math.Min(value, Atk); //防止减成负数
+            Cri -= realValue;
+            return realValue;
+        }
+
         public float CriDmgRate
         {
             get { return battleUnitAttribute.criDmgRate; }
@@ -479,6 +525,8 @@ namespace JFrame
                 battleUnitAttribute.criDmgRate = value;
             }
         }
+
+
 
         public float CriDmgAnti
         {
@@ -561,6 +609,7 @@ namespace JFrame
             DebuffAnti -= realValue;
             return realValue;
         }
+
 
 
         public float Penetrate

@@ -32,7 +32,7 @@ namespace JFrameTest
         public void TestBufferAttackDown()
         {
             //arrange
-            var buffer = new DeBufferAttackDown("1", 1, 1, new float[2] { 10, 0.2f });
+            var buffer = new DeBufferAttackDown(null,"1", 1, 1, new float[2] { 10, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -46,7 +46,7 @@ namespace JFrameTest
         public void TestDettachBufferAttackDown()
         {
             //arrange
-            var buffer = new DeBufferAttackDown("1", 1, 1, new float[2] { 10, 20f });
+            var buffer = new DeBufferAttackDown(null, "1", 1, 1, new float[2] { 10, 20f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -61,7 +61,7 @@ namespace JFrameTest
         public void TestBufferAttackDownFold()
         {
             //arrange
-            var buffer = new DeBufferAttackDown("1", 1, 2, new float[2] { 10, 0.2f });
+            var buffer = new DeBufferAttackDown(null, "1", 1, 2, new float[2] { 10, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -76,7 +76,7 @@ namespace JFrameTest
         {
             //arrange
             var value = 5;
-            var buffer = new BufferAttackSpeedUp("1", 101, 1, new float[2] { 10, 1f });
+            var buffer = new BufferAttackSpeedUp(null,"1", 101, 1, new float[2] { 10, 1f });
             var target = Substitute.For<IBattleUnit>();          
             var action = Substitute.For<IBattleAction>();
             var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
@@ -96,8 +96,8 @@ namespace JFrameTest
         public void TestDeBufferAttackSpeedDown()
         {
             //arrange
-            var value = 20;
-            var buffer = new DebufferAttackSpeedDown("1", 101, 1, new float[2] { 10, 0.5f });
+            var value = 15;
+            var buffer = new DebufferAttackSpeedDown(null, "1", 101, 1, new float[2] { 10, 0.5f });
             var target = Substitute.For<IBattleUnit>();
             var action = Substitute.For<IBattleAction>();
             var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
@@ -117,7 +117,7 @@ namespace JFrameTest
         public void TestBufferDebuffAntiUpgrade()
         {
             //arrange
-            var buffer = new BufferDebuffAntiUpgrade("1", 1, 1, new float[2] { 10, 0.2f });
+            var buffer = new BufferDebuffAntiUpgrade(null, "1", 1, 1, new float[2] { 10, 0.2f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -131,7 +131,7 @@ namespace JFrameTest
         public void TestBufferShield()
         {
             //arrange
-            var buffer = new BufferShield("1", 1, 1, new float[2] { 10, 2 });
+            var buffer = new BufferShield(null,"1", 1, 1, new float[2] { 10, 2 });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1" }, null, null);
 
             //action
@@ -148,7 +148,7 @@ namespace JFrameTest
         public void TestBufferStunning()
         {
             //arrange
-            var buffer = new DeBufferStunning("1", 1, 1, new float[1] { 10 });
+            var buffer = new DeBufferStunning(null, "1", 1, 1, new float[1] { 10 });
             var actionManager = Substitute.For<ActionManager>();
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1" }, actionManager, null);
             var action = Substitute.For<IBattleAction>();
@@ -168,7 +168,7 @@ namespace JFrameTest
         public void TestBufferSkillDmgUp()
         {
             //arrange
-            var buffer = new BufferSkillDmgUp("1", 1, 1, new float[2] { 10, 2 });
+            var buffer = new BufferSkillDmgUp(null,"1", 1, 1, new float[2] { 10, 2 });
             var target = Substitute.For< IBattleUnit>();
             var info = new ExecuteInfo() { Value = 10 };
             var action = Substitute.For<IBattleAction>();
@@ -180,6 +180,45 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(30, info.Value);
+        }
+
+        [Test]
+        public void TestBufferCriUp()
+        {
+            //arrange
+            var buffer = new BufferCriUp(null, "1", 1, 1, new float[2] { 10, 0.1f });
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1", cri = 0.5f }, null, null);
+
+            //action
+            buffer.OnAttach(target);
+
+
+            //expect
+            Assert.AreEqual(0.6f, target.Cri);
+        }
+
+        [Test]
+        public void TestBufferLightningFlag()
+        {
+            //arrange
+            var value = 2.5f;
+            
+            var target = Substitute.For<IBattleUnit>();
+            var action = Substitute.For<IBattleAction>();
+            var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
+            action.Type.Returns(ActionType.Normal);
+            action.GetCDTrigger().Returns(cdTrigger);
+            target.GetActions().Returns(new IBattleAction[] { action });
+            var buffer = new BufferLightningFlag(null, "1", 101, 1, new float[2] { 10, 1f });
+
+            //action
+            buffer.OnAttach(target);
+            target.onActionCast += Raise.Event<Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float>>(null, null, null, 1f);
+            target.onActionCast += Raise.Event<Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float>>(null, null, null, 1f);
+
+
+            //expect
+            Assert.AreEqual(value, cdTrigger.GetArgs()[0]);
         }
     }
 

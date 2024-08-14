@@ -12,6 +12,9 @@ namespace JFrame
         /// </summary>
         event Action<List<IBattleAction>, float> onInterrupt;
 
+
+        event Action<IBattleAction, float> onStartCD;
+
         /// <summary>
         /// 即将命中目标
         /// </summary>
@@ -34,12 +37,12 @@ namespace JFrame
         /// <summary>
         /// 眩晕时调用
         /// </summary>
-        void OnStunning(float duration);
+        void OnStunning(ActionType actionType, float duration);
 
         /// <summary>
         /// 眩晕恢复
         /// </summary>
-        void OnResumeFromStunning();
+        void OnResumeFromStunning(ActionType actionType);
 
         /// <summary>
         /// 沉默时调用
@@ -64,7 +67,6 @@ namespace JFrame
         /// <param name="actionId"></param>
         /// <returns></returns>
         IBattleAction GetAction(int actionId);
-
-
+        IBattleAction[] GetAll();
     }
 }

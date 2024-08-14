@@ -63,7 +63,7 @@ namespace JFrame
         protected virtual void AddBuff(IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
             //添加buff
-            target.AddBuffer(bufferId, foldCount);
+            target.AddBuffer(caster, bufferId, foldCount);
         }
 
         /// <summary>

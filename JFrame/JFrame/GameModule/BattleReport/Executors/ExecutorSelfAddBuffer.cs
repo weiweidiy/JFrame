@@ -26,7 +26,7 @@ namespace JFrame
             //to do:如果是减溢，则进行抵抗
 
             //添加buff
-            caster.AddBuffer(bufferId, foldCount);
+            caster.AddBuffer(caster, bufferId, foldCount);
 
         }
     }

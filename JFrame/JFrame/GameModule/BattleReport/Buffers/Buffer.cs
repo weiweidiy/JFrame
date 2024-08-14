@@ -7,6 +7,11 @@ namespace JFrame
 
         public event Action<IBuffer> onCast;
 
+        protected void NotifyOnCast(IBuffer buffer)
+        {
+            onCast?.Invoke(buffer);
+        }
+
         /// <summary>
         /// Id
         /// </summary>
@@ -20,7 +25,7 @@ namespace JFrame
         /// <summary>
         /// 叠加层数
         /// </summary>
-        public int FoldCount { get; set; }
+        public int FoldCount { get; private set; }
 
         /// <summary>
         /// 参数列表
@@ -32,12 +37,18 @@ namespace JFrame
         /// </summary>
         protected IBattleUnit target;
 
-        public Buffer(string UID, int id, int foldCount, float[] args)
+        /// <summary>
+        /// 释放者
+        /// </summary>
+        protected IBattleUnit caster;
+
+        public Buffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args)
         {
             Id = id;
             this.UID = UID;
             this.Args = args;
             this.FoldCount = foldCount;
+            this.caster = caster;
         }
 
 
@@ -69,6 +80,15 @@ namespace JFrame
         public virtual void Update(BattleFrame frame)
         {
 
+        }
+
+        /// <summary>
+        /// 添加层数
+        /// </summary>
+        /// <param name="foldCount"></param>
+        public void AddFoldCount(int foldCount)
+        {
+            FoldCount += foldCount;
         }
     }
 }
