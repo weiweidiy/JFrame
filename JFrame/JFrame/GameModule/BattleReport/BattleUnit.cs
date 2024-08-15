@@ -154,6 +154,10 @@ namespace JFrame
             return actionManager.GetAll();
         }
 
+        public IBattleAction GetAction(int actionId)
+        {
+            return actionManager.GetAction(actionId);
+        }
 
         #region 响应事件
         /// <summary>

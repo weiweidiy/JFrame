@@ -16,7 +16,7 @@ namespace JFrame
     /// </summary>
     public enum ActionMode
     {
-        Active, //会占用施放线程
+        Active = 1, //会占用施放线程
         Passive, //条件满足立即触发
     }
 
@@ -144,12 +144,12 @@ namespace JFrame
                 return;
             }
             
-            //被动技能直接释放
-            if(action.Mode == ActionMode.Passive)
-            {
-                action.Cast();
-                return;
-            }
+            ////被动技能直接释放
+            //if(action.Mode == ActionMode.Passive)
+            //{
+            //    action.Cast();
+            //    return;
+            //}
         }
 
         /// <summary>

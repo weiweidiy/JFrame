@@ -146,7 +146,7 @@ namespace JFrame
         /// 附加到单位上
         /// </summary>
         /// <param name="owner"></param>
-        public void OnAttach(IBattleUnit owner)
+        public virtual void OnAttach(IBattleUnit owner)
         {
             Owner = owner;
             if (ConditionTrigger != null)

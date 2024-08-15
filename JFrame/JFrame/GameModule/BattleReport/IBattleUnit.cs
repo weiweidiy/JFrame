@@ -249,6 +249,13 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         IBattleAction[] GetActions();
+
+        /// <summary>
+        /// 获取指定技能动作
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        IBattleAction GetAction(int actionId);
     }
 }
 

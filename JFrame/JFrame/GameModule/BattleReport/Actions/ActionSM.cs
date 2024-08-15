@@ -1,5 +1,6 @@
 ﻿using Stateless;
 using System;
+using System.Collections.Generic;
 using System.Xml;
 
 
@@ -18,6 +19,8 @@ namespace JFrame
         }
 
         StateMachine<ActionState, Trigger> machine;
+
+        StateMachine<ActionState, Trigger>.TriggerWithParameters<List<IBattleUnit>> setTargetsTrigger;
 
         BaseAction context;
 
@@ -39,6 +42,8 @@ namespace JFrame
             //配置游戏状态机
             machine = new StateMachine<ActionState, Trigger>(disableState /*() => _state, s => _state = s*/);
 
+            setTargetsTrigger = machine.SetTriggerParameters<List<IBattleUnit>>(Trigger.Execute);
+
             machine.Configure(disableState)
                 .OnEntry(() => { OnEnterDisable(disableState); })
                 .OnExit(() => { OnExitDisable(disableState); })
@@ -57,7 +62,8 @@ namespace JFrame
 
             //释放中
             machine.Configure(executingState)
-                .OnEntry(() => { OnEnterExecuting(executingState); })
+                .OnEntryFrom(setTargetsTrigger,(targets) => OnEnterExecuting(executingState, targets))
+                //.OnEntry(() => { OnEnterExecuting(executingState); })
                 .OnExit(() => { OnExitExecuting(executingState); })
                 .Permit(Trigger.Disable, disableState)
                 .Permit(Trigger.Dead, deadState)
@@ -136,9 +142,9 @@ namespace JFrame
              readyState.OnEnter(context);
         }
 
-        private  void OnEnterExecuting(ActionExecuting runningState)
+        private  void OnEnterExecuting(ActionExecuting executingState, List<IBattleUnit> targets)
         {
-             runningState.OnEnter(context);
+             executingState.OnEnter(context, targets);
         }
 
         private  void OnEnterCding(ActionCding endingState)

@@ -128,6 +128,22 @@ namespace JFrameTest
             action1.Received(1).Cast();
             action2.Received(1).Cast();
         }
+
+
+        /// </summary>
+        [Test]
+        public void TestActionSMExecutingState()
+        {
+            //arrange
+            var action = Substitute.For<IBattleAction>();
+
+            //action
+            action.Cast();
+
+            //expect
+
+
+        }
     }
 
 

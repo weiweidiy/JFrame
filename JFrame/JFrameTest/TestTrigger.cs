@@ -124,6 +124,25 @@ namespace JFrameTest
         }
 
 
+        [Test]
+        public void TestActionCastTrigger()
+        {
+            //arrange
+            var targetAcitionId = 9100;
+            var trigger = new ActionCastTrigger(simBattle, new float[] { targetAcitionId });
+            var owner = Substitute.For<IBattleUnit>();
+            var ownerAction = Substitute.For<IBattleAction>();  
+            var targetAcition = Substitute.For<IBattleAction>();
+            ownerAction.Owner.Returns(owner);
+            owner.GetAction(targetAcitionId).Returns(targetAcition);
+
+            //action
+            trigger.OnAttach(ownerAction);
+            targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>,float>>(targetAcition, null, 1f);
+
+            //expect
+            Assert.AreEqual(true, trigger.IsOn());
+        }
     }
 
     

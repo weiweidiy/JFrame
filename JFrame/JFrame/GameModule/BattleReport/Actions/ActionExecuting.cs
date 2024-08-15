@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -14,15 +15,15 @@ namespace JFrame
 
         float duration = 1f; //临时，从action中获取
 
-        public override void OnEnter(BaseAction context)
+        public void OnEnter(BaseAction context, List<IBattleUnit> targets)
         {
-            base.OnEnter(context); //要先调用
-
-
+            OnEnter(context);
 
             //获取目标 to do:不用再找，通过standby
-            var targets = context.FindTargets();
-            if (targets == null || targets.Count == 0)
+            if(targets == null)
+                 targets = context.FindTargets();
+
+            if ((targets == null || targets.Count == 0) && context.Mode == ActionMode.Active)
             {
                 return;
                 //throw new Exception("释放时，没有找到目标 " + context.Id);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -49,6 +50,7 @@ namespace JFrame
         /// 是否可用
         /// </summary>
         bool isEnable = true;
+
 
         public BaseBattleTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0)
         {
