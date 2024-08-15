@@ -113,22 +113,22 @@ namespace JFrame
 
         private void Team_onBufferAdded(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.UID,  buffer.Id });
+            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.Uid,  buffer.Id });
         }
 
         private void Team_onBufferCast(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
+            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.Uid, buffer.Id });
         }
 
         private void Team_onBufferRemoved(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.UID, buffer.Id });
+            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.Uid, buffer.Id });
         }
 
         private void Team_onBufferUpdate(PVPBattleManager.Team arg1, IBattleUnit target, IBuffer buffer, int foldCount, float[] args)
         {
-            AddReportData(target.UID, ReportType.UpdateBuffer, target.UID, new object[] { buffer.UID, buffer.Id , foldCount, args});
+            AddReportData(target.UID, ReportType.UpdateBuffer, target.UID, new object[] { buffer.Uid, buffer.Id , foldCount, args});
         }
 
         private void Team_onDebuffAnti(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int debuffId)

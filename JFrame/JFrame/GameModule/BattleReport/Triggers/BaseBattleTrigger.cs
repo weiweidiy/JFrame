@@ -44,7 +44,7 @@ namespace JFrame
         /// <summary>
         /// 触发状态
         /// </summary>
-        protected bool isOn;
+        bool isOn;
 
         /// <summary>
         /// 是否可用
@@ -134,9 +134,9 @@ namespace JFrame
         /// <summary>
         /// 设置无效
         /// </summary>
-        public void SetInValid()
+        public void SetOn(bool isOn)
         {
-            isOn = false;
+            this.isOn = isOn;
         }
 
         /// <summary>

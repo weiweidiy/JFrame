@@ -8,6 +8,8 @@ namespace JFrame
         Normal,    
         AfterDead, //死亡后触发
     }
+
+
     public interface IBattleTrigger
     {
         BattleTriggerType TriggerType { get; }
@@ -42,6 +44,6 @@ namespace JFrame
         /// <summary>
         /// 设置无效
         /// </summary>
-        void SetInValid();
+        void SetOn(bool isOn);
     }
 }

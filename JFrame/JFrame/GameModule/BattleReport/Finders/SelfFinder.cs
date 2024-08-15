@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -17,5 +18,22 @@ namespace JFrame
         }
     }
 
+
+    public class NewSelfFinder : NewBaseTargetFinder
+    {
+        public NewSelfFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
+        {
+        }
+
+        public override List<IBattleUnit> FindTargets()
+        {
+            var owner = Owner as IBattleAction;
+
+            if (owner == null)
+                throw new Exception("attach owner 转换失败 ");
+
+            return new List<IBattleUnit>() { owner.Owner };
+        }
+    }
 
 }

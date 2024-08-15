@@ -17,7 +17,27 @@
         {
             base.OnDelayCompleteEveryFrame();
 
-            isOn = true;
+            SetOn(true);
+        }
+    }
+
+    /// <summary>
+    /// 战斗开始触发，只触发1次  arg: 没用 type = 3
+    /// </summary>
+    public class NewBattleStartTrigger : NewBattleTrigger
+    {
+        public NewBattleStartTrigger(IPVPBattleManager battleManager, float[] arg, float delay = 0) : base(battleManager, arg, delay)
+        {
+
+        }
+
+
+
+        protected override void OnDelayCompleteEveryFrame()
+        {
+            base.OnDelayCompleteEveryFrame();
+
+            SetOn(true);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace JFrame
         /// <summary>
         /// 唯一ID
         /// </summary>
-        public virtual string UID { get; private set; }
+        public virtual string Uid { get; private set; }
 
         /// <summary>
         /// 叠加层数
@@ -45,7 +45,7 @@ namespace JFrame
         public Buffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args)
         {
             Id = id;
-            this.UID = UID;
+            this.Uid = UID;
             this.Args = args;
             this.FoldCount = foldCount;
             this.caster = caster;

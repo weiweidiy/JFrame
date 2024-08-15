@@ -19,7 +19,7 @@
 
         private void Action_onStartCast(IBattleAction arg1, System.Collections.Generic.List<IBattleUnit> arg2, float arg3)
         {
-            isOn = true;
+            SetOn(true);
         }
     }
 }

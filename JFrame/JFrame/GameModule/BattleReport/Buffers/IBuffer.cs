@@ -2,7 +2,7 @@
 
 namespace JFrame
 {
-    public interface IBuffer
+    public interface IBuffer :  IUnique
     {
         /// <summary>
         /// 触发效果了
@@ -13,11 +13,6 @@ namespace JFrame
         /// Id
         /// </summary>
          int Id { get;  }
-
-        /// <summary>
-        /// 唯一ID
-        /// </summary>
-         string UID { get;  }
 
         /// <summary>
         /// 叠加层数

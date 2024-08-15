@@ -34,4 +34,32 @@ namespace JFrame
     }
 
 
+    public class NewOrderOppoFinder : NewBaseTargetFinder
+    {
+
+        public NewOrderOppoFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg) { }
+
+        /// <summary>
+        /// 获取攻击目标
+        /// </summary>
+        /// <returns></returns>
+        public override List<IBattleUnit> FindTargets()
+        {
+            var result = new List<IBattleUnit>();
+
+            var units = manger.GetUnits(manger.GetOppoTeam(selfPoint.Team));
+
+            //debug
+            foreach (var unit in units)
+            {
+                if (unit.IsAlive() && result.Count < arg)
+                {
+                    result.Add(unit);
+                }
+            }
+
+            return result;
+        }
+    }
+
 }

@@ -36,11 +36,11 @@ namespace JFrame
             //如果当前次数小于使用次数，则通知
             if(amount < GetAmount())
             {
-                isOn = true;
+                SetOn(true);
             }
             else
             {
-                isOn = false;
+                SetOn(false);
             }
         }
 

@@ -107,7 +107,7 @@ namespace JFrame
             for(int i = buffers.Count -1; i >= 0; i --)
             {
                 var buff = buffers[i];
-                RemoveBuffer(buff.UID);
+                RemoveBuffer(buff.Uid);
             }
         }
 
@@ -125,8 +125,8 @@ namespace JFrame
                 //如果buffer失效了，则移除
                 if(!buffer.IsValid())
                 {
-                    if (!RemoveBuffer(buffer.UID))
-                        throw new InvalidOperationException("删除buff失败，参数错误" + buffer.UID);
+                    if (!RemoveBuffer(buffer.Uid))
+                        throw new InvalidOperationException("删除buff失败，参数错误" + buffer.Uid);
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace JFrame
         /// <returns></returns>
         public IBuffer GetBuffer(string uid)
         {
-            return buffers.Where(buffer => buffer.UID.Equals(uid)).SingleOrDefault();
+            return buffers.Where(buffer => buffer.Uid.Equals(uid)).SingleOrDefault();
         }
 
         /// <summary>

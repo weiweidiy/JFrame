@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -29,6 +30,32 @@ namespace JFrame
     }
 
 
+    public abstract class NewBaseTargetFinder : INewBattleTargetFinder
+    {
+        protected BattlePoint selfPoint;
+        protected IPVPBattleManager manger;
+        protected float arg;
 
+        public NewBaseTargetFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg)
+        {
+            this.selfPoint = selfPoint;
+            this.manger = manger;
+            this.arg = arg;
+        }
+
+        public IAttachOwner Owner { get; private set; }
+
+        public abstract List<IBattleUnit> FindTargets();
+
+        public void OnAttach(IAttachOwner target)
+        {
+            Owner = target;
+        }
+
+        public void OnDetach()
+        {
+            //throw new System.NotImplementedException();
+        }
+    }
 
 }

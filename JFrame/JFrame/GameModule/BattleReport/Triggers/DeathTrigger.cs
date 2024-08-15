@@ -23,10 +23,40 @@ namespace JFrame
 
             if (!Owner.Owner.IsAlive() && !hited)
             {
-                isOn = true;
+                SetOn(true);
                 hited = true;
             }
  
+        }
+
+    }
+
+    public class NewDeathTrigger : NewBattleTrigger
+    {
+        bool hited;
+
+        public NewDeathTrigger(IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0) : base(pvpBattleManager, arg, delay)
+        { }
+
+        public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
+
+
+
+
+        protected override void OnDelayCompleteEveryFrame()
+        {
+            base.OnDelayCompleteEveryFrame();
+
+            var owner = Owner as IBattleAction;
+            if (owner == null)
+                throw new Exception("attach owner 转换失败 ");
+
+            if (!owner.Owner.IsAlive() && !hited)
+            {
+                SetOn(true);
+                hited = true;
+            }
+
         }
 
     }

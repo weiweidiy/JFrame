@@ -313,7 +313,7 @@ namespace JFrameTest
             var buffDataSource = Substitute.For<BufferDataSource>();
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
             var buffer = Substitute.For<JFrame.Buffer>(null, bufferUID, 1, 1, new float[] { });
-            buffer.UID.Returns(bufferUID);
+            buffer.Uid.Returns(bufferUID);
             buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<ActionManager>(), buffManager);
@@ -335,7 +335,7 @@ namespace JFrameTest
             var buffFactory = Substitute.For<BufferFactory>(buffDataSource);
             //var buffer = new DurationBuffer("1", 1, 1, new float[] {1});
             var buffer = Substitute.For<JFrame.DurationBuffer>(null, bufferUID, 1, 1, new float[] { 1f });
-            buffer.UID.Returns(bufferUID);
+            buffer.Uid.Returns(bufferUID);
             buffer.IsValid().Returns(false);
             buffer.GetDuration().Returns(1f);
             buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);

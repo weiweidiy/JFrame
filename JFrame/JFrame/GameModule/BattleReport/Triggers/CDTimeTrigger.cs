@@ -32,10 +32,10 @@ namespace JFrame
             //更新cd
             if (delta >= GetDuration() && GetEnable())
             {
-                isOn = true;
+                SetOn(true);
             }
             else
-                isOn = false;
+                SetOn(false);
         }
     }
 }

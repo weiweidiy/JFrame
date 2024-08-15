@@ -58,6 +58,7 @@ namespace JFrameTest
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();
             action1.Id.Returns(1);
+            action1.Mode.Returns(ActionMode.Active);
             manager.Add(action1);
 
             //action
@@ -81,8 +82,10 @@ namespace JFrameTest
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();
             action1.Id.Returns(1);
+            action1.Mode.Returns(ActionMode.Active);
             var action2 = Substitute.For<IBattleAction>();
             action2.Id.Returns(2);
+            action2.Mode.Returns(ActionMode.Active);
             manager.Add(action1);
             manager.Add(action2);
 
@@ -110,9 +113,11 @@ namespace JFrameTest
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();
             action1.Id.Returns(1);
+            action1.Mode.Returns(ActionMode.Active);
             action1.Cast().Returns(1f);
             var action2 = Substitute.For<IBattleAction>();
             action2.Id.Returns(2);
+            action2.Mode.Returns(ActionMode.Active);
             manager.Add(action1);
             manager.Add(action2);
 
