@@ -2,40 +2,13 @@
 
 namespace JFrame
 {
-    /// <summary>
-    /// 本体死亡触发，只能1次  arg : 没用  type = 2
-    /// </summary>
+
+
     public class DeathTrigger : BaseBattleTrigger
     {
         bool hited;
 
-        public DeathTrigger( IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0):base(pvpBattleManager, arg, delay)
-        { }
-
-        public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
-
-
-
-
-        protected override void OnDelayCompleteEveryFrame()
-        {
-            base.OnDelayCompleteEveryFrame();
-
-            if (!Owner.Owner.IsAlive() && !hited)
-            {
-                SetOn(true);
-                hited = true;
-            }
- 
-        }
-
-    }
-
-    public class NewDeathTrigger : NewBattleTrigger
-    {
-        bool hited;
-
-        public NewDeathTrigger(IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0) : base(pvpBattleManager, arg, delay)
+        public DeathTrigger(IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0) : base(pvpBattleManager, arg, delay)
         { }
 
         public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
@@ -61,3 +34,32 @@ namespace JFrame
 
     }
 }
+
+///// <summary>
+///// 本体死亡触发，只能1次  arg : 没用  type = 2
+///// </summary>
+//public class DeathTrigger : BaseBattleTrigger
+//{
+//    bool hited;
+
+//    public DeathTrigger( IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0):base(pvpBattleManager, arg, delay)
+//    { }
+
+//    public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
+
+
+
+
+//    protected override void OnDelayCompleteEveryFrame()
+//    {
+//        base.OnDelayCompleteEveryFrame();
+
+//        if (!Owner.Owner.IsAlive() && !hited)
+//        {
+//            SetOn(true);
+//            hited = true;
+//        }
+
+//    }
+
+//}

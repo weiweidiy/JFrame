@@ -85,7 +85,7 @@ namespace JFrame
         /// <summary>
         /// 条件触发器
         /// </summary>
-        public INewBattleTrigger ConditionTrigger { get; private set; }
+        public IBattleTrigger ConditionTrigger { get; private set; }
 
         /// <summary>
         /// 冷却触发器
@@ -95,12 +95,12 @@ namespace JFrame
         /// <summary>
         /// 目标搜索器
         /// </summary>
-        public INewBattleTargetFinder finder { get; private set; }
+        public IBattleTargetFinder finder { get; private set; }
 
         /// <summary>
         /// 效果执行器
         /// </summary>
-        public List<INewBattleExecutor> exeutors { get; private set; }
+        public List<IBattleExecutor> exeutors { get; private set; }
 
        
 
@@ -118,7 +118,7 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, ActionType type, float duration, INewBattleTrigger trigger, INewBattleTargetFinder finder, List<INewBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
+        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
         {
             this.Type = type;
             this.castDuration = duration;

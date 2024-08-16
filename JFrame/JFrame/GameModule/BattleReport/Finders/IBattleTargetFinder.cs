@@ -2,12 +2,19 @@
 
 namespace JFrame
 {
-    public interface IBattleTargetFinder
+
+
+    public interface IBattleTargetFinder : IAttachable
     {
-        IBattleAction Owner { get; }
-
         List<IBattleUnit> FindTargets();
-
-        void OnAttach(IBattleAction action);
     }
 }
+
+//public interface IBattleTargetFinder
+//{
+//    IBattleAction Owner { get; }
+
+//    List<IBattleUnit> FindTargets();
+
+//    void OnAttach(IBattleAction action);
+//}

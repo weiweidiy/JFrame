@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class ActiveAction : BaseAction
     {
-        public ActiveAction(string UID, int id, ActionType type, float duration, INewBattleTrigger conditionTrigger, INewBattleTargetFinder finder, List<INewBattleExecutor> exutors, IBattleTrigger cdTrigger, ActionSM sm) : base(UID, id, type, duration, conditionTrigger, finder, exutors, cdTrigger, sm)
+        public ActiveAction(string UID, int id, ActionType type, float duration, IBattleTrigger conditionTrigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger, ActionSM sm) : base(UID, id, type, duration, conditionTrigger, finder, exutors, cdTrigger, sm)
         {
         }
 

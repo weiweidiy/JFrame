@@ -4,9 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
-
-
-    public abstract class NewBuffer : IBuffer
+    public abstract class NewBuffer : INewBuffer
     {
         public event Action<IBuffer> onCast;
 
@@ -35,10 +33,10 @@ namespace JFrame
         /// </summary>
         public float[] Args { get; set; }
 
-        /// <summary>
-        /// 目标对象
-        /// </summary>
-        protected IBattleUnit target;
+        ///// <summary>
+        ///// 目标对象
+        ///// </summary>
+        public IAttachOwner Owner { get; private set; }
 
         /// <summary>
         /// 释放者
@@ -60,6 +58,7 @@ namespace JFrame
         /// 效果执行器
         /// </summary>
         public List<IBattleExecutor> exeutors { get; private set; }
+
 
 
         public NewBuffer(IBattleUnit caster, string UID, int id, int foldCount, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
@@ -88,9 +87,31 @@ namespace JFrame
         /// <param name="info"></param>
         private void Executor_onHittingTarget(IBattleUnit unit, ExecuteInfo info)
         {
-            
+
         }
 
+        public float Cast()
+        {
+            //释放
+            var targets = finder.FindTargets();
+            if (targets == null || targets.Count == 0)
+                throw new Exception("buff cast 没有找到有效目标 " + Id);
+
+            foreach(var e in exeutors)
+            {
+                // to do: ibattleaction接口参数要替换成iattachowner
+                e.ReadyToExecute(caster, null, targets);
+            }
+
+            ConditionTrigger.SetOn(false);
+
+            return 0f;
+        }
+
+        public bool CanCast()
+        {
+            return ConditionTrigger.IsOn();
+        }
 
 
         /// <summary>
@@ -98,34 +119,33 @@ namespace JFrame
         /// </summary>
         public abstract bool IsValid();
 
-        /// <summary>
-        /// 被添加上时
-        /// </summary>
-        public virtual void OnAttach(IBattleUnit target)
+
+
+        public void OnAttach(IAttachOwner target)
         {
-            this.target = target;
+            this.Owner = target;
 
-            //if (ConditionTrigger != null)
-            //    ConditionTrigger.OnAttach(this);
+            if (ConditionTrigger != null)
+            {
+                ConditionTrigger.OnAttach(this);
+            }
+                
 
-            //if (finder != null)
-            //    finder.OnAttach(this);
+            if (finder != null)
+                finder.OnAttach(this);
 
-            //if (exeutors != null)
-            //{
-            //    foreach (var executor in exeutors)
-            //    {
-            //        executor.OnAttach(this);
-            //    }
-            //}
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.OnAttach(this);
+                }
+            }
         }
 
-        /// <summary>
-        /// 被移除时
-        /// </summary>
-        public virtual void OnDettach()
+        public void OnDetach()
         {
-
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -133,7 +153,8 @@ namespace JFrame
         /// </summary>
         public virtual void Update(BattleFrame frame)
         {
-
+            if (ConditionTrigger != null)
+                ConditionTrigger.Update(frame);
         }
 
         /// <summary>
@@ -144,6 +165,8 @@ namespace JFrame
         {
             FoldCount += foldCount;
         }
+
+
     }
 }
 

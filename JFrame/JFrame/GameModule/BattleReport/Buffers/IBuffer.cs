@@ -2,6 +2,62 @@
 
 namespace JFrame
 {
+    public interface INewBuffer : IUnique , IAttachOwner , IAttachable
+    {
+        /// <summary>
+        /// 触发效果了
+        /// </summary>
+        event Action<IBuffer> onCast;
+
+        /// <summary>
+        /// Id
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
+        /// 叠加层数
+        /// </summary>
+        int FoldCount { get; }
+
+        /// <summary>
+        /// 添加buffer层数
+        /// </summary>
+        /// <param name="foldCount"></param>
+        void AddFoldCount(int foldCount);
+
+        /// <summary>
+        /// 参数列表
+        /// </summary>
+        float[] Args { get; set; }
+
+        /// <summary>
+        /// buffer是否有效（时间到了，或者数值消耗完了等等）
+        /// </summary>
+        bool IsValid();
+
+        /// <summary>
+        /// 更新帧
+        /// </summary>
+        void Update(BattleFrame frame);
+
+        /// <summary>
+        /// 触发实际效果
+        /// </summary>
+        /// <returns></returns>
+        float Cast();
+
+        /// <summary>
+        /// 是否能释放
+        /// </summary>
+        /// <returns></returns>
+        bool CanCast();
+    }
+
+
+
+
+
+
     public interface IBuffer :  IUnique
     {
         /// <summary>

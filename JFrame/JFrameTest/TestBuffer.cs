@@ -201,7 +201,7 @@ namespace JFrameTest
         public void TestBufferLightningFlag()
         {
             //arrange
-            var value = 2.5f;
+            var value = 5f;
             
             var target = Substitute.For<IBattleUnit>();
             var action = Substitute.For<IBattleAction>();

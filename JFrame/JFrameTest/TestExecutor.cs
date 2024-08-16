@@ -79,12 +79,12 @@ namespace JFrameTest
             caster.Atk.Returns(1);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
 
 
             //action
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(caster, action, targets);
 
             //expect
@@ -104,11 +104,11 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var target2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 20, uid = "2" }, null, null);
             var targets = new List<IBattleUnit>() { target , target2 };
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
 
             //action
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(caster, action, targets);
 
             //expect
@@ -147,11 +147,11 @@ namespace JFrameTest
             var executor = new ExecutorHpDamage(new FormulaManager(), new float[4] { 1, 0, 0, 0.1f });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
 
             //action
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(Substitute.For<IBattleUnit>(), action, targets);
 
             //expect
@@ -170,9 +170,9 @@ namespace JFrameTest
             var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
             caster.MaxHP.Returns(100);
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(caster);
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
 
             //action
             executor.Hit(caster, action, targets);
@@ -195,11 +195,11 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, bufferManager);
             var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(caster);
 
             //action
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(caster, null, targets);
 
             //expect
@@ -236,12 +236,12 @@ namespace JFrameTest
             caster.Atk.Returns(1);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(caster);
 
 
             //action
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(caster, null, targets);
 
             //expect
@@ -278,12 +278,12 @@ namespace JFrameTest
             var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
             var caster = new BattleUnit(new BattleUnitInfo() { atk = 20, hp = 100, uid = "2" }, null, null);
             var targets = new List<IBattleUnit>() { target };
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
 
             //action
             caster.OnDamage(target, null, new ExecuteInfo() { Value = 50 });
-            executor.OnAttach(action);
+            executor.OnAttach(action as IAttachOwner);
             executor.Hit(caster, action, targets);
 
             //expect

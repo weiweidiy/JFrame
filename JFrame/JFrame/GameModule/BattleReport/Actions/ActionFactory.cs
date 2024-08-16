@@ -13,9 +13,9 @@ namespace JFrame
         PVPBattleManager pvpBattleManager;
         FormulaManager formulaManager;
         BattleUnitInfo unitInfo = default;
-        NewTriggerFactory conditionTriggerFactory = new NewTriggerFactory();
-        NewFinderFactory finderFactory = new NewFinderFactory();
-        NewExecutorFactory executorFactory = new NewExecutorFactory();
+        TriggerFactory conditionTriggerFactory = new TriggerFactory();
+        FinderFactory finderFactory = new FinderFactory();
+        ExecutorFactory executorFactory = new ExecutorFactory();
         public ActionFactory(BattleUnitInfo unitInfo, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager, FormulaManager formulaManager)
         {
             this.unitInfo = unitInfo;
@@ -153,9 +153,9 @@ namespace JFrame
         /// <param name="unitId"></param>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        List<INewBattleExecutor> CreateExecutors(string unitUID, int unitId, int actionId)
+        List<IBattleExecutor> CreateExecutors(string unitUID, int unitId, int actionId)
         {
-            var result = new List<INewBattleExecutor>();
+            var result = new List<IBattleExecutor>();
             var executors = actionDataSource.GetExcutorTypes(unitUID, unitId, actionId);
 
             //foreach (var executorId in executors)

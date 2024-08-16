@@ -36,14 +36,14 @@ namespace JFrameTest
             //arrange
             var trigger = new DeathTrigger(simBattle, new float[] { 0 });
             var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(unit1);
             //bool triggerOn = false;
             //int count = 0;
             //trigger.onTrigger += () => { triggerOn = true; count++; };
 
             //action
-            trigger.OnAttach(action);
+            trigger.OnAttach(action as IAttachOwner);
             unit1.OnDamage(null, null, new ExecuteInfo() { Value = 10 });
             unit1.OnDamage(null, null, new ExecuteInfo() { Value = 10 });
             trigger.Update(frame);
@@ -61,8 +61,8 @@ namespace JFrameTest
         {
             //arrange
             var trigger = new CDTimeTrigger(simBattle, new float[] { 3 });
-            bool triggerOn = false;
-            int count = 0;
+            //bool triggerOn = false;
+            //int count = 0;
             //trigger.onTrigger += () => { triggerOn = true; count++; };
             frame.DeltaTime.Returns(3);
 
@@ -112,11 +112,11 @@ namespace JFrameTest
             simBattle.GetUnits(Arg.Any<Team>()).Returns(new List<IBattleUnit>() { friend , friend2 });
             simBattle.GetFriendTeam(Arg.Any<IBattleUnit>()).Returns(Team.Attacker);
             frame.DeltaTime.Returns(2);
-            var action = Substitute.For<IBattleAction>();
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(friend2);
 
             //action
-            trigger.OnAttach(action);
+            trigger.OnAttach(action as IAttachOwner);
             trigger.Update(frame);
 
             //expect
@@ -131,13 +131,13 @@ namespace JFrameTest
             var targetAcitionId = 9100;
             var trigger = new ActionCastTrigger(simBattle, new float[] { targetAcitionId });
             var owner = Substitute.For<IBattleUnit>();
-            var ownerAction = Substitute.For<IBattleAction>();  
-            var targetAcition = Substitute.For<IBattleAction>();
+            var ownerAction = Substitute.For<IBattleAction, IAttachOwner>();  
+            var targetAcition = Substitute.For<IBattleAction, IAttachOwner>();
             ownerAction.Owner.Returns(owner);
             owner.GetAction(targetAcitionId).Returns(targetAcition);
 
             //action
-            trigger.OnAttach(ownerAction);
+            trigger.OnAttach(ownerAction as IAttachOwner);
             targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>,float>>(targetAcition, null, 1f);
 
             //expect
