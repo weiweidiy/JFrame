@@ -11,6 +11,9 @@ namespace JFrame
 
     public interface IBattleTrigger : IAttachable
     {
+
+        event Action<IBattleTrigger, object> onTriggerOn;
+
         BattleTriggerType TriggerType { get; }
 
         void SetEnable(bool isOn);
@@ -42,6 +45,12 @@ namespace JFrame
         /// 设置无效
         /// </summary>
         void SetOn(bool isOn);
+
+        /// <summary>
+        /// 获取透传参数，比如触发的目标敌人，比如受到伤害时触发的伤害对象
+        /// </summary>
+        /// <returns></returns>
+        object GetExtraArg();
     }
 
     //public interface IBattleTrigger

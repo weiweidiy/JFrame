@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
-
+    /// <summary>
+    /// type ?
+    /// </summary>
     public class ActionCastTrigger : BaseBattleTrigger 
     {
         int targetAciontId;

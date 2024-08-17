@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -35,50 +36,192 @@ namespace JFrame
         /// <summary>
         /// 目标对象
         /// </summary>
-        protected IBattleUnit target;
+        public virtual IBattleUnit Owner { get; private set; }
 
         /// <summary>
         /// 释放者
         /// </summary>
-        protected IBattleUnit caster;
+        protected IBattleUnit Caster { get; private set; }
 
-        public Buffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args)
+        /// <summary>
+        /// 条件触发器
+        /// </summary>
+        public IBattleTrigger ConditionTrigger { get; private set; }
+
+        /// <summary>
+        /// 目标搜索器
+        /// </summary>
+        public IBattleTargetFinder finder { get; private set; }
+
+        /// <summary>
+        /// 效果执行器
+        /// </summary>
+        public List<IBattleExecutor> exeutors { get; private set; }
+
+        public string Name => throw new NotImplementedException();
+
+        protected bool isValid;
+
+        public Buffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args,  IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
         {
             Id = id;
             this.Uid = UID;
             this.Args = args;
             this.FoldCount = foldCount;
-            this.caster = caster;
+            this.ConditionTrigger = trigger;
+            this.finder = finder;
+            this.exeutors = exutors;
+
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.onHittingTarget += Executor_onHittingTarget;
+                }
+            }
+
+            isValid = true;
         }
-
-
-
-        /// <summary>
-        /// buffer是否有效（时间到了，或者数值消耗完了等等）
-        /// </summary>
-        public abstract bool IsValid();
 
         /// <summary>
         /// 被添加上时
         /// </summary>
         public virtual void OnAttach(IBattleUnit target)
         {
-            this.target = target;
+            this.Owner = target;
+
+            if (ConditionTrigger != null)
+            {
+                ConditionTrigger.OnAttach(this);
+                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
+            }
+
+
+            if (finder != null)
+                finder.OnAttach(this);
+
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.OnAttach(this);
+                }
+            }
         }
+
+
 
         /// <summary>
         /// 被移除时
         /// </summary>
         public virtual void OnDettach()
         {
+            if (ConditionTrigger != null)
+            {
+                ConditionTrigger.OnDetach();
+            }
 
+
+            if (finder != null)
+                finder.OnDetach();
+
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.OnDetach();
+                }
+            }
         }
 
+        /// <summary>
+        /// 触发器触发了（一半是需要立即执行的）
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object arg2)
+        {
+            var targets = finder.FindTargets();
+            if (targets == null || targets.Count == 0)
+                throw new Exception("buff cast 没有找到有效目标 " + Id);
+
+            foreach (var e in exeutors)
+            {
+                // to do: ibattleaction接口参数要替换成iattachowner
+                e.Hit(Caster, null, targets, arg2);
+            }
+
+            ConditionTrigger.SetOn(false);
+        }
+
+
+        /// <summary>
+        /// buffer 执行效果命中
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="info"></param>
+        private void Executor_onHittingTarget(IBattleUnit unit, ExecuteInfo info)
+        {
+            
+        }
+
+        public void SetValid(bool valid)
+        {
+            isValid = valid;
+        }
+
+
+        public float Cast()
+        {
+            //释放
+            var targets = finder.FindTargets();
+            if (targets == null || targets.Count == 0)
+                throw new Exception("buff cast 没有找到有效目标 " + Id);
+
+            foreach (var e in exeutors)
+            {
+                // to do: ibattleaction接口参数要替换成iattachowner
+                e.ReadyToExecute(Caster, null, targets);
+            }
+
+            ConditionTrigger.SetOn(false);
+
+            return 0f;
+        }
+
+
+        public bool CanCast()
+        {
+            return ConditionTrigger.IsOn();
+        }
+
+        /// <summary>
+        /// buffer是否有效（时间到了，或者数值消耗完了等等）
+        /// </summary>
+        public virtual bool IsValid()
+        {
+            return isValid;
+        }
+
+    
         /// <summary>
         /// 更新帧
         /// </summary>
         public virtual void Update(BattleFrame frame)
         {
+            if (ConditionTrigger != null)
+                ConditionTrigger.Update(frame);
+
+            if(exeutors != null)
+            {
+                foreach (var e in exeutors)
+                {
+                    if(e.Active)
+                    {
+                        e.Update(frame);
+                    }
+                }
+            }
 
         }
 
@@ -90,6 +233,13 @@ namespace JFrame
         {
             FoldCount += foldCount;
         }
+
+        public float GetFoldCount()
+        {
+            return FoldCount;
+        }
+
+        public abstract float GetDuration();
     }
 }
 

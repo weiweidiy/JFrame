@@ -21,16 +21,16 @@ namespace JFrame
 
         IBattleExecutor executor;
 
-        public BufferLightningFlag(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferLightningFlag(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferLightningFlag 参数不能少于2个");
         }
 
-        public override bool IsValid()
-        {
-            return FoldCount < GetTriggeValue();
-        }
+        //public override bool IsValid()
+        //{
+        //    return FoldCount < GetTriggeValue();
+        //}
 
         /// <summary>
         /// 触发值
@@ -76,12 +76,12 @@ namespace JFrame
                 //创建执行器
                 float[] arg = new float[4] { 3, 0, 0.2f, 1 };
                 executor = new ExecutorDamage(new FormulaManager(), arg);
-                executor.ReadyToExecute(caster, null, new List<IBattleUnit>() { target });
+                executor.ReadyToExecute(Caster, null, new List<IBattleUnit>() { Owner });
             }
             else
             {
                 //加攻速
-                var actions = target.GetActions();
+                var actions = Owner.GetActions();
                 foreach (var action in actions)
                 {
                     if (action.Type == ActionType.Normal) //普通攻击
@@ -109,7 +109,7 @@ namespace JFrame
         {
             base.OnDettach();
 
-            var actions = target.GetActions();
+            var actions = Owner.GetActions();
             foreach (var action in actions)
             {
                 if (action.Type == ActionType.Normal) //普通攻击
@@ -183,6 +183,11 @@ namespace JFrame
 
             if(executor != null)
                 executor.Update(frame); 
+        }
+
+        public override float GetDuration()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

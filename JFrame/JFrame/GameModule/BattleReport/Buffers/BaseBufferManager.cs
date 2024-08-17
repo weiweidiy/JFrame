@@ -128,6 +128,9 @@ namespace JFrame
                     if (!RemoveBuffer(buffer.Uid))
                         throw new InvalidOperationException("删除buff失败，参数错误" + buffer.Uid);
                 }
+
+                if (buffer.CanCast())
+                    buffer.Cast();
             }
         }
 

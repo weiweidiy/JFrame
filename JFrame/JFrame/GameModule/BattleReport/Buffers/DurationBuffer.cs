@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -15,7 +16,7 @@ namespace JFrame
         /// <summary>
         /// buffer是否有效
         /// </summary>
-        bool isValid;
+        //bool isValid;
 
         /// <summary>
         /// 周期buffer , 第一个参数是周期时间
@@ -25,7 +26,7 @@ namespace JFrame
         /// <param name="foldCount"></param>
         /// <param name="args"></param>
         /// <exception cref="ArgumentException"></exception>
-        public DurationBuffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID,id, foldCount,args)
+        public DurationBuffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args == null || args.Length == 0)
                 throw new ArgumentException("durationbuffer 参数不能为空 ，需要有个持续时间参数" + id);
@@ -33,20 +34,20 @@ namespace JFrame
         }
 
 
-        /// <summary>
-        /// 是否有效
-        /// </summary>
-        /// <returns></returns>
-        public override bool IsValid()
-        {
-            return isValid;
-        }
+        ///// <summary>
+        ///// 是否有效
+        ///// </summary>
+        ///// <returns></returns>
+        //public override bool IsValid()
+        //{
+        //    return isValid;
+        //}
 
         /// <summary>
         /// 获取周期
         /// </summary>
         /// <returns></returns>
-        public virtual float GetDuration()
+        public override float GetDuration()
         {
             return Args[0];
         }
@@ -80,6 +81,7 @@ namespace JFrame
 
             isValid = true;
         }
+
     }
 }
 

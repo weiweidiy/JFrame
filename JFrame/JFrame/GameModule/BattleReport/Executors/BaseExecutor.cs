@@ -85,6 +85,7 @@ namespace JFrame
         IBattleUnit caster;
         IBattleAction action;
         List<IBattleUnit> targets;
+        object triggerArg;
 
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace JFrame
 
             delta = 0f;
             //延迟完成了
-            Hit(caster, action, targets);
+            Hit(caster, action, targets, triggerArg);
 
             tempCount++;
 
@@ -130,8 +131,8 @@ namespace JFrame
         /// </summary>
         /// <param name="caster"></param>
         /// <param name="action"></param>
-        /// <param name="target"></param>
-        public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target);
+        /// <param name="targets"></param>
+        public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object triggerArg = null);
 
         /// <summary>
         /// 准备释放
@@ -140,7 +141,7 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="target"></param>
         /// <exception cref="Exception"></exception>
-        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        public void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
         {
             if (Active)
                 throw new Exception("执行器正在执行中，无法再次执行" + this.GetType().ToString());
@@ -151,6 +152,7 @@ namespace JFrame
             this.caster = caster;
             this.action = action;
             this.targets = targets;
+            triggerArg = arg;
         }
 
         public virtual void OnAttach(IAttachOwner action)
@@ -169,7 +171,7 @@ namespace JFrame
             delta = 0;
         }
 
-        public void OnDetach()
+        public virtual void OnDetach()
         {
             //throw new NotImplementedException();
         }

@@ -338,5 +338,20 @@ namespace JFrame
         {
            ConditionTrigger.SetEnable(enable);
         }
+
+        public float GetFoldCount()
+        {
+            return 1f;
+        }
+
+        public float GetDuration()
+        {
+            return float.MaxValue;
+        }
+
+        public void SetValid(bool valid)
+        {
+            
+        }
     }
 }

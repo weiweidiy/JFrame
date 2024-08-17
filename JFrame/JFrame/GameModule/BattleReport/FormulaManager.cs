@@ -64,7 +64,7 @@ namespace JFrame
         {
             var r = new Random().NextDouble();
 
-            return r <= hitter.Cri;
+            return r <= hitter.Critical;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace JFrame
         /// <returns></returns>
         float GetCriDmg(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            return 1 + Math.Max(hitter.CriDmgRate - hittee.CriDmgAnti, 0);
+            return 1 + Math.Max(hitter.CriticalDamage - hittee.CriticalDamageResist, 0);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace JFrame
         /// <returns></returns>
         float GetDmgRate(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            return 1 + Math.Max(hitter.DmgRate - hittee.DmgAnti, 0);
+            return 1 + Math.Max(hitter.DamageEnhance - hittee.DamageReduce, 0);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         private float GetSkillDmgRate(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            return 1 + Math.Max(hitter.SkillDmgRate - hittee.SkillDmgAnti, 0);
+            return 1 + Math.Max(hitter.SkillDamageEnhance - hittee.SkillDamageReduce, 0);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace JFrame
         bool IsBlock(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
             var r = new Random().NextDouble();
-            var rate = Math.Min(1, Math.Max(hittee.Block - hitter.Penetrate, 0));
+            var rate = Math.Min(1, Math.Max(hittee.Block - hitter.Puncture, 0));
             return r < rate;
         }
 

@@ -80,10 +80,10 @@ namespace JFrameTest
             //arrange
             var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
             var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 1 }, null, null);
-            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 }, null, null);
-            simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
+            //var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 }, null, null);
+            //simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
             var finder = new SelfFinder(battlePoint, simBattle, 1);
-            var action = Substitute.For<IBattleAction, IAttachOwner>();
+            var action = Substitute.For<IAttachOwner>();
             action.Owner.Returns(unit1);
 
             //action

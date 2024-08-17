@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 状态抵抗上升 参数 1： 持续时间， 参数2：提升百分比（加法）
@@ -6,7 +8,7 @@
     public class BufferDebuffAntiUpgrade : DurationBuffer
     {
         float value;
-        public BufferDebuffAntiUpgrade(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferDebuffAntiUpgrade(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferDebuffAntiUpgrade 参数不能少于2个");
@@ -21,7 +23,7 @@
         public override void OnDettach()
         {
             base.OnDettach();
-            target.DebuffAntiReduce(value);
+            Owner.DebuffAntiReduce(value);
         }
 
         public virtual float GetValue()

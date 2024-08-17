@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-
-
-
     public class SelfFinder : BaseTargetFinder
     {
         public SelfFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
@@ -14,12 +11,12 @@ namespace JFrame
 
         public override List<IBattleUnit> FindTargets()
         {
-            var owner = Owner as IBattleAction;
+            //var owner = Owner as IBattleAction;
 
-            if (owner == null)
-                throw new Exception("attach owner 转换失败 ");
+            //if (owner == null)
+            //    throw new Exception("attach owner 转换失败 ");
 
-            return new List<IBattleUnit>() { owner.Owner };
+            return new List<IBattleUnit>() { Owner.Owner };
         }
     }
 

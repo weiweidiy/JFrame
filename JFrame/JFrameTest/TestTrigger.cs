@@ -6,6 +6,7 @@ using NUnit.Framework;
 using static JFrame.PVPBattleManager;
 using System.Collections.Generic;
 using System;
+using static System.Collections.Specialized.BitVector32;
 
 namespace JFrameTest
 {
@@ -24,7 +25,7 @@ namespace JFrameTest
         [TearDown]
         public void Clear()
         {
- 
+
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace JFrameTest
             var friend2 = Substitute.For<IBattleUnit>();
             friend2.IsHpFull().Returns(true);
             friend2.IsAlive().Returns(true);
-            simBattle.GetUnits(Arg.Any<Team>()).Returns(new List<IBattleUnit>() { friend , friend2 });
+            simBattle.GetUnits(Arg.Any<Team>()).Returns(new List<IBattleUnit>() { friend, friend2 });
             simBattle.GetFriendTeam(Arg.Any<IBattleUnit>()).Returns(Team.Attacker);
             frame.DeltaTime.Returns(2);
             var action = Substitute.For<IBattleAction, IAttachOwner>();
@@ -131,19 +132,73 @@ namespace JFrameTest
             var targetAcitionId = 9100;
             var trigger = new ActionCastTrigger(simBattle, new float[] { targetAcitionId });
             var owner = Substitute.For<IBattleUnit>();
-            var ownerAction = Substitute.For<IBattleAction, IAttachOwner>();  
+            var ownerAction = Substitute.For<IBattleAction, IAttachOwner>();
             var targetAcition = Substitute.For<IBattleAction, IAttachOwner>();
             ownerAction.Owner.Returns(owner);
             owner.GetAction(targetAcitionId).Returns(targetAcition);
 
             //action
             trigger.OnAttach(ownerAction as IAttachOwner);
-            targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>,float>>(targetAcition, null, 1f);
+            targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>, float>>(targetAcition, null, 1f);
 
             //expect
             Assert.AreEqual(true, trigger.IsOn());
         }
+
+        [Test]
+        public void TestHurtTrigger()
+        {
+            //arrange
+            var trigger = new HurtTrigger(simBattle, new float[] { });
+            bool result = false;
+            trigger.onTriggerOn += (sender, arg) => { result = true; };
+            var owner = Substitute.For<IAttachOwner>();
+            var unit = Substitute.For<IBattleUnit>();
+            owner.Owner.Returns(unit);
+            var info = new ExecuteInfo() { Value = 10 };
+
+            //action
+            trigger.OnAttach(owner);
+            //unit.onDamaging += Raise.Event<Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo>>(owner, Substitute.For<IBattleAction>(), owner, info);
+
+            unit.onDamaging += Raise.Event<Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo>>(null, Substitute.For<IBattleAction>(), null, info);
+
+            //expect
+            Assert.AreEqual(true, result);
+        }
+
+        //[Test]
+        //public void TestHurtTrigger2()
+        //{
+        //    //arrange
+        //    var trigger = new HurtTrigger(simBattle, new float[] { });
+        //    var finder = Substitute.For<IBattleTargetFinder>();
+        //    var executor = Substitute.For<IBattleExecutor>();
+        //    var executors = new List<IBattleExecutor>() { executor };
+        //    var buffer = Substitute.For<JFrame.Buffer>(null, "", 1, 1, new float[3] { 1, 0, 0 }, trigger, finder, executors);
+            
+        //    bool result = false;
+        //    trigger.onTriggerOn += (sender, arg) => { 
+        //        result = true; 
+        //    };
+
+        //    var unit = Substitute.For<IBattleUnit>();
+        //    buffer.Owner.Returns(unit);
+
+        //    //buffer.Owner.Returns(unit);
+        //    var info = new ExecuteInfo() { Value = 10 };
+
+        //    //action
+        //    trigger.OnAttach(buffer);
+        //    //unit.onDamaging += Raise.Event<Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo>>(owner, Substitute.For<IBattleAction>(), owner, info);
+
+        //    unit.onDamaging += Raise.Event<Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo>>(null, Substitute.For<IBattleAction>(), null, info);
+
+        //    //expect
+        //    Assert.AreEqual(true, result);
+        //    executor.Received(1).ReadyToExecute(Arg.Any<IBattleUnit>(), Arg.Any<IBattleAction>(), Arg.Any<List<IBattleUnit>>());
+        //}
     }
 
-    
+
 }

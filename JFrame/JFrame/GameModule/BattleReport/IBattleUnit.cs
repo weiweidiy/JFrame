@@ -86,7 +86,7 @@ namespace JFrame
         /// <summary>
         /// 暴击率 0~1的值 百分比
         /// </summary>
-        float Cri { get; }
+        float Critical { get; }
 
         /// <summary>
         /// 暴击率提升
@@ -104,28 +104,30 @@ namespace JFrame
         /// <summary>
         /// //暴击伤害加成百分比
         /// </summary>
-        float CriDmgRate { get; }
+        float CriticalDamage { get; }
 
         /// <summary>
         /// //暴击伤害抵抗百分比
         /// </summary>
-        float CriDmgAnti { get; }
+        float CriticalDamageResist { get; }
         /// <summary>
         /// //技能伤害加成百分比
         /// </summary>
-        float SkillDmgRate { get; }
+        float SkillDamageEnhance { get; }
+        float SkillDamageEnhanceUpgrade(float value);
+        float SkillDamageEnhanceReduce(float value);
         /// <summary>
         /// //技能伤害抵抗百分比
         /// </summary>
-        float SkillDmgAnti { get; }
+        float SkillDamageReduce { get; }
         /// <summary>
         /// //伤害加成百分比
         /// </summary>
-        float DmgRate { get; }
+        float DamageEnhance { get; }
         /// <summary>
         /// //伤害抵抗百分比
         /// </summary>
-        float DmgAnti { get; } 
+        float DamageReduce { get; } 
         /// <summary>
         /// //0~1异常状态命中百分比
         /// </summary>
@@ -149,7 +151,7 @@ namespace JFrame
         /// <summary>
         /// //穿透 0~1 百分比
         /// </summary>
-        float Penetrate { get; }
+        float Puncture { get; }
         /// <summary>
         ///  //格挡 0~1 百分比
         /// </summary>

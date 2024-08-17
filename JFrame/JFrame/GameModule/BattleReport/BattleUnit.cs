@@ -73,16 +73,16 @@ namespace JFrame
             MaxHP = info.hp;
             HP = info.hp;
             AtkSpeed = info.atkSpeed;
-            Cri = info.cri;
-            CriDmgRate = info.criDmgRate;
-            CriDmgAnti = info.criDmgAnti;
-            SkillDmgRate = info.skillDmgRate;
-            SkillDmgAnti = info.skillDmgAnti;
-            DmgRate = info.dmgRate;
-            DmgAnti = info.dmgAnti;
+            Critical = info.cri;
+            CriticalDamage = info.criDmgRate;
+            CriticalDamageResist = info.criDmgAnti;
+            SkillDamageEnhance = info.skillDmgRate;
+            SkillDamageReduce = info.skillDmgAnti;
+            DamageEnhance = info.dmgRate;
+            DamageReduce = info.dmgAnti;
             DebuffHit = info.debuffHit;
             DebuffAnti = info.debuffAnti;
-            Penetrate = info.penetrate;
+            Puncture = info.penetrate;
             Block = info.block;
 
 
@@ -493,7 +493,7 @@ namespace JFrame
 
 
 
-        public float Cri
+        public float Critical
         {
             get { return battleUnitAttribute.cri; }
             private set
@@ -507,7 +507,7 @@ namespace JFrame
             if (value < 0)
                 throw new Exception("暴击提升数值不能为负数 " + value);
 
-            Cri += value;
+            Critical += value;
             return value;
         }
 
@@ -517,11 +517,11 @@ namespace JFrame
                 throw new Exception("暴击降低数值不能为负数 " + value);
 
             var realValue = Math.Min(value, Atk); //防止减成负数
-            Cri -= realValue;
+            Critical -= realValue;
             return realValue;
         }
 
-        public float CriDmgRate
+        public float CriticalDamage
         {
             get { return battleUnitAttribute.criDmgRate; }
             private set
@@ -532,7 +532,7 @@ namespace JFrame
 
 
 
-        public float CriDmgAnti
+        public float CriticalDamageResist
         {
             get { return battleUnitAttribute.criDmgAnti; }
             private set
@@ -541,7 +541,7 @@ namespace JFrame
             }
         }
 
-        public float SkillDmgRate
+        public float SkillDamageEnhance
         {
             get { return battleUnitAttribute.skillDmgRate; }
             private set
@@ -550,7 +550,26 @@ namespace JFrame
             }
         }
 
-        public float SkillDmgAnti
+        public float SkillDamageEnhanceUpgrade(float value)
+        {
+            if (value < 0)
+                throw new Exception("技能伤害提升数值不能为负数 " + value);
+
+            SkillDamageEnhance += value;
+            return value;
+        }
+
+        public float SkillDamageEnhanceReduce(float value)
+        {
+            if (value < 0)
+                throw new Exception("技能伤害降低数值不能为负数 " + value);
+
+            var realValue = Math.Min(value, SkillDamageEnhance); //防止减成负数
+            SkillDamageEnhance -= realValue;
+            return realValue;
+        }
+
+        public float SkillDamageReduce
         {
             get { return battleUnitAttribute.skillDmgAnti; }
             private set
@@ -559,7 +578,7 @@ namespace JFrame
             }
         }
 
-        public float DmgRate
+        public float DamageEnhance
         {
             get { return battleUnitAttribute.dmgRate; }
             private set
@@ -568,7 +587,7 @@ namespace JFrame
             }
         }
 
-        public float DmgAnti
+        public float DamageReduce
         {
             get { return battleUnitAttribute.dmgAnti; }
             private set
@@ -616,7 +635,7 @@ namespace JFrame
 
 
 
-        public float Penetrate
+        public float Puncture
         {
             get { return battleUnitAttribute.penetrate; }
             private set

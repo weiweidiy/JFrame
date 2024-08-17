@@ -13,7 +13,7 @@ namespace JFrame
         PVPBattleManager pvpBattleManager;
         FormulaManager formulaManager;
         BattleUnitInfo unitInfo = default;
-        TriggerFactory conditionTriggerFactory = new TriggerFactory();
+        TriggerFactory triggerFactory = new TriggerFactory();
         FinderFactory finderFactory = new FinderFactory();
         ExecutorFactory executorFactory = new ExecutorFactory();
         public ActionFactory(BattleUnitInfo unitInfo, ActionDataSource dataSource, BattlePoint battlePoint, PVPBattleManager pvpBattleManager, FormulaManager formulaManager)
@@ -33,10 +33,10 @@ namespace JFrame
             var uid = Guid.NewGuid().ToString();
             var type = (ActionType)actionDataSource.GetType(unitUID, unitId, actionId);
             var duration = actionDataSource.GetDuration(unitUID, unitId, actionId);
-            var conditionTrigger = conditionTriggerFactory.Create(pvpBattleManager, actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f);//CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f);
+            var conditionTrigger = triggerFactory.Create(pvpBattleManager, actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), new float[1] { actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId) }, 0f);//CreateConditionTrigger(actionDataSource.GetConditionTriggerType(unitUID, unitId, actionId), actionDataSource.GetConditionTriggerArg(unitUID, unitId, actionId), 0f);
             var targetFinder = finderFactory.Create(pvpBattleManager, actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId)); // CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId));
             var executors = CreateExecutors(unitUID, unitId, actionId);
-            var cdTrigger = CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f);
+            var cdTrigger = triggerFactory.Create(pvpBattleManager, actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f); // CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f);
             var sm = new ActionSM();
 
             switch (actionDataSource.GetActionMode(unitUID, unitId, actionId))

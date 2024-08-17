@@ -6,6 +6,13 @@ namespace JFrame
 
     public abstract class BaseBattleTrigger : IBattleTrigger
     {
+        public event Action<IBattleTrigger, object> onTriggerOn;
+
+        protected void NotifyTriggerOn(IBattleTrigger trigger, object arg)
+        {
+            onTriggerOn?.Invoke(trigger, arg);
+        }
+
         /// <summary>
         /// 拥有者
         /// </summary>
@@ -49,7 +56,6 @@ namespace JFrame
         /// 是否可用
         /// </summary>
         bool isEnable = true;
-
 
         public BaseBattleTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0)
         {
@@ -148,9 +154,14 @@ namespace JFrame
             Owner = target;
         }
 
-        public void OnDetach()
+        public virtual void OnDetach()
         {
             //throw new NotImplementedException();
+        }
+
+        public virtual object GetExtraArg()
+        {
+            return null;
         }
     }
     //public abstract class BaseBattleTrigger : IBattleTrigger

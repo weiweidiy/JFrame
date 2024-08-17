@@ -6,8 +6,6 @@ using System.Security.Cryptography;
 namespace JFrame
 {
 
-
-
     /// <summary>
     /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：伤害倍率  type = 1
     /// </summary>
@@ -41,7 +39,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="targets"></param>
         /// <param name="reporter"></param>
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
         {
             foreach (var target in targets)
             {

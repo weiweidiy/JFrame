@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
 
     /// <summary>
@@ -7,7 +9,7 @@
     public class BufferShield : DurationBuffer
     {
         int amount;
-        public BufferShield(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferShield(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferShield 参数不能少于2个");
@@ -27,7 +29,7 @@
         {
             base.OnDettach();
 
-            target.onDamaging -= Unit_onDamaging;
+            Owner.onDamaging -= Unit_onDamaging;
         }
 
 
@@ -46,14 +48,14 @@
             return Args[1] * FoldCount;
         }
 
-        /// <summary>
-        /// 是否有效
-        /// </summary>
-        /// <returns></returns>
-        public override bool IsValid()
-        {
-            return base.IsValid() && amount != 0;
-        }
+        ///// <summary>
+        ///// 是否有效
+        ///// </summary>
+        ///// <returns></returns>
+        //public override bool IsValid()
+        //{
+        //    return base.IsValid() && amount != 0;
+        //}
 
 
     }

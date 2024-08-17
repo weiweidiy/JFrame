@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>// 还没生效
     /// 暴击提升 参数 1：持续时间 , 参数2 ：暴击提升数值
@@ -6,7 +8,7 @@
     public class BufferCriUp : DurationBuffer
     {
         float value;
-        public BufferCriUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferCriUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferCriUp 参数不能少于2个");
@@ -28,7 +30,7 @@
             base.OnDettach();
 
             //如果直接减，会有问题
-           target.CriReduce(value);
+           Owner.CriReduce(value);
         }
     }
 }

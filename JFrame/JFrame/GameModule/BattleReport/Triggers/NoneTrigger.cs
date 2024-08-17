@@ -2,10 +2,12 @@
 {
 
 
-
-    public class NewNoneTrigger : BaseBattleTrigger
+    /// <summary>
+    /// type = 1
+    /// </summary>
+    public class NoneTrigger : BaseBattleTrigger
     {
-        public NewNoneTrigger(IPVPBattleManager pVPBattleManager, float[] duration, float delay = 0f) : base(pVPBattleManager, duration, delay) { }
+        public NoneTrigger(IPVPBattleManager pVPBattleManager, float[] duration, float delay = 0f) : base(pVPBattleManager, duration, delay) { }
 
 
 

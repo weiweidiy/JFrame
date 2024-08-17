@@ -5,6 +5,7 @@ using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using static System.Collections.Specialized.BitVector32;
 
 namespace JFrameTest
 {
@@ -43,7 +44,7 @@ namespace JFrameTest
             executor.Update(frame); 
 
             //expect
-            executor.Received(1).Hit(null, null, targets);
+            executor.Received(1).Hit(null, null, targets,null);
         }
 
         /// <summary>
@@ -288,6 +289,41 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(70, caster.HP);
+        }
+
+        [Test]
+        public void TestExecutorAttrChanged()
+        {
+            //arrange
+            var executor = new ExecutorAttrChange(new FormulaManager(), new float[5] { 1,0,0,1000, 1});
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
+            var owner = Substitute.For<IAttachOwner>();
+            owner.GetFoldCount().Returns(1);
+
+            //action
+            executor.OnAttach(owner);
+            executor.Hit(null,null, new List<IBattleUnit>() { target});
+
+            //expect
+            Assert.AreEqual(60, target.Atk);
+        }
+
+        [Test]
+        public void TestExecutorAttrDettach()
+        {
+            //arrange
+            var executor = new ExecutorAttrChange(new FormulaManager(), new float[5] { 1, 0, 0, 1000, 1 });
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
+            var owner = Substitute.For<IAttachOwner>();
+            owner.GetFoldCount().Returns(1);
+
+            //action
+            executor.OnAttach(owner);
+            executor.Hit(null, null, new List<IBattleUnit>() { target });
+            executor.OnDetach();
+
+            //expect
+            Assert.AreEqual(30, target.Atk);
         }
     }
 

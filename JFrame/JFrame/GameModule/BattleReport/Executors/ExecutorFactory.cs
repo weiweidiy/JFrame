@@ -33,6 +33,12 @@ namespace JFrame
                     return new ExecutorReborn(formulaManager, arg);
                 case 9: //吸血
                     return new ExecutorSuckHp(formulaManager, arg);
+                case 10://属性变更
+                    return new ExecutorAttrChange(formulaManager, arg);
+                case 11://抵挡伤害
+                    return new ExecutorShield(formulaManager, arg);
+                case 12://打断
+                    return new ExecutorControlStatus(formulaManager, arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

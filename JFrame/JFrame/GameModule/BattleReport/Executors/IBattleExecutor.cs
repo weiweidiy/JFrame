@@ -22,7 +22,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target);
+        void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object arg = null);
 
         /// <summary>
         /// 准备开始执行
@@ -30,7 +30,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="targets"></param>
-        void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets);
+        void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null);
 
         /// <summary>
         /// 更新帧，可以延迟命中

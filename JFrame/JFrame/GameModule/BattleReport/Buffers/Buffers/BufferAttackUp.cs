@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace JFrame
 {
 
@@ -10,7 +12,7 @@ namespace JFrame
     {
         int value;
 
-        public BufferAttackUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferAttackUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferAttackUp 参数不能少于2个");
@@ -32,7 +34,7 @@ namespace JFrame
             base.OnDettach();
 
             //如果直接减，会有问题
-            target.AtkReduce(value);
+            Owner.AtkReduce(value);
         }
 
     }

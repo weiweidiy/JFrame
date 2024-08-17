@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 攻击速度提升（只对普通攻击生效）： arg[1] ：百分比
@@ -10,7 +12,7 @@
         /// </summary>
         float value;
 
-        public BufferAttackSpeedUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferAttackSpeedUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferAttackSpeedUp 参数不能少于2个");
@@ -39,7 +41,7 @@
         {
             base.OnAttach(unit);
 
-            var actions = target.GetActions();
+            var actions = Owner.GetActions();
             foreach (var action in actions)
             {
                 if (action.Type == ActionType.Normal) //普通攻击
@@ -66,7 +68,7 @@
         {
             base.OnDettach();
 
-            var actions = target.GetActions();
+            var actions = Owner.GetActions();
             foreach (var action in actions)
             {
                 if (action.Type == ActionType.Normal) //普通攻击

@@ -1,11 +1,13 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 技能伤害提升， 参数1：持续时间， 参数2：提升百分比
     /// </summary>
     public class BufferSkillDmgUp : DurationBuffer
     {
-        public BufferSkillDmgUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public BufferSkillDmgUp(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferSkillDmgUp 参数不能少于2个");
@@ -23,7 +25,7 @@
         {
             base.OnDettach();
 
-            target.onHittingTarget -= Unit_onHittingTarget;
+            Owner.onHittingTarget -= Unit_onHittingTarget;
         }
 
 

@@ -43,7 +43,7 @@ namespace JFrame
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual int GetConditionTriggerType(string unitUID, int unitId, int actionId)
+        public virtual int GetConditionTriggerType(int bufferId)
         {
             return 1; //CDTrigger
         }
@@ -53,7 +53,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetConditionTriggerArg(string unitUID, int unitId, int actionId)
+        public virtual float GetConditionTriggerArg(int bufferId)
         {
             return 3f; //to do: 计算数值
         }
@@ -63,7 +63,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual int GetFinderType(string unitUID, int unitId, int actionId)
+        public virtual int GetFinderType(int bufferId)
         {
             return 1; //normaltargetfinder
         }
@@ -73,7 +73,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetFinderArg(string unitUID, int unitId, int actionId)
+        public virtual float GetFinderArg(int bufferId)
         {
             return 1f;
         }
@@ -83,7 +83,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual List<int> GetExcutorTypes(string unitUID, int unitId, int actionId)
+        public virtual List<int> GetExcutorTypes(int bufferId)
         {
             return new List<int>() { 1 };
         }
@@ -93,7 +93,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float[] GetExcutorArg(string unitUID, int unitId, int actionId, int executorIndex)
+        public virtual float[] GetExcutorArg(int bufferId, int executorIndex)
         {
             return new float[] { 1f, 0.5f, 0.25f, 1f };//1:次数, 2：延迟 3:多段攻击间隔 4:倍率：
         }

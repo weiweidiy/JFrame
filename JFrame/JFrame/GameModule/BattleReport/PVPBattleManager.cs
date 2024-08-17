@@ -270,7 +270,7 @@ namespace JFrame
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActionManager(info, info.actionsId, slot), CreateBufferManager());
+                var battleUnit = new BattleUnit(info, CreateActionManager(info, info.actionsId, slot), CreateBufferManager(slot));
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -285,9 +285,9 @@ namespace JFrame
         /// 创建 buff管理器
         /// </summary>
         /// <returns></returns>
-        BaseBufferManager CreateBufferManager()
+        BaseBufferManager CreateBufferManager(BattlePoint battlePoint)
         {
-            return new BaseBufferManager(bufferDataSource, new BufferFactory(bufferDataSource));
+            return new BaseBufferManager(bufferDataSource, new BufferFactory(bufferDataSource, this, battlePoint, formulaManager));
         }
 
 

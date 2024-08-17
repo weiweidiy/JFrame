@@ -18,7 +18,7 @@ namespace JFrame
             return target.MaxHP * arg; //是个生命百分比
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
         {
             foreach (var target in targets)
             {

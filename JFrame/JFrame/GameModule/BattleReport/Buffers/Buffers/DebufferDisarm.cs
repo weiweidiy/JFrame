@@ -1,11 +1,13 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 缴械 参数 1： 持续时间
     /// </summary>
     public class DebufferDisarm : DurationBuffer
     {
-        public DebufferDisarm(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public DebufferDisarm(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
         {
         }
 
@@ -20,7 +22,7 @@
         {
             base.OnDettach();
 
-            target.OnResumeFromStunning(ActionType.Normal);
+            Owner.OnResumeFromStunning(ActionType.Normal);
         }
 
     }

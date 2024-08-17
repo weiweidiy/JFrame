@@ -1,11 +1,13 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 攻击速度下降（只对普通攻击生效）： arg[1] ：百分比
     /// </summary>
     public class DebufferAttackSpeedDown : BufferAttackSpeedUp
     {
-        public DebufferAttackSpeedDown(IBattleUnit caster, string UID, int id, int foldCount, float[] args) : base(caster, UID, id, foldCount, args)
+        public DebufferAttackSpeedDown(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger,finder,exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("DebufferAttackSpeedDown 参数不能少于2个");
