@@ -20,8 +20,6 @@ namespace JFrame
             return args[0];
         }
 
-
-
         /// <summary>
         /// 延迟完成
         /// </summary>
@@ -32,10 +30,20 @@ namespace JFrame
             //更新cd
             if (delta >= GetDuration() && GetEnable())
             {
+                if (!IsOn())
+                {
+                    NotifyTriggerOn(this, true);
+                    delta = 0f;
+                }
+                    
+
                 SetOn(true);
             }
-            else
-                SetOn(false);
+            //else
+            //{
+            //    SetOn(false);
+            //}
+
         }
     }
 }

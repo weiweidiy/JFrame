@@ -20,6 +20,8 @@ namespace JFrame
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferRemoved;
         event Action<PVPBattleManager.Team, IBattleUnit, IBuffer> onBufferCast;
 
+        void Initialize();
+
         IBattleUnit GetUnit(BattlePoint point);
 
         void AddUnit(BattlePoint point, IBattleUnit unit);

@@ -113,7 +113,7 @@ namespace JFrame
 
         private void Team_onBufferAdded(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.Uid,  buffer.Id });
+            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.Uid,  buffer.Id, buffer.FoldCount });
         }
 
         private void Team_onBufferCast(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)

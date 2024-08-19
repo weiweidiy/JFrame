@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public interface IBattleAction : IUnique
+    public interface IBattleAction : IUnique, IAttachOwner
     {
         #region 委托事件
         /// <summary>
@@ -41,6 +41,11 @@ namespace JFrame
         /// </summary>
         event Action<IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget;
 
+        /// <summary>
+        /// 已经命中
+        /// </summary>
+        event Action<IBattleAction, IBattleUnit, ExecuteInfo, IBattleUnit> onHittedComplete;
+
         #endregion
 
         #region 生命周期
@@ -55,20 +60,20 @@ namespace JFrame
         #endregion
 
         #region 属性
-        /// <summary>
-        /// 持有者
-        /// </summary>
-        IBattleUnit Owner { get;  }
+        ///// <summary>
+        ///// 持有者
+        ///// </summary>
+        //IBattleUnit Owner { get;  }
 
-        /// <summary>
-        /// 名字
-        /// </summary>
-        string Name { get; }
+        ///// <summary>
+        ///// 名字
+        ///// </summary>
+        //string Name { get; }
 
-        /// <summary>
-        /// id
-        /// </summary>
-        int Id { get; }
+        ///// <summary>
+        ///// id
+        ///// </summary>
+        //int Id { get; }
 
         /// <summary>
         /// 类型 区分普通动作和技能动作

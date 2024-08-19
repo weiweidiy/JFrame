@@ -11,7 +11,7 @@ namespace JFrame
         /// 有动作准备完毕，可以释放了
         /// </summary>
         //主体事件
-        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>,float> onActionCast;
+        public event Action<IBattleUnit, IBattleAction, List<IBattleUnit>, float> onActionCast;
         public event Action<IBattleUnit, IBattleAction, float> onActionStartCD;
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget; //动作命中对方
 
@@ -39,7 +39,7 @@ namespace JFrame
         /// </summary>
         public string UID { get; set; }
 
-   
+
 
         /// <summary>
         /// 所有动作列表
@@ -63,11 +63,11 @@ namespace JFrame
 
 
 
-        public BattleUnit( BattleUnitInfo info, IActionManager actionManager, IBufferManager bufferManager)
+        public BattleUnit(BattleUnitInfo info, IActionManager actionManager, IBufferManager bufferManager)
         {
             this.UID = info.uid;
             battleUnitInfo = info;
- 
+
 
             Atk = info.atk;
             MaxHP = info.hp;
@@ -87,7 +87,7 @@ namespace JFrame
 
 
             this.bufferManager = bufferManager;
-            if(this.bufferManager != null)
+            if (this.bufferManager != null)
             {
                 this.bufferManager.onBufferAdded += BufferManager_onBufferAdded;
                 this.bufferManager.onBufferRemoved += BufferManager_onBufferRemoved;
@@ -96,7 +96,18 @@ namespace JFrame
             }
 
             this.actionManager = actionManager;
-            if(actionManager != null)
+            //if (actionManager != null)
+            //{
+            //    actionManager.Initialize(this);
+            //    actionManager.onStartCast += Action_onCast;
+            //    actionManager.onStartCD += ActionManager_onStartCD;
+            //    actionManager.onHittingTarget += ActionManager_onHittingTarget;
+            //}
+        }
+
+        public void Initialize()
+        {
+            if (actionManager != null)
             {
                 actionManager.Initialize(this);
                 actionManager.onStartCast += Action_onCast;
@@ -104,8 +115,6 @@ namespace JFrame
                 actionManager.onHittingTarget += ActionManager_onHittingTarget;
             }
         }
-
-
 
 
 
@@ -152,6 +161,11 @@ namespace JFrame
         public IBattleAction[] GetActions()
         {
             return actionManager.GetAll();
+        }
+
+        public IBattleAction[] GetActions(ActionType type)
+        {
+            return actionManager.GetActionsByType(type).ToArray();
         }
 
         public IBattleAction GetAction(int actionId)
@@ -403,6 +417,8 @@ namespace JFrame
         #endregion
 
         #region 属性
+
+
         public int Atk
         {
             get { return battleUnitAttribute.atk; }

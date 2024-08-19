@@ -28,9 +28,9 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetConditionTriggerArg(string unitUID, int unitId, int actionId)
+        public virtual float[] GetConditionTriggerArg(string unitUID, int unitId, int actionId)
         {
-            return 3f; //to do: 计算数值
+            return new float[] { 3f }; //to do: 计算数值
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace JFrame
     /// <summary>
     /// 1：执行段数，2：延迟执行 3: 段数间隔 4：buffId 5:层数 6:概率0-1 type = 2
     /// </summary>
-    public class ExecutorTargetAddBuffer : BaseExecutor
+    public class ExecutorTargetAddBuffer : NormalExecutor
     {
         protected int bufferId;
         protected int foldCount;

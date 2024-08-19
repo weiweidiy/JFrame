@@ -10,6 +10,8 @@ namespace JFrame
         {
             switch (finderType)
             {
+                case 0:
+                    return new NoneFinder(point, pvpBattleManager, arg);
                 case 1: //顺序找目标（可复数）
                     return new OrderOppoFinder(point, pvpBattleManager, arg);
                 case 2: //倒序找目标（可复数）

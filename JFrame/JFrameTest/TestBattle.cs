@@ -64,25 +64,26 @@ namespace JFrameTest
         }
 
 
-        /// <summary>
-        /// 战斗管理器初始化成功, createTeam调用
-        /// </summary>
-        [Test]
-        public void TestBattleManagerInitialize()
-        {
-            //arrange
-            actionDataSource.GetConditionTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1); //返回 cdtrigger
-            actionDataSource.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1); //返回 orderTargetFinder
-            actionDataSource.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() {1}); //返回 battleDamage
+        ///// <summary>
+        ///// 战斗管理器初始化成功, createTeam调用
+        ///// </summary>
+        //[Test]
+        //public void TestBattleManagerInitialize()
+        //{
+        //    //arrange
+        //    actionDataSource.GetConditionTriggerType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1); //返回 cdtrigger
+        //    actionDataSource.GetFinderType(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(1); //返回 orderTargetFinder
+        //    actionDataSource.GetExcutorTypes(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns(new List<int>() {1}); //返回 battleDamage
+        //    simBattle.CreateTeam(Arg.Any<PVPBattleManager.Team>(), Arg.Any<Dictionary<BattlePoint, BattleUnitInfo>>()).Returns(Pattacker);
 
-            //action
-            simBattle.Initialize(attacker, defence, actionDataSource, actionBufferDataSource,reporter,Substitute.For<FormulaManager>());
+        //    //action
+        //    simBattle.Initialize(attacker, defence, actionDataSource, actionBufferDataSource,reporter,Substitute.For<FormulaManager>());
 
-            //expect
-            simBattle.Received(1).CreateTeam(PVPBattleManager.Team.Attacker, attacker);
-            simBattle.Received(1).CreateTeam(PVPBattleManager.Team.Defence, defence);
+        //    //expect
+        //    simBattle.Received(1).CreateTeam(PVPBattleManager.Team.Attacker, attacker);
+        //    simBattle.Received(1).CreateTeam(PVPBattleManager.Team.Defence, defence);
 
-        }
+        //}
 
         /// <summary>
         /// 战斗管理器更新

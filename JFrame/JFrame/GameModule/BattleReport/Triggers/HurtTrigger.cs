@@ -1,7 +1,7 @@
 ﻿namespace JFrame
 {
     /// <summary>
-    /// type 6
+    /// type 6  立即触发型，
     /// </summary>
     public class HurtTrigger : BaseBattleTrigger
     {

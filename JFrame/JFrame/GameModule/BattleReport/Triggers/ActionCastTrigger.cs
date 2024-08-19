@@ -3,16 +3,17 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-
     /// <summary>
-    /// type ?
+    /// 自己释放技能时， type = 7
     /// </summary>
     public class ActionCastTrigger : BaseBattleTrigger 
     {
-        int targetAciontId;
+        protected int targetAciontId;
+
+        protected IBattleAction targetAction;
         public ActionCastTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0) : base(battleManager, args, delay)
         {
-            if (args.Length < 1)
+            if (args.Length != 1)
                 throw new Exception("ActionCastTrigger 需要1个参数");
 
             targetAciontId = (int)args[0];
@@ -26,7 +27,7 @@ namespace JFrame
             if (o == null)
                 throw new Exception("attach owner 转换失败 ");
 
-            var targetAction = o.Owner.GetAction(targetAciontId);
+            targetAction = o.Owner.GetAction(targetAciontId);
 
             if (targetAction == null)
                 throw new Exception("没有找到目标 action " + targetAciontId);
@@ -34,7 +35,15 @@ namespace JFrame
             targetAction.onStartCast += Action_onStartCast;
         }
 
-        private void Action_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
+        public override void OnDetach()
+        {
+            base.OnDetach();
+
+            if(targetAction != null)
+                targetAction.onStartCast -= Action_onStartCast;
+        }
+
+        protected virtual void Action_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
             SetOn(true);
         }

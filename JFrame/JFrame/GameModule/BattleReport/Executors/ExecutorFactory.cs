@@ -15,6 +15,8 @@ namespace JFrame
         {
             switch (excutorType)
             {
+                case 0:
+                    return new ExecutorNone(formulaManager, arg);
                 case 1: //按释放者攻击力对目标伤害（可多段伤害）
                     return new ExecutorDamage(formulaManager, arg);
                 case 2: //给目标添加buffer

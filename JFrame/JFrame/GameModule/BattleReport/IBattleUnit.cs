@@ -42,6 +42,8 @@ namespace JFrame
         /// </summary>
         string Name { get; }
 
+        void Initialize();
+
         #region 属性
         /// <summary>
         /// 当前攻击力
@@ -253,11 +255,19 @@ namespace JFrame
         IBattleAction[] GetActions();
 
         /// <summary>
+        /// 获取所有指定类型动作
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IBattleAction[] GetActions(ActionType type);
+
+        /// <summary>
         /// 获取指定技能动作
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
         IBattleAction GetAction(int actionId);
+
     }
 }
 

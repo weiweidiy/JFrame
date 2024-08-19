@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http.Headers;
+using static JFrame.PVPBattleManager;
 using static System.Collections.Specialized.BitVector32;
 
 namespace JFrame
@@ -236,6 +237,9 @@ namespace JFrame
             teams.Add(Team.Attacker, attackTeam);
             var defenceTeam = CreateTeam(Team.Defence, defence);
             teams.Add(Team.Defence, defenceTeam);
+
+            attackTeam.Initialize();
+            defenceTeam.Initialize();
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
             pvpReporter = reporter == null?  new BattleReporter(frame, teams) : reporter ;

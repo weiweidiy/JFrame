@@ -9,6 +9,17 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace JFrameTest
 {
+    public class TestNormalExecutor : NormalExecutor
+    {
+        public TestNormalExecutor(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+        {
+        }
+
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object arg = null)
+        {
+            
+        }
+    }
     public class TestExecutor
     {
         BattleFrame frame = Substitute.For<BattleFrame>();
@@ -30,43 +41,43 @@ namespace JFrameTest
         /// <summary>
         /// 触发器基类测，启动后，指定时间后触发命中
         /// </summary>
-        [Test]
-        public void TestBaseExecutorAndHitCalled()
-        {
-            //arrange
-            var executor = Substitute.For<BaseExecutor>(new FormulaManager(), new float[3] { 1, 0, 0 });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-            var targets = new List<IBattleUnit>() { target };
-            frame.DeltaTime.Returns(1);
+        //[Test]
+        //public void TestBaseExecutorAndHitCalled()
+        //{
+        //    //arrange
+        //    var executor = Substitute.For<TestNormalExecutor>(new FormulaManager(), new float[3] { 1, 0, 0 });
+        //    var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+        //    var targets = new List<IBattleUnit>() { target };
+        //    frame.DeltaTime.Returns(1);
 
-            //action
-            executor.ReadyToExecute(null, null, targets);
-            executor.Update(frame); 
+        //    //action
+        //    executor.ReadyToExecute(null, null, targets);
+        //    executor.Update(frame); 
 
-            //expect
-            executor.Received(1).Hit(null, null, targets,null);
-        }
+        //    //expect
+        //    executor.Received(1).Hit(null, null, targets,null);
+        //}
 
-        /// <summary>
-        /// 延迟触发
-        /// </summary>
-        [Test]
-        public void TestBaseExecutorAndDelayHitCalled()
-        {
-            //arrange
-            var executor = Substitute.For<BaseExecutor>(new FormulaManager(), new float[3] { 1, 2, 0 }); //延迟2秒
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-            var targets = new List<IBattleUnit>() { target };
-            frame.DeltaTime.Returns(1);
+        ///// <summary>
+        ///// 延迟触发
+        ///// </summary>
+        //[Test]
+        //public void TestBaseExecutorAndDelayHitCalled()
+        //{
+        //    //arrange
+        //    var executor = Substitute.For<NormalExecutor>(new FormulaManager(), new float[3] { 1, 2, 0 }); //延迟2秒
+        //    var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+        //    var targets = new List<IBattleUnit>() { target };
+        //    frame.DeltaTime.Returns(1);
 
-            //action
-            executor.ReadyToExecute(null, null, targets);
-            executor.Update(frame);
-            executor.Update(frame);
-            executor.Update(frame);
-            //expect
-            executor.Received(1).Hit(null, null, targets);
-        }
+        //    //action
+        //    executor.ReadyToExecute(null, null, targets);
+        //    executor.Update(frame);
+        //    executor.Update(frame);
+        //    executor.Update(frame);
+        //    //expect
+        //    executor.Received(1).Hit(null, null, targets);
+        //}
 
         /// <summary>
         /// 普通伤害

@@ -12,6 +12,11 @@ namespace JFrame
         event Action<IBattleUnit, ExecuteInfo> onHittingTarget;
 
         /// <summary>
+        /// 命中完成
+        /// </summary>
+        event Action<IBattleUnit, ExecuteInfo, IBattleUnit> onHittedComplete;
+
+        /// <summary>
         /// 是否激活
         /// </summary>
         bool Active { get; }
@@ -42,6 +47,19 @@ namespace JFrame
         /// 重新激活技能
         /// </summary>
         void Reset();
+
+        /// <summary>
+        /// 获取CD
+        /// </summary>
+        /// <returns></returns>
+        float[] GetArgs();
+
+        /// <summary>
+        /// 设置cd
+        /// </summary>
+        /// <param name="cd"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        void SetArgs(float[] args);
     }
 
     ///// <summary>

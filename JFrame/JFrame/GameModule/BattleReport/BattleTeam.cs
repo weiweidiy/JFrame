@@ -34,11 +34,20 @@ namespace JFrame
             this.team = team;
             this.units = units;
 
-            if(this.units != null)
+            
+
+        }
+
+
+        public void Initialize()
+        {
+            if (this.units != null)
             {
                 foreach (var key in units.Keys)
                 {
                     var unit = units[key];
+
+                    unit.Initialize();
                     //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                     unit.onActionCast += Unit_onActionCast;
                     unit.onActionStartCD += Unit_onActionStartCD;
@@ -55,11 +64,7 @@ namespace JFrame
                     unit.onBufferUpdate += Unit_onBufferUpdate;
                 }
             }
-
         }
-
-
-
 
 
 

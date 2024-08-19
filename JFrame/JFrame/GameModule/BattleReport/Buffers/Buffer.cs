@@ -148,6 +148,7 @@ namespace JFrame
             foreach (var e in exeutors)
             {
                 // to do: ibattleaction接口参数要替换成iattachowner
+                //e.ReadyToExecute(Caster, null, targets, arg2);
                 e.Hit(Caster, null, targets, arg2);
             }
 
@@ -240,6 +241,35 @@ namespace JFrame
         }
 
         public abstract float GetDuration();
+
+        public void SetConditionTriggerArgs(float[] args)
+        {
+            if (ConditionTrigger != null)
+                ConditionTrigger.SetArgs(args);
+        }
+
+        public void SetFinderArgs(float[] args)
+        {
+            if (finder != null)
+                finder.SetArgs(args);
+        }
+
+        public void SetExecutorArgs(float[] args)
+        {
+            if (exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.SetArgs(args);
+                }
+            }
+        }
+
+        public void SetCdArgs(float[] args)
+        {
+            //if (cdTrigger != null)
+            //    cdTrigger.SetArgs(args);
+        }
     }
 }
 

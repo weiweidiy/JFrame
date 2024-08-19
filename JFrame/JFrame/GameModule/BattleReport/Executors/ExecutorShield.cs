@@ -2,7 +2,10 @@
 
 namespace JFrame
 {
-    public class ExecutorShield : BaseExecutor
+    /// <summary>
+    /// 需要立即生效
+    /// </summary>
+    public class ExecutorShield : NormalExecutor
     {
         protected float arg = 1f;
 
@@ -32,7 +35,7 @@ namespace JFrame
 
             count ++;
 
-            if (count > Owner.GetFoldCount()) 
+            if (count >= Owner.GetFoldCount()) 
             {
                 Owner.SetValid(false);
             }

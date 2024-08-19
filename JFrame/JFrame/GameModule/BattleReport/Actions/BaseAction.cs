@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// 普通的一次行动逻辑 (瞬时动作类型)
     /// </summary>
-    public abstract class BaseAction : IBattleAction , IAttachOwner
+    public abstract class BaseAction : IBattleAction
     {
         #region 委托
         /// <summary>
@@ -29,6 +29,11 @@ namespace JFrame
         /// 即将命中目标
         /// </summary>
         public event Action<IBattleAction, IBattleUnit, ExecuteInfo> onHittingTarget;
+
+        /// <summary>
+        /// 已经命中
+        /// </summary>
+        public event Action<IBattleAction, IBattleUnit, ExecuteInfo, IBattleUnit> onHittedComplete;
 
         public void NotifyCanCast()
         {
@@ -137,10 +142,13 @@ namespace JFrame
                 foreach (var executor in exeutors)
                 {
                     executor.onHittingTarget += Executor_onHittingTarget;
+                    executor.onHittedComplete += Executor_onHittedComplete;
                 }
             }
 
         }
+
+
 
         /// <summary>
         /// 附加到单位上
@@ -150,7 +158,12 @@ namespace JFrame
         {
             Owner = owner;
             if (ConditionTrigger != null)
+            {
                 ConditionTrigger.OnAttach(this);
+                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
+
+            }
+            
 
             if (finder != null)
                 finder.OnAttach(this);
@@ -170,6 +183,29 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 直接独立执行
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="Exception"></exception>
+        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object arg2)
+        {
+            var targets = finder.FindTargets();
+            if (targets == null || targets.Count == 0)
+                throw new Exception("action cast 没有找到有效目标 " + Id);
+
+            foreach (var e in exeutors)
+            {
+                // to do: ibattleaction接口参数要替换成iattachowner
+                e.Hit(Owner, this, targets, arg2);
+
+                //打完了
+            }
+
+            ConditionTrigger.SetOn(false);
+        }
+
+        /// <summary>
         /// 即将命中目标
         /// </summary>
         /// <param name="obj"></param>
@@ -177,6 +213,18 @@ namespace JFrame
         private void Executor_onHittingTarget(IBattleUnit target, ExecuteInfo obj)
         {
             onHittingTarget?.Invoke(this, target, obj);
+        }
+
+        /// <summary>
+        /// 已经命中目标
+        /// </summary>
+        /// <param name="caster"></param>
+        /// <param name="info"></param>
+        /// <param name="target"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Executor_onHittedComplete(IBattleUnit caster, ExecuteInfo info, IBattleUnit target)
+        {
+            onHittedComplete?.Invoke(this, caster,info, target);    
         }
 
         /// <summary>
@@ -352,6 +400,35 @@ namespace JFrame
         public void SetValid(bool valid)
         {
             
+        }
+
+        public void SetConditionTriggerArgs(float[] args)
+        {
+            if(ConditionTrigger != null)
+                ConditionTrigger.SetArgs(args);
+        }
+
+        public void SetFinderArgs(float[] args)
+        {
+            if (finder != null)
+                finder.SetArgs(args);
+        }
+
+        public void SetExecutorArgs(float[] args)
+        {
+            if(exeutors != null)
+            {
+                foreach (var executor in exeutors)
+                {
+                    executor.SetArgs(args);
+                }
+            }
+        }
+
+        public void SetCdArgs(float[] args)
+        {
+            if(cdTrigger != null)
+                cdTrigger.SetArgs(args);
         }
     }
 }

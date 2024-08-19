@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// 改变属性执行器：参数 4：属性id  参数5：改变百分比
     /// </summary>
-    public class ExecutorAttrChange : BaseExecutor
+    public class ExecutorAttrChange : NormalExecutor
     {
         PVPAttribute attrType;
         float arg;

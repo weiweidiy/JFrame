@@ -45,12 +45,16 @@ namespace JFrame
                     return new AttachTrigger(pvpBattleManager, args, delay);
                 case 6:
                     return new HurtTrigger(pvpBattleManager, args, delay);
+                case 7: //指定action释放
+                    return new ActionCastTrigger(pvpBattleManager, args, delay);
                 case 8:
                     return new CDTimeTrigger(pvpBattleManager, args, delay);
                 case 9:
                     return new AmountTrigger(pvpBattleManager, args, delay);
-                case 100: //指定action释放
-                    return new ActionCastTrigger(pvpBattleManager, args, delay);
+                case 11: //友军释放动作，不包括自己
+                    return new FriendsActionCastTrigger(pvpBattleManager, args, delay);
+                case 12:
+                    return new KillTrigger(pvpBattleManager, args, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 ConditionTrigger type " + triggerType);
             }

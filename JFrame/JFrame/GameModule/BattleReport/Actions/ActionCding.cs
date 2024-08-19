@@ -39,7 +39,7 @@
             if (NeedUpdate() && context.IsCDComplete())
             {
                 //设置触发器无效
-                context.cdTrigger.SetOn(false);
+                context.cdTrigger.Restart();
 
                 //动作进入待机状态
                 context.Standby();
