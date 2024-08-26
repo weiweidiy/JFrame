@@ -4,7 +4,7 @@ namespace JFrame
 {
     public interface IBattleTargetFinder : IAttachable
     {
-        List<IBattleUnit> FindTargets();
+        List<IBattleUnit> FindTargets(object[] args);
 
         /// <summary>
         /// 获取CD

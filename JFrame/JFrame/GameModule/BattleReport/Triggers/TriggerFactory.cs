@@ -54,7 +54,19 @@ namespace JFrame
                 case 11: //友军释放动作，不包括自己
                     return new FriendsActionCastTrigger(pvpBattleManager, args, delay);
                 case 12:
-                    return new KillTrigger(pvpBattleManager, args, delay);
+                    return new ActionKillTrigger(pvpBattleManager, args, delay);
+                case 13:
+                    return new ActionHittingTrigger(pvpBattleManager, args, delay);
+                case 14:
+                    return new ActionHittedTrigger(pvpBattleManager, args, delay);
+                case 15:
+                    return new ActionCastTimeTrigger(pvpBattleManager, args, delay);
+                case 16:
+                    return new ActionCastHittedTrigger(pvpBattleManager, args, delay);
+                case 17:
+                    return new FriednsAddedBufferTrigger(pvpBattleManager, args, delay);
+                case 18:
+                    return new SelfAddingBufferTrigger(pvpBattleManager, args, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 ConditionTrigger type " + triggerType);
             }

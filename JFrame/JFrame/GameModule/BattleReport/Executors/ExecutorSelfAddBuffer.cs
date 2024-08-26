@@ -20,7 +20,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] arg = null)
         {
             if (!HitRate())
                 return;

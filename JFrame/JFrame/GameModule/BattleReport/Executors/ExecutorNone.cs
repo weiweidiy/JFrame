@@ -8,12 +8,12 @@ namespace JFrame
         {
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] arg = null)
         {
             //throw new NotImplementedException();
         }
 
-        public override void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] arg = null)
         {
             //throw new NotImplementedException();
         }

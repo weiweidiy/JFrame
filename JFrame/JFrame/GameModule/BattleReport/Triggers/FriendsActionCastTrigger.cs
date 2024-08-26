@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace JFrame
 {
+
     /// <summary>
     /// 友军释放普通或技能时 type = 11
     /// </summary>
@@ -11,13 +12,16 @@ namespace JFrame
     {
         ActionType actionType;
 
+        int team; //1 友军，2 敌军
+
         List<IBattleAction> targetActions = new List<IBattleAction>();
         public FriendsActionCastTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0) : base(battleManager, args, delay)
         {
-            if (args.Length < 1)
-                throw new Exception("ActionCastTrigger 需要1个参数");
+            if (args.Length < 2)
+                throw new Exception("ActionCastTrigger 需要2个参数");
 
             actionType = (ActionType)args[0];
+            team = (int)args[1];
         }
 
         public override void OnAttach(IAttachOwner owner)
@@ -28,7 +32,9 @@ namespace JFrame
             if (o == null)
                 throw new Exception("attach owner 转换失败 ");
 
-            var units = battleManager.GetUnits(battleManager.GetFriendTeam(owner.Owner));
+            
+
+            var units = battleManager.GetUnits(  team == 1?  battleManager.GetFriendTeam(owner.Owner) : battleManager.GetOppoTeam(owner.Owner));
 
             foreach( var unit in units)
             {
@@ -62,7 +68,7 @@ namespace JFrame
 
         private void Action_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
-            NotifyTriggerOn(this, true);
+            NotifyTriggerOn(this, new object[] { true });
             SetOn(true);
         }
     }

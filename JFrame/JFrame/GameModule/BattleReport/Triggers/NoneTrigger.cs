@@ -14,9 +14,9 @@
         /// <summary>
         /// 延迟完成
         /// </summary>
-        protected override void OnDelayCompleteEveryFrame()
+        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
-            base.OnDelayCompleteEveryFrame();
+            base.OnDelayCompleteEveryFrame(frame);
 
             SetOn(true);
         }

@@ -11,7 +11,7 @@ namespace JFrame
     public class DeBufferAttackDown : DurationBuffer
     {
         int value;
-        public DeBufferAttackDown(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
+        public DeBufferAttackDown(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("DeBufferAttackDown 参数不能少于2个");

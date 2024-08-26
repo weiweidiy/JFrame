@@ -6,7 +6,7 @@ namespace JFrame
     /// <summary>
     /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：状态类型 1 眩晕， 2缴械 type
     /// </summary>
-    public class ExecutorControlStatus : NormalExecutor
+    public class ExecutorControlStatus : ExecutorNormal
     {
         int arg;
 
@@ -23,7 +23,7 @@ namespace JFrame
             }
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] argsObject = null)
         {
             foreach (var target in targets)
             {

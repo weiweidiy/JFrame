@@ -36,11 +36,23 @@ namespace JFrame
                 case 9: //吸血
                     return new ExecutorSuckHp(formulaManager, arg);
                 case 10://属性变更
-                    return new ExecutorAttrChange(formulaManager, arg);
+                    return new ExecutorChangeAttr(formulaManager, arg);
                 case 11://抵挡伤害
                     return new ExecutorShield(formulaManager, arg);
                 case 12://打断
                     return new ExecutorControlStatus(formulaManager, arg);
+                case 13:
+                    return new ExecutorChangeCDArgs(formulaManager, arg);
+                case 14:
+                    return new ExecutorDamageUp(formulaManager, arg);
+                case 15:
+                    return new ExecutorDamageCounter(formulaManager, arg);
+                case 16:
+                    return new ExecutorRandomClearDebuff(formulaManager, arg);
+                case 17:
+                    return new ExecutorAttrDamage(formulaManager, arg);
+                case 18:
+                    return new ExecutorImmunity(formulaManager, arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

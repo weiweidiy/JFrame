@@ -65,10 +65,12 @@ namespace JFrame
         /// </summary>
         event Action<IBuffer> onCast;
 
-        /// <summary>
-        /// Id
-        /// </summary>
-         int Id { get;  }
+        ///// <summary>
+        ///// Id
+        ///// </summary>
+        // int Id { get;  }
+
+        bool IsBuff();
 
         /// <summary>
         /// 叠加层数

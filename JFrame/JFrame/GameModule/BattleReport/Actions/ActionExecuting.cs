@@ -21,7 +21,7 @@ namespace JFrame
 
             //获取目标 to do:不用再找，通过standby
             if(targets == null)
-                 targets = context.FindTargets();
+                 targets = context.FindTargets(null);
 
             if ((targets == null || targets.Count == 0) && context.Mode == ActionMode.Active)
             {

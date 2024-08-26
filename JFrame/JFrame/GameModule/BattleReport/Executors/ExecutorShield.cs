@@ -2,10 +2,11 @@
 
 namespace JFrame
 {
+
     /// <summary>
     /// 需要立即生效
     /// </summary>
-    public class ExecutorShield : NormalExecutor
+    public class ExecutorShield : ExecutorNormal
     {
         protected float arg = 1f;
 
@@ -25,9 +26,9 @@ namespace JFrame
 
 
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
         {
-            var info = arg as ExecuteInfo;
+            var info = args[2] as ExecuteInfo;
             if (info == null)
                 throw new System.Exception("ExecutorShield 转换arg时错误 ");
 

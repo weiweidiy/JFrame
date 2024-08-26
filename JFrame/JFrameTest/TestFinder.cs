@@ -33,13 +33,13 @@ namespace JFrameTest
         {
             //arrange
             var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
-            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 1 }, null, null);
-            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 }, null, null);
+            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 1 , maxHp = 1}, null, null);
+            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 1 , maxHp = 1 }, null, null);
             simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
             var finder = new OrderOppoTopAtkFinder(battlePoint, simBattle, 1);
 
             //action
-            var result = finder.FindTargets();
+            var result = finder.FindTargets(null);
 
             //expect
             Assert.AreEqual(1, result.Count);
@@ -55,15 +55,15 @@ namespace JFrameTest
         {
             //arrange
             var battlePoint = Substitute.For<BattlePoint>(1, PVPBattleManager.Team.Attacker);
-            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 10, uid = "2" }, null, null);
+            var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10,maxHp = 10, uid = "1" }, null, null);
+            var unit2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 10,maxHp = 10, uid = "2" }, null, null);
             unit1.OnDamage(null, null, new ExecuteInfo() { Value = 1 });
             unit2.OnDamage(null, null, new ExecuteInfo() { Value = 2 });
             simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
             var finder = new OrderFriendsHurtFinder(battlePoint, simBattle, 2);
 
             //action
-            var result = finder.FindTargets();
+            var result = finder.FindTargets(null);
 
             //expect
             Assert.AreEqual(2, result.Count);
@@ -88,7 +88,7 @@ namespace JFrameTest
 
             //action
             finder.OnAttach(action as IAttachOwner);
-            var result = finder.FindTargets();
+            var result = finder.FindTargets(null);
 
             //expect
             Assert.AreEqual(1, result.Count);

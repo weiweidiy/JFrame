@@ -11,9 +11,9 @@ namespace JFrame
 
         }
 
-        protected override void OnDelayCompleteEveryFrame()
+        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
-            base.OnDelayCompleteEveryFrame();
+            base.OnDelayCompleteEveryFrame(frame);
 
             var targets = FindTargets();
             if (targets.Count > 0)

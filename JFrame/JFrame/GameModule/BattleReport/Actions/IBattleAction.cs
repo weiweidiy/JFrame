@@ -156,7 +156,7 @@ namespace JFrame
         /// 搜索目标
         /// </summary>
         /// <returns></returns>
-        List<IBattleUnit> FindTargets();
+        List<IBattleUnit> FindTargets(object[] args);
 
         /// <summary>
         /// 准备执行效果

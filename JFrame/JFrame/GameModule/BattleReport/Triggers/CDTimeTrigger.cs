@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -23,16 +24,17 @@ namespace JFrame
         /// <summary>
         /// 延迟完成
         /// </summary>
-        protected override void OnDelayCompleteEveryFrame()
+        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
-            base.OnDelayCompleteEveryFrame();
+            base.OnDelayCompleteEveryFrame(frame);
 
             //更新cd
             if (delta >= GetDuration() && GetEnable())
             {
                 if (!IsOn())
                 {
-                    NotifyTriggerOn(this, true);
+                    
+                    NotifyTriggerOn(this, new object[] { true });
                     delta = 0f;
                 }
                     

@@ -16,9 +16,9 @@ namespace JFrame
 
 
 
-        protected override void OnDelayCompleteEveryFrame()
+        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
-            base.OnDelayCompleteEveryFrame();
+            base.OnDelayCompleteEveryFrame(frame);
 
             var owner = Owner as IBattleAction;
             if (owner == null)

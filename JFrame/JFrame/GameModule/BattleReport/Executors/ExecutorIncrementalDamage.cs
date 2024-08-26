@@ -41,7 +41,7 @@ namespace JFrame
             return caster.Atk * value;
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] arg = null)
         {
             base.Hit(caster, action, targets);
 

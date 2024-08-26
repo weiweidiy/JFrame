@@ -7,14 +7,13 @@ namespace JFrame
 {
 
 
-
     public class RandomOppoFinder : BaseTargetFinder
     {
         public RandomOppoFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg)
         {
         }
 
-        public override List<IBattleUnit> FindTargets()
+        public override List<IBattleUnit> FindTargets(object[] args)
         {
             var units = manger.GetUnits(manger.GetOppoTeam(selfPoint.Team));
             var random = new Random();

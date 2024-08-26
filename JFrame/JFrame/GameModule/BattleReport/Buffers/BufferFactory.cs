@@ -32,23 +32,45 @@ namespace JFrame
             switch (buffId)
             {
                 case 101: //增加攻速
-                    return new BufferAttackSpeedUp(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId),trigger, finder, executors);
-                case 102:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
-                case 103: //增加状态抵抗
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
-                case 104:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
-                case 201:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
-                case 202:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
-                case 203:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                    return new BufferAttackSpeedUp(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId),trigger, finder, executors);
                 case 998:
-                    return new DebufferAttackSpeedDown(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                    return new DebufferAttackSpeedDown(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 102:
+                    //return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 103: //增加状态抵抗
+                    //return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 104:
+                // return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 105:
+                case 106:
+                case 107:
+                case 108:
+                case 109:
+                case 201:
+                    //return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 202:
+                    //return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 203:
+                case 204:
+                case 205:
+                case 206:
+                case 801:
+                case 802:
+                case 803:
+                case 804:
+                case 805:
+                case 806:
+                case 991:
+                case 992:
+                case 993:
+                case 994:
+                case 995:
+                case 996:
+                    return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                case 997:
+                    return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);          
                 case 999:
-                    return new DurationBuffer(caster, Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
+                    return new DurationBuffer(caster, dataSource.IsBuff(buffId), Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId), trigger, finder, executors);
                 default:
                     throw new Exception("没有实现指定的技能buff " + buffId);
             }

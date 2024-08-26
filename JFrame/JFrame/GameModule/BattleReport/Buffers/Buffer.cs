@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -62,7 +63,9 @@ namespace JFrame
 
         protected bool isValid;
 
-        public Buffer(IBattleUnit caster, string UID, int id, int foldCount, float[] args,  IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
+        bool isBuff;
+
+        public Buffer(IBattleUnit caster, bool isBuff,  string UID, int id, int foldCount, float[] args,  IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
         {
             Id = id;
             this.Uid = UID;
@@ -71,6 +74,8 @@ namespace JFrame
             this.ConditionTrigger = trigger;
             this.finder = finder;
             this.exeutors = exutors;
+            this.Caster = caster;
+            this.isBuff = isBuff;
 
             if (exeutors != null)
             {
@@ -90,13 +95,6 @@ namespace JFrame
         {
             this.Owner = target;
 
-            if (ConditionTrigger != null)
-            {
-                ConditionTrigger.OnAttach(this);
-                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
-            }
-
-
             if (finder != null)
                 finder.OnAttach(this);
 
@@ -106,6 +104,12 @@ namespace JFrame
                 {
                     executor.OnAttach(this);
                 }
+            }
+
+            if (ConditionTrigger != null)
+            {
+                ConditionTrigger.OnAttach(this);
+                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
             }
         }
 
@@ -139,11 +143,14 @@ namespace JFrame
         /// </summary>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object arg2)
+        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object[] arg2)
         {
-            var targets = finder.FindTargets();
+            var targets = finder.FindTargets(arg2);
             if (targets == null || targets.Count == 0)
-                throw new Exception("buff cast 没有找到有效目标 " + Id);
+            {
+                ConditionTrigger.SetOn(false);
+                return;
+            }
 
             foreach (var e in exeutors)
             {
@@ -166,16 +173,24 @@ namespace JFrame
             
         }
 
+        /// <summary>
+        /// 设置是否有效
+        /// </summary>
+        /// <param name="valid"></param>
         public void SetValid(bool valid)
         {
             isValid = valid;
         }
 
-
+        /// <summary>
+        /// 释放
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public float Cast()
         {
             //释放
-            var targets = finder.FindTargets();
+            var targets = finder.FindTargets(null);
             if (targets == null || targets.Count == 0)
                 throw new Exception("buff cast 没有找到有效目标 " + Id);
 
@@ -190,7 +205,10 @@ namespace JFrame
             return 0f;
         }
 
-
+        /// <summary>
+        /// 是否可以释放
+        /// </summary>
+        /// <returns></returns>
         public bool CanCast()
         {
             return ConditionTrigger.IsOn();
@@ -217,7 +235,7 @@ namespace JFrame
             {
                 foreach (var e in exeutors)
                 {
-                    if(e.Active)
+                    if(e.Executing)
                     {
                         e.Update(frame);
                     }
@@ -235,13 +253,25 @@ namespace JFrame
             FoldCount += foldCount;
         }
 
+        /// <summary>
+        /// 获取层数
+        /// </summary>
+        /// <returns></returns>
         public float GetFoldCount()
         {
             return FoldCount;
         }
 
+        /// <summary>
+        /// 获取周期
+        /// </summary>
+        /// <returns></returns>
         public abstract float GetDuration();
 
+        /// <summary>
+        /// 设置条件触发器参数
+        /// </summary>
+        /// <param name="args"></param>
         public void SetConditionTriggerArgs(float[] args)
         {
             if (ConditionTrigger != null)
@@ -269,6 +299,11 @@ namespace JFrame
         {
             //if (cdTrigger != null)
             //    cdTrigger.SetArgs(args);
+        }
+
+        public bool IsBuff()
+        {
+            return isBuff;
         }
     }
 }

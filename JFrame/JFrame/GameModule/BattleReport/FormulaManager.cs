@@ -127,7 +127,7 @@ namespace JFrame
         /// <returns></returns>
         public bool IsDebuffAnti(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            var rate = hittee.DebuffAnti - hitter.DebuffHit; //可能负数
+            var rate = hittee.ControlResistance - hitter.ControlHit; //可能负数
             var r = new Random().NextDouble();
             return r < rate;
         }

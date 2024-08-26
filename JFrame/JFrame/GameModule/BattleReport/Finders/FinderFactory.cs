@@ -26,6 +26,14 @@ namespace JFrame
                     return new OrderFriendsFinder(point, pvpBattleManager, arg);
                 case 8: //顺序敌方攻击最高的
                     return new OrderOppoTopAtkFinder(point, pvpBattleManager, arg);
+                case 9:
+                    return new FliterHpFinder(point, pvpBattleManager, arg);
+                case 10:
+                    return new FliterFinder(point, pvpBattleManager, arg);
+                case 11:
+                    return new TeamFinder(point, pvpBattleManager, arg);
+                case 12:
+                    return new RandomFriendFinder(point, pvpBattleManager, arg); 
                 default:
                     throw new Exception("没有实现目标 finder type " + finderType);
             }

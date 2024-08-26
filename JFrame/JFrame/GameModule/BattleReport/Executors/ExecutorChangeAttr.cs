@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// 改变属性执行器：参数 4：属性id  参数5：改变百分比
     /// </summary>
-    public class ExecutorAttrChange : NormalExecutor
+    public class ExecutorChangeAttr : ExecutorNormal
     {
         PVPAttribute attrType;
         float arg;
@@ -19,7 +19,7 @@ namespace JFrame
         /// 发生属性改变的目标列表
         /// </summary>
         List<IBattleUnit> changedTargets = new List<IBattleUnit>();
-        public ExecutorAttrChange(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+        public ExecutorChangeAttr(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
             if (args != null && args.Length >= 5)
             {
@@ -32,7 +32,7 @@ namespace JFrame
             }
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
         {
             foreach (var target in targets)
             {
@@ -69,12 +69,22 @@ namespace JFrame
                         return target.AtkUpgrade((int)value);
                     }
                 case PVPAttribute.HP: return 0;
+                case PVPAttribute.MaxHP:
+                    {
+                        return target.MaxHPUpgrade((int)value);
+                    }
                 case PVPAttribute.AtkSpeed: return 0;
-                case PVPAttribute.Critical: return 0;
+                case PVPAttribute.Critical:
+                    {
+                        return target.CriUpgrade(value);
+                    }
                 case PVPAttribute.CriticalDamage: return 0;
                 case PVPAttribute.CriticalDamageResist: return 0;
                 case PVPAttribute.ControlHit: return 0;
-                case PVPAttribute.ControlResistance: return 0;
+                case PVPAttribute.ControlResistance:
+                    {
+                        return target.ControlResistanceUpgrade(value);
+                    }
                 case PVPAttribute.DamageEnhance: return 0;
                 case PVPAttribute.DamageReduce: return 0;
                 case PVPAttribute.SkillDamageEnhance:
@@ -98,12 +108,22 @@ namespace JFrame
                         return target.AtkReduce((int)value);
                     }
                 case PVPAttribute.HP: return 0;
+                case PVPAttribute.MaxHP:
+                    {
+                        return target.MaxHPReduce((int)value);
+                    }
                 case PVPAttribute.AtkSpeed: return 0;
-                case PVPAttribute.Critical: return 0;
+                case PVPAttribute.Critical:
+                    {
+                        return target.CriReduce(value);
+                    }
                 case PVPAttribute.CriticalDamage: return 0;
                 case PVPAttribute.CriticalDamageResist: return 0;
                 case PVPAttribute.ControlHit: return 0;
-                case PVPAttribute.ControlResistance: return 0;
+                case PVPAttribute.ControlResistance:
+                    {
+                        return target.ControlResistanceReduce(value);
+                    }
                 case PVPAttribute.DamageEnhance: return 0;
                 case PVPAttribute.DamageReduce: return 0;
                 case PVPAttribute.SkillDamageEnhance:
@@ -131,6 +151,11 @@ namespace JFrame
                 case PVPAttribute.HP:
                     {
                         attrValue = target.HP;
+                    }
+                    break;
+                case PVPAttribute.AtkSpeed:
+                    {
+                        attrValue = target.AtkSpeed;
                     }
                     break;
                 case PVPAttribute.Critical:
@@ -176,6 +201,16 @@ namespace JFrame
                 case PVPAttribute.Puncture:
                     {
                         attrValue = target.Puncture;
+                    }
+                    break;
+                case PVPAttribute.ControlHit:
+                    {
+                        attrValue = target.ControlHit;
+                    }
+                    break;
+                case PVPAttribute.ControlResistance:
+                    {
+                        attrValue = target.ControlResistance;
                     }
                     break;
                 default:

@@ -9,7 +9,7 @@ namespace JFrame
         {
         }
 
-        public override List<IBattleUnit> FindTargets()
+        public override List<IBattleUnit> FindTargets(object[] args)
         {
             //var owner = Owner as IBattleAction;
 

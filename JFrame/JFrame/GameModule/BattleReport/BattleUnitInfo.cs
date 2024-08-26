@@ -8,6 +8,7 @@ namespace JFrame
         public int id;
         public List<int> actionsId;
         public int hp;
+        public int maxHp;
         public int atk;
         public float atkSpeed; 
         public float cri; //暴击率 0~1的值 百分比

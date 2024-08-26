@@ -27,6 +27,11 @@ namespace JFrame
             this.formulaManager = formulaManager;
         }
 
+        public ActionFactory(ActionDataSource dataSource, PVPBattleManager pvpBattleManager, FormulaManager formulaManager) : this(default(BattleUnitInfo), dataSource, null, pvpBattleManager, formulaManager)
+        {
+
+        }
+
 
         public IBattleAction Create(int actionId)
         {
@@ -64,6 +69,8 @@ namespace JFrame
             {
                 var cd = actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId)[0];
                 var atkSpeed = unitInfo.atkSpeed;
+                if(atkSpeed == 0)
+                    throw new Exception("atkspeed 不能为 0 " + unitId);
                 var arg = cd + 1 / atkSpeed;
                 return new float[] { arg };
             }

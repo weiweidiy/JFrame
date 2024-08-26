@@ -11,7 +11,7 @@ namespace JFrame
         {
         }
 
-        public override List<IBattleUnit> FindTargets()
+        public override List<IBattleUnit> FindTargets(object[] args)
         {
             var result = new List<IBattleUnit>();
 

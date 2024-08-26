@@ -8,7 +8,7 @@ namespace JFrame
     {
         public OrderFriendsHurtFinder(BattlePoint selfPoint, IPVPBattleManager manger, float arg) : base(selfPoint, manger, arg) { }
 
-        public override List<IBattleUnit> FindTargets()
+        public override List<IBattleUnit> FindTargets(object[] args)
         {
             var result = new List<IBattleUnit>();
 

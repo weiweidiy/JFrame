@@ -8,7 +8,7 @@ namespace JFrame
     public class BufferDebuffAntiUpgrade : DurationBuffer
     {
         float value;
-        public BufferDebuffAntiUpgrade(IBattleUnit caster, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, UID, id, foldCount, args, trigger, finder, exutors)
+        public BufferDebuffAntiUpgrade(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster,isBuff, UID, id, foldCount, args, trigger, finder, exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("BufferDebuffAntiUpgrade 参数不能少于2个");
@@ -17,13 +17,13 @@ namespace JFrame
         public override void OnAttach(IBattleUnit unit)
         {
             base.OnAttach(unit);
-            value = unit.DebuffAntiUpgrade(GetValue());
+            value = unit.ControlResistanceUpgrade(GetValue());
         }
 
         public override void OnDettach()
         {
             base.OnDettach();
-            Owner.DebuffAntiReduce(value);
+            Owner.ControlResistanceReduce(value);
         }
 
         public virtual float GetValue()

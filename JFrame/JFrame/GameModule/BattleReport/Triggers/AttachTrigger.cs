@@ -13,8 +13,9 @@
         public override void OnAttach(IAttachOwner target)
         {
             base.OnAttach(target);
-
             SetOn(true);
+            NotifyTriggerOn(this, new object[] { true });
+            
         }
     }
 }

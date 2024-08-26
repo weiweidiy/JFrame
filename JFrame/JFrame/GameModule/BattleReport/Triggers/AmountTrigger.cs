@@ -29,9 +29,9 @@ namespace JFrame
         /// <summary>
         /// 延迟完成（每一帧调用1次）
         /// </summary>
-        protected override void OnDelayCompleteEveryFrame()
+        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
-            base.OnDelayCompleteEveryFrame();
+            base.OnDelayCompleteEveryFrame(frame);
 
             //如果当前次数小于使用次数，则通知
             if(amount < GetAmount())

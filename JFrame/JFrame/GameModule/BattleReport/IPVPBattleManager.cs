@@ -5,11 +5,15 @@ namespace JFrame
 {
     public interface IPVPBattleManager
     {
-        void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter, FormulaManager formulaManager);
+        void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence
+            , ActionDataSource dataSource, BufferDataSource bufferDataSource
+            , IBattleReporter reporter, FormulaManager formulaManager, float battleDuration = 90
+            , Dictionary<BattlePoint, BattleUnitInfo> global = null, ActionDataSource globalActionDataSource = null
+            , IBattleNotifier[] notifiers = null);
 
         void Release();
 
-        BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units);
+        BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units, ActionDataSource dataSource);
 
         void Update();
 
@@ -19,9 +23,13 @@ namespace JFrame
 
         Team GetOppoTeam(Team team);
 
+        Team GetOppoTeam(IBattleUnit unit);
+
         Team GetFriendTeam(IBattleUnit unit);
 
         float GetBattleTimeLimit();
+
+        bool IsBuffer(int buffId);
 
     }
 }

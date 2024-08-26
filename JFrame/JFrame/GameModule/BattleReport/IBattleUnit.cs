@@ -28,6 +28,7 @@ namespace JFrame
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;
         event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;    //状态抵抗
 
+        event Action<IBattleUnit, int, ExecuteInfo> onBufferAdding; //即将添加buff
         event Action<IBattleUnit, IBuffer> onBufferAdded;
         event Action<IBattleUnit, IBuffer> onBufferRemoved;
         event Action<IBattleUnit, IBuffer> onBufferCast;
@@ -84,6 +85,7 @@ namespace JFrame
         /// <param name="value"></param>
         /// <returns></returns>
         int MaxHPUpgrade(int value);
+        int MaxHPReduce(int value);
 
         /// <summary>
         /// 暴击率 0~1的值 百分比
@@ -133,23 +135,23 @@ namespace JFrame
         /// <summary>
         /// //0~1异常状态命中百分比
         /// </summary>
-        float DebuffHit { get; }
+        float ControlHit { get; }
         /// <summary>
         /// //0~1异常状态抵抗百分比
         /// </summary>
-        float DebuffAnti { get; }
+        float ControlResistance { get; }
         /// <summary>
         /// 抵抗数值提升
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        float DebuffAntiUpgrade(float value);
+        float ControlResistanceUpgrade(float value);
         /// <summary>
         /// 抵抗数值降低
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        float DebuffAntiReduce(float value);
+        float ControlResistanceReduce(float value);
         /// <summary>
         /// //穿透 0~1 百分比
         /// </summary>

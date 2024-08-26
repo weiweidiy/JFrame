@@ -9,13 +9,13 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace JFrameTest
 {
-    public class TestNormalExecutor : NormalExecutor
+    public class TestNormalExecutor : ExecutorNormal
     {
         public TestNormalExecutor(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] args = null)
         {
             
         }
@@ -89,7 +89,7 @@ namespace JFrameTest
             var executor = new ExecutorDamage(new FormulaManager(), new float[4] { 1, 0, 0, 1 });
             var caster = Substitute.For<IBattleUnit>();
             caster.Atk.Returns(1);
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, maxHp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
@@ -113,8 +113,8 @@ namespace JFrameTest
             var executor = new ExecutorDamage(new FormulaManager(), new float[4] { 1, 0, 0, 1 });
             var caster = Substitute.For<IBattleUnit>();
             caster.Atk.Returns(1);
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
-            var target2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 20, uid = "2" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, maxHp = 20, uid = "1" }, null, null);
+            var target2 = new BattleUnit(new BattleUnitInfo() { atk = 2, hp = 20, maxHp = 20, uid = "2" }, null, null);
             var targets = new List<IBattleUnit>() { target , target2 };
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
@@ -136,7 +136,7 @@ namespace JFrameTest
         {
             //arrange
             var executor = new ExecutorHeal(new FormulaManager(), new float[4] { 1, 0, 0, 0.2f });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, maxHp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
             caster.MaxHP.Returns(20);
@@ -156,15 +156,17 @@ namespace JFrameTest
         public void TestExecutorHpDamage()
         {
             //arrange
-            var executor = new ExecutorHpDamage(new FormulaManager(), new float[4] { 1, 0, 0, 0.1f });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
+            var executor = new ExecutorHpDamage(new FormulaManager(), new float[6] { 1, 0, 0, 0.1f , 3000, 0.1f});
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, maxHp = 100, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
+            var caster = Substitute.For<IBattleUnit>();
+            caster.MaxHP.Returns(200);
 
             //action
             executor.OnAttach(action as IAttachOwner);
-            executor.Hit(Substitute.For<IBattleUnit>(), action, targets);
+            executor.Hit(caster, action, targets);
 
             //expect
             Assert.AreEqual(90, target.HP);
@@ -178,7 +180,7 @@ namespace JFrameTest
         {
             //arrange
             var executor = new ExecutorMaxHpUp(new FormulaManager(), new float[4] { 1, 0, 0, 0.1f });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, uid = "1" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 100, maxHp = 100, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var caster = Substitute.For<IBattleUnit>();
             caster.MaxHP.Returns(100);
@@ -246,7 +248,7 @@ namespace JFrameTest
             var executor = new ExecutorIncrementalDamage(new FormulaManager(), new float[6] { 1, 0, 0, 1 , 3, 0.5f});
             var caster = Substitute.For<IBattleUnit>();
             caster.Atk.Returns(1);
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, maxHp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(caster);
@@ -268,7 +270,7 @@ namespace JFrameTest
         {
             //arrange
             var executor = new ExecutorReborn(new FormulaManager(), new float[4] { 1, 0, 0, 0.5f });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, maxHp = 10, uid = "1" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             //action
             target.OnDamage(null, null, new ExecuteInfo() { Value = 10 });
@@ -287,8 +289,8 @@ namespace JFrameTest
         {
             //arrange
             var executor = new ExecutorSuckHp(new FormulaManager(), new float[5] { 1, 0, 0, 1f,1f });
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
-            var caster = new BattleUnit(new BattleUnitInfo() { atk = 20, hp = 100, uid = "2" }, null, null);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, maxHp = 100, uid = "1" }, null, null);
+            var caster = new BattleUnit(new BattleUnitInfo() { atk = 20, hp = 100, maxHp = 100, uid = "2" }, null, null);
             var targets = new List<IBattleUnit>() { target };
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Type.Returns(ActionType.Normal);
@@ -306,7 +308,7 @@ namespace JFrameTest
         public void TestExecutorAttrChanged()
         {
             //arrange
-            var executor = new ExecutorAttrChange(new FormulaManager(), new float[5] { 1,0,0,1000, 1});
+            var executor = new ExecutorChangeAttr(new FormulaManager(), new float[5] { 1,0,0,1000, 1});
             var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
             var owner = Substitute.For<IAttachOwner>();
             owner.GetFoldCount().Returns(1);
@@ -323,7 +325,7 @@ namespace JFrameTest
         public void TestExecutorAttrDettach()
         {
             //arrange
-            var executor = new ExecutorAttrChange(new FormulaManager(), new float[5] { 1, 0, 0, 1000, 1 });
+            var executor = new ExecutorChangeAttr(new FormulaManager(), new float[5] { 1, 0, 0, 1000, 1 });
             var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
             var owner = Substitute.For<IAttachOwner>();
             owner.GetFoldCount().Returns(1);
@@ -335,6 +337,65 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(30, target.Atk);
+        }
+
+        [Test]
+        public void TestExecutorDamageUp()
+        {
+            //arrange
+            var executor = new ExecutorDamageUp(new FormulaManager(), new float[4] { 1, 0, 0, 0.5f });
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, uid = "1" }, null, null);
+            var owner = Substitute.For<IBattleAction, IAttachOwner>();
+            owner.GetFoldCount().Returns(1);
+            ExecuteInfo info = new ExecuteInfo() { Value = 100 };
+
+            //action
+            executor.OnAttach(owner);
+            executor.Hit(null, null, new List<IBattleUnit>() { target }, new object[] { owner as IBattleAction, target,  info });
+
+
+            //expect
+            Assert.AreEqual(150, info.Value);
+        }
+
+
+        [Test]
+        public void TestExecutorDamageCounter()
+        {
+            //arrange
+            var executor = new ExecutorDamageCounter(new FormulaManager(), new float[4] { 1, 0, 0, 0.5f});
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 30, hp = 100, maxHp = 100, uid = "1" }, null, null);
+            var caster = new BattleUnit(new BattleUnitInfo() { atk = 20, hp = 100, maxHp = 100, uid = "2" }, null, null);
+            var targets = new List<IBattleUnit>() { target };
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
+            action.Type.Returns(ActionType.Normal);
+
+            //action
+            var info = new ExecuteInfo() { Value = 50 , Source = target };
+            caster.OnDamage(target, null, info);
+            executor.OnAttach(action as IAttachOwner);
+            executor.Hit(caster, action, targets, new object[] {null,null, info });
+
+            //expect
+            Assert.AreEqual(75, target.HP);
+            Assert.AreEqual(50, caster.HP);
+        }
+
+        [Test]
+        public void TestExecutorRandomClearDebuff()
+        {
+            //arrange
+            var executor = new ExecutorRandomClearDebuff(new FormulaManager(), new float[4] { 1, 0, 0, 2 });
+            var target = Substitute.For<IBattleUnit>();
+            var buffer = Substitute.For<IBuffer>();
+            buffer.IsBuff().Returns(false);
+            target.GetBuffers().Returns(new IBuffer[]{ buffer });
+
+            //action
+            executor.Hit(null, null, new List<IBattleUnit>() { target });
+
+            //expect
+            target.Received(1).RemoveBuffer(Arg.Any<string>());
         }
     }
 

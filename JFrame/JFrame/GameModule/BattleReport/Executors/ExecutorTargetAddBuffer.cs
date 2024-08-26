@@ -10,7 +10,7 @@ namespace JFrame
     /// <summary>
     /// 1：执行段数，2：延迟执行 3: 段数间隔 4：buffId 5:层数 6:概率0-1 type = 2
     /// </summary>
-    public class ExecutorTargetAddBuffer : NormalExecutor
+    public class ExecutorTargetAddBuffer : ExecutorNormal
     {
         protected int bufferId;
         protected int foldCount;
@@ -40,7 +40,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="target"></param>
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
         {
             foreach (IBattleUnit target in targets)
             {

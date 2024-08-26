@@ -22,7 +22,7 @@ namespace JFrame
 
         public IAttachOwner Owner { get; private set; }
 
-        public abstract List<IBattleUnit> FindTargets();
+        public abstract List<IBattleUnit> FindTargets(object[] args);
 
         public float[] GetArgs()
         {

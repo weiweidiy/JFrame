@@ -44,7 +44,7 @@ namespace JFrameTest
         public void TestBufferAttackDown()
         {
             //arrange
-            var buffer = new DeBufferAttackDown(null,"1", 1, 1, new float[2] { 10, 0.2f }, trigger, finder, executors);
+            var buffer = new DeBufferAttackDown(null,false,"1", 1, 1, new float[2] { 10, 0.2f }, trigger, finder, executors);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -58,7 +58,7 @@ namespace JFrameTest
         public void TestDettachBufferAttackDown()
         {
             //arrange
-            var buffer = new DeBufferAttackDown(null, "1", 1, 1, new float[2] { 10, 20f }, trigger, finder, executors);
+            var buffer = new DeBufferAttackDown(null, false, "1", 1, 1, new float[2] { 10, 20f }, trigger, finder, executors);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -73,7 +73,7 @@ namespace JFrameTest
         public void TestBufferAttackDownFold()
         {
             //arrange
-            var buffer = new DeBufferAttackDown(null, "1", 1, 2, new float[2] { 10, 0.2f }, trigger, finder, executors);
+            var buffer = new DeBufferAttackDown(null, false, "1", 2, 2, new float[2] { 10, 0.2f }, trigger, finder, executors);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
@@ -88,7 +88,7 @@ namespace JFrameTest
         {
             //arrange
             var value = 5;
-            var buffer = new BufferAttackSpeedUp(null, "1", 101, 1, new float[2] { 10, 1f }, trigger, finder, executors);
+            var buffer = new BufferAttackSpeedUp(null,true, "1", 101, 1, new float[2] { 10, 1f }, trigger, finder, executors);
             var target = Substitute.For<IBattleUnit>();          
             var action = Substitute.For<IBattleAction>();
             var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
@@ -109,7 +109,7 @@ namespace JFrameTest
         {
             //arrange
             var value = 15;
-            var buffer = new DebufferAttackSpeedDown(null, "1", 101, 1, new float[2] { 10, 0.5f }, trigger, finder, executors);
+            var buffer = new DebufferAttackSpeedDown(null,false, "1", 101, 1, new float[2] { 10, 0.5f }, trigger, finder, executors);
             var target = Substitute.For<IBattleUnit>();
             var action = Substitute.For<IBattleAction>();
             var cdTrigger = new CDTimeTrigger(null, new float[] { 10 });
@@ -129,22 +129,22 @@ namespace JFrameTest
         public void TestBufferDebuffAntiUpgrade()
         {
             //arrange
-            var buffer = new BufferDebuffAntiUpgrade(null, "1", 1, 1, new float[2] { 10, 0.2f }, trigger, finder, executors);
+            var buffer = new BufferDebuffAntiUpgrade(null, false, "1", 1, 1, new float[2] { 10, 0.2f }, trigger, finder, executors);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 10, uid = "1" }, null, null);
 
             //action
             buffer.OnAttach(target);
 
             //expect
-            Assert.AreEqual(0.2f, target.DebuffAnti);
+            Assert.AreEqual(0.2f, target.ControlResistance);
         }
 
         [Test]
         public void TestBufferShield()
         {
             //arrange
-            var buffer = new BufferShield(null, "1", 1, 1, new float[2] { 10, 2 }, trigger, finder, executors);
-            var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1" }, null, null);
+            var buffer = new BufferShield(null,true, "1", 1, 1, new float[2] { 10, 2 }, trigger, finder, executors);
+            var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, maxHp = 100, uid = "1" }, null, null);
 
             //action
             buffer.OnAttach(target);
@@ -160,7 +160,7 @@ namespace JFrameTest
         public void TestBufferStunning()
         {
             //arrange
-            var buffer = new DeBufferStunning(null, "1", 1, 1, new float[1] { 10 }, trigger, finder, executors);
+            var buffer = new DeBufferStunning(null, false, "1", 1, 1, new float[1] { 10 }, trigger, finder, executors);
             var actionManager = Substitute.For<ActionManager>();
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1" }, actionManager, null);
             var action = Substitute.For<IBattleAction>();
@@ -180,7 +180,7 @@ namespace JFrameTest
         public void TestBufferSkillDmgUp()
         {
             //arrange
-            var buffer = new BufferSkillDmgUp(null,"1", 1, 1, new float[2] { 10, 2 }, trigger, finder, executors);
+            var buffer = new BufferSkillDmgUp(null,true,"1", 1, 1, new float[2] { 10, 2 }, trigger, finder, executors);
             var target = Substitute.For< IBattleUnit>();
             var info = new ExecuteInfo() { Value = 10 };
             var action = Substitute.For<IBattleAction>();
@@ -198,7 +198,7 @@ namespace JFrameTest
         public void TestBufferCriUp()
         {
             //arrange
-            var buffer = new BufferCriUp(null, "1", 1, 1, new float[2] { 10, 0.1f }, trigger, finder, executors);
+            var buffer = new BufferCriUp(null, true,"1", 1, 1, new float[2] { 10, 0.1f }, trigger, finder, executors);
             var target = new BattleUnit(new BattleUnitInfo() { atk = 100, hp = 100, uid = "1", cri = 0.5f }, null, null);
 
             //action
@@ -221,7 +221,7 @@ namespace JFrameTest
             action.Type.Returns(ActionType.Normal);
             action.GetCDTrigger().Returns(cdTrigger);
             target.GetActions().Returns(new IBattleAction[] { action });
-            var buffer = new BufferLightningFlag(null, "1", 101, 1, new float[2] { 10, 1f }, trigger, finder, executors);
+            var buffer = new BufferLightningFlag(null,true, "1", 101, 1, new float[2] { 10, 1f }, trigger, finder, executors);
 
             //action
             buffer.OnAttach(target);

@@ -17,9 +17,10 @@
             if (NeedUpdate())
             {
                 context.cdTrigger.Restart();
-                context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
+                if (context.Mode == ActionMode.Active)
+                    context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
             }
-                
+
         }
 
 
@@ -40,7 +41,7 @@
             {
                 //设置触发器无效
                 context.cdTrigger.Restart();
-
+                context.cdTrigger.SetArgs(context.cdTrigger.GetOriginalArgs());
                 //动作进入待机状态
                 context.Standby();
             }

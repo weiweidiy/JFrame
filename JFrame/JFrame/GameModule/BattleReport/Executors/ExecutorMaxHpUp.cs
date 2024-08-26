@@ -44,13 +44,13 @@ namespace JFrame
         }
 
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] arg = null)
         {
             foreach (var target in targets)
             {
                 var info = new ExecuteInfo() { Value = (int)GetValue(caster, action, target) };
                 //广播，可以改变这个值
-                NotifyHitTarget(target, info);
+                NotifyHittingTarget(target, info);
 
                 target.OnMaxHpUp(caster, action, info);
                 //target.MaxHPUpgrade((int)GetValue(caster, action , target));

@@ -1,21 +1,43 @@
-﻿namespace JFrame
+﻿
+using System;
+using System.Collections.Generic;
+
+namespace JFrame
 {
-    public enum PVPAttribute
+    /// <summary>
+    /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：伤害倍率  type = 1
+    /// </summary>
+    public class ExecutorDamageUp : ExecutorNormal
     {
-        ATK = 1000,
-        HP,
-        AtkSpeed,
-        Critical,
-        CriticalDamage,
-        CriticalDamageResist,
-        SkillDamageEnhance,
-        SkillDamageReduce,
-        DamageEnhance,
-        DamageReduce,
-        ControlResistance,
-        ControlHit,
-        Block,
-        Puncture,
+        protected float arg = 1f; ///提高百分比
+        public ExecutorDamageUp(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+        {
+            if (args != null && args.Length >= 4)
+            {
+                arg = args[3];
+            }
+            else
+            {
+                throw new System.Exception(this.GetType().ToString() + " 参数数量不对 缺少伤害倍率参数");
+            }
+        }
+
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
+        {
+            var targetAction = args[0] as IBattleAction;
+            if (targetAction == null)
+                throw new Exception("ExecutorDamageUp action转换错误");
+
+            var target = args[1] as IBattleUnit;
+            if (target == null)
+                throw new Exception("ExecutorDamageUp 目标转换错误");
+
+            var info = args[2] as ExecuteInfo;
+            if (info == null)
+                throw new Exception("ExecutorDamageUp info 转换错误");
+
+            info.Value = (int)(info.Value * (1 + arg));
+        }
     }
 
 }

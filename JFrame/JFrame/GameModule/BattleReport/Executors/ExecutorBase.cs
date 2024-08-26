@@ -3,15 +3,21 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+
     public abstract class ExecutorBase : IBattleExecutor
     {
-        
+        /// <summary>
+        /// 即将命中
+        /// </summary>
         public event Action<IBattleUnit, ExecuteInfo> onHittingTarget;
-        protected void NotifyHitTarget(IBattleUnit target, ExecuteInfo info)
+        protected void NotifyHittingTarget(IBattleUnit target, ExecuteInfo info)
         {
             onHittingTarget?.Invoke(target, info);
         }
 
+        /// <summary>
+        /// 已经命中
+        /// </summary>
         public event Action<IBattleUnit, ExecuteInfo, IBattleUnit> onHittedComplete;
 
         protected void NotifyHitedTarget(IBattleUnit caster, ExecuteInfo info, IBattleUnit taget)
@@ -19,12 +25,24 @@ namespace JFrame
             onHittedComplete?.Invoke(caster, info, taget);
         }
 
+        /// <summary>
+        /// 拥有者
+        /// </summary>
         public virtual IAttachOwner Owner { get; private set; }
 
-        public bool Active { get; protected set; }
+        /// <summary>
+        /// 是否在执行中
+        /// </summary>
+        public bool Executing { get; protected set; }
 
+        /// <summary>
+        /// 公式管理器
+        /// </summary>
         protected FormulaManager formulaManager;
 
+        /// <summary>
+        /// 参数
+        /// </summary>
         protected float[] args;
 
         public ExecutorBase(FormulaManager formulaManager, float[] args)
@@ -32,34 +50,44 @@ namespace JFrame
             this.formulaManager = formulaManager;
             this.args = args;
         }
+
+        /// <summary>
+        /// 获取参数
+        /// </summary>
+        /// <returns></returns>
         public float[] GetArgs()
         {
             return args;
         }
 
-        public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object arg = null);
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="args"></param>
+        public virtual void SetArgs(float[] args)
+        {
+            this.args = args;
+        }
 
         public virtual void OnAttach(IAttachOwner target)
         {
             Owner = target;
         }
 
-        public virtual void OnDetach()
-        {
-            //throw new NotImplementedException();
-        }
+        public virtual void OnDetach() { }
 
-        public abstract void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null);
-
+        /// <summary>
+        /// 重置
+        /// </summary>
         public virtual void Reset()
         {
-            Active = false;
+            Executing = false;
         }
 
-        public virtual void SetArgs(float[] args)
-        {
-            this.args = args;
-        }
+
+        public abstract void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null);
+        public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] args = null);
+
 
         public abstract void Update(BattleFrame frame);
     }

@@ -10,7 +10,7 @@ namespace JFrame
     /// <summary>
     /// 执行器基础类： 可以延迟执行，多段执行
     /// </summary>
-    public abstract class NormalExecutor : ExecutorBase
+    public abstract class ExecutorNormal : ExecutorBase
     {
         //public event Action<IBattleUnit, ExecuteInfo> onHittingTarget;
 
@@ -28,7 +28,7 @@ namespace JFrame
         /// 参数：1：执行段数，2：延迟执行 3: 段数间隔
         /// </summary>
         /// <param name="args"></param>
-        public NormalExecutor(FormulaManager formulaManager, float[] args):base(formulaManager, args) 
+        public ExecutorNormal(FormulaManager formulaManager, float[] args):base(formulaManager, args) 
         {
 
             //this.formulaManager = formulaManager;
@@ -92,7 +92,7 @@ namespace JFrame
         IBattleUnit caster;
         IBattleAction action;
         List<IBattleUnit> targets;
-        object triggerArg;
+        object[] triggerArg;
 
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace JFrame
         /// <param name="frame"></param>
         public override void Update(BattleFrame frame)
         {
-            if (!Active)
+            if (!Executing)
                 return;
 
             delta += frame.DeltaTime;
@@ -127,7 +127,7 @@ namespace JFrame
 
             if (tempCount >= count)
             {
-                Active = false;
+                Executing = false;
                 delayed = false;
                 tempCount = 0;
             }
@@ -148,13 +148,13 @@ namespace JFrame
         /// <param name="action"></param>
         /// <param name="target"></param>
         /// <exception cref="Exception"></exception>
-        public override void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object triggerArgs = null)
+        public override void ReadyToExecute(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] triggerArgs = null)
         {
-            if (Active)
+            if (Executing)
                 throw new Exception("执行器正在执行中，无法再次执行" + this.GetType().ToString());
 
             //激活
-            Active = true;
+            Executing = true;
 
             this.caster = caster;
             this.action = action;

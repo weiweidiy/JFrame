@@ -6,9 +6,9 @@ namespace JFrame
 
     public abstract class BaseBattleTrigger : IBattleTrigger
     {
-        public event Action<IBattleTrigger, object> onTriggerOn;
+        public event Action<IBattleTrigger, object[]> onTriggerOn;
 
-        protected void NotifyTriggerOn(IBattleTrigger trigger, object arg)
+        protected void NotifyTriggerOn(IBattleTrigger trigger, object[] arg)
         {
             onTriggerOn?.Invoke(trigger, arg);
         }
@@ -32,6 +32,8 @@ namespace JFrame
         /// 参数
         /// </summary>
         protected float[] args;
+
+        public float[] OriginalArgs;
 
         /// <summary>
         /// 延迟触发
@@ -64,6 +66,7 @@ namespace JFrame
             this.delay = delay;
             this.delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
             this.isOn = false;
+            OriginalArgs = args;
         }
 
 
@@ -89,10 +92,10 @@ namespace JFrame
                 return;
             }
 
-            OnDelayCompleteEveryFrame();
+            OnDelayCompleteEveryFrame(frame);
         }
 
-        protected virtual void OnDelayCompleteEveryFrame() { }
+        protected virtual void OnDelayCompleteEveryFrame(BattleFrame frame) { }
 
 
         /// <summary>
@@ -162,6 +165,11 @@ namespace JFrame
         public virtual object GetExtraArg()
         {
             return null;
+        }
+
+        public float[] GetOriginalArgs()
+        {
+            return OriginalArgs;
         }
     }
     //public abstract class BaseBattleTrigger : IBattleTrigger

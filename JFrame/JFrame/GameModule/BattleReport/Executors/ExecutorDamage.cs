@@ -1,7 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+
+
 
 namespace JFrame
 {
@@ -9,7 +10,7 @@ namespace JFrame
     /// <summary>
     /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：伤害倍率  type = 1
     /// </summary>
-    public class ExecutorDamage : NormalExecutor
+    public class ExecutorDamage : ExecutorNormal
     {
         /// <summary>
         /// 伤害倍率
@@ -39,7 +40,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="targets"></param>
         /// <param name="reporter"></param>
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object arg = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
         {
             foreach (var target in targets)
             {
@@ -50,22 +51,32 @@ namespace JFrame
 
                 int dmg = 0;
                 var owner = Owner as IBattleAction;
-                if (owner == null)
-                    throw new Exception("attach owner 转换失败 ");
+                //if (owner == null)
+                //    throw new Exception("attach owner 转换失败 ");
 
-                if (owner.Type == ActionType.Normal) //普通攻击
-                    dmg = formulaManager.GetNormalDamageValue(baseValue, caster, action, target, out isCri, out isBlock);
+                if (owner != null)
+                {
+                    if (owner.Type == ActionType.Normal) //普通攻击
+                        dmg = formulaManager.GetNormalDamageValue(baseValue, caster, action, target, out isCri, out isBlock);
+                    else
+                        dmg = formulaManager.GetSkillDamageValue(baseValue, caster, action, target, out isCri);
+                }
                 else
-                    dmg = formulaManager.GetSkillDamageValue(baseValue, caster, action, target, out isCri);
+                {
 
-                var info = new ExecuteInfo() { Value = (int)dmg, IsCri = isCri, IsBlock = isBlock };
+                    dmg = baseValue;
+                }
+
+                var info = new ExecuteInfo() { Value = (int)dmg, IsCri = isCri, IsBlock = isBlock, Source = caster };
 
                 //广播，可以改变这个值
-                NotifyHitTarget(target, info);
+                NotifyHittingTarget(target, info);
 
                 target.OnDamage(caster, action, info);
 
                 OnTargetHit(caster, action, target, info);
+
+                NotifyHitedTarget(caster, info, target);
             }
 
         }

@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http.Headers;
-using static JFrame.PVPBattleManager;
-using static System.Collections.Specialized.BitVector32;
 
 namespace JFrame
 {
@@ -13,7 +10,8 @@ namespace JFrame
         public enum Team
         {
             Attacker,
-            Defence
+            Defence,
+            Global
         }
 
         /// <summary>
@@ -47,6 +45,11 @@ namespace JFrame
         ActionDataSource dataSource = null;
 
         /// <summary>
+        /// 全局action配置表
+        /// </summary>
+        ActionDataSource globalDataSource = null;
+
+        /// <summary>
         /// buff数据源
         /// </summary>
         BufferDataSource bufferDataSource = null;
@@ -56,41 +59,11 @@ namespace JFrame
         /// </summary>
         FormulaManager formulaManager;
 
+        /// <summary>
+        /// 所有可通知对象
+        /// </summary>
+        public IBattleNotifier[] Notifiers { get; private set; }
 
-        #region 响应方法：战斗规则
-        ///// <summary>
-        ///// 有动作准备好了
-        ///// </summary>
-        ///// <param name="arg1"></param>
-        ///// <param name="arg2"></param>
-        ///// <param name="arg3"></param>
-        ///// <exception cref="System.NotImplementedException"></exception>
-        //private void BattleTeam_onActionTriggerOn(Team team, IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets)
-        //{
-        //    //var uids = new List<string>();
-        //    //foreach (var target in targets)
-        //    //{
-        //    //    uids.Add(target.UID);
-        //    //}
-        //    //var reportUID = pvpReporter.AddReportActionData(caster.UID, action.Id, uids);
-        //    //action.Cast(caster, targets, pvpReporter);
-        //}
-
-        ///// <summary>
-        ///// 动作生效了, 单个目标调用1次，AOE在1次action中会调用多次
-        ///// </summary>
-        ///// <param name="team"></param>
-        ///// <param name="caster"></param>
-        ///// <param name="action"></param>
-        ///// <param name="target"></param>
-        //private void BattleTeam_onActionDone(Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
-        //{
-        //    //Console.WriteLine("Frame " + frame.CurFrame + "~ 队伍：" + team.ToString() + "~ 单位 ： " + caster.Name + " ~对目标 " + target.Name + " ~执行动作：" + action.Name);
-        //}
-
-
-
-        #endregion
 
         #region Get方法
 
@@ -225,21 +198,41 @@ namespace JFrame
         /// <summary>
         /// 初始化战斗
         /// </summary>
-        /// <param name="attacker"></param>
-        /// <param name="defence"></param>
-        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence, ActionDataSource dataSource, BufferDataSource bufferDataSource, IBattleReporter reporter, FormulaManager formulaManager)
+        /// <param name="attacker">攻击者队伍字典</param>
+        /// <param name="defence">防御者队伍字典</param>
+        /// <param name="dataSource">action配置参数源</param>
+        /// <param name="bufferDataSource">buff配置参数源</param>
+        /// <param name="reporter">战报记录器</param>
+        /// <param name="formulaManager">公式管理器</param>
+        /// <param name="battleDuration">战斗时长</param>
+        /// <param name="globalAction">全局action</param>
+        public void Initialize(Dictionary<BattlePoint, BattleUnitInfo> attacker, Dictionary<BattlePoint, BattleUnitInfo> defence
+                , ActionDataSource dataSource, BufferDataSource bufferDataSource
+                , IBattleReporter reporter, FormulaManager formulaManager, float battleDuration = 90f
+                , Dictionary<BattlePoint, BattleUnitInfo> global = null, ActionDataSource globalActionDataSource = null
+                , IBattleNotifier[] notifiers = null)
         {
+            this.Notifiers = notifiers;
+            frame.AllTime = battleDuration;
             this.formulaManager = formulaManager;
             this.dataSource = dataSource;
             this.bufferDataSource = bufferDataSource;
             teams.Clear();
-            var attackTeam = CreateTeam(Team.Attacker, attacker);
+            var attackTeam = CreateTeam(Team.Attacker, attacker, this.dataSource);
             teams.Add(Team.Attacker, attackTeam);
-            var defenceTeam = CreateTeam(Team.Defence, defence);
+            var defenceTeam = CreateTeam(Team.Defence, defence, this.dataSource);
             teams.Add(Team.Defence, defenceTeam);
+
+            if(global != null && global.Keys.Count > 0)
+            {
+                var globalTeam = CreateTeam(Team.Global, global, globalActionDataSource);
+                teams.Add(Team.Global, globalTeam);
+                globalTeam.Initialize();
+            }
 
             attackTeam.Initialize();
             defenceTeam.Initialize();
+            
 
             battleResult = new BattleResult(attackTeam, defenceTeam);
             pvpReporter = reporter == null?  new BattleReporter(frame, teams) : reporter ;
@@ -268,13 +261,13 @@ namespace JFrame
         /// 初始化队伍数据
         /// </summary>
         /// <param name="units"></param>
-        public virtual BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units)
+        public virtual BattleTeam CreateTeam(Team team, Dictionary<BattlePoint, BattleUnitInfo> units, ActionDataSource dataSource)
         {
             var dicUnits = new Dictionary<BattlePoint, IBattleUnit>();
             foreach (var slot in units.Keys)
             {
                 var info = units[slot];
-                var battleUnit = new BattleUnit(info, CreateActionManager(info, info.actionsId, slot), CreateBufferManager(slot));
+                var battleUnit = new BattleUnit(info, CreateActionManager(info, info.actionsId, slot, dataSource), CreateBufferManager(slot));
                 //battleUnit.onActionReady += BattleUnit_onActionReady;
                 dicUnits.Add(slot, battleUnit);
             }
@@ -295,7 +288,7 @@ namespace JFrame
         }
 
 
-        ActionManager CreateActionManager(BattleUnitInfo unitInfo , List<int> actionIds, BattlePoint battlePoint)
+        ActionManager CreateActionManager(BattleUnitInfo unitInfo , List<int> actionIds, BattlePoint battlePoint, ActionDataSource dataSource)
         {
             string unitUID = unitInfo.uid;
             int unitId = unitInfo.id;
@@ -331,6 +324,25 @@ namespace JFrame
             if (point != null) return point.Team;
 
             throw new System.Exception("没有找到指定单位的队伍 " + unit.Name);
+        }
+
+        public Team GetOppoTeam(IBattleUnit unit)
+        {
+            var atkTeam = GetTeam(Team.Attacker);
+            BattlePoint point = null;
+            point = atkTeam.GetPoint(unit);
+            if (point != null) return Team.Defence;
+
+            var defTeam = GetTeam(Team.Defence);
+            point = defTeam.GetPoint(unit);
+            if (point != null) return Team.Attacker;
+
+            throw new System.Exception("没有找到指定单位的队伍 " + unit.Name);
+        }
+
+        public bool IsBuffer(int buffId)
+        {
+            return bufferDataSource.IsBuff(buffId);
         }
 
         ///// <summary>

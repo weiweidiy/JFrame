@@ -17,7 +17,7 @@
         /// 战斗最大时长
         /// </summary>
         float _allTime = 90f; //to do:从配置表读取
-        public float AllTime { get => _allTime; private set => _allTime = value; }
+        public float AllTime { get => _allTime; set => _allTime = value; }
 
         /// <summary>
         /// 下一个逻辑帧

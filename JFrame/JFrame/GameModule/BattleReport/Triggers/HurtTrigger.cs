@@ -1,12 +1,21 @@
-﻿namespace JFrame
+﻿using System;
+
+namespace JFrame
 {
     /// <summary>
     /// type 6  立即触发型，
     /// </summary>
     public class HurtTrigger : BaseBattleTrigger
     {
+        float hitRate;
         public HurtTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0) : base(battleManager, args, delay)
         {
+            if(args.Length < 1)
+            {
+                throw new System.Exception("HurtTrigger 需要1个参数");
+            }
+
+            hitRate = args[0];
         }
 
 
@@ -25,9 +34,14 @@
             Owner.Owner.onDamaging -= Owner_onDamaging; 
         }
 
-        private void Owner_onDamaging(IBattleUnit arg1, IBattleAction arg2, IBattleUnit arg3, ExecuteInfo Info)
+        private void Owner_onDamaging(IBattleUnit caster, IBattleAction action, IBattleUnit target, ExecuteInfo Info)
         {
-            NotifyTriggerOn(this, Info);
+            var r = new Random().NextDouble();
+            if (r < hitRate)
+            {
+                NotifyTriggerOn(this, new object[] { action, target, Info });
+            }
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -18,7 +19,7 @@ namespace JFrame
         /// <summary>
         /// 开始释放了
         /// </summary>
-        public event Action<IBattleAction, List<IBattleUnit>,float> onStartCast;
+        public event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 
         /// <summary>
         /// 开始CD了
@@ -107,14 +108,14 @@ namespace JFrame
         /// </summary>
         public List<IBattleExecutor> exeutors { get; private set; }
 
-       
+
 
         /// <summary>
         /// 状态机
         /// </summary>
         ActionSM sm;
 
-#endregion
+        #endregion
 
         /// <summary>
         /// 常规动作逻辑，触发器触发->搜索敌人->执行效果
@@ -123,7 +124,7 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger , ActionSM sm)
+        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger, ActionSM sm)
         {
             this.Type = type;
             this.castDuration = duration;
@@ -137,7 +138,7 @@ namespace JFrame
             this.sm = sm;
             this.sm.Initialize(this);
 
-            if(exeutors !=null)
+            if (exeutors != null)
             {
                 foreach (var executor in exeutors)
                 {
@@ -157,13 +158,7 @@ namespace JFrame
         public void OnAttach(IBattleUnit owner)
         {
             Owner = owner;
-            if (ConditionTrigger != null)
-            {
-                ConditionTrigger.OnAttach(this);
-                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
 
-            }
-            
 
             if (finder != null)
                 finder.OnAttach(this);
@@ -179,6 +174,12 @@ namespace JFrame
                 }
             }
 
+            if (ConditionTrigger != null)
+            {
+                ConditionTrigger.onTriggerOn += ConditionTrigger_onTriggerOn; //通过事件触发会直接触发finder和执行器，不会等待下一帧
+                ConditionTrigger.OnAttach(this);
+            }
+
             sm.SwitchToStandby();
         }
 
@@ -188,11 +189,15 @@ namespace JFrame
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <exception cref="Exception"></exception>
-        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object arg2)
+        private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object[] arg2)
         {
-            var targets = finder.FindTargets();
+            var targets = finder.FindTargets(arg2);
             if (targets == null || targets.Count == 0)
-                throw new Exception("action cast 没有找到有效目标 " + Id);
+            {
+                ConditionTrigger.SetOn(false);
+                return;
+            }
+
 
             foreach (var e in exeutors)
             {
@@ -224,7 +229,7 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         private void Executor_onHittedComplete(IBattleUnit caster, ExecuteInfo info, IBattleUnit target)
         {
-            onHittedComplete?.Invoke(this, caster,info, target);    
+            onHittedComplete?.Invoke(this, caster, info, target);
         }
 
         /// <summary>
@@ -266,7 +271,7 @@ namespace JFrame
         }
         #endregion
 
-        
+
         /// <summary>
         /// 是否cd完成
         /// </summary>
@@ -282,9 +287,9 @@ namespace JFrame
         /// <returns></returns>
         public bool IsExecuting()
         {
-            foreach(var executor in exeutors)
+            foreach (var executor in exeutors)
             {
-                if(executor.Active) return true;
+                if (executor.Executing) return true;
             }
             return false;
         }
@@ -318,9 +323,9 @@ namespace JFrame
         /// 搜索目标
         /// </summary>
         /// <returns></returns>
-        public List<IBattleUnit> FindTargets()
+        public List<IBattleUnit> FindTargets(object[] args)
         {
-            return finder.FindTargets();
+            return finder.FindTargets(args);
         }
 
         /// <summary>
@@ -384,7 +389,7 @@ namespace JFrame
         /// <param name="enable"></param>
         public void SetEnable(bool enable)
         {
-           ConditionTrigger.SetEnable(enable);
+            ConditionTrigger.SetEnable(enable);
         }
 
         public float GetFoldCount()
@@ -399,12 +404,12 @@ namespace JFrame
 
         public void SetValid(bool valid)
         {
-            
+
         }
 
         public void SetConditionTriggerArgs(float[] args)
         {
-            if(ConditionTrigger != null)
+            if (ConditionTrigger != null)
                 ConditionTrigger.SetArgs(args);
         }
 
@@ -416,7 +421,7 @@ namespace JFrame
 
         public void SetExecutorArgs(float[] args)
         {
-            if(exeutors != null)
+            if (exeutors != null)
             {
                 foreach (var executor in exeutors)
                 {
@@ -427,7 +432,7 @@ namespace JFrame
 
         public void SetCdArgs(float[] args)
         {
-            if(cdTrigger != null)
+            if (cdTrigger != null)
                 cdTrigger.SetArgs(args);
         }
     }

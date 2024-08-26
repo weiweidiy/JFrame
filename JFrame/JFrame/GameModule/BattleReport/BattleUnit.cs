@@ -24,6 +24,7 @@ namespace JFrame
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onMaxHpUp;       //复活
         public event Action<IBattleUnit, IBattleAction, IBattleUnit, int> onDebuffAnti;    //状态抵抗
 
+        public event Action<IBattleUnit, int, ExecuteInfo> onBufferAdding; //即将添加buff
         public event Action<IBattleUnit, IBuffer> onBufferAdded;
         public event Action<IBattleUnit, IBuffer> onBufferRemoved;
         public event Action<IBattleUnit, IBuffer> onBufferCast;
@@ -70,7 +71,7 @@ namespace JFrame
 
 
             Atk = info.atk;
-            MaxHP = info.hp;
+            MaxHP = info.maxHp;
             HP = info.hp;
             AtkSpeed = info.atkSpeed;
             Critical = info.cri;
@@ -80,8 +81,8 @@ namespace JFrame
             SkillDamageReduce = info.skillDmgAnti;
             DamageEnhance = info.dmgRate;
             DamageReduce = info.dmgAnti;
-            DebuffHit = info.debuffHit;
-            DebuffAnti = info.debuffAnti;
+            ControlHit = info.debuffHit;
+            ControlResistance = info.debuffAnti;
             Puncture = info.penetrate;
             Block = info.block;
 
@@ -393,7 +394,17 @@ namespace JFrame
             if (bufferManager == null)
                 throw new Exception("没有设置bufferManager 不能AddBuffer " + Name);
 
-            return bufferManager.AddBuffer(caster, this, bufferId, foldCout);
+            var info = new ExecuteInfo() { IsImmunity = false };
+            onBufferAdding?.Invoke(this, bufferId, info);
+
+            if(!info.IsImmunity)
+            {
+                return bufferManager.AddBuffer(caster, this, bufferId, foldCout);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -507,6 +518,21 @@ namespace JFrame
             return value;
         }
 
+        /// <summary>
+        /// 最大生命值降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int MaxHPReduce(int value)
+        {
+            if (value < 0)
+                throw new Exception("MaxHp降低数值不能为负数 " + value);
+
+            var realValue = Math.Min(value, MaxHP); //防止减成负数
+            MaxHP -= realValue;
+            return realValue;
+        }
 
 
         public float Critical
@@ -532,7 +558,7 @@ namespace JFrame
             if (value < 0)
                 throw new Exception("暴击降低数值不能为负数 " + value);
 
-            var realValue = Math.Min(value, Atk); //防止减成负数
+            var realValue = Math.Min(value, Critical); //防止减成负数
             Critical -= realValue;
             return realValue;
         }
@@ -612,7 +638,7 @@ namespace JFrame
             }
         }
 
-        public float DebuffHit
+        public float ControlHit
         {
             get { return battleUnitAttribute.debuffHit; }
             private set
@@ -621,7 +647,7 @@ namespace JFrame
             }
         }
 
-        public float DebuffAnti
+        public float ControlResistance
         {
             get { return battleUnitAttribute.debuffAnti; }
             private set
@@ -630,22 +656,22 @@ namespace JFrame
             }
         }
 
-        public float DebuffAntiUpgrade(float value)
+        public float ControlResistanceUpgrade(float value)
         {
             if (value < 0)
                 throw new Exception("攻击提升数值不能为负数 " + value);
 
-            DebuffAnti += value;
+            ControlResistance += value;
             return value;
         }
 
-        public float DebuffAntiReduce(float value)
+        public float ControlResistanceReduce(float value)
         {
             if (value < 0)
                 throw new Exception("攻击降低数值不能为负数 " + value);
 
-            var realValue = Math.Min(value, DebuffAnti); //防止减成负数
-            DebuffAnti -= realValue;
+            var realValue = Math.Min(value, ControlResistance); //防止减成负数
+            ControlResistance -= realValue;
             return realValue;
         }
 

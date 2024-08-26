@@ -2,9 +2,9 @@
 
 namespace JFrame
 {
-
-
-
+    /// <summary>
+    /// type = 1
+    /// </summary>
     public class OrderOppoFinder : BaseTargetFinder
     {
 
@@ -14,7 +14,7 @@ namespace JFrame
         /// 获取攻击目标
         /// </summary>
         /// <returns></returns>
-        public override List<IBattleUnit> FindTargets()
+        public override List<IBattleUnit> FindTargets(object[] args)
         {
             var result = new List<IBattleUnit>();
 

@@ -12,7 +12,7 @@ namespace JFrame
     public interface IBattleTrigger : IAttachable
     {
 
-        event Action<IBattleTrigger, object> onTriggerOn;
+        event Action<IBattleTrigger, object[]> onTriggerOn;
 
         BattleTriggerType TriggerType { get; }
 
@@ -33,7 +33,7 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         float[] GetArgs();
-
+        float[] GetOriginalArgs();
         /// <summary>
         /// 设置cd
         /// </summary>
