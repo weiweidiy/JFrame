@@ -153,6 +153,11 @@ namespace JFrame
                         attrValue = target.HP;
                     }
                     break;
+                case PVPAttribute.MaxHP:
+                    {
+                        attrValue = target.MaxHP;
+                    }
+                    break;
                 case PVPAttribute.AtkSpeed:
                     {
                         attrValue = target.AtkSpeed;
