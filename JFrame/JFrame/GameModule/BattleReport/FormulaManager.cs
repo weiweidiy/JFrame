@@ -88,7 +88,7 @@ namespace JFrame
         /// <returns></returns>
         float GetDmgRate(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            return 1 + Math.Max(hitter.DamageEnhance - hittee.DamageReduce, 0);
+            return 1 + Math.Max(hitter.DamageEnhance - hittee.DamageReduce, -1);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         private float GetSkillDmgRate(IBattleUnit hitter, IBattleAction action, IBattleUnit hittee)
         {
-            return 1 + Math.Max(hitter.SkillDamageEnhance - hittee.SkillDamageReduce, 0);
+            return 1 + Math.Max(hitter.SkillDamageEnhance - hittee.SkillDamageReduce, -1);
         }
 
         /// <summary>

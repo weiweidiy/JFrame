@@ -53,6 +53,10 @@ namespace JFrame
                     return new ExecutorAttrDamage(formulaManager, arg);
                 case 18:
                     return new ExecutorImmunity(formulaManager, arg);
+                case 19:
+                    return new ExecutorDanamicAttrChange(formulaManager, arg);
+                case 20:
+                    return new ExecutorShareDamage(formulaManager, arg);
                 default:
                     throw new Exception("没有实现指定的 excutor type " + excutorType);
             }

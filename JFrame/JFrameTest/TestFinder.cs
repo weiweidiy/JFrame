@@ -60,7 +60,7 @@ namespace JFrameTest
             unit1.OnDamage(null, null, new ExecuteInfo() { Value = 1 });
             unit2.OnDamage(null, null, new ExecuteInfo() { Value = 2 });
             simBattle.GetUnits(Arg.Any<PVPBattleManager.Team>()).Returns(new List<IBattleUnit>() { unit1, unit2 });
-            var finder = new OrderFriendsHurtFinder(battlePoint, simBattle, 2);
+            var finder = new FriendsLowestHpFinder(battlePoint, simBattle, 2);
 
             //action
             var result = finder.FindTargets(null);

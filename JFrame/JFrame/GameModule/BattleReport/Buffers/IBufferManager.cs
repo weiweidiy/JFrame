@@ -9,6 +9,8 @@ namespace JFrame
          event Action<IBuffer> onBufferRemoved;
          event Action<IBuffer> onBufferCast;//buff触发效果了
 
+        IBattleUnit Owner { get; set; }
+
         /// <summary>
         /// 添加一个指定buffer到指定单位上
         /// </summary>

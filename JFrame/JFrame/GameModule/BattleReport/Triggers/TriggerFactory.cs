@@ -67,6 +67,12 @@ namespace JFrame
                     return new FriednsAddedBufferTrigger(pvpBattleManager, args, delay);
                 case 18:
                     return new SelfAddingBufferTrigger(pvpBattleManager, args, delay);
+                case 19:
+                    return new DynamicHpTrigger(pvpBattleManager, args, delay);
+                case 20:
+                    return new OtherDeathTrigger(pvpBattleManager, args, delay);
+                case 21:
+                    return new FriendsRemoveBufferTrigger(pvpBattleManager, args, delay);
                 default:
                     throw new Exception(triggerType + " 技能未实现的 ConditionTrigger type " + triggerType);
             }

@@ -15,8 +15,9 @@ namespace JFrame
         {
             //0: action, 1 target, 2 info
             IBattleUnit ts = args[1] as IBattleUnit;
+
             if (ts == null)
-                throw new System.Exception("FliterHpFinder 转换错误");
+                throw new System.Exception("FliterFinder 转换错误");
 
             List<IBattleUnit> result = new List<IBattleUnit>();
 

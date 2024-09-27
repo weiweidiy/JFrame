@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class DebufferAttackSpeedDown : BufferAttackSpeedUp
     {
-        public DebufferAttackSpeedDown(IBattleUnit caster,bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, UID, id, foldCount, args, trigger,finder,exutors)
+        public DebufferAttackSpeedDown(IBattleUnit caster,bool isBuff,int buffType, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, buffType, UID, id, foldCount, args, trigger,finder,exutors)
         {
             if (args.Length < 2)
                 throw new System.Exception("DebufferAttackSpeedDown 参数不能少于2个");

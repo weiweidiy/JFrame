@@ -191,10 +191,13 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object[] arg2)
         {
+            if (GetCurState() == nameof(ActionCding))
+                return;
+
             var targets = finder.FindTargets(arg2);
             if (targets == null || targets.Count == 0)
             {
-                ConditionTrigger.SetOn(false);
+                ConditionTrigger.Restart();
                 return;
             }
 
@@ -207,7 +210,8 @@ namespace JFrame
                 //打完了
             }
 
-            ConditionTrigger.SetOn(false);
+            EnterCD();
+            //ConditionTrigger.Restart();
         }
 
         /// <summary>

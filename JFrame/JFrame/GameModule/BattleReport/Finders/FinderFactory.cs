@@ -17,7 +17,7 @@ namespace JFrame
                 case 2: //倒序找目标（可复数）
                     return new ReverseOrderOppoFinder(point, pvpBattleManager, arg);
                 case 3: //正序找自己队伍非满血目标（可复数）
-                    return new OrderFriendsHurtFinder(point, pvpBattleManager, arg);
+                    return new FriendsLowestHpFinder(point, pvpBattleManager, arg);
                 case 4: //随机敌方
                     return new RandomOppoFinder(point, pvpBattleManager, arg);
                 case 6: //本体

@@ -69,7 +69,10 @@ namespace JFrame
 
         protected virtual void Action_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
-            NotifyTriggerOn(this,new object[] { action, null, null });
+            if (targets == null || targets.Count == 0)
+                return;
+
+            NotifyTriggerOn(this,new object[] { action, targets[0], null });
             SetOn(true);
         }
 

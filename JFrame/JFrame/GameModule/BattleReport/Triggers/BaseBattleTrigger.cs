@@ -11,6 +11,7 @@ namespace JFrame
         protected void NotifyTriggerOn(IBattleTrigger trigger, object[] arg)
         {
             onTriggerOn?.Invoke(trigger, arg);
+
         }
 
         /// <summary>
@@ -29,10 +30,13 @@ namespace JFrame
         protected IPVPBattleManager battleManager;
 
         /// <summary>
-        /// 参数
+        /// 执行的可变更参数
         /// </summary>
         protected float[] args;
 
+        /// <summary>
+        /// 原始参数
+        /// </summary>
         public float[] OriginalArgs;
 
         /// <summary>
@@ -66,7 +70,11 @@ namespace JFrame
             this.delay = delay;
             this.delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
             this.isOn = false;
-            OriginalArgs = args;
+            OriginalArgs = new float[args.Length];
+            for (int i = 0; i < args.Length; i++)
+            {
+                OriginalArgs[i] = args[i];
+            }
         }
 
 
@@ -149,7 +157,14 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         public void SetArgs(float[] args)
         {
-            this.args = args;
+            if (args.Length != this.args.Length)
+                throw new Exception("SetArgs时参数列表长度不一致 " + this.GetType().Name);
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                this.args[i] = args[i];
+            }
+
         }
 
         public virtual void OnAttach(IAttachOwner target)

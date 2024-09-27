@@ -397,6 +397,23 @@ namespace JFrameTest
             //expect
             target.Received(1).RemoveBuffer(Arg.Any<string>());
         }
+
+        [Test]
+        public void TestExecutorShareDamage()
+        {
+            //arrange
+            var executor =new ExecutorShareDamage(new FormulaManager(), new float[4] { 1, 0, 0, 0.5f });
+            var action = Substitute.For<IBattleAction, IAttachOwner>();
+            executor.OnAttach(action);
+            action.Owner.Returns(Substitute.For<IBattleUnit>());
+            var info = new ExecuteInfo() { Value = 100 };
+
+            //action
+            executor.Hit(null, null, null, new object[] { null, null, info });
+
+            //expect
+            Assert.AreEqual(50, info.Value);
+        }
     }
 
 

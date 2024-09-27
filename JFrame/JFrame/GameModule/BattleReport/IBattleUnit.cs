@@ -109,11 +109,15 @@ namespace JFrame
         /// //暴击伤害加成百分比
         /// </summary>
         float CriticalDamage { get; }
+        float CriticalDamageUpgrade(float value);
+        float CriticalDamageReduce(float value);
 
         /// <summary>
         /// //暴击伤害抵抗百分比
         /// </summary>
         float CriticalDamageResist { get; }
+        float CriticalDamageResistUpgrade(float value);
+        float CriticalDamageResistReduce(float value);
         /// <summary>
         /// //技能伤害加成百分比
         /// </summary>
@@ -124,18 +128,27 @@ namespace JFrame
         /// //技能伤害抵抗百分比
         /// </summary>
         float SkillDamageReduce { get; }
+        float SkillDamageReduceUpgrade(float value);
+        float SkillDamageReduceReduce(float value);
+
         /// <summary>
         /// //伤害加成百分比
         /// </summary>
         float DamageEnhance { get; }
+        float DamageEnhanceUpgrade(float value);
+        float DamageEnhanceReduce(float value);
         /// <summary>
         /// //伤害抵抗百分比
         /// </summary>
-        float DamageReduce { get; } 
+        float DamageReduce { get; }
+        float DamageReduceUpgrade(float value);
+        float DamageReduceReduce(float value);
         /// <summary>
         /// //0~1异常状态命中百分比
         /// </summary>
         float ControlHit { get; }
+        float ControlHitUpgrade(float value);
+        float ControlHitReduce(float value);
         /// <summary>
         /// //0~1异常状态抵抗百分比
         /// </summary>
@@ -156,10 +169,15 @@ namespace JFrame
         /// //穿透 0~1 百分比
         /// </summary>
         float Puncture { get; }
+        float PunctureUpgrade(float value);
+        float PunctureReduce(float value);
+
         /// <summary>
         ///  //格挡 0~1 百分比
         /// </summary>
-        float Block { get; }    
+        float Block { get; }
+        float BlockUpgrade(float value);
+        float BlockReduce(float value);
 
 
 

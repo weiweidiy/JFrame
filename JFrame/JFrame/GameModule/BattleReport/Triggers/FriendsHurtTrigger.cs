@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-
+    /// <summary>
+    /// 非满血友军
+    /// </summary>
     public class FriendsHurtTrigger : BaseBattleTrigger
     {
         public FriendsHurtTrigger(IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0) : base(pvpBattleManager, arg, delay)
         {
-
+            if (arg.Length < 1)
+                throw new Exception("FriendsHurtTrigger 参数不对，需要1个参数");
         }
 
         protected override void OnDelayCompleteEveryFrame(BattleFrame frame)

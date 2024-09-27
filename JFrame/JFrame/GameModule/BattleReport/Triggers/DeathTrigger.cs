@@ -1,20 +1,33 @@
 ﻿using System;
+using System.Drawing;
 
 namespace JFrame
 {
 
-
+    /// <summary>
+    /// 自己死亡触发
+    /// </summary>
     public class DeathTrigger : BaseBattleTrigger
     {
         bool hited;
 
+        int count;
+        int tempCount;
         public DeathTrigger(IPVPBattleManager pvpBattleManager, float[] arg, float delay = 0) : base(pvpBattleManager, arg, delay)
-        { }
+        {
+            if (arg.Length < 1)
+                throw new Exception("DeathTrigger 参数不对");
+
+            count = (int)arg[0];
+        }
 
         public override BattleTriggerType TriggerType => BattleTriggerType.AfterDead;
 
-
-
+        public override void Restart()
+        {
+            base.Restart();
+            hited = false;
+        }
 
         protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
         {
@@ -24,10 +37,11 @@ namespace JFrame
             if (owner == null)
                 throw new Exception("attach owner 转换失败 ");
 
-            if (!owner.Owner.IsAlive() && !hited)
+            if (!owner.Owner.IsAlive() && !hited && tempCount < count)
             {
                 SetOn(true);
                 hited = true;
+                tempCount++;
             }
 
         }

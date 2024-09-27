@@ -43,6 +43,13 @@ namespace JFrame
         T Get(string uid);
 
         /// <summary>
+        /// 根据条件获取
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        List<T> Get(Predicate<T> predicate);
+
+        /// <summary>
         /// 获取所有成员
         /// </summary>
         /// <returns></returns>

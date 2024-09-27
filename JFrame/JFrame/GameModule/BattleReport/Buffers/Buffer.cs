@@ -65,7 +65,9 @@ namespace JFrame
 
         bool isBuff;
 
-        public Buffer(IBattleUnit caster, bool isBuff,  string UID, int id, int foldCount, float[] args,  IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
+        ActionMode actionMode;
+
+        public Buffer(IBattleUnit caster, bool isBuff, int buffType, string UID, int id, int foldCount, float[] args,  IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors)
         {
             Id = id;
             this.Uid = UID;
@@ -76,6 +78,7 @@ namespace JFrame
             this.exeutors = exutors;
             this.Caster = caster;
             this.isBuff = isBuff;
+            actionMode = (ActionMode)buffType;
 
             if (exeutors != null)
             {
@@ -148,7 +151,7 @@ namespace JFrame
             var targets = finder.FindTargets(arg2);
             if (targets == null || targets.Count == 0)
             {
-                ConditionTrigger.SetOn(false);
+                ConditionTrigger.Restart();
                 return;
             }
 
@@ -157,9 +160,10 @@ namespace JFrame
                 // to do: ibattleaction接口参数要替换成iattachowner
                 //e.ReadyToExecute(Caster, null, targets, arg2);
                 e.Hit(Caster, null, targets, arg2);
+                e.Executing = false;
             }
 
-            ConditionTrigger.SetOn(false);
+            ConditionTrigger.Restart();
         }
 
 
@@ -235,7 +239,7 @@ namespace JFrame
             {
                 foreach (var e in exeutors)
                 {
-                    if(e.Executing)
+                    if(e.Executing && actionMode == ActionMode.Active)
                     {
                         e.Update(frame);
                     }

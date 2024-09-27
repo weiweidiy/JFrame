@@ -10,6 +10,8 @@ namespace JFrame
             return true;
         }
 
+
+
         public virtual BufferFoldType GetFoldType(int buffId)
         {
             return BufferFoldType.Fold;
@@ -53,9 +55,9 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public virtual float GetConditionTriggerArg(int bufferId)
+        public virtual float[] GetConditionTriggerArg(int bufferId)
         {
-            return 3f; //to do: 计算数值
+            return new float[] { 3f }; //to do: 计算数值
         }
 
         /// <summary>
@@ -96,6 +98,11 @@ namespace JFrame
         public virtual float[] GetExcutorArg(int bufferId, int executorIndex)
         {
             return new float[] { 1f, 0.5f, 0.25f, 1f };//1:次数, 2：延迟 3:多段攻击间隔 4:倍率：
+        }
+
+        public virtual int GetBuffType(int buffId)
+        {
+            return 1;
         }
     }
 }

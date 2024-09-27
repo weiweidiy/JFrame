@@ -7,6 +7,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
+
     /// <summary>
     /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：伤害倍率  type = 1
     /// </summary>

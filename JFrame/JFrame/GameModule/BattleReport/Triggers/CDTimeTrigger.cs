@@ -35,16 +35,14 @@ namespace JFrame
                 {
                     
                     NotifyTriggerOn(this, new object[] { true });
-                    delta = 0f;
+                    //delta = 0f;
                 }
-                    
-
                 SetOn(true);
             }
-            //else
-            //{
-            //    SetOn(false);
-            //}
+            else
+            {
+                SetOn(false);
+            }
 
         }
     }

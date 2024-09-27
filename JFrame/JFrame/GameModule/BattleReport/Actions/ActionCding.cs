@@ -17,8 +17,10 @@
             if (NeedUpdate())
             {
                 context.cdTrigger.Restart();
-                if (context.Mode == ActionMode.Active)
-                    context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
+                //if (context.Mode == ActionMode.Active)
+                //    context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
+
+                context.NotifyStartCD(context.cdTrigger.GetArgs()[0]);
             }
 
         }

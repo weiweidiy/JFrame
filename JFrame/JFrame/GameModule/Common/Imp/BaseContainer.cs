@@ -25,6 +25,11 @@ namespace JFrame
             return list.Where(i =>  i.Uid == uid).FirstOrDefault();
         }
 
+        public List<T> Get(Predicate<T> predicate)
+        {
+            return list.Where(i => predicate(i)).ToList();
+        }
+
         public virtual List<T> GetAll()
         {
             return list;
@@ -58,6 +63,8 @@ namespace JFrame
 
             throw new System.Exception("没有找到要更新的item " + member.Uid);
         }
+
+
     }
 }
 

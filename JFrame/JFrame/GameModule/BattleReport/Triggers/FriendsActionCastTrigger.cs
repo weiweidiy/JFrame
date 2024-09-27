@@ -68,7 +68,11 @@ namespace JFrame
 
         private void Action_onStartCast(IBattleAction action, List<IBattleUnit> targets, float duration)
         {
-            NotifyTriggerOn(this, new object[] { true });
+            IBattleUnit target = null;
+            if(targets != null && targets.Count > 0)
+                target = targets[0];
+
+            NotifyTriggerOn(this, new object[] { action, target, new ExecuteInfo() { } });
             SetOn(true);
         }
     }

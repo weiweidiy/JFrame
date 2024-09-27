@@ -1,7 +1,6 @@
 ﻿namespace JFrame
 {
 
-
     /// <summary>
     /// type = 1
     /// </summary>

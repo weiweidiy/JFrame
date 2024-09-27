@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace JFrame
@@ -16,6 +17,8 @@ namespace JFrame
         BufferDataSource dataSource = null;
 
         BufferFactory factory = null;
+
+        public IBattleUnit Owner { get; set; }
 
         public BaseBufferManager(BufferDataSource dataSource, BufferFactory factory)
         {
@@ -64,6 +67,7 @@ namespace JFrame
             buffers.Add(buffer);
 
             onBufferAdded?.Invoke(buffer);
+
             return buffer;
         }
 

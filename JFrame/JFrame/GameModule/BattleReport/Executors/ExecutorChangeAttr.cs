@@ -1,24 +1,27 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 
 namespace JFrame
 {
+
     /// <summary>
     /// 改变属性执行器：参数 4：属性id  参数5：改变百分比
     /// </summary>
     public class ExecutorChangeAttr : ExecutorNormal
     {
-        PVPAttribute attrType;
-        float arg;
+        protected PVPAttribute attrType;
+        protected float arg;
 
         //真正改变的值
-        float valueChanged;
+        protected float valueChanged;
 
         /// <summary>
         /// 发生属性改变的目标列表
         /// </summary>
-        List<IBattleUnit> changedTargets = new List<IBattleUnit>();
+        protected List<IBattleUnit> changedTargets = new List<IBattleUnit>();
         public ExecutorChangeAttr(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
             if (args != null && args.Length >= 5)
@@ -34,9 +37,13 @@ namespace JFrame
 
         public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> targets, object[] args = null)
         {
+
             foreach (var target in targets)
             {
-                var value = GetValue(caster, action, target);
+
+
+                var value = GetValue(caster, action, target, args);
+
                 if (value > 0)
                     valueChanged = UpgradeValue(target, Math.Abs(value));
                 else
@@ -78,22 +85,46 @@ namespace JFrame
                     {
                         return target.CriUpgrade(value);
                     }
-                case PVPAttribute.CriticalDamage: return 0;
-                case PVPAttribute.CriticalDamageResist: return 0;
-                case PVPAttribute.ControlHit: return 0;
+                case PVPAttribute.CriticalDamage:
+                    {
+                        return target.CriticalDamageUpgrade(value);
+                    }
+                case PVPAttribute.CriticalDamageResist:
+                    {
+                        return target.CriticalDamageResistUpgrade(value);
+                    }
+                case PVPAttribute.ControlHit:
+                    {
+                        return target.ControlHitUpgrade(value);
+                    }
                 case PVPAttribute.ControlResistance:
                     {
                         return target.ControlResistanceUpgrade(value);
                     }
-                case PVPAttribute.DamageEnhance: return 0;
-                case PVPAttribute.DamageReduce: return 0;
+                case PVPAttribute.DamageEnhance:
+                    {
+                        return target.DamageEnhanceUpgrade(value);
+                    }
+                case PVPAttribute.DamageReduce:
+                    {
+                        return target.DamageReduceUpgrade(value);
+                    }
                 case PVPAttribute.SkillDamageEnhance:
                     {
                         return target.SkillDamageEnhanceUpgrade(value);
                     }
-                case PVPAttribute.SkillDamageReduce: return 0;
-                case PVPAttribute.Block: return 0;
-                case PVPAttribute.Puncture: return 0;
+                case PVPAttribute.SkillDamageReduce:
+                    {
+                        return target.SkillDamageReduceUpgrade(value);
+                    }
+                case PVPAttribute.Block:
+                    {
+                        return target.BlockUpgrade(value);
+                    }
+                case PVPAttribute.Puncture:
+                    {
+                        return target.PunctureUpgrade(value);
+                    }
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);
             }
@@ -117,28 +148,52 @@ namespace JFrame
                     {
                         return target.CriReduce(value);
                     }
-                case PVPAttribute.CriticalDamage: return 0;
-                case PVPAttribute.CriticalDamageResist: return 0;
-                case PVPAttribute.ControlHit: return 0;
+                case PVPAttribute.CriticalDamage:
+                    {
+                        return target.CriticalDamageReduce(value);
+                    }
+                case PVPAttribute.CriticalDamageResist:
+                    {
+                        return target.CriticalDamageResistReduce(value);
+                    }
+                case PVPAttribute.ControlHit:
+                    {
+                        return target.ControlHitReduce(value);
+                    }
                 case PVPAttribute.ControlResistance:
                     {
                         return target.ControlResistanceReduce(value);
                     }
-                case PVPAttribute.DamageEnhance: return 0;
-                case PVPAttribute.DamageReduce: return 0;
+                case PVPAttribute.DamageEnhance:
+                    {
+                        return target.DamageEnhanceReduce(value);
+                    }
+                case PVPAttribute.DamageReduce:
+                    {
+                        return target.DamageReduceReduce(value);
+                    }
                 case PVPAttribute.SkillDamageEnhance:
                     {
                         return target.SkillDamageEnhanceReduce(value);
                     }
-                case PVPAttribute.SkillDamageReduce: return 0;
-                case PVPAttribute.Block: return 0;
-                case PVPAttribute.Puncture: return 0;
+                case PVPAttribute.SkillDamageReduce:
+                    {
+                        return target.SkillDamageReduceReduce(value);
+                    }
+                case PVPAttribute.Block:
+                    {
+                        return target.BlockReduce(value);
+                    }
+                case PVPAttribute.Puncture:
+                    {
+                        return target.PunctureReduce(value);
+                    }
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);
             }
         }
 
-        protected virtual float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
+        protected virtual float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target, object[] args = null)
         {
             float attrValue;
             switch (attrType)
@@ -166,58 +221,60 @@ namespace JFrame
                 case PVPAttribute.Critical:
                     {
                         attrValue = target.Critical;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.CriticalDamage:
                     {
                         attrValue = target.CriticalDamage;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.CriticalDamageResist:
                     {
                         attrValue = target.CriticalDamageResist;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.DamageEnhance:
                     {
                         attrValue = target.DamageEnhance;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.DamageReduce:
                     {
+
                         attrValue = target.DamageReduce;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.SkillDamageEnhance:
                     {
                         attrValue = target.SkillDamageEnhance;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
+
                 case PVPAttribute.SkillDamageReduce:
                     {
                         attrValue = target.SkillDamageReduce;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.Block:
                     {
                         attrValue = target.Block;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.Puncture:
                     {
                         attrValue = target.Puncture;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.ControlHit:
                     {
                         attrValue = target.ControlHit;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 case PVPAttribute.ControlResistance:
                     {
                         attrValue = target.ControlResistance;
+                        return attrValue + arg * Owner.GetFoldCount();
                     }
-                    break;
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 
 namespace JFrame
 {
@@ -8,19 +10,27 @@ namespace JFrame
     /// </summary>
     public class ExecutorImmunity : ExecutorNormal
     {
+        int count;
         public ExecutorImmunity(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
 
         }
 
-        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] args = null)
+        public override void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] argsObj = null)
         {
-            if (args.Length < 3)
+            if (argsObj.Length < 3)
                 throw new ArgumentException("ExecutorImmunity 接受传递的参数错误");
 
-            var info = args[2] as ExecuteInfo ;
+            var info = argsObj[2] as ExecuteInfo ;
 
             info.IsImmunity = true ;
+
+            count++;
+
+            if (count >= Owner.GetFoldCount())
+            {
+                Owner.SetValid(false);
+            }
         }
 
 

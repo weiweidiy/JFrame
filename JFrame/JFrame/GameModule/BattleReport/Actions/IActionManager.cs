@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace JFrame
+namespace JFrame.BattleReportSystem
 {
     public interface IActionManager
     {

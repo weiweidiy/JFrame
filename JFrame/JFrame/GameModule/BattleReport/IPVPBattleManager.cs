@@ -9,7 +9,8 @@ namespace JFrame
             , ActionDataSource dataSource, BufferDataSource bufferDataSource
             , IBattleReporter reporter, FormulaManager formulaManager, float battleDuration = 90
             , Dictionary<BattlePoint, BattleUnitInfo> global = null, ActionDataSource globalActionDataSource = null
-            , IBattleNotifier[] notifiers = null);
+            , IBattleNotifier[] notifiers = null
+            , object extraData = null);
 
         void Release();
 
@@ -30,6 +31,8 @@ namespace JFrame
         float GetBattleTimeLimit();
 
         bool IsBuffer(int buffId);
+
+        object GetExtraData();
 
     }
 }

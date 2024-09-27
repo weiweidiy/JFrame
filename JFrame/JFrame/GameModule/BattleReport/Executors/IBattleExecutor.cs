@@ -19,7 +19,7 @@ namespace JFrame
         /// <summary>
         /// 是否激活
         /// </summary>
-        bool Executing { get; }
+        bool Executing { get; set; }
 
         /// <summary>
         ///  命中效果

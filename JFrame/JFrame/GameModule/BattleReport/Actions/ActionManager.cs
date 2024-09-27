@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Diagnostics;
+using JFrame.BattleReportSystem;
 
 
 namespace JFrame

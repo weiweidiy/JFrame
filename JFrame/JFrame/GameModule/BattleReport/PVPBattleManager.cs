@@ -64,6 +64,11 @@ namespace JFrame
         /// </summary>
         public IBattleNotifier[] Notifiers { get; private set; }
 
+        /// <summary>
+        /// 透传参数
+        /// </summary>
+        object extraData = null;
+
 
         #region Get方法
 
@@ -210,8 +215,10 @@ namespace JFrame
                 , ActionDataSource dataSource, BufferDataSource bufferDataSource
                 , IBattleReporter reporter, FormulaManager formulaManager, float battleDuration = 90f
                 , Dictionary<BattlePoint, BattleUnitInfo> global = null, ActionDataSource globalActionDataSource = null
-                , IBattleNotifier[] notifiers = null)
+                , IBattleNotifier[] notifiers = null
+                , object extraData = null)
         {
+            this.extraData = extraData;
             this.Notifiers = notifiers;
             frame.AllTime = battleDuration;
             this.formulaManager = formulaManager;
@@ -340,10 +347,27 @@ namespace JFrame
             throw new System.Exception("没有找到指定单位的队伍 " + unit.Name);
         }
 
+        /// <summary>
+        /// 是否是BUFF
+        /// </summary>
+        /// <param name="buffId"></param>
+        /// <returns></returns>
         public bool IsBuffer(int buffId)
         {
             return bufferDataSource.IsBuff(buffId);
         }
+
+        /// <summary>
+        /// 透传参数
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public object GetExtraData()
+        {
+            return extraData;
+        }
+
+
 
         ///// <summary>
         ///// 根据id创建技能实例

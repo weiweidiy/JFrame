@@ -2,9 +2,8 @@
 
 namespace JFrame
 {
-
     /// <summary>
-    /// 需要立即生效
+    /// type 11 需要立即生效
     /// </summary>
     public class ExecutorShield : ExecutorNormal
     {

@@ -35,7 +35,7 @@ namespace JFrameTest
         public void TestDeathTrigger()
         {
             //arrange
-            var trigger = new DeathTrigger(simBattle, new float[] { 0 });
+            var trigger = new DeathTrigger(simBattle, new float[] { 1 });
             var unit1 = new BattleUnit(new BattleUnitInfo() { atk = 1, hp = 10, uid = "1" }, null, null);
             var action = Substitute.For<IBattleAction, IAttachOwner>();
             action.Owner.Returns(unit1);
@@ -136,10 +136,11 @@ namespace JFrameTest
             var targetAcition = Substitute.For<IBattleAction, IAttachOwner>();
             ownerAction.Owner.Returns(owner);
             owner.GetAction(targetAcitionId).Returns(targetAcition);
+            var targets = new List<IBattleUnit>() { Substitute.For<IBattleUnit>()};
 
             //action
             trigger.OnAttach(ownerAction as IAttachOwner);
-            targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>, float>>(targetAcition, null, 1f);
+            targetAcition.onStartCast += Raise.Event<Action<IBattleAction, List<IBattleUnit>, float>>(targetAcition, targets, 1f);
 
             //expect
             Assert.AreEqual(true, trigger.IsOn());
@@ -149,7 +150,7 @@ namespace JFrameTest
         public void TestHurtTrigger()
         {
             //arrange
-            var trigger = new HurtTrigger(simBattle, new float[] { 1});
+            var trigger = new HurtTrigger(simBattle, new float[] { 1, 0});
             bool result = false;
             trigger.onTriggerOn += (sender, arg) => { result = true; };
             var owner = Substitute.For<IAttachOwner>();

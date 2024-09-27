@@ -33,7 +33,7 @@ namespace JFrame
         /// <summary>
         /// 是否在执行中
         /// </summary>
-        public bool Executing { get; protected set; }
+        public bool Executing { get; set; }
 
         /// <summary>
         /// 公式管理器
