@@ -88,3 +88,5 @@ D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.sourc
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.CopyComplete
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.pdb
+D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame.Battle.dll
+D:\JcwProjects\JFrame\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrame.Battle.pdb

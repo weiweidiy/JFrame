@@ -18,5 +18,6 @@
         void SetMemberLocationInTeam(T unit, int location);
 
     }
+         
 }
 

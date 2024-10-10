@@ -39,8 +39,3 @@ D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.cspro
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
-D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GameModule.Thirdparts.Stateless.ParameterConversionResources.resources
-D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GameModule.Thirdparts.Stateless.StateConfigurationResources.resources
-D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GameModule.Thirdparts.Stateless.StateMachineResources.resources
-D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GameModule.Thirdparts.Stateless.StateRepresentationResources.resources
-D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.GenerateResource.cache

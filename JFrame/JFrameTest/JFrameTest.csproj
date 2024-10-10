@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JFrame\JFrame.csproj" />
+    <ProjectReference Include="..\JFrame.Battle\JFrame.Battle.csproj" />
   </ItemGroup>
 
 </Project>
