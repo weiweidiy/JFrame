@@ -45,9 +45,9 @@ namespace JFrame
                 var value = GetValue(caster, action, target, args);
 
                 if (value > 0)
-                    valueChanged = UpgradeValue(target, Math.Abs(value));
+                    valueChanged += UpgradeValue(target, Math.Abs(value));
                 else
-                    valueChanged = ReduceValue(target, Math.Abs(value));
+                    valueChanged -= ReduceValue(target, Math.Abs(value));
 
                 changedTargets.Add(target);
             }
@@ -59,8 +59,8 @@ namespace JFrame
 
             foreach (var t in changedTargets)
             {
-                var value = GetValue(null, null, t);
-                if (value > 0)
+                //var value = GetValue(null, null, t);
+                if (valueChanged > 0)
                     ReduceValue(t, valueChanged);
                 else
                     UpgradeValue(t, valueChanged);
@@ -221,59 +221,59 @@ namespace JFrame
                 case PVPAttribute.Critical:
                     {
                         attrValue = target.Critical;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.CriticalDamage:
                     {
                         attrValue = target.CriticalDamage;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.CriticalDamageResist:
                     {
                         attrValue = target.CriticalDamageResist;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.DamageEnhance:
                     {
                         attrValue = target.DamageEnhance;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.DamageReduce:
                     {
 
                         attrValue = target.DamageReduce;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.SkillDamageEnhance:
                     {
                         attrValue = target.SkillDamageEnhance;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
 
                 case PVPAttribute.SkillDamageReduce:
                     {
                         attrValue = target.SkillDamageReduce;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.Block:
                     {
                         attrValue = target.Block;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.Puncture:
                     {
                         attrValue = target.Puncture;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.ControlHit:
                     {
                         attrValue = target.ControlHit;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.ControlResistance:
                     {
                         attrValue = target.ControlResistance;
-                        return attrValue + arg * Owner.GetFoldCount();
+                        return arg * Owner.GetFoldCount() - valueChanged;
                     }
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);

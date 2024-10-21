@@ -1,14 +1,19 @@
 ﻿//using JFrame.UI;
 //using NUnit.Framework;
 using JFrame;
+using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace JFrameTest
 {
+
     //public class TestGameValue
     //{
     //    #region int

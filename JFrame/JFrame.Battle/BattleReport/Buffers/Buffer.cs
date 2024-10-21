@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace JFrame
 {
@@ -252,9 +253,12 @@ namespace JFrame
         /// 添加层数
         /// </summary>
         /// <param name="foldCount"></param>
-        public void AddFoldCount(int foldCount)
+        public virtual void AddFoldCount(int foldCount)
         {
             FoldCount += foldCount;
+
+            if (ConditionTrigger != null)
+                ConditionTrigger.OnUpdate();
         }
 
         /// <summary>

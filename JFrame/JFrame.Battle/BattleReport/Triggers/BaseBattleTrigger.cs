@@ -186,6 +186,11 @@ namespace JFrame
         {
             return OriginalArgs;
         }
+
+        public virtual void OnUpdate()
+        {
+            
+        }
     }
     //public abstract class BaseBattleTrigger : IBattleTrigger
     //{

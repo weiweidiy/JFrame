@@ -33,6 +33,11 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         float[] GetArgs();
+
+        /// <summary>
+        /// 获取原始参数
+        /// </summary>
+        /// <returns></returns>
         float[] GetOriginalArgs();
         /// <summary>
         /// 设置cd
@@ -51,6 +56,11 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         object GetExtraArg();
+
+        /// <summary>
+        /// 触发器数据有更新了
+        /// </summary>
+        void OnUpdate();
     }
 
     //public interface IBattleTrigger

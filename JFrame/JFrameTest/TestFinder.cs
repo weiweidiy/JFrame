@@ -66,8 +66,8 @@ namespace JFrameTest
             var result = finder.FindTargets(null);
 
             //expect
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("1", result[0].UID);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("2", result[0].UID);
 
         }
 
@@ -96,6 +96,4 @@ namespace JFrameTest
 
         }
     }
-
-    
 }

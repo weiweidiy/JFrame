@@ -52,7 +52,10 @@ namespace JFrame
                 if (foldType == BufferFoldType.Replace) //替换（刷新周期） 
                 {
                     //to do:刷新周期
-                    throw new Exception("还没有实现替换类型的buff");
+                    //throw new Exception("还没有实现替换类型的buff");
+
+                    buffers.Remove(buffer);
+                    onBufferRemoved?.Invoke(buffer);
                     //onBufferUpdated?.Invoke(buffer, buffer.FoldCount, buffer.Args);
                     //return buffer;
                 }
@@ -188,7 +191,7 @@ namespace JFrame
         /// <returns></returns>
         public IBuffer GetBuffer(int bufferId)
         {
-            return buffers.Where(buffer => buffer.Id.Equals(bufferId)).SingleOrDefault();
+            return buffers.Where(buffer => buffer.Id.Equals(bufferId)).FirstOrDefault();
         }
 
         /// <summary>

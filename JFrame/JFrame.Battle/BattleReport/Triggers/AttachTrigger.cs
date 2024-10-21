@@ -8,6 +8,10 @@
     {
         public AttachTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0) : base(battleManager, args, delay)
         {
+            //if(args.Length < 1)
+            //{
+            //    throw new System.Exception(this.GetType().ToString() + " 参数数量不对");
+            //}
         }
 
         public override void OnAttach(IAttachOwner target)
@@ -16,6 +20,14 @@
             SetOn(true);
             NotifyTriggerOn(this, new object[] { true });
             
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            SetOn(true);
+            NotifyTriggerOn(this, new object[] { true });
         }
     }
 }
