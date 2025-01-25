@@ -71,7 +71,11 @@ namespace JFrame
                 var cd = actionDataSource.GetCDTriggerArg(unitUID, unitId, actionId)[0];
                 var atkSpeed = unitInfo.atkSpeed;
                 if(atkSpeed == 0)
-                    throw new Exception("atkspeed 不能为 0 " + unitId);
+                {
+                    unitInfo.atkSpeed = 1;
+                    //throw new Exception("atkspeed 不能为 0 " + unitId);
+                }
+                    
                 var arg = cd + 1 / atkSpeed;
                 return new float[] { arg };
             }

@@ -124,20 +124,27 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(BattleFrame frame)
         {
-            for(int i= buffers.Count-1; i>=0; i--)
+            try
             {
-                var buffer = buffers[i];
-                buffer.Update(frame);
-
-                //如果buffer失效了，则移除
-                if(!buffer.IsValid())
+                for (int i = buffers.Count - 1; i >= 0; i--)
                 {
-                    if (!RemoveBuffer(buffer.Uid))
-                        throw new InvalidOperationException("删除buff失败，参数错误" + buffer.Uid);
-                }
+                    var buffer = buffers[i];
+                    buffer.Update(frame);
 
-                if (buffer.CanCast())
-                    buffer.Cast();
+                    //如果buffer失效了，则移除
+                    if (!buffer.IsValid())
+                    {
+                        if (!RemoveBuffer(buffer.Uid))
+                            throw new InvalidOperationException("删除buff失败，参数错误" + buffer.Uid);
+                    }
+
+                    if (buffer.CanCast())
+                        buffer.Cast();
+                }
+            }
+            catch(Exception e)
+            {
+                //UnityEngine.Debug.LogError("buff更新发生异常，自动跳过");
             }
         }
 

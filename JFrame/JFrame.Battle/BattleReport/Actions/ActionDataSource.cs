@@ -4,7 +4,7 @@ namespace JFrame
 {
     public class ActionDataSource
     {
-        protected PVPBattleManager pvpManager { get; }
+        public PVPBattleManager pvpManager { get; set; }
 
         public ActionDataSource(PVPBattleManager pvpManager)
         {

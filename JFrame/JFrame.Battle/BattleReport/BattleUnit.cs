@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Collections.Specialized.BitVector32;
+
 
 namespace JFrame
 {
@@ -439,8 +439,14 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         public int AtkUpgrade(int value)
         {
+            //if (value < 0)
+            //    throw new Exception("攻击提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("攻击提升数值不能为负数 " + value);
+            {
+                //Debug.LogError("AtkUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             Atk += value;
             return value;
@@ -454,8 +460,14 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         public int AtkReduce(int value)
         {
+            //if (value < 0)
+            //    throw new Exception("攻击降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("攻击降低数值不能为负数 " + value);
+            {
+                //Debug.LogError("AtkReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, Atk); //防止减成负数
             Atk -= realValue;
@@ -505,8 +517,14 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public int MaxHPUpgrade(int value)
         {
+            //if (value < 0)
+            //    throw new Exception("最大生命提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("最大生命提升数值不能为负数 " + value);
+            {
+                //Debug.LogError("MaxHPUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             MaxHP += value;
             HP += value; //当前生命也要上升
@@ -521,8 +539,14 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public int MaxHPReduce(int value)
         {
+            //if (value < 0)
+            //    throw new Exception("MaxHp降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("MaxHp降低数值不能为负数 " + value);
+            {
+                //Debug.LogError("MaxHPReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, MaxHP); //防止减成负数
             MaxHP -= realValue;
@@ -541,8 +565,14 @@ namespace JFrame
 
         public float CriUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("暴击提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("暴击提升数值不能为负数 " + value);
+            {
+                //Debug.LogError("CriUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             Critical += value;
             return value;
@@ -550,8 +580,14 @@ namespace JFrame
 
         public float CriReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("暴击降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("暴击降低数值不能为负数 " + value);
+            {
+                //Debug.LogError("CriReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, Critical); //防止减成负数
             Critical -= realValue;
@@ -569,8 +605,14 @@ namespace JFrame
 
         public float CriticalDamageUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("CriticalDamage提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("CriticalDamage提升数值不能为负数 " + value);
+            {
+                //Debug.LogError("CriticalDamageUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             CriticalDamage += value;
             return value;
@@ -578,8 +620,14 @@ namespace JFrame
 
         public float CriticalDamageReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("CriticalDamage降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("CriticalDamage降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("CriticalDamageReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, CriticalDamage); //防止减成负数
             CriticalDamage -= realValue;
@@ -597,8 +645,14 @@ namespace JFrame
 
         public float CriticalDamageResistUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("CriticalDamageResist提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("CriticalDamageResist提升数值不能为负数 " + value);
+            {
+                //Debug.LogError("CriticalDamageResistUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             CriticalDamageResist += value;
             return value;
@@ -606,8 +660,14 @@ namespace JFrame
 
         public float CriticalDamageResistReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("CriticalDamageResist降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("CriticalDamageResist降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("CriticalDamageResistReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, CriticalDamageResist); //防止减成负数
             CriticalDamageResist -= realValue;
@@ -626,7 +686,13 @@ namespace JFrame
         public float SkillDamageEnhanceUpgrade(float value)
         {
             if (value < 0)
-                throw new Exception("SkillDamageEnhance提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("SkillDamageEnhance提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+
+            }
+            //if (value < 0)
+            //    throw new Exception("SkillDamageEnhance提升数值不能为负数 " + value);
 
             SkillDamageEnhance += value;
             return value;
@@ -634,8 +700,15 @@ namespace JFrame
 
         public float SkillDamageEnhanceReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("SkillDamageEnhance降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("SkillDamageEnhance降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("SkillDamageEnhanceReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+
+            }
 
             var realValue = Math.Min(value, SkillDamageEnhance); //防止减成负数
             SkillDamageEnhance -= realValue;
@@ -653,8 +726,15 @@ namespace JFrame
 
         public float SkillDamageReduceUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("SkillDamageReduce提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("SkillDamageReduce提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("SkillDamageReduceUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+
+            }
 
             SkillDamageReduce += value;
             return value;
@@ -662,8 +742,14 @@ namespace JFrame
 
         public float SkillDamageReduceReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("SkillDamageReduce降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("SkillDamageReduce降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("SkillDamageReduceReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, SkillDamageReduce); //防止减成负数
             SkillDamageReduce -= realValue;
@@ -681,8 +767,14 @@ namespace JFrame
 
         public float DamageEnhanceUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("DamageEnhance提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("DamageEnhance提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("DamageEnhanceUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             DamageEnhance += value;
             return value;
@@ -690,8 +782,14 @@ namespace JFrame
 
         public float DamageEnhanceReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("DamageEnhance降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("DamageEnhance降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("DamageEnhanceReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, DamageEnhance); //防止减成负数
             DamageEnhance -= realValue;
@@ -710,8 +808,14 @@ namespace JFrame
 
         public float DamageReduceUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("DamageReduce提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("DamageReduce提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("DamageReduceUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             DamageReduce += value;
             return value;
@@ -719,8 +823,14 @@ namespace JFrame
 
         public float DamageReduceReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("DamageReduce降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("DamageReduce降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("DamageReduceReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, DamageReduce); //防止减成负数
             DamageReduce -= realValue;
@@ -738,8 +848,14 @@ namespace JFrame
 
         public float ControlHitUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("ControlHit提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("ControlHit提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("ControlHitUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             ControlHit += value;
             return value;
@@ -747,8 +863,14 @@ namespace JFrame
 
         public float ControlHitReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("ControlHit降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("ControlHit降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("ControlHitReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, ControlHit); //防止减成负数
             ControlHit -= realValue;
@@ -766,8 +888,14 @@ namespace JFrame
 
         public float ControlResistanceUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("ControlResistance提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("ControlResistance提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("ControlResistanceUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             ControlResistance += value;
             return value;
@@ -775,8 +903,14 @@ namespace JFrame
 
         public float ControlResistanceReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("ControlResistance降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("ControlResistance降低数值不能为负数 " + value);
+            {
+                //Debug.LogError("ControlResistanceReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, ControlResistance); //防止减成负数
             ControlResistance -= realValue;
@@ -794,8 +928,14 @@ namespace JFrame
 
         public float PunctureUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("Puncture提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("Puncture提升数值不能为负数 " + value);
+            {
+               //Debug.LogError("PunctureUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             Puncture += value;
             return value;
@@ -803,8 +943,14 @@ namespace JFrame
 
         public float PunctureReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("Puncture降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("Puncture降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("PunctureReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, Puncture); //防止减成负数
             Puncture -= realValue;
@@ -823,8 +969,14 @@ namespace JFrame
 
         public float BlockUpgrade(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("Block提升数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("Block提升数值不能为负数 " + value);
+            {
+               // Debug.LogError("BlockUpgrade 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             Block += value;
             return value;
@@ -832,8 +984,14 @@ namespace JFrame
 
         public float BlockReduce(float value)
         {
+            //if (value < 0)
+            //    throw new Exception("Block降低数值不能为负数 " + value);
+
             if (value < 0)
-                throw new Exception("Block降低数值不能为负数 " + value);
+            {
+               // Debug.LogError("BlockReduce 提升数值不能为负数 " + this.Name + " " + value);
+                value = 0;
+            }
 
             var realValue = Math.Min(value, Block); //防止减成负数
             Block -= realValue;
