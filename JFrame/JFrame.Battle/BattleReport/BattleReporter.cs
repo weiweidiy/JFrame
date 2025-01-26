@@ -76,64 +76,64 @@ namespace JFrame
             List<string> lstUID = new List<string>();
             for (int i = 0; i < targets.Count; i ++)
             {
-                lstUID.Add(targets[i].UID);
+                lstUID.Add(targets[i].Uid);
             }
-            AddReportData(caster.UID, ReportType.Action, targets[0].UID, new object[] { action.Id, lstUID , duration });
+            AddReportData(caster.Uid, ReportType.Action, targets[0].Uid, new object[] { action.Id, lstUID , duration });
         }
 
         private void Team_onActionStartCD(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, float cd)
         {
-            AddReportData(caster.UID, ReportType.ActionCD, action.Uid, new object[] { action.Id, cd});
+            AddReportData(caster.Uid, ReportType.ActionCD, action.Uid, new object[] { action.Id, cd});
         }
 
         private void Team_onDamage(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, ExecuteInfo value)
         {
-            AddReportData(caster.UID, ReportType.Damage, target.UID, new object[] { value.Value, target.HP, target.MaxHP , value.IsCri, value.IsBlock});
+            AddReportData(caster.Uid, ReportType.Damage, target.Uid, new object[] { value.Value, target.HP, target.MaxHP , value.IsCri, value.IsBlock});
         }
 
 
         private void Team_onHeal(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
-            AddReportData(caster.UID, ReportType.Heal, target.UID, new object[] { value, target.HP, target.MaxHP });
+            AddReportData(caster.Uid, ReportType.Heal, target.Uid, new object[] { value, target.HP, target.MaxHP });
         }
 
         private void Team_onMaxHpUp(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
-            AddReportData(caster.UID, ReportType.MaxHpUp, target.UID, new object[] { value, target.HP, target.MaxHP });
+            AddReportData(caster.Uid, ReportType.MaxHpUp, target.Uid, new object[] { value, target.HP, target.MaxHP });
         }
 
         private void Team_onReborn(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int value)
         {
-            AddReportData(caster.UID, ReportType.Reborn, target.UID, new object[] { value, target.HP, target.MaxHP });
+            AddReportData(caster.Uid, ReportType.Reborn, target.Uid, new object[] { value, target.HP, target.MaxHP });
         }
         private void Team_onDead(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target)
         {
-            AddReportData(caster.UID, ReportType.Dead, target.UID, new object[] {0});
+            AddReportData(caster.Uid, ReportType.Dead, target.Uid, new object[] {0});
         }
 
         private void Team_onBufferAdded(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.AddBuffer, target.UID, new object[] {buffer.Uid,  buffer.Id, buffer.FoldCount });
+            AddReportData(target.Uid, ReportType.AddBuffer, target.Uid, new object[] {buffer.Uid,  buffer.Id, buffer.FoldCount });
         }
 
         private void Team_onBufferCast(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.CastBuffer, target.UID, new object[] { buffer.Uid, buffer.Id });
+            AddReportData(target.Uid, ReportType.CastBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id });
         }
 
         private void Team_onBufferRemoved(PVPBattleManager.Team team, IBattleUnit target, IBuffer buffer)
         {
-            AddReportData(target.UID, ReportType.RemoveBuffer, target.UID, new object[] { buffer.Uid, buffer.Id });
+            AddReportData(target.Uid, ReportType.RemoveBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id });
         }
 
         private void Team_onBufferUpdate(PVPBattleManager.Team arg1, IBattleUnit target, IBuffer buffer, int foldCount, float[] args)
         {
-            AddReportData(target.UID, ReportType.UpdateBuffer, target.UID, new object[] { buffer.Uid, buffer.Id , foldCount, args});
+            AddReportData(target.Uid, ReportType.UpdateBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id , foldCount, args});
         }
 
         private void Team_onDebuffAnti(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, IBattleUnit target, int debuffId)
         {
-            AddReportData(target.UID, ReportType.DebuffAnti, target.UID, new object[] { debuffId });
+            AddReportData(target.Uid, ReportType.DebuffAnti, target.Uid, new object[] { debuffId });
         }
 
 

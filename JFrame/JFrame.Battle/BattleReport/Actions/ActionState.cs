@@ -8,7 +8,7 @@ namespace JFrame
         /// <summary>
         /// 状态机
         /// </summary>
-        public ActionSM Fsm { get; set; }
+        public OldActionSM Fsm { get; set; }
 
         /// <summary>
         /// 子类实现，状态名字

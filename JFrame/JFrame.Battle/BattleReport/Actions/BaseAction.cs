@@ -113,7 +113,7 @@ namespace JFrame
         /// <summary>
         /// 状态机
         /// </summary>
-        ActionSM sm;
+        OldActionSM sm;
 
         #endregion
 
@@ -124,7 +124,7 @@ namespace JFrame
         /// <param name="trigger"></param>
         /// <param name="finder"></param>
         /// <param name="exutor"></param>
-        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger, ActionSM sm)
+        public BaseAction(string UID, int id, ActionType type, float duration, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors, IBattleTrigger cdTrigger, OldActionSM sm)
         {
             this.Type = type;
             this.castDuration = duration;

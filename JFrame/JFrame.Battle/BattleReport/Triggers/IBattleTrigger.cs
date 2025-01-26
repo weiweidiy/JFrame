@@ -9,7 +9,7 @@ namespace JFrame
         AfterDead, //死亡后触发
     }
 
-    public interface IBattleTrigger : IAttachable
+    public interface IBattleTrigger : IOldAttachable
     {
 
         event Action<IBattleTrigger, object[]> onTriggerOn;

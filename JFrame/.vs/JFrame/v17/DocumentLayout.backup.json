@@ -1,0 +1,826 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\icombatunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\icombatunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\combatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\combatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\icombataction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\icombataction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\icombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\icombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\icombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\icombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\ibattleunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\ibattleunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\battleteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\battleteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\ibattleteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\ibattleteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\battleunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\battleunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\pvpbattlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\pvpbattlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\pvpbattlereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\pvpbattlereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\ibattlereporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\ibattlereporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testcommonlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testcommonlauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testgamevalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testgamevalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\imp\\commonbattlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\imp\\commonbattlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\imp\\commonroutemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\imp\\commonroutemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\interfaces\\irouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\interfaces\\irouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\interfaces\\ireporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\interfaces\\ireporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\interfaces\\iname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\interfaces\\iname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\interfaces\\ilocatable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\interfaces\\ilocatable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\actions\\actionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\actions\\actionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\triggers\\attachtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\triggers\\attachtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\buffers\\buffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\buffers\\buffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\executors\\executorchangeattr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\executors\\executorchangeattr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\triggers\\basebattletrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\triggers\\basebattletrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\triggers\\ibattletrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\triggers\\ibattletrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\actions\\baseaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\actions\\baseaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\buffers\\basebuffermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\buffers\\basebuffermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\triggers\\triggerfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\triggers\\triggerfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\triggers\\friednsaddedbuffertrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\triggers\\friednsaddedbuffertrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\executors\\ibattleexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\executors\\ibattleexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\executors\\executorbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\executors\\executorbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\battlereport\\actions\\actioncding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\battlereport\\actions\\actioncding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\advertisement\\iadplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\advertisement\\iadplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\advertisement\\adsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\advertisement\\adsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\advertisement\\iaditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\advertisement\\iaditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\advertisement\\adplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\advertisement\\adplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\common\\utility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\common\\utility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\common\\ungziper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\common\\ungziper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\common\\hiplayhttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\common\\hiplayhttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\common\\httpreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\common\\httpreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\attributemanage\\attributegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\attributemanage\\attributegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\common\\interfaces\\ialivechecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\common\\interfaces\\ialivechecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\attributemanage\\multidownattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\attributemanage\\multidownattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\attributemanage\\minusattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\attributemanage\\minusattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\gamemodule\\attributemanage\\baseattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\gamemodule\\attributemanage\\baseattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICombatAction.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatAction.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\ICombatAction.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatAction.cs",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\ICombatAction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T02:51:37.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ICombatUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatUnit.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\ICombatUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatUnit.cs*",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\ICombatUnit.cs*",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAABIAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T02:36:12.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BattleUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\BattleUnit.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\BattleUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\BattleUnit.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\BattleUnit.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAUwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T15:14:37.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IBattleUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleUnit.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\IBattleUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleUnit.cs*",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\IBattleUnit.cs*",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAuwCQBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T15:13:42.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CombatTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatTeam.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatTeam.cs",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\CombatTeam.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAABEAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T15:13:02.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BattleTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\BattleTeam.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\BattleTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\BattleTeam.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\BattleTeam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T15:09:32.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ICombatTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatTeam.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\ICombatTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatTeam.cs",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\ICombatTeam.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAUwBUAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T15:08:05.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PVPBattleManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\PVPBattleManager.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\PVPBattleManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\PVPBattleManager.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\PVPBattleManager.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAAAJUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:57:16.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IBattleTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleTeam.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\IBattleTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleTeam.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\IBattleTeam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:53:17.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ICombatManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatManager.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\ICombatManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\ICombatManager.cs",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\ICombatManager.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:49:56.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PVPBattleReport.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\PVPBattleReport.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\PVPBattleReport.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\PVPBattleReport.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\PVPBattleReport.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:57:25.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IBattleReporter.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleReporter.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\IBattleReporter.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\IBattleReporter.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\IBattleReporter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:48:32.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CommonRouteManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Imp\\CommonRouteManager.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Imp\\CommonRouteManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Imp\\CommonRouteManager.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Imp\\CommonRouteManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Buffer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Buffers\\Buffer.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Buffers\\Buffer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Buffers\\Buffer.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Buffers\\Buffer.cs",
+              "ViewState": "AQIAAPIAAAAAAAAAAAAAAAQBAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TestBuffer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestBuffer.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestBuffer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestBuffer.cs",
+              "RelativeToolTip": "JFrameTest\\TestBuffer.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAUwCgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TestTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestTrigger.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestTrigger.cs",
+              "RelativeToolTip": "JFrameTest\\TestTrigger.cs",
+              "ViewState": "AQIAAJsAAAAAAAAAAAAuwK4AAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ActionFactory.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\ActionFactory.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Actions\\ActionFactory.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\ActionFactory.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Actions\\ActionFactory.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAxwCwAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.893Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ILocatable.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\ILocatable.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Interfaces\\ILocatable.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\ILocatable.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Interfaces\\ILocatable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TestCommonLauncher.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCommonLauncher.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestCommonLauncher.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCommonLauncher.cs",
+              "RelativeToolTip": "JFrameTest\\TestCommonLauncher.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAgwGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TestGameValue.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestGameValue.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestGameValue.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestGameValue.cs",
+              "RelativeToolTip": "JFrameTest\\TestGameValue.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IName.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IName.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Interfaces\\IName.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IName.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Interfaces\\IName.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IRouter.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IRouter.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Interfaces\\IRouter.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IRouter.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Interfaces\\IRouter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.877Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CommonBattleManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Imp\\CommonBattleManager.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Imp\\CommonBattleManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Imp\\CommonBattleManager.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Imp\\CommonBattleManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "BaseBattleTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\BaseBattleTrigger.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Triggers\\BaseBattleTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\BaseBattleTrigger.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Triggers\\BaseBattleTrigger.cs",
+              "ViewState": "AQIAAJoAAAAAAAAAAAAAAL0AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.902Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AttachTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\AttachTrigger.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Triggers\\AttachTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\AttachTrigger.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Triggers\\AttachTrigger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IReporter.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IReporter.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Interfaces\\IReporter.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IReporter.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Interfaces\\IReporter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IBattleTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\IBattleTrigger.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Triggers\\IBattleTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\IBattleTrigger.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Triggers\\IBattleTrigger.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAkwD4AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "BaseAction.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\BaseAction.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Actions\\BaseAction.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\BaseAction.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Actions\\BaseAction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "TestExecutor.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestExecutor.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestExecutor.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestExecutor.cs",
+              "RelativeToolTip": "JFrameTest\\TestExecutor.cs",
+              "ViewState": "AQIAAIEBAAAAAAAAAAApwJQBAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "BaseBufferManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Buffers\\BaseBufferManager.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Buffers\\BaseBufferManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Buffers\\BaseBufferManager.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Buffers\\BaseBufferManager.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAAC4AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "TestFinder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestFinder.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestFinder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestFinder.cs",
+              "RelativeToolTip": "JFrameTest\\TestFinder.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAuwGIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "TriggerFactory.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\TriggerFactory.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Triggers\\TriggerFactory.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\TriggerFactory.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Triggers\\TriggerFactory.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACwAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "FriednsAddedBufferTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\FriednsAddedBufferTrigger.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Triggers\\FriednsAddedBufferTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Triggers\\FriednsAddedBufferTrigger.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Triggers\\FriednsAddedBufferTrigger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IBattleExecutor.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\IBattleExecutor.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Executors\\IBattleExecutor.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\IBattleExecutor.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Executors\\IBattleExecutor.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAkwD0AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ExecutorBase.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\ExecutorBase.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Executors\\ExecutorBase.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\ExecutorBase.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Executors\\ExecutorBase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ExecutorChangeAttr.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\ExecutorChangeAttr.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Executors\\ExecutorChangeAttr.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Executors\\ExecutorChangeAttr.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Executors\\ExecutorChangeAttr.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAAADoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ActionCding.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\ActionCding.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\BattleReport\\Actions\\ActionCding.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\BattleReport\\Actions\\ActionCding.cs",
+              "RelativeToolTip": "JFrame.Battle\\BattleReport\\Actions\\ActionCding.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IAdPlatform.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\IAdPlatform.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Advertisement\\IAdPlatform.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\IAdPlatform.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Advertisement\\IAdPlatform.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "IAdItem.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\IAdItem.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Advertisement\\IAdItem.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\IAdItem.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Advertisement\\IAdItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "AdsManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\AdsManager.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Advertisement\\AdsManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\AdsManager.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Advertisement\\AdsManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "AdPlatform.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\AdPlatform.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Advertisement\\AdPlatform.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Advertisement\\AdPlatform.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Advertisement\\AdPlatform.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Utility.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\Utility.cs",
+              "RelativeDocumentMoniker": "JFrame\\Common\\Utility.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\Utility.cs",
+              "RelativeToolTip": "JFrame\\Common\\Utility.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAABUAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "UnGZiper.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\UnGZiper.cs",
+              "RelativeDocumentMoniker": "JFrame\\Common\\UnGZiper.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\UnGZiper.cs",
+              "RelativeToolTip": "JFrame\\Common\\UnGZiper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "HiplayHttpRequest.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\HiplayHttpRequest.cs",
+              "RelativeDocumentMoniker": "JFrame\\Common\\HiplayHttpRequest.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\HiplayHttpRequest.cs",
+              "RelativeToolTip": "JFrame\\Common\\HiplayHttpRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEsAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.966Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "HttpReader.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\HttpReader.cs",
+              "RelativeDocumentMoniker": "JFrame\\Common\\HttpReader.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Common\\HttpReader.cs",
+              "RelativeToolTip": "JFrame\\Common\\HttpReader.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "MultiDownAttribute.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\MultiDownAttribute.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\AttributeManage\\MultiDownAttribute.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\MultiDownAttribute.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\AttributeManage\\MultiDownAttribute.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "MinusAttribute.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\MinusAttribute.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\AttributeManage\\MinusAttribute.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\MinusAttribute.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\AttributeManage\\MinusAttribute.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "IAliveChecker.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IAliveChecker.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\Common\\Interfaces\\IAliveChecker.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\Common\\Interfaces\\IAliveChecker.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\Common\\Interfaces\\IAliveChecker.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "AttributeGenerator.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\AttributeGenerator.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\AttributeManage\\AttributeGenerator.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\AttributeGenerator.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\AttributeManage\\AttributeGenerator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "BaseAttribute.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\BaseAttribute.cs",
+              "RelativeDocumentMoniker": "JFrame\\GameModule\\AttributeManage\\BaseAttribute.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\GameModule\\AttributeManage\\BaseAttribute.cs",
+              "RelativeToolTip": "JFrame\\GameModule\\AttributeManage\\BaseAttribute.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T10:13:43.985Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

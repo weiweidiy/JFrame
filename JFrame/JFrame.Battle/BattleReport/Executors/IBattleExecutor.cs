@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
-    public interface IBattleExecutor : IAttachable
+    public interface IBattleExecutor : IOldAttachable
     {
         /// <summary>
         /// 即将命中目标

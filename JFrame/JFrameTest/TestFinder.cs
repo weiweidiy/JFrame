@@ -67,7 +67,7 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("2", result[0].UID);
+            Assert.AreEqual("2", result[0].Uid);
 
         }
 

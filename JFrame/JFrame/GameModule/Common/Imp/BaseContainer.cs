@@ -64,7 +64,10 @@ namespace JFrame
             throw new System.Exception("没有找到要更新的item " + member.Uid);
         }
 
-
+        public int Count()
+        {
+            return list.Count;
+        }
     }
 }
 

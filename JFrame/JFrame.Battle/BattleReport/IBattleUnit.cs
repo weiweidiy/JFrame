@@ -6,7 +6,7 @@ namespace JFrame
     /// <summary>
     /// 战斗单元接口
     /// </summary>
-    public interface IBattleUnit
+    public interface IBattleUnit : IUnique
     {
         /// <summary>
         /// 行动时主动事件
@@ -36,7 +36,7 @@ namespace JFrame
 
         void Update(BattleFrame frame);
 
-        string UID { get; }
+       // string Uid { get; }
 
         /// <summary>
         /// 名字
@@ -182,6 +182,8 @@ namespace JFrame
 
 
         #endregion
+
+        #region 回调
         /// <summary>
         /// 受到伤害了
         /// </summary>
@@ -227,6 +229,8 @@ namespace JFrame
         /// 眩晕恢复
         /// </summary>
         void OnResumeFromStunning(ActionType actionType);
+
+        #endregion
 
         /// <summary>
         /// 是否活着

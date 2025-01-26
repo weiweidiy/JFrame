@@ -189,7 +189,7 @@ namespace JFrame
         {
             foreach (var item in units)
             {
-                if (item.Value.UID == unit.UID)
+                if (item.Value.Uid == unit.Uid)
                     return item.Key;
             }
             return null;

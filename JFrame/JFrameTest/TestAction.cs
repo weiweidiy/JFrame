@@ -26,7 +26,7 @@ namespace JFrameTest
         public void TestActionSm()
         {
             //arrange
-            var sm = new ActionSM();
+            var sm = new OldActionSM();
 
             //action
             sm.Initialize(Substitute.For<BaseAction>("uid", 1, ActionType.Normal, 1f, null, null,null,null, sm));
@@ -40,7 +40,7 @@ namespace JFrameTest
         public void TestActionDefaultState()
         {
             //arrange
-            var sm = new ActionSM();
+            var sm = new OldActionSM();
             var action = Substitute.For<BaseAction>("uid",1, ActionType.Normal, 1f, null,null,null,null, sm);
 
             //action

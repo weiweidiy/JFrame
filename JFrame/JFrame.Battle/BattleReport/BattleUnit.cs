@@ -39,7 +39,7 @@ namespace JFrame
         /// <summary>
         /// 唯一ID
         /// </summary>
-        public string UID { get; set; }
+        public string Uid { get; set; }
 
 
 
@@ -67,7 +67,7 @@ namespace JFrame
 
         public BattleUnit(BattleUnitInfo info, IActionManager actionManager, IBufferManager bufferManager)
         {
-            this.UID = info.uid;
+            this.Uid = info.uid;
             battleUnitInfo = info;
 
 

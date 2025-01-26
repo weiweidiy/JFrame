@@ -54,6 +54,12 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         List<T> GetAll();
+
+        /// <summary>
+        /// 长度
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }
 

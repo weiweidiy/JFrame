@@ -43,7 +43,7 @@ namespace JFrame
             var targetFinder = finderFactory.Create(pvpBattleManager, actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId)); // CreateTargetFinder(actionDataSource.GetFinderType(unitUID, unitId, actionId), battlePoint, actionDataSource.GetFinderArg(unitUID, unitId, actionId));
             var executors = CreateExecutors(unitUID, unitId, actionId);
             var cdTrigger = triggerFactory.Create(pvpBattleManager, actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f); // CreateCDTrigger(actionDataSource.GetCDTriggerType(unitUID, unitId, actionId), GetCDTriggerArg(actionId), 0f);
-            var sm = new ActionSM();
+            var sm = new OldActionSM();
 
             switch (actionDataSource.GetActionMode(unitUID, unitId, actionId))
             {

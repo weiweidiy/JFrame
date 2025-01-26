@@ -2,7 +2,7 @@
 
 namespace JFrame
 {
-    public interface IBattleTargetFinder : IAttachable
+    public interface IBattleTargetFinder : IOldAttachable
     {
         List<IBattleUnit> FindTargets(object[] args);
 

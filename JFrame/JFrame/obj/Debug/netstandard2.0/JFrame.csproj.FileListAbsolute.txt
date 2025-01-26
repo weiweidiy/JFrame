@@ -39,3 +39,14 @@ D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.cspro
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
 D:\JcwProjects\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
+E:\UnityProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.deps.json
+E:\UnityProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
+E:\UnityProjects\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GeneratedMSBuildEditorConfig.editorconfig
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfoInputs.cache
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfo.cs
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.CoreCompileInputs.cache
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
+E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
