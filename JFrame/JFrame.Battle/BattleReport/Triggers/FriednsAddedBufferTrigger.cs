@@ -54,7 +54,7 @@ namespace JFrame
         {
             if(buffer.Id == buffId)
             {
-                NotifyTriggerOn(this, new object[] { });
+                NotifyTriggerOn(this, new object[] { Owner, unit, null });
                 SetOn(true);
             }
 

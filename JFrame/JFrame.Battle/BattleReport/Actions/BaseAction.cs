@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace JFrame
 {
@@ -189,6 +188,7 @@ namespace JFrame
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <exception cref="Exception"></exception>
+        
         private void ConditionTrigger_onTriggerOn(IBattleTrigger arg1, object[] arg2)
         {
             if (GetCurState() == nameof(ActionCding))
@@ -201,16 +201,19 @@ namespace JFrame
                 return;
             }
 
+            EnterCD();
 
             foreach (var e in exeutors)
             {
                 // to do: ibattleaction接口参数要替换成iattachowner
                 e.Hit(Owner, this, targets, arg2);
-
+                //if (Id == 940420)
+                //    Debug.LogError("940420反射");
                 //打完了
             }
 
-            EnterCD();
+
+
             //ConditionTrigger.Restart();
         }
 

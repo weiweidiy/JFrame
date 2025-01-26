@@ -75,7 +75,9 @@ namespace JFrame
                 .OnExit(() => { OnExitCding(cdingState); })
                 .Permit(Trigger.Disable, disableState)
                 .Permit(Trigger.Dead, deadState)
-                .Permit(Trigger.Standby, standbyState);
+                .Permit(Trigger.Standby, standbyState)
+                .PermitReentry(Trigger.CD);
+
 
             machine.Configure(deadState)
                 .OnEntry(() => { OnEnterDead(deadState); })

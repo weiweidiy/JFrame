@@ -16,6 +16,8 @@
         ControlHit,
         Block,
         Puncture,
+        ATKRate = 2000,
+        HPRate = 2001,
         MaxHP = 3000
     }
 

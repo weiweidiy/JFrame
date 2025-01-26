@@ -226,7 +226,7 @@ namespace JFrame
                 case PVPAttribute.CriticalDamage:
                     {
                         attrValue = target.CriticalDamage;
-                        return arg * Owner.GetFoldCount() - valueChanged;
+                        return  arg* Owner.GetFoldCount() - valueChanged;
                     }
                 case PVPAttribute.CriticalDamageResist:
                     {
