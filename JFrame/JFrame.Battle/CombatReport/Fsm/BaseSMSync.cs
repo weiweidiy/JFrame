@@ -26,7 +26,7 @@ namespace JFrame
         /// <summary>
         /// 
         /// </summary>
-        TContext context;
+        protected TContext context;
 
         /// <summary>
         /// 所有状态列表
@@ -93,6 +93,15 @@ namespace JFrame
         private void OnExit(TState state)
         {
             state.OnExit();
+        }
+
+        /// <summary>
+        /// 获取当前state
+        /// </summary>
+        /// <returns></returns>
+        public TState GetCurState()
+        {
+            return machine.State;
         }
 
         /// <summary>

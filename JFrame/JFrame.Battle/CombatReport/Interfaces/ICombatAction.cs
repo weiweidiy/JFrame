@@ -3,7 +3,7 @@ using System;
 
 namespace JFrame
 {
-    public interface ICombatAction 
+    public interface ICombatAction
     {
         #region 委托事件
         /// <summary>
@@ -48,16 +48,7 @@ namespace JFrame
 
         #endregion
 
-        #region 生命周期
-        void OnStart(); //开始更新前只调用1次
 
-        void OnEnable(); //触发时调用
-
-        void Update(BattleFrame frame);
-
-        void OnStop(); //停止更新
-
-        #endregion
 
         //#region 属性
         ///// <summary>
@@ -68,7 +59,16 @@ namespace JFrame
         ///// <summary>
         ///// 动作模式：主动，被动
         ///// </summary>
-        //ActionMode Mode { get; }
+        //ActionMode Mode { get; }        //#region 生命周期
+        //void OnStart(); //开始更新前只调用1次
+
+        //void OnEnable(); //触发时调用
+
+        ////void Update(BattleFrame frame);
+
+        //void OnStop(); //停止更新
+
+        //#endregion
 
         //#endregion
 
@@ -95,7 +95,7 @@ namespace JFrame
         /// 设置这个动作是否可触发
         /// </summary>
         /// <param name="active"></param>
-        void SetValid(bool active);
+        void SetActive(bool active);
 
         #endregion
 
@@ -164,8 +164,9 @@ namespace JFrame
 
         #endregion
 
+        #region 修改参数
         /// <summary>
-        /// 修改属性
+        /// 修改参数
         /// </summary>
         /// <param name="args"></param>
         void SetConditionTriggerArgs(float[] args);
@@ -173,14 +174,23 @@ namespace JFrame
         void SetExecutorArgs(float[] args);
         void SetCdArgs(float[] args);
         /// <summary>
-        /// 重置属性
+        /// 获取参数
+        /// </summary>
+        /// <returns></returns>
+        float[] GetConditionTriggerArgs();
+        float[] GetFinderArgs();
+        float[] GetCdArgs();
+        float[] GetExecutorArgs();
+
+        /// <summary>
+        /// 重置参数
         /// </summary>
         /// <param name="args"></param>
         void ResetConditionTriggerArgs(float[] args);
         void ResetFinderArgs(float[] args);
         void ResetExecutorArgs(float[] args);
         void ResetCdArgs(float[] args);
-
+        #endregion
     }
 
 

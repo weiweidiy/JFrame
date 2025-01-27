@@ -7,5 +7,6 @@
         Standby,
         Execute,
         Cd,
+        CrowdControl,
     }
 }

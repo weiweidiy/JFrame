@@ -12,9 +12,9 @@ namespace JFrame
 
         void ClearResult();
 
-        void AddUnit(TUnit unit);
+        void AddUnit(int teamId, TUnit unit);
 
-        void RemoveUnit(TUnit unit);
+        void RemoveUnit(int teamId, TUnit unit);
 
         TUnit GetUnit(string uid);
 

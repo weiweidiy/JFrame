@@ -7,6 +7,7 @@ using System;
 
 namespace JFrameTest
 {
+
     public class TestAction
     {
         [SetUp]

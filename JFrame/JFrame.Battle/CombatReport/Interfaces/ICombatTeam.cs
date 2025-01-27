@@ -39,7 +39,7 @@ namespace JFrame
 
         bool IsAllDead();
 
-        void Update(BattleFrame frame);
+        //void Update(BattleFrame frame);
 
     }
 }
