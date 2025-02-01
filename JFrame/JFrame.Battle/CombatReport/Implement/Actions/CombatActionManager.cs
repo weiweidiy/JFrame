@@ -4,7 +4,10 @@
     {
         public void Update(BattleFrame frame)
         {
-            throw new System.NotImplementedException();
+            foreach (var action in GetAll())
+            {
+                action.Update(frame);
+            }
         }
     }
 

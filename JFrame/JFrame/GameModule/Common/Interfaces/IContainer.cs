@@ -12,7 +12,7 @@ namespace JFrame
     /// <typeparam name="T"></typeparam>
     public interface IContainer<T> where T : IUnique
     {
-        event Action<T> onItemAdded;
+        event Action<List<T>> onItemAdded;
 
         event Action<T> onItemRemoved;
 
@@ -23,6 +23,13 @@ namespace JFrame
         /// </summary>
         /// <param name="teamMember"></param>
         void Add(T member);
+
+        /// <summary>
+        /// 添加多個成員
+        /// </summary>
+        /// <param name="collection"></param>
+        void AddRange(IEnumerable<T> collection);
+
         /// <summary>
         /// 删除成员
         /// </summary>

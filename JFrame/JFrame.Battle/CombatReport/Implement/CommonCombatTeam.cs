@@ -80,7 +80,7 @@ namespace JFrame
                 foreach (var unit in units)
                 {
 
-                    (unit as CombatUnit).Initialize(context);
+                    //(unit as CombatUnit).Initialize(context);
                     //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                     unit.onActionCast += Unit_onActionCast;
                     unit.onActionStartCD += Unit_onActionStartCD;

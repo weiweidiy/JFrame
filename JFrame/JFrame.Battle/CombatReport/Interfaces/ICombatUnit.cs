@@ -3,7 +3,6 @@ using System;
 
 namespace JFrame
 {
-    
 
     public interface ICombatUnit : IUnique
     {

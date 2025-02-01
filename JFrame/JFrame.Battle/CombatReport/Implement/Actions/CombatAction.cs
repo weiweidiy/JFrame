@@ -17,6 +17,18 @@ namespace JFrame
         public event Action<ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
         public event Action<ICombatAction, ICombatUnit, ExecuteInfo, ICombatUnit> onHittedComplete;
 
+        /// <summary>
+        /// 初始化actions
+        /// </summary>
+        /// <param name="conditionTriggers"></param>
+        /// <param name="finder"></param>
+        /// <param name="executors"></param>
+        /// <param name="cdTriggers"></param>
+        public void Initialize(List<ICombatTrigger> conditionTriggers, List<ICombatExecutor> executors, List<ICombatTrigger> cdTriggers)
+        {
+
+        }
+
         public bool CanCast()
         {
             throw new NotImplementedException();

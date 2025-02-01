@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace JFrameTest
 {
+
     public class TestActionSM
     {
         ActionSM sm;
@@ -14,7 +15,7 @@ namespace JFrameTest
         public void SetUp()
         {
             sm = new ActionSM();
-            sm.Initialize(Substitute.For<CombatManager>());
+            sm.Initialize(Substitute.For<CombatAction>());
         }
 
 

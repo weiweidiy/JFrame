@@ -14,7 +14,7 @@
         {
             base.OnEnter();
 
-            context.reset
+            //context.reset
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 透传参数
@@ -38,7 +40,7 @@
         /// <summary>
         /// 发起的单位
         /// </summary>
-        public ICombatUnit Source { get; set; }
+        public ICombatUnit SourceUnit { get; set; }
 
         /// <summary>
         /// 哪個aciton造成的
@@ -48,12 +50,8 @@
         /// <summary>
         /// 目标单位
         /// </summary>
-        public ICombatUnit Target { get; set; }
+        public List<ICombatUnit> Targets { get; set; }
 
-        /// <summary>
-        /// 战斗管理器
-        /// </summary>
-        public CombatManager CombatManager { get; set; }
     }
 
 

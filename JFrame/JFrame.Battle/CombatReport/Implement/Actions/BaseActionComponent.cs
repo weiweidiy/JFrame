@@ -1,29 +1,32 @@
-﻿using System;
+﻿using JFrame.Common;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace JFrame
 {
     /// <summary>
-    /// action 组件基类
+    /// action 组件基类 0:攻擊距離 1:查找數量
     /// </summary>
-    public abstract class BaseActionComponent : IArgsable, IAttachable<ICombatAction>, ICombatUpdatable
+    public abstract class BaseActionComponent : IArgsable, IAttachable<CombatAction>, ICombatUpdatable
     {
-        ICombatAction _owner;
-        public ICombatAction Owner => _owner;
+        CombatAction _owner;
+        public virtual CombatAction Owner => _owner;
 
         /// <summary>
         /// 原始参数
         /// </summary>
-        float[] originArgs;
+        float[] originArgs; //0:攻擊距離
 
         /// <summary>
         /// 当前参数值
         /// </summary>
-        float[] curArgs;
+        protected float[] curArgs;
 
         /// <summary>
         /// 上下文
         /// </summary>
-        CombatContext context;
+        protected CombatContext context;
 
         /// <summary>
         /// 初始化组件
@@ -33,7 +36,7 @@ namespace JFrame
         public void Initialize(CombatContext context, float[] args)
         {
             this.context = context;
-            originArgs = args;   
+            originArgs = args;
             SetCurArgs(originArgs);
         }
 
@@ -49,7 +52,7 @@ namespace JFrame
 
         public void ResetArgs()
         {
-            if(originArgs.Length != curArgs.Length) 
+            if (originArgs.Length != curArgs.Length)
                 throw new Exception("原始参数列表长度和当前参数列表长度不一致，无法重置！" + GetType().Name);
 
             Array.Copy(originArgs, curArgs, originArgs.Length);
@@ -57,13 +60,13 @@ namespace JFrame
 
         public void SetCurArgs(float[] args)
         {
-            if(args == null)
+            if (args == null)
                 throw new ArgumentNullException("参数列表为空！" + GetType().Name);
 
-            if(curArgs == null)
+            if (curArgs == null)
                 curArgs = new float[args.Length];
 
-            if(curArgs.Length != args.Length)
+            if (curArgs.Length != args.Length)
                 throw new Exception("原始参数列表长度和当前参数列表长度不一致，无法赋值！" + GetType().Name);
 
             Array.Copy(args, curArgs, args.Length);
@@ -71,7 +74,7 @@ namespace JFrame
 
         public void SetCurArg(int index, float arg)
         {
-            if(curArgs == null || curArgs.Length <= index)
+            if (curArgs == null || curArgs.Length <= index)
                 throw new ArgumentOutOfRangeException("设置参数时索引越界！" + GetType().Name);
 
             curArgs[index] = arg;
@@ -85,10 +88,10 @@ namespace JFrame
             return curArgs[index];
         }
 
-        public abstract void Update(BattleFrame frame);
+        public virtual void Update(BattleFrame frame) { }
 
 
-        public virtual void OnAttach(ICombatAction target)
+        public virtual void OnAttach(CombatAction target)
         {
             _owner = target;
         }
@@ -98,7 +101,7 @@ namespace JFrame
             _owner = null;
         }
 
-
+        
     }
 
 }

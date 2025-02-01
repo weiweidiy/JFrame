@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable
     {
         public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -21,6 +21,9 @@ namespace JFrame
         public event Action<ICombatUnit, ICombatBuffer> onBufferCast;
         public event Action<ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
 
+        /// <summary>
+        /// 唯一id
+        /// </summary>
         public string Uid { get; private set; }
 
         /// <summary>
@@ -38,12 +41,47 @@ namespace JFrame
         /// </summary>
         CombatAttributeManger attributeManger;
 
-        public void Initialize(CombatContext context)
+        /// <summary>
+        /// 上下文
+        /// </summary>
+        CombatContext context;
+
+        /// <summary>
+        /// 坐標
+        /// </summary>
+        CombatVector position;
+
+        /// <summary>
+        /// 移動方向速度
+        /// </summary>
+        CombatVector velocity;
+
+        /// <summary>
+        /// 是否在移動中
+        /// </summary>
+        bool isMoving;
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="actions"></param>
+        /// <param name="buffers"></param>
+        /// <param name="attributes"></param>
+        public void Initialize(CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, List<IUnique> attributes)
         {
+            this.context = context;
             Uid = Guid.NewGuid().ToString();
+            attributeManger = new CombatAttributeManger();
+            actionManager = new CombatActionManager();
             bufferManager = new CombatBufferManager();
-            actionManager = context.combatActionManager;
-            attributeManger = context.combatAttributeManger;
+
+            if (attributes != null)
+                attributeManger.AddRange(attributes);
+            if (actions != null)
+                actionManager.AddRange(actions);
+            if (buffers != null)
+                bufferManager.AddRange(buffers);
         }
 
         public void Release()
@@ -52,12 +90,17 @@ namespace JFrame
             bufferManager = null;
             actionManager = null;
             attributeManger = null;
+            isMoving = false;
         }
 
         public void Update(BattleFrame frame)
         {
             actionManager.Update(frame);
             bufferManager.Update(frame);
+            if (IsMoving())
+            {
+                position += velocity;
+            }
         }
 
         public bool IsAlive()
@@ -110,6 +153,59 @@ namespace JFrame
         public void OnCrowdControled(CombatExtraData extraData)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 獲取所有action
+        /// </summary>
+        /// <returns></returns>
+        public List<CombatAction> GetActions()
+        {
+            return actionManager.GetAll();
+        }
+
+        /// <summary>
+        /// 設置坐標
+        /// </summary>
+        /// <param name="position"></param>
+        public void SetPosition(CombatVector position)
+        {
+            this.position = position;
+        }
+
+        /// <summary>
+        /// 設置速度
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void SetSpeed(CombatVector speed)
+        {
+            velocity = speed;
+        }
+
+        public void StartMove()
+        {
+            isMoving = true;
+        }
+
+        public void StopMove()
+        {
+            isMoving = false;
+        }
+
+        public bool IsMoving()
+        {
+            return isMoving;
+        }
+
+        public virtual CombatVector GetPosition()
+        {
+            return position;
+        }
+
+        public CombatVector GetSpeed()
+        {
+            return velocity;
         }
     }
 

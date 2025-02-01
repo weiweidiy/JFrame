@@ -1,12 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using static JFrame.PVPBattleManager;
 
 namespace JFrame
 {
-    public class CombatUnitInfo 
+    public enum ActionComponentType
+    {
+        ConditionTrigger,
+        Finder,
+        Executor,
+        CdTrigger
+    }
+
+    /// <summary>
+    /// action組件：4種類型
+    /// </summary>
+    public class ActionComponentInfo
+    {
+        public int id;
+        public float[] args;
+    }
+
+
+    public class CombatUnitInfo
     {
         public string uid;
         public int id;
-        public Dictionary<int, List<float[]>> actionsId;//float[]是參數列表,condition, finder, executor, cd 4組參數
+        public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> actionsData;
+        public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData;
         public int hp;
         public int maxHp;
         public int atk;
@@ -22,34 +44,180 @@ namespace JFrame
         public float debuffAnti; //0~1异常状态抵抗百分比
         public float penetrate; //穿透 0~1 百分比
         public float block;     //格挡 0~1 百分比
+        public CombatVector position; //初始坐標點
+        public CombatVector moveSpeed; //移動速度，向左就是負數，向右是正數
+
     }
 
     public class CombatManager : ICombatManager<Report, CommonCombatTeam, ICombatUnit>
     {
+        Dictionary<int, CommonCombatTeam> teams;
+
+        BattleFrame frame = new BattleFrame();
+
         public void Initialize(List<CombatUnitInfo> team1Data, List<CombatUnitInfo> team2Data, float timeLimit, CombatUnitInfo god = null)
         {
-            var combatTeam = new CommonCombatTeam();
-            foreach (var unitInfo in team1Data)
+            teams = new Dictionary<int, CommonCombatTeam>();
+            var context = new CombatContext();
+            context.CombatManager = this;
+
+            //創建2個隊伍
+            if (team1Data != null)
             {
-                var unit = new CombatUnit();
-                combatTeam.Add(unit);
+                var team1 = CreateTeam(team1Data, context);
+                AddTeam(1, team1); //1 = 隊伍id
+            }
+
+            if (team2Data != null)
+            {
+                var team2 = CreateTeam(team2Data, context);
+                AddTeam(2, team2); //2 = 隊伍id
             }
         }
 
+        #region 創建對象
+        /// <summary>
+        /// 創建一個隊伍對象
+        /// </summary>
+        /// <param name="teamData"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        CommonCombatTeam CreateTeam(List<CombatUnitInfo> teamData, CombatContext context)
+        {
+            var team = new CommonCombatTeam();
+            if (teamData != null)
+            {
+                var actionFactory = new CombatActionFactory();
+                var attrFactory = new CombatAttributeFactory();
+                //創建並初始化隊伍
+                foreach (var unitInfo in teamData)
+                {
+                    //創建並初始化戰鬥單位
+                    var unit = new CombatUnit();
+                    unit.Initialize(context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
+                    unit.SetPosition(unitInfo.position);
+                    unit.SetSpeed(unitInfo.moveSpeed);
+                    team.Add(unit);
+                }
+            }
+            team.Initialize(context);
+
+            return team;
+        }
+
+        /// <summary>
+        /// 創建所有默認帶有的buffers
+        /// </summary>
+        /// <param name="buffersData"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private List<CombatBuffer> CreateBuffers(Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData)
+        {
+            return null;
+        }
+
+
+
+        #endregion
+
+        #region 添加獲取方法
+        /// <summary>
+        /// 添加隊伍
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="teamObj"></param>
+        /// <exception cref="Exception"></exception>
         public void AddTeam(int teamId, CommonCombatTeam teamObj)
         {
+            if (teams == null)
+                throw new Exception("team list is not init , please call the Initialize method ");
+
+            teams.Add(teamId, teamObj);
+        }
+
+        public CommonCombatTeam GetTeam(int teamId)
+        {
+            if (teams.ContainsKey(teamId))
+                return teams[teamId];
+            return null;
+        }
+
+        public List<CommonCombatTeam> GetTeams()
+        {
+            return teams.Values.ToList();
+        }
+
+        public int GetFriendTeamId(ICombatUnit unit)
+        {
             throw new System.NotImplementedException();
+        }
+
+        public int GetOppoTeamId(int teamId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetOppoTeamId(ICombatUnit unit)
+        {
+            return 0;//throw new System.NotImplementedException();
         }
 
         public void AddUnit(int teamId, ICombatUnit unit)
         {
             throw new System.NotImplementedException();
         }
-
-        public void ClearResult()
+        public void RemoveUnit(int teamId, ICombatUnit unit)
         {
             throw new System.NotImplementedException();
         }
+
+        public ICombatUnit GetUnit(string uid)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual List<ICombatUnit> GetUnits(int teamId)
+        {
+            var team = GetTeam(teamId);
+            return team.GetUnits();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="teamId"></param>
+        /// <param name="range">-1:無視距離</param>
+        /// <returns></returns>
+        public virtual List<ICombatUnit> GetUnits(ICombatUnit unit, int teamId, float range = -1f)
+        {
+            var units = GetUnits(teamId);
+            if (range == -1)
+                return units;
+
+            var result = new List<ICombatUnit>();
+
+            foreach (var item in units)
+            {
+                var myX = (unit as ICombatMovable).GetPosition().x;
+                var x = (item as ICombatMovable).GetPosition().x;
+                if (Math.Abs(myX - x) <= range)
+                    result.Add(item);
+            }
+
+            return result;
+        }
+
+        public int GetUnitCount(int teamId)
+        {
+            return GetTeam(teamId).Count();
+        }
+
+        public int GetAllUnitCount()
+        {
+            throw new NotImplementedException();
+        }
+
 
         public float GetCombatTimeLimit()
         {
@@ -61,32 +229,31 @@ namespace JFrame
             throw new System.NotImplementedException();
         }
 
-        public int GetFriendTeam(ICombatUnit unit)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetOppoTeam(int teamId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetOppoTeam(ICombatUnit unit)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public Report GetResult()
         {
             throw new System.NotImplementedException();
         }
+        #endregion
 
-        public ICombatUnit GetUnit(string uid)
+
+
+        public void Start()
         {
             throw new System.NotImplementedException();
         }
 
-        public List<ICombatUnit> GetUnits(int teamId)
+        public void Update()
+        {
+            foreach (var team in teams.Values)
+            {
+                team.Update(frame);
+            }
+
+            frame.NextFrame();
+        }
+
+        public void ClearResult()
         {
             throw new System.NotImplementedException();
         }
@@ -96,19 +263,6 @@ namespace JFrame
             throw new System.NotImplementedException();
         }
 
-        public void RemoveUnit(int teamId, ICombatUnit unit)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void Start()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Update()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -9,7 +9,7 @@ namespace JFrame
 {
     public class BaseContainer<T> : IContainer<T> where T : IUnique
     {
-        public event Action<T> onItemAdded;
+        public event Action<List<T>> onItemAdded;
         public event Action<T> onItemRemoved;
         public event Action<T> onItemUpdated;
 
@@ -17,7 +17,15 @@ namespace JFrame
         public virtual void Add(T member)
         {
             list.Add(member);
-            onItemAdded?.Invoke(member); 
+            onItemAdded?.Invoke(new List<T>() { member }); 
+        }
+
+        public void AddRange(IEnumerable<T> collection)
+        {
+            list.AddRange(collection);
+            var lst = new List<T>();
+            lst.AddRange(collection);
+            onItemAdded?.Invoke(lst.ToList());
         }
 
         public virtual T Get(string uid)
@@ -68,6 +76,8 @@ namespace JFrame
         {
             return list.Count;
         }
+
+
     }
 }
 
