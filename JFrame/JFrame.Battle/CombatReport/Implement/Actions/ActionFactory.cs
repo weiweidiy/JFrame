@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateActions(Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> actionsData, CombatUnit owner, CombatContext context)
+        public List<CombatAction> CreateUnitActions(Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> actionsData, CombatUnit owner, CombatContext context)
         {
             if (actionsData == null)
                 return null;
@@ -25,11 +25,13 @@ namespace JFrame
                 var dic = action.Value;
                 var conditionTriggers = dic[ActionComponentType.ConditionTrigger]; //條件觸發器
                 var finders = dic[ActionComponentType.Finder]; //查找器
+                var delayTrigger = dic[ActionComponentType.DelayTrigger];//延遲觸發器(只能有1個)
                 var executors = dic[ActionComponentType.Executor]; //執行器
                 var cdTriggers = dic[ActionComponentType.CdTrigger]; //cd觸發器
                 var unitAction = new CombatUnitAction();
                 unitAction.OnAttach(owner);
-                unitAction.Initialize(CreateTriggers(conditionTriggers, CreateFinders(finders, context), context), CreateExecutors(executors, context), CreateCdTriggers(cdTriggers, context));
+                ActionSM sm = new ActionSM();
+                unitAction.Initialize(CreateTriggers(conditionTriggers, CreateFinders(finders, context, unitAction), context, unitAction), CreateTrigger(delayTrigger[0],null, context, unitAction), CreateExecutors(executors, context, unitAction), CreateCdTriggers(cdTriggers, context, unitAction),sm);
 
                 result.Add(unitAction);
             }
@@ -43,13 +45,13 @@ namespace JFrame
         /// <param name="finders"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<ICombatTrigger> CreateTriggers(List<ActionComponentInfo> conditionTriggers, List<ICombatFinder> finders, CombatContext context)
+        private List<ICombatTrigger> CreateTriggers(List<ActionComponentInfo> conditionTriggers, List<ICombatFinder> finders, CombatContext context, CombatAction owner)
         {
             var result = new List<ICombatTrigger>();
 
             foreach (var componentInfo in conditionTriggers)
             {
-                var trigger = CreateTrigger(componentInfo, finders, context);
+                var trigger = CreateTrigger(componentInfo, finders, context, owner);
                 result.Add(trigger);
             }
 
@@ -62,13 +64,13 @@ namespace JFrame
         /// <param name="finders"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<ICombatFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context)
+        private List<ICombatFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context, CombatAction owner)
         {
             var result = new List<ICombatFinder>();
 
             foreach (var componentInfo in finders)
             {
-                var finder = CreateFinder(componentInfo, context);
+                var finder = CreateFinder(componentInfo, context, owner);
                 result.Add(finder);
             }
 
@@ -81,13 +83,13 @@ namespace JFrame
         /// <param name="executors"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<ICombatExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatContext context)
+        private List<ICombatExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatContext context, CombatAction owner)
         {
             var result = new List<ICombatExecutor>();
 
             foreach (var componentInfo in executors)
             {
-                var executor = CreateExecutor(componentInfo, context);
+                var executor = CreateExecutor(componentInfo, context, owner);
                 result.Add(executor);
             }
 
@@ -100,13 +102,13 @@ namespace JFrame
         /// <param name="cdTriggers"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<ICombatTrigger> CreateCdTriggers(List<ActionComponentInfo> cdTriggers, CombatContext context)
+        private List<ICombatTrigger> CreateCdTriggers(List<ActionComponentInfo> cdTriggers, CombatContext context, CombatAction owner)
         {
             var result = new List<ICombatTrigger>();
 
             foreach (var componentInfo in cdTriggers)
             {
-                var trigger = CreateTrigger(componentInfo, null, context);
+                var trigger = CreateTrigger(componentInfo, null, context, owner);
                 result.Add(trigger);
             }
 
@@ -120,19 +122,20 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        ICombatTrigger CreateTrigger(ActionComponentInfo componentInfo, List<ICombatFinder> finders, CombatContext context)
+        ICombatTrigger CreateTrigger(ActionComponentInfo componentInfo, List<ICombatFinder> finders, CombatContext context, CombatAction owner)
         {
             ICombatTrigger trigger = null;
             switch (componentInfo.id)
             {
                 case 1:
                     {
-                        trigger = new TriggerNone(finders);
+                        trigger = new TriggerRangeNearest();
                     }
                     break;
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
+            (trigger as BaseActionComponent).OnAttach(owner);
             (trigger as BaseActionComponent).Initialize(context, componentInfo.args);
             return trigger;
         }
@@ -144,7 +147,7 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        ICombatFinder CreateFinder(ActionComponentInfo componentInfo, CombatContext context)
+        ICombatFinder CreateFinder(ActionComponentInfo componentInfo, CombatContext context, CombatAction owner)
         {
             ICombatFinder finder = null;
             switch (componentInfo.id)
@@ -157,6 +160,7 @@ namespace JFrame
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
+            (finder as BaseActionComponent).OnAttach(owner);
             (finder as BaseActionComponent).Initialize(context, componentInfo.args);
             return finder;
         }
@@ -168,7 +172,7 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        ICombatExecutor CreateExecutor(ActionComponentInfo componentInfo, CombatContext context)
+        ICombatExecutor CreateExecutor(ActionComponentInfo componentInfo, CombatContext context, CombatAction owner)
         {
             ICombatExecutor executor = null;
             switch (componentInfo.id)
@@ -181,6 +185,7 @@ namespace JFrame
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
+            (executor as BaseActionComponent).OnAttach(owner);
             (executor as BaseActionComponent).Initialize(context, componentInfo.args);
             return executor;
         }

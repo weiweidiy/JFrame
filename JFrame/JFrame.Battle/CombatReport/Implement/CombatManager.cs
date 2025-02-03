@@ -9,6 +9,7 @@ namespace JFrame
     {
         ConditionTrigger,
         Finder,
+        DelayTrigger,
         Executor,
         CdTrigger
     }
@@ -96,7 +97,7 @@ namespace JFrame
                 {
                     //創建並初始化戰鬥單位
                     var unit = new CombatUnit();
-                    unit.Initialize(context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
+                    unit.Initialize(context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
                     unit.SetPosition(unitInfo.position);
                     unit.SetSpeed(unitInfo.moveSpeed);
                     team.Add(unit);

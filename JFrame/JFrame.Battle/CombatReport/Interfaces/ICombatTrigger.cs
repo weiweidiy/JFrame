@@ -8,10 +8,26 @@ namespace JFrame
     public interface ICombatTrigger
     {
         /// <summary>
-        /// 触发的消息
-        /// 触发可传递的参数
+        /// 是否是觸發狀態
         /// </summary>
-        event Action<CombatExtraData> onTriggerOn;
+        /// <returns></returns>
+        bool IsOn();
+
+        /// <summary>
+        /// 重置
+        /// </summary>
+        void Reset();
+
+        /// <summary>
+        /// 設置觸發狀態
+        /// </summary>
+        /// <param name="on"></param>
+        void SetOn(bool on);
+
+        /// <summary>
+        /// 透傳參數
+        /// </summary>
+        CombatExtraData CombatExtraData { get; }
     }
 
 

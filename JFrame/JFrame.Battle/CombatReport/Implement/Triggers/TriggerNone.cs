@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using JFrame.Common;
 
 namespace JFrame
 {
@@ -7,24 +7,10 @@ namespace JFrame
     /// </summary>
     public class TriggerNone : BaseTrigger
     {
-        public TriggerNone(List<ICombatFinder> finders) : base(finders)
+        public TriggerNone() 
         {
+            SetOn(true);
         }
 
-        public override void Update(BattleFrame frame)
-        {
-            if (finders == null)
-                return;
-
-            foreach (ICombatFinder finder in finders)
-            {
-                var targets = finder.FindTargets(extraData);
-                if (targets != null && targets.Count > 0)
-                {
-                    extraData.Targets = targets;
-                    NotifyTriggerOn(extraData);
-                }
-            }
-        }
     }
 }

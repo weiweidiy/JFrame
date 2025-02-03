@@ -8,26 +8,59 @@ namespace JFrame
     /// </summary>
     public abstract class BaseTrigger : BaseActionComponent, ICombatTrigger
     {
-        public event Action<CombatExtraData> onTriggerOn;
-
-        protected void NotifyTriggerOn(CombatExtraData extraData) { onTriggerOn?.Invoke(extraData); }
-
-        /// <summary>
-        /// 查找器
-        /// </summary>
-        protected List<ICombatFinder> finders;
-
         /// <summary>
         /// 透傳參數
         /// </summary>
-        protected CombatExtraData extraData;
+        protected CombatExtraData extraData = new CombatExtraData();
+        public CombatExtraData CombatExtraData => extraData;
 
-        public BaseTrigger(List<ICombatFinder> finders)
+        bool isOn;
+
+        /// <summary>
+        /// 查詢是否觸發
+        /// </summary>
+        /// <returns></returns>
+        public bool IsOn()
         {
-            extraData = new CombatExtraData();
-            this.finders = finders; 
+            return isOn;
         }
 
+        /// <summary>
+        /// 重置為未觸發
+        /// </summary>
+        public void Reset()
+        {
+            SetOn(false);
+        }
 
+        /// <summary>
+        /// 設置觸發狀態
+        /// </summary>
+        /// <param name="on"></param>
+        public void SetOn(bool on)
+        {
+            isOn = on;
+        }
+
+        /// <summary>
+        /// 設置透傳參數的源單位
+        /// </summary>
+        /// <param name="target"></param>
+        public override void OnAttach(CombatAction target)
+        {
+            base.OnAttach(target);
+
+            if (Owner is CombatUnitAction)
+            {
+                var action = Owner as CombatUnitAction;
+                extraData.SourceUnit = action.Owner;
+            }
+            else //是一個buffaction
+            {
+                var action = Owner as CombatBufferAction;
+                var buffer = action.Owner;
+                extraData.SourceUnit = buffer.SourceUnit;
+            }
+        }
     }
 }

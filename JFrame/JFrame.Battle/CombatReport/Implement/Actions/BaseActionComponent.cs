@@ -100,8 +100,6 @@ namespace JFrame
         {
             _owner = null;
         }
-
-        
     }
 
 }

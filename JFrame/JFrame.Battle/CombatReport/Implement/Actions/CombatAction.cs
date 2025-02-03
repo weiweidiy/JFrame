@@ -5,7 +5,7 @@ namespace JFrame
 {
     public class CombatAction : ICombatAction , ICombatUpdatable , IUnique
     {
-        public string Uid => throw new NotImplementedException();
+        public string Uid { get; private set; }
 
         //public ActionType Type => throw new NotImplementedException();
 
@@ -32,6 +32,15 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
+        List<ICombatTrigger> conditionTriggers;
+        /// <summary>
+        /// 延遲出發器（從觸發到執行中間的延遲，有時間延遲類，還有距離/速度類等）
+        /// </summary>
+        ICombatTrigger delayTrigger;
+        List<ICombatExecutor> executors;
+        List<ICombatTrigger> cdTriggers;
+        ActionSM sm;
+
         /// <summary>
         /// 初始化actions
         /// </summary>
@@ -39,9 +48,13 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(List<ICombatTrigger> conditionTriggers, List<ICombatExecutor> executors, List<ICombatTrigger> cdTriggers)
+        public void Initialize(List<ICombatTrigger> conditionTriggers, ICombatTrigger delayTrigger,  List<ICombatExecutor> executors, List<ICombatTrigger> cdTriggers, ActionSM sm)
         {
-
+            Uid = Guid.NewGuid().ToString();
+            this.conditionTriggers = conditionTriggers;
+            this.executors = executors;
+            this.cdTriggers = cdTriggers;
+            this.sm = sm;
         }
 
 
