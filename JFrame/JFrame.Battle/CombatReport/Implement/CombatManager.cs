@@ -55,6 +55,8 @@ namespace JFrame
 
         BattleFrame frame = new BattleFrame();
 
+        bool isStartUpdate;
+
         public void Initialize(List<CombatUnitInfo> team1Data, List<CombatUnitInfo> team2Data, float timeLimit, CombatUnitInfo god = null)
         {
             teams = new Dictionary<int, CommonCombatTeam>();
@@ -65,13 +67,13 @@ namespace JFrame
             if (team1Data != null)
             {
                 var team1 = CreateTeam(team1Data, context);
-                AddTeam(1, team1); //1 = 隊伍id
+                AddTeam(0, team1); //1 = 隊伍id
             }
 
             if (team2Data != null)
             {
                 var team2 = CreateTeam(team2Data, context);
-                AddTeam(2, team2); //2 = 隊伍id
+                AddTeam(1, team2); //2 = 隊伍id
             }
         }
 
@@ -135,6 +137,11 @@ namespace JFrame
             teams.Add(teamId, teamObj);
         }
 
+        /// <summary>
+        /// 獲取隊伍對象
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         public CommonCombatTeam GetTeam(int teamId)
         {
             if (teams.ContainsKey(teamId))
@@ -142,25 +149,67 @@ namespace JFrame
             return null;
         }
 
+        /// <summary>
+        /// 獲取所有隊伍
+        /// </summary>
+        /// <returns></returns>
         public List<CommonCombatTeam> GetTeams()
         {
             return teams.Values.ToList();
         }
 
+        /// <summary>
+        /// 獲取友方隊伍id
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public int GetFriendTeamId(ICombatUnit unit)
         {
-            throw new System.NotImplementedException();
+            var teams = GetTeams();
+            foreach (var team in teams)
+            {
+                var units = team.GetUnits();
+                foreach (var item in units)
+                {
+                    if (item.Uid == unit.Uid)
+                        return team.TeamId;
+                }
+            }
+
+            throw new Exception("沒有找對對方的隊伍id");
         }
 
+        /// <summary>
+        /// 獲取敵對隊伍id
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         public int GetOppoTeamId(int teamId)
         {
-            throw new System.NotImplementedException();
+            return teamId == 0? 1 : 0;
         }
 
-        public int GetOppoTeamId(ICombatUnit unit)
+        /// <summary>
+        /// 獲取敵對隊伍id
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public virtual int GetOppoTeamId(ICombatUnit unit)
         {
-            return 0;//throw new System.NotImplementedException();
+            var team0 = GetTeam(0);
+            foreach (var item in team0.GetUnits())
+            {
+                if (item.Uid == unit.Uid)
+                    return 1;
+            }
+
+            return 0;
+
+            //throw new Exception("沒有找對對方的隊伍id");
         }
+
 
         public void AddUnit(int teamId, ICombatUnit unit)
         {
@@ -176,6 +225,11 @@ namespace JFrame
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// 獲取指定隊伍所有單位
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         public virtual List<ICombatUnit> GetUnits(int teamId)
         {
             var team = GetTeam(teamId);
@@ -208,6 +262,11 @@ namespace JFrame
             return result;
         }
 
+        /// <summary>
+        /// 獲取指定隊伍戰鬥單位數量
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         public int GetUnitCount(int teamId)
         {
             return GetTeam(teamId).Count();
@@ -238,13 +297,21 @@ namespace JFrame
 
 
 
-        public void Start()
+        public void StartUpdate()
         {
-            throw new System.NotImplementedException();
+            isStartUpdate = true;
+        }
+
+        public void StopUpdate()
+        {
+            isStartUpdate = false;
         }
 
         public void Update()
         {
+            if (!isStartUpdate)
+                return;
+
             foreach (var team in teams.Values)
             {
                 team.Update(frame);
@@ -262,7 +329,6 @@ namespace JFrame
         {
             throw new System.NotImplementedException();
         }
-
 
     }
 }

@@ -8,9 +8,9 @@ namespace JFrame
         public event Action<int, ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         public event Action<int, ICombatUnit, ICombatAction, float> onActionStartCD;
 
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onDamage;
+        public event Action<int, CombatExtraData> onDamage;
         public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onHeal;
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit> onDead;
+        public event Action<int, CombatExtraData> onDead;
         public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onReborn;
         public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
         public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
@@ -21,7 +21,7 @@ namespace JFrame
         public event Action<int, ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
 
         int team;
-        public int Team => team;
+        public int TeamId => team;
 
         public void AddUnit(ICombatUnit unit)
         {
@@ -111,9 +111,9 @@ namespace JFrame
             onActionStartCD?.Invoke(team, arg1, arg2, arg3);
         }
 
-        private void Unit_onDamage(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, ExecuteInfo arg4)
+        private void Unit_onDamage(CombatExtraData extraData /*ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, ExecuteInfo arg4*/)
         {
-            onDamage?.Invoke(team, arg1, arg2, arg3, arg4);
+            onDamage?.Invoke(team, extraData);
         }
 
         private void Unit_onHeal(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, int arg4)
@@ -132,9 +132,9 @@ namespace JFrame
         }
 
 
-        private void Unit_onDead(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3)
+        private void Unit_onDead(CombatExtraData extraData)
         {
-            onDead?.Invoke(team, arg1, arg2, arg3);
+            onDead?.Invoke(team, extraData);
         }
 
         private void Unit_onBufferAdded(ICombatUnit arg1, ICombatBuffer arg2)

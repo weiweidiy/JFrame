@@ -15,7 +15,7 @@ namespace JFrame
         /// <summary>
         /// 值
         /// </summary>
-        public int Value { get; set; }
+        public long Value { get; set; }
 
         /// <summary>
         /// 是否暴击

@@ -6,9 +6,11 @@ namespace JFrame
     {
         void Update();
 
-        void Start();
+        void StartUpdate();
 
         TResult GetResult();
+
+        void StopUpdate();
 
         void ClearResult();
 

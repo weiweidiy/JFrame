@@ -1,42 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace JFrame
 {
-    public class CombatAttributeFactory
-    {
-        /// <summary>
-        /// 創建所有屬性對象
-        /// </summary>
-        /// <param name="unitInfo"></param>
-        /// <returns></returns>
-        public List<IUnique> CreateAllAttributes(CombatUnitInfo unitInfo)
-        {
-            var result = new List<IUnique>();
-            var hp = new CombatAttributeLong(PVPAttribute.HP.ToString(), unitInfo.hp, unitInfo.maxHp);
-            var atk = new CombatAttributeLong(PVPAttribute.ATK.ToString(), unitInfo.atk, long.MaxValue);
-            var atkSpeed = new CombatAttributeDouble(PVPAttribute.AtkSpeed.ToString(), unitInfo.atkSpeed, double.MaxValue);
-            var cri = new CombatAttributeDouble(PVPAttribute.Critical.ToString(), unitInfo.cri, double.MaxValue);
-            var criDmgRate = new CombatAttributeDouble(PVPAttribute.CriticalDamage.ToString(), unitInfo.criDmgRate, double.MaxValue);
-            var criDmgAnti = new CombatAttributeDouble(PVPAttribute.CriticalDamageResist.ToString(), unitInfo.criDmgAnti, double.MaxValue); //暴击伤害抵抗百分比
-                                                                                                                                            //public float skillDmgRate; //技能伤害加成百分比
-                                                                                                                                            //public float skillDmgAnti; //技能伤害抵抗百分比
-                                                                                                                                            //public float dmgRate; //伤害加成百分比
-                                                                                                                                            //public float dmgAnti; //伤害抵抗百分比
-                                                                                                                                            //public float debuffHit; //0~1异常状态命中百分比
-                                                                                                                                            //public float debuffAnti; //0~1异常状态抵抗百分比
-                                                                                                                                            //public float penetrate; //穿透 0~1 百分比
-                                                                                                                                            //public float block;     //格挡 0~1 百分比
-                                                                                                                                            //to do : 其他屬性
-            result.Add(hp);
-            result.Add(atk);
-            result.Add(atkSpeed);
-            result.Add(cri);
-            result.Add(criDmgRate);
-            result.Add(criDmgAnti);
-            return result;
-        }
-    }
     public class CombatActionFactory
     {
         /// <summary>
@@ -69,6 +36,13 @@ namespace JFrame
             return result;
         }
 
+        /// <summary>
+        /// 創建觸發器列表
+        /// </summary>
+        /// <param name="conditionTriggers"></param>
+        /// <param name="finders"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         private List<ICombatTrigger> CreateTriggers(List<ActionComponentInfo> conditionTriggers, List<ICombatFinder> finders, CombatContext context)
         {
             var result = new List<ICombatTrigger>();
@@ -83,7 +57,64 @@ namespace JFrame
         }
 
         /// <summary>
-        /// 
+        /// 創建finder列表
+        /// </summary>
+        /// <param name="finders"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private List<ICombatFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context)
+        {
+            var result = new List<ICombatFinder>();
+
+            foreach (var componentInfo in finders)
+            {
+                var finder = CreateFinder(componentInfo, context);
+                result.Add(finder);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 創建執行器列表
+        /// </summary>
+        /// <param name="executors"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private List<ICombatExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatContext context)
+        {
+            var result = new List<ICombatExecutor>();
+
+            foreach (var componentInfo in executors)
+            {
+                var executor = CreateExecutor(componentInfo, context);
+                result.Add(executor);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 創建cd觸發器列表
+        /// </summary>
+        /// <param name="cdTriggers"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private List<ICombatTrigger> CreateCdTriggers(List<ActionComponentInfo> cdTriggers, CombatContext context)
+        {
+            var result = new List<ICombatTrigger>();
+
+            foreach (var componentInfo in cdTriggers)
+            {
+                var trigger = CreateTrigger(componentInfo, null, context);
+                result.Add(trigger);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 創建觸發器
         /// </summary>
         /// <param name="componentInfo"></param>
         /// <param name="context"></param>
@@ -106,19 +137,52 @@ namespace JFrame
             return trigger;
         }
 
-        private List<ICombatTrigger> CreateCdTriggers(List<ActionComponentInfo> cdTriggers, CombatContext context)
+        /// <summary>
+        /// 創建finder
+        /// </summary>
+        /// <param name="componentInfo"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        ICombatFinder CreateFinder(ActionComponentInfo componentInfo, CombatContext context)
         {
-            throw new NotImplementedException();
+            ICombatFinder finder = null;
+            switch (componentInfo.id)
+            {
+                case 1:
+                    {
+                        finder = new FinderOneOppo();
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
+            }
+            (finder as BaseActionComponent).Initialize(context, componentInfo.args);
+            return finder;
         }
 
-        private List<ICombatExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatContext context)
+        /// <summary>
+        /// 創建執行器
+        /// </summary>
+        /// <param name="componentInfo"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        ICombatExecutor CreateExecutor(ActionComponentInfo componentInfo, CombatContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        private List<ICombatFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context)
-        {
-            throw new NotImplementedException();
+            ICombatExecutor executor = null;
+            switch (componentInfo.id)
+            {
+                case 1:
+                    {
+                        executor = new ExecutorCombatDamage();
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
+            }
+            (executor as BaseActionComponent).Initialize(context, componentInfo.args);
+            return executor;
         }
     }
 }

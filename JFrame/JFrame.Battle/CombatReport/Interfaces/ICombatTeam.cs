@@ -14,9 +14,9 @@ namespace JFrame
         //event Action<PVPBattleManager.Team, IBattleUnit, IBattleAction, IBattleUnit> onActionDone;
         event Action<int, TUnit, TAction, float> onActionStartCD;
 
-        event Action<int, TUnit, TAction, TUnit, ExecuteInfo> onDamage;
+        event Action<int, CombatExtraData> onDamage;
         event Action<int, TUnit, TAction, TUnit, int> onHeal;
-        event Action<int, TUnit, TAction, TUnit> onDead;
+        event Action<int, CombatExtraData> onDead;
         event Action<int, TUnit, TAction, TUnit, int> onReborn;
         event Action<int, TUnit, TAction, TUnit, int> onMaxHpUp;
         event Action<int, TUnit, TAction, TUnit, int> onDebuffAnti;
@@ -26,7 +26,7 @@ namespace JFrame
         event Action<int, TUnit, TBuffer, int, float[]> onBufferUpdate;
 
 
-        int Team { get; }
+        int TeamId { get; }
 
         TUnit GetUnit(string uid);
 

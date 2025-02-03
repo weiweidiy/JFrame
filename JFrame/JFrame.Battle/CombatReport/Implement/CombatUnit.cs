@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using static System.Collections.Specialized.BitVector32;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
@@ -8,10 +10,10 @@ namespace JFrame
         public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
         public event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onDamaging;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onDamaged;
+        public event Action<CombatExtraData> onDamaging;
+        public event Action<CombatExtraData> onDamaged;
         public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onHealed;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit> onDead;
+        public event Action<CombatExtraData> onDead;
         public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onRebord;
         public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
         public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
@@ -103,6 +105,11 @@ namespace JFrame
             }
         }
 
+        /// <summary>
+        /// 是否還活著
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool IsAlive()
         {
             var hpAttr = attributeManger.Get(PVPAttribute.HP.ToString());
@@ -114,6 +121,11 @@ namespace JFrame
             throw new Exception("沒有找到Hp屬性");
         }
 
+        /// <summary>
+        /// 是否滿血
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool IsHpFull()
         {
             var hpAttr = attributeManger.Get(PVPAttribute.HP.ToString());
@@ -127,7 +139,45 @@ namespace JFrame
 
         public void OnDamage(CombatExtraData extraData)
         {
-            throw new NotImplementedException();
+            //to do: 添加一个预伤害事件，可以修改值
+           // onDamaging?.Invoke(hitter, action, this, damage);
+           onDamaging?.Invoke(extraData);
+
+            var attrManager = GetAttributeManager();
+            var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
+            if (hpAttr == null)
+                throw new Exception("沒有找到Hp屬性 " + Uid);
+
+            var damage = extraData.Value;
+
+            var attr = hpAttr as CombatAttributeLong;
+            if (attr.CurValue <= 0 || damage == 0)
+                return;
+
+            attr.Minus(damage);
+
+            //onDamaged?.Invoke(hitter, action, this, damage);
+            onDamaged?.Invoke(extraData);
+
+            if (attr.CurValue <= 0)
+            {
+                OnDead(extraData);
+            }
+        }
+
+        /// <summary>
+        /// 角色死亡了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void OnDead(CombatExtraData extraData)
+        {
+            //所有action設置成非活動狀態，不會出發
+            actionManager.SetAllActive(false);
+
+            //to do:清除所有buffer
+
+            //onDead?.Invoke(hitter, action, this);
+            onDead?.Invoke(extraData);
         }
 
         public void OnHeal(CombatExtraData extraData)
@@ -206,6 +256,11 @@ namespace JFrame
         public CombatVector GetSpeed()
         {
             return velocity;
+        }
+
+        public virtual CombatAttributeManger GetAttributeManager()
+        {
+            return attributeManger;
         }
     }
 

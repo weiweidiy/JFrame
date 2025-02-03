@@ -17,11 +17,11 @@ namespace JFrame
         /// <summary>
         /// 被动事件
         /// </summary>
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onDamaging; //即将受到伤害
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onDamaged; //受到伤害之后
+        event Action<CombatExtraData> onDamaging; //即将受到伤害
+        event Action<CombatExtraData> onDamaged; //受到伤害之后
 
         event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onHealed;        //回血
-        event Action<ICombatUnit, ICombatAction, ICombatUnit> onDead;        //死亡
+        event Action<CombatExtraData> onDead;        //死亡
         event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onRebord;        //复活
         event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
         event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;    //状态抵抗

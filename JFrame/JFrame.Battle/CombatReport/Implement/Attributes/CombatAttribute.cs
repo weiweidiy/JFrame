@@ -30,6 +30,7 @@ namespace JFrame
 
         public CombatAttribute(string uid, T value, T maxValue)
         {
+            Uid = uid;
             OriginValue = value;
             CurValue = value;
             MaxValue = maxValue;
