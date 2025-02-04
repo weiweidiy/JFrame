@@ -3,23 +3,17 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CombatAction : ICombatAction , ICombatUpdatable , IUnique
+    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique
     {
-        public string Uid { get; private set; }
-
-        //public ActionType Type => throw new NotImplementedException();
-
-        //public ActionMode Mode => throw new NotImplementedException();
-
-        public event Action<ICombatAction> onCanCast;
+        public event Action<CombatExtraData> onTriggerOn;
         public event Action<ICombatAction, List<ICombatUnit>, float> onStartCast;
         public event Action<ICombatAction, float> onStartCD;
         public event Action<ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
         public event Action<ICombatAction, ICombatUnit, ExecuteInfo, ICombatUnit> onHittedComplete;
 
-        protected void NotifyCanCast()
+        public void NotifyTriggerOn()
         {
-            throw new NotImplementedException();
+            onTriggerOn?.Invoke(ExtraData);
         }
 
         protected void NotifyStartCast(List<ICombatUnit> targets, float duration)
@@ -32,12 +26,29 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
-        List<ICombatTrigger> conditionTriggers;
+        public string Uid { get; private set; }
+
+        public ActionType Type { get; protected set; }
+
+        public ActionMode Mode { get; private set; }
+
+        /// <summary>
+        /// 透傳對象
+        /// </summary>
+        public CombatExtraData ExtraData { get; private set; }
+
+        public int Id { get; private set; }
+
+        /// <summary>
+        /// 觸發器列表
+        /// </summary>
+        List<BaseTrigger> conditionTriggers;
+
         /// <summary>
         /// 延遲出發器（從觸發到執行中間的延遲，有時間延遲類，還有距離/速度類等）
         /// </summary>
-        ICombatTrigger delayTrigger;
-        List<ICombatExecutor> executors;
+        BaseTrigger delayTrigger;
+        List<BaseExecutor> executors;
         List<ICombatTrigger> cdTriggers;
         ActionSM sm;
 
@@ -48,40 +59,145 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(List<ICombatTrigger> conditionTriggers, ICombatTrigger delayTrigger,  List<ICombatExecutor> executors, List<ICombatTrigger> cdTriggers, ActionSM sm)
+        public void Initialize(int id, ActionType type, ActionMode mode, List<BaseTrigger> conditionTriggers, BaseTrigger delayTrigger, List<BaseExecutor> executors, List<ICombatTrigger> cdTriggers, ActionSM sm)
         {
             Uid = Guid.NewGuid().ToString();
             this.conditionTriggers = conditionTriggers;
+            this.delayTrigger = delayTrigger;
             this.executors = executors;
             this.cdTriggers = cdTriggers;
             this.sm = sm;
-        }
-
-
-
-        public float SwitchToCd()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SwitchToDisable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public float SwitchToExecuting()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SwitchToTrigging()
-        {
-            throw new NotImplementedException();
+            Id = id;
+            this.Type = type;
+            this.Mode = mode;
         }
 
         public void Update(BattleFrame frame)
         {
-            throw new NotImplementedException();
+            sm.Update(frame);
+        }
+
+        /// <summary>
+        /// 更新條件觸發器
+        /// </summary>
+        /// <param name="frame"></param>
+        public void UpdateConditionTriggers(BattleFrame frame)
+        {
+            foreach (var trigger in conditionTriggers)
+            {
+                trigger.Update(frame);
+            }
+        }
+
+        /// <summary>
+        /// 是否已經觸發
+        /// </summary>
+        /// <returns></returns>
+        public bool IsConditionTriggerOn()
+        {
+            foreach (var trigger in conditionTriggers)
+            {
+                if(trigger.IsOn())
+                {
+                    ExtraData = trigger.CombatExtraData;
+                    return true;
+                }                
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 重置
+        /// </summary>
+        public void ResetConiditionTriggers()
+        {
+            if (conditionTriggers == null)
+                return;
+
+            foreach(var trigger in conditionTriggers)
+            {
+                trigger.Reset();
+            }
+        }
+
+
+        public void UpdateDelayTrigger(BattleFrame frame)
+        {
+            delayTrigger.Update(frame);
+        }
+
+        public bool IsDelayTriggerOn()
+        {
+            return delayTrigger.IsOn();
+        }
+
+        public void ResetDelayTrigger()
+        {
+            delayTrigger.Reset();
+        }
+
+
+        public void UpdateExecutors(BattleFrame frame)
+        {
+            foreach(var executor in executors)
+            {
+                executor.Update(frame);
+            }
+        }
+
+
+        public void SwitchToDisable()
+        {
+            sm.SwitchToDisable();
+        }
+
+        public void SwitchToTrigging()
+        {
+            sm.SwitchToStandby();
+        }
+
+        public float SwitchToExecuting()
+        {
+            sm.SwitchToExecuting();
+            return GetExecutingDuration();
+        }
+
+        public float SwitchToCd()
+        {
+            sm.SwitchToCding();
+            return GetCdTriggerDuration();
+        }
+
+        /// <summary>
+        /// 獲取執行時常
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private float GetExecutingDuration()
+        {
+            return 0;
+            //foreach(var executor in executors)
+            //{
+            //    if(executor is executor)
+            //}
+        }
+
+        /// <summary>
+        /// 獲取cd時長
+        /// </summary>
+        /// <returns></returns>
+        public float GetCdTriggerDuration()
+        {
+            foreach (var trigger in cdTriggers)
+            {
+
+                if (trigger is TriggerTime)
+                {
+                    var triggerTime = trigger as TriggerTime;
+                    return triggerTime.GetDuration();
+                }
+            }
+            return 0f;
         }
 
         //public bool CanCast()

@@ -3,10 +3,11 @@
 using NUnit.Framework;
 using NSubstitute;
 using JFrame;
+using System.Collections.Generic;
 
 namespace JFrameTest
 {
-    public class TestCombatActionComponent
+    public class TestCombatFinder
     {
         [SetUp]
         public void SetUp()
@@ -37,7 +38,7 @@ namespace JFrameTest
             var unit2 = Substitute.For<CombatUnit>();
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
-            combatManager.Initialize(null, null, 90);
+            combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
             combatManager.GetOppoTeamId(Arg.Any<ICombatUnit>()).Returns(1);
             combatManager.GetUnits(Arg.Any<ICombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<ICombatUnit>() { unit1, unit2 });
             component.Owner.Returns(acition);

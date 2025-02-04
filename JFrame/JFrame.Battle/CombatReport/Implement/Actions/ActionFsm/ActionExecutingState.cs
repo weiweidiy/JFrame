@@ -9,5 +9,27 @@ namespace JFrame
     {
         public event Action onExecutingComplete;
 
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        public override void Update(BattleFrame frame)
+        {
+            base.Update(frame);
+
+            context.UpdateDelayTrigger(frame);
+            if(context.IsDelayTriggerOn())
+            {
+                context.UpdateExecutors(frame);
+            }
+        }
+
+
     }
 }

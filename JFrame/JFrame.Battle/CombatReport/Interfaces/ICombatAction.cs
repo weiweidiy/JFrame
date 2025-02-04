@@ -9,7 +9,7 @@ namespace JFrame
         /// <summary>
         /// 通知actionmanager 可以释放了
         /// </summary>
-        event Action<ICombatAction> onCanCast;
+        event Action<CombatExtraData> onTriggerOn;
 
         /// <summary>
         /// 触发了，群体也只会返回首目标
@@ -36,6 +36,11 @@ namespace JFrame
         #endregion
 
 
+        int Id { get; }
+
+        ActionType Type { get;  }
+
+        ActionMode Mode { get;  }
 
         //#region 属性
         ///// <summary>
@@ -46,7 +51,9 @@ namespace JFrame
         ///// <summary>
         ///// 动作模式：主动，被动
         ///// </summary>
-        //ActionMode Mode { get; }        //#region 生命周期
+        //ActionMode Mode { get; }    
+
+        //#region 生命周期
         //void OnStart(); //开始更新前只调用1次
 
         //void OnEnable(); //触发时调用

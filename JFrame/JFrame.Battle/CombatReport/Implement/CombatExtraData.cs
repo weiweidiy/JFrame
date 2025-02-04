@@ -2,6 +2,10 @@
 
 namespace JFrame
 {
+    public class  ReportData
+    {
+
+    }
     /// <summary>
     /// 透传参数
     /// </summary>
@@ -45,7 +49,7 @@ namespace JFrame
         /// <summary>
         /// 哪個aciton造成的
         /// </summary>
-        public ICombatAction Action { get; set; }
+        public CombatAction Action { get; set; }
 
         /// <summary>
         /// 目标单位

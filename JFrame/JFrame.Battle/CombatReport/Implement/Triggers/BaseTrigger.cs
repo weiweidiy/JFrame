@@ -28,7 +28,7 @@ namespace JFrame
         /// <summary>
         /// 重置為未觸發
         /// </summary>
-        public void Reset()
+        public virtual void Reset()
         {
             SetOn(false);
         }
@@ -54,12 +54,14 @@ namespace JFrame
             {
                 var action = Owner as CombatUnitAction;
                 extraData.SourceUnit = action.Owner;
+                extraData.Action = action;
             }
             else //是一個buffaction
             {
                 var action = Owner as CombatBufferAction;
                 var buffer = action.Owner;
                 extraData.SourceUnit = buffer.SourceUnit;
+                extraData.Action = action;
             }
         }
     }

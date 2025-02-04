@@ -26,4 +26,6 @@ namespace JFrame
         object[] Arg {  get; } //如果reportType = action , arg = action id, 如果是damage , Arg = damage
 
     }
+
+
 }

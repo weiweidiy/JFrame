@@ -43,7 +43,7 @@ namespace JFrame
             return Count();
         }
 
-        public List<ICombatUnit> GetUnits()
+        public virtual List<ICombatUnit> GetUnits()
         {
             return GetAll();
         }

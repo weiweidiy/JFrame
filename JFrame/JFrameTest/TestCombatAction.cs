@@ -4,20 +4,24 @@ using JFrame;
 using NUnit.Framework;
 using NSubstitute;
 using System.Collections.Generic;
+using System;
+using static System.Collections.Specialized.BitVector32;
 
 namespace JFrameTest
 {
-    public class TestCombatTriggers
+    public class TestCombatAction
     {
         CombatUnitAction action;
         CombatContext context;
-
+        CombatUnit my;
+        BattleFrame frame;
         [SetUp]
         public void Setup()
         {
+            frame = new BattleFrame();
             context = Substitute.For<CombatContext>();
             var combatManager = Substitute.For<CombatManager>();
-            var my = Substitute.For<CombatUnit>();
+            my = Substitute.For<CombatUnit>();
             my.GetPosition().Returns(new CombatVector() { x = -1 });
             action = Substitute.For<CombatUnitAction>();
             action.Owner.Returns(my);
@@ -33,35 +37,33 @@ namespace JFrameTest
         }
 
         [Test]
-        public void TestTriggerRange()
+        public void TestAction()
         {
-            //arrange
-            var component = new TriggerRangeNearest();
-            component.OnAttach(action);
-            component.Initialize(context, new float[] { 4, 1 });//攻擊距離
+            //arrage
+            action = new CombatUnitAction();
+            action.OnAttach(my);
+            var trigger = new TriggerTime();
+            trigger.OnAttach(action);
+            trigger.Initialize(context, new float[] { 0.3f });
+            var sm = new ActionSM();
+            sm.Initialize(action);
+            action.Initialize(1, ActionType.Normal, ActionMode.Active, new List<BaseTrigger>() { trigger},new TriggerTime(), new List<BaseExecutor>(), new List<ICombatTrigger>(), sm);
+            bool isOn = false;
+            CombatExtraData data = null;
+            int count = 0;
+            action.onTriggerOn += (extraData) => { isOn = true; data = extraData; count++; };
+            action.SwitchToDisable();
+            action.SwitchToTrigging();
 
-            //act   
-            component.Update(null);
+            //act
+            action.Update(frame);
+            action.Update(frame);
+            action.Update(frame);
 
             //expect
-            Assert.AreEqual(true, component.IsOn());
-        }
-
-        [Test]  
-        public void TestTriggerTime()
-        {
-            //arrange
-            var component = new TriggerTime();
-            component.OnAttach(action);
-            component.Initialize(context, new float[] { 0.5f});//攻擊距離
-            var frame = new BattleFrame();
-            //act   
-            component.Update(frame);
-            component.Update(frame);
-
-            //expect
-            Assert.AreEqual(true, component.IsOn());
-            Assert.AreEqual(action, component.CombatExtraData.Action);
+            Assert.AreEqual(true, isOn);
+            Assert.AreEqual(my, data.SourceUnit);
+            Assert.AreEqual(2, count);
         }
     }
 

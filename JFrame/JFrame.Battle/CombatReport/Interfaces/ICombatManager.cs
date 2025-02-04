@@ -4,13 +4,13 @@ namespace JFrame
 {
     public interface ICombatManager<TResult, TTeam, TUnit>
     {
-        void Update();
+        //void Update();
 
-        void StartUpdate();
+        //void StartUpdate();
 
         TResult GetResult();
 
-        void StopUpdate();
+        //void StopUpdate();
 
         void ClearResult();
 

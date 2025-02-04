@@ -80,8 +80,13 @@ namespace JFrame
 
             if (attributes != null)
                 attributeManger.AddRange(attributes);
+
             if (actions != null)
+            {
                 actionManager.AddRange(actions);
+                actionManager.Initialize();
+            }
+                
             if (buffers != null)
                 bufferManager.AddRange(buffers);
         }

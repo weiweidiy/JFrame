@@ -5,16 +5,30 @@
     /// </summary>
     public class ActionStandbyState : BaseActionState
     {
-        public override void Update(BattleFrame frame)
-        {
-            base.Update(frame);
-        }
-
         protected override void OnEnter()
         {
             base.OnEnter();
 
-            //context.reset
+            context.ResetConiditionTriggers();
         }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        public override void Update(BattleFrame frame)
+        {
+            base.Update(frame);
+            
+            context.UpdateConditionTriggers(frame);
+
+            if(context.IsConditionTriggerOn())
+            {
+                context.NotifyTriggerOn();
+            }
+        }
+
+
     }
 }

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+    /// <summary>
+    /// 根據距離觸發
+    /// </summary>
     public abstract class TriggerRange : BaseTrigger
     {
         /// <summary>

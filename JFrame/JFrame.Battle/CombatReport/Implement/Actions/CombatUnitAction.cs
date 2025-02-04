@@ -9,6 +9,7 @@ namespace JFrame
     {
         public virtual CombatUnit Owner { get; private set; }
 
+
         public void OnAttach(CombatUnit ower)
         {
             Owner = ower;

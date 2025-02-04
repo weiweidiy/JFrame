@@ -9,4 +9,6 @@ namespace JFrame
         public List<IBattleReportData> report;
         public int winner;
     }
+
+    
 }

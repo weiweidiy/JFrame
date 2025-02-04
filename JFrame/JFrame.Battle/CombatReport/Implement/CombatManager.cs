@@ -5,6 +5,7 @@ using static JFrame.PVPBattleManager;
 
 namespace JFrame
 {
+
     public enum ActionComponentType
     {
         ConditionTrigger,
@@ -24,11 +25,18 @@ namespace JFrame
     }
 
 
+    public class ActionInfo
+    {
+        public ActionType type;
+        public ActionMode mode;
+        public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
+    }
+
     public class CombatUnitInfo
     {
         public string uid;
         public int id;
-        public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> actionsData;
+        public Dictionary<int, ActionInfo> actionsData;
         public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData;
         public int hp;
         public int maxHp;
@@ -50,11 +58,15 @@ namespace JFrame
 
     }
 
-    public class CombatManager : ICombatManager<Report, CommonCombatTeam, ICombatUnit>
+    public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, ICombatUnit>
     {
         Dictionary<int, CommonCombatTeam> teams;
 
         BattleFrame frame = new BattleFrame();
+
+        CombatJudge combatJudge;
+
+        CombatReport report;
 
         bool isStartUpdate;
 
@@ -64,18 +76,24 @@ namespace JFrame
             var context = new CombatContext();
             context.CombatManager = this;
 
-            //創建2個隊伍
-            if (team1Data != null)
-            {
-                var team1 = CreateTeam(team1Data, context);
-                AddTeam(0, team1); //1 = 隊伍id
-            }
+            if (team1Data == null || team2Data == null)
+                throw new ArgumentNullException("teamdata 不能為null");
 
-            if (team2Data != null)
-            {
-                var team2 = CreateTeam(team2Data, context);
-                AddTeam(1, team2); //2 = 隊伍id
-            }
+            CommonCombatTeam team1 = CreateTeam(team1Data, context, new SpecialCombatTeam());
+            if (team1Data.Count > 0)
+                AddTeam(0, team1); //1 = 隊伍id
+
+            CommonCombatTeam team2 = CreateTeam(team2Data, context, new CommonCombatTeam());
+            if (team2Data.Count > 0)
+                AddTeam(1, team2);
+
+
+            combatJudge = new CombatJudge(team1, team2);
+
+            // pvpReporter = 
+            report = new CombatReport();
+            report.attacker = team1 as SpecialCombatTeam;
+            report.defence = team2;
         }
 
         #region 創建對象
@@ -85,9 +103,9 @@ namespace JFrame
         /// <param name="teamData"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        CommonCombatTeam CreateTeam(List<CombatUnitInfo> teamData, CombatContext context)
+        CommonCombatTeam CreateTeam(List<CombatUnitInfo> teamData, CombatContext context, CommonCombatTeam team)
         {
-            var team = new CommonCombatTeam();
+            //var team = new CommonCombatTeam();
             if (teamData != null)
             {
                 var actionFactory = new CombatActionFactory();
@@ -188,7 +206,7 @@ namespace JFrame
         /// <returns></returns>
         public int GetOppoTeamId(int teamId)
         {
-            return teamId == 0? 1 : 0;
+            return teamId == 0 ? 1 : 0;
         }
 
         /// <summary>
@@ -290,40 +308,55 @@ namespace JFrame
         }
 
 
-        public Report GetResult()
-        {
-            throw new System.NotImplementedException();
-        }
+
         #endregion
 
 
 
-        public void StartUpdate()
-        {
-            isStartUpdate = true;
-        }
+        //public void StartUpdate()
+        //{
+        //    isStartUpdate = true;
+        //}
 
-        public void StopUpdate()
-        {
-            isStartUpdate = false;
-        }
+        //public void StopUpdate()
+        //{
+        //    isStartUpdate = false;
+        //}
 
-        public void Update()
-        {
-            if (!isStartUpdate)
-                return;
+        //public void Update()
+        //{
+        //    if (!isStartUpdate)
+        //        return;
 
-            foreach (var team in teams.Values)
+        //    foreach (var team in teams.Values)
+        //    {
+        //        team.Update(frame);
+        //    }
+
+        //    frame.NextFrame();
+        //}
+        public CombatReport GetResult()
+        {
+            //如果战斗没有决出胜负，则继续战斗
+            while (!combatJudge.IsOver() && !frame.IsMaxFrame())
             {
-                team.Update(frame);
+                foreach (var team in teams.Values)
+                {
+                    team.Update(frame);
+                }
+
+                frame.NextFrame();
             }
 
-            frame.NextFrame();
+            //report.report = pvpReporter.GetAllReportData();
+            //report.winner = combatJudge.GetWinner().TeamId == 1 ? 1 : 0; //1:挑战成功 0：挑战失败
+            //Debug.Log("战斗结束 " + frame.FrameCount);
+            return report;
         }
 
         public void ClearResult()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public bool IsBuffer(int buffId)
