@@ -5,7 +5,7 @@ namespace JFrame
     public class CombatReport
     {
 
-        public SpecialCombatTeam attacker;
+        public CommonCombatTeam attacker;
         public CommonCombatTeam defence;
         public List<ICombatReportData> report;
         public int winner;

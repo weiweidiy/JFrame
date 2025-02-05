@@ -320,34 +320,8 @@ namespace JFrame
             throw new System.NotImplementedException();
         }
 
-
-
         #endregion
 
-
-
-        //public void StartUpdate()
-        //{
-        //    isStartUpdate = true;
-        //}
-
-        //public void StopUpdate()
-        //{
-        //    isStartUpdate = false;
-        //}
-
-        //public void Update()
-        //{
-        //    if (!isStartUpdate)
-        //        return;
-
-        //    foreach (var team in teams.Values)
-        //    {
-        //        team.Update(frame);
-        //    }
-
-        //    frame.NextFrame();
-        //}
         public CombatReport GetResult()
         {
             //如果战斗没有决出胜负，则继续战斗
