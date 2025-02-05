@@ -25,7 +25,7 @@
 
             if(context.IsConditionTriggerOn())
             {
-                context.NotifyTriggerOn();
+                context.NotifyTriggerOn(); //允许每一帧都通知
             }
         }
 

@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace JFrame
 {
-    public class ActionSM : BaseSMSync<CombatAction, BaseActionState, ActionSMTrigger>
+    public class CombatActionSM : BaseSMSync<CombatAction, BaseActionState, ActionSMTrigger>
     {
         ActionInitState actionInitState;
         ActionDisableState actionDisableState;
@@ -53,6 +53,7 @@ namespace JFrame
             disableConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
             disableConfig.dicPermit.Add(ActionSMTrigger.Standby, actionStandbyState);  //disable -> standby 开始
             disableConfig.dicPermit.Add(ActionSMTrigger.Cd, actionCdingState);         //disable -> cding  复活
+            //disableConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
             configs.Add(disableName, disableConfig);
 
             //等待状态，等待触发条件满足（触发器触发 + 触发队列空闲）（触发器触发）
@@ -61,6 +62,7 @@ namespace JFrame
             standbyConfig.state = actionStandbyState;
             standbyConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
             standbyConfig.dicPermit.Add(ActionSMTrigger.Execute, actionExecutingState);  // standby -> executing 释放
+            standbyConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
             //standbyConfig.dicPermit.Add(ActionSMTrigger.Execute, actionExecutingState);
             configs.Add(standbyName, standbyConfig);
 
@@ -70,6 +72,7 @@ namespace JFrame
             executingConfig.state = actionExecutingState;
             executingConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
             executingConfig.dicPermit.Add(ActionSMTrigger.Cd, actionCdingState);      // executing -> cding  //释放结束进入cd
+            executingConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
             //executingConfig.dicPermit.Add(ActionSMTrigger.CrowdControl, actionCrowdControlState); // executing -> crowdControl 被打断
             configs.Add(executingName, executingConfig);
 
@@ -78,6 +81,7 @@ namespace JFrame
             cdingConfig.state = actionCdingState;
             cdingConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
             cdingConfig.dicPermit.Add(ActionSMTrigger.Standby, actionStandbyState);  // cding -> standby 冷却结束，继续等待触发
+            cdingConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
             configs.Add(cdingName, cdingConfig);
 
 

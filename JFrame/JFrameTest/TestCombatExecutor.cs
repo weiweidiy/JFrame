@@ -24,7 +24,7 @@ namespace JFrameTest
             attributeManager.Add(hpAttr);
             targetUnit.GetAttributeManager().Returns(attributeManager);
             extraData = new CombatExtraData();
-            extraData.Targets = new List<ICombatUnit>();
+            extraData.Targets = new List<CombatUnit>();
             extraData.Targets.Add(targetUnit);
         }
 
@@ -57,7 +57,7 @@ namespace JFrameTest
         {
             //arrange
             var executor = new ExecutorCombatContinuousDamage(null);
-            executor.Initialize(null, new float[] {1f, 1f , 0.25f, 3 });
+            executor.Initialize(null, new float[] { 1f,1f , 0.25f, 3 });
             extraData.Value = 10;
             var frame = new BattleFrame();
             //act

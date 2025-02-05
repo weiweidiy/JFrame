@@ -6,6 +6,7 @@ using NSubstitute;
 using System.Collections.Generic;
 using System;
 using static System.Collections.Specialized.BitVector32;
+using System.Runtime.Remoting.Contexts;
 
 namespace JFrameTest
 {
@@ -30,8 +31,8 @@ namespace JFrameTest
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
             combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
-            combatManager.GetOppoTeamId(Arg.Any<ICombatUnit>()).Returns(1);
-            combatManager.GetUnits(Arg.Any<ICombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<ICombatUnit>() { unit1, unit2 });
+            combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
+            combatManager.GetUnits(Arg.Any<CombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
             //component.Owner.Returns(acition);
             context.CombatManager.Returns(combatManager);
         }
@@ -43,11 +44,12 @@ namespace JFrameTest
             action = new CombatUnitAction();
             action.OnAttach(my);
             var trigger = new TriggerTime();
+            trigger.ExtraData = new CombatExtraData() { SourceUnit = my, Action = action };
             trigger.OnAttach(action);
             trigger.Initialize(context, new float[] { 0.3f });
-            var sm = new ActionSM();
+            var sm = new CombatActionSM();
             sm.Initialize(action);
-            action.Initialize(1, ActionType.Normal, ActionMode.Active, new List<BaseTrigger>() { trigger},new TriggerTime(), new List<BaseExecutor>(), new List<ICombatTrigger>(), sm);
+            action.Initialize(1, "uid",ActionType.Normal, ActionMode.Active, new List<CombatBaseTrigger>() { trigger},new TriggerTime(), new List<CombatBaseExecutor>(), new List<CombatBaseTrigger>(), sm);
             bool isOn = false;
             CombatExtraData data = null;
             int count = 0;

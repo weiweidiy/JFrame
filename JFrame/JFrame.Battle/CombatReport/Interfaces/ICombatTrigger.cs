@@ -27,7 +27,7 @@ namespace JFrame
         /// <summary>
         /// 透傳參數
         /// </summary>
-        CombatExtraData CombatExtraData { get; }
+        CombatExtraData ExtraData { get; }
     }
 
 

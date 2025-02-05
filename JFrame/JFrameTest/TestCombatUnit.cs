@@ -25,12 +25,13 @@ namespace JFrameTest
         {
             //arrage
             var unit = new CombatUnit();
-            unit.Initialize(null, null, null,null);
+            unit.Initialize("uid", null, null, null,null);
             unit.SetPosition(new CombatVector() { x = 10, y = 0 });
             unit.SetSpeed(new CombatVector() { x = -1,y =0 });
 
             //act
             unit.StartMove();
+            unit.UpdatePosition(new BattleFrame());
             unit.Update(new BattleFrame());
 
             //expect

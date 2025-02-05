@@ -10,9 +10,9 @@ namespace JFrame
         /// 行动时主动事件
         /// </summary>
         //event Action<ICombatUnit, ICombatAction, List<ICombatUnit>> onActionTriggerOn;
-        event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast; //执行效果之前，只有首目标
-        event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget; //动作命中对方,一个目标1次调用
+        event Action<CombatExtraData> onActionCast; //执行效果之前，只有首目标
+        event Action<CombatExtraData> onActionStartCD;
+        event Action<CombatExtraData> onHittingTarget; //动作命中对方,一个目标1次调用
 
         /// <summary>
         /// 被动事件
@@ -20,17 +20,17 @@ namespace JFrame
         event Action<CombatExtraData> onDamaging; //即将受到伤害
         event Action<CombatExtraData> onDamaged; //受到伤害之后
 
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onHealed;        //回血
+        event Action<CombatExtraData> onHealed;        //回血
         event Action<CombatExtraData> onDead;        //死亡
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onRebord;        //复活
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
-        event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;    //状态抵抗
+        event Action<CombatExtraData> onRebord;        //复活
+        event Action<CombatExtraData> onMaxHpUp;
+        event Action<CombatExtraData> onDebuffAnti;    //状态抵抗
 
-        event Action<ICombatUnit, int, ExecuteInfo> onBufferAdding; //即将添加buff
-        event Action<ICombatUnit, ICombatBuffer> onBufferAdded;
-        event Action<ICombatUnit, ICombatBuffer> onBufferRemoved;
-        event Action<ICombatUnit, ICombatBuffer> onBufferCast;
-        event Action<ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
+        event Action<CombatExtraData> onBufferAdding; //即将添加buff
+        event Action<CombatExtraData> onBufferAdded;
+        event Action<CombatExtraData> onBufferRemoved;
+        event Action<CombatExtraData> onBufferCast;
+        event Action<CombatExtraData> onBufferUpdate;
 
         /// <summary>
         /// 是否活着

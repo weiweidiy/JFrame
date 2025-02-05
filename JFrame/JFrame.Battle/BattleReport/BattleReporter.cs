@@ -8,7 +8,7 @@ namespace JFrame
 {
     public enum ReportType
     {
-        Action, //英雄动作
+        ActionCast, //英雄动作
         Damage, //受伤
         Heal,   //治疗回血
         Dead,   //死亡
@@ -78,7 +78,7 @@ namespace JFrame
             {
                 lstUID.Add(targets[i].Uid);
             }
-            AddReportData(caster.Uid, ReportType.Action, targets[0].Uid, new object[] { action.Id, lstUID , duration });
+            AddReportData(caster.Uid, ReportType.ActionCast, targets[0].Uid, new object[] { action.Id, lstUID , duration });
         }
 
         private void Team_onActionStartCD(PVPBattleManager.Team team, IBattleUnit caster, IBattleAction action, float cd)

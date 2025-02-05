@@ -12,12 +12,14 @@ namespace JFrameTest
         CombatUnitAction action;
         CombatContext context;
 
+        CombatUnit my;
+
         [SetUp]
         public void Setup()
         {
             context = Substitute.For<CombatContext>();
             var combatManager = Substitute.For<CombatManager>();
-            var my = Substitute.For<CombatUnit>();
+            my = Substitute.For<CombatUnit>();
             my.GetPosition().Returns(new CombatVector() { x = -1 });
             action = Substitute.For<CombatUnitAction>();
             action.Owner.Returns(my);
@@ -26,8 +28,8 @@ namespace JFrameTest
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
             combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
-            combatManager.GetOppoTeamId(Arg.Any<ICombatUnit>()).Returns(1);
-            combatManager.GetUnits(Arg.Any<ICombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<ICombatUnit>() { unit1, unit2 });
+            combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
+            combatManager.GetUnits(Arg.Any<CombatUnit   >(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
             //component.Owner.Returns(acition);
             context.CombatManager.Returns(combatManager);
         }
@@ -37,6 +39,7 @@ namespace JFrameTest
         {
             //arrange
             var component = new TriggerRangeNearest();
+            component.ExtraData = new CombatExtraData() { SourceUnit = my,  Action = action };
             component.OnAttach(action);
             component.Initialize(context, new float[] { 4, 1 });//攻擊距離
 
@@ -52,6 +55,7 @@ namespace JFrameTest
         {
             //arrange
             var component = new TriggerTime();
+            component.ExtraData = new CombatExtraData() { SourceUnit = my, Action = action };
             component.OnAttach(action);
             component.Initialize(context, new float[] { 0.5f});//攻擊距離
             var frame = new BattleFrame();
@@ -61,7 +65,7 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(true, component.IsOn());
-            Assert.AreEqual(action, component.CombatExtraData.Action);
+            Assert.AreEqual(action, component.ExtraData.Action);
         }
     }
 

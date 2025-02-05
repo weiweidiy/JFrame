@@ -95,12 +95,15 @@ namespace JFrameTest
         public void TestCombatManagerGetUnitInRange()
         {
             //arrange 
-            var lstCombat = new List<ICombatUnit>();
+            var lstCombat = new List<CombatUnit>();
             var unit1 = Substitute.For<CombatUnit>();
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
+            unit1.IsAlive().Returns(true);
             var unit2 = Substitute.For<CombatUnit>();
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
+            unit2.IsAlive().Returns(true);
             var myUnit = Substitute.For<CombatUnit>();
+            myUnit.IsAlive().Returns(true);
             myUnit.GetPosition().Returns(new CombatVector() { x = 0 });
             lstCombat.Add(unit1);
             lstCombat.Add(unit2);

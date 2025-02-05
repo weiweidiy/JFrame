@@ -14,24 +14,34 @@ namespace JFrame
         /// <summary>
         /// 触发了，群体也只会返回首目标
         /// </summary>
-        event Action<ICombatAction, List<ICombatUnit>, float> onStartCast;
+        event Action<CombatExtraData> onStartExecuting;
 
 
         /// <summary>
         /// 开始进入冷却
         /// </summary>
-        event Action<ICombatAction, float> onStartCD;
+        event Action<CombatExtraData> onStartCD;
 
 
         /// <summary>
         /// 即将命中目标
         /// </summary>
-        event Action<ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
+        event Action<CombatExtraData> onHittingTargets;
 
         /// <summary>
         /// 已经命中
         /// </summary>
-        event Action<ICombatAction, ICombatUnit, ExecuteInfo, ICombatUnit> onHittedComplete;
+        event Action<CombatExtraData> onTargetsHittedComplete;
+
+        /// <summary>
+        /// 即将命中目标
+        /// </summary>
+        event Action<CombatExtraData> onHittingTarget;
+
+        /// <summary>
+        /// 已经命中
+        /// </summary>
+        event Action<CombatExtraData> onTargetHittedComplete;
 
         #endregion
 

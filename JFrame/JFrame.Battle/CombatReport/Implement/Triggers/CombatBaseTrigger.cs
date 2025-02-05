@@ -6,13 +6,21 @@ namespace JFrame
     /// <summary>
     /// 觸發器基類
     /// </summary>
-    public abstract class BaseTrigger : BaseActionComponent, ICombatTrigger
+    public abstract class CombatBaseTrigger : BaseActionComponent, ICombatTrigger, IExtraDataClaimable
     {
         /// <summary>
         /// 透傳參數
         /// </summary>
-        protected CombatExtraData extraData = new CombatExtraData();
-        public CombatExtraData CombatExtraData => extraData;
+        protected CombatExtraData _extraData;
+        public CombatExtraData ExtraData
+        {
+            get => _extraData; 
+            set
+            {
+                _extraData = value;
+            }
+        }
+     
 
         bool isOn;
 
@@ -50,19 +58,19 @@ namespace JFrame
         {
             base.OnAttach(target);
 
-            if (Owner is CombatUnitAction)
-            {
-                var action = Owner as CombatUnitAction;
-                extraData.SourceUnit = action.Owner;
-                extraData.Action = action;
-            }
-            else //是一個buffaction
-            {
-                var action = Owner as CombatBufferAction;
-                var buffer = action.Owner;
-                extraData.SourceUnit = buffer.SourceUnit;
-                extraData.Action = action;
-            }
+            //if (Owner is CombatUnitAction)
+            //{
+            //    var action = Owner as CombatUnitAction;
+            //    _extraData.SourceUnit = action.Owner;
+            //    _extraData.Action = action;
+            //}
+            //else //是一個buffaction
+            //{
+            //    var action = Owner as CombatBufferAction;
+            //    var buffer = action.Owner;
+            //    _extraData.SourceUnit = buffer.SourceUnit;
+            //    _extraData.Action = action;
+            //}
         }
     }
 }

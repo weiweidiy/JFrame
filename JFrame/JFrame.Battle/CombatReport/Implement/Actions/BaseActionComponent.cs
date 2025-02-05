@@ -8,7 +8,7 @@ namespace JFrame
     /// <summary>
     /// action 组件基类 0:攻擊距離 1:查找數量
     /// </summary>
-    public abstract class BaseActionComponent : IArgsable, IAttachable<CombatAction>, ICombatUpdatable
+    public abstract class BaseActionComponent : IArgsable, ICombatAttachable<CombatAction>, ICombatUpdatable
     {
         CombatAction _owner;
         public virtual CombatAction Owner => _owner;

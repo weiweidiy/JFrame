@@ -3,7 +3,7 @@
     /// <summary>
     /// 根據時間觸發  type = 3 參數0：時長
     /// </summary>
-    public class TriggerTime : BaseTrigger
+    public class TriggerTime : CombatBaseTrigger
     {
         float delta = 0f;
 

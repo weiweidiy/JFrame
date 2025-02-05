@@ -7,22 +7,22 @@ namespace JFrame
     /// <summary>
     /// finder基類 0：攻擊距離 1: 查找個數
     /// </summary>
-    public abstract class BaseFinder : BaseActionComponent, ICombatFinder
+    public abstract class CombatBaseFinder : BaseActionComponent, ICombatFinder
     {
         /// <summary>
         /// 幫助類
         /// </summary>
         Utility utility = new Utility();
 
-        public abstract List<ICombatUnit> FindTargets(CombatExtraData extraData);
+        public abstract List<CombatUnit> FindTargets(CombatExtraData extraData);
 
         /// <summary>
         /// 獲取距離最近的n個單位()
         /// </summary>
         /// <returns></returns>
-        public List<ICombatUnit> GetNearestOppoUnitInRange(CombatExtraData extraData, int count)
+        public List<CombatUnit> GetNearestOppoUnitInRange(CombatExtraData extraData, int count)
         {
-            var reslut = new List<ICombatUnit>();
+            var reslut = new List<CombatUnit>();
             var oppoTeamId = context.CombatManager.GetOppoTeamId(extraData.SourceUnit);
             //獲取所有攻擊範圍内的單位
             var oppoUnits = context.CombatManager.GetUnits(extraData.SourceUnit, oppoTeamId, GetAtkRange());
@@ -43,7 +43,7 @@ namespace JFrame
             //獲取距離最近的
             var myX = selfUnit.GetPosition().x;
             var arr = oppoUnits.ToArray();
-            utility.BinarySort<ICombatUnit>(arr, new Compare(myX));
+            utility.BinarySort<CombatUnit>(arr, new Compare(myX));
 
             //保證不能超過數組長度
             var finalCount = Math.Min(arr.Length, count);
@@ -82,7 +82,7 @@ namespace JFrame
             return (int)GetCurArg(1);
         }
 
-        class Compare : IComparer<ICombatUnit>
+        class Compare : IComparer<CombatUnit>
         {
             float myX;
             public Compare(float myX)
@@ -90,7 +90,7 @@ namespace JFrame
                 this.myX = myX;
             }
 
-            int IComparer<ICombatUnit>.Compare(ICombatUnit x, ICombatUnit y)
+            int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
             {
                 var unit1 = x as CombatUnit;
                 var unit2 = y as CombatUnit;

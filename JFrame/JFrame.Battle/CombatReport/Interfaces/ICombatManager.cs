@@ -95,6 +95,6 @@ namespace JFrame
         /// <param name="teamId"></param>
         /// <param name="range"></param>
         /// <returns></returns>
-        List<TUnit> GetUnits(TUnit unit, int teamId, float range);
+        List<TUnit> GetUnits(TUnit unit, int teamId, float range, bool alive);
     }
 }

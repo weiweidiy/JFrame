@@ -1,6 +1,6 @@
 ﻿namespace JFrame
 {
-    public interface IAttachable<TOwner>
+    public interface ICombatAttachable<TOwner>
     {
         TOwner Owner { get; }
 

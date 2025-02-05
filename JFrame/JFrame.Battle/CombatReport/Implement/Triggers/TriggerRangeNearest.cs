@@ -5,21 +5,21 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 1
+    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 1  参数：0 攻击距离 1 查找数量
     /// </summary>
     public class TriggerRangeNearest : TriggerRange
     {
         protected Utility utility = new Utility();
 
-        protected override void SortList(ICombatUnit[] arr, float myXPosition)
+        protected override void SortList(CombatUnit[] arr, float myXPosition)
         {
-            utility.BinarySort<ICombatUnit>(arr, new Compare(myXPosition));
+            utility.BinarySort<CombatUnit>(arr, new Compare(myXPosition));
         }
 
         /// <summary>
         /// 按距離由近到遠
         /// </summary>
-        class Compare : IComparer<ICombatUnit>
+        class Compare : IComparer<CombatUnit>
         {
             float myX;
             public Compare(float myX)
@@ -27,7 +27,7 @@ namespace JFrame
                 this.myX = myX;
             }
 
-            int IComparer<ICombatUnit>.Compare(ICombatUnit x, ICombatUnit y)
+            int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
             {
                 var unit1 = x as CombatUnit;
                 var unit2 = y as CombatUnit;

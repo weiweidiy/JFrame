@@ -5,7 +5,7 @@ namespace JFrame
     /// <summary>
     /// unit上的action
     /// </summary>
-    public class CombatUnitAction : CombatAction, IAttachable<CombatUnit>
+    public class CombatUnitAction : CombatAction, ICombatAttachable<CombatUnit>
     {
         public virtual CombatUnit Owner { get; private set; }
 

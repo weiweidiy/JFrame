@@ -3,37 +3,52 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CommonCombatTeam : BaseContainer<ICombatUnit>, ICombatTeam<ICombatUnit, ICombatAction, ICombatBuffer> , ICombatUpdatable
+    public class CommonCombatTeam : BaseContainer<CombatUnit>, ICombatTeam<CombatUnit> , ICombatUpdatable
     {
-        public event Action<int, ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
-        public event Action<int, ICombatUnit, ICombatAction, float> onActionStartCD;
+        //public event Action<int, ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
+        //public event Action<int, ICombatUnit, ICombatAction, float> onActionStartCD;
 
+        //public event Action<int, CombatExtraData> onDamage;
+        //public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onHeal;
+        //public event Action<int, CombatExtraData> onDead;
+        //public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onReborn;
+        //public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
+        //public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
+
+        //public event Action<int, ICombatUnit, ICombatBuffer> onBufferAdded;
+        //public event Action<int, ICombatUnit, ICombatBuffer> onBufferRemoved;
+        //public event Action<int, ICombatUnit, ICombatBuffer> onBufferCast;
+        //public event Action<int, ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
+
+
+        public event Action<int, CombatExtraData> onActionCast;
+        public event Action<int, CombatExtraData> onActionStartCD;
         public event Action<int, CombatExtraData> onDamage;
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onHeal;
+        public event Action<int, CombatExtraData> onHeal;
         public event Action<int, CombatExtraData> onDead;
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onReborn;
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
-        public event Action<int, ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
+        public event Action<int, CombatExtraData> onReborn;
+        public event Action<int, CombatExtraData> onMaxHpUp;
+        public event Action<int, CombatExtraData> onDebuffAnti;
+        public event Action<int, CombatExtraData> onBufferAdded;
+        public event Action<int, CombatExtraData> onBufferRemoved;
+        public event Action<int, CombatExtraData> onBufferCast;
+        public event Action<int, CombatExtraData> onBufferUpdate;
 
-        public event Action<int, ICombatUnit, ICombatBuffer> onBufferAdded;
-        public event Action<int, ICombatUnit, ICombatBuffer> onBufferRemoved;
-        public event Action<int, ICombatUnit, ICombatBuffer> onBufferCast;
-        public event Action<int, ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
 
         int team;
         public int TeamId => team;
 
-        public void AddUnit(ICombatUnit unit)
+        public void AddUnit(CombatUnit unit)
         {
             Add(unit);
         }
 
-        public void RemoveUnit(ICombatUnit unit)
+        public void RemoveUnit(CombatUnit unit)
         {
             Remove(unit.Uid);
         }
 
-        public ICombatUnit GetUnit(string uid)
+        public CombatUnit GetUnit(string uid)
         {
             return Get(uid);
         }
@@ -43,9 +58,21 @@ namespace JFrame
             return Count();
         }
 
-        public virtual List<ICombatUnit> GetUnits()
+        public virtual List<CombatUnit> GetUnits()
         {
             return GetAll();
+        }
+
+        public void UpdatePosition(BattleFrame frame)
+        {
+            var units = GetUnits();
+            if (units == null)
+                return;
+
+            foreach (var unit in units)
+            {
+                unit.UpdatePosition(frame);
+            }
         }
 
         public void Update(BattleFrame frame)
@@ -102,13 +129,13 @@ namespace JFrame
         #region 响应事件
 
 
-        private void Unit_onActionCast(ICombatUnit arg1, ICombatAction arg2, List<ICombatUnit> arg3, float duration)
+        private void Unit_onActionCast(CombatExtraData extraData)
         {
-            onActionCast?.Invoke(team, arg1, arg2, arg3, duration);
+            onActionCast?.Invoke(team, extraData);
         }
-        private void Unit_onActionStartCD(ICombatUnit arg1, ICombatAction arg2, float arg3)
+        private void Unit_onActionStartCD(CombatExtraData extraData)
         {
-            onActionStartCD?.Invoke(team, arg1, arg2, arg3);
+            onActionStartCD?.Invoke(team, extraData);
         }
 
         private void Unit_onDamage(CombatExtraData extraData /*ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, ExecuteInfo arg4*/)
@@ -116,19 +143,19 @@ namespace JFrame
             onDamage?.Invoke(team, extraData);
         }
 
-        private void Unit_onHeal(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, int arg4)
+        private void Unit_onHeal(CombatExtraData extraData)
         {
-            onHeal?.Invoke(team, arg1, arg2, arg3, arg4);
+            onHeal?.Invoke(team, extraData);
         }
 
-        private void Unit_onMaxHpUp(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, int arg4)
+        private void Unit_onMaxHpUp(CombatExtraData extraData)
         {
-            onMaxHpUp?.Invoke(team, arg1, arg2, arg3, arg4);
+            onMaxHpUp?.Invoke(team, extraData);
         }
 
-        private void Unit_onRebord(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, int arg4)
+        private void Unit_onRebord(CombatExtraData extraData)
         {
-            onReborn?.Invoke(team, arg1, arg2, arg3, arg4);
+            onReborn?.Invoke(team, extraData);
         }
 
 
@@ -137,26 +164,26 @@ namespace JFrame
             onDead?.Invoke(team, extraData);
         }
 
-        private void Unit_onBufferAdded(ICombatUnit arg1, ICombatBuffer arg2)
+        private void Unit_onBufferAdded(CombatExtraData extraData)
         {
-            onBufferAdded?.Invoke(team, arg1, arg2);
+            onBufferAdded?.Invoke(team, extraData);
         }
-        private void Unit_onBufferCast(ICombatUnit arg1, ICombatBuffer arg2)
+        private void Unit_onBufferCast(CombatExtraData extraData)
         {
-            onBufferCast?.Invoke(team, arg1, arg2);
+            onBufferCast?.Invoke(team, extraData);
         }
-        private void Unit_onBufferRemoved(ICombatUnit arg1, ICombatBuffer arg2)
+        private void Unit_onBufferRemoved(CombatExtraData extraData)
         {
-            onBufferRemoved?.Invoke(team, arg1, arg2);
+            onBufferRemoved?.Invoke(team, extraData);
         }
 
-        private void Unit_onBufferUpdate(ICombatUnit arg1, ICombatBuffer arg2, int arg3, float[] arg4)
+        private void Unit_onBufferUpdate(CombatExtraData extraData)
         {
-            onBufferUpdate?.Invoke(team, arg1, arg2, arg3, arg4);
+            onBufferUpdate?.Invoke(team, extraData);
         }
-        private void Unit_onDebuffAnti(ICombatUnit arg1, ICombatAction arg2, ICombatUnit arg3, int arg4)
+        private void Unit_onDebuffAnti(CombatExtraData extraData)
         {
-            onDebuffAnti?.Invoke(team, arg1, arg2, arg3, arg4);
+            onDebuffAnti?.Invoke(team, extraData);
         }
 
 

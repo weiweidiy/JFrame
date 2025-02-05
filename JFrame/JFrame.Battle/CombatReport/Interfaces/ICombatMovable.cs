@@ -9,6 +9,8 @@
         void StartMove();
         void StopMove();
         bool IsMoving();
+
+        void UpdatePosition(BattleFrame frame);
     }
 }
 

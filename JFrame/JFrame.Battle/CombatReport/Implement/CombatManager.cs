@@ -27,6 +27,7 @@ namespace JFrame
 
     public class ActionInfo
     {
+        public string uid;
         public ActionType type;
         public ActionMode mode;
         public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
@@ -58,17 +59,19 @@ namespace JFrame
 
     }
 
-    public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, ICombatUnit>
+    public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, CombatUnit>
     {
         Dictionary<int, CommonCombatTeam> teams;
 
         BattleFrame frame = new BattleFrame();
+        public BattleFrame Frame { get => frame; }
 
         CombatJudge combatJudge;
 
         CombatReport report;
 
-        bool isStartUpdate;
+        public CombatReporter Reporter;
+
 
         public void Initialize(List<CombatUnitInfo> team1Data, List<CombatUnitInfo> team2Data, float timeLimit, CombatUnitInfo god = null)
         {
@@ -90,7 +93,8 @@ namespace JFrame
 
             combatJudge = new CombatJudge(team1, team2);
 
-            // pvpReporter = 
+            Reporter = new CombatReporter(frame, GetTeams());
+
             report = new CombatReport();
             report.attacker = team1 as SpecialCombatTeam;
             report.defence = team2;
@@ -115,7 +119,7 @@ namespace JFrame
                 {
                     //創建並初始化戰鬥單位
                     var unit = new CombatUnit();
-                    unit.Initialize(context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
+                    unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
                     unit.SetPosition(unitInfo.position);
                     unit.SetSpeed(unitInfo.moveSpeed);
                     team.Add(unit);
@@ -183,7 +187,7 @@ namespace JFrame
         /// <param name="unit"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public int GetFriendTeamId(ICombatUnit unit)
+        public int GetFriendTeamId(CombatUnit unit)
         {
             var teams = GetTeams();
             foreach (var team in teams)
@@ -215,7 +219,7 @@ namespace JFrame
         /// <param name="unit"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public virtual int GetOppoTeamId(ICombatUnit unit)
+        public virtual int GetOppoTeamId(CombatUnit unit)
         {
             var team0 = GetTeam(0);
             foreach (var item in team0.GetUnits())
@@ -230,18 +234,24 @@ namespace JFrame
         }
 
 
-        public void AddUnit(int teamId, ICombatUnit unit)
+        public void AddUnit(int teamId, CombatUnit unit)
         {
             throw new System.NotImplementedException();
         }
-        public void RemoveUnit(int teamId, ICombatUnit unit)
+        public void RemoveUnit(int teamId, CombatUnit unit)
         {
             throw new System.NotImplementedException();
         }
 
-        public ICombatUnit GetUnit(string uid)
+        public CombatUnit GetUnit(string uid)
         {
-            throw new System.NotImplementedException();
+            foreach(var team in teams.Values)
+            {
+                var unit = team.GetUnit(uid);
+                if(unit != null)
+                    return unit;
+            }
+            return null;
         }
 
         /// <summary>
@@ -249,7 +259,7 @@ namespace JFrame
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        public virtual List<ICombatUnit> GetUnits(int teamId)
+        public virtual List<CombatUnit> GetUnits(int teamId)
         {
             var team = GetTeam(teamId);
             return team.GetUnits();
@@ -262,16 +272,19 @@ namespace JFrame
         /// <param name="teamId"></param>
         /// <param name="range">-1:無視距離</param>
         /// <returns></returns>
-        public virtual List<ICombatUnit> GetUnits(ICombatUnit unit, int teamId, float range = -1f)
+        public virtual List<CombatUnit> GetUnits(CombatUnit unit, int teamId, float range = -1f, bool alive = true)
         {
             var units = GetUnits(teamId);
             if (range == -1)
                 return units;
 
-            var result = new List<ICombatUnit>();
+            var result = new List<CombatUnit>();
 
             foreach (var item in units)
             {
+                if (item.IsAlive() != alive)
+                    continue;
+
                 var myX = (unit as ICombatMovable).GetPosition().x;
                 var x = (item as ICombatMovable).GetPosition().x;
                 if (Math.Abs(myX - x) <= range)
@@ -340,18 +353,30 @@ namespace JFrame
             //如果战斗没有决出胜负，则继续战斗
             while (!combatJudge.IsOver() && !frame.IsMaxFrame())
             {
-                foreach (var team in teams.Values)
-                {
-                    team.Update(frame);
-                }
+                Update(frame);
 
                 frame.NextFrame();
             }
 
-            //report.report = pvpReporter.GetAllReportData();
-            //report.winner = combatJudge.GetWinner().TeamId == 1 ? 1 : 0; //1:挑战成功 0：挑战失败
+            var winner = combatJudge.GetWinner().TeamId == 0 ? 1 : 0; //1:挑战成功 0：挑战失败
+
+            report.report = Reporter.GetAllReportData();
+            report.winner = winner;
             //Debug.Log("战斗结束 " + frame.FrameCount);
             return report;
+        }
+
+        public void Update(BattleFrame frame)
+        {
+            foreach(var team in teams.Values)
+            {
+                team.UpdatePosition(frame);
+            }
+
+            foreach (var team in teams.Values)
+            {
+                team.Update(frame);
+            }
         }
 
         public void ClearResult()

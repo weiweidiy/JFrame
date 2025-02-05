@@ -44,5 +44,11 @@
         {
             return GetCurArg(3);
         }
+
+        public override void Reset()
+        {
+            base.Reset();
+            delta = 0f;
+        }
     }
 }

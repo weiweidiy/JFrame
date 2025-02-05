@@ -9,12 +9,12 @@ namespace JFrameTest
 
     public class TestActionSM
     {
-        ActionSM sm;
+        CombatActionSM sm;
 
         [SetUp]
         public void SetUp()
         {
-            sm = new ActionSM();
+            sm = new CombatActionSM();
             sm.Initialize(Substitute.For<CombatAction>());
         }
 

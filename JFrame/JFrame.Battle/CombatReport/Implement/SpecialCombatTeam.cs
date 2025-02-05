@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class SpecialCombatTeam : CommonCombatTeam
     {
-        public override List<ICombatUnit> GetUnits()
+        public override List<CombatUnit> GetUnits()
         {
             return base.GetUnits();
         }

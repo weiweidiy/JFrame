@@ -5,17 +5,17 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 根據距離觸發
+    /// 根據距離觸發 参数：0 攻击距离 1 查找数量
     /// </summary>
-    public abstract class TriggerRange : BaseTrigger
+    public abstract class TriggerRange : CombatBaseTrigger
     {
         /// <summary>
-        /// 獲取距離最近的n個單位()
+        /// 獲取距離最近的n個單位(存活的)
         /// </summary>
         /// <returns></returns>
-        protected List<ICombatUnit> GetOppoUnitInRange(CombatUnit sourceUnit, int count)
+        protected List<CombatUnit> GetOppoUnitInRange(CombatUnit sourceUnit, int count)
         {
-            var reslut = new List<ICombatUnit>();
+            var reslut = new List<CombatUnit>();
             var oppoTeamId = context.CombatManager.GetOppoTeamId(sourceUnit);
             //獲取所有攻擊範圍内的單位
             var oppoUnits = context.CombatManager.GetUnits(sourceUnit, oppoTeamId, GetAtkRange());
@@ -37,7 +37,7 @@ namespace JFrame
             return reslut;
         }
 
-        protected abstract void SortList(ICombatUnit[] arr, float myXPosition);
+        protected abstract void SortList(CombatUnit[] arr, float myXPosition);
 
         /// <summary>
         /// 獲取攻擊距離              
@@ -46,9 +46,6 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         protected float GetAtkRange()
         {
-            if (curArgs.Length < 1)
-                throw new Exception(GetType().ToString() + " curArgs 數量小於1個");
-
             return GetCurArg(0);
         }
 
@@ -59,21 +56,17 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         protected int GetFindAmount()
         {
-            if (curArgs.Length < 2)
-                throw new Exception(GetType().ToString() + " curArgs 數量小於2個");
-
             return (int)GetCurArg(1);
         }
 
 
         public override void Update(BattleFrame frame)
         {
-            var targets = GetOppoUnitInRange(extraData.SourceUnit as CombatUnit, GetFindAmount());
+            var targets = GetOppoUnitInRange(_extraData.SourceUnit as CombatUnit, GetFindAmount());
 
             if (targets != null && targets.Count > 0)
             {
-                extraData.Targets = targets;
-                extraData.Action = Owner;
+                _extraData.Targets = targets;
                 SetOn(true);
             }
         }

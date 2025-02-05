@@ -1,32 +1,60 @@
-﻿using System;
+﻿using JFrame.BattleReportSystem;
+using System;
 using System.Collections.Generic;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IExtraDataClaimable
     {
-        public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
-        public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
+        //public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
+        //public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
+        //public event Action<ICombatUnit, ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
+        //public event Action<CombatExtraData> onDamaging;
+        //public event Action<CombatExtraData> onDamaged;
+        //public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onHealed;
+        //public event Action<CombatExtraData> onDead;
+        //public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onRebord;
+        //public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
+        //public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
+        //public event Action<ICombatUnit, int, ExecuteInfo> onBufferAdding;
+        //public event Action<ICombatUnit, ICombatBuffer> onBufferAdded;
+        //public event Action<ICombatUnit, ICombatBuffer> onBufferRemoved;
+        //public event Action<ICombatUnit, ICombatBuffer> onBufferCast;
+        //public event Action<ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
+        public event Action<CombatExtraData> onActionCast;
+        public event Action<CombatExtraData> onActionStartCD;
+        public event Action<CombatExtraData> onHittingTarget;
         public event Action<CombatExtraData> onDamaging;
         public event Action<CombatExtraData> onDamaged;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onHealed;
+        public event Action<CombatExtraData> onHealed;
         public event Action<CombatExtraData> onDead;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onRebord;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onMaxHpUp;
-        public event Action<ICombatUnit, ICombatAction, ICombatUnit, int> onDebuffAnti;
-        public event Action<ICombatUnit, int, ExecuteInfo> onBufferAdding;
-        public event Action<ICombatUnit, ICombatBuffer> onBufferAdded;
-        public event Action<ICombatUnit, ICombatBuffer> onBufferRemoved;
-        public event Action<ICombatUnit, ICombatBuffer> onBufferCast;
-        public event Action<ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
+        public event Action<CombatExtraData> onRebord;
+        public event Action<CombatExtraData> onMaxHpUp;
+        public event Action<CombatExtraData> onDebuffAnti;
+        public event Action<CombatExtraData> onBufferAdding;
+        public event Action<CombatExtraData> onBufferAdded;
+        public event Action<CombatExtraData> onBufferRemoved;
+        public event Action<CombatExtraData> onBufferCast;
+        public event Action<CombatExtraData> onBufferUpdate;
 
         /// <summary>
         /// 唯一id
         /// </summary>
         public string Uid { get; private set; }
+        public CombatExtraData ExtraData
+        {
+            get
+            {           
+                return new CombatExtraData() {
+                    SourceUnit = this,   
+                    Value = (long)GetAttributeCurValue(PVPAttribute.ATK) ,
+                };
+            }
+            set { this.ExtraData = value; }
+        }
+
 
         /// <summary>
         /// buffer管理器
@@ -63,6 +91,8 @@ namespace JFrame
         /// </summary>
         bool isMoving;
 
+
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -70,10 +100,10 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, List<IUnique> attributes)
+        public void Initialize(string uid, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, List<IUnique> attributes)
         {
             this.context = context;
-            Uid = Guid.NewGuid().ToString();
+            Uid = uid;
             attributeManger = new CombatAttributeManger();
             actionManager = new CombatActionManager();
             bufferManager = new CombatBufferManager();
@@ -84,11 +114,32 @@ namespace JFrame
             if (actions != null)
             {
                 actionManager.AddRange(actions);
-                actionManager.Initialize();
+                actionManager.Initialize(this);
             }
-                
+
             if (buffers != null)
                 bufferManager.AddRange(buffers);
+
+            actionManager.onTriggerOn += ActionManager_onTriggerOn;
+            actionManager.onStartExecuting += ActionManager_onStartExecuting;
+            actionManager.onStartCD += ActionManager_onStartCD;
+
+            StartMove();
+        }
+
+        private void ActionManager_onTriggerOn(CombatExtraData obj)
+        {
+            StopMove();
+        }
+
+        private void ActionManager_onStartCD(CombatExtraData extraData)
+        {
+            onActionStartCD?.Invoke(extraData);
+        }
+
+        private void ActionManager_onStartExecuting(CombatExtraData extraData)
+        {
+            onActionCast?.Invoke(extraData);
         }
 
         public void Release()
@@ -100,14 +151,73 @@ namespace JFrame
             isMoving = false;
         }
 
-        public void Update(BattleFrame frame)
+        public void UpdatePosition(BattleFrame frame)
         {
-            actionManager.Update(frame);
-            bufferManager.Update(frame);
-            if (IsMoving())
+            if (IsMoving())   //只是自己移动了，其他单位还没有移动
             {
                 position += velocity;
             }
+        }
+
+        public void Update(BattleFrame frame)
+        {
+            actionManager.Update(frame); 
+            bufferManager.Update(frame);
+
+        }
+
+        public object GetAttributeCurValue(PVPAttribute attribute)
+        {
+            var attr = attributeManger.Get(attribute.ToString());
+            if (attr != null)
+            {
+                if (attr is CombatAttributeLong)
+                {
+                    var fattr = attr as CombatAttributeLong;
+                    return fattr.CurValue;
+                }
+
+                if (attr is CombatAttributeDouble)
+                {
+                    var fattr = attr as CombatAttributeDouble;
+                    return fattr.CurValue;
+                }
+
+                if (attr is CombatAttributeInt)
+                {
+                    var fattr = attr as CombatAttributeInt;
+                    return fattr.CurValue;
+                }
+
+            }
+            throw new Exception("沒有找到屬性" + attribute.ToString());
+        }
+
+        public object GetAttributeMaxValue(PVPAttribute attribute)
+        {
+            var attr = attributeManger.Get(attribute.ToString());
+            if (attr != null)
+            {
+                if (attr is CombatAttributeLong)
+                {
+                    var fattr = attr as CombatAttributeLong;
+                    return fattr.MaxValue;
+                }
+
+                if (attr is CombatAttributeDouble)
+                {
+                    var fattr = attr as CombatAttributeDouble;
+                    return fattr.MaxValue;
+                }
+
+                if (attr is CombatAttributeInt)
+                {
+                    var fattr = attr as CombatAttributeInt;
+                    return fattr.MaxValue;
+                }
+
+            }
+            throw new Exception("沒有找到屬性" + attribute.ToString());
         }
 
         /// <summary>
@@ -115,7 +225,7 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public bool IsAlive()
+        public virtual bool IsAlive()
         {
             var hpAttr = attributeManger.Get(PVPAttribute.HP.ToString());
             if (hpAttr != null)
@@ -142,11 +252,14 @@ namespace JFrame
             throw new Exception("沒有找到Hp屬性");
         }
 
+
+
+
         public void OnDamage(CombatExtraData extraData)
         {
             //to do: 添加一个预伤害事件，可以修改值
-           // onDamaging?.Invoke(hitter, action, this, damage);
-           onDamaging?.Invoke(extraData);
+            // onDamaging?.Invoke(hitter, action, this, damage);
+            onDamaging?.Invoke(extraData);
 
             var attrManager = GetAttributeManager();
             var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
@@ -267,6 +380,8 @@ namespace JFrame
         {
             return attributeManger;
         }
+
+
     }
 
 

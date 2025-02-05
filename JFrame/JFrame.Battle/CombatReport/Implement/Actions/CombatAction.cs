@@ -3,30 +3,57 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique
+
+    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IExtraDataClaimable
     {
         public event Action<CombatExtraData> onTriggerOn;
-        public event Action<ICombatAction, List<ICombatUnit>, float> onStartCast;
-        public event Action<ICombatAction, float> onStartCD;
-        public event Action<ICombatAction, ICombatUnit, ExecuteInfo> onHittingTarget;
-        public event Action<ICombatAction, ICombatUnit, ExecuteInfo, ICombatUnit> onHittedComplete;
+        public event Action<CombatExtraData> onStartExecuting;
+        public event Action<CombatExtraData> onStartCD;
+        public event Action<CombatExtraData> onHittingTargets; //动作命中之前（单次所有目标）
+        public event Action<CombatExtraData> onTargetsHittedComplete; //动作命中之后（单个目标）
+        public event Action<CombatExtraData> onHittingTarget;
+        public event Action<CombatExtraData> onTargetHittedComplete;
 
         public void NotifyTriggerOn()
         {
             onTriggerOn?.Invoke(ExtraData);
         }
 
-        protected void NotifyStartCast(List<ICombatUnit> targets, float duration)
+        public void NotifyStartExecuting()
         {
-            throw new NotImplementedException();
+            onStartExecuting?.Invoke(ExtraData);
         }
 
-        protected void NotifyStartCD(float cd)
+        public void NotifyStartCD()
         {
-            throw new NotImplementedException();
+            onStartCD?.Invoke(ExtraData);
+        }
+
+        public void NotifyHittingTargets(CombatExtraData extraData)
+        {
+            //ExtraData = extraData;
+            onHittingTargets?.Invoke(extraData);
+        }
+
+        public void NotifyHittedTargets(CombatExtraData extraData)
+        {
+            //ExtraData = extraData;
+            onTargetsHittedComplete?.Invoke(extraData);
+        }
+
+        public void NotifyHittingTarget(CombatExtraData extraData)
+        {
+            onHittingTarget?.Invoke(extraData);
+        }
+
+        public void NotifyHittedTarget(CombatExtraData extraData)
+        {
+            onTargetHittedComplete?.Invoke(extraData);
         }
 
         public string Uid { get; private set; }
+
+        public int Id { get; private set; }
 
         public ActionType Type { get; protected set; }
 
@@ -35,22 +62,34 @@ namespace JFrame
         /// <summary>
         /// 透傳對象
         /// </summary>
-        public CombatExtraData ExtraData { get; private set; }
+        CombatExtraData _extraData;
+        public CombatExtraData ExtraData
+        {
+            get => _extraData; 
+            set
+            {
+                _extraData = value;
+                _extraData.Action = this;
 
-        public int Id { get; private set; }
+                foreach(var trigger in conditionTriggers)
+                {
+                    trigger.ExtraData = _extraData;
+                }
+            }
+        }
 
         /// <summary>
         /// 觸發器列表
         /// </summary>
-        List<BaseTrigger> conditionTriggers;
+        List<CombatBaseTrigger> conditionTriggers;
 
         /// <summary>
         /// 延遲出發器（從觸發到執行中間的延遲，有時間延遲類，還有距離/速度類等）
         /// </summary>
-        BaseTrigger delayTrigger;
-        List<BaseExecutor> executors;
-        List<ICombatTrigger> cdTriggers;
-        ActionSM sm;
+        CombatBaseTrigger delayTrigger;
+        List<CombatBaseExecutor> executors;
+        List<CombatBaseTrigger> cdTriggers;
+        CombatActionSM sm;
 
         /// <summary>
         /// 初始化actions
@@ -59,9 +98,9 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(int id, ActionType type, ActionMode mode, List<BaseTrigger> conditionTriggers, BaseTrigger delayTrigger, List<BaseExecutor> executors, List<ICombatTrigger> cdTriggers, ActionSM sm)
+        public void Initialize(int id, string uid, ActionType type, ActionMode mode, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
         {
-            Uid = Guid.NewGuid().ToString();
+            Uid = uid;
             this.conditionTriggers = conditionTriggers;
             this.delayTrigger = delayTrigger;
             this.executors = executors;
@@ -70,13 +109,45 @@ namespace JFrame
             Id = id;
             this.Type = type;
             this.Mode = mode;
+
+            //监听执行器命中等消息
+            foreach (var executor in executors)
+            {
+                executor.onHittingTargets += Executor_onHittingTargets; ;
+                executor.onTargetsHittedComplete += Executor_onTargetsHittedComplete;
+                executor.onHittingTarget += Executor_onHittingTarget;
+                executor.onTargetHittedComplete += Executor_onTargetHittedComplete;
+            }
         }
+
+        private void Executor_onTargetHittedComplete(CombatExtraData extraData)
+        {
+            NotifyHittedTarget(extraData);
+        }
+
+        private void Executor_onHittingTarget(CombatExtraData extraData)
+        {
+            NotifyHittingTarget(extraData);
+        }
+
+        private void Executor_onHittingTargets(CombatExtraData extraData)
+        {
+            NotifyHittingTargets(extraData);
+        }
+
+        private void Executor_onTargetsHittedComplete(CombatExtraData extraData)
+        {
+            NotifyHittedTargets(extraData);
+        }
+
+
 
         public void Update(BattleFrame frame)
         {
             sm.Update(frame);
         }
 
+        #region 给状态机调用的接口
         /// <summary>
         /// 更新條件觸發器
         /// </summary>
@@ -90,18 +161,18 @@ namespace JFrame
         }
 
         /// <summary>
-        /// 是否已經觸發
+        /// 是否已經觸發（只要有1个触发器触发了就触发）
         /// </summary>
         /// <returns></returns>
         public bool IsConditionTriggerOn()
         {
             foreach (var trigger in conditionTriggers)
             {
-                if(trigger.IsOn())
+                if (trigger.IsOn())
                 {
-                    ExtraData = trigger.CombatExtraData;
+                    ExtraData = trigger.ExtraData;
                     return true;
-                }                
+                }
             }
             return false;
         }
@@ -114,7 +185,7 @@ namespace JFrame
             if (conditionTriggers == null)
                 return;
 
-            foreach(var trigger in conditionTriggers)
+            foreach (var trigger in conditionTriggers)
             {
                 trigger.Reset();
             }
@@ -136,18 +207,80 @@ namespace JFrame
             delayTrigger.Reset();
         }
 
+        public void DoExecutors()
+        {
+            if (executors == null)
+                return;
+            foreach (var executor in executors)
+            {
+                executor.Execute(ExtraData);
+            }
+        }
 
         public void UpdateExecutors(BattleFrame frame)
         {
-            foreach(var executor in executors)
+            if (executors == null)
+                return;
+            foreach (var executor in executors)
             {
                 executor.Update(frame);
             }
         }
 
+        public void ResetExecutors()
+        {
+            if (executors == null)
+                return;
+
+            foreach (var executor in executors)
+            {
+                executor.Reset();
+            }
+        }
+
+        public void UpdateCdTriggers(BattleFrame frame)
+        {
+            foreach (var trigger in cdTriggers)
+            {
+                trigger.Update(frame);
+            }
+        }
+
+        /// <summary>
+        /// 是否已經觸發 (必须所有触发器都触发才算触发）
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCdTriggerOn()
+        {
+            bool isCdTriggerOn = true;
+            foreach (var trigger in cdTriggers)
+            {
+                if (!trigger.IsOn())
+                {
+                    isCdTriggerOn = false;
+                }
+            }
+            return isCdTriggerOn;
+        }
+
+        public void ResetCdTriggers()
+        {
+            if (cdTriggers == null)
+                return;
+
+            foreach (var trigger in cdTriggers)
+            {
+                trigger.Reset();
+            }
+        }
+        #endregion
 
         public void SwitchToDisable()
         {
+            var curState = sm.GetCurState();
+            if (curState.Name == nameof(ActionDisableState))
+                return;
+
             sm.SwitchToDisable();
         }
 
@@ -158,14 +291,20 @@ namespace JFrame
 
         public float SwitchToExecuting()
         {
+            var duration = GetExecutingDuration();
+            ExtraData.CastDuration = duration;
+
             sm.SwitchToExecuting();
-            return GetExecutingDuration();
+
+            return duration;
         }
 
         public float SwitchToCd()
         {
+            var duration = GetCdTriggerDuration();
+            ExtraData.CdDuration = duration;
             sm.SwitchToCding();
-            return GetCdTriggerDuration();
+            return duration;
         }
 
         /// <summary>
@@ -173,13 +312,19 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        private float GetExecutingDuration()
+        public float GetExecutingDuration()
         {
-            return 0;
-            //foreach(var executor in executors)
-            //{
-            //    if(executor is executor)
-            //}
+            if (executors == null)
+                return 0;
+
+            float duration = 0f;
+            foreach (var executor in executors)
+            {
+                var d = executor.GetDuration();
+                if (d > duration)
+                    duration = d;
+            }
+            return duration;
         }
 
         /// <summary>
@@ -200,213 +345,7 @@ namespace JFrame
             return 0f;
         }
 
-        //public bool CanCast()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public float SwitchToExecuting()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float SwitchToCd()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public List<ICombatUnit> FindTargets(object[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float GetCastDuration()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetCdArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IBattleTrigger GetCDTrigger()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetConditionTriggerArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public string GetCurState()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetExecutorArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetFinderArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Interrupt()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public bool IsCDComplete()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public bool IsExecuting()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void NotifyCanCast()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void NotifyStartCast(List<ICombatUnit> targets, float duration)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void NotifyStartCD(float cd)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void OnEnable()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void OnStart()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void OnStop()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ReadyToExecute(ICombatUnit caster, ICombatAction action, List<ICombatUnit> targets)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ResetCdArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ResetConditionTriggerArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ResetExecutorArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ResetFinderArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetCdArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetConditionTriggerArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetEnable(bool enable)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetExecutorArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetFinderArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SwitchToDisable()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SwitchToTrigging()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Update(BattleFrame frame)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void UpdateConditionTriggers(BattleFrame frame)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void UpdateExecutors(BattleFrame frame)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void UpdateCdTriggers(BattleFrame frame)
-        //{ throw new NotImplementedException(); }
-
-        //public void SetCurArgs(float[] args)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void SetCurArg(int index, float arg)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float GetCurArg(int index)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetCurArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public float[] GetOriginArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void ResetArgs()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 
 

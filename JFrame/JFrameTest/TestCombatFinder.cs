@@ -26,7 +26,7 @@ namespace JFrameTest
         public void TestCombatActionComponentGetNearestOppoUnit()
         {
             //arrange
-            var component = Substitute.For<BaseFinder>();
+            var component = Substitute.For<CombatBaseFinder>();
 
             var context = Substitute.For<CombatContext>();
             var combatManager = Substitute.For<CombatManager>();
@@ -39,8 +39,8 @@ namespace JFrameTest
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
             combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
-            combatManager.GetOppoTeamId(Arg.Any<ICombatUnit>()).Returns(1);
-            combatManager.GetUnits(Arg.Any<ICombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<ICombatUnit>() { unit1, unit2 });
+            combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
+            combatManager.GetUnits(Arg.Any<CombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
             component.Owner.Returns(acition);
             context.CombatManager.Returns(combatManager);
             component.Initialize(context, new float[] { 4 });//攻擊距離

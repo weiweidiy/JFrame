@@ -220,7 +220,7 @@ namespace JFrameTest
             var casterUID = Guid.NewGuid().ToString();
             var targetUID = Guid.NewGuid().ToString();
             //action
-            var reportUid = reporter.AddReportData(casterUID, ReportType.Action, targetUID, new object[] { 1 });
+            var reportUid = reporter.AddReportData(casterUID, ReportType.ActionCast, targetUID, new object[] { 1 });
             var reportData = reporter.GetReportData(reportUid);
             reporter.AddReportData(casterUID, ReportType.Damage, targetUID, new object[] { 1 });
 

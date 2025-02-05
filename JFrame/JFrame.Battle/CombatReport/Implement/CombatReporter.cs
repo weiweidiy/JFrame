@@ -34,20 +34,39 @@ namespace JFrame
             {
                 foreach (var team in this.teams)
                 {
-                    //team.onActionCast += Team_onActionCast;
-                    //team.onActionStartCD += Team_onActionStartCD;
-                    //team.onDamage += Team_onDamage;
+                    team.onActionCast += Team_onActionCast;
+                    team.onActionStartCD += Team_onActionStartCD;
+                    team.onDamage += Team_onDamage;
                     //team.onHeal += Team_onHeal;
                     //team.onReborn += Team_onReborn;
                     //team.onDebuffAnti += Team_onDebuffAnti;
                     //team.onMaxHpUp += Team_onMaxHpUp;
-                    //team.onDead += Team_onDead;
+                    team.onDead += Team_onDead;
                     //team.onBufferAdded += Team_onBufferAdded;
                     //team.onBufferRemoved += Team_onBufferRemoved;
                     //team.onBufferCast += Team_onBufferCast;
                     //team.onBufferUpdate += Team_onBufferUpdate;
                 }
             }
+        }
+
+
+        /// <summary>
+        /// action释放了
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="data"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Team_onActionCast(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.TargetsUid = data.GetTargetsUid();
+            reportData.CastDuration = data.CastDuration;
+
+            AddReportData(ReportType.ActionCast, reportData);
         }
 
 
@@ -62,10 +81,41 @@ namespace JFrame
         //    AddReportData(caster.Uid, ReportType.Action, targets[0].Uid, new object[] { action.Id, lstUID, duration });
         //}
 
+        private void Team_onActionStartCD(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetsUid = data.GetTargetsUid();
+            reportData.CdDuration = data.CdDuration;
+
+            AddReportData(ReportType.ActionCD, reportData);
+        }
+
+
         //private void Team_onActionStartCD(PVPBattleManager.Team team, ICombatUnit caster, CombatAction action, float cd)
         //{
         //    AddReportData(caster.Uid, ReportType.ActionCD, action.Uid, new object[] { action.Id, cd });
         //}
+
+        private void Team_onDamage(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.Value = data.Value;
+            reportData.TargetHp = (long)data.Target.GetAttributeCurValue(PVPAttribute.HP);
+            reportData.TargetMaxHp = (long)data.Target.GetAttributeMaxValue(PVPAttribute.HP);
+            reportData.IsCri = data.IsCri;
+            reportData.IsBlock = data.IsBlock;
+            AddReportData(ReportType.Damage, reportData);
+        }
+
 
         //private void Team_onDamage(PVPBattleManager.Team team, ICombatUnit caster, CombatAction action, ICombatUnit target, ExecuteInfo value)
         //{
@@ -87,6 +137,21 @@ namespace JFrame
         //{
         //    AddReportData(caster.Uid, ReportType.Reborn, target.Uid, new object[] { value, target.HP, target.MaxHP });
         //}
+
+
+        private void Team_onDead(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            
+            AddReportData(ReportType.Dead, reportData);
+        }
+
+
         //private void Team_onDead(PVPBattleManager.Team team, ICombatUnit caster, CombatAction action, ICombatUnit target)
         //{
         //    AddReportData(caster.Uid, ReportType.Dead, target.Uid, new object[] { 0 });
