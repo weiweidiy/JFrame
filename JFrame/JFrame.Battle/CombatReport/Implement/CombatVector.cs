@@ -1,5 +1,8 @@
-﻿namespace JFrame
+﻿using System;
+
+namespace JFrame
 {
+    [Serializable]
     public class CombatVector
     {
         public float x;

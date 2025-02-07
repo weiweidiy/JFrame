@@ -38,21 +38,20 @@ namespace JFrame
         public event Action<CombatExtraData> onBufferRemoved;
         public event Action<CombatExtraData> onBufferCast;
         public event Action<CombatExtraData> onBufferUpdate;
+        public event Action<CombatExtraData> onStartMove;
+        public event Action<CombatExtraData> onSpeedChanged;
+        public event Action<CombatExtraData> onEndMove;
 
         /// <summary>
         /// 唯一id
         /// </summary>
         public string Uid { get; private set; }
+
+        CombatExtraData _extraData ;
         public CombatExtraData ExtraData
         {
-            get
-            {           
-                return new CombatExtraData() {
-                    SourceUnit = this,   
-                    Value = (long)GetAttributeCurValue(PVPAttribute.ATK) ,
-                };
-            }
-            set { this.ExtraData = value; }
+            get => _extraData;
+            set { _extraData = value; }
         }
 
 
@@ -104,13 +103,13 @@ namespace JFrame
         {
             this.context = context;
             Uid = uid;
-            //attributeManger = new CombatAttributeManger();
             actionManager = new CombatActionManager();
             bufferManager = new CombatBufferManager();
-
             this.attributeManger = attributeManager;
-            //if (attributes != null)
-            //    attributeManger.AddRange(attributes);
+
+            _extraData = new CombatExtraData();
+            _extraData.SourceUnit = this;
+            _extraData.Value = (long)GetAttributeCurValue(PVPAttribute.ATK);
 
             if (actions != null)
             {
@@ -125,8 +124,16 @@ namespace JFrame
             actionManager.onStartExecuting += ActionManager_onStartExecuting;
             actionManager.onStartCD += ActionManager_onStartCD;
 
+            //不能在初始化里跑，team收不到
+            //StartMove();
+        }
+
+        public void Start()
+        {
             StartMove();
         }
+
+        public void Stop() { StopMove(); }  
 
         private void ActionManager_onTriggerOn(CombatExtraData obj)
         {
@@ -167,8 +174,17 @@ namespace JFrame
 
         }
 
+        /// <summary>
+        /// 获取当前属性值
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public object GetAttributeCurValue(PVPAttribute attribute)
         {
+            if (attributeManger == null)
+                throw new Exception("combat unit attributemanager = null ");
+
             var attr = attributeManger.Get(attribute.ToString());
             if (attr != null)
             {
@@ -343,7 +359,7 @@ namespace JFrame
         }
 
         /// <summary>
-        /// 設置速度
+        /// 設置速度，目前只在初始化时候设置
         /// </summary>
         /// <param name="speed"></param>
         /// <exception cref="NotImplementedException"></exception>
@@ -352,14 +368,23 @@ namespace JFrame
             velocity = speed;
         }
 
+        /// <summary>
+        /// 开始移动
+        /// </summary>
         public void StartMove()
         {
             isMoving = true;
+            _extraData.Velocity = GetSpeed();
+            onStartMove?.Invoke(_extraData);
         }
 
+        /// <summary>
+        /// 停止移动
+        /// </summary>
         public void StopMove()
         {
             isMoving = false;
+            onEndMove?.Invoke(_extraData);
         }
 
         public bool IsMoving()

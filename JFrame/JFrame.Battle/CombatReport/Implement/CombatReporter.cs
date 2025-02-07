@@ -46,9 +46,14 @@ namespace JFrame
                     //team.onBufferRemoved += Team_onBufferRemoved;
                     //team.onBufferCast += Team_onBufferCast;
                     //team.onBufferUpdate += Team_onBufferUpdate;
+                    team.onUnitStartMove += Team_onUnitStartMove;
+                    team.onUnitSpeedChanged += Team_onUnitSpeedChanged;
+                    team.onUnitEndMove += Team_onUnitEndMove;
                 }
             }
         }
+
+
 
 
         /// <summary>
@@ -181,6 +186,37 @@ namespace JFrame
         //{
         //    AddReportData(target.Uid, ReportType.DebuffAnti, target.Uid, new object[] { debuffId });
         //}
+
+
+
+        private void Team_onUnitStartMove(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.Velocity = data.Velocity;
+
+            AddReportData(ReportType.StartMove, reportData);
+        }
+        private void Team_onUnitSpeedChanged(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.Velocity = data.Velocity;
+
+            AddReportData(ReportType.SpeedChanged, reportData);
+        }
+        private void Team_onUnitEndMove(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.Velocity = data.Velocity;
+
+            AddReportData(ReportType.EndMove, reportData);
+        }
+
 
 
         public List<ICombatReportData> GetAllReportData()

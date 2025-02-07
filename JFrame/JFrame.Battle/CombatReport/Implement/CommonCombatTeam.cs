@@ -33,6 +33,9 @@ namespace JFrame
         public event Action<int, CombatExtraData> onBufferRemoved;
         public event Action<int, CombatExtraData> onBufferCast;
         public event Action<int, CombatExtraData> onBufferUpdate;
+        public event Action<int, CombatExtraData> onUnitStartMove;
+        public event Action<int, CombatExtraData> onUnitSpeedChanged;
+        public event Action<int, CombatExtraData> onUnitEndMove;
 
 
         int team;
@@ -106,29 +109,58 @@ namespace JFrame
 
             //监听单位事件
             var units = GetUnits();
-            if (units != null)
-            {
-                foreach (var unit in units)
-                {
+            if (units == null)
+                return;
 
-                    //(unit as CombatUnit).Initialize(context);
-                    //unit.onActionTriggerOn += Unit_onActionTriggerOn;
-                    unit.onActionCast += Unit_onActionCast;
-                    unit.onActionStartCD += Unit_onActionStartCD;
-                    //unit.onActionHitTarget += Unit_onActionDone;
-                    unit.onDamaged += Unit_onDamage;
-                    unit.onHealed += Unit_onHeal;
-                    unit.onRebord += Unit_onRebord;
-                    unit.onDebuffAnti += Unit_onDebuffAnti;
-                    unit.onMaxHpUp += Unit_onMaxHpUp;
-                    unit.onDead += Unit_onDead;
-                    unit.onBufferAdded += Unit_onBufferAdded;
-                    unit.onBufferRemoved += Unit_onBufferRemoved;
-                    unit.onBufferCast += Unit_onBufferCast;
-                    unit.onBufferUpdate += Unit_onBufferUpdate;
-                }
+            foreach (var unit in units)
+            {
+
+                //(unit as CombatUnit).Initialize(context);
+                //unit.onActionTriggerOn += Unit_onActionTriggerOn;
+                unit.onActionCast += Unit_onActionCast;
+                unit.onActionStartCD += Unit_onActionStartCD;
+                //unit.onActionHitTarget += Unit_onActionDone;
+                unit.onDamaged += Unit_onDamage;
+                unit.onHealed += Unit_onHeal;
+                unit.onRebord += Unit_onRebord;
+                unit.onDebuffAnti += Unit_onDebuffAnti;
+                unit.onMaxHpUp += Unit_onMaxHpUp;
+                unit.onDead += Unit_onDead;
+                unit.onBufferAdded += Unit_onBufferAdded;
+                unit.onBufferRemoved += Unit_onBufferRemoved;
+                unit.onBufferCast += Unit_onBufferCast;
+                unit.onBufferUpdate += Unit_onBufferUpdate;
+                unit.onStartMove += Unit_onStartMove;
+                unit.onSpeedChanged += Unit_onSpeedChanged;
+                unit.onEndMove += Unit_onEndMove;
             }
         }
+
+
+        public void Start()
+        {
+            var units = GetUnits();
+            if (units == null)
+                return;
+
+            foreach(var unit in units)
+            {
+                unit.Start();
+            }
+        }
+
+        public void Stop()
+        {
+            var units = GetUnits();
+            if (units == null)
+                return;
+
+            foreach (var unit in units)
+            {
+                unit.Stop();
+            }
+        }
+
 
         protected virtual void CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
         {
@@ -214,7 +246,18 @@ namespace JFrame
             onDebuffAnti?.Invoke(team, extraData);
         }
 
-
+        private void Unit_onStartMove(CombatExtraData extraData)
+        {
+            onUnitStartMove?.Invoke(team, extraData);
+        }
+        private void Unit_onSpeedChanged(CombatExtraData extraData)
+        {
+            onUnitSpeedChanged?.Invoke(team, extraData);
+        }
+        private void Unit_onEndMove(CombatExtraData extraData)
+        {
+            onUnitEndMove?.Invoke(team, extraData);
+        }
         #endregion
     }
 }

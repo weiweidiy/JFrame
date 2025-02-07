@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System;
+
+namespace JFrame
 {
     public interface ICombatMovable
     {

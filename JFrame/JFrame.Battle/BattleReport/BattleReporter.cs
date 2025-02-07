@@ -20,7 +20,9 @@ namespace JFrame
         UpdateBuffer,//更新
         DebuffAnti, //状态抵抗
         ActionCD, //动作CD
-
+        StartMove, //开始移动
+        SpeedChanged, //速度改变
+        EndMove, //停止移动
     }
 
     /// <summary>

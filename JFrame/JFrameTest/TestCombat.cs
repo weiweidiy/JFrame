@@ -90,18 +90,72 @@ namespace JFrameTest
 
             //act
             var report = combatManager.GetResult();
+            var reporter = combatManager.Reporter;
+            var allReportData = reporter.GetAllReportData();
+            var hasStartMoveReport = 0;
+            var hasEndMoveReport = 0;
+            var usbUnitAct = false;
+            foreach (var data in allReportData)
+            {
+                if (data.ReportType == ReportType.StartMove)
+                {
+                    hasStartMoveReport++;
+                }
+
+                if (data.ReportType == ReportType.EndMove)
+                {
+                    hasEndMoveReport++;
+                }
+
+                if(data.ReportType == ReportType.ActionCast && data.ReportData.SourceUnitUid == "11")
+                {
+                    usbUnitAct = true;
+                }
+            }
 
             //expect
-            var reporter = combatManager.Reporter;
             Assert.AreEqual(2f, unit1.GetPosition().x); //攻击距离1，所以不走了
             Assert.AreEqual(3f, unit2.GetPosition().x); //攻击距离1，所以不走了
-            //Assert.AreEqual(true, triggerOn);
-            //Assert.AreEqual(true, isOn);
             Assert.AreEqual(0, combatManager.GetUnit("11").GetAttributeCurValue(PVPAttribute.HP));
             Assert.AreEqual(80, combatManager.GetUnit("2").GetAttributeCurValue(PVPAttribute.HP));
             Assert.AreEqual(200, combatManager.GetUnit("3").GetAttributeCurValue(PVPAttribute.HP));
             Assert.AreEqual(0, combatManager.GetUnit("1").GetAttributeCurValue(PVPAttribute.HP));
-            
+            Assert.IsTrue(usbUnitAct);
+        }
+
+        [Test]
+        public void TestCombatUnitMoveReport()
+        {
+            //arrange
+            team1.Add(CreateUnitInfo("1", 100, 10, 1f, new CombatVector(), new CombatVector(), CreateActions()));
+            team1.Add(CreateUnitInfo("11", 1000000, 10, 1f, new CombatVector(), new CombatVector(), CreateActions()));
+
+            team2.Add(CreateUnitInfo("2", 100, 50, 1f, new CombatVector() { x = 3 }, new CombatVector() { x = -1f }, CreateActions(2f)));
+            team2.Add(CreateUnitInfo("3", 200, 50, 1f, new CombatVector() { x = 5 }, new CombatVector() { x = -1f }, CreateActions(3f)));
+            combatManager.Initialize(new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Combine, team1), new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team2), 90);
+
+            //act
+            var report = combatManager.GetResult();
+            var reporter = combatManager.Reporter;
+            var allReportData = reporter.GetAllReportData();
+            var hasStartMoveReport = 0;
+            var hasEndMoveReport = 0;
+            foreach (var data in allReportData)
+            {
+                if (data.ReportType == ReportType.StartMove)
+                {
+                    hasStartMoveReport ++;
+                }
+
+                if (data.ReportType == ReportType.EndMove)
+                {
+                    hasEndMoveReport ++;
+                }
+            }
+
+            //expect
+            Assert.AreEqual(4, hasStartMoveReport);
+            Assert.AreEqual(4, hasEndMoveReport);
         }
 
 

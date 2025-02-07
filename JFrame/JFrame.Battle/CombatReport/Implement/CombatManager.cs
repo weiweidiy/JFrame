@@ -292,10 +292,13 @@ namespace JFrame
 
         public CombatReport GetResult()
         {
-            //如果战斗没有决出胜负，则继续战斗
+            //开始战斗
+            Start();
+
+            //更新战斗 如果战斗没有决出胜负，则继续战斗
             while (!combatJudge.IsOver() && !frame.IsMaxFrame())
             {
-                Update(frame);
+                Update();
 
                 frame.NextFrame();
             }
@@ -304,6 +307,9 @@ namespace JFrame
 
             report.report = Reporter.GetAllReportData();
             report.winner = winner;
+            report.deltaTime = frame.DeltaTime;
+
+            Stop();
             //Debug.Log("战斗结束 " + frame.FrameCount);
             return report;
         }
@@ -331,5 +337,22 @@ namespace JFrame
             throw new System.NotImplementedException();
         }
 
+        public void Update()
+        {
+            Update(frame);
+        }
+
+        public void Start()
+        {
+            foreach(var team in teams.Values)
+            {
+                team.Start();
+            }
+        }
+
+        public void Stop()
+        {
+            
+        }
     }
 }
