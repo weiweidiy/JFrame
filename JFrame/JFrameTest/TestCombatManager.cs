@@ -51,7 +51,9 @@ namespace JFrameTest
         public void TestCombat()
         {
             //arrange
-            combatManager.Initialize(team1, team2, 90);
+            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team1);
+            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team2);
+            combatManager.Initialize(dicTeam1, dicTeam2, 90);
 
             //act
             //combatManager.StartUpdate();
@@ -68,7 +70,9 @@ namespace JFrameTest
             unitInfos.Add(new CombatUnitInfo());
 
             //act
-            combatManager.Initialize(unitInfos, new List<CombatUnitInfo>(), 90);
+            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, unitInfos);
+            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
+            combatManager.Initialize(dicTeam1, dicTeam2, 90);
 
             //expect
             Assert.AreEqual(1, combatManager.GetTeams().Count);
@@ -84,7 +88,9 @@ namespace JFrameTest
             team2Info.Add(new CombatUnitInfo());
 
             //act
-            combatManager.Initialize(team1Info, team2Info, 90);
+            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team1Info);
+            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team2Info);
+            combatManager.Initialize(dicTeam1, dicTeam2, 90);
 
             //expect
             Assert.AreEqual(1, combatManager.GetUnitCount(0));
@@ -109,7 +115,9 @@ namespace JFrameTest
             lstCombat.Add(unit2);
             var team1 = Substitute.For<CommonCombatTeam>();
             team1.GetUnits().Returns(lstCombat);
-            combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
+            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
+            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
+            combatManager.Initialize(dicTeam1, dicTeam2, 90);
             combatManager.AddTeam(1, team1);
 
             //act

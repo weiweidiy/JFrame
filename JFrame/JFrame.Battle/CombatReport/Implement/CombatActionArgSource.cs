@@ -1,0 +1,88 @@
+﻿using System.Collections.Generic;
+
+namespace JFrame
+{
+    public abstract class CombatActionArgSource
+    {
+        /// <summary>
+        /// 获取action类型：0：普通，1：技能
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public abstract ActionType GetActionType();
+
+        /// <summary>
+        /// 获取action模式 0：主动 1：被动
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public abstract ActionMode GetActionMode();
+
+        /// <summary>
+        /// 获取所有条件触发器id列表
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public abstract List<int> GetConditionTriggersId();
+
+        /// <summary>
+        /// 获取参数列表
+        /// </summary>
+        /// <param name="aciontId"></param>
+        /// <param name="triggerIndex"></param>
+        /// <returns></returns>
+        public abstract float[] GetConditionTriggersArgs(int triggerIndex);
+
+        /// <summary>
+        /// 延迟生效触发器
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public abstract int GetDelayTriggerId();
+
+        /// <summary>
+        /// 获取延迟触发器参数列表
+        /// </summary>
+        /// <returns></returns>
+        public abstract float[] GetDelayTriggerArgs();
+
+        /// <summary>
+        /// 获取查找器id
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<int> GetFindersId();
+
+        /// <summary>
+        /// 获取查找器参数
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public abstract float[] GetFindersArgs(int index);
+
+        /// <summary>
+        /// 获取执行器id列表
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<int> GetExecutorsId();
+
+        /// <summary>
+        /// 获取执行器参数列表
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public abstract float[] GetExecutorsArgs(int index);
+
+        /// <summary>
+        /// 获取cd触发器id列表
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<int> GetCdTriggersId();
+
+        /// <summary>
+        /// 获取cd触发器参数列表
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public abstract float[] GetCdTriggersArgs(int index);
+    }
+}

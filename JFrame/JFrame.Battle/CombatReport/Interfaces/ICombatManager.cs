@@ -83,18 +83,19 @@ namespace JFrame
         /// <returns></returns>
         TUnit GetUnit(string uid);
         /// <summary>
-        /// 獲取指定隊伍所有單位
+        /// 獲取指定隊伍所有單位（包括主目标和）
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        List<TUnit> GetUnits(int teamId);
+        List<TUnit> GetUnits(int teamId, bool mainTarget);
 
         /// <summary>
-        /// 指定距離的單位
+        /// 指定距離的單位(可能只找主目标)
         /// </summary>
         /// <param name="teamId"></param>
         /// <param name="range"></param>
+        /// /// <param name="mainTarget"> true: 只找主目标，false: 所有units里找 </param>
         /// <returns></returns>
-        List<TUnit> GetUnits(TUnit unit, int teamId, float range, bool alive);
+        List<TUnit> GetUnits(TUnit unit, int teamId, float range, bool alive, bool mainTarget);
     }
 }

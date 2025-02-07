@@ -48,7 +48,7 @@ namespace JFrame
         void AddUnit(TUnit unit);
         void RemoveUnit(TUnit unit);
 
-        List<TUnit> GetUnits();
+        List<TUnit> GetUnits(bool mainTarget);
 
         int GetUnitCount();
 

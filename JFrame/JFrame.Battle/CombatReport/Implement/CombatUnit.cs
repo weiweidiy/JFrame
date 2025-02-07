@@ -100,16 +100,17 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(string uid, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, List<IUnique> attributes)
+        public void Initialize(string uid, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager /*List<IUnique> attributes*/)
         {
             this.context = context;
             Uid = uid;
-            attributeManger = new CombatAttributeManger();
+            //attributeManger = new CombatAttributeManger();
             actionManager = new CombatActionManager();
             bufferManager = new CombatBufferManager();
 
-            if (attributes != null)
-                attributeManger.AddRange(attributes);
+            this.attributeManger = attributeManager;
+            //if (attributes != null)
+            //    attributeManger.AddRange(attributes);
 
             if (actions != null)
             {

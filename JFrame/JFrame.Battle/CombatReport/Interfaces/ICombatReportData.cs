@@ -1,6 +1,8 @@
-﻿namespace JFrame
+﻿using System;
+
+namespace JFrame
 {
-    public interface ICombatReportData
+    public interface ICombatReportData : ICloneable
     {
         string UID { get; }
         int Frame { get; }

@@ -18,7 +18,7 @@ namespace JFrame
             var reslut = new List<CombatUnit>();
             var oppoTeamId = context.CombatManager.GetOppoTeamId(sourceUnit);
             //獲取所有攻擊範圍内的單位
-            var oppoUnits = context.CombatManager.GetUnits(sourceUnit, oppoTeamId, GetAtkRange());
+            var oppoUnits = context.CombatManager.GetUnits(sourceUnit, oppoTeamId, GetAtkRange(), true, true);
           
             //獲取距離最近的
             var myX = sourceUnit.GetPosition().x;

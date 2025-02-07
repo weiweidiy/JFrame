@@ -27,9 +27,11 @@ namespace JFrameTest
             var unit2 = Substitute.For<CombatUnit>();
             unit1.GetPosition().Returns(new CombatVector() { x = 1 });
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
-            combatManager.Initialize(new List<CombatUnitInfo>(), new List<CombatUnitInfo>(), 90);
+            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
+            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
+            combatManager.Initialize(dicTeam1, dicTeam2, 90);
             combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
-            combatManager.GetUnits(Arg.Any<CombatUnit   >(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
+            combatManager.GetUnits(Arg.Any<CombatUnit   >(), Arg.Any<int>(), Arg.Any<float>(), Arg.Any<bool>(), Arg.Any<bool>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
             //component.Owner.Returns(acition);
             context.CombatManager.Returns(combatManager);
         }

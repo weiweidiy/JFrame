@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static JFrame.PVPBattleManager;
 
 namespace JFrame
 {
@@ -39,9 +38,9 @@ namespace JFrame
         public int id;
         public Dictionary<int, ActionInfo> actionsData;
         public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData;
-        public int hp;
-        public int maxHp;
-        public int atk;
+        public long hp;
+        public long maxHp;
+        public long atk;
         public float atkSpeed;
         public float cri; //暴击率 0~1的值 百分比
         public float criDmgRate; //暴击伤害加成百分比
@@ -59,6 +58,12 @@ namespace JFrame
 
     }
 
+    public enum CombatTeamType
+    {
+        Combine, //组合 类似gjj+hero 公用gjj属性
+        Single,  //独立 每个单位独自计算
+    }
+
     public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, CombatUnit>
     {
         Dictionary<int, CommonCombatTeam> teams;
@@ -73,20 +78,28 @@ namespace JFrame
         public CombatReporter Reporter;
 
 
-        public void Initialize(List<CombatUnitInfo> team1Data, List<CombatUnitInfo> team2Data, float timeLimit, CombatUnitInfo god = null)
+        public void Initialize(KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam1Data, KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam2Data, float timeLimit, CombatUnitInfo god = null)
         {
             teams = new Dictionary<int, CommonCombatTeam>();
             var context = new CombatContext();
             context.CombatManager = this;
 
+            var team1Type = dicTeam1Data.Key;
+            var team1Data = dicTeam1Data.Value;
+
+            var team2Type = dicTeam2Data.Key;
+            var team2Data = dicTeam2Data.Value;
+
             if (team1Data == null || team2Data == null)
                 throw new ArgumentNullException("teamdata 不能為null");
 
-            CommonCombatTeam team1 = CreateTeam(team1Data, context, new SpecialCombatTeam());
+            CommonCombatTeam team1 = team1Type == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
+            team1.Initialize(context, team1Data);
             if (team1Data.Count > 0)
                 AddTeam(0, team1); //1 = 隊伍id
 
-            CommonCombatTeam team2 = CreateTeam(team2Data, context, new CommonCombatTeam());
+            CommonCombatTeam team2 = team2Type == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
+            team2.Initialize(context, team2Data);
             if (team2Data.Count > 0)
                 AddTeam(1, team2);
 
@@ -96,54 +109,9 @@ namespace JFrame
             Reporter = new CombatReporter(frame, GetTeams());
 
             report = new CombatReport();
-            report.attacker = team1 as SpecialCombatTeam;
-            report.defence = team2;
+            report.attacker = dicTeam1Data;
+            report.defence = dicTeam2Data;
         }
-
-        #region 創建對象
-        /// <summary>
-        /// 創建一個隊伍對象
-        /// </summary>
-        /// <param name="teamData"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        CommonCombatTeam CreateTeam(List<CombatUnitInfo> teamData, CombatContext context, CommonCombatTeam team)
-        {
-            //var team = new CommonCombatTeam();
-            if (teamData != null)
-            {
-                var actionFactory = new CombatActionFactory();
-                var attrFactory = new CombatAttributeFactory();
-                //創建並初始化隊伍
-                foreach (var unitInfo in teamData)
-                {
-                    //創建並初始化戰鬥單位
-                    var unit = new CombatUnit();
-                    unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), CreateBuffers(unitInfo.buffersData), attrFactory.CreateAllAttributes(unitInfo));
-                    unit.SetPosition(unitInfo.position);
-                    unit.SetSpeed(unitInfo.moveSpeed);
-                    team.Add(unit);
-                }
-            }
-            team.Initialize(context);
-
-            return team;
-        }
-
-        /// <summary>
-        /// 創建所有默認帶有的buffers
-        /// </summary>
-        /// <param name="buffersData"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        private List<CombatBuffer> CreateBuffers(Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData)
-        {
-            return null;
-        }
-
-
-
-        #endregion
 
         #region 添加獲取方法
         /// <summary>
@@ -245,10 +213,10 @@ namespace JFrame
 
         public CombatUnit GetUnit(string uid)
         {
-            foreach(var team in teams.Values)
+            foreach (var team in teams.Values)
             {
                 var unit = team.GetUnit(uid);
-                if(unit != null)
+                if (unit != null)
                     return unit;
             }
             return null;
@@ -259,10 +227,10 @@ namespace JFrame
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        public virtual List<CombatUnit> GetUnits(int teamId)
+        public virtual List<CombatUnit> GetUnits(int teamId, bool mainTarget = false)
         {
             var team = GetTeam(teamId);
-            return team.GetUnits();
+            return team.GetUnits(mainTarget);
         }
 
         /// <summary>
@@ -272,9 +240,9 @@ namespace JFrame
         /// <param name="teamId"></param>
         /// <param name="range">-1:無視距離</param>
         /// <returns></returns>
-        public virtual List<CombatUnit> GetUnits(CombatUnit unit, int teamId, float range = -1f, bool alive = true)
+        public virtual List<CombatUnit> GetUnits(CombatUnit unit, int teamId, float range = -1f, bool alive = true, bool mainTarget = false)
         {
-            var units = GetUnits(teamId);
+            var units = GetUnits(teamId, mainTarget);
             if (range == -1)
                 return units;
 
@@ -342,7 +310,7 @@ namespace JFrame
 
         public void Update(BattleFrame frame)
         {
-            foreach(var team in teams.Values)
+            foreach (var team in teams.Values)
             {
                 team.UpdatePosition(frame);
             }

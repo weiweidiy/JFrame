@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+    [Serializable]
     public class  ReportData
     {
         public string SourceUnitUid { get;  set; }

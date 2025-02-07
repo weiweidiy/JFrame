@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CommonCombatTeam : BaseContainer<CombatUnit>, ICombatTeam<CombatUnit> , ICombatUpdatable
+    public class CommonCombatTeam : BaseContainer<CombatUnit>, ICombatTeam<CombatUnit>, ICombatUpdatable
     {
         //public event Action<int, ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<int, ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -58,7 +58,7 @@ namespace JFrame
             return Count();
         }
 
-        public virtual List<CombatUnit> GetUnits()
+        public virtual List<CombatUnit> GetUnits(bool mainTarget = false)
         {
             return GetAll();
         }
@@ -99,8 +99,12 @@ namespace JFrame
         }
 
 
-        public void Initialize(CombatContext context)
+        public void Initialize(CombatContext context, List<CombatUnitInfo> teamData)
         {
+
+            CreateUnits(context, teamData);
+
+            //监听单位事件
             var units = GetUnits();
             if (units != null)
             {
@@ -125,6 +129,30 @@ namespace JFrame
                 }
             }
         }
+
+        protected virtual void CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
+        {
+            if (teamData != null)
+            {
+                var actionFactory = new CombatActionFactory();
+                var attrFactory = new CombatAttributeFactory();
+                var buffFactory = new CombatBufferFactory();
+                //創建並初始化隊伍
+                foreach (var unitInfo in teamData)
+                {
+                    //創建並初始化戰鬥單位
+                    var unit = new CombatUnit();
+                    var attributes = attrFactory.CreateAllAttributes(unitInfo);
+                    var attrManager = new CombatAttributeManger();
+                    attrManager.AddRange(attributes);
+                    unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
+                    unit.SetPosition(unitInfo.position);
+                    unit.SetSpeed(unitInfo.moveSpeed);
+                    Add(unit);
+                }
+            }
+        }
+
 
         #region 响应事件
 

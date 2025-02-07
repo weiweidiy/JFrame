@@ -57,20 +57,6 @@ namespace JFrame
         public override void OnAttach(CombatAction target)
         {
             base.OnAttach(target);
-
-            //if (Owner is CombatUnitAction)
-            //{
-            //    var action = Owner as CombatUnitAction;
-            //    _extraData.SourceUnit = action.Owner;
-            //    _extraData.Action = action;
-            //}
-            //else //是一個buffaction
-            //{
-            //    var action = Owner as CombatBufferAction;
-            //    var buffer = action.Owner;
-            //    _extraData.SourceUnit = buffer.SourceUnit;
-            //    _extraData.Action = action;
-            //}
         }
     }
 }

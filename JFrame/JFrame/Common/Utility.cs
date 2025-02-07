@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace JFrame.Common
 {
@@ -109,6 +112,41 @@ namespace JFrame.Common
             result = left; // 如果未找到，返回应该插入的位置
 
             sortedList.Insert(result, target);
+        }
+
+        /// <summary>
+        /// 深拷贝
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public T DeepClone<T>(T obj)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                return (T)formatter.Deserialize(ms);
+            }
+        }
+
+        /// <summary>
+        /// 获取列表中的随机值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public T GetRandomValue<T>(List<T> list)
+        {
+            // 创建随机数生成器
+            Random random = new Random();
+
+            // 生成一个随机索引
+            int index = random.Next(list.Count);
+
+            // 返回列表中对应索引的值
+            return list[index];
         }
     }
 }
