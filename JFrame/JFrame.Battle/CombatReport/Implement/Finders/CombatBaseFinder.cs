@@ -25,7 +25,7 @@ namespace JFrame
             var reslut = new List<CombatUnit>();
             var oppoTeamId = context.CombatManager.GetOppoTeamId(extraData.SourceUnit);
             //獲取所有攻擊範圍内的單位
-            var oppoUnits = context.CombatManager.GetUnits(extraData.SourceUnit, oppoTeamId, GetAtkRange(), true, true);
+            var oppoUnits = context.CombatManager.GetUnitsInRange(extraData.SourceUnit, oppoTeamId, GetAtkRange(), true, true);
 
             CombatUnit selfUnit = null;
             if (Owner is CombatUnitAction)

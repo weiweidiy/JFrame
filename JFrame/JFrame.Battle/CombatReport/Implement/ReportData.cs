@@ -6,7 +6,7 @@ namespace JFrame
     [Serializable]
     public class  ReportData
     {
-        public string SourceUnitUid { get;  set; }
+        public string CastUnitUid { get;  set; }
 
         public int ActionId { get; set; }
 

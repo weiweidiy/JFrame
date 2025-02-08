@@ -37,7 +37,7 @@ namespace JFrame
                     team.onActionCast += Team_onActionCast;
                     team.onActionStartCD += Team_onActionStartCD;
                     team.onDamage += Team_onDamage;
-                    //team.onHeal += Team_onHeal;
+                    team.onHeal += Team_onHeal;
                     //team.onReborn += Team_onReborn;
                     //team.onDebuffAnti += Team_onDebuffAnti;
                     //team.onMaxHpUp += Team_onMaxHpUp;
@@ -56,6 +56,8 @@ namespace JFrame
 
 
 
+
+
         /// <summary>
         /// action释放了
         /// </summary>
@@ -66,7 +68,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.TargetsUid = data.GetTargetsUid();
             reportData.CastDuration = data.CastDuration;
@@ -90,7 +92,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetsUid = data.GetTargetsUid();
@@ -109,7 +111,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -126,6 +128,22 @@ namespace JFrame
         //{
         //    AddReportData(caster.Uid, ReportType.Damage, target.Uid, new object[] { value.Value, target.HP, target.MaxHP, value.IsCri, value.IsBlock });
         //}
+
+        private void Team_onHeal(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.Value = data.Value;
+            reportData.TargetHp = (long)data.Target.GetAttributeCurValue(PVPAttribute.HP);
+            reportData.TargetMaxHp = (long)data.Target.GetAttributeMaxValue(PVPAttribute.HP);
+            reportData.IsCri = data.IsCri;
+            reportData.IsBlock = data.IsBlock;
+            AddReportData(ReportType.Heal, reportData);
+        }
 
 
         //private void Team_onHeal(PVPBattleManager.Team team, ICombatUnit caster, CombatAction action, ICombatUnit target, int value)
@@ -148,7 +166,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -193,7 +211,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.StartMove, reportData);
@@ -202,7 +220,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.SpeedChanged, reportData);
@@ -211,7 +229,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.SourceUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.SourceUnit.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.EndMove, reportData);

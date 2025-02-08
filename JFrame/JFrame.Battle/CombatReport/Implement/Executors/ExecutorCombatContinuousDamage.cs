@@ -1,7 +1,7 @@
 ﻿namespace JFrame
 {
     /// <summary>
-    /// 持續傷害 type = 2 參數0：持續時間 1：傷害加成  2：間隔  3：次數
+    /// 连续傷害执行器，可以打多次 type = 2 參數0：持續時間 1：傷害加成  2：間隔  3：次數
     /// </summary>
     public class ExecutorCombatContinuousDamage : ExecutorCombatDamage
     {
@@ -21,26 +21,26 @@
             if (!isExecuting)
                 return;
 
-            if (count >= GetCount())
+            if (count >= GetCountArg())
             {
                 isExecuting = false;
                 return;
             }
                 
             delta += frame.DeltaTime;
-            if (delta >= GetInterval())
+            if (delta >= GetIntervalArg())
             {
                 delta = 0f;
-                DoDamge();
+                Hit();
             }
         }
 
-        protected float GetInterval()
+        protected float GetIntervalArg()
         {
             return GetCurArg(2);
         }
 
-        protected override float GetCount()
+        protected override float GetCountArg()
         {
             return GetCurArg(3);
         }

@@ -19,7 +19,7 @@ namespace JFrameTest
         {
             
             targetUnit = Substitute.For<CombatUnit>();
-            hpAttr = new CombatAttributeLong(PVPAttribute.HP.ToString(), 100, 100);
+            hpAttr = new CombatAttributeLong(PVPAttribute.HP.ToString(), 90, 100);
             attributeManager = new CombatAttributeManger();
             attributeManager.Add(hpAttr);
             targetUnit.GetAttributeManager().Returns(attributeManager);
@@ -49,7 +49,7 @@ namespace JFrameTest
             executor.Update(frame);
 
             //expect
-            Assert.AreEqual(80, hpAttr.CurValue);
+            Assert.AreEqual(70, hpAttr.CurValue);
         }
 
         [Test]
@@ -68,7 +68,26 @@ namespace JFrameTest
             executor.Update(frame);
 
             //expect
-            Assert.AreEqual(70, hpAttr.CurValue);
+            Assert.AreEqual(60, hpAttr.CurValue);
+        }
+
+        [Test]
+        public void TestExecutorHealAndPlusHp()
+        {
+            //arrange
+            var executor = new ExecutorCombatHeal(null);
+            executor.Initialize(null, new float[] { 1f, 2f });
+            extraData.Value = 10;
+            var frame = new BattleFrame();
+            //act
+            executor.Execute(extraData);
+            executor.Update(frame);
+            executor.Update(frame);
+            executor.Update(frame);
+            executor.Update(frame);
+
+            //expect
+            Assert.AreEqual(100, hpAttr.CurValue);
         }
     }
 

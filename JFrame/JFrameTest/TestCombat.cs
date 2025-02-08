@@ -107,7 +107,7 @@ namespace JFrameTest
                     hasEndMoveReport++;
                 }
 
-                if(data.ReportType == ReportType.ActionCast && data.ReportData.SourceUnitUid == "11")
+                if(data.ReportType == ReportType.ActionCast && data.ReportData.CastUnitUid == "11")
                 {
                     usbUnitAct = true;
                 }
@@ -189,7 +189,7 @@ namespace JFrameTest
         ActionInfo CreateActionInfo(int actionId)
         {
             var actionInfo = new ActionInfo();
-            var actionArgSource = new CombatFakeActionArgSource(actionId);
+            var actionArgSource = new CombatJFrameFakeActionArgSource(actionId);
             actionInfo.type = actionArgSource.GetActionType();
             actionInfo.mode = actionArgSource.GetActionMode();
             actionInfo.uid = Guid.NewGuid().ToString();
@@ -199,7 +199,7 @@ namespace JFrameTest
             //条件触发器
             var conditionTriggers = new List<ActionComponentInfo>();
             var conditionTriggersId = actionArgSource.GetConditionTriggersId();
-            for (int i = 0; i < conditionTriggersId.Count; i++)
+            for (int i = 0; i < conditionTriggersId.Length; i++)
             {
                 var id = conditionTriggersId[i];
                 var index = i;
@@ -218,7 +218,7 @@ namespace JFrameTest
             //查找器
             var finders = new List<ActionComponentInfo>();
             var findersId = actionArgSource.GetFindersId();
-            for (int i = 0; i < findersId.Count; i++)
+            for (int i = 0; i < findersId.Length; i++)
             {
                 var id = findersId[i];
                 var index = i;
@@ -230,7 +230,7 @@ namespace JFrameTest
             //执行器
             var executors = new List<ActionComponentInfo>();
             var executorsId = actionArgSource.GetExecutorsId();
-            for (int i = 0; i < executorsId.Count; i++)
+            for (int i = 0; i < executorsId.Length; i++)
             {
                 var id = executorsId[i];
                 var index = i;
@@ -243,7 +243,7 @@ namespace JFrameTest
             //cd触发器
             var cdTriggers = new List<ActionComponentInfo>();
             var cdTriggersId = actionArgSource.GetCdTriggersId();
-            for (int i = 0; i < cdTriggersId.Count; i++)
+            for (int i = 0; i < cdTriggersId.Length; i++)
             {
                 var id = cdTriggersId[i];
                 var index = i;
@@ -270,7 +270,7 @@ namespace JFrameTest
             var dicComponentInfo = new Dictionary<ActionComponentType, List<ActionComponentInfo>>();
             //条件触发器
             var conditionTriggers = new List<ActionComponentInfo>();
-            var conditionTrigger = new ActionComponentInfo() { id = 1, args = new float[] { range, 1 } }; //查找最近单位触发器 攻击距离， 查找个数
+            var conditionTrigger = new ActionComponentInfo() { id = 1, args = new float[] { 1,1, range } }; //查找最近单位触发器 攻击距离， 查找个数
             conditionTriggers.Add(conditionTrigger);
             dicComponentInfo.Add(ActionComponentType.ConditionTrigger, conditionTriggers);
             //延迟触发器

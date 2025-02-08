@@ -140,7 +140,18 @@ namespace JFrame
             NotifyHittedTargets(extraData);
         }
 
+        public void Start()
+        {
+            foreach (var trigger in conditionTriggers)
+            {
+                trigger.OnStart();
+            }
 
+            foreach (var executor in executors)
+            {
+                executor.OnStart();
+            }
+        }
 
         public void Update(BattleFrame frame)
         {

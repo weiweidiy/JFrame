@@ -23,7 +23,7 @@ namespace JFrame
         /// </summary>
         /// <param name="actionId"></param>
         /// <returns></returns>
-        public abstract List<int> GetConditionTriggersId();
+        public abstract int[] GetConditionTriggersId();
 
         /// <summary>
         /// 获取参数列表
@@ -50,7 +50,7 @@ namespace JFrame
         /// 获取查找器id
         /// </summary>
         /// <returns></returns>
-        public abstract List<int> GetFindersId();
+        public abstract int[] GetFindersId();
 
         /// <summary>
         /// 获取查找器参数
@@ -63,7 +63,7 @@ namespace JFrame
         /// 获取执行器id列表
         /// </summary>
         /// <returns></returns>
-        public abstract List<int> GetExecutorsId();
+        public abstract int[] GetExecutorsId();
 
         /// <summary>
         /// 获取执行器参数列表
@@ -76,7 +76,7 @@ namespace JFrame
         /// 获取cd触发器id列表
         /// </summary>
         /// <returns></returns>
-        public abstract List<int> GetCdTriggersId();
+        public abstract int[] GetCdTriggersId();
 
         /// <summary>
         /// 获取cd触发器参数列表

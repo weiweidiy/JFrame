@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+    /// <summary>
+    /// 参数：0 执行周期
+    /// </summary>
     public abstract class CombatBaseExecutor : BaseActionComponent, ICombatExecutor
     {
         public event Action<CombatExtraData> onHittingTargets;

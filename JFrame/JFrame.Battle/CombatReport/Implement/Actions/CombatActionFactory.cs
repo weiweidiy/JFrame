@@ -154,11 +154,16 @@ namespace JFrame
                         trigger = new TriggerTime(); //時長觸發器
                     }
                     break;
+                case 4:
+                    {
+                        trigger = new TriggerHp(); //hp百分比觸發器
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
-            (trigger as BaseActionComponent).OnAttach(owner);
-            (trigger as BaseActionComponent).Initialize(context, componentInfo.args);
+            trigger.OnAttach(owner);
+            trigger.Initialize(context, componentInfo.args);
             return trigger;
         }
 
@@ -212,11 +217,16 @@ namespace JFrame
                         executor = new ExecutorCombatContinuousDamage(finder);
                     }           
                     break;
+                case 3:
+                    {
+                        executor = new ExecutorCombatHeal(finder);
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
-            (executor as BaseActionComponent).OnAttach(owner);
-            (executor as BaseActionComponent).Initialize(context, componentInfo.args);
+            executor.OnAttach(owner);
+            executor.Initialize(context, componentInfo.args);
             return executor;
         }
     }

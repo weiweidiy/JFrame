@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Globalization;
 
 namespace JFrame.Common
 {
@@ -55,6 +56,47 @@ namespace JFrame.Common
                 }
                 //把temp 赋值给left的位置
                 arr[left] = temp;
+            }
+        }
+
+        /// <summary>
+        /// 二分排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lst"></param>
+        /// <param name="comparer"></param>
+        public void BinarySort<T>(List<T> lst, IComparer<T> comparer)
+        {
+            T temp;
+            int j, mid;
+            for (int i = 0; i < lst.Count; i++)
+            {
+                temp = lst[i];
+                //把temp当成key，利用二分查找法，找到temp需要插入的位置
+                int left = 0;
+                int right = i - 1; //取i之前的数组
+
+                while (left <= right)
+                {
+                    mid = (right - left) / 2 + left;
+
+                    //if (temp > arr[mid])
+                    if (comparer.Compare(temp, lst[mid]) > 0)
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+                //通过二分查找法找到temp需要插入的位置left。
+                for (j = i - 1; j >= left; j--)
+                {
+                    lst[j + 1] = lst[j];
+                }
+                //把temp 赋值给left的位置
+                lst[left] = temp;
             }
         }
 
@@ -147,6 +189,26 @@ namespace JFrame.Common
 
             // 返回列表中对应索引的值
             return list[index];
+        }
+
+        /// <summary>
+        /// 无关地区的解析浮点
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public float ParseFloatInvariantCulturet(string str)
+        {
+            return float.Parse(str, CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// 无关地区格式的解析double
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public double ParseDoubleInvariantCulturet(string str)
+        {
+            return double.Parse(str, CultureInfo.InvariantCulture);
         }
     }
 }

@@ -131,6 +131,7 @@ namespace JFrame
         public void Start()
         {
             StartMove();
+            StartAction();
         }
 
         public void Stop() { StopMove(); }  
@@ -180,7 +181,7 @@ namespace JFrame
         /// <param name="attribute"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public object GetAttributeCurValue(PVPAttribute attribute)
+        public virtual object GetAttributeCurValue(PVPAttribute attribute)
         {
             if (attributeManger == null)
                 throw new Exception("combat unit attributemanager = null ");
@@ -210,8 +211,11 @@ namespace JFrame
             throw new Exception("沒有找到屬性" + attribute.ToString());
         }
 
-        public object GetAttributeMaxValue(PVPAttribute attribute)
+        public virtual object GetAttributeMaxValue(PVPAttribute attribute)
         {
+            if (attributeManger == null)
+                throw new Exception("combat unit attributemanager = null ");
+
             var attr = attributeManger.Get(attribute.ToString());
             if (attr != null)
             {
@@ -244,7 +248,7 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public virtual bool IsAlive()
         {
-            var hpAttr = attributeManger.Get(PVPAttribute.HP.ToString());
+            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
             if (hpAttr != null)
             {
                 var attr = hpAttr as CombatAttributeLong;
@@ -260,7 +264,7 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public bool IsHpFull()
         {
-            var hpAttr = attributeManger.Get(PVPAttribute.HP.ToString());
+            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
             if (hpAttr != null)
             {
                 var attr = hpAttr as CombatAttributeLong;
@@ -315,9 +319,23 @@ namespace JFrame
             onDead?.Invoke(extraData);
         }
 
+        /// <summary>
+        /// 收到治疗了
+        /// </summary>
+        /// <param name="extraData"></param>
+        /// <exception cref="Exception"></exception>
         public void OnHeal(CombatExtraData extraData)
         {
-            throw new NotImplementedException();
+            var attrManager = GetAttributeManager();
+            var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
+            if (hpAttr == null)
+                throw new Exception("沒有找到Hp屬性 " + Uid);
+
+            var healValue = extraData.Value;
+            var attr = hpAttr as CombatAttributeLong;
+            attr.Plus(healValue);
+
+            onHealed?.Invoke(extraData);
         }
 
         public void OnReborn(CombatExtraData extraData)
@@ -390,6 +408,11 @@ namespace JFrame
         public bool IsMoving()
         {
             return isMoving;
+        }
+
+        void StartAction()
+        {
+            actionManager.Start();
         }
 
         public virtual CombatVector GetPosition()

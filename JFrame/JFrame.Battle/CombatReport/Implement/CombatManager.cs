@@ -234,15 +234,15 @@ namespace JFrame
         }
 
         /// <summary>
-        /// 
+        /// 获取距离指定单位指定距离内的所有单位
         /// </summary>
-        /// <param name="unit"></param>
-        /// <param name="teamId"></param>
+        /// <param name="startUnit">距离该单位指定距离的所有单位</param>
+        /// <param name="targetTeamId"></param>
         /// <param name="range">-1:無視距離</param>
         /// <returns></returns>
-        public virtual List<CombatUnit> GetUnits(CombatUnit unit, int teamId, float range = -1f, bool alive = true, bool mainTarget = false)
+        public virtual List<CombatUnit> GetUnitsInRange(CombatUnit startUnit, int targetTeamId, float range = -1f, bool alive = true, bool mainTarget = false)
         {
-            var units = GetUnits(teamId, mainTarget);
+            var units = GetUnits(targetTeamId, mainTarget);
             if (range == -1)
                 return units;
 
@@ -253,7 +253,7 @@ namespace JFrame
                 if (item.IsAlive() != alive)
                     continue;
 
-                var myX = (unit as ICombatMovable).GetPosition().x;
+                var myX = (startUnit as ICombatMovable).GetPosition().x;
                 var x = (item as ICombatMovable).GetPosition().x;
                 if (Math.Abs(myX - x) <= range)
                     result.Add(item);

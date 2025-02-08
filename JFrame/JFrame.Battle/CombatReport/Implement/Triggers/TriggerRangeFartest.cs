@@ -5,15 +5,15 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 2 参数：0 攻击距离 1 查找数量
+    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 2 参数：0 查找数量 1 攻击距离
     /// </summary>
     public class TriggerRangeFartest : TriggerRange
     {
         protected Utility utility = new Utility();
 
-        protected override void SortList(CombatUnit[] arr, float myXPosition)
+        protected override void SortList(List<CombatUnit> lst, float myXPosition)
         {
-            utility.BinarySort<CombatUnit>(arr, new Compare(myXPosition));
+            utility.BinarySort<CombatUnit>(lst, new Compare(myXPosition));
         }
 
         class Compare : IComparer<CombatUnit>

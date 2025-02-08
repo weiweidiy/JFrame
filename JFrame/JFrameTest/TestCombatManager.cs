@@ -121,7 +121,7 @@ namespace JFrameTest
             combatManager.AddTeam(1, team1);
 
             //act
-            var units = combatManager.GetUnits(myUnit, 1, 2f);
+            var units = combatManager.GetUnitsInRange(myUnit, 1, 2f);
 
             //expect
             Assert.AreEqual(2,units.Count);

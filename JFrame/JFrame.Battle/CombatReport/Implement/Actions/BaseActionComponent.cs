@@ -100,6 +100,11 @@ namespace JFrame
         {
             _owner = null;
         }
+
+        /// <summary>
+        /// 所有组件都完成了初始化了
+        /// </summary>
+        public void OnStart() { }
     }
 
 }

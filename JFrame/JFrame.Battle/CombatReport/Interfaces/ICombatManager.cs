@@ -98,6 +98,6 @@ namespace JFrame
         /// <param name="range"></param>
         /// /// <param name="mainTarget"> true: 只找主目标，false: 所有units里找 </param>
         /// <returns></returns>
-        List<TUnit> GetUnits(TUnit unit, int teamId, float range, bool alive, bool mainTarget);
+        List<TUnit> GetUnitsInRange(TUnit unit, int teamId, float range, bool alive, bool mainTarget);
     }
 }

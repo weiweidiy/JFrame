@@ -1,44 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace JFrame
 {
+
     /// <summary>
-    /// 根據距離觸發 参数：0 攻击距离 1 查找数量
+    /// 根據距離觸發 参数：0 查找数量 1：队伍参数 0=友军 1=敌军 2 攻击距离
     /// </summary>
-    public abstract class TriggerRange : CombatBaseTrigger
+    public abstract class TriggerRange : TriggerFindUnits
     {
-        /// <summary>
-        /// 獲取距離最近的n個單位(存活的)
-        /// </summary>
-        /// <returns></returns>
-        protected List<CombatUnit> GetOppoUnitInRange(CombatUnit sourceUnit, int count)
-        {
-            var reslut = new List<CombatUnit>();
-            var oppoTeamId = context.CombatManager.GetOppoTeamId(sourceUnit);
-            //獲取所有攻擊範圍内的單位
-            var oppoUnits = context.CombatManager.GetUnits(sourceUnit, oppoTeamId, GetAtkRange(), true, true);
-          
-            //獲取距離最近的
-            var myX = sourceUnit.GetPosition().x;
-            var arr = oppoUnits.ToArray();
-            //utility.BinarySort<ICombatUnit>(arr, new Compare(myX));
-            SortList(arr, myX);
-
-            //保證不能超過數組長度
-            var finalCount = Math.Min(arr.Length, count);
-
-            for (int i = 0; i < finalCount; i++)
-            {
-                reslut.Add(arr[i]);
-            }
-
-            return reslut;
-        }
-
-        protected abstract void SortList(CombatUnit[] arr, float myXPosition);
-
         /// <summary>
         /// 獲取攻擊距離              
         /// </summary>
@@ -46,32 +18,47 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         protected float GetAtkRange()
         {
-            return GetCurArg(0);
+            return GetCurArg(2);
         }
 
         /// <summary>
-        /// 獲取查找數量
+        /// 获取获得坐标
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        protected int GetFindAmount()
+        float GetMyX()
         {
-            return (int)GetCurArg(1);
-        }
-
-
-        public override void Update(BattleFrame frame)
-        {
-            var targets = GetOppoUnitInRange(_extraData.SourceUnit as CombatUnit, GetFindAmount());
-
-            if (targets != null && targets.Count > 0)
-            {
-                _extraData.Targets = targets;
-                SetOn(true);
-            }
+            return _extraData.SourceUnit.GetPosition().x;
         }
 
 
 
+        /// <summary>
+        /// 获取指定队伍里的单位
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        protected override List<CombatUnit> GetUnitsByTargetTeam(int teamId)
+        {
+            return context.CombatManager.GetUnitsInRange(_extraData.SourceUnit, teamId, GetAtkRange(), true, true);
+        }
+
+
+        /// <summary>
+        /// 按条件排序数组
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="myXPosition"></param>
+        protected abstract void SortList(List<CombatUnit> lst, float myXPosition);
+
+        /// <summary>
+        /// 排序筛选
+        /// </summary>
+        /// <param name="lst"></param>
+        protected override void SortList(List<CombatUnit> lst)
+        {
+            var myX = GetMyX();
+
+            SortList(lst, myX);
+        }
     }
 }

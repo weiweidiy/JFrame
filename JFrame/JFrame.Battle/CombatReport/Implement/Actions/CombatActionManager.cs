@@ -32,6 +32,15 @@ namespace JFrame
                 //设置透传参数
                 action.ExtraData = extraClaimable.ExtraData;
 
+
+            }
+        }
+
+        public void Start()
+        {
+            foreach (var action in GetAll())
+            {
+                action.Start();
                 //切换到不可用状态
                 action.SwitchToDisable();
                 action.SwitchToTrigging();

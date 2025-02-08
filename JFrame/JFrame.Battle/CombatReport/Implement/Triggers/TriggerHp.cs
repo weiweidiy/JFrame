@@ -5,35 +5,30 @@ using JFrame.Common;
 namespace JFrame
 {
     /// <summary>
-    /// 根据HP的情况来触发 type=3 参数：0 攻击距离 1 查找数量 2：队伍id
+    /// 查找hp百分比小的 type=4 参数 0 ： 查找数量  1： 队伍id
     /// </summary>
-    public class TriggerHp : TriggerRange
+    public class TriggerHp : TriggerFindUnits
     {
         protected Utility utility = new Utility();
 
-        public override void Update(BattleFrame frame)
+        protected override List<CombatUnit> GetUnitsByTargetTeam(int teamId)
         {
-            //敌人的
-            base.Update(frame);
-
-            //自己的update
+            return context.CombatManager.GetUnits(teamId, true);
         }
 
-        protected override void SortList(CombatUnit[] arr, float myXPosition)
+        protected override void SortList(List<CombatUnit> lst)
         {
-            //arr是敌人数组 按血量排序
-            utility.BinarySort<CombatUnit>(arr, new Compare(myXPosition));
-
+            utility.BinarySort<CombatUnit>(lst, new Compare()); //按血量高低排序
+            for(int i = lst.Count - 1; i >=0; i --)
+            {
+                var unit = lst[i];
+                if(unit.IsHpFull())
+                    lst.RemoveAt(i);
+            }
         }
 
         class Compare : IComparer<CombatUnit>
         {
-            float myX;
-            public Compare(float myX)
-            {
-                this.myX = myX;
-            }
-
             int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
             {
                 var unit1 = x;
@@ -42,15 +37,54 @@ namespace JFrame
                 var unit1Hp = (long)unit1.GetAttributeCurValue(PVPAttribute.HP);
                 var unit2Hp = (long)unit2.GetAttributeCurValue(PVPAttribute.HP);
 
-                if (unit1Hp > unit2Hp)
+                var unit1HpMax = (long)unit1.GetAttributeMaxValue(PVPAttribute.HP);
+                var unit2HpMax = (long)unit2.GetAttributeMaxValue(PVPAttribute.HP);
+
+                if ((double)unit1Hp / unit1HpMax < (double)unit2Hp / unit2HpMax)
                     return -1;
 
-                if (unit1Hp < unit2Hp)
+                if ((double)unit1Hp / unit1HpMax > (double)unit2Hp / unit2HpMax)
                     return 1;
 
                 return 0;
             }
         }
 
+        //protected Utility utility = new Utility();
+
+
+
+        //protected override void SortList(CombatUnit[] arr, float myXPosition)
+        //{
+        //    //按血量排序
+        //    utility.BinarySort<CombatUnit>(arr, new Compare(myXPosition));
+
+        //}
+
+        //class Compare : IComparer<CombatUnit>
+        //{
+        //    float myX;
+        //    public Compare(float myX)
+        //    {
+        //        this.myX = myX;
+        //    }
+
+        //    int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
+        //    {
+        //        var unit1 = x;
+        //        var unit2 = y;
+
+        //        var unit1Hp = (long)unit1.GetAttributeCurValue(PVPAttribute.HP);
+        //        var unit2Hp = (long)unit2.GetAttributeCurValue(PVPAttribute.HP);
+
+        //        if (unit1Hp > unit2Hp)
+        //            return -1;
+
+        //        if (unit1Hp < unit2Hp)
+        //            return 1;
+
+        //        return 0;
+        //    }
+        //}
     }
 }
