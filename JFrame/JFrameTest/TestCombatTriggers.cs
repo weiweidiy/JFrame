@@ -50,6 +50,7 @@ namespace JFrameTest
             combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
             combatManager.GetUnitsInRange(Arg.Any<CombatUnit   >(), Arg.Any<int>(), Arg.Any<float>(), Arg.Any<bool>(), Arg.Any<bool>()).Returns(new List<CombatUnit>() { unit1, unit2 });
             combatManager.GetUnits(Arg.Any<int>(), Arg.Any<bool>()).Returns(new List<CombatUnit>() { unit1, unit2 });
+            combatManager.GetFriendTeamId(Arg.Any<CombatUnit>()).Returns(0);
             //component.Owner.Returns(acition);
             context.CombatManager.Returns(combatManager);
         }

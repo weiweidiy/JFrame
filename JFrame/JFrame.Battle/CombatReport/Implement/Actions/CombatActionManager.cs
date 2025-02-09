@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+    /// <summary>
+    /// 管理所有action to do:可以增加线程组概念，允许某些技能使用一个线程组
+    /// </summary>
     public class CombatActionManager : BaseContainer<CombatAction>, ICombatUpdatable
     {
         public event Action<CombatExtraData> onTriggerOn; //满足触发条件
@@ -30,7 +33,7 @@ namespace JFrame
                 action.onTargetHittedComplete += Action_onTargetHittedComplete;
 
                 //设置透传参数
-                action.ExtraData = extraClaimable.ExtraData;
+                action.ExtraData = extraClaimable.ExtraData.Clone() as CombatExtraData;
 
 
             }

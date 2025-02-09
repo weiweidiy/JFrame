@@ -55,6 +55,7 @@ namespace JFrame
         public float block;     //格挡 0~1 百分比
         public CombatVector position; //初始坐標點
         public CombatVector moveSpeed; //移動速度，向左就是負數，向右是正數
+        public CombatVector targetPosition;//目标点
 
     }
 
@@ -94,12 +95,12 @@ namespace JFrame
                 throw new ArgumentNullException("teamdata 不能為null");
 
             CommonCombatTeam team1 = team1Type == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
-            team1.Initialize(context, team1Data);
+            team1.Initialize(0, context, team1Data);
             if (team1Data.Count > 0)
                 AddTeam(0, team1); //1 = 隊伍id
 
             CommonCombatTeam team2 = team2Type == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
-            team2.Initialize(context, team2Data);
+            team2.Initialize(1, context, team2Data);
             if (team2Data.Count > 0)
                 AddTeam(1, team2);
 
@@ -155,7 +156,7 @@ namespace JFrame
         /// <param name="unit"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public int GetFriendTeamId(CombatUnit unit)
+        public virtual int GetFriendTeamId(CombatUnit unit)
         {
             var teams = GetTeams();
             foreach (var team in teams)

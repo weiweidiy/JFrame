@@ -48,16 +48,15 @@ namespace JFrame
         {
             List<CombatUnit> targets = GetTargets(extraData);
 
-            //获取数值
-            extraData.Value = GetValue();
-
             var d = extraData.Clone() as CombatExtraData;
+            //获取数值
+            d.Value = GetValue();    
             //即将命中
             NotifyHittingTargets(d);
 
             foreach (var target in targets)
             {
-                var data = extraData.Clone() as CombatExtraData;
+                var data = d.Clone() as CombatExtraData;
                 data.Target = target;
                 NotifyHittingTarget(data); //即将命中单个单位
                 DoHit(target, data);

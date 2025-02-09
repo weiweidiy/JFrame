@@ -102,8 +102,9 @@ namespace JFrame
         }
 
 
-        public void Initialize(CombatContext context, List<CombatUnitInfo> teamData)
+        public void Initialize(int teamId, CombatContext context, List<CombatUnitInfo> teamData)
         {
+            team = teamId;
 
             CreateUnits(context, teamData);
 
@@ -180,6 +181,7 @@ namespace JFrame
                     unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
                     unit.SetPosition(unitInfo.position);
                     unit.SetSpeed(unitInfo.moveSpeed);
+                    unit.SetTargetPosition(unitInfo.targetPosition);
                     Add(unit);
                 }
             }

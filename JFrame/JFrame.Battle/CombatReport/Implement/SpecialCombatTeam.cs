@@ -48,6 +48,7 @@ namespace JFrame
                 unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
                 unit.SetPosition(unitInfo.position);
                 unit.SetSpeed(unitInfo.moveSpeed);
+                unit.SetTargetPosition(unitInfo.targetPosition);
                 Add(unit);
             }
         }

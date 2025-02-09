@@ -16,7 +16,7 @@
 
         protected override long GetValue()
         {
-            return extraData.Value = (long)(extraData.Value * GetRateArg());
+            return (long)(extraData.Value * GetRateArg());
         }
 
         /// <summary>

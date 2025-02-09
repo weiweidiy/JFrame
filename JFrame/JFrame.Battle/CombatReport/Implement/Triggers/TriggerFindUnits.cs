@@ -36,7 +36,7 @@ namespace JFrame
         {
             var teamArg = GetTeamIdArg();
             if (teamArg == 0) //找自己
-                return 0;
+                return context.CombatManager.GetFriendTeamId(_extraData.SourceUnit);
 
             if (teamArg == 1)
                 return context.CombatManager.GetOppoTeamId(_extraData.SourceUnit);

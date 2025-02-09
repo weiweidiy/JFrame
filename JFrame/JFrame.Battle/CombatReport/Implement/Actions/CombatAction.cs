@@ -73,7 +73,7 @@ namespace JFrame
 
                 foreach(var trigger in conditionTriggers)
                 {
-                    trigger.ExtraData = _extraData;
+                    trigger.ExtraData = _extraData.Clone() as CombatExtraData;
                 }
             }
         }

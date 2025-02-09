@@ -14,7 +14,7 @@ namespace JFrame
 
         protected override long GetValue()
         {
-            return extraData.Value = (long)(extraData.Value * GetAtkRateArg());
+            return (long)(extraData.Value * GetAtkRateArg());
         }
 
         protected float GetAtkRateArg()

@@ -31,6 +31,7 @@ namespace JFrameTest
             unit.Initialize("uid", null, null, null, attributeManager);
             unit.SetPosition(new CombatVector() { x = 10, y = 0 });
             unit.SetSpeed(new CombatVector() { x = -1,y =0 });
+            unit.SetTargetPosition(new CombatVector() { x = 0,y = 0});
 
             //act
             unit.StartMove();
