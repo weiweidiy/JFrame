@@ -17,6 +17,7 @@ namespace JFrame
         {
             base.OnEnter();
             context.ResetExecutors(); 
+            context.ResetDelayTrigger();
             context.NotifyStartExecuting();
             executingDuration = context.GetExecutingDuration();
         }
