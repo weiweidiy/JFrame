@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace JFrame
 {
-
     public enum ActionComponentType
     {
         ConditionTrigger,

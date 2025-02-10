@@ -215,7 +215,7 @@ namespace JFrame
 
         public void ResetDelayTrigger()
         {
-            delayTrigger.Reset();
+            delayTrigger?.Reset();
         }
 
         public void DoExecutors()

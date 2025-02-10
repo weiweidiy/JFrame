@@ -142,9 +142,15 @@ namespace JFrame
         public void Stop() { StopMove(); }  
 
 
-        private void ActionManager_onTriggerOn(CombatExtraData obj)
+        private void ActionManager_onTriggerOn(CombatExtraData extraData)
         {
-            //StopMove();
+            if (GetTargetPostion() != null)
+                return;
+
+            if (extraData.Action.Mode == ActionMode.Passive)
+                return;
+
+            StopMove();
         }
 
         private void ActionManager_onStartCD(CombatExtraData extraData)
@@ -171,7 +177,10 @@ namespace JFrame
             if (IsMoving())   //只是自己移动了，其他单位还没有移动
             {
                 position += velocity;
-                if (Math.Abs( targetPsoition.x - position.x )< 0.5f)
+                if (GetTargetPostion() == null)
+                    return;
+
+                if (Math.Abs(GetTargetPostion().x - position.x) < 0.5f)
                     StopMove();
             }
         }
@@ -401,6 +410,15 @@ namespace JFrame
         public void SetTargetPosition(CombatVector position)
         {
             targetPsoition = position;
+        }
+
+        /// <summary>
+        /// 获取目标点位
+        /// </summary>
+        /// <returns></returns>
+        public CombatVector GetTargetPostion()
+        {
+            return targetPsoition;
         }
         /// <summary>
         /// 开始移动

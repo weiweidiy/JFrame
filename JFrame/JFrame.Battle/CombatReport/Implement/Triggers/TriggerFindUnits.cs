@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    /// 找单位的触发器 参数 0 ： 查找数量  1：队伍参数 0=友军 1=敌军
+    /// 找单位的触发器 参数 0 ： 查找数量  1：队伍参数 0=友军 1=敌军 
     /// </summary>
     public abstract class TriggerFindUnits : CombatBaseTrigger
     {
