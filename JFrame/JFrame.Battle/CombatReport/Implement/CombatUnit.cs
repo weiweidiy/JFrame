@@ -327,6 +327,8 @@ namespace JFrame
         /// <param name="extraData"></param>
         private void OnDead(CombatExtraData extraData)
         {
+            StopMove();
+
             //所有action設置成非活動狀態，不會出發
             actionManager.SetAllActive(false);
 
