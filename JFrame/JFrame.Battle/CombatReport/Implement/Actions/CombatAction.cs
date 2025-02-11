@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace JFrame
 {
 
-    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IExtraDataClaimable
+    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionContent
     {
         public event Action<CombatExtraData> onTriggerOn;
         public event Action<CombatExtraData> onStartExecuting;
@@ -147,9 +148,16 @@ namespace JFrame
                 trigger.OnStart();
             }
 
+            delayTrigger.OnStart();
+
             foreach (var executor in executors)
             {
                 executor.OnStart();
+            }
+
+            foreach(var cdTrigger in cdTriggers)
+            {
+                cdTrigger.OnStart();
             }
         }
 

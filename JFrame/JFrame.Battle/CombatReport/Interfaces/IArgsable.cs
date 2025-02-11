@@ -42,6 +42,12 @@
         /// 重置参数到原始值
         /// </summary>
         void ResetArgs();
+
+        /// <summary>
+        /// 获取有效的参数个数（用于检查配置）
+        /// </summary>
+        /// <returns></returns>
+        int GetValidArgsCount();
     }
 
 

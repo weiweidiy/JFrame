@@ -27,5 +27,10 @@
         {
             return GetCurArg(1);
         }
+
+        public override int GetValidArgsCount()
+        {
+            return 2;
+        }
     }
 }

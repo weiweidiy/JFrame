@@ -61,7 +61,7 @@ namespace JFrame
             return Count();
         }
 
-        public virtual List<CombatUnit> GetUnits(bool mainTarget = false)
+        public virtual List<CombatUnit> GetUnits(bool findMode = false)
         {
             return GetAll();
         }
@@ -178,7 +178,7 @@ namespace JFrame
                     var attributes = attrFactory.CreateAllAttributes(unitInfo);
                     var attrManager = new CombatAttributeManger();
                     attrManager.AddRange(attributes);
-                    unit.Initialize(unitInfo.uid, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
+                    unit.Initialize(unitInfo, context, actionFactory.CreateUnitActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
                     unit.SetPosition(unitInfo.position);
                     unit.SetSpeed(unitInfo.moveSpeed);
                     unit.SetTargetPosition(unitInfo.targetPosition);

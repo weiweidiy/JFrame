@@ -41,7 +41,7 @@ namespace JFrame
         /// <summary>
         /// 发起的单位
         /// </summary>
-        public CombatUnit SourceUnit { get; set; }
+        public virtual CombatUnit Caster { get; set; }
 
         /// <summary>
         /// 哪個aciton造成的
@@ -51,7 +51,7 @@ namespace JFrame
         /// <summary>
         /// 目标单位
         /// </summary>
-        public List<CombatUnit> Targets { get; set; }
+        public virtual List<CombatUnit> Targets { get; set; }
 
         /// <summary>
         /// 单一目标

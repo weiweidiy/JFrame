@@ -26,6 +26,18 @@ namespace JFrame
             return ActionMode.Active;
         }
 
+
+        public override int GetConditionFindersId()
+        {
+            return 0;
+        }
+
+        public override float[] GetConditionFindersArgs()
+        {
+            return new float[] { };
+        }
+
+
         /// <summary>
         /// 获取所有条件触发器id列表
         /// </summary>
@@ -134,5 +146,7 @@ namespace JFrame
             result.Add(0.1f);
             return result.ToArray();
         }
+
+
     }
 }

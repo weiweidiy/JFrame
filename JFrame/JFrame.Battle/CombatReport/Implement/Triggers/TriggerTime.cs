@@ -5,7 +5,22 @@
     /// </summary>
     public class TriggerTime : CombatBaseTrigger
     {
+
         float delta = 0f;
+
+        public TriggerTime(CombatBaseFinder finder) : base(finder)
+        {
+        }
+
+        public override int GetValidArgsCount()
+        {
+            return 1;
+        }
+
+        public float GetDuration()
+        {
+            return GetCurArg(0);
+        }
 
         public override void Reset()
         {
@@ -14,9 +29,9 @@
             delta = 0f;
         }
 
-        public override void Update(BattleFrame frame)
+        protected override void OnUpdate(BattleFrame frame)
         {
-            base.Update(frame);
+            base.OnUpdate(frame);
 
             delta += frame.DeltaTime;
 
@@ -27,9 +42,8 @@
 
         }
 
-        public float GetDuration()
-        {
-            return GetCurArg(0);
-        }
+
+
+
     }
 }

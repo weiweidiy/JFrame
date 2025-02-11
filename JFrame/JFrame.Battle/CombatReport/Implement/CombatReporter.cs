@@ -68,7 +68,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.TargetsUid = data.GetTargetsUid();
             reportData.CastDuration = data.CastDuration;
@@ -92,7 +92,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetsUid = data.GetTargetsUid();
@@ -111,7 +111,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -133,7 +133,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -166,7 +166,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -211,7 +211,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.StartMove, reportData);
@@ -220,7 +220,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.SpeedChanged, reportData);
@@ -229,7 +229,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.SourceUnit.Uid;
+            reportData.CastUnitUid = data.Caster.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.EndMove, reportData);

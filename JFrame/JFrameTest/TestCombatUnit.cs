@@ -28,7 +28,7 @@ namespace JFrameTest
             var unit = new CombatUnit();
             var attributeManager = NSubstitute.Substitute.For<CombatAttributeManger>();
             attributeManager.Get(Arg.Any<string>()).Returns(new CombatAttributeLong(PVPAttribute.ATK.ToString(), 10, 10)); //默认会调用atk
-            unit.Initialize("uid", null, null, null, attributeManager);
+            unit.Initialize(new CombatUnitInfo() { uid = "uid"}, null, null, null, attributeManager);
             unit.SetPosition(new CombatVector() { x = 10, y = 0 });
             unit.SetSpeed(new CombatVector() { x = -1,y =0 });
             unit.SetTargetPosition(new CombatVector() { x = 0,y = 0});

@@ -26,9 +26,9 @@ namespace JFrame
             count = 0;
         }
 
-        public override void Update(BattleFrame frame)
+        protected override void OnUpdate(BattleFrame frame)
         {
-            base.Update(frame);
+            base.OnUpdate(frame);
 
             if (!isExecuting)
                 return;

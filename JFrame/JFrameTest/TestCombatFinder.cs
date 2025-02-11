@@ -9,10 +9,24 @@ namespace JFrameTest
 {
     public class TestCombatFinder
     {
+        CombatExtraData fakeExtraData;
+        CombatUnit fakeUnit1;
+        CombatUnit fakeUnit2;
+        CombatUnit fakeUnit3;
+        CombatContext fakeContext;
+        CombatManager fakeManager;
+
         [SetUp]
         public void SetUp()
         {
-            //combatManager = new CombatManager();
+            fakeExtraData = Substitute.For<CombatExtraData>();
+            fakeUnit1 = Substitute.For<CombatUnit>();
+            fakeUnit2 = Substitute.For<CombatUnit>();
+            fakeUnit3 = Substitute.For<CombatUnit>();
+            fakeContext = Substitute.For<CombatContext>();
+            fakeManager = Substitute.For<CombatManager>();
+            fakeContext.CombatManager.Returns(fakeManager);
+            fakeExtraData.Caster.Returns(fakeUnit1);
         }
 
 
@@ -23,35 +37,118 @@ namespace JFrameTest
         }
 
         [Test]
-        public void TestCombatActionComponentGetNearestOppoUnit()
+        public void TestFindSelf()
         {
             //arrange
-            var component = Substitute.For<CombatBaseFinder>();
-
-            var context = Substitute.For<CombatContext>();
-            var combatManager = Substitute.For<CombatManager>();
-            var my = Substitute.For<CombatUnit>();
-            my.GetPosition().Returns(new CombatVector() { x = -1 });
-            var acition = Substitute.For<CombatUnitAction>();
-            acition.Owner.Returns(my);
-            var unit1 = Substitute.For<CombatUnit>();
-            var unit2 = Substitute.For<CombatUnit>();
-            unit1.GetPosition().Returns(new CombatVector() { x = 1 });
-            unit2.GetPosition().Returns(new CombatVector() { x = 2 });
-            var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
-            var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
-            combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
-            combatManager.GetUnitsInRange(Arg.Any<CombatUnit>(), Arg.Any<int>(), Arg.Any<float>(), Arg.Any<bool>(), Arg.Any<bool>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
-            component.Owner.Returns(acition);
-            context.CombatManager.Returns(combatManager);
-            component.Initialize(context, new float[] { 4 });//攻擊距離
+            var findSelf = new FinderFindSelf();
+            fakeExtraData.Caster.Returns(fakeUnit1);
 
             //act
-            var lst = component.GetNearestOppoUnitInRange(new CombatExtraData(), 1);
+            var targets = findSelf.FindTargets(fakeExtraData);
+
 
             //expect
-            Assert.AreEqual(unit1, lst[0]);
+            Assert.AreEqual(fakeUnit1, targets[0]);
+
+        }
+
+        [Test]
+        public void TestFinderFindNearest()
+        {
+            //arrage
+            var finder = new FinderFindNearest();
+            finder.Initialize(fakeContext, new float[] { 1, 0, 0, 0, 2, 5f }); //找敌方5米内的1个单位
+
+            fakeManager.GetOppoTeamId(fakeExtraData.Caster).Returns(1);
+            fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
+            fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
+            fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
+            fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
+            fakeUnit1.IsAlive().Returns(true);
+            fakeUnit2.IsAlive().Returns(true);
+            fakeUnit3.IsAlive().Returns(true);
+
+            //act 
+            var result = finder.FindTargets(fakeExtraData);
+
+            //expect
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(fakeUnit3 , result[0]);
+        }
+
+        [Test]
+        public void TestFinderFindNearestByMainType()
+        {
+            //arrage
+            var finder = new FinderFindNearest();
+            finder.Initialize(fakeContext, new float[] { 1, 3, 0, 0, 2, 5f }); //找敌方5米内的1个单位
+
+            fakeManager.GetOppoTeamId(fakeExtraData.Caster).Returns(1);
+            fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
+            fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
+            fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
+            fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
+            fakeUnit2.IsMainType(UnitMainType.Monster).Returns(true);
+            fakeUnit3.IsMainType(UnitMainType.Monster).Returns(true);
+            fakeUnit1.IsAlive().Returns(true);
+            fakeUnit2.IsAlive().Returns(true);
+            fakeUnit3.IsAlive().Returns(true);
+
+            //act 
+            var result = finder.FindTargets(fakeExtraData);
+
+            //expect
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(fakeUnit3, result[0]);
+        }
+
+
+        [Test]
+        public void TestFinderFindHpLessThanPercent()
+        {
+            //arrange
+            var finder = new FinderFindHpLessThanPercent();
+            finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 2, 0.5f }); //找友军低于50%生命的单位
+            fakeManager.GetFriendTeamId(fakeExtraData.Caster).Returns(0);
+            fakeManager.GetUnits(0, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
+            fakeUnit1.GetHpPercent().Returns(0.8f);
+            fakeUnit2.GetHpPercent().Returns(0.4f);
+            fakeUnit3.GetHpPercent().Returns(0.1f);
+            fakeUnit1.IsAlive().Returns(true);
+            fakeUnit2.IsAlive().Returns(true);
+            fakeUnit3.IsAlive().Returns(true);
+
+            //act
+            var result = finder.FindTargets(fakeExtraData);
+
+            //expect
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(fakeUnit2, result[0]);
+            Assert.AreEqual(fakeUnit3, result[1]);
+        }
+
+        [Test]
+        public void TestFinderRangeByTarget()
+        {
+            //arrange
+            var finder = new FinderFindRangeByTargets();
+            finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 8, 30f }); //找友军低于50%生命的单位
+            fakeExtraData.Targets.Returns(new List<CombatUnit>() { fakeUnit1 });
+            fakeManager.GetFriendTeamId(fakeExtraData.Targets[0]).Returns(1);
+            fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
+            fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
+            fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
+            fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
+            fakeUnit1.IsAlive().Returns(true);
+            fakeUnit2.IsAlive().Returns(true);
+            fakeUnit3.IsAlive().Returns(true);
+
+            //act
+            var result = finder.FindTargets(fakeExtraData);
+
+            //expect
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(fakeUnit1, result[0]);
         }
     }
 

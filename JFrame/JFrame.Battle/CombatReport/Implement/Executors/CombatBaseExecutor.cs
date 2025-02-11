@@ -78,6 +78,7 @@ namespace JFrame
         protected List<CombatUnit> GetTargets(CombatExtraData extraData)
         {
             List<CombatUnit> targets = new List<CombatUnit>();
+
             if (finder != null)
             {
                 targets = finder.FindTargets(extraData);
@@ -91,6 +92,11 @@ namespace JFrame
             }
 
             return targets;
+        }
+
+        protected override void OnUpdate(BattleFrame frame)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

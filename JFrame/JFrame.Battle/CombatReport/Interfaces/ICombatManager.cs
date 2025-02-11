@@ -91,6 +91,13 @@ namespace JFrame
         /// <returns></returns>
         List<TUnit> GetUnits(int teamId, bool mainTarget);
 
+
+        /// <summary>
+        /// 获取所有单位
+        /// </summary>
+        /// <returns></returns>
+        List<TUnit> GetUnits(bool findMode);
+
         /// <summary>
         /// 指定距離的單位(可能只找主目标)
         /// </summary>

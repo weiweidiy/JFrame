@@ -8,6 +8,11 @@ namespace JFrame
     /// </summary>
     public class ExecutorCombatDamage : ExecutorCombatNormal
     {
+        public override int GetValidArgsCount()
+        {
+            return 2;
+        }
+
         public ExecutorCombatDamage(ICombatFinder combinFinder) : base(combinFinder)
         {
         }
@@ -26,5 +31,7 @@ namespace JFrame
         {
             target.OnDamage(data);
         }
+
+
     }
 }

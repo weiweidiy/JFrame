@@ -6,7 +6,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IExtraDataClaimable
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionContent
     {
         //public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -95,7 +95,10 @@ namespace JFrame
         /// </summary>
         bool isMoving;
 
-
+        /// <summary>
+        /// 单位类型
+        /// </summary>
+        int unitType; //主类型，子类型
 
         /// <summary>
         /// 初始化
@@ -104,16 +107,19 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(string uid, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager /*List<IUnique> attributes*/)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager /*List<IUnique> attributes*/)
         {
             this.context = context;
-            Uid = uid;
+            Uid = unitInfo.uid;
+            unitType = 0;
+            unitType |= (int)unitInfo.mainType;
+            unitType |= (int)unitInfo.unitSubType;
             actionManager = new CombatActionManager();
             bufferManager = new CombatBufferManager();
             this.attributeManger = attributeManager;
 
             _extraData = new CombatExtraData();
-            _extraData.SourceUnit = this;
+            _extraData.Caster = this;
             _extraData.Value = (long)GetAttributeCurValue(PVPAttribute.ATK);
 
             if (actions != null)
@@ -290,8 +296,41 @@ namespace JFrame
             throw new Exception("沒有找到Hp屬性");
         }
 
+        /// <summary>
+        /// 获取hp比率
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public virtual double GetHpPercent()
+        {
+            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
+            if (hpAttr != null)
+            {
+                var attr = hpAttr as CombatAttributeLong;
+                return (double)attr.CurValue / attr.MaxValue;
+            }
+            throw new Exception("沒有找到Hp屬性");
+        }
 
+        /// <summary>
+        /// 判断主类型
+        /// </summary>
+        /// <param name="mainType"></param>
+        /// <returns></returns>
+        public virtual bool IsMainType(UnitMainType mainType)
+        {
+            return (unitType & (int)mainType) != 0;
+        }
 
+        /// <summary>
+        /// 判断子类型
+        /// </summary>
+        /// <param name="subType"></param>
+        /// <returns></returns>
+        public virtual bool IsSubType(UnitSubType subType)
+        {
+            return (unitType & (int)subType) != 0;
+        }
 
         public void OnDamage(CombatExtraData extraData)
         {
@@ -465,6 +504,8 @@ namespace JFrame
         {
             return attributeManger;
         }
+
+
 
 
     }

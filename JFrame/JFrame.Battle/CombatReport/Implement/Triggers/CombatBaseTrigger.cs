@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+
     /// <summary>
     /// 觸發器基類
     /// </summary>
-    public abstract class CombatBaseTrigger : BaseActionComponent, ICombatTrigger, IExtraDataClaimable
+    public abstract class CombatBaseTrigger : BaseActionComponent, ICombatTrigger, IActionContent
     {
         /// <summary>
         /// 透傳參數
@@ -23,6 +24,16 @@ namespace JFrame
      
 
         bool isOn;
+
+        /// <summary>
+        /// 查找器
+        /// </summary>
+        protected CombatBaseFinder finder;
+
+        public CombatBaseTrigger(CombatBaseFinder finder)
+        {
+            this.finder = finder;
+        }
 
         /// <summary>
         /// 查詢是否觸發
@@ -57,6 +68,10 @@ namespace JFrame
         public override void OnAttach(CombatAction target)
         {
             base.OnAttach(target);
+        }
+
+        protected override void OnUpdate(BattleFrame frame)
+        {
         }
     }
 }

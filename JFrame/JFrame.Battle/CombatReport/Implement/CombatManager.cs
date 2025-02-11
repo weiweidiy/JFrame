@@ -6,11 +6,34 @@ namespace JFrame
 {
     public enum ActionComponentType
     {
+        ConditionFinder,
         ConditionTrigger,
-        Finder,
         DelayTrigger,
+        ExecutorFinder,
         Executor,
         CdTrigger
+    }
+
+    public enum CombatTeamType
+    {
+        Combine, //组合 类似gjj+hero 公用gjj属性
+        Single,  //独立 每个单位独自计算
+    }
+
+    public enum UnitMainType
+    {
+
+        Gjj = 1 << 0,  //1
+        Hero = 1 << 1, //2
+        Monster = 1 << 2, //4
+        Boss = 1 << 3, //8
+    }
+
+    public enum UnitSubType
+    {
+
+        Ground = 1 << 4, //16
+        Sky = 1 << 5, //32
     }
 
     /// <summary>
@@ -37,6 +60,8 @@ namespace JFrame
         public int id;
         public Dictionary<int, ActionInfo> actionsData;
         public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData;
+        public UnitMainType mainType;
+        public UnitSubType unitSubType;
         public long hp;
         public long maxHp;
         public long atk;
@@ -58,11 +83,7 @@ namespace JFrame
 
     }
 
-    public enum CombatTeamType
-    {
-        Combine, //组合 类似gjj+hero 公用gjj属性
-        Single,  //独立 每个单位独自计算
-    }
+
 
     public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, CombatUnit>
     {
@@ -227,10 +248,28 @@ namespace JFrame
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        public virtual List<CombatUnit> GetUnits(int teamId, bool mainTarget = false)
+        public virtual List<CombatUnit> GetUnits(int teamId, bool findMode = false)
         {
             var team = GetTeam(teamId);
-            return team.GetUnits(mainTarget);
+            return team.GetUnits(findMode);
+        }
+
+        /// <summary>
+        /// 获取所有单位
+        /// </summary>
+        /// <param name="findMode"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<CombatUnit> GetUnits(bool findMode)
+        {
+            var result = new List<CombatUnit>();
+
+            foreach (var team in teams.Values)
+            {
+                result.AddRange(team.GetUnits(findMode));
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -344,7 +383,7 @@ namespace JFrame
 
         public void Start()
         {
-            foreach(var team in teams.Values)
+            foreach (var team in teams.Values)
             {
                 team.Start();
             }
@@ -352,7 +391,9 @@ namespace JFrame
 
         public void Stop()
         {
-            
+
         }
+
+
     }
 }

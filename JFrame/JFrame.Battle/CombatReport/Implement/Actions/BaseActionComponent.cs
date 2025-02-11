@@ -29,12 +29,20 @@ namespace JFrame
         protected CombatContext context;
 
         /// <summary>
+        /// 是否启动了
+        /// </summary>
+        bool isStart; 
+
+        /// <summary>
         /// 初始化组件
         /// </summary>
         /// <param name="context"></param>
         /// <param name="args"></param>
         public void Initialize(CombatContext context, float[] args)
         {
+            if (args.Length != GetValidArgsCount())
+                throw new ArgumentException($"参数数量不正确{GetType().ToString()} 需要 {GetValidArgsCount()} 实际{args.Length}");
+
             this.context = context;
             originArgs = args;
             SetCurArgs(originArgs);
@@ -88,7 +96,12 @@ namespace JFrame
             return curArgs[index];
         }
 
-        public virtual void Update(BattleFrame frame) { }
+        public void Update(BattleFrame frame) {
+            if (isStart)
+                OnUpdate(frame);
+        }
+
+        protected abstract void OnUpdate(BattleFrame frame);
 
 
         public virtual void OnAttach(CombatAction target)
@@ -104,7 +117,13 @@ namespace JFrame
         /// <summary>
         /// 所有组件都完成了初始化了
         /// </summary>
-        public void OnStart() { }
+        public virtual void OnStart() {
+
+            isStart = true;
+
+        }
+
+        public abstract int GetValidArgsCount();
     }
 
 }

@@ -45,6 +45,7 @@ namespace JFrameTest
             var frame = new BattleFrame();
 
             //act
+            executor.OnStart();
             executor.Execute(extraData);
             executor.Update(frame);
 
@@ -61,6 +62,7 @@ namespace JFrameTest
             extraData.Value = 10;
             var frame = new BattleFrame();
             //act
+            executor.OnStart();
             executor.Execute(extraData);
             executor.Update(frame);
             executor.Update(frame);
@@ -80,6 +82,7 @@ namespace JFrameTest
             extraData.Value = 10;
             var frame = new BattleFrame();
             //act
+            executor.OnStart();
             executor.Execute(extraData);
             executor.Update(frame);
             executor.Update(frame);

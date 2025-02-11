@@ -18,6 +18,19 @@ namespace JFrame
         /// <returns></returns>
         public abstract ActionMode GetActionMode();
 
+
+        /// <summary>
+        /// 获取条件查找器
+        /// </summary>
+        /// <returns></returns>
+        public abstract int GetConditionFindersId();
+
+        /// <summary>
+        /// 获取条件查找器参数
+        /// </summary>
+        /// <returns></returns>
+        public abstract float[] GetConditionFindersArgs();
+
         /// <summary>
         /// 获取所有条件触发器id列表
         /// </summary>
@@ -29,9 +42,9 @@ namespace JFrame
         /// 获取参数列表
         /// </summary>
         /// <param name="aciontId"></param>
-        /// <param name="triggerIndex"></param>
+        /// <param name="index"></param>
         /// <returns></returns>
-        public abstract float[] GetConditionTriggersArgs(int triggerIndex);
+        public abstract float[] GetConditionTriggersArgs(int index);
 
         /// <summary>
         /// 延迟生效触发器

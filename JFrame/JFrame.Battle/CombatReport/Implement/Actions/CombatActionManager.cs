@@ -20,7 +20,7 @@ namespace JFrame
         float curDuration = 0f;
         float deltaTime = 0f;
 
-        public void Initialize(IExtraDataClaimable extraClaimable)
+        public void Initialize(IActionContent extraClaimable)
         {
             foreach(var action in GetAll())
             {

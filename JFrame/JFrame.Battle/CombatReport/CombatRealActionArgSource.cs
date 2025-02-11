@@ -97,6 +97,16 @@
             }
         }
 
+        public override int GetConditionFindersId()
+        {
+            return 0;
+        }
+
+        public override float[] GetConditionFindersArgs()
+        {
+            return new float[] { };
+        }
+
         public override float[] GetConditionTriggersArgs(int triggerIndex)
         {
             switch (actionId)

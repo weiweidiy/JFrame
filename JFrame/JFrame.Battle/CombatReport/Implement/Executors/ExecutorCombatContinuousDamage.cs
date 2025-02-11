@@ -8,13 +8,16 @@
 
         float delta = 0f;
 
-
+        public override int GetValidArgsCount()
+        {
+            return 4;
+        }
 
         public ExecutorCombatContinuousDamage(ICombatFinder combinFinder) : base(combinFinder)
         {
         }
 
-        public override void Update(BattleFrame frame)
+        protected override void OnUpdate(BattleFrame frame)
         {
            // base.Update(frame);
 
@@ -50,5 +53,7 @@
             base.Reset();
             delta = 0f;
         }
+
+
     }
 }

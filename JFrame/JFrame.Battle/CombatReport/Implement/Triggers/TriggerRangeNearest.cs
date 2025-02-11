@@ -1,45 +1,54 @@
-﻿using JFrame.Common;
-using System;
-using System.Collections.Generic;
+﻿//using JFrame.Common;
+//using System;
+//using System.Collections.Generic;
 
-namespace JFrame
-{
-    /// <summary>
-    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 1  参数：0 查找数量 1 攻击距离
-    /// </summary>
-    public class TriggerRangeNearest : TriggerRange
-    {
-        protected Utility utility = new Utility();
+//namespace JFrame
+//{
+//    /// <summary>
+//    /// 距離觸發器，如果距離内有單位則觸發 目標最近的單位 type = 1  参数：0 查找数量 1：队伍参数 0=友军 1=敌军 2 攻击距离
+//    /// </summary>
+//    public class TriggerRangeNearest : TriggerRange
+//    {
+//        protected Utility utility = new Utility();
 
-        protected override void SortList(List<CombatUnit> list, float myXPosition)
-        {
-            utility.BinarySort<CombatUnit>(list, new Compare(myXPosition));
-        }
+//        public TriggerRangeNearest(CombatBaseFinder finder) : base(finder)
+//        {
+//        }
 
-        /// <summary>
-        /// 按距離由近到遠
-        /// </summary>
-        class Compare : IComparer<CombatUnit>
-        {
-            float myX;
-            public Compare(float myX)
-            {
-                this.myX = myX;
-            }
+//        public override int GetValidArgsCount()
+//        {
+//            return 3;
+//        }
 
-            int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
-            {
-                var unit1 = x as CombatUnit;
-                var unit2 = y as CombatUnit;
+//        protected override void SortList(List<CombatUnit> list, float myXPosition)
+//        {
+//            utility.BinarySort<CombatUnit>(list, new Compare(myXPosition));
+//        }
 
-                if (Math.Abs(myX - unit1.GetPosition().x) > Math.Abs(myX - unit2.GetPosition().x))
-                    return 1;
+//        /// <summary>
+//        /// 按距離由近到遠
+//        /// </summary>
+//        class Compare : IComparer<CombatUnit>
+//        {
+//            float myX;
+//            public Compare(float myX)
+//            {
+//                this.myX = myX;
+//            }
 
-                if (Math.Abs(myX - unit1.GetPosition().x) < Math.Abs(myX - unit2.GetPosition().x))
-                    return -1;
+//            int IComparer<CombatUnit>.Compare(CombatUnit x, CombatUnit y)
+//            {
+//                var unit1 = x as CombatUnit;
+//                var unit2 = y as CombatUnit;
 
-                return 0;
-            }
-        }
-    }
-}
+//                if (Math.Abs(myX - unit1.GetPosition().x) > Math.Abs(myX - unit2.GetPosition().x))
+//                    return 1;
+
+//                if (Math.Abs(myX - unit1.GetPosition().x) < Math.Abs(myX - unit2.GetPosition().x))
+//                    return -1;
+
+//                return 0;
+//            }
+//        }
+//    }
+//}
