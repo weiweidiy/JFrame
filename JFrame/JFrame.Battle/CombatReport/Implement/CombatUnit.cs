@@ -107,7 +107,7 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager /*List<IUnique> attributes*/)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager)
         {
             this.context = context;
             Uid = unitInfo.uid;

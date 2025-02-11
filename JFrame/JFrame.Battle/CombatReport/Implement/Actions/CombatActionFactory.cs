@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateUnitActions(Dictionary<int,ActionInfo> actionsInfo, CombatUnit owner, CombatContext context)
+        public List<CombatAction> CreateActions(Dictionary<int,ActionInfo> actionsInfo, IActionContent owner, CombatContext context)
         {
             if (actionsInfo == null)
                 return null;
