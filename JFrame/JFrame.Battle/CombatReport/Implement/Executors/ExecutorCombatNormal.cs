@@ -10,7 +10,7 @@ namespace JFrame
         protected int count = 0;
 
 
-        public ExecutorCombatNormal(ICombatFinder combinFinder) : base(combinFinder)
+        public ExecutorCombatNormal(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
         {
         }
 
@@ -48,26 +48,38 @@ namespace JFrame
         {
             List<CombatUnit> targets = GetTargets(extraData);
 
-            var d = extraData.Clone() as CombatExtraData;
+            var ExecutorExtraData = extraData.Clone() as CombatExtraData;
+
+            double baseValue = 1;
+            if(formula != null)
+            {
+                baseValue = formula.GetBaseValue(ExecutorExtraData);
+            }
+
             //获取数值
-            d.Value = GetValue();    
+            ExecutorExtraData.Value = baseValue * GetExecutorValueRate();
+
             //即将命中
-            NotifyHittingTargets(d);
+            NotifyHittingTargets(ExecutorExtraData);
 
             foreach (var target in targets)
             {
-                var data = d.Clone() as CombatExtraData;
+                var data = ExecutorExtraData.Clone() as CombatExtraData;
                 data.Target = target;
                 NotifyHittingTarget(data); //即将命中单个单位
                 DoHit(target, data);
-                NotifyTargetHittedComplete(d);
+                NotifyTargetHittedComplete(ExecutorExtraData);
             }
             //命中完成了
             NotifyTargetsHittedComplete(extraData);
             count++;
         }
 
-        protected abstract long GetValue();
+        /// <summary>
+        /// 执行参数倍率
+        /// </summary>
+        /// <returns></returns>
+        protected abstract double GetExecutorValueRate();
 
         protected abstract void DoHit(CombatUnit target, CombatExtraData data);
     }

@@ -18,7 +18,6 @@ namespace JFrame
         /// <returns></returns>
         public abstract ActionMode GetActionMode();
 
-
         /// <summary>
         /// 获取条件查找器
         /// </summary>
@@ -71,6 +70,18 @@ namespace JFrame
         /// <param name="index"></param>
         /// <returns></returns>
         public abstract float[] GetFindersArgs(int index);
+
+        /// <summary>
+        /// 公式计算器
+        /// </summary>
+        /// <returns></returns>
+        public abstract int GetFormulaId();
+
+        /// <summary>
+        /// 公式计算器参数
+        /// </summary>
+        /// <returns></returns>
+        public abstract float[] GetFormulaArgs();
 
         /// <summary>
         /// 获取执行器id列表

@@ -2,7 +2,6 @@
 
 namespace JFrame
 {
-
     /// <summary>
     /// 普通傷害執行器 只能打1次 type = 1 參數：0：执行時間 1：傷害加成
     /// </summary>
@@ -13,18 +12,18 @@ namespace JFrame
             return 2;
         }
 
-        public ExecutorCombatDamage(ICombatFinder combinFinder) : base(combinFinder)
-        {
-        }
-
-        protected override long GetValue()
-        {
-            return (long)(extraData.Value * GetAtkRateArg());
-        }
-
-        protected float GetAtkRateArg()
+        protected float GetRateArg()
         {
             return GetCurArg(1);
+        }
+
+        public ExecutorCombatDamage(ICombatFinder combinFinder , ICombatFormula formulua) : base(combinFinder, formulua)
+        {
+        }
+
+        protected override double GetExecutorValueRate()
+        {
+            return  GetRateArg();
         }
 
         protected override void DoHit(CombatUnit target, CombatExtraData data)

@@ -28,6 +28,11 @@ namespace JFrame
         protected ICombatFinder finder;
 
         /// <summary>
+        /// 公式计算
+        /// </summary>
+        protected ICombatFormula formula;
+
+        /// <summary>
         /// 是否在执行中
         /// </summary>
         protected bool isExecuting;
@@ -37,9 +42,10 @@ namespace JFrame
         /// </summary>
         protected CombatExtraData extraData;
 
-        public CombatBaseExecutor(ICombatFinder combinFinder)
+        public CombatBaseExecutor(ICombatFinder combinFinder, ICombatFormula formula)
         {
             this.finder = combinFinder;
+            this.formula = formula;
         }
 
         /// <summary>
@@ -82,6 +88,8 @@ namespace JFrame
             if (finder != null)
             {
                 targets = finder.FindTargets(extraData);
+                if (targets != null && targets.Count > 0) //换新的目标了
+                    extraData.Targets = targets;
             }
             else
             {

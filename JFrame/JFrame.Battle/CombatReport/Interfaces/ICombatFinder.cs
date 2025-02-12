@@ -6,6 +6,4 @@ namespace JFrame
     {
         List<CombatUnit> FindTargets(CombatExtraData extraData);
     }
-
-
 }

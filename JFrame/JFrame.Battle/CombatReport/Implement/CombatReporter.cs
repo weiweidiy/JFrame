@@ -115,9 +115,9 @@ namespace JFrame
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
-            reportData.Value = data.Value;
-            reportData.TargetHp = (long)data.Target.GetAttributeCurValue(PVPAttribute.HP);
-            reportData.TargetMaxHp = (long)data.Target.GetAttributeMaxValue(PVPAttribute.HP);
+            reportData.Value = (double)data.Value;
+            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.HP);
+            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.MaxHP);
             reportData.IsCri = data.IsCri;
             reportData.IsBlock = data.IsBlock;
             AddReportData(ReportType.Damage, reportData);
@@ -137,9 +137,9 @@ namespace JFrame
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
-            reportData.Value = data.Value;
-            reportData.TargetHp = (long)data.Target.GetAttributeCurValue(PVPAttribute.HP);
-            reportData.TargetMaxHp = (long)data.Target.GetAttributeMaxValue(PVPAttribute.HP);
+            reportData.Value = (double)data.Value;
+            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.HP);
+            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.MaxHP);
             reportData.IsCri = data.IsCri;
             reportData.IsBlock = data.IsBlock;
             AddReportData(ReportType.Heal, reportData);

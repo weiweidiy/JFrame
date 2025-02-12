@@ -1,6 +1,7 @@
 ﻿using JFrame.BattleReportSystem;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -100,6 +101,8 @@ namespace JFrame
         /// </summary>
         int unitType; //主类型，子类型
 
+
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -107,8 +110,10 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager /*List<IUnique> attributes*/)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager)
         {
+            Clear();
+
             this.context = context;
             Uid = unitInfo.uid;
             unitType = 0;
@@ -118,9 +123,10 @@ namespace JFrame
             bufferManager = new CombatBufferManager();
             this.attributeManger = attributeManager;
 
+            //创建一个透传参数
             _extraData = new CombatExtraData();
             _extraData.Caster = this;
-            _extraData.Value = (long)GetAttributeCurValue(PVPAttribute.ATK);
+            _extraData.Value = (double)GetAttributeCurValue(PVPAttribute.ATK); // to do: 移动到action里去定义
 
             if (actions != null)
             {
@@ -131,53 +137,69 @@ namespace JFrame
             if (buffers != null)
                 bufferManager.AddRange(buffers);
 
+            actionManager.onItemAdded += ActionManager_onItemAdded;
+            actionManager.onItemRemoved += ActionManager_onItemRemoved;
+            actionManager.onItemUpdated += ActionManager_onItemUpdated;
             actionManager.onTriggerOn += ActionManager_onTriggerOn;
             actionManager.onStartExecuting += ActionManager_onStartExecuting;
             actionManager.onStartCD += ActionManager_onStartCD;
 
-            //不能在初始化里跑，team收不到
-            //StartMove();
+            bufferManager.onItemAdded += BufferManager_onItemAdded;
+            bufferManager.onItemRemoved += BufferManager_onItemRemoved;
+            bufferManager.onItemUpdated += BufferManager_onItemUpdated;
         }
 
-        public void Start()
-        {
-            StartMove();
-            StartAction();
-        }
 
-        public void Stop() { StopMove(); }  
-
-
-        private void ActionManager_onTriggerOn(CombatExtraData extraData)
-        {
-            if (GetTargetPostion() != null)
-                return;
-
-            if (extraData.Action.Mode == ActionMode.Passive)
-                return;
-
-            StopMove();
-        }
-
-        private void ActionManager_onStartCD(CombatExtraData extraData)
-        {
-            onActionStartCD?.Invoke(extraData);
-        }
-
-        private void ActionManager_onStartExecuting(CombatExtraData extraData)
-        {
-            onActionCast?.Invoke(extraData);
-        }
-
-        public void Release()
+        /// <summary>
+        /// 清理
+        /// </summary>
+        public void Clear()
         {
             Uid = "";
             bufferManager = null;
             actionManager = null;
             attributeManger = null;
             isMoving = false;
+            _extraData = null;
+            context = null;
+            unitType = 0;
         }
 
+
+
+        #region unit接口
+
+        /// <summary>
+        /// 开始
+        /// </summary>
+        public void Start()
+        {
+            StartMove();
+            StartAction();
+        }
+
+        /// <summary>
+        /// 停止
+        /// </summary>
+        public void Stop()
+        {
+            StopMove();
+        }
+
+        /// <summary>
+        /// 更新逻辑
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            actionManager.Update(frame);
+            bufferManager.Update(frame);
+        }
+
+        /// <summary>
+        /// 更新坐标
+        /// </summary>
+        /// <param name="frame"></param>
         public void UpdatePosition(BattleFrame frame)
         {
             if (IsMoving())   //只是自己移动了，其他单位还没有移动
@@ -191,11 +213,147 @@ namespace JFrame
             }
         }
 
-        public void Update(BattleFrame frame)
+        /// <summary>
+        /// 开始移动
+        /// </summary>
+        public void StartMove()
         {
-            actionManager.Update(frame); 
-            bufferManager.Update(frame);
+            isMoving = true;
+            _extraData.Velocity = GetSpeed();
+            onStartMove?.Invoke(_extraData);
+        }
 
+        /// <summary>
+        /// 停止移动
+        /// </summary>
+        public void StopMove()
+        {
+            isMoving = false;
+            onEndMove?.Invoke(_extraData);
+        }
+
+        /// <summary>
+        /// 开始动作
+        /// </summary>
+        void StartAction()
+        {
+            actionManager.Start();
+        }
+        /// <summary>
+        /// 判断主类型
+        /// </summary>
+        /// <param name="mainType"></param>
+        /// <returns></returns>
+        public virtual bool IsMainType(UnitMainType mainType)
+        {
+            return (unitType & (int)mainType) != 0;
+        }
+
+        /// <summary>
+        /// 判断子类型
+        /// </summary>
+        /// <param name="subType"></param>
+        /// <returns></returns>
+        public virtual bool IsSubType(UnitSubType subType)
+        {
+            return (unitType & (int)subType) != 0;
+        }
+
+        /// <summary>
+        /// 获取目标点位
+        /// </summary>
+        /// <returns></returns>
+        public CombatVector GetTargetPostion()
+        {
+            return targetPsoition;
+        }
+
+        /// <summary>
+        /// 設置坐標
+        /// </summary>
+        /// <param name="position"></param>
+        public void SetPosition(CombatVector position)
+        {
+            this.position = position;
+        }
+
+        /// <summary>
+        /// 設置速度，目前只在初始化时候设置
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void SetSpeed(CombatVector speed)
+        {
+            velocity = speed;
+        }
+
+        /// <summary>
+        /// 设置目标点
+        /// </summary>
+        /// <param name="position"></param>
+        public void SetTargetPosition(CombatVector position)
+        {
+            targetPsoition = position;
+        }
+
+        /// <summary>
+        /// 是否移动
+        /// </summary>
+        /// <returns></returns>
+        public bool IsMoving()
+        {
+            return isMoving;
+        }
+
+        /// <summary>
+        /// 获取当前坐标
+        /// </summary>
+        /// <returns></returns>
+        public virtual CombatVector GetPosition()
+        {
+            return position;
+        }
+
+        /// <summary>
+        /// 获取移动速度
+        /// </summary>
+        /// <returns></returns>
+        public CombatVector GetSpeed()
+        {
+            return velocity;
+        }
+        #endregion
+
+        #region 属性接口
+
+        /// <summary>
+        /// 添加一个加成值
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="value"></param>
+        public void AddExtraValue(PVPAttribute attrType, string uid, double value)
+        {
+            var item = GetAttributeManager().Get(attrType.ToString());
+            var attr = item as CombatAttributeDouble;
+            if (attr == null)
+                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+
+            attr.AddExtraValue(uid, value);
+        }
+
+        /// <summary>
+        /// 移除一个加成值
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public bool RemoveExtraValue(PVPAttribute attrType, string uid)
+        {
+            var item = GetAttributeManager().Get(attrType.ToString());
+            var attr = item as CombatAttributeDouble;
+            if (attr == null)
+                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+
+            return attr.RemoveExtraValue(uid);
         }
 
         /// <summary>
@@ -234,36 +392,6 @@ namespace JFrame
             throw new Exception("沒有找到屬性" + attribute.ToString());
         }
 
-        public virtual object GetAttributeMaxValue(PVPAttribute attribute)
-        {
-            if (attributeManger == null)
-                throw new Exception("combat unit attributemanager = null ");
-
-            var attr = attributeManger.Get(attribute.ToString());
-            if (attr != null)
-            {
-                if (attr is CombatAttributeLong)
-                {
-                    var fattr = attr as CombatAttributeLong;
-                    return fattr.MaxValue;
-                }
-
-                if (attr is CombatAttributeDouble)
-                {
-                    var fattr = attr as CombatAttributeDouble;
-                    return fattr.MaxValue;
-                }
-
-                if (attr is CombatAttributeInt)
-                {
-                    var fattr = attr as CombatAttributeInt;
-                    return fattr.MaxValue;
-                }
-
-            }
-            throw new Exception("沒有找到屬性" + attribute.ToString());
-        }
-
         /// <summary>
         /// 是否還活著
         /// </summary>
@@ -274,7 +402,7 @@ namespace JFrame
             var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
             if (hpAttr != null)
             {
-                var attr = hpAttr as CombatAttributeLong;
+                var attr = hpAttr as CombatAttributeDouble;
                 return attr.CurValue > 0;
             }
             throw new Exception("沒有找到Hp屬性");
@@ -288,10 +416,12 @@ namespace JFrame
         public bool IsHpFull()
         {
             var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
-            if (hpAttr != null)
+            var maxHpAttr = GetAttributeManager().Get(PVPAttribute.MaxHP.ToString());
+            if (hpAttr != null && maxHpAttr != null)
             {
-                var attr = hpAttr as CombatAttributeLong;
-                return attr.IsMax();
+                var attr = hpAttr as CombatAttributeDouble;
+                var attr2 = maxHpAttr as CombatAttributeDouble;
+                return attr.CurValue == attr2.CurValue;
             }
             throw new Exception("沒有找到Hp屬性");
         }
@@ -304,34 +434,135 @@ namespace JFrame
         public virtual double GetHpPercent()
         {
             var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
-            if (hpAttr != null)
+            var maxHpAttr = GetAttributeManager().Get(PVPAttribute.MaxHP.ToString());
+            if (hpAttr != null && maxHpAttr != null)
             {
-                var attr = hpAttr as CombatAttributeLong;
-                return (double)attr.CurValue / attr.MaxValue;
+                var attr = hpAttr as CombatAttributeDouble;
+                var attr2 = maxHpAttr as CombatAttributeDouble;
+                return attr.CurValue / attr2.CurValue;
             }
             throw new Exception("沒有找到Hp屬性");
         }
 
         /// <summary>
-        /// 判断主类型
+        /// 获取属性管理器
         /// </summary>
-        /// <param name="mainType"></param>
         /// <returns></returns>
-        public virtual bool IsMainType(UnitMainType mainType)
+        public virtual CombatAttributeManger GetAttributeManager()
         {
-            return (unitType & (int)mainType) != 0;
+            return attributeManger;
+        }
+        #endregion
+
+        #region action接口
+
+        /// <summary>
+        /// 添加action
+        /// </summary>
+        /// <param name="action"></param>
+        public void AddAction(CombatAction action) => actionManager.AddItem(action);
+
+        /// <summary>
+        /// 移除action
+        /// </summary>
+        /// <param name="action"></param>
+        public void RemoveAction(CombatAction action) => actionManager.RemoveItem(action);
+
+        /// <summary>
+        /// 更新action
+        /// </summary>
+        /// <param name="action"></param>
+        public void UpdateAction(CombatAction action) => actionManager.UpdateItem(action);
+
+        /// <summary>
+        /// 獲取所有action
+        /// </summary>
+        /// <returns></returns>
+        public List<CombatAction> GetActions() => actionManager.GetAll();
+
+
+        private void ActionManager_onItemUpdated(CombatAction obj)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ActionManager_onItemRemoved(CombatAction obj)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ActionManager_onItemAdded(List<CombatAction> obj)
+        {
+            //throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 判断子类型
+        /// 触发了
         /// </summary>
-        /// <param name="subType"></param>
-        /// <returns></returns>
-        public virtual bool IsSubType(UnitSubType subType)
+        /// <param name="extraData"></param>
+        private void ActionManager_onTriggerOn(CombatExtraData extraData)
         {
-            return (unitType & (int)subType) != 0;
+            if (GetTargetPostion() != null)
+                return;
+
+            if (extraData.Action.Mode == ActionMode.Passive)
+                return;
+
+            StopMove();
         }
 
+        /// <summary>
+        /// action进入cd了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onStartCD(CombatExtraData extraData) => onActionStartCD?.Invoke(extraData);
+
+        /// <summary>
+        /// action开始释放了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onStartExecuting(CombatExtraData extraData) => onActionCast?.Invoke(extraData);
+        #endregion
+
+        #region buffer接口
+
+        /// <summary>
+        /// 添加一个buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void AddBuffer(CombatBuffer buffer)
+        {
+            bufferManager.Add(buffer);
+        }
+
+        public void RemoveBuffer(CombatBuffer buffer)
+        {
+            bufferManager.Remove(buffer.Uid);
+        }
+
+        public void UpdateBuffer(CombatBuffer buffer)
+        {
+            bufferManager.Update(buffer);
+        }
+
+        private void BufferManager_onItemUpdated(CombatBuffer obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BufferManager_onItemRemoved(CombatBuffer obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BufferManager_onItemAdded(List<CombatBuffer> obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region 战斗接口
         public void OnDamage(CombatExtraData extraData)
         {
             //to do: 添加一个预伤害事件，可以修改值
@@ -345,11 +576,11 @@ namespace JFrame
 
             var damage = extraData.Value;
 
-            var attr = hpAttr as CombatAttributeLong;
+            var attr = hpAttr as CombatAttributeDouble;
             if (attr.CurValue <= 0 || damage == 0)
                 return;
 
-            attr.Minus(damage);
+            attr.Minus((long)damage);
 
             //onDamaged?.Invoke(hitter, action, this, damage);
             onDamaged?.Invoke(extraData);
@@ -388,10 +619,18 @@ namespace JFrame
             var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
             if (hpAttr == null)
                 throw new Exception("沒有找到Hp屬性 " + Uid);
+            var maxHpAttr = attrManager.Get(PVPAttribute.MaxHP.ToString());
+            if (maxHpAttr == null)
+                throw new Exception("沒有找到MaxHp屬性 " + Uid);
 
-            var healValue = extraData.Value;
-            var attr = hpAttr as CombatAttributeLong;
+
+            var attr = hpAttr as CombatAttributeDouble;
+            var attr2 = maxHpAttr as CombatAttributeDouble;
+
+            var healValue = Math.Min(extraData.Value , attr2.CurValue - attr.CurValue);
             attr.Plus(healValue);
+
+            extraData.Value = healValue;
 
             onHealed?.Invoke(extraData);
         }
@@ -416,96 +655,7 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// 獲取所有action
-        /// </summary>
-        /// <returns></returns>
-        public List<CombatAction> GetActions()
-        {
-            return actionManager.GetAll();
-        }
-
-        /// <summary>
-        /// 設置坐標
-        /// </summary>
-        /// <param name="position"></param>
-        public void SetPosition(CombatVector position)
-        {
-            this.position = position;
-        }
-
-        /// <summary>
-        /// 設置速度，目前只在初始化时候设置
-        /// </summary>
-        /// <param name="speed"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void SetSpeed(CombatVector speed)
-        {
-            velocity = speed;
-        }
-
-        /// <summary>
-        /// 设置目标点
-        /// </summary>
-        /// <param name="position"></param>
-        public void SetTargetPosition(CombatVector position)
-        {
-            targetPsoition = position;
-        }
-
-        /// <summary>
-        /// 获取目标点位
-        /// </summary>
-        /// <returns></returns>
-        public CombatVector GetTargetPostion()
-        {
-            return targetPsoition;
-        }
-        /// <summary>
-        /// 开始移动
-        /// </summary>
-        public void StartMove()
-        {
-            isMoving = true;
-            _extraData.Velocity = GetSpeed();
-            onStartMove?.Invoke(_extraData);
-        }
-
-        /// <summary>
-        /// 停止移动
-        /// </summary>
-        public void StopMove()
-        {
-            isMoving = false;
-            onEndMove?.Invoke(_extraData);
-        }
-
-        public bool IsMoving()
-        {
-            return isMoving;
-        }
-
-        void StartAction()
-        {
-            actionManager.Start();
-        }
-
-        public virtual CombatVector GetPosition()
-        {
-            return position;
-        }
-
-        public CombatVector GetSpeed()
-        {
-            return velocity;
-        }
-
-        public virtual CombatAttributeManger GetAttributeManager()
-        {
-            return attributeManger;
-        }
-
-
+        #endregion
 
 
     }

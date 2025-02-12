@@ -72,7 +72,7 @@ namespace JFrame
                 _extraData = value;
                 _extraData.Action = this;
 
-                foreach(var trigger in conditionTriggers)
+                foreach (var trigger in conditionTriggers)
                 {
                     trigger.ExtraData = _extraData.Clone() as CombatExtraData;
                 }
@@ -108,6 +108,7 @@ namespace JFrame
             this.cdTriggers = cdTriggers;
             this.sm = sm;
             Id = id;
+
             this.Type = type;
             this.Mode = mode;
 

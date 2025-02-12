@@ -10,6 +10,7 @@ namespace JFrame
         ConditionTrigger,
         DelayTrigger,
         ExecutorFinder,
+        ExecuteFormulator,
         Executor,
         CdTrigger
     }

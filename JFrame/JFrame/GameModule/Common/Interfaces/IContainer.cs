@@ -67,6 +67,11 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// 清理
+        /// </summary>
+        void Clear();
     }
 }
 

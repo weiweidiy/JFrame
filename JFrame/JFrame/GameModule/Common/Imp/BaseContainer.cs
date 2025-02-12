@@ -77,7 +77,10 @@ namespace JFrame
             return list.Count;
         }
 
-
+        public virtual void Clear()
+        {
+            list.Clear();
+        }
     }
 }
 

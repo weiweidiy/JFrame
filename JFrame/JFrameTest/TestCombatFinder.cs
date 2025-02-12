@@ -73,7 +73,7 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(fakeUnit3 , result[0]);
+            Assert.AreEqual(fakeUnit3, result[0]);
         }
 
         [Test]
@@ -132,7 +132,31 @@ namespace JFrameTest
         {
             //arrange
             var finder = new FinderFindRangeByTargets();
-            finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 8, 30f }); //找友军低于50%生命的单位
+            finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 3, 30f });
+            fakeExtraData.Targets.Returns(new List<CombatUnit>() { fakeUnit1 });//取3个目标（unit1）左右15米的单位
+            fakeManager.GetFriendTeamId(fakeExtraData.Targets[0]).Returns(1);
+            fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
+            fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
+            fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
+            fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
+            fakeUnit1.IsAlive().Returns(true);
+            fakeUnit2.IsAlive().Returns(true);
+            fakeUnit3.IsAlive().Returns(true);
+
+            //act
+            var result = finder.FindTargets(fakeExtraData);
+
+            //expect
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(fakeUnit1, result[0]);
+        }
+
+        [Test]
+        public void TestFinderRangeByScreen()
+        {
+            //arrange
+            var finder = new FinderFindRangeByScreen();
+            finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 3, 0, 15 });
             fakeExtraData.Targets.Returns(new List<CombatUnit>() { fakeUnit1 });
             fakeManager.GetFriendTeamId(fakeExtraData.Targets[0]).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });

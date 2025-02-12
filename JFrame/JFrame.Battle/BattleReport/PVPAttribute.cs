@@ -2,18 +2,30 @@
 {
     public enum PVPAttribute
     {
-        ATK = 1000,
-        HP,
+        ATK = 101,
+        HP  = 102,
+        CurHp  = 103,
+        MoveSpeed = 104,
+        Critical  = 206, //暴击率
+        CriticalAnti = 207, //暴击抵抗
+        CriticalDamage = 208,
+        Cd = 209, //cd 加成
+        ControlHit = 212,
+        ControlResistance = 213,
+        Hit = 216,
+        Dodge = 217,
+
+
         AtkSpeed,
-        Critical,
-        CriticalDamage,
+
+
         CriticalDamageResist,
         SkillDamageEnhance,
         SkillDamageReduce,
         DamageEnhance,
         DamageReduce,
-        ControlResistance,
-        ControlHit,
+
+  
         Block,
         Puncture,
         ATKRate = 2000,

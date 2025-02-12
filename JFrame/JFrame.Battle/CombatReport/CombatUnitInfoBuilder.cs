@@ -1,0 +1,163 @@
+﻿using System.Collections.Generic;
+using System;
+
+namespace JFrame
+{
+    /// <summary>
+    /// 构建combatunit builder
+    /// </summary>
+    public class CombatUnitInfoBuilder
+    {
+        public GameDataSource DataSource { get; set; }
+        public Dictionary<int, CombatActionArgSource> DicActionArgSource { get; set; }
+
+        /// <summary>
+        /// 返回对应的action参数源对象
+        /// </summary>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        CombatActionArgSource GetActionArgSource(int actionId)
+        {
+            if (DicActionArgSource != null && DicActionArgSource.ContainsKey(actionId))
+                return DicActionArgSource[actionId];
+
+            throw new Exception($"没有找到 action {actionId} 对应的 CombatActionArgSource");
+        }
+
+        /// <summary>
+        /// 构建gjj战斗数据
+        /// </summary>
+        /// <param name="hp"></param>
+        /// <param name="maxHp"></param>
+        /// <param name="atk"></param>
+        /// <param name="atkSpeed"></param>
+        /// <param name="position"></param>
+        /// <param name="actionsData"></param>
+        /// <returns></returns>
+        public CombatUnitInfo BuildCombatUnit()
+        {
+            var unitInfo = new CombatUnitInfo();
+            unitInfo.uid = DataSource.GetUid();
+            unitInfo.id = DataSource.GetUnitId();
+            unitInfo.hp = DataSource.GetHp();
+            unitInfo.atk = DataSource.GetAtk();
+            unitInfo.maxHp = DataSource.GetMaxHp();
+            unitInfo.position = DataSource.GetPosition();
+            unitInfo.moveSpeed = DataSource.GetVelocity();
+            unitInfo.targetPosition = DataSource.GetTargetPosition();
+            var actionIds = DataSource.GetActions();
+            var actionsData = CreateActions(actionIds);
+            unitInfo.actionsData = actionsData;
+            return unitInfo;
+        }
+
+
+        Dictionary<int, ActionInfo> CreateActions(List<int> actionsId)
+        {
+            var result = new Dictionary<int, ActionInfo>();
+
+            foreach (var id in actionsId)
+            {
+                var actionInfo = CreateActionInfo(id);
+                result.Add(id, actionInfo);
+            }
+
+            return result;
+        }
+
+
+        ActionInfo CreateActionInfo(int actionId)
+        {
+            var actionInfo = new ActionInfo();
+
+            var argSource = GetActionArgSource(actionId);
+            if (argSource == null)
+                throw new Exception("没有找到指定actionid 的argsource " + actionId);
+
+            actionInfo.type = argSource.GetActionType();
+            actionInfo.mode = argSource.GetActionMode();
+            actionInfo.uid = Guid.NewGuid().ToString();
+
+            var dicComponentInfo = new Dictionary<ActionComponentType, List<ActionComponentInfo>>();
+
+            //条件finder
+            var conditionFinders = new List<ActionComponentInfo>();
+            var conditionFinder = new ActionComponentInfo() { id = argSource.GetConditionFindersId(), args = argSource.GetConditionFindersArgs() }; //时间触发器， 时长
+            conditionFinders.Add(conditionFinder);
+            dicComponentInfo.Add(ActionComponentType.ConditionFinder, conditionFinders);
+
+
+            //条件触发器
+            var conditionTriggers = new List<ActionComponentInfo>();
+            var conditionTriggersId = argSource.GetConditionTriggersId();
+            for (int i = 0; i < conditionTriggersId.Length; i++)
+            {
+                var id = conditionTriggersId[i];
+                var index = i;
+                var conditionTrigger = new ActionComponentInfo() { id = id, args = argSource.GetConditionTriggersArgs(index) }; //查找最近单位触发器 攻击距离， 查找个数
+                conditionTriggers.Add(conditionTrigger);
+            }
+            dicComponentInfo.Add(ActionComponentType.ConditionTrigger, conditionTriggers);
+
+            //延迟触发器
+            var delayTriggers = new List<ActionComponentInfo>();
+            var delayTrigger = new ActionComponentInfo() { id = argSource.GetDelayTriggerId(), args = argSource.GetDelayTriggerArgs() }; //时间触发器， 时长
+            delayTriggers.Add(delayTrigger);
+            dicComponentInfo.Add(ActionComponentType.DelayTrigger, delayTriggers);
+
+
+
+            //公式计算器
+            var formulas = new List<ActionComponentInfo>();
+            var formula = new ActionComponentInfo() { id = argSource.GetFormulaId(), args = argSource.GetFormulaArgs() }; //
+            formulas.Add(formula);
+            dicComponentInfo.Add(ActionComponentType.ExecuteFormulator, formulas);
+
+
+            //查找器
+            var finders = new List<ActionComponentInfo>();
+            var findersId = argSource.GetFindersId();
+            for (int i = 0; i < findersId.Length; i++)
+            {
+                var id = findersId[i];
+                var index = i;
+                var finder = new ActionComponentInfo() { id = id, args = argSource.GetFindersArgs(index) }; //查找最近单位触发器 攻击距离， 查找个数
+                finders.Add(finder);
+            }
+            dicComponentInfo.Add(ActionComponentType.ExecutorFinder, finders);
+
+            //执行器
+            var executors = new List<ActionComponentInfo>();
+            var executorsId = argSource.GetExecutorsId();
+            for (int i = 0; i < executorsId.Length; i++)
+            {
+                var id = executorsId[i];
+                var index = i;
+                var executor = new ActionComponentInfo() { id = id, args = argSource.GetExecutorsArgs(index) };//伤害触发器， 时长， 伤害倍率
+                executors.Add(executor);
+            }
+            dicComponentInfo.Add(ActionComponentType.Executor, executors);
+
+
+            //cd触发器
+            var cdTriggers = new List<ActionComponentInfo>();
+            var cdTriggersId = argSource.GetCdTriggersId();
+            for (int i = 0; i < cdTriggersId.Length; i++)
+            {
+                var id = cdTriggersId[i];
+                var index = i;
+                var cdTrigger = new ActionComponentInfo() { id = id, args = argSource.GetCdTriggersArgs(index) };//时间触发器， 时长
+                cdTriggers.Add(cdTrigger);
+            }
+            dicComponentInfo.Add(ActionComponentType.CdTrigger, cdTriggers);
+
+            actionInfo.componentInfo = dicComponentInfo;
+            //actionsData.Add(actionId, actionInfo);//actionID
+
+            return actionInfo;
+        }
+
+
+    }
+}

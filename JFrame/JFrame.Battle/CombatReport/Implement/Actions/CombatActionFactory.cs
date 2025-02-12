@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateUnitActions(Dictionary<int,ActionInfo> actionsInfo, CombatUnit owner, CombatContext context)
+        public List<CombatAction> CreateActions(Dictionary<int,ActionInfo> actionsInfo, IActionContent owner, CombatContext context)
         {
             if (actionsInfo == null)
                 return null;
@@ -32,6 +32,7 @@ namespace JFrame
                 var conditionTriggers = dic[ActionComponentType.ConditionTrigger]; //條件觸發器
                 var delayTriggers = dic[ActionComponentType.DelayTrigger];//延遲觸發器(只能有1個)
                 var executorfinders = dic[ActionComponentType.ExecutorFinder]; //执行查找器
+                var executorFormulas = dic[ActionComponentType.ExecuteFormulator];
                 var executors = dic[ActionComponentType.Executor]; //執行器
                 var cdTriggers = dic[ActionComponentType.CdTrigger]; //cd觸發器
                 var unitAction = new CombatUnitAction();
@@ -42,11 +43,12 @@ namespace JFrame
                 var conditionFinder = conditionFinders.Count > 0? conditionFinders[0] : null;
                 var delayTrigger = delayTriggers.Count > 0 ? delayTriggers[0] : null;
                 var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
+                var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
                 unitAction.Initialize(actionId, actionUid, actionType, actionMode
                             , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
                             , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
-                            , CreateExecutors(executors, CreateFinder(executorFinder, context,unitAction), context, unitAction) //执行器
+                            , CreateExecutors(executors, CreateFinder(executorFinder, context,unitAction), CreateFormula(executorFormula,context, unitAction), context, unitAction) //执行器
                             , CreateCdTriggers(cdTriggers, context, unitAction),sm); //cd触发器
 
                 result.Add(unitAction);
@@ -99,13 +101,13 @@ namespace JFrame
         /// <param name="executors"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<CombatBaseExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatBaseFinder finder, CombatContext context, CombatAction owner)
+        private List<CombatBaseExecutor> CreateExecutors(List<ActionComponentInfo> executors, CombatBaseFinder finder, CombatBaseFormula formula, CombatContext context, CombatAction owner)
         {
             var result = new List<CombatBaseExecutor>();
 
             foreach (var componentInfo in executors)
             {
-                var executor = CreateExecutor(componentInfo,finder, context, owner);
+                var executor = CreateExecutor(componentInfo,finder, formula, context, owner);
                 result.Add(executor);
             }
 
@@ -208,6 +210,11 @@ namespace JFrame
                         finder = new FinderFindRangeByTargets();
                     }
                     break;
+                case 6:
+                    {
+                        finder = new FinderFindRangeByScreen();
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
             }
@@ -217,30 +224,56 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 公式计算器
+        /// </summary>
+        /// <param name="componentInfo"></param>
+        /// <param name="context"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        CombatBaseFormula CreateFormula(ActionComponentInfo componentInfo, CombatContext context, CombatAction owner)
+        {
+            CombatBaseFormula formula = null;
+
+            switch(componentInfo.id)
+            {
+                case 1:
+                    {
+                        formula = new SingleAttrFormula();
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException("没有实现 formula id: " + componentInfo.id);
+            }
+            formula.OnAttach(owner);
+            formula.Initialize(context, componentInfo.args);
+            return formula;
+        }
+
+        /// <summary>
         /// 創建執行器
         /// </summary>
         /// <param name="componentInfo"></param>
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, ICombatFinder finder, CombatContext context, CombatAction owner)
+        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, ICombatFinder finder, CombatBaseFormula formula,  CombatContext context, CombatAction owner)
         {
             CombatBaseExecutor executor = null;
             switch (componentInfo.id)
             {
                 case 1:
                     {
-                        executor = new ExecutorCombatDamage(finder);
+                        executor = new ExecutorCombatDamage(finder, formula);
                     }
                     break;
                 case 2:
                     {
-                        executor = new ExecutorCombatContinuousDamage(finder);
+                        executor = new ExecutorCombatContinuousDamage(finder, formula);
                     }           
                     break;
                 case 3:
                     {
-                        executor = new ExecutorCombatHeal(finder);
+                        executor = new ExecutorCombatHeal(finder, formula);
                     }
                     break;
                 default:

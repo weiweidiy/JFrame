@@ -147,6 +147,14 @@ namespace JFrame
             return result.ToArray();
         }
 
+        public override int GetFormulaId()
+        {
+            throw new System.NotImplementedException();
+        }
 
+        public override float[] GetFormulaArgs()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

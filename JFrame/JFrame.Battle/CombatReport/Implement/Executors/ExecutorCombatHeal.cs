@@ -5,7 +5,7 @@
     /// </summary>
     public class ExecutorCombatHeal : ExecutorCombatNormal
     {
-        public ExecutorCombatHeal(ICombatFinder combinFinder) : base(combinFinder)
+        public ExecutorCombatHeal(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
         {
         }
 
@@ -14,9 +14,9 @@
             target.OnHeal(data);
         }
 
-        protected override long GetValue()
+        protected override double GetExecutorValueRate()
         {
-            return (long)(extraData.Value * GetRateArg());
+            return  GetRateArg();
         }
 
         /// <summary>

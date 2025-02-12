@@ -12,9 +12,9 @@ namespace JFrame
         public List<IUnique> CreateAllAttributes(CombatUnitInfo unitInfo)
         {
             var result = new List<IUnique>();
-            var hp = new CombatAttributeLong(PVPAttribute.HP.ToString(), unitInfo.hp, unitInfo.maxHp);
-            var atk = new CombatAttributeLong(PVPAttribute.ATK.ToString(), unitInfo.atk, long.MaxValue);
-            var atkSpeed = new CombatAttributeDouble(PVPAttribute.AtkSpeed.ToString(), unitInfo.atkSpeed, double.MaxValue);
+            var hp = new CombatAttributeDouble(PVPAttribute.HP.ToString(), unitInfo.hp, double.MaxValue);
+            var atk = new CombatAttributeDouble(PVPAttribute.ATK.ToString(), unitInfo.atk, double.MaxValue);
+            var maxHp = new CombatAttributeDouble(PVPAttribute.MaxHP.ToString(), unitInfo.atkSpeed, double.MaxValue);
             var cri = new CombatAttributeDouble(PVPAttribute.Critical.ToString(), unitInfo.cri, 1f);
             var criDmgRate = new CombatAttributeDouble(PVPAttribute.CriticalDamage.ToString(), unitInfo.criDmgRate, double.MaxValue);
             var criDmgAnti = new CombatAttributeDouble(PVPAttribute.CriticalDamageResist.ToString(), unitInfo.criDmgAnti, 1f); //暴击伤害抵抗百分比
@@ -30,7 +30,7 @@ namespace JFrame
             //to do : 其他屬性
             result.Add(hp);
             result.Add(atk);
-            result.Add(atkSpeed);
+            result.Add(maxHp);
             result.Add(cri);
             result.Add(criDmgRate);
             result.Add(criDmgAnti);

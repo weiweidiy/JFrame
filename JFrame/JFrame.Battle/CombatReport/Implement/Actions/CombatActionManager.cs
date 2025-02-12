@@ -1,12 +1,14 @@
-﻿using System;
+﻿using JFrame.BattleReportSystem;
+using System;
 using System.Collections.Generic;
 
 namespace JFrame
 {
+
     /// <summary>
     /// 管理所有action to do:可以增加线程组概念，允许某些技能使用一个线程组
     /// </summary>
-    public class CombatActionManager : BaseContainer<CombatAction>, ICombatUpdatable
+    public class CombatActionManager : UpdateableContainer<CombatAction>, ICombatUpdatable
     {
         public event Action<CombatExtraData> onTriggerOn; //满足触发条件
         public event Action<CombatExtraData> onStartExecuting; //开始释放
@@ -22,7 +24,9 @@ namespace JFrame
 
         public void Initialize(IActionContent extraClaimable)
         {
-            foreach(var action in GetAll())
+            //Release();
+
+            foreach (var action in GetAll())
             {
                 action.onTriggerOn += Action_onTriggerOn;
                 action.onStartExecuting += Action_onStartExecuting;
@@ -32,11 +36,14 @@ namespace JFrame
                 action.onHittingTarget += Action_onHittingTarget;
                 action.onTargetHittedComplete += Action_onTargetHittedComplete;
 
-                //设置透传参数
+                //把unit上的extraData 传递给 action
                 action.ExtraData = extraClaimable.ExtraData.Clone() as CombatExtraData;
-
-
             }
+        }
+
+        public void Release()
+        {
+            Clear();
         }
 
         public void Start()
@@ -50,6 +57,55 @@ namespace JFrame
             }
         }
 
+
+        public void SetAllActive(bool active)
+        {
+            foreach (var action in GetAll())
+            {
+                if (active)
+                    action.SwitchToCd();
+                else
+                    action.SwitchToDisable();
+            }
+        }
+
+        /// <summary>
+        /// 逻辑帧
+        /// </summary>
+        /// <param name="frame"></param>
+        public void Update(BattleFrame frame)
+        {
+            foreach (var action in GetAll())
+            {
+                action.Update(frame);
+            }
+
+            UpdateDuration(frame);
+
+            //更新等待添加删除更新的item
+            UpdateWaitingItems();
+        }
+
+        /// <summary>
+        /// 更新释放时间
+        /// </summary>
+        /// <param name="frame"></param>
+        public void UpdateDuration(BattleFrame frame)
+        {
+            if (isBusy)
+            {
+                deltaTime += frame.DeltaTime;
+
+                if (deltaTime >= curDuration)
+                {
+                    isBusy = false;
+                    deltaTime = 0f;
+                }
+            }
+        }
+
+
+        #region action事件
         private void Action_onTargetHittedComplete(CombatExtraData extraData)
         {
             onTargetHittedComplete?.Invoke(extraData);
@@ -92,7 +148,7 @@ namespace JFrame
                 return;
             }
 
-            if(extraData.Action.Mode == ActionMode.Passive)
+            if (extraData.Action.Mode == ActionMode.Passive)
                 extraData.Action.SwitchToExecuting();
         }
 
@@ -104,61 +160,8 @@ namespace JFrame
         {
             onStartExecuting?.Invoke(extraData);
         }
+        #endregion
 
-
-        public void Update(BattleFrame frame)
-        {
-            foreach (var action in GetAll())
-            {
-                action.Update(frame);
-            }
-
-            UpdateDuration(frame);
-        }
-
-        /// <summary>
-        /// 更新释放时间
-        /// </summary>
-        /// <param name="frame"></param>
-        public void UpdateDuration(BattleFrame frame)
-        {
-            if (isBusy)
-            {
-                deltaTime += frame.DeltaTime;
-
-                if (deltaTime >= curDuration)
-                {
-                    isBusy = false;
-                    deltaTime = 0f;
-                }
-            }
-        }
-
-        public void SetAllActive(bool active)
-        {
-            if (active)
-            {
-                foreach (var action in GetAll())
-                {
-                    action.SwitchToCd();
-                }
-            }
-            else
-            {
-                foreach (var action in GetAll())
-                {
-                    action.SwitchToDisable();
-                }
-            }
-        }
-
-        //public void Start()
-        //{
-        //    foreach (var action in GetAll())
-        //    {
-        //        action.SwitchToTrigging();
-        //    }
-        //}
     }
 
 }

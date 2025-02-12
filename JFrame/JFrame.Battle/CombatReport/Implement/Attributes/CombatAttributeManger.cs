@@ -5,7 +5,47 @@
     /// </summary>
     public class CombatAttributeManger : BaseContainer<IUnique>
     {
+        /// <summary>
+        /// 添加一个加成值
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="value"></param>
+        public void AddExtraValue(PVPAttribute attrType, string uid, double value)
+        {
+            var item = Get(attrType.ToString());
+            var attr =  item as CombatAttributeDouble;
+            if (attr == null)
+                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}" );
 
+            attr.AddExtraValue(uid, value);
+        }
+
+        /// <summary>
+        /// 移除一个加成值
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public bool RemoveExtraValue(PVPAttribute attrType, string uid)
+        {
+            var item = Get(attrType.ToString());
+            var attr = item as CombatAttributeDouble;
+            if (attr == null)
+                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+
+            return attr.RemoveExtraValue(uid);
+        }
+
+        /// <summary>
+        /// 重置所有属性
+        /// </summary>
+        public void ResetAll()
+        {
+            foreach(var item in GetAll())
+            {
+                var attr = item as CombatAttributeDouble;
+                attr.Reset();
+            }
+        }
     }
 
 }

@@ -17,10 +17,10 @@ namespace JFrame
         public float CastDuration { get; set; }
         public float CdDuration { get; set; }
 
-        public long Value { get; set; }
+        public double Value { get; set; }
 
-        public long TargetHp { get; set; }
-        public long TargetMaxHp { get; set; }
+        public double TargetHp { get; set; }
+        public double TargetMaxHp { get; set; }
 
         /// <summary>
         /// 是否暴击

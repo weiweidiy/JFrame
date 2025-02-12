@@ -16,7 +16,7 @@ namespace JFrame
         /// <summary>
         /// 值
         /// </summary>
-        public long Value { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
         /// 是否暴击
@@ -57,6 +57,11 @@ namespace JFrame
         /// 单一目标
         /// </summary>
         public CombatUnit Target { get; set; }
+
+        /// <summary>
+        /// ActionOwner
+        /// </summary>
+        public virtual IActionContent Owner { get; set; }
 
         /// <summary>
         /// 释放时长

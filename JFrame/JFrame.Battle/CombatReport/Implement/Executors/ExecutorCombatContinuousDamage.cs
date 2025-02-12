@@ -12,8 +12,18 @@
         {
             return 4;
         }
+        protected float GetIntervalArg()
+        {
+            return GetCurArg(2);
+        }
 
-        public ExecutorCombatContinuousDamage(ICombatFinder combinFinder) : base(combinFinder)
+        protected override float GetCountArg()
+        {
+            return GetCurArg(3);
+        }
+
+
+        public ExecutorCombatContinuousDamage(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
         {
         }
 
@@ -38,15 +48,7 @@
             }
         }
 
-        protected float GetIntervalArg()
-        {
-            return GetCurArg(2);
-        }
 
-        protected override float GetCountArg()
-        {
-            return GetCurArg(3);
-        }
 
         public override void Reset()
         {
