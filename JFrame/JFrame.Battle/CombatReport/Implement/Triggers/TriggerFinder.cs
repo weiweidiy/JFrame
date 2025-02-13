@@ -1,7 +1,7 @@
 ﻿namespace JFrame
 {
     /// <summary>
-    /// 查找触发器，只要查找器找到了对象，就触发
+    ///  type 1 查找触发器，只要查找器找到了对象，就触发
     /// </summary>
     public class TriggerFinder : CombatBaseTrigger
     {
@@ -15,7 +15,7 @@
         {
         }
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {
             base.OnUpdate(frame);
 

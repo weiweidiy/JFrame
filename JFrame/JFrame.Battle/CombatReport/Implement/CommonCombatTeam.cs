@@ -66,7 +66,7 @@ namespace JFrame
             return GetAll();
         }
 
-        public void UpdatePosition(BattleFrame frame)
+        public void UpdatePosition(ComabtFrame frame)
         {
             var units = GetUnits();
             if (units == null)
@@ -78,7 +78,7 @@ namespace JFrame
             }
         }
 
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             var units = GetUnits();
             if (units == null)

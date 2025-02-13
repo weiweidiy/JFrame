@@ -231,7 +231,7 @@ namespace JFrame
         /// <summary>
         /// 更新帧
         /// </summary>
-        public virtual void Update(BattleFrame frame)
+        public virtual void Update(ComabtFrame frame)
         {
             if (ConditionTrigger != null)
                 ConditionTrigger.Update(frame);

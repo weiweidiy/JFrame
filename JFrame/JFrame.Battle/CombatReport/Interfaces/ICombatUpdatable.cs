@@ -2,7 +2,7 @@
 {
     public interface ICombatUpdatable
     {
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
     }
 
 

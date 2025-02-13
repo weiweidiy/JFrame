@@ -61,7 +61,7 @@ namespace JFrame
         /// <summary>
         /// ActionOwner
         /// </summary>
-        public virtual IActionContent Owner { get; set; }
+        public virtual IActionOwner Owner { get; set; }
 
         /// <summary>
         /// 释放时长
@@ -77,6 +77,11 @@ namespace JFrame
         /// 移动速度
         /// </summary>
         public CombatVector Velocity { get; set; }  
+
+        /// <summary>
+        /// buffer
+        /// </summary>
+        public CombatBuffer Buffer { get; set; }
 
         /// <summary>
         /// 浅拷贝
@@ -97,6 +102,11 @@ namespace JFrame
             }
 
             return result;
+        }
+
+        public virtual string GetActionUid()
+        {
+            return Action.Uid;
         }
     }
 

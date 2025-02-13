@@ -8,7 +8,7 @@
     {
         public abstract double GetBaseValue(CombatExtraData extraData);
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {        
         }
     }

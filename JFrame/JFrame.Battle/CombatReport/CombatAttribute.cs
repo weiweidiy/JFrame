@@ -1,9 +1,9 @@
 ﻿namespace JFrame
 {
-    public enum PVPAttribute
+    public enum CombatAttribute
     {
         ATK = 101,
-        HP  = 102,
+        MaxHP  = 102,
         CurHp  = 103,
         MoveSpeed = 104,
         Critical  = 206, //暴击率
@@ -16,21 +16,17 @@
         Dodge = 217,
 
 
-        AtkSpeed,
+        //AtkSpeed = 1000,
+        //CriticalDamageResist,
+        //SkillDamageEnhance,
+        //SkillDamageReduce,
+        //DamageEnhance,
+        //DamageReduce,
+        //Block,
+        //Puncture,
+        //ATKRate = 2000,
+        //HPRate = 2001,
 
-
-        CriticalDamageResist,
-        SkillDamageEnhance,
-        SkillDamageReduce,
-        DamageEnhance,
-        DamageReduce,
-
-  
-        Block,
-        Puncture,
-        ATKRate = 2000,
-        HPRate = 2001,
-        MaxHP = 3000
     }
 
 }

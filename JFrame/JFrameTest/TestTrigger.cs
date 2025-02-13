@@ -12,7 +12,7 @@ namespace JFrameTest
 {
     public class TestTrigger
     {
-        BattleFrame frame = Substitute.For<BattleFrame>();
+        ComabtFrame frame = Substitute.For<ComabtFrame>();
         IPVPBattleManager simBattle = Substitute.For<PVPBattleManager>();
 
         [SetUp]

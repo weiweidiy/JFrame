@@ -11,13 +11,13 @@ namespace JFrame
     /// </summary>
     public class ExecutorHpDamage : ExecutorDamage
     {
-        PVPAttribute attrType;
+        CombatAttribute attrType;
         float rate;
         public ExecutorHpDamage(FormulaManager formulaManager, float[] args) : base(formulaManager, args) 
         {
             if (args != null && args.Length >= 6)
             {
-                attrType = (PVPAttribute)args[4];
+                attrType = (CombatAttribute)args[4];
                 rate = (float)args[5];
             }
             else
@@ -33,21 +33,21 @@ namespace JFrame
 
             switch(attrType)
             {
-                case PVPAttribute.MaxHP:
+                case CombatAttribute.MaxHP:
                     {
                         max = (int)(caster.MaxHP * rate);
                     }
                     break;
-                case PVPAttribute.ATK:
+                case CombatAttribute.ATK:
                     {
                         max = (int)(caster.Atk * rate);
                     }
                     break;
-                case PVPAttribute.HP:
-                    {
-                        max =(int)(caster.HP * rate);
-                    }
-                    break;
+                //case CombatAttribute.MaxHP:
+                //    {
+                //        max =(int)(caster.HP * rate);
+                //    }
+                //    break;
                 default:
                     throw new Exception("没有实现pvp属性类型 " + attrType);
             }

@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionContent
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner
     {
         //public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -34,6 +34,7 @@ namespace JFrame
         public event Action<CombatExtraData> onRebord;
         public event Action<CombatExtraData> onMaxHpUp;
         public event Action<CombatExtraData> onDebuffAnti;
+
         public event Action<CombatExtraData> onBufferAdding;
         public event Action<CombatExtraData> onBufferAdded;
         public event Action<CombatExtraData> onBufferRemoved;
@@ -110,7 +111,7 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<CombatBuffer> buffers, CombatAttributeManger attributeManager)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<BaseCombatBuffer> buffers, CombatAttributeManger attributeManager)
         {
             Clear();
 
@@ -125,8 +126,8 @@ namespace JFrame
 
             //创建一个透传参数
             _extraData = new CombatExtraData();
-            _extraData.Caster = this;
-            _extraData.Value = (double)GetAttributeCurValue(PVPAttribute.ATK); // to do: 移动到action里去定义
+            _extraData.Caster = this; //释放者
+            //_extraData.Value = (double)GetAttributeCurValue(CombatAttribute.ATK); // to do: 移动到action里去定义
 
             if (actions != null)
             {
@@ -190,7 +191,7 @@ namespace JFrame
         /// 更新逻辑
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             actionManager.Update(frame);
             bufferManager.Update(frame);
@@ -200,7 +201,7 @@ namespace JFrame
         /// 更新坐标
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdatePosition(BattleFrame frame)
+        public void UpdatePosition(ComabtFrame frame)
         {
             if (IsMoving())   //只是自己移动了，其他单位还没有移动
             {
@@ -331,7 +332,7 @@ namespace JFrame
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="value"></param>
-        public void AddExtraValue(PVPAttribute attrType, string uid, double value)
+        public virtual void AddExtraValue(CombatAttribute attrType, string uid, double value)
         {
             var item = GetAttributeManager().Get(attrType.ToString());
             var attr = item as CombatAttributeDouble;
@@ -346,7 +347,7 @@ namespace JFrame
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public bool RemoveExtraValue(PVPAttribute attrType, string uid)
+        public virtual bool RemoveExtraValue(CombatAttribute attrType, string uid)
         {
             var item = GetAttributeManager().Get(attrType.ToString());
             var attr = item as CombatAttributeDouble;
@@ -362,7 +363,7 @@ namespace JFrame
         /// <param name="attribute"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public virtual object GetAttributeCurValue(PVPAttribute attribute)
+        public virtual object GetAttributeCurValue(CombatAttribute attribute)
         {
             if (attributeManger == null)
                 throw new Exception("combat unit attributemanager = null ");
@@ -399,7 +400,7 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public virtual bool IsAlive()
         {
-            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
+            var hpAttr = GetAttributeManager().Get(CombatAttribute.CurHp.ToString());
             if (hpAttr != null)
             {
                 var attr = hpAttr as CombatAttributeDouble;
@@ -415,8 +416,8 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public bool IsHpFull()
         {
-            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
-            var maxHpAttr = GetAttributeManager().Get(PVPAttribute.MaxHP.ToString());
+            var hpAttr = GetAttributeManager().Get(CombatAttribute.CurHp.ToString());
+            var maxHpAttr = GetAttributeManager().Get(CombatAttribute.MaxHP.ToString());
             if (hpAttr != null && maxHpAttr != null)
             {
                 var attr = hpAttr as CombatAttributeDouble;
@@ -433,8 +434,8 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         public virtual double GetHpPercent()
         {
-            var hpAttr = GetAttributeManager().Get(PVPAttribute.HP.ToString());
-            var maxHpAttr = GetAttributeManager().Get(PVPAttribute.MaxHP.ToString());
+            var hpAttr = GetAttributeManager().Get(CombatAttribute.CurHp.ToString());
+            var maxHpAttr = GetAttributeManager().Get(CombatAttribute.MaxHP.ToString());
             if (hpAttr != null && maxHpAttr != null)
             {
                 var attr = hpAttr as CombatAttributeDouble;
@@ -451,6 +452,16 @@ namespace JFrame
         public virtual CombatAttributeManger GetAttributeManager()
         {
             return attributeManger;
+        }
+
+        /// <summary>
+        /// 获取属性
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        public virtual CombatAttributeDouble GetAttribute(CombatAttribute attr)
+        {
+            return attributeManger.Get(attr.ToString()) as CombatAttributeDouble ;
         }
         #endregion
 
@@ -530,35 +541,48 @@ namespace JFrame
         /// 添加一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void AddBuffer(CombatBuffer buffer)
+        public void AddBuffer(BaseCombatBuffer buffer)
         {
-            bufferManager.Add(buffer);
+            bufferManager.AddItem(buffer);
         }
 
-        public void RemoveBuffer(CombatBuffer buffer)
+        /// <summary>
+        /// 删除一个buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void RemoveBuffer(BaseCombatBuffer buffer)
         {
-            bufferManager.Remove(buffer.Uid);
+            bufferManager.RemoveItem(buffer);
         }
 
-        public void UpdateBuffer(CombatBuffer buffer)
+        /// <summary>
+        /// 更新一个buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void UpdateBuffer(BaseCombatBuffer buffer)
         {
-            bufferManager.Update(buffer);
+            bufferManager.UpdateItem(buffer);
         }
 
-        private void BufferManager_onItemUpdated(CombatBuffer obj)
+        private void BufferManager_onItemAdded(List<BaseCombatBuffer> buffer)
         {
-            throw new NotImplementedException();
+            foreach (var buf in buffer)
+            {
+                onBufferAdded?.Invoke(buf.ExtraData);
+            }
         }
 
-        private void BufferManager_onItemRemoved(CombatBuffer obj)
+        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer)
         {
-            throw new NotImplementedException();
+            onBufferUpdate?.Invoke(buffer.ExtraData);
         }
 
-        private void BufferManager_onItemAdded(List<CombatBuffer> obj)
+        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer)
         {
-            throw new NotImplementedException();
+            onBufferRemoved?.Invoke(buffer.ExtraData);
         }
+
+
 
         #endregion
 
@@ -570,7 +594,7 @@ namespace JFrame
             onDamaging?.Invoke(extraData);
 
             var attrManager = GetAttributeManager();
-            var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
+            var hpAttr = attrManager.Get(CombatAttribute.CurHp.ToString());
             if (hpAttr == null)
                 throw new Exception("沒有找到Hp屬性 " + Uid);
 
@@ -580,7 +604,7 @@ namespace JFrame
             if (attr.CurValue <= 0 || damage == 0)
                 return;
 
-            attr.Minus((long)damage);
+            attr.Minus(damage);
 
             //onDamaged?.Invoke(hitter, action, this, damage);
             onDamaged?.Invoke(extraData);
@@ -616,10 +640,10 @@ namespace JFrame
         public void OnHeal(CombatExtraData extraData)
         {
             var attrManager = GetAttributeManager();
-            var hpAttr = attrManager.Get(PVPAttribute.HP.ToString());
+            var hpAttr = attrManager.Get(CombatAttribute.CurHp.ToString());
             if (hpAttr == null)
                 throw new Exception("沒有找到Hp屬性 " + Uid);
-            var maxHpAttr = attrManager.Get(PVPAttribute.MaxHP.ToString());
+            var maxHpAttr = attrManager.Get(CombatAttribute.MaxHP.ToString());
             if (maxHpAttr == null)
                 throw new Exception("沒有找到MaxHp屬性 " + Uid);
 

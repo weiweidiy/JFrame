@@ -204,7 +204,7 @@ namespace JFrame
             return units.Values.ToList();
         }
 
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             var collection = GetUnits();
             if(collection == null)

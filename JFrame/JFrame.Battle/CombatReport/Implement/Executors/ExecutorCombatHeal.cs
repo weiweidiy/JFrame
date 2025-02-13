@@ -14,7 +14,7 @@
             target.OnHeal(data);
         }
 
-        protected override double GetExecutorValueRate()
+        protected override double GetExecutorValue()
         {
             return  GetRateArg();
         }

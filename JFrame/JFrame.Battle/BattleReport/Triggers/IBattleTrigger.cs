@@ -20,7 +20,7 @@ namespace JFrame
 
         bool GetEnable();
 
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         //void OnAttach(IBattleAction action);
 

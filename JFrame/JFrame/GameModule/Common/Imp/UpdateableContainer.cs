@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace JFrame
 {
@@ -11,24 +12,22 @@ namespace JFrame
         /// <summary>
         /// 等待添加的action
         /// </summary>
-        List<T> waitForAddItem = new List<T>();
+        protected List<T> waitForAddItem = new List<T>();
 
         /// <summary>
         /// 等待移除的action
         /// </summary>
-        List<T> waitForRemoveItems = new List<T>();
+        protected List<T> waitForRemoveItems = new List<T>();
 
         /// <summary>
         /// 更新更新的列表
         /// </summary>
-        List<T> waitForUpdateItems = new List<T>();
-
-        
+        protected List<T> waitForUpdateItems = new List<T>();
 
         /// <summary>
         /// 更新等待队列
         /// </summary>
-        public void UpdateWaitingItems()
+        public virtual void UpdateWaitingItems()
         {
             //更新
             foreach (var action in waitForUpdateItems)
@@ -56,7 +55,7 @@ namespace JFrame
         /// 添加一个动作
         /// </summary>
         /// <param name="item"></param>
-        public void AddItem(T item)
+        public virtual void AddItem(T item)
         {
             waitForAddItem.Add(item);
         }
@@ -65,7 +64,7 @@ namespace JFrame
         /// 删除动作
         /// </summary>
         /// <param name="item"></param>
-        public void RemoveItem(T item)
+        public virtual void RemoveItem(T item)
         {
             waitForRemoveItems.Add(item);
         }
@@ -74,9 +73,19 @@ namespace JFrame
         /// 更新动作
         /// </summary>
         /// <param name="item"></param>
-        public void UpdateItem(T item)
+        public virtual void UpdateItem(T item)
         {
             waitForUpdateItems.Add(item);
+        }
+
+        /// <summary>
+        /// 查找等待队列里的指定单位
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public T FindItemInWaitingAddList(string uid)
+        {
+            return waitForAddItem.Where(i=> i.Uid == uid).SingleOrDefault();
         }
 
         /// <summary>

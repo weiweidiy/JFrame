@@ -41,7 +41,7 @@ namespace JFrame
         /// 更新帧，可以延迟命中
         /// </summary>
         /// <param name="frame"></param>
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         /// <summary>
         /// 重新激活技能

@@ -22,11 +22,11 @@ namespace JFrame
 
         List<ICombatReportData> reports = new List<ICombatReportData>();
 
-        BattleFrame frame;
+        ComabtFrame frame;
 
         List<CommonCombatTeam> teams;
 
-        public CombatReporter(BattleFrame frame, List<CommonCombatTeam> teams)
+        public CombatReporter(ComabtFrame frame, List<CommonCombatTeam> teams)
         {
             this.frame = frame;
             this.teams = teams;
@@ -116,8 +116,8 @@ namespace JFrame
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
             reportData.Value = (double)data.Value;
-            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.HP);
-            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.MaxHP);
+            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.CurHp);
+            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.MaxHP);
             reportData.IsCri = data.IsCri;
             reportData.IsBlock = data.IsBlock;
             AddReportData(ReportType.Damage, reportData);
@@ -138,8 +138,8 @@ namespace JFrame
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
             reportData.Value = (double)data.Value;
-            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.HP);
-            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(PVPAttribute.MaxHP);
+            reportData.TargetHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.CurHp);
+            reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.MaxHP);
             reportData.IsCri = data.IsCri;
             reportData.IsBlock = data.IsBlock;
             AddReportData(ReportType.Heal, reportData);

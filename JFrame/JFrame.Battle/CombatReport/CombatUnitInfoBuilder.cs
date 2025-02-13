@@ -17,7 +17,7 @@ namespace JFrame
         /// <param name="actionId"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        CombatActionArgSource GetActionArgSource(int actionId)
+        protected virtual CombatActionArgSource GetActionArgSource(int actionId)
         {
             if (DicActionArgSource != null && DicActionArgSource.ContainsKey(actionId))
                 return DicActionArgSource[actionId];
@@ -83,8 +83,11 @@ namespace JFrame
 
             //条件finder
             var conditionFinders = new List<ActionComponentInfo>();
-            var conditionFinder = new ActionComponentInfo() { id = argSource.GetConditionFindersId(), args = argSource.GetConditionFindersArgs() }; //时间触发器， 时长
-            conditionFinders.Add(conditionFinder);
+            if (argSource.GetConditionFindersId() != 0)
+            {
+                var conditionFinder = new ActionComponentInfo() { id = argSource.GetConditionFindersId(), args = argSource.GetConditionFindersArgs() }; //时间触发器， 时长
+                conditionFinders.Add(conditionFinder);
+            }
             dicComponentInfo.Add(ActionComponentType.ConditionFinder, conditionFinders);
 
 
@@ -110,8 +113,11 @@ namespace JFrame
 
             //公式计算器
             var formulas = new List<ActionComponentInfo>();
-            var formula = new ActionComponentInfo() { id = argSource.GetFormulaId(), args = argSource.GetFormulaArgs() }; //
-            formulas.Add(formula);
+            if (argSource.GetFormulaId() != 0)
+            {
+                var formula = new ActionComponentInfo() { id = argSource.GetFormulaId(), args = argSource.GetFormulaArgs() }; //
+                formulas.Add(formula);
+            }
             dicComponentInfo.Add(ActionComponentType.ExecuteFormulator, formulas);
 
 

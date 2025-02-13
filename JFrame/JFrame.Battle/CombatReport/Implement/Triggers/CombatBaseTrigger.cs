@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// 觸發器基類
     /// </summary>
-    public abstract class CombatBaseTrigger : BaseActionComponent, ICombatTrigger, IActionContent
+    public abstract class CombatBaseTrigger : BaseActionComponent, ICombatTrigger, IActionOwner
     {
         /// <summary>
         /// 透傳參數
@@ -70,7 +70,7 @@ namespace JFrame
             base.OnAttach(target);
         }
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {
         }
     }

@@ -16,11 +16,11 @@ namespace JFrameTest
         CombatUnitAction action;
         CombatContext context;
         CombatUnit my;
-        BattleFrame frame;
+        ComabtFrame frame;
         [SetUp]
         public void Setup()
         {
-            frame = new BattleFrame();
+            frame = new ComabtFrame();
             context = Substitute.For<CombatContext>();
             var combatManager = Substitute.For<CombatManager>();
             my = Substitute.For<CombatUnit>();

@@ -55,7 +55,7 @@ namespace JFrame
         /// <param name="owner"></param>
         void OnAttach(IBattleUnit owner);
 
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         #endregion
 

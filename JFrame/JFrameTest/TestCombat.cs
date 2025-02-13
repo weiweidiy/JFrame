@@ -20,7 +20,7 @@ namespace JFrameTest
         CombatContext context;
 
 
-        BattleFrame frame;
+        ComabtFrame frame;
 
         List<CombatUnitInfo> team1;
         List<CombatUnitInfo> team2;
@@ -30,15 +30,21 @@ namespace JFrameTest
         public void Setup()
         {
             //创建combatManager
-            combatManager = new CombatManager();
-            team1 = new List<CombatUnitInfo>();
-            team2 = new List<CombatUnitInfo>();
+            //combatManager = new CombatManager();
+            //team1 = new List<CombatUnitInfo>();
+            //team2 = new List<CombatUnitInfo>();
   
-            //创建上下文
-            context = new CombatContext();
-            context.CombatManager = combatManager;
+            ////创建上下文
+            //context = new CombatContext();
+            //context.CombatManager = combatManager;
 
-            frame = context.CombatManager.Frame;
+            //frame = context.CombatManager.Frame;
+        }
+
+        public void TestCombatUnitDead()
+        {
+            //arrage
+
         }
 
         //[Test]

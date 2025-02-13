@@ -14,7 +14,7 @@ namespace JFrameTest
         public void TestTriggerFinder()
         {
             //arrange
-            var frame = Substitute.For<BattleFrame>();
+            var frame = Substitute.For<ComabtFrame>();
 
             var mySelf = Substitute.For<CombatUnit>();
 

@@ -13,7 +13,7 @@ namespace JFrame
         public event Action<T> onItemRemoved;
         public event Action<T> onItemUpdated;
 
-        List<T> list = new List<T>();
+        protected List<T> list = new List<T>();
         public virtual void Add(T member)
         {
             list.Add(member);

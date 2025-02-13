@@ -15,7 +15,7 @@
 
 
 
-        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
+        protected override void OnDelayCompleteEveryFrame(ComabtFrame frame)
         {
             base.OnDelayCompleteEveryFrame(frame);
 

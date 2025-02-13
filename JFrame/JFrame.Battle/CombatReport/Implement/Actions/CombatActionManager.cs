@@ -22,7 +22,7 @@ namespace JFrame
         float curDuration = 0f;
         float deltaTime = 0f;
 
-        public void Initialize(IActionContent extraClaimable)
+        public void Initialize(IActionOwner actionOwner)
         {
             //Release();
 
@@ -37,7 +37,8 @@ namespace JFrame
                 action.onTargetHittedComplete += Action_onTargetHittedComplete;
 
                 //把unit上的extraData 传递给 action
-                action.ExtraData = extraClaimable.ExtraData.Clone() as CombatExtraData;
+                action.ExtraData = actionOwner.ExtraData.Clone() as CombatExtraData;
+                action.ExtraData.Owner = actionOwner;
             }
         }
 
@@ -73,7 +74,7 @@ namespace JFrame
         /// 逻辑帧
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             foreach (var action in GetAll())
             {
@@ -90,7 +91,7 @@ namespace JFrame
         /// 更新释放时间
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdateDuration(BattleFrame frame)
+        public void UpdateDuration(ComabtFrame frame)
         {
             if (isBusy)
             {

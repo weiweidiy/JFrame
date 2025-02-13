@@ -26,7 +26,7 @@ namespace JFrame
             count = 0;
         }
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {
             base.OnUpdate(frame);
 
@@ -57,7 +57,7 @@ namespace JFrame
             }
 
             //获取数值
-            ExecutorExtraData.Value = baseValue * GetExecutorValueRate();
+            ExecutorExtraData.Value = baseValue * GetExecutorValue();
 
             //即将命中
             NotifyHittingTargets(ExecutorExtraData);
@@ -79,7 +79,7 @@ namespace JFrame
         /// 执行参数倍率
         /// </summary>
         /// <returns></returns>
-        protected abstract double GetExecutorValueRate();
+        protected abstract double GetExecutorValue();
 
         protected abstract void DoHit(CombatUnit target, CombatExtraData data);
     }

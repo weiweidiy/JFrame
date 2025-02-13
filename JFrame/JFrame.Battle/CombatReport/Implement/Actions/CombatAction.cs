@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace JFrame
 {
 
-    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionContent
+    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionOwner
     {
         public event Action<CombatExtraData> onTriggerOn;
         public event Action<CombatExtraData> onStartExecuting;
@@ -113,12 +113,15 @@ namespace JFrame
             this.Mode = mode;
 
             //监听执行器命中等消息
-            foreach (var executor in executors)
+            if(executors != null)
             {
-                executor.onHittingTargets += Executor_onHittingTargets; ;
-                executor.onTargetsHittedComplete += Executor_onTargetsHittedComplete;
-                executor.onHittingTarget += Executor_onHittingTarget;
-                executor.onTargetHittedComplete += Executor_onTargetHittedComplete;
+                foreach (var executor in executors)
+                {
+                    executor.onHittingTargets += Executor_onHittingTargets; ;
+                    executor.onTargetsHittedComplete += Executor_onTargetsHittedComplete;
+                    executor.onHittingTarget += Executor_onHittingTarget;
+                    executor.onTargetHittedComplete += Executor_onTargetHittedComplete;
+                }
             }
         }
 
@@ -162,7 +165,7 @@ namespace JFrame
             }
         }
 
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             sm.Update(frame);
         }
@@ -172,7 +175,7 @@ namespace JFrame
         /// 更新條件觸發器
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdateConditionTriggers(BattleFrame frame)
+        public void UpdateConditionTriggers(ComabtFrame frame)
         {
             foreach (var trigger in conditionTriggers)
             {
@@ -211,8 +214,16 @@ namespace JFrame
             }
         }
 
+        public void ExitConditionTriggers()
+        {
+            foreach (var trigger in conditionTriggers)
+            {
+                trigger.OnExit();
+            }
+        }
 
-        public void UpdateDelayTrigger(BattleFrame frame)
+
+        public void UpdateDelayTrigger(ComabtFrame frame)
         {
             delayTrigger.Update(frame);
         }
@@ -237,7 +248,7 @@ namespace JFrame
             }
         }
 
-        public void UpdateExecutors(BattleFrame frame)
+        public void UpdateExecutors(ComabtFrame frame)
         {
             if (executors == null)
                 return;
@@ -258,11 +269,19 @@ namespace JFrame
             }
         }
 
-        public void UpdateCdTriggers(BattleFrame frame)
+        public void UpdateCdTriggers(ComabtFrame frame)
         {
             foreach (var trigger in cdTriggers)
             {
                 trigger.Update(frame);
+            }
+        }
+
+        public void ExitCdTriggers()
+        {
+            foreach (var trigger in cdTriggers)
+            {
+                trigger.OnExit();
             }
         }
 

@@ -55,7 +55,7 @@ namespace JFrameTest
         public void TestActionManager()
         {
             // arrange
-            BattleFrame frame = Substitute.For<BattleFrame>();
+            ComabtFrame frame = Substitute.For<ComabtFrame>();
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();
             action1.Id.Returns(1);
@@ -79,7 +79,7 @@ namespace JFrameTest
         public void TestActionManagerAndOneActionCalled()
         {
             // arrange
-            BattleFrame frame = Substitute.For<BattleFrame>();
+            ComabtFrame frame = Substitute.For<ComabtFrame>();
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();
             action1.Id.Returns(1);
@@ -109,7 +109,7 @@ namespace JFrameTest
         public void TestActionManagerAndTwoeActionCalled()
         {
             // arrange
-            BattleFrame frame = Substitute.For<BattleFrame>();
+            ComabtFrame frame = Substitute.For<ComabtFrame>();
             frame.DeltaTime.Returns(2f);
             var manager = new ActionManager();
             var action1 = Substitute.For<IBattleAction>();

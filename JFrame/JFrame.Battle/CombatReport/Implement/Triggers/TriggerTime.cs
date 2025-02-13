@@ -29,7 +29,7 @@
             delta = 0f;
         }
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {
             base.OnUpdate(frame);
 

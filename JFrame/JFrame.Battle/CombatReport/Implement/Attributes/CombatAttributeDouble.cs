@@ -87,6 +87,16 @@ namespace JFrame
 
             return result;
         }
+
+        public override void AddExtraValue(string extraUid, double value)
+        {
+            if (extraAttributes.ContainsKey(extraUid))
+            {
+                extraAttributes[extraUid] += value;
+            }
+            else
+                extraAttributes.Add(extraUid, value);
+        }
     }
 
 }

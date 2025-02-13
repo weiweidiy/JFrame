@@ -90,8 +90,8 @@ namespace JFrame
     {
         Dictionary<int, CommonCombatTeam> teams;
 
-        BattleFrame frame = new BattleFrame();
-        public BattleFrame Frame { get => frame; }
+        ComabtFrame frame = new ComabtFrame();
+        public ComabtFrame Frame { get => frame; }
 
         CombatJudge combatJudge;
 
@@ -354,7 +354,7 @@ namespace JFrame
             return report;
         }
 
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             foreach (var team in teams.Values)
             {

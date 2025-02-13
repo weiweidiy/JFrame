@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateActions(Dictionary<int,ActionInfo> actionsInfo, IActionContent owner, CombatContext context)
+        public List<CombatAction> CreateActions(Dictionary<int,ActionInfo> actionsInfo, IActionOwner owner, CombatContext context)
         {
             if (actionsInfo == null)
                 return null;
@@ -152,7 +152,7 @@ namespace JFrame
                     break;
                 case 2:
                     {
-                        trigger = new TriggerCombatStart(finder); //战斗开始时
+                        trigger = new TriggerAmount(finder); //战斗开始时
                     }
                     break;
                 case 3:
@@ -232,6 +232,9 @@ namespace JFrame
         /// <returns></returns>
         CombatBaseFormula CreateFormula(ActionComponentInfo componentInfo, CombatContext context, CombatAction owner)
         {
+            if (componentInfo == null)
+                return null;
+
             CombatBaseFormula formula = null;
 
             switch(componentInfo.id)
@@ -274,6 +277,11 @@ namespace JFrame
                 case 3:
                     {
                         executor = new ExecutorCombatHeal(finder, formula);
+                    }
+                    break;
+                case 4:
+                    {
+                        executor = new ExecutorCombatChangeAttribute(finder, formula);
                     }
                     break;
                 default:

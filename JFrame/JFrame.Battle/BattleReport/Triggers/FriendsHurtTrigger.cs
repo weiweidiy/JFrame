@@ -14,7 +14,7 @@ namespace JFrame
                 throw new Exception("FriendsHurtTrigger 参数不对，需要1个参数");
         }
 
-        protected override void OnDelayCompleteEveryFrame(BattleFrame frame)
+        protected override void OnDelayCompleteEveryFrame(ComabtFrame frame)
         {
             base.OnDelayCompleteEveryFrame(frame);
 

@@ -56,7 +56,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public override void Update(BattleFrame frame)
+        public override void Update(ComabtFrame frame)
         {
             base.Update(frame);
 

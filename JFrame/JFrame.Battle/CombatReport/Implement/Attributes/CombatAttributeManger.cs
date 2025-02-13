@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="value"></param>
-        public void AddExtraValue(PVPAttribute attrType, string uid, double value)
+        public void AddExtraValue(CombatAttribute attrType, string uid, double value)
         {
             var item = Get(attrType.ToString());
             var attr =  item as CombatAttributeDouble;
@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public bool RemoveExtraValue(PVPAttribute attrType, string uid)
+        public bool RemoveExtraValue(CombatAttribute attrType, string uid)
         {
             var item = Get(attrType.ToString());
             var attr = item as CombatAttributeDouble;

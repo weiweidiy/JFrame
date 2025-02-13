@@ -54,7 +54,7 @@ namespace JFrame
 
         }
 
-        public override void Update(BattleFrame frame)
+        public override void Update(ComabtFrame frame)
         {
             base.Update(frame);
 

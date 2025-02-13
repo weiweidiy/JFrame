@@ -12,7 +12,7 @@ namespace JFrame
     /// </summary>
     public class ExecutorChangeAttr : ExecutorNormal
     {
-        protected PVPAttribute attrType;
+        protected CombatAttribute attrType;
         protected float arg;
 
         //真正改变的值
@@ -26,7 +26,7 @@ namespace JFrame
         {
             if (args != null && args.Length >= 5)
             {
-                attrType = (PVPAttribute)((int)args[3]);
+                attrType = (CombatAttribute)((int)args[3]);
                 arg = args[4];
             }
             else
@@ -71,60 +71,60 @@ namespace JFrame
         {
             switch (attrType)
             {
-                case PVPAttribute.ATK:
+                case CombatAttribute.ATK:
                     {
                         return target.AtkUpgrade((int)value);
                     }
-                case PVPAttribute.HP: return 0;
-                case PVPAttribute.MaxHP:
-                    {
-                        return target.MaxHPUpgrade((int)value);
-                    }
-                case PVPAttribute.AtkSpeed: return 0;
-                case PVPAttribute.Critical:
-                    {
-                        return target.CriUpgrade(value);
-                    }
-                case PVPAttribute.CriticalDamage:
-                    {
-                        return target.CriticalDamageUpgrade(value);
-                    }
-                case PVPAttribute.CriticalDamageResist:
-                    {
-                        return target.CriticalDamageResistUpgrade(value);
-                    }
-                case PVPAttribute.ControlHit:
-                    {
-                        return target.ControlHitUpgrade(value);
-                    }
-                case PVPAttribute.ControlResistance:
-                    {
-                        return target.ControlResistanceUpgrade(value);
-                    }
-                case PVPAttribute.DamageEnhance:
-                    {
-                        return target.DamageEnhanceUpgrade(value);
-                    }
-                case PVPAttribute.DamageReduce:
-                    {
-                        return target.DamageReduceUpgrade(value);
-                    }
-                case PVPAttribute.SkillDamageEnhance:
-                    {
-                        return target.SkillDamageEnhanceUpgrade(value);
-                    }
-                case PVPAttribute.SkillDamageReduce:
-                    {
-                        return target.SkillDamageReduceUpgrade(value);
-                    }
-                case PVPAttribute.Block:
-                    {
-                        return target.BlockUpgrade(value);
-                    }
-                case PVPAttribute.Puncture:
-                    {
-                        return target.PunctureUpgrade(value);
-                    }
+                case CombatAttribute.MaxHP: return 0;
+                //case CombatAttribute.MaxHP:
+                //    {
+                //        return target.MaxHPUpgrade((int)value);
+                //    }
+                //case CombatAttribute.AtkSpeed: return 0;
+                //case CombatAttribute.Critical:
+                //    {
+                //        return target.CriUpgrade(value);
+                //    }
+                //case CombatAttribute.CriticalDamage:
+                //    {
+                //        return target.CriticalDamageUpgrade(value);
+                //    }
+                //case CombatAttribute.CriticalDamageResist:
+                //    {
+                //        return target.CriticalDamageResistUpgrade(value);
+                //    }
+                //case CombatAttribute.ControlHit:
+                //    {
+                //        return target.ControlHitUpgrade(value);
+                //    }
+                //case CombatAttribute.ControlResistance:
+                //    {
+                //        return target.ControlResistanceUpgrade(value);
+                //    }
+                //case CombatAttribute.DamageEnhance:
+                //    {
+                //        return target.DamageEnhanceUpgrade(value);
+                //    }
+                //case CombatAttribute.DamageReduce:
+                //    {
+                //        return target.DamageReduceUpgrade(value);
+                //    }
+                //case CombatAttribute.SkillDamageEnhance:
+                //    {
+                //        return target.SkillDamageEnhanceUpgrade(value);
+                //    }
+                //case CombatAttribute.SkillDamageReduce:
+                //    {
+                //        return target.SkillDamageReduceUpgrade(value);
+                //    }
+                //case CombatAttribute.Block:
+                //    {
+                //        return target.BlockUpgrade(value);
+                //    }
+                //case CombatAttribute.Puncture:
+                //    {
+                //        return target.PunctureUpgrade(value);
+                //    }
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);
             }
@@ -134,60 +134,60 @@ namespace JFrame
         {
             switch (attrType)
             {
-                case PVPAttribute.ATK:
+                case CombatAttribute.ATK:
                     {
                         return target.AtkReduce((int)value);
                     }
-                case PVPAttribute.HP: return 0;
-                case PVPAttribute.MaxHP:
-                    {
-                        return target.MaxHPReduce((int)value);
-                    }
-                case PVPAttribute.AtkSpeed: return 0;
-                case PVPAttribute.Critical:
-                    {
-                        return target.CriReduce(value);
-                    }
-                case PVPAttribute.CriticalDamage:
-                    {
-                        return target.CriticalDamageReduce(value);
-                    }
-                case PVPAttribute.CriticalDamageResist:
-                    {
-                        return target.CriticalDamageResistReduce(value);
-                    }
-                case PVPAttribute.ControlHit:
-                    {
-                        return target.ControlHitReduce(value);
-                    }
-                case PVPAttribute.ControlResistance:
-                    {
-                        return target.ControlResistanceReduce(value);
-                    }
-                case PVPAttribute.DamageEnhance:
-                    {
-                        return target.DamageEnhanceReduce(value);
-                    }
-                case PVPAttribute.DamageReduce:
-                    {
-                        return target.DamageReduceReduce(value);
-                    }
-                case PVPAttribute.SkillDamageEnhance:
-                    {
-                        return target.SkillDamageEnhanceReduce(value);
-                    }
-                case PVPAttribute.SkillDamageReduce:
-                    {
-                        return target.SkillDamageReduceReduce(value);
-                    }
-                case PVPAttribute.Block:
-                    {
-                        return target.BlockReduce(value);
-                    }
-                case PVPAttribute.Puncture:
-                    {
-                        return target.PunctureReduce(value);
-                    }
+                case CombatAttribute.MaxHP: return 0;
+                //case CombatAttribute.MaxHP:
+                //    {
+                //        return target.MaxHPReduce((int)value);
+                //    }
+                //case CombatAttribute.AtkSpeed: return 0;
+                //case CombatAttribute.Critical:
+                //    {
+                //        return target.CriReduce(value);
+                //    }
+                //case CombatAttribute.CriticalDamage:
+                //    {
+                //        return target.CriticalDamageReduce(value);
+                //    }
+                //case CombatAttribute.CriticalDamageResist:
+                //    {
+                //        return target.CriticalDamageResistReduce(value);
+                //    }
+                //case CombatAttribute.ControlHit:
+                //    {
+                //        return target.ControlHitReduce(value);
+                //    }
+                //case CombatAttribute.ControlResistance:
+                //    {
+                //        return target.ControlResistanceReduce(value);
+                //    }
+                //case CombatAttribute.DamageEnhance:
+                //    {
+                //        return target.DamageEnhanceReduce(value);
+                //    }
+                //case CombatAttribute.DamageReduce:
+                //    {
+                //        return target.DamageReduceReduce(value);
+                //    }
+                //case CombatAttribute.SkillDamageEnhance:
+                //    {
+                //        return target.SkillDamageEnhanceReduce(value);
+                //    }
+                //case CombatAttribute.SkillDamageReduce:
+                //    {
+                //        return target.SkillDamageReduceReduce(value);
+                //    }
+                //case CombatAttribute.Block:
+                //    {
+                //        return target.BlockReduce(value);
+                //    }
+                //case CombatAttribute.Puncture:
+                //    {
+                //        return target.PunctureReduce(value);
+                //    }
                 default:
                     throw new Exception("没有实现pvp属性 " + attrType);
             }
@@ -195,90 +195,90 @@ namespace JFrame
 
         protected virtual float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target, object[] args = null)
         {
-            float attrValue;
-            switch (attrType)
-            {
-                case PVPAttribute.ATK:
-                    {
-                        attrValue = target.Atk;
-                    }
-                    break;
-                case PVPAttribute.HP:
-                    {
-                        attrValue = target.HP;
-                    }
-                    break;
-                case PVPAttribute.MaxHP:
-                    {
-                        attrValue = target.MaxHP;
-                    }
-                    break;
-                case PVPAttribute.AtkSpeed:
-                    {
-                        attrValue = target.AtkSpeed;
-                    }
-                    break;
-                case PVPAttribute.Critical:
-                    {
-                        attrValue = target.Critical;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.CriticalDamage:
-                    {
-                        attrValue = target.CriticalDamage;
-                        return  arg* Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.CriticalDamageResist:
-                    {
-                        attrValue = target.CriticalDamageResist;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.DamageEnhance:
-                    {
-                        attrValue = target.DamageEnhance;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.DamageReduce:
-                    {
+            float attrValue = 0;
+            //switch (attrType)
+            //{
+            //    case CombatAttribute.ATK:
+            //        {
+            //            attrValue = target.Atk;
+            //        }
+            //        break;
+            //    case CombatAttribute.MaxHP:
+            //        {
+            //            attrValue = target.HP;
+            //        }
+            //        break;
+            //    case CombatAttribute.MaxHP:
+            //        {
+            //            attrValue = target.MaxHP;
+            //        }
+            //        break;
+            //    case CombatAttribute.AtkSpeed:
+            //        {
+            //            attrValue = target.AtkSpeed;
+            //        }
+            //        break;
+            //    case CombatAttribute.Critical:
+            //        {
+            //            attrValue = target.Critical;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.CriticalDamage:
+            //        {
+            //            attrValue = target.CriticalDamage;
+            //            return  arg* Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.CriticalDamageResist:
+            //        {
+            //            attrValue = target.CriticalDamageResist;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.DamageEnhance:
+            //        {
+            //            attrValue = target.DamageEnhance;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.DamageReduce:
+            //        {
 
-                        attrValue = target.DamageReduce;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.SkillDamageEnhance:
-                    {
-                        attrValue = target.SkillDamageEnhance;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
+            //            attrValue = target.DamageReduce;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.SkillDamageEnhance:
+            //        {
+            //            attrValue = target.SkillDamageEnhance;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
 
-                case PVPAttribute.SkillDamageReduce:
-                    {
-                        attrValue = target.SkillDamageReduce;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.Block:
-                    {
-                        attrValue = target.Block;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.Puncture:
-                    {
-                        attrValue = target.Puncture;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.ControlHit:
-                    {
-                        attrValue = target.ControlHit;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                case PVPAttribute.ControlResistance:
-                    {
-                        attrValue = target.ControlResistance;
-                        return arg * Owner.GetFoldCount() - valueChanged;
-                    }
-                default:
-                    throw new Exception("没有实现pvp属性 " + attrType);
+            //    case CombatAttribute.SkillDamageReduce:
+            //        {
+            //            attrValue = target.SkillDamageReduce;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.Block:
+            //        {
+            //            attrValue = target.Block;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.Puncture:
+            //        {
+            //            attrValue = target.Puncture;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.ControlHit:
+            //        {
+            //            attrValue = target.ControlHit;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    case CombatAttribute.ControlResistance:
+            //        {
+            //            attrValue = target.ControlResistance;
+            //            return arg * Owner.GetFoldCount() - valueChanged;
+            //        }
+            //    default:
+            //        throw new Exception("没有实现pvp属性 " + attrType);
 
-            }
+            //}
 
             return attrValue * arg * Owner.GetFoldCount();
         }

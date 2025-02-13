@@ -5,12 +5,12 @@
     /// </summary>
     public class ExecutorAttrDamage : ExecutorDamage
     {
-        PVPAttribute  attrType;
+        CombatAttribute  attrType;
         public ExecutorAttrDamage(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
         {
             if (args != null && args.Length >= 5)
             {
-                attrType = (PVPAttribute)args[4];
+                attrType = (CombatAttribute)args[4];
             }
             else
             {
@@ -22,12 +22,12 @@
         {
             switch(attrType)
             {
-                case PVPAttribute.ATK:
+                case CombatAttribute.ATK:
                     return caster.Atk * arg;
-                case PVPAttribute.HP:
+                case CombatAttribute.MaxHP:
                     return caster.HP * arg;
-                case PVPAttribute.MaxHP:
-                    return caster.MaxHP * arg;
+                //case CombatAttribute.MaxHP:
+                //    return caster.MaxHP * arg;
                 default:
                     throw new System.Exception("ExecutorAttrDamage没有实现pvp属性" + attrType);
             }

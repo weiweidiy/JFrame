@@ -40,7 +40,7 @@
                 throw new System.Exception($"{GetType()} 没有找到对应的unit目标，无法计算数值");
 
             var attrId = GetAttrTypeArg();
-            var type = (PVPAttribute)attrId;
+            var type = (CombatAttribute)attrId;
             return (double)unit.GetAttributeCurValue(type);
         }
 

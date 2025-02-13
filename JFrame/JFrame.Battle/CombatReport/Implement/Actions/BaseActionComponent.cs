@@ -96,12 +96,12 @@ namespace JFrame
             return curArgs[index];
         }
 
-        public void Update(BattleFrame frame) {
+        public void Update(ComabtFrame frame) {
             if (isStart)
                 OnUpdate(frame);
         }
 
-        protected abstract void OnUpdate(BattleFrame frame);
+        protected abstract void OnUpdate(ComabtFrame frame);
 
 
         public virtual void OnAttach(CombatAction target)
@@ -115,12 +115,27 @@ namespace JFrame
         }
 
         /// <summary>
-        /// 所有组件都完成了初始化了
+        /// 所有组件都完成了初始化了,只启动1次
         /// </summary>
         public virtual void OnStart() {
 
             isStart = true;
+        }
 
+        /// <summary>
+        /// 退出当前状态
+        /// </summary>
+        public virtual void OnExit()
+        {
+
+        }
+
+        /// <summary>
+        /// 停止组件的效果
+        /// </summary>
+        public virtual void OnStop()
+        {
+            isStart = false;
         }
 
         public abstract int GetValidArgsCount();

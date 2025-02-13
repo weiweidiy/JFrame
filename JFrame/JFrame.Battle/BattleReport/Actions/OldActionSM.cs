@@ -190,7 +190,7 @@ namespace JFrame
             deadState.OnExit();
         }
 
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             machine.State.Update(frame);
         }

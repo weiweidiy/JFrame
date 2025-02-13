@@ -118,7 +118,7 @@ namespace JFrame
         /// 更新帧了
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             actionManager.Update(frame);
 

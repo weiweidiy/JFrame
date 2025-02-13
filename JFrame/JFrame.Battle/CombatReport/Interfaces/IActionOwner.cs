@@ -3,7 +3,7 @@
     /// <summary>
     /// action载体
     /// </summary>
-    public interface IActionContent
+    public interface IActionOwner
     {
         CombatExtraData ExtraData { get; set; }
 

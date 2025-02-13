@@ -243,7 +243,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(BattleFrame frame)
+        public void Update(ComabtFrame frame)
         {
             sm.Update(frame);
         }

@@ -21,7 +21,7 @@ namespace JFrame
         {
         }
 
-        protected override double GetExecutorValueRate()
+        protected override double GetExecutorValue()
         {
             return  GetRateArg();
         }

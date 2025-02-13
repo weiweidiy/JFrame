@@ -80,6 +80,16 @@ namespace JFrame
         {
             throw new NotImplementedException();
         }
+
+        public override void AddExtraValue(string extraUid, long value)
+        {
+            if (extraAttributes.ContainsKey(extraUid))
+            {
+                extraAttributes[extraUid] += value;
+            }
+            else
+                extraAttributes.Add(extraUid, value);
+        }
     }
 
 }

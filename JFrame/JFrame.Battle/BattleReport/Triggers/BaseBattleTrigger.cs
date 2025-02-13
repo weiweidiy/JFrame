@@ -83,7 +83,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public virtual void Update(BattleFrame frame)
+        public virtual void Update(ComabtFrame frame)
         {
             if (!GetEnable())
                 return;
@@ -103,7 +103,7 @@ namespace JFrame
             OnDelayCompleteEveryFrame(frame);
         }
 
-        protected virtual void OnDelayCompleteEveryFrame(BattleFrame frame) { }
+        protected virtual void OnDelayCompleteEveryFrame(ComabtFrame frame) { }
 
 
         /// <summary>

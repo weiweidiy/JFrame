@@ -24,7 +24,7 @@ namespace JFrameTest
         BufferDataSource actionBufferDataSource;
         IBattleReporter reporter;
         IPVPBattleManager simBattle;
-        BattleFrame battleFrame;
+        ComabtFrame battleFrame;
 
 
         IBattleTrigger trigger;
@@ -47,7 +47,7 @@ namespace JFrameTest
             
             actionDataSource = Substitute.For<ActionDataSource>(battle);
             actionBufferDataSource = Substitute.For<BufferDataSource>();         
-            battleFrame = Substitute.For<BattleFrame>();
+            battleFrame = Substitute.For<ComabtFrame>();
             reporter = Substitute.For<BattleReporter>(battleFrame, teams);
             simBattle = Substitute.For<PVPBattleManager>();
 
@@ -216,7 +216,7 @@ namespace JFrameTest
         public void TestAddReport()
         {
             //arrange
-            var reporter = new BattleReporter(Substitute.For<BattleFrame>(), battle.GetTeams());
+            var reporter = new BattleReporter(Substitute.For<ComabtFrame>(), battle.GetTeams());
             var casterUID = Guid.NewGuid().ToString();
             var targetUID = Guid.NewGuid().ToString();
             //action
@@ -352,7 +352,7 @@ namespace JFrameTest
             buffFactory.Create(Arg.Any<IBattleUnit>(), Arg.Any<int>(), Arg.Any<int>()).Returns(buffer);
             var buffManager = new BaseBufferManager(buffDataSource, buffFactory);
             var unit = new BattleUnit(new BattleUnitInfo(), Substitute.For<ActionManager>(), buffManager);
-            var frame = new BattleFrame();
+            var frame = new ComabtFrame();
 
             //action
             buffManager.AddBuffer(null, unit, 1, 1);

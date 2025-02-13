@@ -27,7 +27,7 @@
         {
         }
 
-        protected override void OnUpdate(BattleFrame frame)
+        protected override void OnUpdate(ComabtFrame frame)
         {
            // base.Update(frame);
 

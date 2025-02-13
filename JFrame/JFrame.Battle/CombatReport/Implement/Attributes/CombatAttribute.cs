@@ -40,15 +40,8 @@ namespace JFrame
         /// </summary>
         /// <param name="extraUid">来源者的uid，便于删除</param>
         /// <param name="value"></param>
-        public void AddExtraValue(string extraUid, T value)
-        {
-            if (extraAttributes.ContainsKey(extraUid))
-            {
-                extraAttributes[extraUid] = value;
-            }
-            else
-                extraAttributes.Add(extraUid, value);
-        }
+        public abstract void AddExtraValue(string extraUid, T value);
+
 
         /// <summary>
         /// 移除一个加成值

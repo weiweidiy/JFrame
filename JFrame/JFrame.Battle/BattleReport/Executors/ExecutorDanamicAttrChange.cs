@@ -13,7 +13,7 @@ namespace JFrame
         {
             if (args != null && args.Length >= 7)
             {
-                attrType = (PVPAttribute)((int)args[3]);
+                attrType = (CombatAttribute)((int)args[3]);
                 baseValue = args[4];
                 xValue = args[5];
                 kValue = args[6];
@@ -32,7 +32,7 @@ namespace JFrame
             float attrValue = 0;
             switch (attrType)
             {
-                case PVPAttribute.ATK:
+                case CombatAttribute.ATK:
                     {
                         var curValue = target.Atk;
                         var finalValue = baseValue + xValue * Math.Pow(curLevel, kValue);

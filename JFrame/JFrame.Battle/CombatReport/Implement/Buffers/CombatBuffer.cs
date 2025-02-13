@@ -1,34 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace JFrame
 {
-    public class CombatBuffer : /*ICombatBuffer, */ICombatUpdatable, IUnique, IActionContent, ICombatAttachable<CombatUnit>
+    public class CombatBuffer : BaseCombatBuffer
     {
-        public string Uid { get; protected set; }
-
-        public CombatExtraData ExtraData { get; set; }
-
-        public CombatUnit Owner { get; private set; }
-
-        public void Initialize(BufferInfo bufferInfo, List<CombatAction> combatActions, CombatUnit caster)
+        float delta;
+        protected float duration;
+        int curFoldCount;
+        public override float GetDuration()
         {
-            throw new NotImplementedException();
+            return duration;
         }
 
-        public void Update(BattleFrame frame)
+        public override void SetCurFoldCount(int foldCount) => curFoldCount = foldCount;
+        public override int GetCurFoldCount() => curFoldCount;
+
+        public override void Update(ComabtFrame frame)
         {
-            throw new System.NotImplementedException();
+            delta += frame.DeltaTime;
+            if (delta >= duration)
+            {
+                delta = 0f;
+                Expired = true;
+            }
         }
 
-        public void OnAttach(CombatUnit target)
+        public void Initialize(BufferInfo bufferInfo , List<CombatAction> actions)
         {
-            Owner = target;
-        }
-
-        public void OnDetach()
-        {
-            Owner = null;
+            FoldType = bufferInfo.foldType;
+            Id = bufferInfo.id;
+            duration = bufferInfo.duration;
+            //curFoldCount = bufferInfo.foldCount;
+            MaxFoldCount = bufferInfo.foldMaxCount;
         }
     }
 

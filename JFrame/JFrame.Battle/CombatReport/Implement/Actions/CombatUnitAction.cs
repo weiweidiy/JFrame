@@ -5,12 +5,12 @@ namespace JFrame
     /// <summary>
     /// unit上的action
     /// </summary>
-    public class CombatUnitAction : CombatAction, ICombatAttachable<IActionContent>
+    public class CombatUnitAction : CombatAction, ICombatAttachable<IActionOwner>
     {
-        public virtual IActionContent Owner { get; private set; }
+        public virtual IActionOwner Owner { get; private set; }
 
 
-        public void OnAttach(IActionContent ower)
+        public void OnAttach(IActionOwner ower)
         {
             Owner = ower;
         }

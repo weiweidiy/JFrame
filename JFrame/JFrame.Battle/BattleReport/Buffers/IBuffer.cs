@@ -106,7 +106,7 @@ namespace JFrame
         /// <summary>
         /// 更新帧
         /// </summary>
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         /// <summary>
         /// 触发实际效果

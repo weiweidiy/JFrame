@@ -32,7 +32,7 @@ namespace JFrame
 
         bool IsAllDead();
 
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         PVPBattleManager.Team Team { get; } 
     }

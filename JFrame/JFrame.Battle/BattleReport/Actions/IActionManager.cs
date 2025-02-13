@@ -25,7 +25,7 @@ namespace JFrame.BattleReportSystem
         /// </summary>
         bool IsBusy { get; }
 
-        void Update(BattleFrame frame);
+        void Update(ComabtFrame frame);
 
         void Initialize(IBattleUnit owner);
 
