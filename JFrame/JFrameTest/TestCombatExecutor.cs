@@ -21,7 +21,7 @@ namespace JFrameTest
         [SetUp]
         public void SetUp()
         {
-            
+
             unit1 = Substitute.For<CombatUnit>();
             hpAttr = new CombatAttributeDouble(CombatAttribute.CurHp.ToString(), 90, double.MaxValue);
             maxHpAttr = new CombatAttributeDouble(CombatAttribute.MaxHP.ToString(), 100, double.MaxValue);
@@ -50,9 +50,9 @@ namespace JFrameTest
             //arrange
             fakeFormula.GetBaseValue(Arg.Any<CombatExtraData>()).Returns(10);
             var executor = new ExecutorCombatDamage(null, fakeFormula);
-            executor.Initialize(null, new float[] {1f, 2f });
+            executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
-            var frame = new ComabtFrame();
+            var frame = new CombatFrame();
 
             //act
             executor.OnStart();
@@ -69,9 +69,9 @@ namespace JFrameTest
             //arrange
             fakeFormula.GetBaseValue(Arg.Any<CombatExtraData>()).Returns(10);
             var executor = new ExecutorCombatContinuousDamage(null, fakeFormula);
-            executor.Initialize(null, new float[] { 1f,1f , 0.25f, 3 });
+            executor.Initialize(null, new float[] { 1f, 1f, 0.25f, 3 });
             //extraData.Value = 10;
-            var frame = new ComabtFrame();
+            var frame = new CombatFrame();
             //act
             executor.OnStart();
             executor.Execute(extraData);
@@ -92,8 +92,8 @@ namespace JFrameTest
             var executor = new ExecutorCombatHeal(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
-            var frame = new ComabtFrame();
-            
+            var frame = new CombatFrame();
+
             //act
             executor.OnStart();
             executor.Execute(extraData);
@@ -114,8 +114,8 @@ namespace JFrameTest
             extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, null, null, null, null, null);
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(hpAttr);
-            var executor = new ExecutorCombatChangeAttribute(null,null);
-            executor.Initialize(null, new float[] {0.1f, 102, 0.1f });
+            var executor = new ExecutorCombatChangeAttribute(null, null);
+            executor.Initialize(null, new float[] { 0.1f, 102, 0.1f });
 
             //act
             executor.OnStart();
@@ -147,6 +147,35 @@ namespace JFrameTest
             unit1.Received(1).AddExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
             unit1.Received(1).RemoveExtraValue(CombatAttribute.MaxHP, "action");
             Assert.AreEqual(90, hpAttr.CurValue);
+        }
+
+        [Test]
+        public void TestExecutorAddBuffer()
+        {
+            //arrange
+            var extraData = Substitute.For<CombatExtraData>();     
+            var context = Substitute.For<CombatContext>();
+            var bufferFactoy = Substitute.For<CombatBufferFactory>();
+            context.CombatBufferFactory.Returns(bufferFactoy);
+            var unit1 = Substitute.For<CombatUnit>();
+            var bufferManager = Substitute.For<CombatBufferManager>();
+            unit1.GetBufferManager().Returns(bufferManager);
+            var buffer = Substitute.For<CombatBuffer>();
+            bufferFactoy.CreateBuffer(1001, Arg.Any<CombatExtraData>()).Returns(buffer);
+            extraData.Targets.Returns(new List<CombatUnit>() { unit1 });
+            var executor = new ExecutorAddBuffer(null, null);
+            executor.Initialize(context, new float[] { 0.1f, 1001, 2, 5f });
+
+            //act
+            executor.OnStart();
+            executor.Execute(extraData);
+            executor.Update(new CombatFrame());
+
+            //expect
+            unit1.Received(1).AddBuffer(buffer);
+            buffer.Received(1).SetCurFoldCount(2);
+            buffer.Received(1).SetDuration(5f);
+
         }
     }
 

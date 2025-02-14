@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace JFrameTest
 {
 
-    public class TestActionSM
+    public class TestCombatActionSM
     {
         CombatActionSM sm;
 

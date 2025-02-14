@@ -3,7 +3,7 @@
 namespace JFrame
 {
     /// <summary>
-    /// 找自己 type 1  
+    /// 找持有者 type 1  
     /// </summary>
     public class FinderFindSelf : CombatBaseFinder
     {
@@ -11,7 +11,7 @@ namespace JFrame
         {
             var result = new List<CombatUnit>();
 
-            result.Add(extraData.Caster);
+            result.Add(extraData.Owner);
 
             return result;
         }

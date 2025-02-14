@@ -30,9 +30,9 @@ namespace JFrameTest
 
             //act
             manager.AddItem(buffer1);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
             manager.AddItem(buffer2);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
 
             //expect
             Assert.AreEqual(2, manager.GetAll().Count);
@@ -53,9 +53,9 @@ namespace JFrameTest
 
             //act
             manager.AddItem(buffer1);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
             manager.AddItem(buffer2);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
 
 
             //expect
@@ -81,9 +81,9 @@ namespace JFrameTest
 
             //act
             manager.AddItem(buffer1);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
             manager.AddItem(buffer2);
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
 
 
             //expect
@@ -103,8 +103,8 @@ namespace JFrameTest
 
             //act
             manager.AddItem(buffer1);
-            manager.Update(new ComabtFrame());
-            manager.Update(new ComabtFrame());
+            manager.Update(new CombatFrame());
+            manager.Update(new CombatFrame());
 
             //expect
             Assert.AreEqual(0, manager.GetAll().Count);

@@ -1,36 +1,59 @@
-﻿using System;
+﻿using JFrame.BattleReportSystem;
+using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
 
-    public abstract class BaseCombatBuffer :  ICombatUpdatable, IUnique, IActionOwner, ICombatAttachable<CombatUnit>
+    public abstract class BaseCombatBuffer : ICombatUpdatable, IUnique, IActionOwner, ICombatAttachable<CombatUnit>
     {
+        public event Action<CombatExtraData> onBufferExecuting;
+        protected void NotifyBufferExecuting(CombatExtraData extraData)
+        {
+            onBufferExecuting?.Invoke(extraData);
+        }
+
         public virtual string Uid { get; set; }
 
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// 是否过期
         /// </summary>
-        public virtual bool Expired { get; protected set; }
+        public virtual bool Expired { get; set; }
 
-        public virtual CombatBufferFoldType FoldType { get; protected set; }
+        public virtual CombatBufferFoldType FoldType { get; set; }
 
         /// <summary>
         /// 最大叠加层数
         /// </summary>
-        public int MaxFoldCount { get; protected set; }
+        public int MaxFoldCount { get; set; }
 
         /// <summary>
         /// 透传数据，其中caster
         /// </summary>
-        public CombatExtraData ExtraData { get; set; }
+        CombatExtraData _extraData;
+        public virtual CombatExtraData ExtraData
+        {
+            get => _extraData; set
+            {
+                _extraData = value;
+            }
+        }
+
+        public void SetBufferOwner(CombatUnit owner)
+        {
+            _extraData.Owner = owner;
+        }
 
         public CombatUnit Owner { get; private set; }
 
 
-        public abstract void Update(ComabtFrame frame);
+        public abstract void Update(CombatFrame frame);
 
+
+
+        public abstract void SetDuration(float duration);
         public abstract float GetDuration();
 
         /// <summary>
@@ -39,9 +62,42 @@ namespace JFrame
         public abstract void SetCurFoldCount(int foldCount);
         public abstract int GetCurFoldCount();
 
-        public void OnAttach(CombatUnit target) => Owner = target;
+        public virtual void OnAttach(CombatUnit target)
+        {
+            _extraData.Owner = target;
+            Owner = target;
+        }
 
-        public void OnDetach() => Owner = null;
+        public virtual void OnDetach() => Owner = null;
+
+
+
+        #region action接口
+        /// <summary>
+        /// 添加action
+        /// </summary>
+        /// <param name="action"></param>
+        public abstract void AddAction(CombatAction action);
+
+        /// <summary>
+        /// 移除action
+        /// </summary>
+        /// <param name="action"></param>
+        public abstract void RemoveAction(CombatAction action);
+
+        /// <summary>
+        /// 更新action
+        /// </summary>
+        /// <param name="action"></param>
+        public abstract void UpdateAction(CombatAction action);
+
+        /// <summary>
+        /// 獲取所有action
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<CombatAction> GetActions();
+
+        #endregion
     }
 
 }

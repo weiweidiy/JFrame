@@ -34,7 +34,7 @@ namespace JFrame
         event Action<IBattleUnit, IBuffer> onBufferCast;
         event Action<IBattleUnit, IBuffer, int, float[]> onBufferUpdate;
 
-        void Update(ComabtFrame frame);
+        void Update(CombatFrame frame);
 
        // string Uid { get; }
 

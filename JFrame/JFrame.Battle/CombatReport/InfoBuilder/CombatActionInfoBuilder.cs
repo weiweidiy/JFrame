@@ -3,13 +3,16 @@ using System;
 
 namespace JFrame
 {
-    /// <summary>
-    /// 构建combatunit builder
-    /// </summary>
-    public class CombatUnitInfoBuilder
+    public abstract class CombatActionInfoBuilder<T>
     {
-        public GameDataSource DataSource { get; set; }
-        public Dictionary<int, CombatActionArgSource> DicActionArgSource { get; set; }
+        Dictionary<int, CombatActionArgSource> dicActionArgSource;
+
+        public CombatActionInfoBuilder(CombatActionArgSourceBuilder actionArgBuilder)
+        {
+            dicActionArgSource = actionArgBuilder.Build();
+        }
+
+        public abstract T Build();
 
         /// <summary>
         /// 返回对应的action参数源对象
@@ -19,41 +22,13 @@ namespace JFrame
         /// <exception cref="Exception"></exception>
         protected virtual CombatActionArgSource GetActionArgSource(int actionId)
         {
-            if (DicActionArgSource != null && DicActionArgSource.ContainsKey(actionId))
-                return DicActionArgSource[actionId];
+            if (dicActionArgSource != null && dicActionArgSource.ContainsKey(actionId))
+                return dicActionArgSource[actionId];
 
             throw new Exception($"没有找到 action {actionId} 对应的 CombatActionArgSource");
         }
 
-        /// <summary>
-        /// 构建gjj战斗数据
-        /// </summary>
-        /// <param name="hp"></param>
-        /// <param name="maxHp"></param>
-        /// <param name="atk"></param>
-        /// <param name="atkSpeed"></param>
-        /// <param name="position"></param>
-        /// <param name="actionsData"></param>
-        /// <returns></returns>
-        public CombatUnitInfo BuildCombatUnit()
-        {
-            var unitInfo = new CombatUnitInfo();
-            unitInfo.uid = DataSource.GetUid();
-            unitInfo.id = DataSource.GetUnitId();
-            unitInfo.hp = DataSource.GetHp();
-            unitInfo.atk = DataSource.GetAtk();
-            unitInfo.maxHp = DataSource.GetMaxHp();
-            unitInfo.position = DataSource.GetPosition();
-            unitInfo.moveSpeed = DataSource.GetVelocity();
-            unitInfo.targetPosition = DataSource.GetTargetPosition();
-            var actionIds = DataSource.GetActions();
-            var actionsData = CreateActions(actionIds);
-            unitInfo.actionsData = actionsData;
-            return unitInfo;
-        }
-
-
-        Dictionary<int, ActionInfo> CreateActions(List<int> actionsId)
+        protected Dictionary<int, ActionInfo> CreateActions(List<int> actionsId)
         {
             var result = new Dictionary<int, ActionInfo>();
 
@@ -66,8 +41,7 @@ namespace JFrame
             return result;
         }
 
-
-        ActionInfo CreateActionInfo(int actionId)
+        protected ActionInfo CreateActionInfo(int actionId)
         {
             var actionInfo = new ActionInfo();
 
@@ -163,7 +137,6 @@ namespace JFrame
 
             return actionInfo;
         }
-
 
     }
 }

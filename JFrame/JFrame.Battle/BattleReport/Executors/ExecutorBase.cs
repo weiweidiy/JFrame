@@ -89,7 +89,7 @@ namespace JFrame
         public abstract void Hit(IBattleUnit caster, IBattleAction action, List<IBattleUnit> target, object[] args = null);
 
 
-        public abstract void Update(ComabtFrame frame);
+        public abstract void Update(CombatFrame frame);
     }
 
 }

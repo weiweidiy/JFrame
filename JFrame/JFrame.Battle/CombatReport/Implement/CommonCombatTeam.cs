@@ -66,7 +66,7 @@ namespace JFrame
             return GetAll();
         }
 
-        public void UpdatePosition(ComabtFrame frame)
+        public void UpdatePosition(CombatFrame frame)
         {
             var units = GetUnits();
             if (units == null)
@@ -78,7 +78,7 @@ namespace JFrame
             }
         }
 
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             var units = GetUnits();
             if (units == null)
@@ -106,10 +106,8 @@ namespace JFrame
         {
             team = teamId;
 
-            CreateUnits(context, teamData);
+            var units = CreateUnits(context, teamData);
 
-            //监听单位事件
-            var units = GetUnits();
             if (units == null)
                 return;
 
@@ -163,7 +161,7 @@ namespace JFrame
         }
 
 
-        protected virtual void CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
+        public virtual List<CombatUnit> CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
         {
             if (teamData != null)
             {
@@ -178,13 +176,16 @@ namespace JFrame
                     var attributes = attrFactory.CreateAllAttributes(unitInfo);
                     var attrManager = new CombatAttributeManger();
                     attrManager.AddRange(attributes);
-                    unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
+                    unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), null/* buffFactory.CreateBuffers(unitInfo.buffersData)*/, attrManager);
                     unit.SetPosition(unitInfo.position);
                     unit.SetSpeed(unitInfo.moveSpeed);
                     unit.SetTargetPosition(unitInfo.targetPosition);
                     Add(unit);
                 }
+
+                return GetAll();
             }
+            return new List<CombatUnit>();
         }
 
 

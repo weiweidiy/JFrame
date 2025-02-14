@@ -10,6 +10,7 @@
             base.OnEnter();
 
             context.ResetConiditionTriggers();
+            context.EnterConditionTriggers();
         }
 
         public override void OnExit()
@@ -19,7 +20,7 @@
             context.ExitConditionTriggers();
         }
 
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             base.Update(frame);
             

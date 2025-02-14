@@ -1,6 +1,6 @@
 ﻿namespace JFrame
 {
-    public class ComabtFrame
+    public class CombatFrame
     {
         /// <summary>
         /// 当前帧数

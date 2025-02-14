@@ -39,9 +39,14 @@ namespace JFrame
         public bool IsImmunity { get; set; }
 
         /// <summary>
-        /// 发起的单位
+        /// 持有者
         /// </summary>
-        public virtual CombatUnit Caster { get; set; }
+        public virtual CombatUnit Owner { get; set; }
+
+        /// <summary>
+        /// 释放者
+        /// </summary>
+        public CombatUnit Caseter { get; set; }
 
         /// <summary>
         /// 哪個aciton造成的
@@ -61,7 +66,7 @@ namespace JFrame
         /// <summary>
         /// ActionOwner
         /// </summary>
-        public virtual IActionOwner Owner { get; set; }
+        //public virtual IActionOwner Owner { get; set; }
 
         /// <summary>
         /// 释放时长

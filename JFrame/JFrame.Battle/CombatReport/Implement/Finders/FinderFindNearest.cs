@@ -24,14 +24,14 @@ namespace JFrame
 
         protected override bool IsHit(CombatUnit unit, CombatExtraData extraData)
         {
-            var myX = extraData.Caster.GetPosition().x;
+            var myX = extraData.Owner.GetPosition().x;
             return unit.IsAlive() && Math.Abs(myX - unit.GetPosition().x) <= GetDistance(); 
         }
 
 
         protected override List<CombatUnit> OnSortUnits(List<CombatUnit> units, CombatExtraData extraData)
         {
-            var myX = extraData.Caster.GetPosition().x;
+            var myX = extraData.Owner.GetPosition().x;
             utility.BinarySort(units, GetCompare(myX)); //按距离排序
             return units;
         }

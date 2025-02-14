@@ -70,7 +70,7 @@ namespace JFrame
             base.OnAttach(target);
         }
 
-        protected override void OnUpdate(ComabtFrame frame)
+        protected override void OnUpdate(CombatFrame frame)
         {
         }
     }

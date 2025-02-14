@@ -122,7 +122,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             try
             {

@@ -67,13 +67,13 @@ namespace JFrame
             {
                 case 0: //友军
                     {
-                        var targetTeamId = context.CombatManager.GetFriendTeamId(extraData.Caster);
+                        var targetTeamId = context.CombatManager.GetFriendTeamId(extraData.Owner);
                         var units = context.CombatManager.GetUnits(targetTeamId, GetFindModeArg());
                         return FiltUnitType(units, extraData);
                     }
                 case 1://敌军
                     {
-                        var targetTeamId = context.CombatManager.GetOppoTeamId(extraData.Caster);
+                        var targetTeamId = context.CombatManager.GetOppoTeamId(extraData.Owner);
                         var units = context.CombatManager.GetUnits(targetTeamId, GetFindModeArg());
                         return FiltUnitType(units, extraData);
                     }

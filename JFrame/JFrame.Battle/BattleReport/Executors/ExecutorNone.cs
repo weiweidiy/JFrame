@@ -18,7 +18,7 @@ namespace JFrame
             //throw new NotImplementedException();
         }
 
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             //throw new NotImplementedException();
         }

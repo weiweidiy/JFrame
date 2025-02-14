@@ -27,7 +27,7 @@ namespace JFrame
         /// <returns></returns>
         bool RemoveBuffer(string uid);
 
-        void Update(ComabtFrame frame);
+        void Update(CombatFrame frame);
 
         /// <summary>
         /// 获取所有buffers

@@ -38,7 +38,7 @@ namespace JFrame
 
                 //把unit上的extraData 传递给 action
                 action.ExtraData = actionOwner.ExtraData.Clone() as CombatExtraData;
-                action.ExtraData.Owner = actionOwner;
+                //action.ExtraData.Owner = actionOwner;
             }
         }
 
@@ -58,23 +58,37 @@ namespace JFrame
             }
         }
 
-
-        public void SetAllActive(bool active)
+        public void Stop()
         {
             foreach (var action in GetAll())
             {
-                if (active)
-                    action.SwitchToCd();
-                else
-                    action.SwitchToDisable();
+                action.Stop();
+                //切换到不可用状态
+                action.SwitchToDisable();
             }
         }
+
+
+        //public void SetAllActive(bool active)
+        //{
+        //    if (active)
+        //        Start();
+        //    else
+        //        Stop();
+        //    //foreach (var action in GetAll())
+        //    //{
+        //    //    if (active)
+        //    //        action.SwitchToCd();
+        //    //    else
+        //    //        action.SwitchToDisable();
+        //    //}
+        //}
 
         /// <summary>
         /// 逻辑帧
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             foreach (var action in GetAll())
             {
@@ -91,7 +105,7 @@ namespace JFrame
         /// 更新释放时间
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdateDuration(ComabtFrame frame)
+        public void UpdateDuration(CombatFrame frame)
         {
             if (isBusy)
             {

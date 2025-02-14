@@ -22,6 +22,9 @@ namespace JFrame
 
         public void AddRange(IEnumerable<T> collection)
         {
+            if (collection == null)
+                return;
+
             list.AddRange(collection);
             var lst = new List<T>();
             lst.AddRange(collection);

@@ -4,23 +4,7 @@ using System.Linq;
 namespace JFrame
 {
 
-    public class BufferInfo
-    {
-        //public string uid;
-        public int id;
-        /// <summary>
-        /// 可叠加最大层数
-        /// </summary>
-        public int foldMaxCount;
-        /// <summary>
-        /// 当前层数
-        /// </summary>
-        //public int foldCount;
-        public CombatBufferFoldType foldType;
-        public float duration; //持续时间
-        public Dictionary<int, ActionInfo> actionsData;
 
-    }
 
     /// <summary>
     /// 添加类型
@@ -47,8 +31,8 @@ namespace JFrame
             //删除
             foreach (var item in waitForRemoveItems)
             {
-
                 Remove(item.Uid);
+                item.OnDetach();
             }
             waitForRemoveItems.Clear();
 
@@ -113,7 +97,7 @@ namespace JFrame
 
 
 
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             foreach (var buffer in GetAll())
             {

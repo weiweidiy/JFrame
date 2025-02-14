@@ -32,7 +32,7 @@ namespace JFrame
         /// <summary>
         /// 帧
         /// </summary>
-        ComabtFrame frame = new ComabtFrame();
+        CombatFrame frame = new CombatFrame();
 
         /// <summary>
         /// 战斗队伍

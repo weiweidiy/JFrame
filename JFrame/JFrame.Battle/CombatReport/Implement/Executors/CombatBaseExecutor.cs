@@ -102,7 +102,7 @@ namespace JFrame
             return targets;
         }
 
-        protected override void OnUpdate(ComabtFrame frame)
+        protected override void OnUpdate(CombatFrame frame)
         {
             //throw new NotImplementedException();
         }

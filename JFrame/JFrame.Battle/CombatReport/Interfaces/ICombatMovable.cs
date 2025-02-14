@@ -12,7 +12,7 @@ namespace JFrame
         void StopMove();
         bool IsMoving();
 
-        void UpdatePosition(ComabtFrame frame);
+        void UpdatePosition(CombatFrame frame);
     }
 }
 

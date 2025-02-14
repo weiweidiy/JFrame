@@ -16,11 +16,11 @@ namespace JFrameTest
         CombatUnitAction action;
         CombatContext context;
         CombatUnit my;
-        ComabtFrame frame;
+        CombatFrame frame;
         [SetUp]
         public void Setup()
         {
-            frame = new ComabtFrame();
+            frame = new CombatFrame();
             context = Substitute.For<CombatContext>();
             var combatManager = Substitute.For<CombatManager>();
             my = Substitute.For<CombatUnit>();
@@ -33,7 +33,7 @@ namespace JFrameTest
             unit2.GetPosition().Returns(new CombatVector() { x = 2 });
             var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
             var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
+            combatManager.Initialize(dicTeam1, dicTeam2,null,90);
             combatManager.GetOppoTeamId(Arg.Any<CombatUnit>()).Returns(1);
             combatManager.GetUnitsInRange(Arg.Any<CombatUnit>(), Arg.Any<int>(), Arg.Any<float>()).Returns(new System.Collections.Generic.List<CombatUnit>() { unit1, unit2 });
             //component.Owner.Returns(acition);

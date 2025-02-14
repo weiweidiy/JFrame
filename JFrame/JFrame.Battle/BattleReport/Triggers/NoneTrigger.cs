@@ -13,7 +13,7 @@
         /// <summary>
         /// 延迟完成
         /// </summary>
-        protected override void OnDelayCompleteEveryFrame(ComabtFrame frame)
+        protected override void OnDelayCompleteEveryFrame(CombatFrame frame)
         {
             base.OnDelayCompleteEveryFrame(frame);
 

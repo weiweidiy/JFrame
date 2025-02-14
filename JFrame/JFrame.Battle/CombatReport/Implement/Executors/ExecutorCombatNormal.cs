@@ -26,7 +26,7 @@ namespace JFrame
             count = 0;
         }
 
-        protected override void OnUpdate(ComabtFrame frame)
+        protected override void OnUpdate(CombatFrame frame)
         {
             base.OnUpdate(frame);
 

@@ -26,7 +26,7 @@ namespace JFrameTest
             fakeContext = Substitute.For<CombatContext>();
             fakeManager = Substitute.For<CombatManager>();
             fakeContext.CombatManager.Returns(fakeManager);
-            fakeExtraData.Caster.Returns(fakeUnit1);
+            fakeExtraData.Owner.Returns(fakeUnit1);
         }
 
 
@@ -41,7 +41,7 @@ namespace JFrameTest
         {
             //arrange
             var findSelf = new FinderFindSelf();
-            fakeExtraData.Caster.Returns(fakeUnit1);
+            fakeExtraData.Owner.Returns(fakeUnit1);
 
             //act
             var targets = findSelf.FindTargets(fakeExtraData);
@@ -59,7 +59,7 @@ namespace JFrameTest
             var finder = new FinderFindNearest();
             finder.Initialize(fakeContext, new float[] { 1, 0, 0, 0, 2, 5f }); //找敌方5米内的1个单位
 
-            fakeManager.GetOppoTeamId(fakeExtraData.Caster).Returns(1);
+            fakeManager.GetOppoTeamId(fakeExtraData.Owner).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
             fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
@@ -83,7 +83,7 @@ namespace JFrameTest
             var finder = new FinderFindNearest();
             finder.Initialize(fakeContext, new float[] { 1, 3, 0, 0, 2, 5f }); //找敌方5米内的1个单位
 
-            fakeManager.GetOppoTeamId(fakeExtraData.Caster).Returns(1);
+            fakeManager.GetOppoTeamId(fakeExtraData.Owner).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
             fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
@@ -109,7 +109,7 @@ namespace JFrameTest
             //arrange
             var finder = new FinderFindHpLessThanPercent();
             finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 2, 0.5f }); //找友军低于50%生命的单位
-            fakeManager.GetFriendTeamId(fakeExtraData.Caster).Returns(0);
+            fakeManager.GetFriendTeamId(fakeExtraData.Owner).Returns(0);
             fakeManager.GetUnits(0, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
             fakeUnit1.GetHpPercent().Returns(0.8f);
             fakeUnit2.GetHpPercent().Returns(0.4f);

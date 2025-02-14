@@ -61,7 +61,7 @@ namespace JFrame
         /// 状态机更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public virtual void Update(ComabtFrame frame)
+        public virtual void Update(CombatFrame frame)
         {
             
         }

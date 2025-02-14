@@ -96,7 +96,7 @@ namespace JFrame
             return configs;
         }
 
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             machine.State.Update(frame);
         }

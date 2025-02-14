@@ -96,12 +96,12 @@ namespace JFrame
             return curArgs[index];
         }
 
-        public void Update(ComabtFrame frame) {
+        public void Update(CombatFrame frame) {
             if (isStart)
                 OnUpdate(frame);
         }
 
-        protected abstract void OnUpdate(ComabtFrame frame);
+        protected abstract void OnUpdate(CombatFrame frame);
 
 
         public virtual void OnAttach(CombatAction target)
@@ -122,13 +122,7 @@ namespace JFrame
             isStart = true;
         }
 
-        /// <summary>
-        /// 退出当前状态
-        /// </summary>
-        public virtual void OnExit()
-        {
 
-        }
 
         /// <summary>
         /// 停止组件的效果
@@ -136,6 +130,19 @@ namespace JFrame
         public virtual void OnStop()
         {
             isStart = false;
+        }
+
+        public virtual void OnEnterState()
+        {
+
+        }
+
+        /// <summary>
+        /// 退出当前状态
+        /// </summary>
+        public virtual void OnExitState()
+        {
+
         }
 
         public abstract int GetValidArgsCount();

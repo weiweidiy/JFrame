@@ -9,7 +9,7 @@ namespace JFrame
     {
         public abstract List<CombatUnit> FindTargets(CombatExtraData extraData);
 
-        protected override void OnUpdate(ComabtFrame frame)
+        protected override void OnUpdate(CombatFrame frame)
         {
             //throw new NotImplementedException();
         }

@@ -10,6 +10,7 @@
             base.OnEnter();
             context.ResetCdTriggers();
             context.NotifyStartCD();
+            context.EnterCdTriggers();
         }
 
         public override void OnExit()
@@ -19,7 +20,7 @@
             context.ExitCdTriggers();
         }
 
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             base.Update(frame);
 

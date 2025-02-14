@@ -163,7 +163,7 @@ namespace JFrame
      
 
                 default:
-                    throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
+                    throw new NotImplementedException("沒有實現trigger組件類型 " + componentInfo.id);
             }
             trigger.OnAttach(owner);
             trigger.Initialize(context, componentInfo.args);
@@ -216,7 +216,7 @@ namespace JFrame
                     }
                     break;
                 default:
-                    throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
+                    throw new NotImplementedException("沒有實現finder組件類型 " + componentInfo.id);
             }
             finder.OnAttach(owner);
             finder.Initialize(context, componentInfo.args);
@@ -284,8 +284,13 @@ namespace JFrame
                         executor = new ExecutorCombatChangeAttribute(finder, formula);
                     }
                     break;
+                case 5:
+                    {
+                        executor = new ExecutorAddBuffer(finder, formula);
+                    }
+                    break;
                 default:
-                    throw new NotImplementedException("沒有實現組件類型 " + componentInfo.id);
+                    throw new NotImplementedException("沒有實現executor組件類型 " + componentInfo.id);
             }
             executor.OnAttach(owner);
             executor.Initialize(context, componentInfo.args);

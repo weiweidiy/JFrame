@@ -102,7 +102,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             var actions = GetAll();
             foreach (var action in actions)
@@ -117,7 +117,7 @@ namespace JFrame
         /// 更新释放时间
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdateDuration(ComabtFrame frame)
+        public void UpdateDuration(CombatFrame frame)
         {
             if (IsBusy)
             {

@@ -1,21 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using JFrame.BattleReportSystem;
+using JFrame.Common;
+using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
     public class CombatBuffer : BaseCombatBuffer
     {
         float delta;
+
         protected float duration;
         int curFoldCount;
-        public override float GetDuration()
+
+        CombatActionManager actionManager = new CombatActionManager();
+
+        public void Initialize(CombatBufferInfo bufferInfo, List<CombatAction> actions)
         {
-            return duration;
+            FoldType = bufferInfo.foldType;
+            MaxFoldCount = bufferInfo.foldMaxCount;
+            Uid = Guid.NewGuid().ToString();
+            Id = bufferInfo.id;
+            if (actions != null)
+            {
+                actionManager.AddRange(actions);
+                actionManager.Initialize(this);
+                actionManager.onStartExecuting += ActionManager_onStartExecuting;
+            }
         }
 
-        public override void SetCurFoldCount(int foldCount) => curFoldCount = foldCount;
-        public override int GetCurFoldCount() => curFoldCount;
 
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             delta += frame.DeltaTime;
             if (delta >= duration)
@@ -23,16 +37,99 @@ namespace JFrame
                 delta = 0f;
                 Expired = true;
             }
+            else
+            {
+                actionManager.Update(frame);
+            }
         }
 
-        public void Initialize(BufferInfo bufferInfo , List<CombatAction> actions)
+
+        public override void SetDuration(float duration) => this.duration = duration;
+        public override float GetDuration() => duration;
+
+        public override void SetCurFoldCount(int foldCount) => curFoldCount = foldCount;
+        public override int GetCurFoldCount() => curFoldCount;
+
+        #region action接口
+        /// <summary>
+        /// 添加action
+        /// </summary>
+        /// <param name="action"></param>
+        public override void AddAction(CombatAction action) => actionManager.AddItem(action);
+
+        /// <summary>
+        /// 移除action
+        /// </summary>
+        /// <param name="action"></param>
+        public override void RemoveAction(CombatAction action) => actionManager.RemoveItem(action);
+
+        /// <summary>
+        /// 更新action
+        /// </summary>
+        /// <param name="action"></param>
+        public override void UpdateAction(CombatAction action) => actionManager.UpdateItem(action);
+
+        /// <summary>
+        /// 獲取所有action
+        /// </summary>
+        /// <returns></returns>
+        public override List<CombatAction> GetActions() => actionManager.GetAll();
+
+
+        private void ActionManager_onItemUpdated(CombatAction obj)
         {
-            FoldType = bufferInfo.foldType;
-            Id = bufferInfo.id;
-            duration = bufferInfo.duration;
-            //curFoldCount = bufferInfo.foldCount;
-            MaxFoldCount = bufferInfo.foldMaxCount;
+            //throw new NotImplementedException();
         }
+
+        private void ActionManager_onItemRemoved(CombatAction obj)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ActionManager_onItemAdded(List<CombatAction> obj)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 触发了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onTriggerOn(CombatExtraData extraData)
+        {
+
+        }
+
+        /// <summary>
+        /// action进入cd了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onStartCD(CombatExtraData extraData)
+        { }
+
+        /// <summary>
+        /// action开始释放了
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onStartExecuting(CombatExtraData extraData)
+        {
+            NotifyBufferExecuting(extraData);
+        }
+
+        public override void OnAttach(CombatUnit target)
+        {
+            base.OnAttach(target);
+
+            actionManager.Start();
+        }
+
+        public override void OnDetach()
+        {
+            base.OnDetach();
+
+            actionManager.Stop();
+        }
+        #endregion
     }
 
 }

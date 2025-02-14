@@ -99,7 +99,7 @@ namespace JFrame
         /// 更新帧
         /// </summary>
         /// <param name="frame"></param>
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             if (!Executing)
                 return;

@@ -126,7 +126,8 @@ namespace JFrame
 
             //创建一个透传参数
             _extraData = new CombatExtraData();
-            _extraData.Caster = this; //释放者
+            _extraData.Owner = this; //持有者
+            _extraData.Caseter = this;//释放者
             //_extraData.Value = (double)GetAttributeCurValue(CombatAttribute.ATK); // to do: 移动到action里去定义
 
             if (actions != null)
@@ -191,7 +192,7 @@ namespace JFrame
         /// 更新逻辑
         /// </summary>
         /// <param name="frame"></param>
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             actionManager.Update(frame);
             bufferManager.Update(frame);
@@ -201,7 +202,7 @@ namespace JFrame
         /// 更新坐标
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdatePosition(ComabtFrame frame)
+        public void UpdatePosition(CombatFrame frame)
         {
             if (IsMoving())   //只是自己移动了，其他单位还没有移动
             {
@@ -541,28 +542,22 @@ namespace JFrame
         /// 添加一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void AddBuffer(BaseCombatBuffer buffer)
+        public virtual void AddBuffer(BaseCombatBuffer buffer)
         {
-            bufferManager.AddItem(buffer);
+            GetBufferManager().AddItem(buffer);
         }
 
         /// <summary>
         /// 删除一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void RemoveBuffer(BaseCombatBuffer buffer)
-        {
-            bufferManager.RemoveItem(buffer);
-        }
+        public void RemoveBuffer(BaseCombatBuffer buffer) => GetBufferManager().RemoveItem(buffer);
 
         /// <summary>
         /// 更新一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void UpdateBuffer(BaseCombatBuffer buffer)
-        {
-            bufferManager.UpdateItem(buffer);
-        }
+        public void UpdateBuffer(BaseCombatBuffer buffer)=> GetBufferManager().UpdateItem(buffer);
 
         private void BufferManager_onItemAdded(List<BaseCombatBuffer> buffer)
         {
@@ -572,16 +567,11 @@ namespace JFrame
             }
         }
 
-        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer)
-        {
-            onBufferUpdate?.Invoke(buffer.ExtraData);
-        }
+        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer)=> onBufferUpdate?.Invoke(buffer.ExtraData);
 
-        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer)
-        {
-            onBufferRemoved?.Invoke(buffer.ExtraData);
-        }
+        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer)=> onBufferRemoved?.Invoke(buffer.ExtraData);
 
+        public virtual CombatBufferManager GetBufferManager() => bufferManager;
 
 
         #endregion
@@ -624,7 +614,7 @@ namespace JFrame
             StopMove();
 
             //所有action設置成非活動狀態，不會出發
-            actionManager.SetAllActive(false);
+            actionManager.Stop();
 
             //to do:清除所有buffer
 

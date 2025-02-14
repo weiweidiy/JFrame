@@ -22,11 +22,11 @@ namespace JFrame
 
         List<ICombatReportData> reports = new List<ICombatReportData>();
 
-        ComabtFrame frame;
+        CombatFrame frame;
 
         List<CommonCombatTeam> teams;
 
-        public CombatReporter(ComabtFrame frame, List<CommonCombatTeam> teams)
+        public CombatReporter(CombatFrame frame, List<CommonCombatTeam> teams)
         {
             this.frame = frame;
             this.teams = teams;
@@ -42,7 +42,7 @@ namespace JFrame
                     //team.onDebuffAnti += Team_onDebuffAnti;
                     //team.onMaxHpUp += Team_onMaxHpUp;
                     team.onDead += Team_onDead;
-                    //team.onBufferAdded += Team_onBufferAdded;
+                    team.onBufferAdded += Team_onBufferAdded;
                     //team.onBufferRemoved += Team_onBufferRemoved;
                     //team.onBufferCast += Team_onBufferCast;
                     //team.onBufferUpdate += Team_onBufferUpdate;
@@ -52,6 +52,7 @@ namespace JFrame
                 }
             }
         }
+
 
 
 
@@ -68,7 +69,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.TargetsUid = data.GetTargetsUid();
             reportData.CastDuration = data.CastDuration;
@@ -92,7 +93,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetsUid = data.GetTargetsUid();
@@ -111,7 +112,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -133,7 +134,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -166,7 +167,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.ActionId = data.Action.Id;
             reportData.ActionUid = data.Action.Uid;
             reportData.TargetUid = data.Target.Uid;
@@ -179,6 +180,23 @@ namespace JFrame
         //{
         //    AddReportData(caster.Uid, ReportType.Dead, target.Uid, new object[] { 0 });
         //}
+
+
+        private void Team_onBufferAdded(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.CastUnitUid = data.Owner.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.BufferUid = data.Buffer.Uid;
+            reportData.BufferFoldCount = data.Buffer.GetCurFoldCount();
+            reportData.BufferId = data.Buffer.Id;
+
+            AddReportData(ReportType.AddBuffer, reportData);
+        }
+
 
         //private void Team_onBufferAdded(PVPBattleManager.Team team, ICombatUnit target, IBuffer buffer)
         //{
@@ -211,7 +229,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.StartMove, reportData);
@@ -220,7 +238,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.SpeedChanged, reportData);
@@ -229,7 +247,7 @@ namespace JFrame
         {
             var reportData = new ReportData();
 
-            reportData.CastUnitUid = data.Caster.Uid;
+            reportData.CastUnitUid = data.Owner.Uid;
             reportData.Velocity = data.Velocity;
 
             AddReportData(ReportType.EndMove, reportData);

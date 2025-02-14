@@ -20,9 +20,9 @@ namespace JFrame
         /// <summary>
         /// 退出当前状态
         /// </summary>
-        public override void OnExit()
+        public override void OnExitState()
         {
-            base.OnExit();
+            base.OnExitState();
 
             count++;
         }
@@ -32,7 +32,7 @@ namespace JFrame
             return (int)GetCurArg(0);
         }
 
-        protected override void OnUpdate(ComabtFrame frame)
+        protected override void OnUpdate(CombatFrame frame)
         {
             base.OnUpdate(frame);
 

@@ -53,7 +53,7 @@ namespace JFrameTest
             //arrange
             var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team1);
             var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team2);
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
+            combatManager.Initialize(dicTeam1, dicTeam2, new List<CombatBufferInfo>(), 90);
 
             //act
             //combatManager.StartUpdate();
@@ -72,7 +72,7 @@ namespace JFrameTest
             //act
             var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, unitInfos);
             var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
+            combatManager.Initialize(dicTeam1, dicTeam2, new List<CombatBufferInfo>(), 90);
 
             //expect
             Assert.AreEqual(1, combatManager.GetTeams().Count);
@@ -90,7 +90,7 @@ namespace JFrameTest
             //act
             var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team1Info);
             var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, team2Info);
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
+            combatManager.Initialize(dicTeam1, dicTeam2, new List<CombatBufferInfo>(), 90);
 
             //expect
             Assert.AreEqual(1, combatManager.GetUnitCount(0));
@@ -117,7 +117,7 @@ namespace JFrameTest
             team1.GetUnits().Returns(lstCombat);
             var dicTeam1 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
             var dicTeam2 = new KeyValuePair<CombatTeamType, List<CombatUnitInfo>>(CombatTeamType.Single, new List<CombatUnitInfo>());
-            combatManager.Initialize(dicTeam1, dicTeam2, 90);
+            combatManager.Initialize(dicTeam1, dicTeam2, new List<CombatBufferInfo>(), 90);
             combatManager.AddTeam(1, team1);
 
             //act
@@ -127,6 +127,18 @@ namespace JFrameTest
             Assert.AreEqual(2,units.Count);
         }
 
+
+        [Test]
+        public void TestCombatResult()
+        {
+            //arrange
+            var combatManager = new CombatManager();
+            //combatManager.Initialize()
+
+            //act
+
+            //expect
+        }
 
     }
 

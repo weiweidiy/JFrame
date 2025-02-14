@@ -36,6 +36,12 @@ namespace JFrame
         /// 移动速度
         /// </summary>
         public CombatVector Velocity { get; set; }
+
+        public string BufferUid { get; set; }
+
+        public int BufferId { get; set; }
+
+        public int BufferFoldCount { get; set; }    
     }
 
 

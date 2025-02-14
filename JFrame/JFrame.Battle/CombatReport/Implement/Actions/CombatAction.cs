@@ -165,7 +165,27 @@ namespace JFrame
             }
         }
 
-        public void Update(ComabtFrame frame)
+        public void Stop()
+        {
+            foreach (var trigger in conditionTriggers)
+            {
+                trigger.OnStop();
+            }
+
+            delayTrigger.OnStop();
+
+            foreach (var executor in executors)
+            {
+                executor.OnStop();
+            }
+
+            foreach (var cdTrigger in cdTriggers)
+            {
+                cdTrigger.OnStop();
+            }
+        }
+
+        public void Update(CombatFrame frame)
         {
             sm.Update(frame);
         }
@@ -175,7 +195,7 @@ namespace JFrame
         /// 更新條件觸發器
         /// </summary>
         /// <param name="frame"></param>
-        public void UpdateConditionTriggers(ComabtFrame frame)
+        public void UpdateConditionTriggers(CombatFrame frame)
         {
             foreach (var trigger in conditionTriggers)
             {
@@ -214,16 +234,28 @@ namespace JFrame
             }
         }
 
-        public void ExitConditionTriggers()
+        public void EnterConditionTriggers()
         {
+            if (conditionTriggers == null)
+                return;
             foreach (var trigger in conditionTriggers)
             {
-                trigger.OnExit();
+                trigger.OnEnterState();
+            }
+        }
+
+        public void ExitConditionTriggers()
+        {
+            if (conditionTriggers == null)
+                return;
+            foreach (var trigger in conditionTriggers)
+            {
+                trigger.OnExitState();
             }
         }
 
 
-        public void UpdateDelayTrigger(ComabtFrame frame)
+        public void UpdateDelayTrigger(CombatFrame frame)
         {
             delayTrigger.Update(frame);
         }
@@ -248,7 +280,7 @@ namespace JFrame
             }
         }
 
-        public void UpdateExecutors(ComabtFrame frame)
+        public void UpdateExecutors(CombatFrame frame)
         {
             if (executors == null)
                 return;
@@ -269,7 +301,7 @@ namespace JFrame
             }
         }
 
-        public void UpdateCdTriggers(ComabtFrame frame)
+        public void UpdateCdTriggers(CombatFrame frame)
         {
             foreach (var trigger in cdTriggers)
             {
@@ -277,11 +309,24 @@ namespace JFrame
             }
         }
 
-        public void ExitCdTriggers()
+        public void EnterCdTriggers()
         {
+            if (cdTriggers == null)
+                return;
             foreach (var trigger in cdTriggers)
             {
-                trigger.OnExit();
+                trigger.OnEnterState();
+            }
+        }
+
+        public void ExitCdTriggers()
+        {
+            if (cdTriggers == null)
+                return;
+
+            foreach (var trigger in cdTriggers)
+            {
+                trigger.OnExitState();
             }
         }
 

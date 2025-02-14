@@ -21,7 +21,7 @@ namespace JFrame
             Console.WriteLine(GetType().Name + " OnEnter");
         }
 
-        public virtual void Update(ComabtFrame frame)
+        public virtual void Update(CombatFrame frame)
         {
             
         }

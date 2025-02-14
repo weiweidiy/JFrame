@@ -6,8 +6,6 @@
     public interface IActionOwner
     {
         CombatExtraData ExtraData { get; set; }
-
-
     }
 
 

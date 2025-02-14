@@ -20,7 +20,7 @@ namespace JFrameTest
         CombatContext context;
 
 
-        ComabtFrame frame;
+        CombatFrame frame;
 
         List<CombatUnitInfo> team1;
         List<CombatUnitInfo> team2;

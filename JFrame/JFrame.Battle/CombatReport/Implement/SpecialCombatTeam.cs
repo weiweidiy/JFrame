@@ -24,10 +24,10 @@ namespace JFrame
         /// </summary>
         /// <param name="context"></param>
         /// <param name="teamData"></param>
-        protected override void CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
+        public override List<CombatUnit> CreateUnits(CombatContext context, List<CombatUnitInfo> teamData)
         {
             if (teamData == null || teamData.Count == 0)
-                return;
+                return new List<CombatUnit>();
 
             var actionFactory = new CombatActionFactory();
             var attrFactory = new CombatAttributeFactory();
@@ -45,12 +45,14 @@ namespace JFrame
                 var unitInfo = teamData[i];
                 //創建並初始化戰鬥單位
                 var unit = new CombatUnit();
-                unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), buffFactory.CreateBuffers(unitInfo.buffersData), attrManager);
+                unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), null,/*buffFactory.CreateBuffers(unitInfo.buffersData),*/ attrManager);
                 unit.SetPosition(unitInfo.position);
                 unit.SetSpeed(unitInfo.moveSpeed);
                 unit.SetTargetPosition(unitInfo.targetPosition);
                 Add(unit);
             }
+
+            return GetAll();
         }
     }
 }

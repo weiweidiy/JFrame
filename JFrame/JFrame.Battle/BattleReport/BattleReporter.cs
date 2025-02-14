@@ -44,11 +44,11 @@ namespace JFrame
 
         List<IBattleReportData> reports = new List<IBattleReportData>();
 
-        ComabtFrame frame;
+        CombatFrame frame;
 
         Dictionary<PVPBattleManager.Team, BattleTeam> teams;
 
-        public BattleReporter(ComabtFrame frame, Dictionary<PVPBattleManager.Team, BattleTeam> teams) {
+        public BattleReporter(CombatFrame frame, Dictionary<PVPBattleManager.Team, BattleTeam> teams) {
             this.frame = frame;
             this.teams = teams;
             if(teams != null)

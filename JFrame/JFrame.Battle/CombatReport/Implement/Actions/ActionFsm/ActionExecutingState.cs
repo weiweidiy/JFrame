@@ -27,7 +27,7 @@ namespace JFrame
             base.OnExit();
         }
 
-        public override void Update(ComabtFrame frame)
+        public override void Update(CombatFrame frame)
         {
             base.Update(frame);
 

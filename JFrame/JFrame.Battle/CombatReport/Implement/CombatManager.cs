@@ -47,6 +47,10 @@ namespace JFrame
     }
 
 
+
+    /// <summary>
+    /// action数据结构
+    /// </summary>
     public class ActionInfo
     {
         public string uid;
@@ -55,6 +59,9 @@ namespace JFrame
         public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
     }
 
+    /// <summary>
+    /// unit数据结构
+    /// </summary>
     public class CombatUnitInfo
     {
         public string uid;
@@ -84,14 +91,36 @@ namespace JFrame
 
     }
 
+    /// <summary>
+    /// buffer数据结构
+    /// </summary>
+    public class CombatBufferInfo : IUnique
+    {
+        //public string uid;
+        public int id;
+        /// <summary>
+        /// 可叠加最大层数
+        /// </summary>
+        public int foldMaxCount;
+        /// <summary>
+        /// 当前层数
+        /// </summary>
+        //public int foldCount;
+        public CombatBufferFoldType foldType;
+        //public float duration; //持续时间
+        public Dictionary<int, ActionInfo> actionsData;
+
+        public string Uid { get; set; }
+    }
+
 
 
     public class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, CombatUnit>
     {
         Dictionary<int, CommonCombatTeam> teams;
 
-        ComabtFrame frame = new ComabtFrame();
-        public ComabtFrame Frame { get => frame; }
+        CombatFrame frame = new CombatFrame();
+        public CombatFrame Frame { get => frame; }
 
         CombatJudge combatJudge;
 
@@ -100,11 +129,15 @@ namespace JFrame
         public CombatReporter Reporter;
 
 
-        public void Initialize(KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam1Data, KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam2Data, float timeLimit, CombatUnitInfo god = null)
+        CombatBufferFactory bufferFactory = new CombatBufferFactory();
+
+
+        public void Initialize(KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam1Data, KeyValuePair<CombatTeamType, List<CombatUnitInfo>> dicTeam2Data, List<CombatBufferInfo> buffers, float timeLimit, CombatUnitInfo god = null)
         {
             teams = new Dictionary<int, CommonCombatTeam>();
             var context = new CombatContext();
             context.CombatManager = this;
+            context.CombatBufferFactory = bufferFactory;
 
             var team1Type = dicTeam1Data.Key;
             var team1Data = dicTeam1Data.Value;
@@ -133,6 +166,9 @@ namespace JFrame
             report = new CombatReport();
             report.attacker = dicTeam1Data;
             report.defence = dicTeam2Data;
+
+            //预加载所有buffers
+            bufferFactory.PreloadBuffers(buffers, context);
         }
 
         #region 添加獲取方法
@@ -354,7 +390,7 @@ namespace JFrame
             return report;
         }
 
-        public void Update(ComabtFrame frame)
+        public void Update(CombatFrame frame)
         {
             foreach (var team in teams.Values)
             {

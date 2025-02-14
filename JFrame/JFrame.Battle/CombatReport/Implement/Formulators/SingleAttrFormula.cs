@@ -27,7 +27,7 @@
             switch (teamArg)
             {
                 case 0:
-                    unit = extraData.Caster;
+                    unit = extraData.Owner;
                     break;
                 case 1:
                     unit = extraData.Target;
