@@ -35,7 +35,19 @@ namespace JFrameTest
             Assert.AreEqual(true, trigger.IsOn());
         }
 
+        //[Test]
+        //public void TestCombatTriggerHurt()
+        //{
+        //    //arrange
+        //    var trigger = new TriggerCombatHurt(Substitute.For<CombatBaseFinder>());
+        //    trigger
 
+        //    //act
+        //    trigger.OnEnterState();
+
+        //    //expect
+
+        //}
 
 
 

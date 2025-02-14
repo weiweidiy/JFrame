@@ -19,6 +19,12 @@ namespace JFrame
         public abstract ActionMode GetActionMode();
 
         /// <summary>
+        /// 獲取action組id
+        /// </summary>
+        /// <returns></returns>
+        public abstract int GetActionGroupId();
+
+        /// <summary>
         /// 获取条件查找器
         /// </summary>
         /// <returns></returns>

@@ -56,6 +56,7 @@ namespace JFrame
         public string uid;
         public ActionType type;
         public ActionMode mode;
+        public int groupId;
         public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
     }
 

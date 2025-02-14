@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateActions(Dictionary<int,ActionInfo> actionsInfo, IActionOwner owner, CombatContext context)
+        public List<CombatAction> CreateActions(Dictionary<int, ActionInfo> actionsInfo, IActionOwner owner, CombatContext context)
         {
             if (actionsInfo == null)
                 return null;
@@ -26,6 +26,7 @@ namespace JFrame
                 var actionType = actionData.type;
                 var actionMode = actionData.mode;
                 var actionUid = actionData.uid;
+                var actionGroupId = actionData.groupId;
 
                 var dic = actionData.componentInfo;
                 var conditionFinders = dic[ActionComponentType.ConditionFinder]; //条件查找器
@@ -40,16 +41,16 @@ namespace JFrame
                 var sm = new CombatActionSM();
                 sm.Initialize(unitAction);
 
-                var conditionFinder = conditionFinders.Count > 0? conditionFinders[0] : null;
+                var conditionFinder = conditionFinders.Count > 0 ? conditionFinders[0] : null;
                 var delayTrigger = delayTriggers.Count > 0 ? delayTriggers[0] : null;
                 var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
                 var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
-                unitAction.Initialize(actionId, actionUid, actionType, actionMode
+                unitAction.Initialize(actionId, actionUid, actionType, actionMode, actionGroupId
                             , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
                             , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
-                            , CreateExecutors(executors, CreateFinder(executorFinder, context,unitAction), CreateFormula(executorFormula,context, unitAction), context, unitAction) //执行器
-                            , CreateCdTriggers(cdTriggers, context, unitAction),sm); //cd触发器
+                            , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
+                            , CreateCdTriggers(cdTriggers, context, unitAction), sm); //cd触发器
 
                 result.Add(unitAction);
             }
@@ -107,7 +108,7 @@ namespace JFrame
 
             foreach (var componentInfo in executors)
             {
-                var executor = CreateExecutor(componentInfo,finder, formula, context, owner);
+                var executor = CreateExecutor(componentInfo, finder, formula, context, owner);
                 result.Add(executor);
             }
 
@@ -160,8 +161,21 @@ namespace JFrame
                         trigger = new TriggerTime(finder); //時長觸發器
                     }
                     break;
-     
-
+                case 4:
+                    {
+                        trigger = new TriggerUnitHurt(finder);//受傷觸發
+                    }
+                    break;
+                case 5:
+                    {
+                        trigger = new TriggerActionCast(finder);
+                    }
+                    break;
+                case 6:
+                    {
+                        trigger = new TriggerHitted(finder);
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現trigger組件類型 " + componentInfo.id);
             }
@@ -237,7 +251,7 @@ namespace JFrame
 
             CombatBaseFormula formula = null;
 
-            switch(componentInfo.id)
+            switch (componentInfo.id)
             {
                 case 1:
                     {
@@ -259,7 +273,7 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, ICombatFinder finder, CombatBaseFormula formula,  CombatContext context, CombatAction owner)
+        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, ICombatFinder finder, CombatBaseFormula formula, CombatContext context, CombatAction owner)
         {
             CombatBaseExecutor executor = null;
             switch (componentInfo.id)
@@ -272,7 +286,7 @@ namespace JFrame
                 case 2:
                     {
                         executor = new ExecutorCombatContinuousDamage(finder, formula);
-                    }           
+                    }
                     break;
                 case 3:
                     {

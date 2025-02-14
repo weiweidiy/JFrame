@@ -1,5 +1,6 @@
 ﻿namespace JFrame
 {
+
     /// <summary>
     ///  type 1 查找触发器，只要查找器找到了对象，就触发
     /// </summary>

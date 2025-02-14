@@ -111,7 +111,7 @@ namespace JFrameTest
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, null, null, null, null, null);
+            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, 1, null, null, null, null, null);
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(hpAttr);
             var executor = new ExecutorCombatChangeAttribute(null, null);
@@ -131,7 +131,7 @@ namespace JFrameTest
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, null, null, null, null, null);
+            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active,1, null, null, null, null, null);
 
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(hpAttr);

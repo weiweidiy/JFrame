@@ -156,6 +156,13 @@ namespace JFrame
             if (extraData.Action.Mode == ActionMode.Active)
                 onTriggerOn?.Invoke(extraData);
 
+            if (extraData.Action.Mode == ActionMode.Passive)
+            {
+                extraData.Action.SwitchToExecuting();
+                return;
+            }
+                
+
             if (!isBusy && extraData.Action.Mode == ActionMode.Active)
             {
                 curDuration = extraData.Action.SwitchToExecuting();
@@ -163,8 +170,6 @@ namespace JFrame
                 return;
             }
 
-            if (extraData.Action.Mode == ActionMode.Passive)
-                extraData.Action.SwitchToExecuting();
         }
 
         /// <summary>

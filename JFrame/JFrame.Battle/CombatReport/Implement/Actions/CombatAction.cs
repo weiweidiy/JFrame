@@ -60,6 +60,8 @@ namespace JFrame
 
         public ActionMode Mode { get; private set; }
 
+        public int GroupId { get; private set; }
+
         /// <summary>
         /// 透傳對象
         /// </summary>
@@ -99,7 +101,7 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(int id, string uid, ActionType type, ActionMode mode, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
+        public void Initialize(int id, string uid, ActionType type, ActionMode mode, int groupId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
         {
             Uid = uid;
             this.conditionTriggers = conditionTriggers;
