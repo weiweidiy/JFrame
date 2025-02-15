@@ -19,6 +19,23 @@
         float _allTime = 90f; //to do:从配置表读取
         public float AllTime { get => _allTime; set => _allTime = value; }
 
+
+        public CombatFrame(float limitTime, float deltaTime)
+        {
+            _deltaTime = deltaTime;
+            _allTime = limitTime;
+        }
+
+        public CombatFrame() : this(90f, 0.25f) { }
+
+        /// <summary>
+        /// 重置当前帧
+        /// </summary>
+        public void ResetFrame()
+        {
+            CurFrame = 0;
+        }
+
         /// <summary>
         /// 下一个逻辑帧
         /// </summary>

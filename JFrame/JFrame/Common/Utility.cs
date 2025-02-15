@@ -174,12 +174,12 @@ namespace JFrame.Common
         }
 
         /// <summary>
-        /// 获取列表中的随机值
+        /// 获取列表中的随机元素
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public T GetRandomValue<T>(List<T> list)
+        public T GetRandomItem<T>(List<T> list)
         {
             // 创建随机数生成器
             Random random = new Random();
@@ -190,6 +190,25 @@ namespace JFrame.Common
             // 返回列表中对应索引的值
             return list[index];
         }
+
+        /// <summary>
+        /// 百分比随机是否命中
+        /// </summary>
+        /// <param name="hitValue">命中值：比如 45%概率命中 </param>
+        /// <returns></returns>
+        public bool RandomHit(float hitValue)
+        {
+            // 创建一个随机数生成器
+            Random random = new Random();
+
+            // 生成一个0到100之间的随机整数
+            int randomNumber = random.Next(0, 100);
+
+            // 判断是否命中
+            return randomNumber >= 0 && randomNumber <= hitValue;
+           
+        }
+
 
         /// <summary>
         /// 无关地区的解析浮点

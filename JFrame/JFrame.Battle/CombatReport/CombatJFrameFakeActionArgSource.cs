@@ -156,5 +156,10 @@ namespace JFrame
         {
             throw new System.NotImplementedException();
         }
+
+        public override int GetActionGroupId()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

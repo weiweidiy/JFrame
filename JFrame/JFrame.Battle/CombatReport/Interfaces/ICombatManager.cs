@@ -12,9 +12,21 @@ namespace JFrame
 
         TResult GetResult();
 
+        /// <summary>
+        /// 战斗是否完全结束了
+        /// </summary>
+        /// <returns></returns>
+        bool IsCombatOver();
 
 
         void ClearResult();
+
+        /// <summary>
+        /// 获取team原始数据
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        KeyValuePair<CombatTeamType, List<CombatUnitInfo>> GetTeamData(int teamId);
 
         /// <summary>
         /// 添加一個隊伍

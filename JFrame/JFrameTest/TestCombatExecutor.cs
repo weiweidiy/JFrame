@@ -164,7 +164,7 @@ namespace JFrameTest
             bufferFactoy.CreateBuffer(1001, Arg.Any<CombatExtraData>()).Returns(buffer);
             extraData.Targets.Returns(new List<CombatUnit>() { unit1 });
             var executor = new ExecutorAddBuffer(null, null);
-            executor.Initialize(context, new float[] { 0.1f, 1001, 2, 5f });
+            executor.Initialize(context, new float[] { 0.1f, 1001, 2, 5f , 1f});
 
             //act
             executor.OnStart();

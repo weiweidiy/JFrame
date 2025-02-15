@@ -1,19 +1,21 @@
-﻿using System;
+﻿using JFrame.Common;
+using System;
 
 namespace JFrame
 {
     /// <summary>
-    ///  type=5 参数：0 执行周期 1: bufferId, 2: foldCount 3:duration
+    ///  type=5 参数：0 执行周期 1: bufferId, 2: foldCount 3:duration 4:概率
     /// </summary>
     public class ExecutorAddBuffer : ExecutorCombatNormal
     {
+        Utility utilty = new Utility();
         public ExecutorAddBuffer(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
         {
         }
 
         public override int GetValidArgsCount()
         {
-            return 4;
+            return 5;
         }
 
         protected int GetBuffIdArg()
@@ -32,6 +34,12 @@ namespace JFrame
             return (int)GetCurArg(3);
         }
 
+        protected float GetRandomArg()
+        {
+            return GetCurArg(4);
+        }
+
+
         protected override double GetExecutorValue()
         {
             return GetBuffIdArg();
@@ -41,12 +49,14 @@ namespace JFrame
 
         protected override void DoHit(CombatUnit target, CombatExtraData extraData)
         {
+            if (!utilty.RandomHit(GetRandomArg() * 100))
+                return;
+
             var clone = extraData.Clone() as CombatExtraData;
             var buffer = context.CombatBufferFactory.CreateBuffer(GetBuffIdArg(), clone);
             buffer.SetCurFoldCount(GetBuffFoldArg());
             buffer.SetDuration(GetBuffDurationArg());
             buffer.OnAttach(target);
-
             target.AddBuffer(buffer);
         }
 

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using JFrame.Common;
+using System.Collections.Generic;
 
 namespace JFrame
 {
     /// <summary>
-    /// type 5 目標釋放指定技能時觸發：  參數0：actionGroupId
+    /// type 5 目標釋放指定技能時觸發：  參數0：actionGroupId  参数1: 概率
     /// </summary>
     public class TriggerActionCast : CombatBaseTrigger
     {
         List<CombatUnit> unitList = new List<CombatUnit>();
+
+        Utility utility = new Utility();
 
         public TriggerActionCast(CombatBaseFinder finder) : base(finder)
         {
@@ -15,12 +18,17 @@ namespace JFrame
 
         public override int GetValidArgsCount()
         {
-            return 1;
+            return 2;
         }
 
         protected int GetGroupIdArg()
         {
             return (int)GetCurArg(0);
+        }
+
+        protected float GetRandomArg()
+        {
+            return GetCurArg(1);
         }
 
         public override void OnEnterState()
@@ -48,11 +56,14 @@ namespace JFrame
 
         private void Target_onActionCast(CombatExtraData extraData)
         {
-            if(extraData.Action.GroupId == GetGroupIdArg())
-            {
-                ExtraData.Targets = new List<CombatUnit>() { extraData.Caseter };
-                SetOn(true);
-            }
+            if (!utility.RandomHit(GetRandomArg() * 100))
+                return;
+
+            if (extraData.Action.GroupId != GetGroupIdArg())
+                return;
+
+            ExtraData.Targets = new List<CombatUnit>() { extraData.Caseter };
+            SetOn(true);
         }
 
         public override void OnExitState()

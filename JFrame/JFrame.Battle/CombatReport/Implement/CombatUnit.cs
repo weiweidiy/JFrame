@@ -49,7 +49,7 @@ namespace JFrame
         /// </summary>
         public string Uid { get; private set; }
 
-        CombatExtraData _extraData ;
+        CombatExtraData _extraData;
         public CombatExtraData ExtraData
         {
             get => _extraData;
@@ -186,7 +186,10 @@ namespace JFrame
         public void Stop()
         {
             StopMove();
+            StopAction();
         }
+
+
 
         /// <summary>
         /// 更新逻辑
@@ -204,6 +207,9 @@ namespace JFrame
         /// <param name="frame"></param>
         public void UpdatePosition(CombatFrame frame)
         {
+            if (!IsAlive())
+                return;
+
             if (IsMoving())   //只是自己移动了，其他单位还没有移动
             {
                 position += velocity;
@@ -230,6 +236,9 @@ namespace JFrame
         /// </summary>
         public void StopMove()
         {
+            if (!isMoving)
+                return;
+
             isMoving = false;
             onEndMove?.Invoke(_extraData);
         }
@@ -241,6 +250,12 @@ namespace JFrame
         {
             actionManager.Start();
         }
+
+        private void StopAction()
+        {
+            actionManager.Stop();
+        }
+
         /// <summary>
         /// 判断主类型
         /// </summary>
@@ -462,7 +477,7 @@ namespace JFrame
         /// <returns></returns>
         public virtual CombatAttributeDouble GetAttribute(CombatAttribute attr)
         {
-            return attributeManger.Get(attr.ToString()) as CombatAttributeDouble ;
+            return attributeManger.Get(attr.ToString()) as CombatAttributeDouble;
         }
         #endregion
 
@@ -520,7 +535,8 @@ namespace JFrame
             if (extraData.Action.Mode == ActionMode.Passive)
                 return;
 
-            StopMove();
+            if (isMoving)
+                StopMove();
         }
 
         /// <summary>
@@ -557,7 +573,7 @@ namespace JFrame
         /// 更新一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void UpdateBuffer(BaseCombatBuffer buffer)=> GetBufferManager().UpdateItem(buffer);
+        public void UpdateBuffer(BaseCombatBuffer buffer) => GetBufferManager().UpdateItem(buffer);
 
         private void BufferManager_onItemAdded(List<BaseCombatBuffer> buffer)
         {
@@ -567,9 +583,9 @@ namespace JFrame
             }
         }
 
-        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer)=> onBufferUpdate?.Invoke(buffer.ExtraData);
+        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer) => onBufferUpdate?.Invoke(buffer.ExtraData);
 
-        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer)=> onBufferRemoved?.Invoke(buffer.ExtraData);
+        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer) => onBufferRemoved?.Invoke(buffer.ExtraData);
 
         public virtual CombatBufferManager GetBufferManager() => bufferManager;
 
@@ -614,7 +630,7 @@ namespace JFrame
             StopMove();
 
             //所有action設置成非活動狀態，不會出發
-            actionManager.Stop();
+            StopAction();
 
             //to do:清除所有buffer
 
@@ -641,7 +657,7 @@ namespace JFrame
             var attr = hpAttr as CombatAttributeDouble;
             var attr2 = maxHpAttr as CombatAttributeDouble;
 
-            var healValue = Math.Min(extraData.Value , attr2.CurValue - attr.CurValue);
+            var healValue = Math.Min(extraData.Value, attr2.CurValue - attr.CurValue);
             attr.Plus(healValue);
 
             extraData.Value = healValue;

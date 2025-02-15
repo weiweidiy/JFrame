@@ -9,7 +9,7 @@ namespace JFrameTest
 {
     public class TestCombatManager
     {
-        CombatManager combatManager;
+        SingleCombatManager combatManager;
 
         List<CombatUnitInfo> team1;
         List<CombatUnitInfo> team2;
@@ -18,7 +18,7 @@ namespace JFrameTest
         [SetUp]
         public void SetUp()
         {
-            combatManager = new CombatManager();
+            combatManager = new SingleCombatManager();
             team1 = new List<CombatUnitInfo>();
             team2 = new List<CombatUnitInfo>();
             
@@ -132,7 +132,7 @@ namespace JFrameTest
         public void TestCombatResult()
         {
             //arrange
-            var combatManager = new CombatManager();
+            var combatManager = new SingleCombatManager();
             //combatManager.Initialize()
 
             //act

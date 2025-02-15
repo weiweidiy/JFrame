@@ -22,7 +22,7 @@ namespace JFrameTest
         {
             frame = new CombatFrame();
             context = Substitute.For<CombatContext>();
-            var combatManager = Substitute.For<CombatManager>();
+            var combatManager = Substitute.For<SingleCombatManager>();
             my = Substitute.For<CombatUnit>();
             my.GetPosition().Returns(new CombatVector() { x = -1 });
             action = Substitute.For<CombatUnitAction>();

@@ -1,27 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using JFrame.Common;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace JFrame
 {
     /// <summary>
-    /// type 4  
+    /// type 4  参数0: 概率
     /// </summary>
     public class TriggerUnitHurt : CombatBaseTrigger
     {
         List<CombatUnit> unitList = new List<CombatUnit>();
+
+        Utility utility = new Utility();
         public TriggerUnitHurt(CombatBaseFinder finder) : base(finder)
         {
         }
 
         public override int GetValidArgsCount()
         {
-            return 0;
+            return 1;
         }
 
         public int GetTargetArg()
         {
             return (int)GetCurArg(0);
         }
+
+        protected float GetRandomArg()
+        {
+            return GetCurArg(1);
+        }
+
 
         public override void OnEnterState()
         {
@@ -62,6 +71,9 @@ namespace JFrame
 
         private void Target_onDamaging(CombatExtraData obj)
         {
+            if (!utility.RandomHit(GetRandomArg() * 100))
+                return;
+
             ExtraData.Targets = unitList;
             SetOn(true);
         }
