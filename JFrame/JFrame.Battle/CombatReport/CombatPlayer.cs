@@ -94,7 +94,7 @@ namespace JFrame
             {
                 //Debug.LogError("播放完毕");
                 Stop();
-                PlayResult(report.winner);
+                //PlayResult(report.winner);
             }
         }
 

@@ -111,7 +111,7 @@ namespace JFrame
 
             if(curIndex + 1 < groupCount)
             {
-                curIndex = curIndex + 1;
+                SetCurGroupIndex(teamId, curIndex + 1);
                 return true;
             }
             
@@ -126,6 +126,23 @@ namespace JFrame
         int GetCurGroupIndex(int teamId)
         {
             return teamId == 0 ? curLeftTeamIndex : curRightTeamIndex;
+        }
+
+        /// <summary>
+        /// 设置当前索引
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="curIndex"></param>
+        void SetCurGroupIndex(int teamId , int curIndex)
+        {
+            if (teamId == 0)
+            {
+                curLeftTeamIndex++;
+            }
+            else
+            {
+                curRightTeamIndex++;
+            }
         }
 
         /// <summary>
