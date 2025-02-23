@@ -37,11 +37,13 @@ namespace JFrame
 
         protected override void DoHit(CombatUnit target, CombatExtraData data)
         {
-            var itemAttr = target.GetAttribute((CombatAttribute)GetAttrIdArg());
-            var finalValue = data.Value * itemAttr.CurValue;
-            uid = data.Action.Uid;
+            //var itemAttr = target.GetAttribute((CombatAttribute)GetAttrIdArg());
+            //var finalValue = data.Value * itemAttr.CurValue;
+            //uid = data.Action.Uid;
 
-            target.AddExtraValue((CombatAttribute)GetAttrIdArg(), uid, finalValue);
+            //target.AddExtraValue((CombatAttribute)GetAttrIdArg(), uid, finalValue);
+            uid = data.Action.Uid;
+            target.OnAttrChanged(data, (CombatAttribute)GetAttrIdArg());
             targets.Add(target);
         }
 

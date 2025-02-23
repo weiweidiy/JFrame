@@ -50,14 +50,11 @@ namespace JFrame
 
             var ExecutorExtraData = extraData.Clone() as CombatExtraData;
 
-            double baseValue = 1;
-            if(formula != null)
-            {
-                baseValue = formula.GetBaseValue(ExecutorExtraData);
-            }
+            //double baseValue = 1;
+
 
             //获取数值
-            ExecutorExtraData.Value = baseValue * GetExecutorValue();
+            ExecutorExtraData.Value = /*baseValue **/ GetExecutorValue();
 
             //即将命中
             NotifyHittingTargets(ExecutorExtraData);
@@ -65,6 +62,10 @@ namespace JFrame
             foreach (var target in targets)
             {
                 var data = ExecutorExtraData.Clone() as CombatExtraData;
+                if (formula != null)
+                {
+                    data.Value = formula.GetHitValue(data);
+                }
                 data.Target = target;
                 NotifyHittingTarget(data); //即将命中单个单位
                 DoHit(target, data);

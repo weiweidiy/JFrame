@@ -52,6 +52,7 @@ namespace JFrame
             actionInfo.type = argSource.GetActionType();
             actionInfo.mode = argSource.GetActionMode();
             actionInfo.groupId = argSource.GetActionGroupId();
+            actionInfo.sortId = argSource.GetActionSortId();
             actionInfo.uid = Guid.NewGuid().ToString();
 
             var dicComponentInfo = new Dictionary<ActionComponentType, List<ActionComponentInfo>>();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -27,6 +28,7 @@ namespace JFrame
         public event Action<CombatExtraData> onActionCast;
         public event Action<CombatExtraData> onActionStartCD;
         public event Action<CombatExtraData> onHittingTarget;
+        public event Action<CombatExtraData> onHittedTarget; //命中完成后
         public event Action<CombatExtraData> onDamaging;
         public event Action<CombatExtraData> onDamaged;
         public event Action<CombatExtraData> onHealed;
@@ -145,11 +147,17 @@ namespace JFrame
             actionManager.onTriggerOn += ActionManager_onTriggerOn;
             actionManager.onStartExecuting += ActionManager_onStartExecuting;
             actionManager.onStartCD += ActionManager_onStartCD;
+            actionManager.onHittingTarget += ActionManager_onHittingTarget;
+            actionManager.onTargetHittedComplete += ActionManager_onTargetHittedComplete;
+
 
             bufferManager.onItemAdded += BufferManager_onItemAdded;
             bufferManager.onItemRemoved += BufferManager_onItemRemoved;
             bufferManager.onItemUpdated += BufferManager_onItemUpdated;
         }
+
+
+
 
 
         /// <summary>
@@ -550,6 +558,19 @@ namespace JFrame
         /// </summary>
         /// <param name="extraData"></param>
         private void ActionManager_onStartExecuting(CombatExtraData extraData) => onActionCast?.Invoke(extraData);
+
+        /// <summary>
+        /// 命中前
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onHittingTarget(CombatExtraData extraData) => onHittingTarget?.Invoke(extraData);
+
+        /// <summary>
+        /// 命中后
+        /// </summary>
+        /// <param name="extraData"></param>
+        private void ActionManager_onTargetHittedComplete(CombatExtraData extraData) => onHittedTarget?.Invoke(extraData);
+
         #endregion
 
         #region buffer接口
@@ -670,9 +691,13 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
-        public void OnAttrChanged(CombatExtraData extraData)
+        public void OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
         {
-            throw new NotImplementedException();
+            var itemAttr = GetAttribute(attr);
+            var finalValue = extraData.Value * itemAttr.CurValue;
+            var uid = extraData.Action.Uid;
+
+            AddExtraValue(attr, uid, finalValue);
         }
 
         public void OnCrowdControlAnti(CombatExtraData extraData)
@@ -680,6 +705,11 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 被控制了
+        /// </summary>
+        /// <param name="extraData"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public void OnCrowdControled(CombatExtraData extraData)
         {
             throw new NotImplementedException();
