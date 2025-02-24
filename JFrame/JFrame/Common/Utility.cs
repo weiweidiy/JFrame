@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace JFrame.Common
 {

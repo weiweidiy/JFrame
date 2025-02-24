@@ -27,6 +27,8 @@
             var unitInfo = new CombatUnitInfo();
             unitInfo.uid = DataSource.GetUid();
             unitInfo.id = DataSource.GetId();
+            unitInfo.mainType = DataSource.GetUnitMainType();
+            unitInfo.unitSubType = DataSource.GetUnitSubType();
             unitInfo.hp = DataSource.GetHp();
             unitInfo.atk = DataSource.GetAtk();
             unitInfo.maxHp = DataSource.GetMaxHp();

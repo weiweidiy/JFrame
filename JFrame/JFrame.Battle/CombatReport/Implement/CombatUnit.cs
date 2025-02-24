@@ -117,7 +117,7 @@ namespace JFrame
 
             this.context = context;
             Uid = unitInfo.uid;
-            unitType = 0;
+            unitType = 0; // unitInfo.type;
             unitType |= (int)unitInfo.mainType;
             unitType |= (int)unitInfo.unitSubType;
             actionManager = new CombatActionManager();

@@ -9,8 +9,18 @@ namespace JFrame
 
     public abstract class CombatPlayer
     {
+        /// <summary>
+        /// 开始播放
+        /// </summary>
+        public event Action onPlayerStart;
+
+
+        /// <summary>
+        /// 退出播放
+        /// </summary>
         public event Action<bool> onPlayerExit;
         public void NotifyExit(bool win) => onPlayerExit?.Invoke(win);
+
 
         /// <summary>
         /// 战报结果
@@ -32,6 +42,8 @@ namespace JFrame
             parser = new CombatReprotParser(report.report);
         }
 
+        public virtual void Release() { }
+
 
         bool isPlaying;
         /// <summary>
@@ -47,6 +59,8 @@ namespace JFrame
         {
             escapeTime = 0f;
             isPlaying = true;
+
+            onPlayerStart?.Invoke();
         }
 
         public void Stop()
@@ -69,6 +83,7 @@ namespace JFrame
         public abstract void Replay();
 
         public abstract float GetDeltaTime();
+
 
 
         public void Update()
@@ -94,10 +109,16 @@ namespace JFrame
             {
                 //Debug.LogError("播放完毕");
                 Stop();
-                //PlayResult(report.winner);
+
+                //战报结束了
+                OnReportEnd(report.winner == 1);
             }
         }
 
+        protected virtual void OnReportEnd(bool result)
+        {
+            
+        }
 
         void PlayData(ICombatReportData data)
         {

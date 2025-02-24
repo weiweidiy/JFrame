@@ -72,18 +72,25 @@ namespace JFrame
         public long hp;
         public long maxHp;
         public long atk;
-        public float atkSpeed;
+        public float atkSpeed;//废弃
         public float cri; //暴击率 0~1的值 百分比
+        public float criAnti;
         public float criDmgRate; //暴击伤害加成百分比
-        public float criDmgAnti; //暴击伤害抵抗百分比
-        public float skillDmgRate; //技能伤害加成百分比
-        public float skillDmgAnti; //技能伤害抵抗百分比
-        public float dmgRate; //伤害加成百分比
-        public float dmgAnti; //伤害抵抗百分比
-        public float debuffHit; //0~1异常状态命中百分比
-        public float debuffAnti; //0~1异常状态抵抗百分比
-        public float penetrate; //穿透 0~1 百分比
-        public float block;     //格挡 0~1 百分比
+        public float controlHit;
+        public float controlAnti;
+        public float hit;
+        public float dodge;
+
+
+        //public float criDmgAnti; //暴击伤害抵抗百分比
+        //public float skillDmgRate; //技能伤害加成百分比
+        //public float skillDmgAnti; //技能伤害抵抗百分比
+        //public float dmgRate; //伤害加成百分比
+        //public float dmgAnti; //伤害抵抗百分比
+        //public float debuffHit; //0~1异常状态命中百分比
+        //public float debuffAnti; //0~1异常状态抵抗百分比
+        //public float penetrate; //穿透 0~1 百分比
+        //public float block;     //格挡 0~1 百分比
         public CombatVector position; //初始坐標點
         public CombatVector moveSpeed; //移動速度，向左就是負數，向右是正數
         public CombatVector targetPosition;//目标点

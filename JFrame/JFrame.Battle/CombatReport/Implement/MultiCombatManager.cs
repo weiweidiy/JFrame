@@ -20,6 +20,14 @@ namespace JFrame
         {
         }
 
+        /// <summary>
+        /// 初始化战斗数据
+        /// </summary>
+        /// <param name="dicTeam1Data"></param>
+        /// <param name="dicTeam2Data"></param>
+        /// <param name="bufferInfos"></param>
+        /// <param name="god"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Initialize(List<KeyValuePair<CombatTeamType, List<CombatUnitInfo>>> dicTeam1Data, List<KeyValuePair<CombatTeamType, List<CombatUnitInfo>>> dicTeam2Data, List<CombatBufferInfo> bufferInfos,  CombatUnitInfo god = null)
         {
             dicTeams = new Dictionary<int, List<CommonCombatTeam>>();
@@ -62,6 +70,26 @@ namespace JFrame
 
             //预加载所有buffers
             bufferFactory.PreloadBuffers(bufferInfos, context);
+        }
+
+        /// <summary>
+        /// 查找单位
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public List<CombatUnitInfo> FindUnit(int teamId,  Func<CombatUnitInfo, bool> predicate)
+        {
+            var result = new List<CombatUnitInfo>();
+            var teamData = GetTeamData(teamId);
+            var lst = teamData.Value;
+
+            foreach(var info in  lst)
+            {
+                if(predicate(info))
+                    result.Add(info);
+            }
+            return result;
         }
 
         /// <summary>
@@ -154,8 +182,22 @@ namespace JFrame
         public override KeyValuePair<CombatTeamType, List<CombatUnitInfo>> GetTeamData(int teamId)
         {
             var curIndex = GetCurGroupIndex(teamId);
+            return GetTeamData(teamId, curIndex);
+        }
+
+        /// <summary>
+        /// 获取指定波次的队伍原始数据
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public KeyValuePair<CombatTeamType, List<CombatUnitInfo>> GetTeamData(int teamId, int index)
+        {
             var allData = dicTeamsData[teamId];
-            return allData[curIndex];
+            if (index >= allData.Count)
+                throw new Exception($"获取队伍信息时索引越界 参数{index} 实际长度：{allData.Count}");
+
+            return allData[index];
         }
 
         /// <summary>

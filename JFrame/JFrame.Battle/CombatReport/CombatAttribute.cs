@@ -1,33 +1,6 @@
 ﻿namespace JFrame
 {
-    public enum CombatAttribute
-    {
-        ATK = 101,
-        MaxHP  = 102,
-        CurHp  = 103,
-        MoveSpeed = 104,
-        Critical  = 206, //暴击率
-        CriticalAnti = 207, //暴击抵抗
-        CriticalDamage = 208,
-        Cd = 209, //cd 加成
-        ControlHit = 212,
-        ControlResistance = 213,
-        Hit = 216,
-        Dodge = 217,
 
-
-        //AtkSpeed = 1000,
-        //CriticalDamageResist,
-        //SkillDamageEnhance,
-        //SkillDamageReduce,
-        //DamageEnhance,
-        //DamageReduce,
-        //Block,
-        //Puncture,
-        //ATKRate = 2000,
-        //HPRate = 2001,
-
-    }
 
 }
 
