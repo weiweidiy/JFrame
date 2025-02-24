@@ -6,7 +6,7 @@
     /// </summary>
     public abstract class CombatBaseFormula : BaseActionComponent , ICombatFormula 
     {
-        public abstract double GetBaseValue(CombatExtraData extraData);
+        public abstract double GetHitValue(CombatExtraData extraData);
 
         protected override void OnUpdate(CombatFrame frame)
         {        

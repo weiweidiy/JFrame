@@ -2,6 +2,6 @@
 {
     public interface ICombatFormula
     {
-        double GetBaseValue(CombatExtraData extraData);
+        double GetHitValue(CombatExtraData extraData);
     }
 }

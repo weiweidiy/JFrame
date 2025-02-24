@@ -48,7 +48,7 @@ namespace JFrameTest
         public void TestExecutorDamageAndMinusHp()
         {
             //arrange
-            fakeFormula.GetBaseValue(Arg.Any<CombatExtraData>()).Returns(10);
+            fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(20);
             var executor = new ExecutorCombatDamage(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
@@ -67,7 +67,7 @@ namespace JFrameTest
         public void TestExecutorContinuousDamageAndMinusHp()
         {
             //arrange
-            fakeFormula.GetBaseValue(Arg.Any<CombatExtraData>()).Returns(10);
+            fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(10);
             var executor = new ExecutorCombatContinuousDamage(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 1f, 0.25f, 3 });
             //extraData.Value = 10;
@@ -88,7 +88,7 @@ namespace JFrameTest
         public void TestExecutorHealAndPlusHp()
         {
             //arrange
-            fakeFormula.GetBaseValue(Arg.Any<CombatExtraData>()).Returns(10);
+            fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(10);
             var executor = new ExecutorCombatHeal(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
@@ -134,7 +134,7 @@ namespace JFrameTest
             extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active,1, null, null, null, null, null);
 
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
-            unit1.GetAttribute(CombatAttribute.MaxHP).Returns(hpAttr);
+            unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
             var executor = new ExecutorCombatChangeAttribute(null, null);
             executor.Initialize(null, new float[] { 0.1f, 102, 0.1f });
 

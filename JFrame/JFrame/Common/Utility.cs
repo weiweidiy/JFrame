@@ -195,7 +195,7 @@ namespace JFrame.Common
         /// <summary>
         /// 百分比随机是否命中
         /// </summary>
-        /// <param name="hitValue">命中值：比如 45%概率命中 </param>
+        /// <param name="hitValue">命中值：比如 45%概率命中就填寫45 </param>
         /// <returns></returns>
         public bool RandomHit(float hitValue)
         {

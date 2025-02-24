@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -23,6 +24,12 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         public abstract int GetActionGroupId();
+
+        /// <summary>
+        /// 獲取技能排序id
+        /// </summary>
+        /// <returns></returns>
+        public abstract int GetActionSortId();
 
         /// <summary>
         /// 获取条件查找器
@@ -114,5 +121,7 @@ namespace JFrame
         /// <param name="index"></param>
         /// <returns></returns>
         public abstract float[] GetCdTriggersArgs(int index);
+
+
     }
 }

@@ -54,7 +54,8 @@ namespace JFrame
         public string uid;
         public ActionType type;
         public ActionMode mode;
-        public int groupId;
+        public int groupId; //技能組id，覺醒后都是同一組
+        public int sortId; //技能排序ID
         public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
     }
 

@@ -173,7 +173,7 @@ namespace JFrame
                     break;
                 case 6:
                     {
-                        trigger = new TriggerHitted(finder);
+                        trigger = new TriggerActionHitted(finder);
                     }
                     break;
                 default:
@@ -255,7 +255,7 @@ namespace JFrame
             {
                 case 1:
                     {
-                        formula = new SingleAttrFormula();
+                        formula = new FormulaSingleAttr();
                     }
                     break;
                 default:
