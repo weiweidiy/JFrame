@@ -49,6 +49,7 @@ namespace JFrameTest
         {
             //arrange
             fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(20);
+            fakeFormula.IsHit(Arg.Any<CombatExtraData>()).Returns(true);
             var executor = new ExecutorCombatDamage(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
@@ -68,6 +69,7 @@ namespace JFrameTest
         {
             //arrange
             fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(10);
+            fakeFormula.IsHit(Arg.Any<CombatExtraData>()).Returns(true);
             var executor = new ExecutorCombatContinuousDamage(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 1f, 0.25f, 3 });
             //extraData.Value = 10;
@@ -89,6 +91,7 @@ namespace JFrameTest
         {
             //arrange
             fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(10);
+            fakeFormula.IsHit(Arg.Any<CombatExtraData>()).Returns(true);
             var executor = new ExecutorCombatHeal(null, fakeFormula);
             executor.Initialize(null, new float[] { 1f, 2f });
             //extraData.Value = 10;
@@ -106,14 +109,38 @@ namespace JFrameTest
             Assert.AreEqual(100, hpAttr.CurValue);
         }
 
+
+        [Test]
+        public void TestExecutorContinuousHealAndPlusHp()
+        {
+            //arrange
+            fakeFormula.GetHitValue(Arg.Any<CombatExtraData>()).Returns(1);
+            fakeFormula.IsHit(Arg.Any<CombatExtraData>()).Returns(true);
+            var executor = new ExecutorCombatContinuousHeal(null, fakeFormula);
+            executor.Initialize(null, new float[] { 1f, 1f, 0.25f, 3 });
+            //extraData.Value = 10;
+            var frame = new CombatFrame();
+            //act
+            executor.OnStart();
+            executor.Execute(extraData);
+            executor.Update(frame);
+            executor.Update(frame);
+            executor.Update(frame);
+            executor.Update(frame);
+
+            //expect
+            Assert.AreEqual(93, hpAttr.CurValue);
+        }
+
+
         [Test]
         public void TestExecutorAttr()
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, 1, null, null, null, null, null);
+            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, 1, 0, null, null, null, null, null);
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
-            unit1.GetAttribute(CombatAttribute.MaxHP).Returns(hpAttr);
+            unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
             var executor = new ExecutorCombatChangeAttribute(null, null);
             executor.Initialize(null, new float[] { 0.1f, 102, 0.1f });
 
@@ -124,6 +151,7 @@ namespace JFrameTest
 
             //expect
             unit1.Received(1).AddExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
+            Assert.AreEqual(100, (long)hpAttr.CurValue);
         }
 
         [Test]
@@ -131,7 +159,7 @@ namespace JFrameTest
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active,1, null, null, null, null, null);
+            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active,1, 0, null, null, null, null, null);
 
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
@@ -146,7 +174,7 @@ namespace JFrameTest
             //expect
             unit1.Received(1).AddExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
             unit1.Received(1).RemoveExtraValue(CombatAttribute.MaxHP, "action");
-            Assert.AreEqual(90, hpAttr.CurValue);
+            Assert.AreEqual(100, (int)hpAttr.CurValue);
         }
 
         [Test]
@@ -163,7 +191,7 @@ namespace JFrameTest
             var buffer = Substitute.For<CombatBuffer>();
             bufferFactoy.CreateBuffer(1001, Arg.Any<CombatExtraData>()).Returns(buffer);
             extraData.Targets.Returns(new List<CombatUnit>() { unit1 });
-            var executor = new ExecutorAddBuffer(null, null);
+            var executor = new ExecutorCombatAddBuffer(null, null);
             executor.Initialize(context, new float[] { 0.1f, 1001, 2, 5f , 1f});
 
             //act

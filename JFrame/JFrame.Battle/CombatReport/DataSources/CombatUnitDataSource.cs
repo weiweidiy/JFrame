@@ -27,6 +27,8 @@
         public abstract float GetCri();
         public abstract float GetCriAnti();
         public abstract float GetCriDamage();
+        public abstract float GetDamageAdvance();
+        public abstract float GetDamageAnti();
         public abstract float GetControlHit();
         public abstract float GetControlAnti();
         public abstract float GetHit();

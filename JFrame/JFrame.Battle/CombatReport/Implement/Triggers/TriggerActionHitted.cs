@@ -3,7 +3,7 @@
 namespace JFrame
 {
     /// <summary>
-    /// type 6 參數0：actionGroupId  参数1: 概率
+    /// type 6 參數0：actionGroupId 参数1：sortid:  参数2: 概率  参数3：是否暴击（0全选， 1必须暴击）
     /// </summary>
     public class TriggerActionHitted : CombatBaseTrigger
     {
@@ -15,13 +15,29 @@ namespace JFrame
 
         public override int GetValidArgsCount()
         {
-            return 1;
+            return 4;
         }
 
         protected int GetGroupIdArg()
         {
             return (int)GetCurArg(0);
         }
+
+        protected int GetSortIdArg()
+        {
+            return (int)GetCurArg(1);
+        }
+
+        protected int GetRandomArg()
+        {
+            return (int)GetCurArg(2);
+        }
+
+        protected int GetCriArg()
+        {
+            return (int)GetCurArg(3);
+        }
+
 
         public override void OnEnterState()
         {
@@ -48,21 +64,29 @@ namespace JFrame
 
         private void Target_onHittedTarget(CombatExtraData extraData)
         {
-            if (extraData.Action.GroupId == GetGroupIdArg() && GetGroupIdArg() != 0)
-            {
-                //ExtraData.Targets = new List<CombatUnit>() { extraData.Caseter };
-                SetOn(true);
-            }
+            if (GetGroupIdArg() != 0 && extraData.Action.GroupId != GetGroupIdArg())
+                return;
+
+            if (GetSortIdArg() != 0 && extraData.Action.SortId != GetSortIdArg())
+                return;
+
+            if (GetCriArg() == 1 && !extraData.IsCri) //需要暴击，但是没有暴击
+                return;
+
+            var lst = new List<CombatUnit>();
+            if (extraData.Targets != null)
+                lst.AddRange(extraData.Targets);
+
+            ExtraData.Targets = lst;
+
+            if (extraData.Target != null)
+                ExtraData.Target = extraData.Target;
+
+            SetOn(true);
+
         }
 
-        //private void Target_onActionCast(CombatExtraData extraData)
-        //{
-        //    if (extraData.Action.GroupId == GetGroupIdArg())
-        //    {
-        //        ExtraData.Targets = new List<CombatUnit>() { extraData.Caseter };
-        //        SetOn(true);
-        //    }
-        //}
+
 
         public override void OnExitState()
         {

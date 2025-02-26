@@ -14,13 +14,16 @@ namespace JFrame
         /// </summary>
         public event Action onPlayerStart;
 
-
         /// <summary>
         /// 退出播放
         /// </summary>
         public event Action<bool> onPlayerExit;
         public void NotifyExit(bool win) => onPlayerExit?.Invoke(win);
 
+        /// <summary>
+        /// 缩放变更了
+        /// </summary>
+        public event Action<float> onScaleChanged;
 
         /// <summary>
         /// 战报结果
@@ -31,6 +34,11 @@ namespace JFrame
         /// 战报解析器
         /// </summary>
         protected CombatReprotParser parser;
+
+        /// <summary>
+        /// 播放速度
+        /// </summary>
+        protected float playScale = 1f;
 
         /// <summary>
         /// 加载战报
@@ -50,29 +58,50 @@ namespace JFrame
         /// 流逝的总时间
         /// </summary>
         float escapeTime = 0f;
-        
+
 
         /// <summary>
         /// 播放
         /// </summary>
-        public void Play()
+        public virtual void Play()
         {
             escapeTime = 0f;
             isPlaying = true;
-
+            //UnityEngine.Debug.LogError("开始播放 " + GetHashCode());
             onPlayerStart?.Invoke();
         }
 
-        public void Stop()
+        /// <summary>
+        /// 设置播放速度
+        /// </summary>
+        /// <param name="scale"></param>
+        public virtual void SetPlayScale(float scale)
+        {
+            if(playScale != scale)
+            {
+                playScale = scale;
+                onScaleChanged?.Invoke(playScale);
+            }
+        }
+
+        /// <summary>
+        /// 获取当前缩放
+        /// </summary>
+        /// <returns></returns>
+        public float GetPlayScale() => playScale;
+
+
+        public virtual void Stop()
         {
             escapeTime = 0f;
             isPlaying = false;
+            //UnityEngine.Debug.LogError("播放完毕 " + GetHashCode());
         }
 
         /// <summary>
         /// 跳过
         /// </summary>
-        public void Skip()
+        public virtual void Skip()
         {
             escapeTime = 100;
         }
@@ -85,19 +114,19 @@ namespace JFrame
         public abstract float GetDeltaTime();
 
 
-
+        float delta = 0;
         public void Update()
         {
             if (!isPlaying)
                 return;
 
-            escapeTime += GetDeltaTime();
+            escapeTime += (GetDeltaTime() * playScale);
 
             //获取需要播放的数据
             var lstData = parser.GetData(escapeTime);
             if (lstData.Count > 0)
             {
-                //Debug.LogError("播放");
+                //UnityEngine.Debug.Log("开始播放 ");
                 foreach (var data in lstData)
                 {
                     //Debug.Log("play " + data.ReportType + " frame " + escapeTime);
@@ -105,9 +134,15 @@ namespace JFrame
                 }
             }
 
-            if (parser.Count() == 0)
+            else if (parser.Count() == 0)
             {
-                //Debug.LogError("播放完毕");
+                delta += GetDeltaTime();
+
+                if (delta < 1f)
+                    return;
+
+                delta = 0;
+
                 Stop();
 
                 //战报结束了
@@ -117,7 +152,7 @@ namespace JFrame
 
         protected virtual void OnReportEnd(bool result)
         {
-            
+
         }
 
         void PlayData(ICombatReportData data)

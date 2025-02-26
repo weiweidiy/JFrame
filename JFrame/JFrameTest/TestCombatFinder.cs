@@ -81,7 +81,7 @@ namespace JFrameTest
         {
             //arrage
             var finder = new FinderFindNearest();
-            finder.Initialize(fakeContext, new float[] { 1, 3, 0, 0, 2, 5f }); //找敌方5米内的1个单位
+            finder.Initialize(fakeContext, new float[] { 1, 0, 0, 0, 2, 5f }); //找敌方5米内的1个单位
 
             fakeManager.GetOppoTeamId(fakeExtraData.Owner).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });

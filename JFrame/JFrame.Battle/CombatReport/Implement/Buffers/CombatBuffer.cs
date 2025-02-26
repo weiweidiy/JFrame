@@ -17,6 +17,7 @@ namespace JFrame
         public void Initialize(CombatBufferInfo bufferInfo, List<CombatAction> actions)
         {
             FoldType = bufferInfo.foldType;
+            BufferType = bufferInfo.bufferType;
             MaxFoldCount = bufferInfo.foldMaxCount;
             Uid = Guid.NewGuid().ToString();
             Id = bufferInfo.id;

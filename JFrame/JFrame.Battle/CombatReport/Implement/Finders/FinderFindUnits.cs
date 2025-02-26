@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
     /// <summary>
-    ///  参数：0=队伍(0友军，1敌军，2所有)   1=主类型  2=子类型  3模式(0模式单位， 1逻辑单位) 4=个数
+    ///  参数：0=队伍(0友军，1敌军，2所有, 3不包含自己的友军)   1=主类型  2=子类型  3模式(0模式单位， 1逻辑单位) 4=个数
     /// </summary>
     public abstract class FinderFindUnits : CombatBaseFinder
     {
@@ -82,10 +82,33 @@ namespace JFrame
                         var units = context.CombatManager.GetUnits(GetFindModeArg());
                         return FiltUnitType(units, extraData);
                     }
+                case 3: //不包含自己的友军
+                    {
+                        var targetTeamId = context.CombatManager.GetFriendTeamId(extraData.Owner);
+                        var units = context.CombatManager.GetUnits(targetTeamId, GetFindModeArg());
+                        units = RemoveSelf(units, extraData);
+                        return FiltUnitType(units, extraData);
+                    }
                 default:
                     throw new NotImplementedException($"{GetType()} 没有实现队伍模式 {teamArg}");
             }
 
+        }
+
+
+        List<CombatUnit> RemoveSelf(List<CombatUnit> units, CombatExtraData extraData)
+        {
+            var selfUid = extraData.Caseter.Uid;
+            for(int i = units.Count -1; i >= 0; i--)
+            {
+                var unit = units[i];
+                if (unit.Uid == selfUid)
+                {
+                    units.Remove(unit);
+                    break;
+                }
+            }
+            return units;
         }
 
         /// <summary>
@@ -103,33 +126,20 @@ namespace JFrame
                 bool mainTypeHit = false;
                 bool subTypeHit = false;
 
-                //检查主类型
-                UnitMainType mainType = UnitMainType.Boss;
-                switch (GetUnitMainTypeArg())
-                {
-                    case 0: mainTypeHit = true; break;
-                    case 1: mainType = UnitMainType.Gjj; break;
-                    case 2: mainType = UnitMainType.Hero; break;
-                    case 3: mainType = UnitMainType.Monster; break;
-                    case 4: mainType = UnitMainType.Boss; break;
-                    default:
-                        throw new NotImplementedException($"{GetType()}没有实现 unitMainType 类型{GetUnitMainTypeArg()}");
-                }
+                var mainTypeArg = GetUnitMainTypeArg();
+                if (mainTypeArg == 0)
+                    mainTypeHit = true;
+
                 if (!mainTypeHit)
-                    mainTypeHit = unit.IsMainType(mainType);
+                    mainTypeHit = unit.IsMainType((UnitMainType)mainTypeArg);
 
                 //检查子类型
-                UnitSubType subType = UnitSubType.Sky;
-                switch (GetUnitSubTypeArg())
-                {
-                    case 0: subTypeHit = true; break;
-                    case 1: subType = UnitSubType.Ground; break;
-                    case 2: subType = UnitSubType.Sky; break;
-                    default:
-                        throw new NotImplementedException($"{GetType()}没有实现 unitSubType 类型{GetUnitSubTypeArg()}");
-                }
+                var subTypeArg = GetUnitSubTypeArg();
+                if (subTypeArg == 0)
+                    subTypeHit = true;
+
                 if (!subTypeHit)
-                    subTypeHit = unit.IsSubType(subType);
+                    subTypeHit = unit.IsSubType((UnitSubType)subTypeArg);
 
                 //都命中则加入
                 if (mainTypeHit && subTypeHit)

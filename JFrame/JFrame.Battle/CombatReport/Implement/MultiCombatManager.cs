@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using static JFrame.PVPBattleManager;
 
 namespace JFrame
@@ -15,6 +16,8 @@ namespace JFrame
 
         int curLeftTeamIndex = 0;
         int curRightTeamIndex = 0;
+
+        CombatContext context;
 
         public MultiCombatManager(float limitTime, float deltaTime) : base(limitTime, deltaTime)
         {
@@ -35,7 +38,7 @@ namespace JFrame
             dicTeamsData.Add(0, dicTeam1Data);
             dicTeamsData.Add(1, dicTeam2Data);
 
-            var context = new CombatContext();
+            context = new CombatContext();
             context.CombatManager = this;
             context.CombatBufferFactory = bufferFactory;
 
@@ -99,10 +102,11 @@ namespace JFrame
         /// <exception cref="System.NotImplementedException"></exception>
         public override CombatReport GetResult()
         {
-            var report =  base.GetResult();
+            var report = base.GetResult();
             var result = NextGroup(report.winner);
             isCombatOver = !result;
             return report;
+
         }
         
         /// <summary>
@@ -151,7 +155,7 @@ namespace JFrame
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        int GetCurGroupIndex(int teamId)
+        public int GetCurGroupIndex(int teamId)
         {
             return teamId == 0 ? curLeftTeamIndex : curRightTeamIndex;
         }
@@ -165,11 +169,11 @@ namespace JFrame
         {
             if (teamId == 0)
             {
-                curLeftTeamIndex++;
+                curLeftTeamIndex = curIndex;
             }
             else
             {
-                curRightTeamIndex++;
+                curRightTeamIndex = curIndex;
             }
         }
 
@@ -189,15 +193,38 @@ namespace JFrame
         /// 获取指定波次的队伍原始数据
         /// </summary>
         /// <param name="teamId"></param>
-        /// <param name="index"></param>
+        /// <param name="wave"></param>
         /// <returns></returns>
-        public KeyValuePair<CombatTeamType, List<CombatUnitInfo>> GetTeamData(int teamId, int index)
+        public KeyValuePair<CombatTeamType, List<CombatUnitInfo>> GetTeamData(int teamId, int wave)
         {
             var allData = dicTeamsData[teamId];
-            if (index >= allData.Count)
-                throw new Exception($"获取队伍信息时索引越界 参数{index} 实际长度：{allData.Count}");
+            if (wave >= allData.Count)
+                throw new Exception($"获取队伍信息时索引越界 参数{wave} 实际长度：{allData.Count}");
 
-            return allData[index];
+            return allData[wave];
+        }
+
+        /// <summary>
+        /// 更新替换指定索引波次的队伍信息
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="wave"></param>
+        /// <param name="teamData"></param>
+        /// <exception cref="Exception"></exception>
+        public void UpdateTeamData(int teamId, int wave, KeyValuePair<CombatTeamType, List<CombatUnitInfo>> teamData)
+        {
+            var allData = dicTeamsData[teamId];
+            if (wave >= allData.Count)
+                throw new Exception($"获取队伍信息时索引越界 参数{wave} 实际长度：{allData.Count}");
+
+            allData[wave] = teamData;
+
+            //创建新的队伍对象
+            CommonCombatTeam team = teamData.Key == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
+            team.Initialize(teamId, context, teamData.Value);
+            if (teamData.Value.Count > 0)
+                UpdateTeam(teamId, wave, team);
+                //AddTeam(0, group); //1 = 隊伍id
         }
 
         /// <summary>
@@ -212,6 +239,21 @@ namespace JFrame
 
             var allGroup = dicTeams[teamId];
             allGroup.Add(team);
+        }
+
+        /// <summary>
+        /// 更新队伍对象
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="wave"></param>
+        /// <param name="team"></param>
+        public void UpdateTeam(int teamId, int wave, CommonCombatTeam team)
+        {
+            if (!dicTeams.ContainsKey(teamId))
+                dicTeams.Add(teamId, new List<CommonCombatTeam>());
+
+            var allGroup = dicTeams[teamId];
+            allGroup[wave] = team;
         }
 
         /// <summary>

@@ -32,6 +32,15 @@
             unitInfo.hp = DataSource.GetHp();
             unitInfo.atk = DataSource.GetAtk();
             unitInfo.maxHp = DataSource.GetMaxHp();
+            unitInfo.cri = DataSource.GetCri();
+            unitInfo.criAnti = DataSource.GetCriAnti();
+            unitInfo.criDamage = DataSource.GetCriDamage();
+            unitInfo.controlHit = DataSource.GetControlHit();
+            unitInfo.controlAnti = DataSource.GetControlAnti();
+            unitInfo.damageAdvance = DataSource.GetDamageAdvance();
+            unitInfo.damageAnti = DataSource.GetDamageAnti();
+            unitInfo.hit = DataSource.GetHit();
+            unitInfo.dodge = DataSource.GetDodge();
             unitInfo.position = DataSource.GetPosition();
             unitInfo.moveSpeed = DataSource.GetVelocity();
             unitInfo.targetPosition = DataSource.GetTargetPosition();

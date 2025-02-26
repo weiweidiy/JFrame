@@ -25,6 +25,7 @@
             bufferInfo.foldType = DataSource.GetBufferFoldType();
             bufferInfo.foldMaxCount = DataSource.GetMaxFoldCount();
             bufferInfo.Uid = DataSource.GetUid();
+            bufferInfo.bufferType = DataSource.GetBufferType();
             var actionIds = DataSource.GetActions();
             var actionsData = CreateActions(actionIds);
             bufferInfo.actionsData = actionsData;

@@ -27,6 +27,7 @@ namespace JFrame
                 var actionMode = actionData.mode;
                 var actionUid = actionData.uid;
                 var actionGroupId = actionData.groupId;
+                var actionSortId = actionData.sortId;
 
                 var dic = actionData.componentInfo;
                 var conditionFinders = dic[ActionComponentType.ConditionFinder]; //条件查找器
@@ -46,7 +47,7 @@ namespace JFrame
                 var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
                 var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
-                unitAction.Initialize(actionId, actionUid, actionType, actionMode, actionGroupId
+                unitAction.Initialize(actionId, actionUid, actionType, actionMode, actionGroupId, actionSortId
                             , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
                             , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
                             , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
@@ -258,6 +259,11 @@ namespace JFrame
                         formula = new FormulaSingleAttr();
                     }
                     break;
+                case 2:
+                    {
+                        formula = new FormulaDamage();
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("没有实现 formula id: " + componentInfo.id);
             }
@@ -300,7 +306,17 @@ namespace JFrame
                     break;
                 case 5:
                     {
-                        executor = new ExecutorAddBuffer(finder, formula);
+                        executor = new ExecutorCombatAddBuffer(finder, formula);
+                    }
+                    break;
+                case 6:
+                    {
+                        executor = new ExecutorCombatContinuousHeal(finder, formula);
+                    }
+                    break;
+                case 7:
+                    {
+                        executor = new ExecutorCombatRemoveBuffer(finder, formula);
                     }
                     break;
                 default:

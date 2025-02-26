@@ -21,14 +21,9 @@ namespace JFrame
             return 1;
         }
 
-        public int GetTargetArg()
-        {
-            return (int)GetCurArg(0);
-        }
-
         protected float GetRandomArg()
         {
-            return GetCurArg(1);
+            return GetCurArg(0);
         }
 
 

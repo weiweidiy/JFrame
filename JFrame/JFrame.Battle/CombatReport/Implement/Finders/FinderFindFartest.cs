@@ -10,7 +10,7 @@ namespace JFrame
     {
         protected override IComparer<CombatUnit> GetCompare(float myX)
         {
-            return base.GetCompare(myX);
+            return new Compare(myX);
         }
 
         /// <summary>

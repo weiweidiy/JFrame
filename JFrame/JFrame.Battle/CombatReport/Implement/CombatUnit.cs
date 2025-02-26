@@ -596,6 +596,23 @@ namespace JFrame
         /// <param name="buffer"></param>
         public void UpdateBuffer(BaseCombatBuffer buffer) => GetBufferManager().UpdateItem(buffer);
 
+        /// <summary>
+        /// 查找buffer
+        /// </summary>
+        /// <param name="bufferType"></param>
+        /// <returns></returns>
+        public List<BaseCombatBuffer> FindBuffers(CombatBufferType bufferType)
+        {
+            var result = new List<BaseCombatBuffer>();
+            var bufferManager = GetBufferManager();
+            foreach(var buffer in bufferManager.GetAll())
+            {
+                if (buffer.BufferType == bufferType)
+                    result.Add(buffer);
+            }
+            return result;
+        }
+
         private void BufferManager_onItemAdded(List<BaseCombatBuffer> buffer)
         {
             foreach (var buf in buffer)
@@ -694,10 +711,28 @@ namespace JFrame
         public void OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
         {
             var itemAttr = GetAttribute(attr);
-            var finalValue = extraData.Value * itemAttr.CurValue;
+
+            double finalValue = 0;
+            if (attr == CombatAttribute.ATK || attr == CombatAttribute.MaxHP)
+            {
+                finalValue = extraData.Value * itemAttr.OriginValue;
+            }
+            else
+            {
+                finalValue = extraData.Value + itemAttr.OriginValue;
+            }
+
             var uid = extraData.Action.Uid;
 
             AddExtraValue(attr, uid, finalValue);
+
+            if (attr == CombatAttribute.MaxHP)
+            {
+                var attrManager = GetAttributeManager();
+                var hpAttr = attrManager.Get(CombatAttribute.CurHp.ToString());
+                var hp = hpAttr as CombatAttributeDouble;
+                hp.Plus(finalValue);
+            }
         }
 
         public void OnCrowdControlAnti(CombatExtraData extraData)

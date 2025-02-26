@@ -25,6 +25,11 @@ namespace JFrame
         public virtual CombatBufferFoldType FoldType { get; set; }
 
         /// <summary>
+        /// buffer类型
+        /// </summary>
+        public virtual CombatBufferType BufferType { get; set; }
+
+        /// <summary>
         /// 最大叠加层数
         /// </summary>
         public int MaxFoldCount { get; set; }

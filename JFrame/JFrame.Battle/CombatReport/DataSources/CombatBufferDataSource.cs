@@ -9,5 +9,6 @@
         public abstract int GetId();
         public abstract int GetMaxFoldCount();
         public abstract CombatBufferFoldType GetBufferFoldType();
+        public abstract CombatBufferType GetBufferType();
     }
 }

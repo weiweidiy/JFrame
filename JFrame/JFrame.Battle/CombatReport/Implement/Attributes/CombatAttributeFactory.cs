@@ -14,6 +14,10 @@ namespace JFrame
         Cd = 209, //cd 加成
         ControlHit = 212,
         ControlAnti = 213,
+
+        DamageAdvance = 214, //伤害加成
+        DamageAnti = 215,    //伤害抵抗
+
         Hit = 216,
         Dodge = 217,
 
@@ -46,12 +50,12 @@ namespace JFrame
             var maxHp = new CombatAttributeDouble(CombatAttribute.MaxHP.ToString(), unitInfo.maxHp, double.MaxValue);
             var cri = new CombatAttributeDouble(CombatAttribute.Critical.ToString(), unitInfo.cri, double.MaxValue); //暴击率
             var criAnti = new CombatAttributeDouble(CombatAttribute.CriticalAnti.ToString(), unitInfo.criAnti, double.MaxValue);
-            var criDmgRate = new CombatAttributeDouble(CombatAttribute.CriticalDamage.ToString(), unitInfo.criDmgRate, double.MaxValue);
+            var criDmgRate = new CombatAttributeDouble(CombatAttribute.CriticalDamage.ToString(), unitInfo.criDamage, double.MaxValue);
             //var criDmgAnti = new CombatAttributeDouble(CombatAttribute.CriticalDamageResist.ToString(), unitInfo.criDmgAnti, 1f); //暴击伤害抵抗百分比
             //var skillDmgRate = new CombatAttributeDouble(CombatAttribute.SkillDamageEnhance.ToString(), unitInfo.skillDmgRate, double.MaxValue); //技能伤害加成百分比
             //var skillDmgAnti = new CombatAttributeDouble(CombatAttribute.SkillDamageReduce.ToString(), unitInfo.skillDmgAnti, 1f);
-            //var dmgRate = new CombatAttributeDouble(CombatAttribute.DamageEnhance.ToString(), unitInfo.dmgRate, double.MaxValue);
-            //var dmgAnti = new CombatAttributeDouble(CombatAttribute.DamageReduce.ToString(), unitInfo.dmgAnti, 1f);
+            var damageAdvance = new CombatAttributeDouble(CombatAttribute.DamageAdvance.ToString(), unitInfo.damageAdvance, double.MaxValue);
+            var damageAnti = new CombatAttributeDouble(CombatAttribute.DamageAnti.ToString(), unitInfo.damageAnti, double.MaxValue);
             var controlHit = new CombatAttributeDouble(CombatAttribute.ControlHit.ToString(), unitInfo.controlHit, double.MaxValue);
             var controlAnti = new CombatAttributeDouble(CombatAttribute.ControlAnti.ToString(), unitInfo.controlAnti, double.MaxValue);
             var hit = new CombatAttributeDouble(CombatAttribute.Hit.ToString(), unitInfo.hit, double.MaxValue);
@@ -66,10 +70,13 @@ namespace JFrame
             result.Add(cri);
             result.Add(criAnti);
             result.Add(criDmgRate);
+            result.Add(damageAdvance);
+            result.Add(damageAnti);
             result.Add(controlHit);
             result.Add(controlAnti);
             result.Add(hit);
             result.Add(dodge);
+
             //result.Add(criDmgAnti);
             //result.Add(skillDmgAnti);
             //result.Add(skillDmgRate);

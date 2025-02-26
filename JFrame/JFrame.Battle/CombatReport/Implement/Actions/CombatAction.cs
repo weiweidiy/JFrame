@@ -62,6 +62,8 @@ namespace JFrame
 
         public int GroupId { get; private set; }
 
+        public int SortId {  get; private set; }
+
         /// <summary>
         /// 透傳對象
         /// </summary>
@@ -101,7 +103,7 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(int id, string uid, ActionType type, ActionMode mode, int groupId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
+        public void Initialize(int id, string uid, ActionType type, ActionMode mode, int groupId, int sortId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
         {
             Uid = uid;
             this.conditionTriggers = conditionTriggers;
@@ -113,6 +115,8 @@ namespace JFrame
 
             this.Type = type;
             this.Mode = mode;
+            this.GroupId = groupId;
+            this.SortId = sortId;
 
             //监听执行器命中等消息
             if(executors != null)

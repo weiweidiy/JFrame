@@ -76,9 +76,11 @@ namespace JFrame
         public float atkSpeed;//废弃
         public float cri; //暴击率 0~1的值 百分比
         public float criAnti;
-        public float criDmgRate; //暴击伤害加成百分比
+        public float criDamage; //暴击伤害加成百分比
         public float controlHit;
         public float controlAnti;
+        public float damageAdvance;
+        public float damageAnti;
         public float hit;
         public float dodge;
 
@@ -109,6 +111,12 @@ namespace JFrame
         /// 可叠加最大层数
         /// </summary>
         public int foldMaxCount;
+
+        /// <summary>
+        /// buffer类型 0=buff  1=debuff
+        /// </summary>
+        public CombatBufferType bufferType;
+
         /// <summary>
         /// 当前层数
         /// </summary>

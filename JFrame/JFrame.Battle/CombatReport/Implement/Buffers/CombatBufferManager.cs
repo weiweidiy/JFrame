@@ -17,6 +17,12 @@ namespace JFrame
         Union, //共存
     }
 
+    public enum CombatBufferType
+    {
+        Buffer,
+        Debuffer,
+    }
+
     public class CombatBufferManager : UpdateableContainer<BaseCombatBuffer>, ICombatUpdatable
     {
         public override void UpdateWaitingItems()
