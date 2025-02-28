@@ -32,6 +32,8 @@
             unitInfo.hp = DataSource.GetHp();
             unitInfo.atk = DataSource.GetAtk();
             unitInfo.maxHp = DataSource.GetMaxHp();
+            unitInfo.bpDamage = DataSource.GetBpDamage();
+            unitInfo.bpDamageAnti = DataSource.GetBpDamageAnti();
             unitInfo.cri = DataSource.GetCri();
             unitInfo.criAnti = DataSource.GetCriAnti();
             unitInfo.criDamage = DataSource.GetCriDamage();

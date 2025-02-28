@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-    public interface IBattleAction : IUnique, IAttachOwner
+    public interface IBattleAction : IUnique, IAttachOwner, IUpdateable
     {
         #region 委托事件
         /// <summary>

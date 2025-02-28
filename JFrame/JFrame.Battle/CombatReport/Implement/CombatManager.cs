@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JFrame.Common.Interface;
+using System;
 using System.Collections.Generic;
 using static JFrame.PVPBattleManager;
 
@@ -19,10 +20,13 @@ namespace JFrame
 
         protected bool isCombatOver = false;
 
-        public CombatManager(float limitTime, float deltaTime)
+        protected ILogger logger = null;
+
+        public CombatManager(float limitTime, float deltaTime, ILogger logger = null)
         {
             frame = new CombatFrame(limitTime, deltaTime);
             report = new CombatReport();
+            this.logger = logger;
         }
 
         public CombatManager() : this(90f, 0.25f) { }

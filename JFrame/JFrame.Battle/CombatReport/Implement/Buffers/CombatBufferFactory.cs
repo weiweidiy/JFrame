@@ -17,15 +17,17 @@ namespace JFrame
             this.context = context;
         }
 
-        public virtual BaseCombatBuffer CreateBuffer(int id, CombatExtraData extraData)
+        public virtual BaseCombatBuffer CreateBuffer(int id, CombatExtraData extraData, int foldCount)
         {
             var bufferInfo = Get(id.ToString());
 
             var buffer = new CombatBuffer();
             buffer.ExtraData = extraData;
             buffer.ExtraData.Buffer = buffer;
+            buffer.ExtraData.Uid = Guid.NewGuid().ToString();
+            //buffer.SetCurFoldCount(foldCount);
             var actionFactory = new CombatActionFactory();
-            buffer.Initialize(bufferInfo, actionFactory.CreateActions(bufferInfo.actionsData, buffer, context));
+            buffer.Initialize(bufferInfo, actionFactory.CreateActions(bufferInfo.actionsData, buffer, context), foldCount);
             return buffer;
 
 

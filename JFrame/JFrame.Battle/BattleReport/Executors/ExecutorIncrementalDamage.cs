@@ -9,7 +9,7 @@ namespace JFrame
     /// <summary>
     /// 伤害递增 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：初始伤害倍率 5：递增次数 6：递增倍率（与参数4相加） type = 7
     /// </summary>
-    public class ExecutorIncrementalDamage : ExecutorDamage
+    public class ExecutorIncrementalDamage :ExecutorDamage
     {
         /// <summary>
         /// 递增次数

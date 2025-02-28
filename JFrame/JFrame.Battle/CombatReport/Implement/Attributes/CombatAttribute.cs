@@ -7,7 +7,7 @@ namespace JFrame
     /// 屬性抽象類
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class CombatAttribute<T> : IUnique where T : struct
+    public abstract class CombatAttribute<T> : IUpdateable where T : struct
     {
         /// <summary>
         /// 
@@ -73,6 +73,11 @@ namespace JFrame
         }
 
         public abstract bool IsMax();
+
+        public void Update(IUpdateable value)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 }

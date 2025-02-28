@@ -21,39 +21,49 @@ namespace JFrame
             var result = new List<CombatAction>();
             foreach (var action in actionsInfo)
             {
-                var actionId = action.Key;
-                var actionData = action.Value;
-                var actionType = actionData.type;
-                var actionMode = actionData.mode;
-                var actionUid = actionData.uid;
-                var actionGroupId = actionData.groupId;
-                var actionSortId = actionData.sortId;
+                try
+                {
+                    var actionId = action.Key;
+                    var actionData = action.Value;
+                    var actionType = actionData.type;
+                    var actionMode = actionData.mode;
+                    var actionUid = actionData.uid;
+                    var actionGroupId = actionData.groupId;
+                    var actionSortId = actionData.sortId;
 
-                var dic = actionData.componentInfo;
-                var conditionFinders = dic[ActionComponentType.ConditionFinder]; //条件查找器
-                var conditionTriggers = dic[ActionComponentType.ConditionTrigger]; //條件觸發器
-                var delayTriggers = dic[ActionComponentType.DelayTrigger];//延遲觸發器(只能有1個)
-                var executorfinders = dic[ActionComponentType.ExecutorFinder]; //执行查找器
-                var executorFormulas = dic[ActionComponentType.ExecuteFormulator];
-                var executors = dic[ActionComponentType.Executor]; //執行器
-                var cdTriggers = dic[ActionComponentType.CdTrigger]; //cd觸發器
-                var unitAction = new CombatUnitAction();
-                unitAction.OnAttach(owner);
-                var sm = new CombatActionSM();
-                sm.Initialize(unitAction);
+                    var dic = actionData.componentInfo;
+                    var conditionFinders = dic[ActionComponentType.ConditionFinder]; //条件查找器
+                    var conditionTriggers = dic[ActionComponentType.ConditionTrigger]; //條件觸發器
+                    var delayTriggers = dic[ActionComponentType.DelayTrigger];//延遲觸發器(只能有1個)
+                    var executorfinders = dic[ActionComponentType.ExecutorFinder]; //执行查找器
+                    var executorFormulas = dic[ActionComponentType.ExecuteFormulator];
+                    var executors = dic[ActionComponentType.Executor]; //執行器
+                    var cdTriggers = dic[ActionComponentType.CdTrigger]; //cd觸發器
+                    var unitAction = new CombatUnitAction();
+                    unitAction.OnAttach(owner);
+                    var sm = new CombatActionSM();
+                    sm.Initialize(unitAction);
 
-                var conditionFinder = conditionFinders.Count > 0 ? conditionFinders[0] : null;
-                var delayTrigger = delayTriggers.Count > 0 ? delayTriggers[0] : null;
-                var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
-                var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
+                    var conditionFinder = conditionFinders.Count > 0 ? conditionFinders[0] : null;
+                    var delayTrigger = delayTriggers.Count > 0 ? delayTriggers[0] : null;
+                    var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
+                    var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
-                unitAction.Initialize(actionId, actionUid, actionType, actionMode, actionGroupId, actionSortId
-                            , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
-                            , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
-                            , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
-                            , CreateCdTriggers(cdTriggers, context, unitAction), sm); //cd触发器
+                    unitAction.Initialize(context, actionId, actionUid, actionType, actionMode, actionGroupId, actionSortId
+                                , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
+                                , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
+                                , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
+                                , CreateCdTriggers(cdTriggers, context, unitAction), sm); //cd触发器
 
-                result.Add(unitAction);
+                    result.Add(unitAction);
+                }
+                catch(Exception ex)
+                {
+                    if (context.Logger != null)
+                        context.Logger.LogError(ex.Message + $" 创建action失败 检查配置 actionId:{action.Key}");
+
+                    continue;
+                }
             }
             return result;
         }
@@ -177,6 +187,11 @@ namespace JFrame
                         trigger = new TriggerActionHitted(finder);
                     }
                     break;
+                case 7:
+                    {
+                        trigger = new TriggerActionHitting(finder);
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現trigger組件類型 " + componentInfo.id);
             }
@@ -230,6 +245,11 @@ namespace JFrame
                         finder = new FinderFindRangeByScreen();
                     }
                     break;
+                case 7:
+                    {
+                        finder = new FinderFindUnitsActions();
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現finder組件類型 " + componentInfo.id);
             }
@@ -262,6 +282,11 @@ namespace JFrame
                 case 2:
                     {
                         formula = new FormulaDamage();
+                    }
+                    break;
+                case 3:
+                    {
+                        formula = new FormulaBpDamage();
                     }
                     break;
                 default:
@@ -317,6 +342,16 @@ namespace JFrame
                 case 7:
                     {
                         executor = new ExecutorCombatRemoveBuffer(finder, formula);
+                    }
+                    break;
+                case 8:
+                    {
+                        executor = new ExecutorCombatIncreaseDamage(finder, formula);
+                    }
+                    break;
+                case 9:
+                    {
+                        executor = new ExecutorCombatChangeActionArg(finder, formula);
                     }
                     break;
                 default:

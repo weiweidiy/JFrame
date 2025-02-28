@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+
+
     /// <summary>
     ///  参数：0=队伍(0友军，1敌军，2所有, 3不包含自己的友军)   1=主类型  2=子类型  3模式(0模式单位， 1逻辑单位) 4=个数
     /// </summary>
@@ -86,8 +88,7 @@ namespace JFrame
                     {
                         var targetTeamId = context.CombatManager.GetFriendTeamId(extraData.Owner);
                         var units = context.CombatManager.GetUnits(targetTeamId, GetFindModeArg());
-                        units = RemoveSelf(units, extraData);
-                        return FiltUnitType(units, extraData);
+                        return FiltUnitType(units, extraData, false);
                     }
                 default:
                     throw new NotImplementedException($"{GetType()} 没有实现队伍模式 {teamArg}");
@@ -96,33 +97,22 @@ namespace JFrame
         }
 
 
-        List<CombatUnit> RemoveSelf(List<CombatUnit> units, CombatExtraData extraData)
-        {
-            var selfUid = extraData.Caseter.Uid;
-            for(int i = units.Count -1; i >= 0; i--)
-            {
-                var unit = units[i];
-                if (unit.Uid == selfUid)
-                {
-                    units.Remove(unit);
-                    break;
-                }
-            }
-            return units;
-        }
-
         /// <summary>
         /// 获取单位类型
         /// </summary>
         /// <param name="units"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        protected List<CombatUnit> FiltUnitType(List<CombatUnit> units, CombatExtraData extraData)
+        protected List<CombatUnit> FiltUnitType(List<CombatUnit> units, CombatExtraData extraData, bool includeSelf = true)
         {
             var result = new List<CombatUnit>();
 
             foreach (var unit in units)
             {
+                var selfUid = extraData.Caster.Uid;
+                if (unit.Uid == selfUid && !includeSelf)
+                    continue;
+
                 bool mainTypeHit = false;
                 bool subTypeHit = false;
 
@@ -140,6 +130,7 @@ namespace JFrame
 
                 if (!subTypeHit)
                     subTypeHit = unit.IsSubType((UnitSubType)subTypeArg);
+
 
                 //都命中则加入
                 if (mainTypeHit && subTypeHit)
@@ -168,7 +159,7 @@ namespace JFrame
             for (int i = units.Count - 1; i >= 0; i--)
             {
                 var unit = units[i];
-                if (IsHit(unit , extraData))
+                if (IsHit(unit, extraData))
                     continue;
 
                 units.Remove(unit);

@@ -3,15 +3,22 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
+    public enum CombatValueType
+    {
+        None,
+        Damage,
+        Heal,
+    }
     /// <summary>
     /// 透传参数
     /// </summary>
     public class CombatExtraData : ICloneable
     {
+        public string Uid { get; set; }
         /// <summary>
         /// 屬性唯一id
         /// </summary>
-        public string AttrUid { get; set; }
+        public CombatValueType ValueType { get; set; }
 
         /// <summary>
         /// 值
@@ -46,7 +53,7 @@ namespace JFrame
         /// <summary>
         /// 释放者
         /// </summary>
-        public CombatUnit Caseter { get; set; }
+        public CombatUnit Caster { get; set; }
 
         /// <summary>
         /// 哪個aciton造成的
@@ -64,9 +71,9 @@ namespace JFrame
         public CombatUnit Target { get; set; }
 
         /// <summary>
-        /// ActionOwner
+        /// 目标技能，用于修改他们技能参数
         /// </summary>
-        //public virtual IActionOwner Owner { get; set; }
+        public List<CombatAction> TargetActions{  get; set; }
 
         /// <summary>
         /// 释放时长
@@ -87,6 +94,17 @@ namespace JFrame
         /// buffer
         /// </summary>
         public CombatBuffer Buffer { get; set; }
+
+        /// <summary>
+        /// 层数，默认1
+        /// </summary>
+        public int FoldCount { get; set; }
+
+
+        public CombatExtraData()
+        {
+            TargetActions = new List<CombatAction>();
+        }
 
         /// <summary>
         /// 浅拷贝

@@ -8,7 +8,7 @@ namespace JFrame
     /// <summary>
     /// 管理所有action to do:可以增加线程组概念，允许某些技能使用一个线程组
     /// </summary>
-    public class CombatActionManager : UpdateableContainer<CombatAction>, ICombatUpdatable
+    public class CombatActionManager : UpdateableContainer<CombatAction>, ICombatUpdatable 
     {
         public event Action<CombatExtraData> onTriggerOn; //满足触发条件
         public event Action<CombatExtraData> onStartExecuting; //开始释放
@@ -46,6 +46,16 @@ namespace JFrame
         {
             Clear();
         }
+
+
+        public void SetExtraData(CombatExtraData extraData)
+        {
+            foreach(var action in GetAll())
+            {
+                action.ExtraData = extraData.Clone() as CombatExtraData;
+            }
+        }
+
 
         public void Start()
         {
@@ -90,6 +100,7 @@ namespace JFrame
         /// <param name="frame"></param>
         public void Update(CombatFrame frame)
         {
+            
             foreach (var action in GetAll())
             {
                 action.Update(frame);

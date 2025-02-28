@@ -43,7 +43,7 @@ namespace JFrame
                     //team.onMaxHpUp += Team_onMaxHpUp;
                     team.onDead += Team_onDead;
                     team.onBufferAdded += Team_onBufferAdded;
-                    //team.onBufferRemoved += Team_onBufferRemoved;
+                    team.onBufferRemoved += Team_onBufferRemoved;
                     //team.onBufferCast += Team_onBufferCast;
                     //team.onBufferUpdate += Team_onBufferUpdate;
                     team.onUnitStartMove += Team_onUnitStartMove;
@@ -207,6 +207,20 @@ namespace JFrame
         //{
         //    AddReportData(target.Uid, ReportType.CastBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id });
         //}
+
+        private void Team_onBufferRemoved(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.CastUnitUid = data.Owner.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.BufferUid = data.Buffer.Uid;
+            reportData.BufferFoldCount = data.Buffer.GetCurFoldCount();
+            reportData.BufferId = data.Buffer.Id;
+            AddReportData(ReportType.RemoveBuffer, reportData);
+        }
 
         //private void Team_onBufferRemoved(PVPBattleManager.Team team, ICombatUnit target, IBuffer buffer)
         //{

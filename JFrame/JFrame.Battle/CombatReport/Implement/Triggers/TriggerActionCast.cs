@@ -68,6 +68,9 @@ namespace JFrame
 
         private void Target_onActionCast(CombatExtraData extraData)
         {
+            if (extraData.Action.Uid == ExtraData.Action.Uid)
+                return;
+
             if (!utility.RandomHit(GetRandomArg() * 100))
                 return;
 

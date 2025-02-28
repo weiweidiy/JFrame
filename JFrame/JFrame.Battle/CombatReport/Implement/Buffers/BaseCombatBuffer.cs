@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace JFrame
 {
 
-    public abstract class BaseCombatBuffer : ICombatUpdatable, IUnique, IActionOwner, ICombatAttachable<CombatUnit>
+    public abstract class BaseCombatBuffer : ICombatUpdatable, IUnique, IActionOwner, ICombatAttachable<CombatUnit>, IUpdateable//, IUpdate<BaseCombatBuffer>
     {
         public event Action<CombatExtraData> onBufferExecuting;
         protected void NotifyBufferExecuting(CombatExtraData extraData)
@@ -37,7 +37,7 @@ namespace JFrame
         /// <summary>
         /// 透传数据，其中caster
         /// </summary>
-        CombatExtraData _extraData;
+        protected CombatExtraData _extraData;
         public virtual CombatExtraData ExtraData
         {
             get => _extraData; set
@@ -101,6 +101,8 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         public abstract List<CombatAction> GetActions();
+
+        public abstract void Update(IUpdateable value);
 
         #endregion
     }

@@ -3,7 +3,7 @@
     /// <summary>
     /// 屬性管理器
     /// </summary>
-    public class CombatAttributeManger : BaseContainer<IUnique>
+    public class CombatAttributeManger : BaseContainer<IUpdateable>
     {
         /// <summary>
         /// 添加一个加成值

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace JFrame
 {
-    public class BaseContainer<T> : IContainer<T> where T : IUnique
+    public class BaseContainer<T> : IContainer<T> where T : IUnique, IUpdateable
     {
         public event Action<List<T>> onItemAdded;
         public event Action<T> onItemRemoved;
@@ -65,9 +65,12 @@ namespace JFrame
         public virtual void Update(T member)
         {
             var item = Get(member.Uid);
+            var origin = item;
             if(item != null)
             {
-                item = member;
+                //item = member;
+                //item.Update(member);
+                item.Update(member);
                 onItemUpdated?.Invoke(item);
                 return;
             }

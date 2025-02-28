@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace JFrame
 {
 
-    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionOwner
+    public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionOwner, IUpdateable
     {
         public event Action<CombatExtraData> onTriggerOn;
         public event Action<CombatExtraData> onStartExecuting;
@@ -95,7 +95,7 @@ namespace JFrame
         List<CombatBaseExecutor> executors;
         List<CombatBaseTrigger> cdTriggers;
         CombatActionSM sm;
-
+        CombatContext context;
         /// <summary>
         /// 初始化actions
         /// </summary>
@@ -103,8 +103,9 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(int id, string uid, ActionType type, ActionMode mode, int groupId, int sortId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
+        public void Initialize(CombatContext context, int id, string uid, ActionType type, ActionMode mode, int groupId, int sortId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
         {
+            this.context = context;
             Uid = uid;
             this.conditionTriggers = conditionTriggers;
             this.delayTrigger = delayTrigger;
@@ -193,7 +194,16 @@ namespace JFrame
 
         public void Update(CombatFrame frame)
         {
-            sm.Update(frame);
+            try
+            {
+                sm.Update(frame);
+            }
+            catch(Exception e)
+            {
+                if (context != null && context.Logger != null)
+                    context.Logger.LogError(e.Message + $"  action执行失败，检查配置 actionID: {Id}");
+            }
+
         }
 
         #region 给状态机调用的接口
@@ -365,6 +375,7 @@ namespace JFrame
         }
         #endregion
 
+        #region 状态机切换
         public void SwitchToDisable()
         {
             var curState = sm.GetCurState();
@@ -397,6 +408,17 @@ namespace JFrame
             return duration;
         }
 
+        /// <summary>
+        /// 获取当前状态
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurState()
+        {
+            return sm.GetCurState().Name;
+        }
+        #endregion
+
+        #region 操作组件数据
         /// <summary>
         /// 獲取執行時常
         /// </summary>
@@ -435,6 +457,90 @@ namespace JFrame
             return 0f;
         }
 
+        ///// <summary>
+        ///// 设置cd时常
+        ///// </summary>
+        ///// <param name="duration"></param>
+        //public void SetCdTriggerArg(float duration)
+        //{
+        //    foreach (var trigger in cdTriggers)
+        //    {
+
+        //        if (trigger is TriggerTime)
+        //        {
+        //            var triggerTime = trigger as TriggerTime;
+        //            triggerTime.SetDuration(duration);
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// 设置cd触发器参数
+        /// </summary>
+        /// <param name="triggerIndex"></param>
+        /// <param name="argIndex"></param>
+        /// <param name="argValue"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public void SetCdTriggerArg(int triggerIndex, int argIndex, float argValue)
+        {
+            if (triggerIndex >= cdTriggers.Count)
+                throw new ArgumentOutOfRangeException($"设置cd触发器时， triggerIndex {triggerIndex} 越界 , 检查cd触发器类型个数配置 actionId {Id}");
+
+            var trigger = cdTriggers[triggerIndex];
+            var argCount = trigger.GetValidArgsCount();
+            if(argIndex >= argCount)
+                throw new ArgumentOutOfRangeException($"设置cd触发器时， argIndex {argIndex} 越界 , 检查cd触发器参数个数配置 actionId {Id}");
+
+            trigger.SetCurArg(argIndex, argValue);
+        }
+
+        /// <summary>
+        /// 获取cd触发器指定参数
+        /// </summary>
+        /// <param name="triggerIndex"></param>
+        /// <param name="argIndex"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public float GetCdTriggerArg(int triggerIndex, int argIndex)
+        {
+            if (triggerIndex >= cdTriggers.Count)
+                throw new ArgumentOutOfRangeException($"设置cd触发器时， triggerIndex {triggerIndex} 越界 , 检查cd触发器类型个数配置 actionId {Id}");
+
+            var trigger = cdTriggers[triggerIndex];
+            var argCount = trigger.GetValidArgsCount();
+            if (argIndex >= argCount)
+                throw new ArgumentOutOfRangeException($"设置cd触发器时， argIndex {argIndex} 越界 , 检查cd触发器参数个数配置 actionId {Id}");
+
+            return trigger.GetCurArg(argIndex);
+        }
+
+        public void Update(CombatAction value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(IUpdateable value)
+        {
+            throw new NotImplementedException();
+        }
+
+        ///// <summary>
+        ///// 恢复cd到原始值
+        ///// </summary>
+        //public void ResetCdTriggerDuration()
+        //{
+        //    foreach (var trigger in cdTriggers)
+        //    {
+
+        //        if (trigger is TriggerTime)
+        //        {
+        //            var triggerTime = trigger as TriggerTime;
+        //            triggerTime.ResetArgs();
+        //        }
+        //    }
+        //}
+
+        #endregion
 
     }
 

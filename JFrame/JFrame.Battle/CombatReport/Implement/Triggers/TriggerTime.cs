@@ -22,6 +22,11 @@
             return GetCurArg(0);
         }
 
+        public void SetDuration(float duration)
+        {
+            SetCurArg(0, duration);
+        }
+
         public override void Reset()
         {
             base.Reset();
@@ -40,6 +45,13 @@
                 SetOn(true);
             }
 
+        }
+
+        public override void OnExitState()
+        {
+            base.OnExitState();
+
+            ResetArgs();
         }
     }
 }

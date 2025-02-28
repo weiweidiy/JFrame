@@ -17,7 +17,7 @@ namespace JFrame
 
         public virtual bool IsHit(CombatExtraData extraData)
         {
-            var caster = extraData.Caseter;
+            var caster = extraData.Caster;
             var target = extraData.Target;
 
             var hit = (double)caster.GetAttributeCurValue(CombatAttribute.Hit);

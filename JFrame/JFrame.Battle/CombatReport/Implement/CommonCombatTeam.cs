@@ -171,16 +171,26 @@ namespace JFrame
                 //創建並初始化隊伍
                 foreach (var unitInfo in teamData)
                 {
-                    //創建並初始化戰鬥單位
-                    var unit = new CombatUnit();
-                    var attributes = attrFactory.CreateAllAttributes(unitInfo);
-                    var attrManager = new CombatAttributeManger();
-                    attrManager.AddRange(attributes);
-                    unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), null/* buffFactory.CreateBuffers(unitInfo.buffersData)*/, attrManager);
-                    unit.SetPosition(unitInfo.position);
-                    unit.SetSpeed(unitInfo.moveSpeed);
-                    unit.SetTargetPosition(unitInfo.targetPosition);
-                    Add(unit);
+                    try
+                    {
+                        //創建並初始化戰鬥單位
+                        var unit = new CombatUnit();
+                        var attributes = attrFactory.CreateAllAttributes(unitInfo);
+                        var attrManager = new CombatAttributeManger();
+                        attrManager.AddRange(attributes);
+                        unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), null/* buffFactory.CreateBuffers(unitInfo.buffersData)*/, attrManager);
+                        unit.SetPosition(unitInfo.position);
+                        unit.SetSpeed(unitInfo.moveSpeed);
+                        unit.SetTargetPosition(unitInfo.targetPosition);
+                        Add(unit);
+                    }
+                    catch(Exception ex)
+                    {
+                        if(context.Logger != null)
+                            context.Logger.LogError(ex.Message + $" 创建unit失败 检查配置 unitID:{unitInfo.id}");
+
+                        continue;
+                    }
                 }
 
                 return GetAll();

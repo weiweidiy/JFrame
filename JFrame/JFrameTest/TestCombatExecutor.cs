@@ -138,7 +138,8 @@ namespace JFrameTest
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active, 1, 0, null, null, null, null, null);
+            extraData.FoldCount = 1;
+            extraData.Action.Initialize(null, 1, "action", ActionType.All, ActionMode.Active, 1, 0, null, null, null, null, null);
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
             var executor = new ExecutorCombatChangeAttribute(null, null);
@@ -159,7 +160,8 @@ namespace JFrameTest
         {
             //arrange
             extraData.Action = new CombatAction();
-            extraData.Action.Initialize(1, "action", ActionType.All, ActionMode.Active,1, 0, null, null, null, null, null);
+            extraData.FoldCount = 1;
+            extraData.Action.Initialize(null,1, "action", ActionType.All, ActionMode.Active,1, 0, null, null, null, null, null);
 
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
@@ -189,7 +191,7 @@ namespace JFrameTest
             var bufferManager = Substitute.For<CombatBufferManager>();
             unit1.GetBufferManager().Returns(bufferManager);
             var buffer = Substitute.For<CombatBuffer>();
-            bufferFactoy.CreateBuffer(1001, Arg.Any<CombatExtraData>()).Returns(buffer);
+            bufferFactoy.CreateBuffer(1001, Arg.Any<CombatExtraData>(), Arg.Any<int>()).Returns(buffer);
             extraData.Targets.Returns(new List<CombatUnit>() { unit1 });
             var executor = new ExecutorCombatAddBuffer(null, null);
             executor.Initialize(context, new float[] { 0.1f, 1001, 2, 5f , 1f});
@@ -201,7 +203,7 @@ namespace JFrameTest
 
             //expect
             unit1.Received(1).AddBuffer(buffer);
-            buffer.Received(1).SetCurFoldCount(2);
+            //buffer.Received(1).SetCurFoldCount(2);
             buffer.Received(1).SetDuration(5f);
 
         }

@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using JFrame.Common;
+using System.Collections.Generic;
 
 namespace JFrame
 {
+
     /// <summary>
     /// type 6 參數0：actionGroupId 参数1：sortid:  参数2: 概率  参数3：是否暴击（0全选， 1必须暴击）
     /// </summary>
     public class TriggerActionHitted : CombatBaseTrigger
     {
         List<CombatUnit> unitList = new List<CombatUnit>();
+
+        Utility utility = new Utility();
 
         public TriggerActionHitted(CombatBaseFinder finder) : base(finder)
         {
@@ -64,6 +68,12 @@ namespace JFrame
 
         private void Target_onHittedTarget(CombatExtraData extraData)
         {
+            if (extraData.Action.Uid == ExtraData.Action.Uid)
+                return;
+
+            if (!utility.RandomHit(GetRandomArg() * 100))
+                return;
+
             if (GetGroupIdArg() != 0 && extraData.Action.GroupId != GetGroupIdArg())
                 return;
 

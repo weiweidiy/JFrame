@@ -7,7 +7,7 @@ namespace JFrame
     /// <summary>
     /// 普通的一次行动逻辑 (瞬时动作类型)
     /// </summary>
-    public abstract class BaseAction : IBattleAction
+    public abstract class BaseAction : IBattleAction, IUpdateable
     {
         #region 委托
         /// <summary>
@@ -441,6 +441,11 @@ namespace JFrame
         {
             if (cdTrigger != null)
                 cdTrigger.SetArgs(args);
+        }
+
+        public void Update(IUpdateable value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

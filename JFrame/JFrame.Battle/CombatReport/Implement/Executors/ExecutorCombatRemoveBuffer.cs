@@ -45,8 +45,13 @@ namespace JFrame
             //buffer.SetDuration(GetBuffDurationArg());
             //buffer.OnAttach(target);
             //target.AddBuffer(buffer);
+
+            //var buffer = target.get
         }
 
-
+        protected override void SetValueType(CombatExtraData data)
+        {
+            data.ValueType = CombatValueType.None;
+        }
     }
 }

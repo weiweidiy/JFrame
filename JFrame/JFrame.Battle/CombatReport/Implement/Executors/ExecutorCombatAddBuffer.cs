@@ -54,13 +54,16 @@ namespace JFrame
                 return;
 
             var clone = extraData.Clone() as CombatExtraData;
-            var buffer = context.CombatBufferFactory.CreateBuffer(GetBuffIdArg(), clone);
-            buffer.SetCurFoldCount(GetBuffFoldArg());
+            var buffer = context.CombatBufferFactory.CreateBuffer(GetBuffIdArg(), clone, GetBuffFoldArg());
+            //buffer.SetCurFoldCount(GetBuffFoldArg());
             buffer.SetDuration(GetBuffDurationArg());
-            buffer.OnAttach(target);
+            //buffer.OnAttach(target);
             target.AddBuffer(buffer);
         }
 
-
+        protected override void SetValueType(CombatExtraData data)
+        {
+            data.ValueType = CombatValueType.None;
+        }
     }
 }

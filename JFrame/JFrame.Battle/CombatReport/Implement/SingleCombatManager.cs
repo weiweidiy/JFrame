@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JFrame.Common.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace JFrame
         protected Dictionary<int, KeyValuePair<CombatTeamType, List<CombatUnitInfo>>> teamsData;
 
         public SingleCombatManager() : base() { }
-        public SingleCombatManager(float limitTime, float deltaTime) : base(limitTime, deltaTime)
+        public SingleCombatManager(float limitTime, float deltaTime,ILogger logger = null) : base(limitTime, deltaTime, logger)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -52,7 +53,7 @@ namespace JFrame
 
             //double baseValue = 1;
             //获取数值
-            ExecutorExtraData.Value = /*baseValue **/ GetExecutorValue();
+            ExecutorExtraData.Value = /*baseValue **/ GetExecutorValue()  *  extraData.FoldCount;
 
             //即将命中
             NotifyHittingTargets(ExecutorExtraData);
@@ -69,6 +70,8 @@ namespace JFrame
                     else
                         data.Value = formula.GetHitValue(data);
                 }
+   
+                SetValueType(data);
                 NotifyHittingTarget(data); //即将命中单个单位
                 DoHit(target, data);
                 NotifyTargetHittedComplete(data);
@@ -79,10 +82,18 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 设置本次执行的类型：伤害，治疗，反击等
+        /// </summary>
+        /// <param name="data"></param>
+        protected abstract void SetValueType(CombatExtraData data);
+
+        /// <summary>
         /// 执行参数倍率
         /// </summary>
         /// <returns></returns>
         protected abstract double GetExecutorValue();
+
+        
 
         protected abstract void DoHit(CombatUnit target, CombatExtraData data);
     }

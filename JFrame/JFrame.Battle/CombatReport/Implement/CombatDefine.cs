@@ -73,6 +73,8 @@ namespace JFrame
         public long hp;
         public long maxHp;
         public long atk;
+        public float bpDamage;
+        public float bpDamageAnti;
         public float atkSpeed;//废弃
         public float cri; //暴击率 0~1的值 百分比
         public float criAnti;
@@ -103,7 +105,7 @@ namespace JFrame
     /// <summary>
     /// buffer数据结构
     /// </summary>
-    public class CombatBufferInfo : IUnique
+    public class CombatBufferInfo : IUnique , IUpdateable
     {
         //public string uid;
         public int id;
@@ -126,5 +128,10 @@ namespace JFrame
         public Dictionary<int, ActionInfo> actionsData;
 
         public string Uid { get; set; }
+
+        public void Update(IUpdateable value)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

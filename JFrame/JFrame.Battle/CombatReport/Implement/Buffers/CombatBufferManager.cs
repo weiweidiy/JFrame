@@ -38,7 +38,7 @@ namespace JFrame
             foreach (var item in waitForRemoveItems)
             {
                 Remove(item.Uid);
-                item.OnDetach();
+                //item.OnDetach();
             }
             waitForRemoveItems.Clear();
 
@@ -49,12 +49,12 @@ namespace JFrame
                 {
                     case CombatBufferFoldType.Union: //独立的就直接加
                         {
-                            var buffer = list.Where(i => i.Id == item.Id).SingleOrDefault();
-                            if (buffer != null)
-                            {
-                                if (buffer.FoldType != CombatBufferFoldType.Union)
-                                    throw new System.Exception(buffer.FoldType + " buff fold type Union 不一致 " + item.Id);
-                            }
+                            //var buffer = list.Where(i => i.Id == item.Id).SingleOrDefault();
+                            //if (buffer != null)
+                            //{
+                            //    if (buffer.FoldType != CombatBufferFoldType.Union)
+                            //        throw new System.Exception(buffer.FoldType + " buff fold type Union 不一致 " + item.Id);
+                            //}
 
                             Add(item);
                         }
@@ -82,7 +82,7 @@ namespace JFrame
                                 if (buffer.FoldType != CombatBufferFoldType.Fold)
                                     throw new System.Exception(buffer.FoldType + " buff fold type Fold 不一致 " + item.Id);
 
-                                item.Uid = buffer.Uid;
+                                item.Uid = buffer.Uid;//uid必须一样，否则找不到
                                 item.SetCurFoldCount(item.GetCurFoldCount() + buffer.GetCurFoldCount());
                                 Update(item);
                             }

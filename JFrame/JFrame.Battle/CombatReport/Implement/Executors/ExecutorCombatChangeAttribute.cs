@@ -43,6 +43,8 @@ namespace JFrame
 
             //target.AddExtraValue((CombatAttribute)GetAttrIdArg(), uid, finalValue);
             uid = data.Action.Uid;
+            data.Value = GetRateArg() * data.FoldCount; 
+
             target.OnAttrChanged(data, (CombatAttribute)GetAttrIdArg());
             targets.Add(target);
         }
@@ -55,6 +57,11 @@ namespace JFrame
             {
                 target.RemoveExtraValue((CombatAttribute)GetAttrIdArg(), uid);
             }
+        }
+
+        protected override void SetValueType(CombatExtraData data)
+        {
+            data.ValueType = CombatValueType.None;
         }
     }
 }

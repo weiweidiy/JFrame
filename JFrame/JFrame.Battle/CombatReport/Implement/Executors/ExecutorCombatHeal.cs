@@ -25,6 +25,7 @@
         /// <returns></returns>
         protected float GetRateArg()
         {
+
             return GetCurArg(1);
         }
 
@@ -32,5 +33,11 @@
         {
             return 2;
         }
+
+        protected override void SetValueType(CombatExtraData data)
+        {
+            data.ValueType = CombatValueType.Heal;
+        }
+    
     }
 }

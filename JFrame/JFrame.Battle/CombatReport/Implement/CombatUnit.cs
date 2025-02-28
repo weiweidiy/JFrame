@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner, IUpdateable
     {
         //public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -129,7 +129,9 @@ namespace JFrame
             //创建一个透传参数
             _extraData = new CombatExtraData();
             _extraData.Owner = this; //持有者
-            _extraData.Caseter = this;//释放者
+            _extraData.Caster = this;//释放者
+            _extraData.FoldCount = 1;
+            _extraData.Uid = Guid.NewGuid().ToString();
             //_extraData.Value = (double)GetAttributeCurValue(CombatAttribute.ATK); // to do: 移动到action里去定义
 
             if (actions != null)
@@ -404,6 +406,9 @@ namespace JFrame
                 if (attr is CombatAttributeDouble)
                 {
                     var fattr = attr as CombatAttributeDouble;
+                    if (attribute == CombatAttribute.ATK || attribute == CombatAttribute.CurHp || attribute == CombatAttribute.MaxHP)
+                        return Math.Max(0, fattr.CurValue);
+
                     return fattr.CurValue;
                 }
 
@@ -515,6 +520,12 @@ namespace JFrame
         /// <returns></returns>
         public List<CombatAction> GetActions() => actionManager.GetAll();
 
+        /// <summary>
+        /// 获取指定技能
+        /// </summary>
+        /// <param name="actionUid"></param>
+        /// <returns></returns>
+        public CombatAction GetAction(string actionUid) => actionManager.Get(actionUid);
 
         private void ActionManager_onItemUpdated(CombatAction obj)
         {
@@ -605,7 +616,7 @@ namespace JFrame
         {
             var result = new List<BaseCombatBuffer>();
             var bufferManager = GetBufferManager();
-            foreach(var buffer in bufferManager.GetAll())
+            foreach (var buffer in bufferManager.GetAll())
             {
                 if (buffer.BufferType == bufferType)
                     result.Add(buffer);
@@ -617,13 +628,25 @@ namespace JFrame
         {
             foreach (var buf in buffer)
             {
+                buf.OnAttach(this);
                 onBufferAdded?.Invoke(buf.ExtraData);
             }
         }
 
-        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer) => onBufferUpdate?.Invoke(buffer.ExtraData);
+        private void BufferManager_onItemUpdated(BaseCombatBuffer buffer)
+        {
+            //重新启动一下，to do: Restart()
+            buffer.OnDetach();
+            buffer.OnAttach(this);
+            onBufferUpdate?.Invoke(buffer.ExtraData);
+        }
 
-        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer) => onBufferRemoved?.Invoke(buffer.ExtraData);
+        private void BufferManager_onItemRemoved(BaseCombatBuffer buffer)
+        {
+            buffer.OnDetach();
+            onBufferRemoved?.Invoke(buffer.ExtraData);
+        }
+
 
         public virtual CombatBufferManager GetBufferManager() => bufferManager;
 
@@ -711,6 +734,8 @@ namespace JFrame
         public void OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
         {
             var itemAttr = GetAttribute(attr);
+            if (itemAttr == null)
+                throw new Exception($"没有找到属性类型：{attr}");
 
             double finalValue = 0;
             if (attr == CombatAttribute.ATK || attr == CombatAttribute.MaxHP)
@@ -746,6 +771,11 @@ namespace JFrame
         /// <param name="extraData"></param>
         /// <exception cref="NotImplementedException"></exception>
         public void OnCrowdControled(CombatExtraData extraData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(IUpdateable value)
         {
             throw new NotImplementedException();
         }

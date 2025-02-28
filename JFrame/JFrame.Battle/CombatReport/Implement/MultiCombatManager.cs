@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JFrame.Common.Interface;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static JFrame.PVPBattleManager;
@@ -19,7 +20,7 @@ namespace JFrame
 
         CombatContext context;
 
-        public MultiCombatManager(float limitTime, float deltaTime) : base(limitTime, deltaTime)
+        public MultiCombatManager(float limitTime, float deltaTime , ILogger logger = null) : base(limitTime, deltaTime, logger)
         {
         }
 
@@ -41,6 +42,7 @@ namespace JFrame
             context = new CombatContext();
             context.CombatManager = this;
             context.CombatBufferFactory = bufferFactory;
+            context.Logger = logger;
 
 
             for(int i = 0; i < dicTeam1Data.Count; i++)

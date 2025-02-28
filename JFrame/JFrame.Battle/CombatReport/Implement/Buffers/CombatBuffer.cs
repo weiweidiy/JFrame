@@ -14,17 +14,18 @@ namespace JFrame
 
         CombatActionManager actionManager = new CombatActionManager();
 
-        public void Initialize(CombatBufferInfo bufferInfo, List<CombatAction> actions)
+        public void Initialize(CombatBufferInfo bufferInfo, List<CombatAction> actions, int foldCount)
         {
             FoldType = bufferInfo.foldType;
             BufferType = bufferInfo.bufferType;
             MaxFoldCount = bufferInfo.foldMaxCount;
             Uid = Guid.NewGuid().ToString();
             Id = bufferInfo.id;
+            SetCurFoldCount(foldCount);
             if (actions != null)
             {
                 actionManager.AddRange(actions);
-                actionManager.Initialize(this);
+                actionManager.Initialize(this); //透传数据初始化了
                 actionManager.onStartExecuting += ActionManager_onStartExecuting;
             }
         }
@@ -48,7 +49,11 @@ namespace JFrame
         public override void SetDuration(float duration) => this.duration = duration;
         public override float GetDuration() => duration;
 
-        public override void SetCurFoldCount(int foldCount) => curFoldCount = foldCount;
+        public override void SetCurFoldCount(int foldCount)
+        {
+            curFoldCount = foldCount;
+            _extraData.FoldCount = curFoldCount;
+        }
         public override int GetCurFoldCount() => curFoldCount;
 
         #region action接口
@@ -121,7 +126,9 @@ namespace JFrame
         {
             base.OnAttach(target);
 
+            actionManager.SetExtraData(_extraData);
             actionManager.Start();
+            delta = 0;
         }
 
         public override void OnDetach()
@@ -129,6 +136,14 @@ namespace JFrame
             base.OnDetach();
 
             actionManager.Stop();
+
+        }
+
+        public override void Update(IUpdateable value)
+        {
+            var combatbuffer = value as CombatBuffer;
+
+            SetCurFoldCount(combatbuffer.GetCurFoldCount());
         }
         #endregion
     }
