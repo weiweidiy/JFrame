@@ -61,6 +61,7 @@ namespace JFrameTest
 
             fakeManager.GetOppoTeamId(fakeExtraData.Owner).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
+            fakeExtraData.Caster.Returns(fakeUnit1);
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
             fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
             fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
@@ -85,6 +86,7 @@ namespace JFrameTest
 
             fakeManager.GetOppoTeamId(fakeExtraData.Owner).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit2, fakeUnit3 });
+            fakeExtraData.Caster.Returns(fakeUnit1);
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
             fakeUnit2.GetPosition().Returns(new CombatVector() { x = 15 });
             fakeUnit3.GetPosition().Returns(new CombatVector() { x = 10 });
@@ -111,6 +113,7 @@ namespace JFrameTest
             finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 2, 0.5f }); //找友军低于50%生命的单位
             fakeManager.GetFriendTeamId(fakeExtraData.Owner).Returns(0);
             fakeManager.GetUnits(0, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
+            fakeExtraData.Caster.Returns(fakeUnit1);
             fakeUnit1.GetHpPercent().Returns(0.8f);
             fakeUnit2.GetHpPercent().Returns(0.4f);
             fakeUnit3.GetHpPercent().Returns(0.1f);
@@ -134,6 +137,7 @@ namespace JFrameTest
             var finder = new FinderFindRangeByTargets();
             finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 3, 30f });
             fakeExtraData.Targets.Returns(new List<CombatUnit>() { fakeUnit1 });//取3个目标（unit1）左右15米的单位
+            fakeExtraData.Caster.Returns(fakeUnit1);
             fakeManager.GetFriendTeamId(fakeExtraData.Targets[0]).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });
@@ -158,6 +162,7 @@ namespace JFrameTest
             var finder = new FinderFindRangeByScreen();
             finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 3, 0, 15 });
             fakeExtraData.Targets.Returns(new List<CombatUnit>() { fakeUnit1 });
+            fakeExtraData.Caster.Returns(fakeUnit1);
             fakeManager.GetFriendTeamId(fakeExtraData.Targets[0]).Returns(1);
             fakeManager.GetUnits(1, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
             fakeUnit1.GetPosition().Returns(new CombatVector() { x = 5 });

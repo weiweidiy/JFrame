@@ -33,9 +33,9 @@ namespace JFrame
             return (int)GetCurArg(1);
         }
 
-        protected int GetRandomArg()
+        protected float GetRandomArg()
         {
-            return (int)GetCurArg(2);
+            return GetCurArg(2);
         }
 
         protected int GetCountCondition()

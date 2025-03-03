@@ -50,3 +50,14 @@ E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.Cor
 E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
 E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
 E:\UnityProjects\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.deps.json
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.dll
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\bin\Debug\netstandard2.0\JFrame.pdb
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.AssemblyReference.cache
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfoInputs.cache
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.AssemblyInfo.cs
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.csproj.CoreCompileInputs.cache
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.sourcelink.json
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.dll
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrame\obj\Debug\netstandard2.0\JFrame.pdb

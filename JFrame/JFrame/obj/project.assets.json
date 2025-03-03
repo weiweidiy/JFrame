@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+      "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
       "projectName": "JFrame",
-      "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+      "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
       "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-      "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
+      "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",

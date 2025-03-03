@@ -104,7 +104,7 @@ namespace JFrame
         /// </summary>
         int unitType; //主类型，子类型
 
-
+        CombatUnitInfo unitInfo;
 
         /// <summary>
         /// 初始化
@@ -118,6 +118,7 @@ namespace JFrame
             Clear();
 
             this.context = context;
+            this.unitInfo = unitInfo;
             Uid = unitInfo.uid;
             unitType = 0; // unitInfo.type;
             unitType |= (int)unitInfo.mainType;
@@ -593,13 +594,22 @@ namespace JFrame
         public virtual void AddBuffer(BaseCombatBuffer buffer)
         {
             GetBufferManager().AddItem(buffer);
+
+            if (context != null && context.Logger != null)
+                context.Logger.Log($"给目标{unitInfo.id} 添加buffer{buffer.Id} + {buffer.GetCurFoldCount()}层  Frame:{context.CombatManager.Frame.CurFrame}");
         }
 
         /// <summary>
         /// 删除一个buffer
         /// </summary>
         /// <param name="buffer"></param>
-        public void RemoveBuffer(BaseCombatBuffer buffer) => GetBufferManager().RemoveItem(buffer);
+        public void RemoveBuffer(BaseCombatBuffer buffer)
+        {
+            GetBufferManager().RemoveItem(buffer);
+
+            if (context != null && context.Logger != null)
+                context.Logger.Log($" 删除目标{unitInfo.id} buffer{buffer.Id} + {buffer.GetCurFoldCount()}层  Frame:{context.CombatManager.Frame.CurFrame}");
+        }
 
         /// <summary>
         /// 更新一个buffer

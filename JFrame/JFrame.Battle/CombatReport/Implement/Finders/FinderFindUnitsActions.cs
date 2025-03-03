@@ -26,16 +26,17 @@
             bool isAlive = unit.IsAlive();
             if (isAlive)
             {
-                foreach(var action in unit.GetActions())
+                foreach (var action in unit.GetActions())
                 {
-                    if (action.GroupId != GetGroupIdArg())
+
+                    if (action.GroupId != GetGroupIdArg() && GetGroupIdArg() != 0)
                         continue;
 
-                    if(action.SortId != GetSortIdArg())
+                    if (action.SortId != GetSortIdArg() && GetSortIdArg() != 0)
                         continue;
 
                     extraData.TargetActions.Add(action);
-                }             
+                }
             }
             return isAlive;
         }

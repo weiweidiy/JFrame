@@ -361,11 +361,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
       "projectName": "JFrameTest",
-      "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
       "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-      "outputPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrameTest\\obj\\",
+      "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -382,8 +382,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
-              "projectPath": "D:\\JcwProjects\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
+            "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
+              "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
             }
           }
         }

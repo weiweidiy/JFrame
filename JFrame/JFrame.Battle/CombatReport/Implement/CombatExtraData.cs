@@ -53,7 +53,7 @@ namespace JFrame
         /// <summary>
         /// 释放者
         /// </summary>
-        public CombatUnit Caster { get; set; }
+        public virtual CombatUnit Caster { get; set; }
 
         /// <summary>
         /// 哪個aciton造成的

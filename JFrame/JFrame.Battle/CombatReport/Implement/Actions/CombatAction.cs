@@ -52,6 +52,15 @@ namespace JFrame
             onTargetHittedComplete?.Invoke(extraData);
         }
 
+        /// <summary>
+        /// cd触发器参数发生改变
+        /// </summary>
+        /// <param name="extraData"></param>
+        public void NotifyCdTriggerArgChanged(CombatExtraData extraData)
+        {
+
+        }
+
         public string Uid { get; private set; }
 
         public int Id { get; private set; }
@@ -514,10 +523,6 @@ namespace JFrame
             return trigger.GetCurArg(argIndex);
         }
 
-        public void Update(CombatAction value)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update(IUpdateable value)
         {
