@@ -12,7 +12,7 @@ namespace JFrame
 
         Utility utility = new Utility();
 
-        public TriggerActionHitting(CombatBaseFinder finder) : base(finder)
+        public TriggerActionHitting(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
@@ -55,8 +55,10 @@ namespace JFrame
         {
             base.OnEnterState();
             unitList.Clear();
-            if (finder != null)
+            if (finders != null && finders.Count > 0)
             {
+                var finder = finders[0];
+
                 var targets = finder.FindTargets(ExtraData); //获取目标
                 if (targets != null && targets.Count > 0)
                 {
@@ -94,17 +96,50 @@ namespace JFrame
             if (extraData.ValueType != (CombatValueType)GetValueTypeArg())
                 return;
 
-            var lst = new List<CombatUnit>();
-            if (extraData.Targets != null)
-                lst.AddRange(extraData.Targets);
 
-            ExtraData.Value = extraData.Value;
-            ExtraData.Targets = lst;
+            if (finders != null && finders.Count > 1)
+            {
+                var finder = finders[1];
+                var targets = finder.FindTargets(ExtraData);
+                if(targets != null && targets.Count > 0)
+                {
+                    ExtraData.Value = extraData.Value;
+                    ExtraData.Targets = targets;
+                    ExtraData.Target = targets[0];
 
-            if (extraData.Target != null)
-                ExtraData.Target = extraData.Target;
+                    ExtraData.Value *= GetValueRateArg();
+                }
+                else
+                {
+                    var lst = new List<CombatUnit>();
+                    if (extraData.Targets != null)
+                        lst.AddRange(extraData.Targets);
 
-            extraData.Value *= GetValueRateArg();
+                    ExtraData.Value = extraData.Value;
+                    ExtraData.Targets = lst;
+
+                    if (extraData.Target != null)
+                        ExtraData.Target = extraData.Target;
+
+                    extraData.Value *= GetValueRateArg();
+                }
+
+            }
+            else
+            {
+                var lst = new List<CombatUnit>();
+                if (extraData.Targets != null)
+                    lst.AddRange(extraData.Targets);
+
+                ExtraData.Value = extraData.Value;
+                ExtraData.Targets = lst;
+
+                if (extraData.Target != null)
+                    ExtraData.Target = extraData.Target;
+
+                extraData.Value *= GetValueRateArg();
+            }
+
             //SetOn(true);
         }
 

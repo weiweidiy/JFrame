@@ -8,7 +8,7 @@ namespace JFrame
     public class TriggerAmount : CombatBaseTrigger
     {
         int count = 0;
-        public TriggerAmount(CombatBaseFinder finder) : base(finder)
+        public TriggerAmount(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
@@ -38,13 +38,16 @@ namespace JFrame
 
             if (count < GetAmountArg())
             {
-                if (finder != null)
+                if (finders != null && finders.Count > 0)
                 {
-                    var targets = finder.FindTargets(ExtraData); //获取目标
-                    if (targets != null && targets.Count > 0)
+                    foreach(var finder in finders)
                     {
-                        _extraData.Targets = targets;
-                        SetOn(true);
+                        var targets = finder.FindTargets(ExtraData); //获取目标
+                        if (targets != null && targets.Count > 0)
+                        {
+                            _extraData.Targets = targets;
+                            SetOn(true);
+                        }
                     }
                 }
                 else

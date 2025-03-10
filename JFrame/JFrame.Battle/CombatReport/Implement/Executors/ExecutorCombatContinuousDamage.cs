@@ -23,7 +23,7 @@
         }
 
 
-        public ExecutorCombatContinuousDamage(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatContinuousDamage(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

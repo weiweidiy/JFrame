@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace JFrame
 {
@@ -9,7 +10,7 @@ namespace JFrame
     {
         string uid = "ExecutorCombatChangeAttribute";
 
-        List<CombatUnit> targets = new List<CombatUnit>();
+        List<KeyValuePair<CombatUnit, double>> targets = new List<KeyValuePair<CombatUnit, double>>();
 
         public override int GetValidArgsCount()
         {
@@ -26,7 +27,7 @@ namespace JFrame
             return GetCurArg(2);
         }
 
-        public ExecutorCombatChangeAttribute(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatChangeAttribute(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 
@@ -34,6 +35,7 @@ namespace JFrame
         {
             return GetRateArg();
         }
+
 
         protected override void DoHit(CombatUnit target, CombatExtraData data)
         {
@@ -43,19 +45,21 @@ namespace JFrame
 
             //target.AddExtraValue((CombatAttribute)GetAttrIdArg(), uid, finalValue);
             uid = data.Action.Uid;
-            data.Value = GetRateArg() * data.FoldCount; 
+            data.Value = GetRateArg() * data.FoldCount;
+            var finalValue = target.OnAttrChanged(data, (CombatAttribute)GetAttrIdArg());
 
-            target.OnAttrChanged(data, (CombatAttribute)GetAttrIdArg());
-            targets.Add(target);
+            targets.Add(new KeyValuePair<CombatUnit, double>(target, finalValue));
         }
 
         public override void OnStop()
         {
             base.OnStop();
 
-            foreach(var target in targets)
+            foreach(var item in targets)
             {
-                target.RemoveExtraValue((CombatAttribute)GetAttrIdArg(), uid);
+                var target = item.Key;
+                var value = item.Value;
+                target.MinusExtraValue((CombatAttribute)GetAttrIdArg(), uid, value);
             }
         }
 

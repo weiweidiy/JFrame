@@ -5,7 +5,7 @@
     /// </summary>
     public class ExecutorCombatChangeActionArg : ExecutorCombatNormal
     {
-        public ExecutorCombatChangeActionArg(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatChangeActionArg(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 
@@ -29,9 +29,9 @@
             return (int)GetCurArg(3);
         }
 
-        protected int GetComponentArgValue() //正负加减算法
+        protected float GetComponentArgValue() //正负加减算法
         {
-            return (int)GetCurArg(4);
+            return GetCurArg(4);
         }
 
         protected override void SetValueType(CombatExtraData data)
@@ -50,7 +50,7 @@
             var componentType = GetComponentType();
             var componentIndex = GetComponentIndex();
             var componentArgIndex = GetComponentArgIndex();
-            var componentArgValue = GetComponentArgValue();
+            var componentArgValue = GetComponentArgValue() * data.FoldCount;
 
             var actions = data.TargetActions; //收集到的所有技能
             foreach (var action in actions)
@@ -65,6 +65,8 @@
                     action.SetCdTriggerArg(componentIndex, componentArgIndex, componentArgValue + originValue);
                 }
             }
+
+            data.TargetActions.Clear();
         }
 
     }

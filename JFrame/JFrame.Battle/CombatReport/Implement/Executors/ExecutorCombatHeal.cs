@@ -5,7 +5,7 @@
     /// </summary>
     public class ExecutorCombatHeal : ExecutorCombatNormal
     {
-        public ExecutorCombatHeal(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatHeal(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

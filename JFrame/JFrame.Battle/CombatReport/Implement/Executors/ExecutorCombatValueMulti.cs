@@ -7,7 +7,7 @@ namespace JFrame
     /// </summary>
     public class ExecutorCombatValueMulti : ExecutorCombatNormal
     {
-        public ExecutorCombatValueMulti(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatValueMulti(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

@@ -89,6 +89,17 @@ namespace JFrame
             else
                 extraAttributes.Add(extraUid, value);
         }
+
+        public override bool MinusExtraValue(string extraUid, int value)
+        {
+            if (extraAttributes.ContainsKey(extraUid))
+            {
+                extraAttributes[extraUid] -= value;
+                return true;
+            }
+            else
+                return false;
+        }
     }
 
 }

@@ -53,6 +53,14 @@ namespace JFrame
             return extraAttributes.Remove(uid);
         }
 
+        /// <summary>
+        /// 删除属性
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public abstract bool MinusExtraValue(string uid, T value);
+
         public abstract T Plus(T value);
         public abstract T Minus(T value);
         /// <summary>

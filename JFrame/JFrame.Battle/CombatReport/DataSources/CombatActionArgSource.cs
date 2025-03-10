@@ -35,13 +35,13 @@ namespace JFrame
         /// 获取条件查找器
         /// </summary>
         /// <returns></returns>
-        public abstract int GetConditionFindersId();
+        public abstract int[] GetConditionFindersId();
 
         /// <summary>
         /// 获取条件查找器参数
         /// </summary>
         /// <returns></returns>
-        public abstract float[] GetConditionFindersArgs();
+        public abstract float[] GetConditionFindersArgs(int index);
 
         /// <summary>
         /// 获取所有条件触发器id列表

@@ -350,6 +350,15 @@ namespace JFrame
         {
             return velocity;
         }
+
+        /// <summary>
+        /// 单位id
+        /// </summary>
+        /// <returns></returns>
+        public int GetUnitId()
+        {
+            return unitInfo.id;
+        }
         #endregion
 
         #region 属性接口
@@ -359,14 +368,16 @@ namespace JFrame
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="value"></param>
-        public virtual void AddExtraValue(CombatAttribute attrType, string uid, double value)
+        public virtual void PlusExtraValue(CombatAttribute attrType, string uid, double value)
         {
-            var item = GetAttributeManager().Get(attrType.ToString());
-            var attr = item as CombatAttributeDouble;
-            if (attr == null)
-                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+            //var item = GetAttributeManager().Get(attrType.ToString());
+            //var attr = item as CombatAttributeDouble;
+            //if (attr == null)
+            //    throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
 
-            attr.AddExtraValue(uid, value);
+            //attr.AddExtraValue(uid, value);
+
+            GetAttributeManager().PlusExtraValue(attrType, uid, value);
         }
 
         /// <summary>
@@ -376,12 +387,26 @@ namespace JFrame
         /// <returns></returns>
         public virtual bool RemoveExtraValue(CombatAttribute attrType, string uid)
         {
-            var item = GetAttributeManager().Get(attrType.ToString());
-            var attr = item as CombatAttributeDouble;
-            if (attr == null)
-                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+            //var item = GetAttributeManager().Get(attrType.ToString());
+            //var attr = item as CombatAttributeDouble;
+            //if (attr == null)
+            //    throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
 
-            return attr.RemoveExtraValue(uid);
+            //return attr.RemoveExtraValue(uid);
+
+            return GetAttributeManager().RemoveExtraValue(attrType, uid);
+        }
+
+        /// <summary>
+        /// 减少一个附加值
+        /// </summary>
+        /// <param name="attrType"></param>
+        /// <param name="uid"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public virtual bool MinusExtraValue(CombatAttribute attrType, string uid, double value)
+        {
+            return GetAttributeManager().MinusExtraValue(attrType, uid, value);
         }
 
         /// <summary>
@@ -741,7 +766,7 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
-        public void OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
+        public double OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
         {
             var itemAttr = GetAttribute(attr);
             if (itemAttr == null)
@@ -759,7 +784,7 @@ namespace JFrame
 
             var uid = extraData.Action.Uid;
 
-            AddExtraValue(attr, uid, finalValue);
+            PlusExtraValue(attr, uid, finalValue);
 
             if (attr == CombatAttribute.MaxHP)
             {
@@ -768,6 +793,8 @@ namespace JFrame
                 var hp = hpAttr as CombatAttributeDouble;
                 hp.Plus(finalValue);
             }
+
+            return finalValue;
         }
 
         public void OnCrowdControlAnti(CombatExtraData extraData)

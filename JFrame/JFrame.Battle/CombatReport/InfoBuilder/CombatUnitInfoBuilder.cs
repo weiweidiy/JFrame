@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using JFrame.Common.Interface;
+
+namespace JFrame
 {
     /// <summary>
     /// 构建combatunit builder
@@ -8,7 +10,7 @@
 
         public CombatUnitDataSource DataSource { get; set; }
 
-        public CombatUnitInfoBuilder(CombatActionArgSourceBuilder actionArgBuilder) : base(actionArgBuilder)
+        public CombatUnitInfoBuilder(CombatActionArgSourceBuilder actionArgBuilder, ILogger logger) : base(actionArgBuilder, logger)
         {
         }
 

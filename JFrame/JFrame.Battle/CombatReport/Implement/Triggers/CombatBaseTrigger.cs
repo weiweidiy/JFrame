@@ -28,11 +28,11 @@ namespace JFrame
         /// <summary>
         /// 查找器
         /// </summary>
-        protected CombatBaseFinder finder;
+        protected List<CombatBaseFinder> finders;
 
-        public CombatBaseTrigger(CombatBaseFinder finder)
+        public CombatBaseTrigger(List<CombatBaseFinder> finders)
         {
-            this.finder = finder;
+            this.finders = finders;
         }
 
         /// <summary>
@@ -68,6 +68,13 @@ namespace JFrame
         public override void OnAttach(CombatAction target)
         {
             base.OnAttach(target);
+            if(finders != null)
+            {
+                foreach(var finder in finders)
+                {
+                    finder.OnAttach(target);
+                }
+            }
         }
 
         protected override void OnUpdate(CombatFrame frame)

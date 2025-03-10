@@ -9,7 +9,7 @@ namespace JFrame
             var result = new List<CombatUnitInfo>();
 
 
-            var unitInfoBuilder = new CombatUnitInfoBuilder(new CombatJFrameActionArgSourceBuilder());
+            var unitInfoBuilder = new CombatUnitInfoBuilder(new CombatJFrameActionArgSourceBuilder(), null);
 
 
             return result;

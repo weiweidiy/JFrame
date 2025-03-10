@@ -247,8 +247,15 @@ namespace JFrameTest
 
             //条件查找器
             var conditionFinders = new List<ActionComponentInfo>();
-            var conditionFinder = new ActionComponentInfo() { id = actionArgSource.GetConditionFindersId(), args = actionArgSource.GetConditionFindersArgs() }; //时间触发器， 时长
-            conditionFinders.Add(conditionFinder);
+            var conditionFindersId = actionArgSource.GetConditionFindersId();
+            for (int i = 0; i < conditionFindersId.Length; i++)
+            {
+                var id = conditionFindersId[i];
+                var index = i;
+                var conditionFinder = new ActionComponentInfo() {id = id, args = actionArgSource.GetConditionFindersArgs(index) }; //时间触发器， 时长
+                conditionFinders.Add(conditionFinder);
+            }
+
             dicComponentInfo.Add(ActionComponentType.ConditionFinder, conditionFinders);
 
 

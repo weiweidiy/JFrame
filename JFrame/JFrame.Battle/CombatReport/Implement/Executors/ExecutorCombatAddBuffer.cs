@@ -10,7 +10,7 @@ namespace JFrame
     public class ExecutorCombatAddBuffer : ExecutorCombatNormal
     {
         Utility utilty = new Utility();
-        public ExecutorCombatAddBuffer(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatAddBuffer(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

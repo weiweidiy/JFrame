@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using System;
+using JFrame.Common.Interface;
 
 namespace JFrame
 {
     public abstract class CombatActionInfoBuilder<T>
     {
         Dictionary<int, CombatActionArgSource> dicActionArgSource;
+        ILogger logger;
 
-        public CombatActionInfoBuilder(CombatActionArgSourceBuilder actionArgBuilder)
+        public CombatActionInfoBuilder(CombatActionArgSourceBuilder actionArgBuilder, ILogger logger = null)
         {
             dicActionArgSource = actionArgBuilder.Build();
+            this.logger = logger;
         }
 
         public abstract T Build();
@@ -34,8 +37,16 @@ namespace JFrame
 
             foreach (var id in actionsId)
             {
-                var actionInfo = CreateActionInfo(id);
-                result.Add(id, actionInfo);
+                try
+                {
+                    var actionInfo = CreateActionInfo(id);
+                    result.Add(id, actionInfo);
+                }
+                catch (Exception e)
+                {
+                    if (logger != null)
+                        logger.LogError(e.Message + " 创建action失败 " + id);
+                }
             }
 
             return result;
@@ -59,11 +70,15 @@ namespace JFrame
 
             //条件finder
             var conditionFinders = new List<ActionComponentInfo>();
-            if (argSource.GetConditionFindersId() != 0)
+            var conditionFindersId = argSource.GetConditionFindersId();
+            for (int i = 0; i < conditionFindersId.Length; i++)
             {
-                var conditionFinder = new ActionComponentInfo() { id = argSource.GetConditionFindersId(), args = argSource.GetConditionFindersArgs() }; //时间触发器， 时长
+                var id = conditionFindersId[i];
+                var index = i;
+                var conditionFinder = new ActionComponentInfo() { id = id, args = argSource.GetConditionFindersArgs(index) }; //时间触发器， 时长
                 conditionFinders.Add(conditionFinder);
             }
+
             dicComponentInfo.Add(ActionComponentType.ConditionFinder, conditionFinders);
 
 

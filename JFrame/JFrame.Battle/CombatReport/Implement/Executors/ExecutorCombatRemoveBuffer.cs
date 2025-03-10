@@ -8,7 +8,7 @@ namespace JFrame
     public class ExecutorCombatRemoveBuffer : ExecutorCombatNormal
     {
         Utility utilty = new Utility();
-        public ExecutorCombatRemoveBuffer(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatRemoveBuffer(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

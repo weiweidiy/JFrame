@@ -7,7 +7,7 @@
     {
         float delta = 0f;
 
-        public ExecutorCombatContinuousHeal(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatContinuousHeal(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

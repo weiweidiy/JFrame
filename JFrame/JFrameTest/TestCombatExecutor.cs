@@ -151,7 +151,7 @@ namespace JFrameTest
             executor.Update(null);
 
             //expect
-            unit1.Received(1).AddExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
+            unit1.Received(1).PlusExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
             Assert.AreEqual(100, (long)hpAttr.CurValue);
         }
 
@@ -174,8 +174,8 @@ namespace JFrameTest
             executor.Update(null);
             executor.OnStop();
             //expect
-            unit1.Received(1).AddExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
-            unit1.Received(1).RemoveExtraValue(CombatAttribute.MaxHP, "action");
+            unit1.Received(1).PlusExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
+            unit1.Received(1).MinusExtraValue(CombatAttribute.MaxHP, "action", Arg.Any<double>());
             Assert.AreEqual(100, (int)hpAttr.CurValue);
         }
 

@@ -70,7 +70,7 @@ namespace JFrame
         /// <param name="caster"></param>
         /// <param name="action"></param>
         /// <param name="value"></param>
-        void OnAttrChanged(CombatExtraData extraData, CombatAttribute attr);
+        double OnAttrChanged(CombatExtraData extraData, CombatAttribute attr);
 
         /// <summary>
         /// 抵抗異常

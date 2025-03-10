@@ -6,7 +6,7 @@
     public class ExecutorCombatIncreaseDamage : ExecutorCombatDamage
     {
         int increaseCount = 0;
-        public ExecutorCombatIncreaseDamage(ICombatFinder combinFinder, ICombatFormula formulua) : base(combinFinder, formulua)
+        public ExecutorCombatIncreaseDamage(CombatBaseFinder combinFinder, CombatBaseFormula formulua) : base(combinFinder, formulua)
         {
         }
 

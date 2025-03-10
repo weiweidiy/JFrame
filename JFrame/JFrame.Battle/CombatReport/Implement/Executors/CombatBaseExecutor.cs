@@ -25,12 +25,12 @@ namespace JFrame
         /// <summary>
         /// 查找器
         /// </summary>
-        protected ICombatFinder finder;
+        protected CombatBaseFinder finder;
 
         /// <summary>
         /// 公式计算
         /// </summary>
-        protected ICombatFormula formula;
+        protected CombatBaseFormula formula;
 
         /// <summary>
         /// 是否在执行中
@@ -42,7 +42,7 @@ namespace JFrame
         /// </summary>
         protected CombatExtraData extraData;
 
-        public CombatBaseExecutor(ICombatFinder combinFinder, ICombatFormula formula)
+        public CombatBaseExecutor(CombatBaseFinder combinFinder, CombatBaseFormula formula)
         {
             this.finder = combinFinder;
             this.formula = formula;
@@ -105,6 +105,13 @@ namespace JFrame
         protected override void OnUpdate(CombatFrame frame)
         {
             //throw new NotImplementedException();
+        }
+
+        public override void OnAttach(CombatAction target)
+        {
+            base.OnAttach(target);
+            if(finder != null) { finder.OnAttach(target); }
+            if(formula != null) { formula.OnAttach(target); }
         }
     }
 }

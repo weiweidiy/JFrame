@@ -24,7 +24,7 @@ namespace JFrameTest
             finder.FindTargets(extraData).Returns(new List<CombatUnit>() { mySelf});
 
 
-            var trigger = new TriggerFinder(finder);
+            var trigger = new TriggerFinder(new List<CombatBaseFinder>() { finder });
             trigger.ExtraData = extraData;
 
             //act

@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
 
     /// <summary>
@@ -12,7 +14,7 @@
         }
 
 
-        public TriggerFinder(CombatBaseFinder finder) : base(finder)
+        public TriggerFinder(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
@@ -20,13 +22,16 @@
         {
             base.OnUpdate(frame);
 
-            if(finder != null)
+            if(finders != null && finders.Count > 0)
             {
-                var targets = finder.FindTargets(ExtraData); //获取目标
-                if(targets != null && targets.Count > 0) 
+                foreach(var finder in finders)
                 {
-                    _extraData.Targets = targets;
-                    SetOn(true);
+                    var targets = finder.FindTargets(ExtraData); //获取目标
+                    if (targets != null && targets.Count > 0)
+                    {
+                        _extraData.Targets = targets;  //会替换成后面那个finder
+                        SetOn(true);
+                    }
                 }
             }
         }

@@ -44,13 +44,13 @@ namespace JFrame
                     var sm = new CombatActionSM();
                     sm.Initialize(unitAction);
 
-                    var conditionFinder = conditionFinders.Count > 0 ? conditionFinders[0] : null;
+                    //var conditionFinder = conditionFinders.Count > 0 ? conditionFinders[0] : null;
                     var delayTrigger = delayTriggers.Count > 0 ? delayTriggers[0] : null;
                     var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
                     var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
                     unitAction.Initialize(context, actionId, actionUid, actionType, actionMode, actionGroupId, actionSortId
-                                , CreateConditionTriggers(conditionTriggers, CreateFinder(conditionFinder, context, unitAction), context, unitAction) //条件触发器
+                                , CreateConditionTriggers(conditionTriggers, CreateFinders(conditionFinders, context, unitAction), context, unitAction) //条件触发器
                                 , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
                                 , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
                                 , CreateCdTriggers(cdTriggers, context, unitAction), sm); //cd触发器
@@ -75,13 +75,13 @@ namespace JFrame
         /// <param name="finders"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<CombatBaseTrigger> CreateConditionTriggers(List<ActionComponentInfo> conditionTriggers, CombatBaseFinder finder, CombatContext context, CombatAction owner)
+        private List<CombatBaseTrigger> CreateConditionTriggers(List<ActionComponentInfo> conditionTriggers, List<CombatBaseFinder> finders, CombatContext context, CombatAction owner)
         {
             var result = new List<CombatBaseTrigger>();
 
             foreach (var componentInfo in conditionTriggers)
             {
-                var trigger = CreateTrigger(componentInfo, finder, context, owner);
+                var trigger = CreateTrigger(componentInfo, finders, context, owner);
                 result.Add(trigger);
             }
 
@@ -94,9 +94,9 @@ namespace JFrame
         /// <param name="finders"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private List<ICombatFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context, CombatAction owner)
+        private List<CombatBaseFinder> CreateFinders(List<ActionComponentInfo> finders, CombatContext context, CombatAction owner)
         {
-            var result = new List<ICombatFinder>();
+            var result = new List<CombatBaseFinder>();
 
             foreach (var componentInfo in finders)
             {
@@ -152,50 +152,50 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        CombatBaseTrigger CreateTrigger(ActionComponentInfo componentInfo, CombatBaseFinder finder, CombatContext context, CombatAction owner)
+        CombatBaseTrigger CreateTrigger(ActionComponentInfo componentInfo, List<CombatBaseFinder> finders, CombatContext context, CombatAction owner)
         {
             CombatBaseTrigger trigger = null;
             switch (componentInfo.id)
             {
                 case 1:
                     {
-                        trigger = new TriggerFinder(finder);
+                        trigger = new TriggerFinder(finders);
                     }
                     break;
                 case 2:
                     {
-                        trigger = new TriggerAmount(finder); //战斗开始时
+                        trigger = new TriggerAmount(finders); //战斗开始时
                     }
                     break;
                 case 3:
                     {
-                        trigger = new TriggerTime(finder); //時長觸發器
+                        trigger = new TriggerTime(finders); //時長觸發器
                     }
                     break;
                 case 4:
                     {
-                        trigger = new TriggerUnitHurt(finder);//受傷觸發
+                        trigger = new TriggerUnitHurt(finders);//受傷觸發
                     }
                     break;
                 case 5:
                     {
-                        trigger = new TriggerActionCast(finder);
+                        trigger = new TriggerActionCast(finders);
                     }
                     break;
                 case 6:
                     {
-                        trigger = new TriggerActionHitted(finder);
+                        trigger = new TriggerActionHitted(finders);
                     }
                     break;
                 case 7:
                     {
-                        trigger = new TriggerActionHitting(finder);
+                        trigger = new TriggerActionHitting(finders);
                     }
                     break;
                 default:
                     throw new NotImplementedException("沒有實現trigger組件類型 " + componentInfo.id);
             }
-            trigger.OnAttach(owner);
+            //trigger.OnAttach(owner);
             trigger.Initialize(context, componentInfo.args);
             return trigger;
         }
@@ -253,7 +253,7 @@ namespace JFrame
                 default:
                     throw new NotImplementedException("沒有實現finder組件類型 " + componentInfo.id);
             }
-            finder.OnAttach(owner);
+            //finder.OnAttach(owner);
             finder.Initialize(context, componentInfo.args);
             return finder;
         }
@@ -292,7 +292,7 @@ namespace JFrame
                 default:
                     throw new NotImplementedException("没有实现 formula id: " + componentInfo.id);
             }
-            formula.OnAttach(owner);
+            //formula.OnAttach(owner);
             formula.Initialize(context, componentInfo.args);
             return formula;
         }
@@ -304,7 +304,7 @@ namespace JFrame
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, ICombatFinder finder, CombatBaseFormula formula, CombatContext context, CombatAction owner)
+        CombatBaseExecutor CreateExecutor(ActionComponentInfo componentInfo, CombatBaseFinder finder, CombatBaseFormula formula, CombatContext context, CombatAction owner)
         {
             CombatBaseExecutor executor = null;
             switch (componentInfo.id)
@@ -357,7 +357,7 @@ namespace JFrame
                 default:
                     throw new NotImplementedException("沒有實現executor組件類型 " + componentInfo.id);
             }
-            executor.OnAttach(owner);
+            //executor.OnAttach(owner);
             executor.Initialize(context, componentInfo.args);
             return executor;
         }

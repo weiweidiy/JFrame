@@ -85,10 +85,26 @@ namespace JFrame
                 _extraData = value;
                 _extraData.Action = this;
 
-                foreach (var trigger in conditionTriggers)
+                if(conditionTriggers != null)
                 {
-                    trigger.ExtraData = _extraData.Clone() as CombatExtraData;
+                    foreach (var trigger in conditionTriggers)
+                    {
+                        trigger.ExtraData = _extraData.Clone() as CombatExtraData;
+                    }
                 }
+
+
+                if(delayTrigger != null)
+                    delayTrigger.ExtraData = _extraData.Clone() as CombatExtraData;
+
+                if(cdTriggers != null)
+                {
+                    foreach (var trigger in cdTriggers)
+                    {
+                        trigger.ExtraData = _extraData.Clone() as CombatExtraData;
+                    }
+                }
+
             }
         }
 
@@ -128,6 +144,15 @@ namespace JFrame
             this.GroupId = groupId;
             this.SortId = sortId;
 
+            if(conditionTriggers != null)
+            {
+                foreach (var trigger in conditionTriggers)
+                    trigger.OnAttach(this);
+            }
+
+            if(delayTrigger != null)
+                delayTrigger.OnAttach(this);
+
             //监听执行器命中等消息
             if(executors != null)
             {
@@ -138,6 +163,12 @@ namespace JFrame
                     executor.onHittingTarget += Executor_onHittingTarget;
                     executor.onTargetHittedComplete += Executor_onTargetHittedComplete;
                 }
+            }
+
+            if(cdTriggers != null)
+            {
+                foreach(var trigger in cdTriggers)
+                    trigger.OnAttach(this);
             }
         }
 

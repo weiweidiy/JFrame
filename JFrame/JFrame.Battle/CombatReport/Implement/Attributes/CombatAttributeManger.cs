@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="value"></param>
-        public void AddExtraValue(CombatAttribute attrType, string uid, double value)
+        public void PlusExtraValue(CombatAttribute attrType, string uid, double value)
         {
             var item = Get(attrType.ToString());
             var attr =  item as CombatAttributeDouble;
@@ -33,6 +33,24 @@
                 throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
 
             return attr.RemoveExtraValue(uid);
+        }
+
+        /// <summary>
+        /// 减少一个加成值，指定数值
+        /// </summary>
+        /// <param name="attrType"></param>
+        /// <param name="uid"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
+        public bool MinusExtraValue(CombatAttribute attrType, string uid, double value)
+        {
+            var item = Get(attrType.ToString());
+            var attr = item as CombatAttributeDouble;
+            if (attr == null)
+                throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
+
+            return attr.MinusExtraValue(uid, value);
         }
 
         /// <summary>

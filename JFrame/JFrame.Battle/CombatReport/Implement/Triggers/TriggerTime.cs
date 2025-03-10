@@ -1,4 +1,6 @@
-﻿namespace JFrame
+﻿using System.Collections.Generic;
+
+namespace JFrame
 {
     /// <summary>
     /// 根據時間觸發  type = 3 參數0：時長
@@ -8,7 +10,7 @@
 
         float delta = 0f;
 
-        public TriggerTime(CombatBaseFinder finder) : base(finder)
+        public TriggerTime(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
@@ -43,6 +45,11 @@
             if(delta >= GetDuration())
             {
                 SetOn(true);
+
+                //if(context != null && context.Logger != null )
+                //{
+                //    context.Logger.Log($"unitId:{ExtraData.Caster.GetUnitId()} cd: {GetDuration()}");
+                //}
             }
 
         }

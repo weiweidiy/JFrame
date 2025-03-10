@@ -35,7 +35,8 @@
                     if (action.SortId != GetSortIdArg() && GetSortIdArg() != 0)
                         continue;
 
-                    extraData.TargetActions.Add(action);
+                    if (!extraData.TargetActions.Contains(action))
+                        extraData.TargetActions.Add(action);
                 }
             }
             return isAlive;

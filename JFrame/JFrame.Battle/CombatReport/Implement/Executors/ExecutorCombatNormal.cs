@@ -11,7 +11,7 @@ namespace JFrame
         protected int count = 0;
 
 
-        public ExecutorCombatNormal(ICombatFinder combinFinder, ICombatFormula formula) : base(combinFinder, formula)
+        public ExecutorCombatNormal(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
         }
 

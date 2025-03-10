@@ -98,12 +98,12 @@
             }
         }
 
-        public override int GetConditionFindersId()
+        public override int[] GetConditionFindersId()
         {
-            return 0;
+            return new int[] { 0 };
         }
 
-        public override float[] GetConditionFindersArgs()
+        public override float[] GetConditionFindersArgs(int index)
         {
             return new float[] { };
         }

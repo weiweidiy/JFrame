@@ -12,7 +12,7 @@ namespace JFrame
         List<CombatUnit> unitList = new List<CombatUnit>();
 
         Utility utility = new Utility();
-        public TriggerUnitHurt(CombatBaseFinder finder) : base(finder)
+        public TriggerUnitHurt(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
@@ -32,8 +32,10 @@ namespace JFrame
             base.OnEnterState();
             unitList.Clear();
 
-            if (finder != null)
+            if (finders != null && finders.Count > 0)
             {
+                var finder = finders[0];
+
                 var targets = finder.FindTargets(ExtraData); //获取目标
                 if (targets != null && targets.Count > 0)
                 {
@@ -69,7 +71,14 @@ namespace JFrame
             if (!utility.RandomHit(GetRandomArg() * 100))
                 return;
 
-            ExtraData.Targets = unitList;
+            if (finders != null && finders.Count > 1)
+            {
+                var finder = finders[1];
+                var targets = finder.FindTargets(ExtraData);
+                ExtraData.Targets = targets;
+            }
+            else
+                ExtraData.Targets = unitList;
             SetOn(true);
         }
 

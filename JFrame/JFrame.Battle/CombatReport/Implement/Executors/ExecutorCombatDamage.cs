@@ -16,7 +16,7 @@
             return GetCurArg(1);
         }
 
-        public ExecutorCombatDamage(ICombatFinder combinFinder , ICombatFormula formulua) : base(combinFinder, formulua)
+        public ExecutorCombatDamage(CombatBaseFinder combinFinder , CombatBaseFormula formulua) : base(combinFinder, formulua)
         {
         }
 
