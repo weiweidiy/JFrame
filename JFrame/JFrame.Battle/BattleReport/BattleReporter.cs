@@ -23,6 +23,7 @@ namespace JFrame
         StartMove, //开始移动
         SpeedChanged, //速度改变
         EndMove, //停止移动
+        ShootChange, //射击目标改变
     }
 
     /// <summary>

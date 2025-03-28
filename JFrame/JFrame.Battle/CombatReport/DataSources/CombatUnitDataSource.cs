@@ -24,8 +24,8 @@
         public abstract long GetHp();
         public abstract long GetMaxHp();
         public abstract long GetAtk();
-        public abstract long GetBpDamage();
-        public abstract long GetBpDamageAnti();
+        public abstract float GetBpDamage();
+        public abstract float GetBpDamageAnti();
         public abstract float GetCri();
         public abstract float GetCriAnti();
         public abstract float GetCriDamage();
@@ -35,6 +35,13 @@
         public abstract float GetControlAnti();
         public abstract float GetHit();
         public abstract float GetDodge();
+        public abstract float GetMonsterAdd();
+        public abstract float GetBossAdd();
+        public abstract float GetHpRecover();
+        public abstract float GetFightBackCoef();
+        public abstract float GetHpSteal();
+        public abstract float GetElemt();
+        public abstract float GetElemtResist();
         public abstract CombatVector GetPosition();
         public abstract CombatVector GetVelocity();
         public abstract CombatVector GetTargetPosition();

@@ -23,6 +23,15 @@ namespace JFrame
             var criDamage = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.CriticalDamage);
             var dmgAdvance = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.DamageAdvance);
             var dmgAnti = (double)extraData.Target.GetAttributeCurValue(CombatAttribute.DamageAnti);
+            var monsterAdd = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.MonsterAdd);
+            var bossAdd = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.BossAdd);
+            var enemyAdd = target.IsMainType(UnitMainType.Monster) ? monsterAdd : target.IsMainType(UnitMainType.Boss) ? bossAdd : 0;
+            var elemt = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.Elemt);
+            var elemtResist = (double)extraData.Target.GetAttributeCurValue(CombatAttribute.ElemtResist);
+            var elemtRate = elemt - elemtResist;
+            elemtRate = Math.Max(elemtRate - 1, elemtRate);
+            if ((int)extraData.ValueType < (int)CombatValueType.FireDamage)
+                elemtRate = 0;
 
             //暴擊判定
             bool isCri = true;
@@ -41,7 +50,7 @@ namespace JFrame
             var dmgRate = (dmgAdvance - dmgAnti);
             dmgRate = Math.Max(-1, dmgRate); //不能小于-1，否则伤害小于0了
 
-            return damage * (1 + dmgRate);
+            return damage * (1 + dmgRate) * (1 + enemyAdd) * (1+ elemtRate);
         }
 
         public override int GetValidArgsCount()

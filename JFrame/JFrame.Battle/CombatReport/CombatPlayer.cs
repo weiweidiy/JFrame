@@ -54,6 +54,8 @@ namespace JFrame
 
 
         bool isPlaying;
+
+        bool isPaused;
         /// <summary>
         /// 流逝的总时间
         /// </summary>
@@ -67,6 +69,7 @@ namespace JFrame
         {
             escapeTime = 0f;
             isPlaying = true;
+            isPaused = false;
             //UnityEngine.Debug.LogError("开始播放 " + GetHashCode());
             onPlayerStart?.Invoke();
         }
@@ -80,6 +83,7 @@ namespace JFrame
             if(playScale != scale)
             {
                 playScale = scale;
+                isPaused = scale == 0f;
                 onScaleChanged?.Invoke(playScale);
             }
         }
@@ -93,7 +97,7 @@ namespace JFrame
 
         public virtual void Stop()
         {
-            escapeTime = 0f;
+            //escapeTime = 0f;
             isPlaying = false;
             //UnityEngine.Debug.LogError("播放完毕 " + GetHashCode());
         }
@@ -107,6 +111,12 @@ namespace JFrame
         }
 
         /// <summary>
+        /// 获取总的流逝时间
+        /// </summary>
+        /// <returns></returns>
+        public float GetEscapeTime() => escapeTime;
+
+        /// <summary>
         /// 重播
         /// </summary>
         public abstract void Replay();
@@ -117,7 +127,7 @@ namespace JFrame
         float delta = 0;
         public void Update()
         {
-            if (!isPlaying)
+            if (!isPlaying || isPaused)
                 return;
 
             escapeTime += (GetDeltaTime() * playScale);
@@ -217,6 +227,7 @@ namespace JFrame
                         PlayActionCD(data);
                     }
                     break;
+ 
                 case ReportType.DebuffAnti:
                     {
                         //PlayDebuffAnti(data);
@@ -227,11 +238,17 @@ namespace JFrame
 
                     }
                     break;
+                case ReportType.ShootChange:
+                    {
+                        PlayShootChange(data);
+                    }
+                    break;
                 default:
                     throw new System.Exception("没有实现的动作类型" + actionName);
             }
         }
 
+        protected abstract void PlayShootChange(ICombatReportData data);
         protected abstract void PlayActionCD(ICombatReportData data);
         protected abstract void PlayReborn(ICombatReportData data);
         protected abstract void PlayRemoveBuffer(ICombatReportData data);

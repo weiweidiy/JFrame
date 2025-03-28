@@ -276,17 +276,32 @@ namespace JFrame
             {
                 case 1:
                     {
-                        formula = new FormulaSingleAttr();
+                        formula = new CombatFormula1();
                     }
                     break;
                 case 2:
                     {
-                        formula = new FormulaDamage();
+                        formula = new CombatFormula2();
                     }
                     break;
                 case 3:
                     {
-                        formula = new FormulaBpDamage();
+                        formula = new CombatFormula3();
+                    }
+                    break;
+                case 4:
+                    {
+                        formula = new CombatFormula4();
+                    }
+                    break;
+                case 5:
+                    {
+                        formula = new CombatFormula5();
+                    }
+                    break;
+                case 6:
+                    {
+                        formula = new CombatFormula6();
                     }
                     break;
                 default:
@@ -352,6 +367,11 @@ namespace JFrame
                 case 9:
                     {
                         executor = new ExecutorCombatChangeActionArg(finder, formula);
+                    }
+                    break;
+                case 10:
+                    {
+                        executor = new ExecutorCombatTurnBackDamage(finder, formula);
                     }
                     break;
                 default:

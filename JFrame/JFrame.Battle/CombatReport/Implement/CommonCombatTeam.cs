@@ -36,6 +36,7 @@ namespace JFrame
         public event Action<int, CombatExtraData> onUnitStartMove;
         public event Action<int, CombatExtraData> onUnitSpeedChanged;
         public event Action<int, CombatExtraData> onUnitEndMove;
+        public event Action<int, CombatExtraData> onShootTargetChanged;
 
 
         int team;
@@ -132,8 +133,10 @@ namespace JFrame
                 unit.onStartMove += Unit_onStartMove;
                 unit.onSpeedChanged += Unit_onSpeedChanged;
                 unit.onEndMove += Unit_onEndMove;
+                unit.onShootTargetChanged += Unit_onShootTargetChanged;
             }
         }
+
 
 
         public void Start()
@@ -270,6 +273,11 @@ namespace JFrame
         private void Unit_onEndMove(CombatExtraData extraData)
         {
             onUnitEndMove?.Invoke(team, extraData);
+        }
+
+        private void Unit_onShootTargetChanged(CombatExtraData extraData)
+        {
+            onShootTargetChanged?.Invoke(team, extraData);
         }
         #endregion
     }

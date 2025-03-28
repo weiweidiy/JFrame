@@ -140,6 +140,7 @@ namespace JFrame
                 extraData.Value *= GetValueRateArg();
             }
 
+            //这个触发器不会继续执行后面的执行器
             //SetOn(true);
         }
 

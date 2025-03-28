@@ -49,6 +49,7 @@ namespace JFrame
                     team.onUnitStartMove += Team_onUnitStartMove;
                     team.onUnitSpeedChanged += Team_onUnitSpeedChanged;
                     team.onUnitEndMove += Team_onUnitEndMove;
+                    team.onShootTargetChanged += Team_onShootTargetChanged;
                 }
             }
         }
@@ -248,6 +249,8 @@ namespace JFrame
 
             AddReportData(ReportType.StartMove, reportData);
         }
+
+
         private void Team_onUnitSpeedChanged(int teamId, CombatExtraData data)
         {
             var reportData = new ReportData();
@@ -257,6 +260,8 @@ namespace JFrame
 
             AddReportData(ReportType.SpeedChanged, reportData);
         }
+
+
         private void Team_onUnitEndMove(int teamId, CombatExtraData data)
         {
             var reportData = new ReportData();
@@ -266,6 +271,26 @@ namespace JFrame
 
             AddReportData(ReportType.EndMove, reportData);
         }
+
+        /// <summary>
+        /// 发射目标改变了
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="data"></param>
+        private void Team_onShootTargetChanged(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.CastUnitUid = data.Owner.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.TargetsUid = data.GetTargetsUid();
+            reportData.CastDuration = data.CastDuration;
+            reportData.ShootCount = data.ShootCount;
+
+            AddReportData(ReportType.ShootChange, reportData);
+        }
+
 
 
 

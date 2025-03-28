@@ -7,7 +7,12 @@ namespace JFrame
     {
         None,
         Damage,
-        Heal,
+        TurnBackDamage, //反射
+
+        Heal = 50,
+
+        FireDamage = 100, //灼烧
+
     }
     /// <summary>
     /// 透传参数
@@ -24,6 +29,11 @@ namespace JFrame
         /// 值
         /// </summary>
         public double Value { get; set; }
+
+        /// <summary>
+        /// 额外参数
+        /// </summary>
+        public double ExtraArg { get; set; }
 
         /// <summary>
         /// 是否暴击
@@ -86,6 +96,11 @@ namespace JFrame
         public float CdDuration { get; set; }
 
         /// <summary>
+        /// 控制时间
+        /// </summary>
+        public float ControlDuration { get;set; }
+
+        /// <summary>
         /// 移动速度
         /// </summary>
         public CombatVector Velocity { get; set; }  
@@ -99,6 +114,11 @@ namespace JFrame
         /// 层数，默认1
         /// </summary>
         public int FoldCount { get; set; }
+
+        /// <summary>
+        /// 技能发射次数
+        /// </summary>
+        public int ShootCount { get; set; }
 
 
         public CombatExtraData()

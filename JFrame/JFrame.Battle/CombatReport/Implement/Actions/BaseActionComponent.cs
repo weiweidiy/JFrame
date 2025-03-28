@@ -40,7 +40,7 @@ namespace JFrame
         /// <param name="args"></param>
         public void Initialize(CombatContext context, float[] args)
         {
-            if (args.Length != GetValidArgsCount())
+            if (args.Length < GetValidArgsCount())
                 throw new ArgumentException($"参数数量不正确{GetType().ToString()} 需要 {GetValidArgsCount()} 实际{args.Length}");
 
             this.context = context;

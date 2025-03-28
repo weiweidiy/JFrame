@@ -24,19 +24,13 @@ namespace JFrame
 
         Hit = 216,
         Dodge = 217,
-
-
-        //AtkSpeed = 1000,
-        //CriticalDamageResist,
-        //SkillDamageEnhance,
-        //SkillDamageReduce,
-        //DamageEnhance,
-        //DamageReduce,
-        //Block,
-        //Puncture,
-        //ATKRate = 2000,
-        //HPRate = 2001,
-
+        FightBackCoef = 220, // 反伤系数
+        HpRecover = 221, // 血量恢复效率
+        Elemt = 222, // 元素强化
+        ElemtResist = 223, // 元素抗性
+        MonsterAdd = 224, // 对小怪伤害加成
+        BossAdd = 225, // 对BOSS伤害加成
+        HpSteal = 226, // 吸血
     }
 
     public class CombatAttributeFactory
@@ -67,6 +61,15 @@ namespace JFrame
             var hit = new CombatAttributeDouble(CombatAttribute.Hit.ToString(), unitInfo.hit, double.MaxValue);
             var dodge = new CombatAttributeDouble(CombatAttribute.Dodge.ToString(), unitInfo.dodge, double.MaxValue);
 
+            var monsterAdd = new CombatAttributeDouble(CombatAttribute.MonsterAdd.ToString(), unitInfo.monsterAdd, double.MaxValue);
+            var bossAdd = new CombatAttributeDouble(CombatAttribute.BossAdd.ToString(), unitInfo.bossAdd, double.MaxValue);
+            var hpRecover = new CombatAttributeDouble(CombatAttribute.HpRecover.ToString(), unitInfo.hpRecover, double.MaxValue);
+
+            var fightBackCoef = new CombatAttributeDouble(CombatAttribute.FightBackCoef.ToString(), unitInfo.fightBackCoef, double.MaxValue);
+            var hpSteal = new CombatAttributeDouble(CombatAttribute.HpSteal.ToString(), unitInfo.hpSteal, double.MaxValue);
+
+            var elemt = new CombatAttributeDouble(CombatAttribute.Elemt.ToString(), unitInfo.elemt, double.MaxValue);
+            var elemtResist = new CombatAttributeDouble(CombatAttribute.ElemtResist.ToString(), unitInfo.elemtResist, double.MaxValue);
 
             //to do : 其他屬性
             result.Add(hp);
@@ -83,6 +86,13 @@ namespace JFrame
             result.Add(controlAnti);
             result.Add(hit);
             result.Add(dodge);
+            result.Add(monsterAdd);
+            result.Add(bossAdd);
+            result.Add(hpRecover);
+            result.Add(fightBackCoef);
+            result.Add(hpSteal);
+            result.Add(elemt);
+            result.Add(elemtResist);
 
             return result;
         }

@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace JFrame
 {
-    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner, IUpdateable
+    public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner, IUpdateable //放容器里需要
     {
         //public event Action<ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<ICombatUnit, ICombatAction, float> onActionStartCD;
@@ -45,6 +45,8 @@ namespace JFrame
         public event Action<CombatExtraData> onStartMove;
         public event Action<CombatExtraData> onSpeedChanged;
         public event Action<CombatExtraData> onEndMove;
+
+        public event Action<CombatExtraData> onShootTargetChanged;
 
         /// <summary>
         /// 唯一id
@@ -753,6 +755,9 @@ namespace JFrame
             var attr = hpAttr as CombatAttributeDouble;
             var attr2 = maxHpAttr as CombatAttributeDouble;
 
+            var hpRecover = (double)extraData.Caster.GetAttributeCurValue(CombatAttribute.HpRecover);
+            extraData.Value *= (1 + hpRecover);
+
             var healValue = Math.Min(extraData.Value, attr2.CurValue - attr.CurValue);
             attr.Plus(healValue);
 
@@ -766,6 +771,13 @@ namespace JFrame
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 属性变更
+        /// </summary>
+        /// <param name="extraData"></param>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public double OnAttrChanged(CombatExtraData extraData, CombatAttribute attr)
         {
             var itemAttr = GetAttribute(attr);
@@ -779,7 +791,7 @@ namespace JFrame
             }
             else
             {
-                finalValue = extraData.Value + itemAttr.OriginValue;
+                finalValue = extraData.Value; //+ itemAttr.OriginValue;
             }
 
             var uid = extraData.Action.Uid;
@@ -797,6 +809,11 @@ namespace JFrame
             return finalValue;
         }
 
+        /// <summary>
+        /// 控制抵抗？
+        /// </summary>
+        /// <param name="extraData"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public void OnCrowdControlAnti(CombatExtraData extraData)
         {
             throw new NotImplementedException();
@@ -809,8 +826,17 @@ namespace JFrame
         /// <exception cref="NotImplementedException"></exception>
         public void OnCrowdControled(CombatExtraData extraData)
         {
-            throw new NotImplementedException();
+            //获取正在释放中的持续技能
+
+            //持续技能进入控制状态
+
         }
+
+        public void OnShootTargetChanged(CombatExtraData extraData)
+        {
+            onShootTargetChanged?.Invoke(extraData);
+        }
+
 
         public void Update(IUpdateable value)
         {

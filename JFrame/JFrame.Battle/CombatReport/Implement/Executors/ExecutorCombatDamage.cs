@@ -1,14 +1,13 @@
 ﻿namespace JFrame
 {
-
     /// <summary>
-    /// 普通傷害執行器 只能打1次 type = 1 參數：0：执行時間 1：傷害加成
+    /// type 1 普通傷害執行器 只能打1次 type = 1 參數：0：执行時間 1：傷害加成 2: 类型（0：无  1：普通伤害， 100：灼烧伤害 ）
     /// </summary>
     public class ExecutorCombatDamage : ExecutorCombatNormal
     {
         public override int GetValidArgsCount()
         {
-            return 2;
+            return 3;
         }
 
         protected float GetRateArg()
@@ -16,23 +15,51 @@
             return GetCurArg(1);
         }
 
-        public ExecutorCombatDamage(CombatBaseFinder combinFinder , CombatBaseFormula formulua) : base(combinFinder, formulua)
+        protected int GetValueType()
+        {
+            return (int)GetCurArg(2);
+        }
+
+        public ExecutorCombatDamage(CombatBaseFinder combinFinder, CombatBaseFormula formulua) : base(combinFinder, formulua)
         {
         }
 
         protected override double GetExecutorValue()
         {
-            return  GetRateArg();
+            return GetRateArg();
         }
 
         protected override void DoHit(CombatUnit target, CombatExtraData data)
         {
             target.OnDamage(data);
+            StealHp(data);
         }
+
+        /// <summary>
+        /// 吸血
+        /// </summary>
+        /// <param name="data"></param>
+        protected void StealHp(CombatExtraData data)
+        {
+            var hpSteal = (double)data.Caster.GetAttributeCurValue(CombatAttribute.HpSteal);
+            var d = new CombatExtraData();
+            d.Caster = data.Caster;
+            d.Target = data.Caster;
+            d.Value = data.Value * hpSteal;
+            d.Owner = data.Owner;
+            d.Action = data.Action;
+
+            if (d.Value < 1)
+                return;
+
+            //d.Target = data.Caster;
+            data.Caster.OnHeal(d);
+        }
+
 
         protected override void SetValueType(CombatExtraData data)
         {
-            data.ValueType = CombatValueType.Damage;
+            data.ValueType = (CombatValueType)GetValueType();
         }
     }
 }

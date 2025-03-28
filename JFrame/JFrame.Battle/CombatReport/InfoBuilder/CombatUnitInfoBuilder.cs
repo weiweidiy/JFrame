@@ -45,6 +45,14 @@ namespace JFrame
             unitInfo.damageAnti = DataSource.GetDamageAnti();
             unitInfo.hit = DataSource.GetHit();
             unitInfo.dodge = DataSource.GetDodge();
+            unitInfo.monsterAdd = DataSource.GetMonsterAdd();
+            unitInfo.bossAdd = DataSource.GetBossAdd();
+            unitInfo.hpRecover = DataSource.GetHpRecover();
+            unitInfo.fightBackCoef = DataSource.GetFightBackCoef();
+            unitInfo.hpSteal = DataSource.GetHpSteal();
+            unitInfo.elemt = DataSource.GetElemt();
+            unitInfo.elemtResist = DataSource.GetElemtResist();
+
             unitInfo.position = DataSource.GetPosition();
             unitInfo.moveSpeed = DataSource.GetVelocity();
             unitInfo.targetPosition = DataSource.GetTargetPosition();

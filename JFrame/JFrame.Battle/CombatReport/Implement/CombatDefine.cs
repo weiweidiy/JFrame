@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace JFrame
 {
@@ -85,21 +86,100 @@ namespace JFrame
         public float damageAnti;
         public float hit;
         public float dodge;
-
-
-        //public float criDmgAnti; //暴击伤害抵抗百分比
-        //public float skillDmgRate; //技能伤害加成百分比
-        //public float skillDmgAnti; //技能伤害抵抗百分比
-        //public float dmgRate; //伤害加成百分比
-        //public float dmgAnti; //伤害抵抗百分比
-        //public float debuffHit; //0~1异常状态命中百分比
-        //public float debuffAnti; //0~1异常状态抵抗百分比
-        //public float penetrate; //穿透 0~1 百分比
-        //public float block;     //格挡 0~1 百分比
+        public float monsterAdd;
+        public float bossAdd;
+        public float hpRecover;
+        public float fightBackCoef;
+        public float hpSteal;
+        public float elemt;
+        public float elemtResist;
         public CombatVector position; //初始坐標點
         public CombatVector moveSpeed; //移動速度，向左就是負數，向右是正數
         public CombatVector targetPosition;//目标点
 
+        public bool HasAction(int actionId)
+        {
+            return actionsData.ContainsKey(actionId);
+        }
+
+        public float GetArg(int actionId, ActionComponentType componentType, int componentIndex, int argIndex)
+        {
+            if (!actionsData.ContainsKey(actionId))
+                throw new System.Exception($"没有找到技能参数 {actionId} {componentType} {componentIndex} {argIndex}");
+
+            var actionInfo = actionsData[actionId];
+            var components = actionInfo.componentInfo[componentType];
+            if (components.Count <= componentIndex)
+                throw new System.Exception($"获取技能参数时，componentIndex 越界{componentIndex},实际长度{components.Count}");
+
+            var component = components[componentIndex];
+            if (component.args.Length <= argIndex)
+                throw new System.Exception($"获取技能参数时，argIndex 越界{argIndex},实际长度{component.args.Length}");
+
+            return component.args[argIndex];
+        }
+
+        public bool HasAction(int sortId, ActionComponentType componentType, int componentId)
+        {
+            var actionInfo = actionsData.Values.Where(i => i.sortId == sortId).FirstOrDefault();
+            if (actionInfo == null)
+                return false;
+
+            var components = actionInfo.componentInfo[componentType];
+
+            foreach (var component in components)
+            {
+                if (component.id == componentId)
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 获取指定类型的参数
+        /// </summary>
+        /// <param name="sortId"></param>
+        /// <param name="componentType"></param>
+        /// <param name="componentId"></param>
+        /// <param name="componentIndex"></param>
+        /// <param name="argIndex"></param>
+        /// <returns></returns>
+        public (int actionId, float arg) GetArg(int sortId, ActionComponentType componentType, int componentId, int componentIndex, int argIndex)
+        {
+            var dicActionInfo = actionsData.Where(i => i.Value.sortId == sortId).FirstOrDefault();
+
+            var components = dicActionInfo.Value.componentInfo[componentType];
+            if (components.Count <= componentIndex)
+                throw new System.Exception($"获取技能参数时，componentIndex 越界{componentIndex},实际长度{components.Count}");
+
+            var component = components[componentIndex];
+
+            if (component.id != componentId)
+                throw new System.Exception($"获取技能参数时，componentId 不正确");
+
+            if (component.args.Length <= argIndex)
+                throw new System.Exception($"获取技能参数时，argIndex 越界{argIndex},实际长度{component.args.Length}");
+
+            return (dicActionInfo.Key, component.args[argIndex]);
+        }
+
+        public void SetArg(int actionId, ActionComponentType componentType, int componentIndex, int argIndex, float value)
+        {
+            if (!actionsData.ContainsKey(actionId))
+                throw new System.Exception($"没有找到技能参数 {actionId} {componentType} {componentIndex} {argIndex}");
+
+            var actionInfo = actionsData[actionId];
+            var components = actionInfo.componentInfo[componentType];
+            if (components.Count <= componentIndex)
+                throw new System.Exception($"获取技能参数时，componentIndex 越界{componentIndex},实际长度{components.Count}");
+
+            var component = components[componentIndex];
+            if (component.args.Length <= argIndex)
+                throw new System.Exception($"获取技能参数时，argIndex 越界{argIndex},实际长度{component.args.Length}");
+
+            component.args[argIndex] = value;
+        }
     }
 
     /// <summary>

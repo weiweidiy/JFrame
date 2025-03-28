@@ -42,6 +42,11 @@ namespace JFrame
         public int BufferId { get; set; }
 
         public int BufferFoldCount { get; set; }    
+
+        /// <summary>
+        /// 发射次数
+        /// </summary>
+        public int ShootCount { get; set; }
     }
 
 

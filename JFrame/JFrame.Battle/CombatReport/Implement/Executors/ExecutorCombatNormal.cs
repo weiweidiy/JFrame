@@ -42,10 +42,11 @@ namespace JFrame
             Hit();
         }
 
+
         /// <summary>
         /// 命中
         /// </summary>
-        protected void Hit()
+        protected CombatUnit Hit()
         {
             List<CombatUnit> targets = GetTargets(extraData);
 
@@ -55,13 +56,23 @@ namespace JFrame
             //获取数值
             ExecutorExtraData.Value = /*baseValue **/ GetExecutorValue()  *  extraData.FoldCount;
 
+            ///首目标
+            CombatUnit primaryUnit = null;
+
             //即将命中
             NotifyHittingTargets(ExecutorExtraData);
 
             foreach (var target in targets)
             {
+                //记录存活的首要单位
+                if(primaryUnit == null && target.IsAlive())
+                    primaryUnit = target;
+
                 var data = ExecutorExtraData.Clone() as CombatExtraData;
                 data.Target = target;
+
+                SetValueType(data);
+
                 if (formula != null)
                 {
                     var miss = !formula.IsHit(data);
@@ -69,9 +80,8 @@ namespace JFrame
                         data.Value = 0;
                     else
                         data.Value = formula.GetHitValue(data);
-                }
-   
-                SetValueType(data);
+                } 
+                
                 NotifyHittingTarget(data); //即将命中单个单位
                 DoHit(target, data);
                 NotifyTargetHittedComplete(data);
@@ -79,6 +89,8 @@ namespace JFrame
             //命中完成了
             NotifyTargetsHittedComplete(ExecutorExtraData);
             count++;
+
+            return primaryUnit;
         }
 
         /// <summary>
@@ -96,5 +108,6 @@ namespace JFrame
         
 
         protected abstract void DoHit(CombatUnit target, CombatExtraData data);
+
     }
 }
