@@ -18,6 +18,7 @@ namespace JFrame
     {
         Combine, //组合 类似gjj+hero 公用gjj属性
         Single,  //独立 每个单位独自计算
+        Remix
     }
 
     public enum UnitMainType
@@ -27,13 +28,15 @@ namespace JFrame
         Hero = 1 << 1, //2
         Monster = 1 << 2, //4
         Boss = 1 << 3, //8
+        Pet1 = 1 << 4, //16
+        Pet2 = 1 << 5, //32 64 128 256 512
     }
 
     public enum UnitSubType
     {
 
-        Ground = 1 << 4, //16
-        Sky = 1 << 5, //32
+        Ground = 1 << 10, //1024
+        Sky = 1 << 11, //2048
     }
 
     /// <summary>
@@ -96,6 +99,9 @@ namespace JFrame
         public CombatVector position; //初始坐標點
         public CombatVector moveSpeed; //移動速度，向左就是負數，向右是正數
         public CombatVector targetPosition;//目标点
+
+        public CombatUnitInfo parent;//父亲单位
+
 
         public bool HasAction(int actionId)
         {

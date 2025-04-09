@@ -24,6 +24,7 @@ namespace JFrame
         public event Action<int, CombatExtraData> onActionCast;
         public event Action<int, CombatExtraData> onActionStartCD;
         public event Action<int, CombatExtraData> onDamage;
+        public event Action<int, CombatExtraData> onMiss;
         public event Action<int, CombatExtraData> onHeal;
         public event Action<int, CombatExtraData> onDead;
         public event Action<int, CombatExtraData> onReborn;
@@ -120,6 +121,7 @@ namespace JFrame
                 unit.onActionCast += Unit_onActionCast;
                 unit.onActionStartCD += Unit_onActionStartCD;
                 //unit.onActionHitTarget += Unit_onActionDone;
+                unit.onMiss += Unit_onMiss;
                 unit.onDamaged += Unit_onDamage;
                 unit.onHealed += Unit_onHeal;
                 unit.onRebord += Unit_onRebord;
@@ -276,8 +278,13 @@ namespace JFrame
         }
 
         private void Unit_onShootTargetChanged(CombatExtraData extraData)
-        {
+        { 
             onShootTargetChanged?.Invoke(team, extraData);
+        }
+
+        private void Unit_onMiss(CombatExtraData extraData)
+        {
+            onMiss?.Invoke(team, extraData);
         }
         #endregion
     }

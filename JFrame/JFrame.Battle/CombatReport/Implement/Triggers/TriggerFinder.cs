@@ -27,6 +27,7 @@ namespace JFrame
                 foreach(var finder in finders)
                 {
                     var targets = finder.FindTargets(ExtraData); //获取目标
+                    targets = Filter(targets);
                     if (targets != null && targets.Count > 0)
                     {
                         _extraData.Targets = targets;  //会替换成后面那个finder

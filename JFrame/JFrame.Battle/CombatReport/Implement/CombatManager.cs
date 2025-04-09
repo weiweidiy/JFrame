@@ -148,6 +148,18 @@ namespace JFrame
             return null;
         }
 
+        public int GetUnitTeamId(string uid)
+        {
+            var teams = GetTeams();
+            for(int i = 0; i < teams.Count; i++)
+            {
+                var team = teams[i];
+                if( team.Get(uid) != null ) return team.TeamId;
+            }
+
+            return -1;
+        }
+
         public virtual List<CombatUnit> GetUnits(int teamId, bool findMode)
         {
             var team = GetTeam(teamId);

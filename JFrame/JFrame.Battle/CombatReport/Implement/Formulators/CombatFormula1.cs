@@ -172,4 +172,21 @@ namespace JFrame
             return dmg * (1 + elemtRate);
         }
     }
+
+
+    //public class CombatFormula7 : CombatFormula6
+    //{
+    //    public override double GetHitValue(CombatExtraData extraData)
+    //    {
+    //        var dmg = base.GetHitValue(extraData);
+
+    //        return dmg * GetRateByHp();
+    //    }
+
+
+    //    float GetRateByHp()
+    //    {
+    //        return 2f;
+    //    }
+    //}
 }

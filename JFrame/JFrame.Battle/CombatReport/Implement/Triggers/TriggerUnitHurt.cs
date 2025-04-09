@@ -46,6 +46,7 @@ namespace JFrame
                 var finder = finders[0];
 
                 var targets = finder.FindTargets(ExtraData); //获取目标
+                targets = Filter(targets);
                 if (targets != null && targets.Count > 0)
                 {
                     foreach (var target in targets)

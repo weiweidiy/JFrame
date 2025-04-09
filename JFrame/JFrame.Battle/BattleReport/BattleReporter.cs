@@ -10,6 +10,7 @@ namespace JFrame
     {
         ActionCast, //英雄动作
         Damage, //受伤
+        Miss, //
         Heal,   //治疗回血
         Dead,   //死亡
         Reborn, //复活

@@ -37,6 +37,7 @@ namespace JFrame
                     team.onActionCast += Team_onActionCast;
                     team.onActionStartCD += Team_onActionStartCD;
                     team.onDamage += Team_onDamage;
+                    team.onMiss += Team_onMiss;
                     team.onHeal += Team_onHeal;
                     //team.onReborn += Team_onReborn;
                     //team.onDebuffAnti += Team_onDebuffAnti;
@@ -53,11 +54,6 @@ namespace JFrame
                 }
             }
         }
-
-
-
-
-
 
 
         /// <summary>
@@ -289,6 +285,30 @@ namespace JFrame
             reportData.ShootCount = data.ShootCount;
 
             AddReportData(ReportType.ShootChange, reportData);
+        }
+
+
+
+        /// <summary>
+        /// miss消息
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Team_onMiss(int teamId, CombatExtraData data)
+        {
+            var reportData = new ReportData();
+
+            reportData.CastUnitUid = data.Owner.Uid;
+            reportData.ActionId = data.Action.Id;
+            reportData.ActionUid = data.Action.Uid;
+            reportData.TargetUid = data.Target.Uid;
+            reportData.Value = (double)data.Value;
+            //reportData.TargetHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.CurHp);
+            //reportData.TargetMaxHp = (double)data.Target.GetAttributeCurValue(CombatAttribute.MaxHP);
+            reportData.IsCri = data.IsCri;
+            reportData.IsBlock = data.IsBlock;
+            AddReportData(ReportType.Miss, reportData);
         }
 
 

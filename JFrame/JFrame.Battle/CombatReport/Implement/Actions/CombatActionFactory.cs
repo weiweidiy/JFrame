@@ -192,6 +192,11 @@ namespace JFrame
                         trigger = new TriggerActionHitting(finders);
                     }
                     break;
+                case 8:
+                    {
+                        trigger = new TriggerActionStartCd(finders);
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現trigger組件類型 " + componentInfo.id);
             }

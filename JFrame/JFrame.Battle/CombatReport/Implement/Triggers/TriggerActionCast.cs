@@ -52,6 +52,7 @@ namespace JFrame
                 var finder = finders[0];
 
                 var targets = finder.FindTargets(ExtraData); //获取目标
+                targets = Filter(targets);
                 if (targets != null && targets.Count > 0)
                 {
                     foreach (var target in targets)
@@ -93,7 +94,8 @@ namespace JFrame
             {
                 var finder = finders[1];
                 var targets = finder.FindTargets(ExtraData);
-                if(targets != null && targets.Count > 0)
+                targets = Filter(targets);
+                if (targets != null && targets.Count > 0)
                 {
                     ExtraData.Targets = targets;
                     ExtraData.Target = targets[0];

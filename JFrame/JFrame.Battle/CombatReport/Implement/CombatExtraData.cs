@@ -41,6 +41,11 @@ namespace JFrame
         public bool IsCri { get; set; }
 
         /// <summary>
+        /// 是否miss
+        /// </summary>
+        public bool IsMiss { get; set; }
+
+        /// <summary>
         /// 是否格挡
         /// </summary>
         public bool IsBlock { get; set; }

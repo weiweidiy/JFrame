@@ -30,6 +30,7 @@ namespace JFrame
         public event Action<CombatExtraData> onHittingTarget;
         public event Action<CombatExtraData> onHittedTarget; //命中完成后
         public event Action<CombatExtraData> onDamaging;
+        public event Action<CombatExtraData> onMiss; //miss
         public event Action<CombatExtraData> onDamaged;
         public event Action<CombatExtraData> onHealed;
         public event Action<CombatExtraData> onDead;
@@ -360,6 +361,20 @@ namespace JFrame
         public int GetUnitId()
         {
             return unitInfo.id;
+        }
+
+        /// <summary>
+        /// 是否是主单位
+        /// </summary>
+        /// <returns></returns>
+        public bool IsMainTarget()
+        {
+            return unitInfo.parent == null;
+        }
+
+        public CombatUnitInfo GetParentInfo()
+        {
+            return unitInfo.parent;
         }
         #endregion
 
@@ -696,6 +711,12 @@ namespace JFrame
             //to do: 添加一个预伤害事件，可以修改值
             // onDamaging?.Invoke(hitter, action, this, damage);
             onDamaging?.Invoke(extraData);
+
+            if(extraData.IsMiss)
+            {
+                onMiss?.Invoke(extraData);
+                return;
+            }
 
             var attrManager = GetAttributeManager();
             var hpAttr = attrManager.Get(CombatAttribute.CurHp.ToString());

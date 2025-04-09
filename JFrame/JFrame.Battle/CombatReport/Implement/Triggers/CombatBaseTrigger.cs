@@ -80,5 +80,17 @@ namespace JFrame
         protected override void OnUpdate(CombatFrame frame)
         {
         }
+
+        protected virtual List<CombatUnit> Filter(List<CombatUnit> list)
+        {
+            for(int i = list.Count - 1; i >= 0; i--)
+            {
+                var unit = list[i];
+                if (ExtraData != null && ExtraData.Owner != null && !ExtraData.Owner.IsMainTarget() && !unit.IsMainTarget() && unit.GetParentInfo().uid != ExtraData.Owner.GetParentInfo().uid) //如果自己是子单位，则过滤掉不是父单位的单位
+                    list.RemoveAt(i);
+            }
+
+            return list;
+        }
     }
 }

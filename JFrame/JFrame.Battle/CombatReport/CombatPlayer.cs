@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 
+
 namespace JFrame
 {
 
@@ -85,6 +86,8 @@ namespace JFrame
                 playScale = scale;
                 isPaused = scale == 0f;
                 onScaleChanged?.Invoke(playScale);
+
+                //Debug.LogError("playscale " + playScale);
             }
         }
 
@@ -130,7 +133,7 @@ namespace JFrame
             if (!isPlaying || isPaused)
                 return;
 
-            escapeTime += (GetDeltaTime() * playScale);
+            escapeTime += (GetDeltaTime() /** playScale*/);
 
             //获取需要播放的数据
             var lstData = parser.GetData(escapeTime);
@@ -142,11 +145,13 @@ namespace JFrame
                     //Debug.Log("play " + data.ReportType + " frame " + escapeTime);
                     PlayData(data);
                 }
+
+               // Debug.LogError("escape " + escapeTime);
             }
 
             else if (parser.Count() == 0)
             {
-                delta += GetDeltaTime();
+                delta += GetDeltaTime() /** playScale*/;
 
                 if (delta < 1f)
                     return;
@@ -154,7 +159,7 @@ namespace JFrame
                 delta = 0;
 
                 Stop();
-
+                //Debug.LogError("OnReportEnd " + escapeTime);
                 //战报结束了
                 OnReportEnd(report.winner == 1);
             }
@@ -243,6 +248,11 @@ namespace JFrame
                         PlayShootChange(data);
                     }
                     break;
+                case ReportType.Miss:
+                    {
+                        PlayMiss(data);
+                    }
+                    break;
                 default:
                     throw new System.Exception("没有实现的动作类型" + actionName);
             }
@@ -269,6 +279,10 @@ namespace JFrame
         /// </summary>
         /// <param name="data"></param>
         protected abstract void PlayDamage(ICombatReportData data);
+
+
+        protected abstract void PlayMiss(ICombatReportData data);
+
 
         /// <summary>
         /// 播放死亡

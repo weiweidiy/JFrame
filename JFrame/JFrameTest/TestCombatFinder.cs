@@ -112,7 +112,7 @@ namespace JFrameTest
             var finder = new FinderFindHpLessThanPercent();
             finder.Initialize(fakeContext, new float[] { 0, 0, 0, 0, 2, 0.5f }); //找友军低于50%生命的单位
             fakeManager.GetFriendTeamId(fakeExtraData.Owner).Returns(0);
-            fakeManager.GetUnits(0, true).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
+            fakeManager.GetUnits(0, true    ).Returns(new List<CombatUnit> { fakeUnit1, fakeUnit2, fakeUnit3 });
             fakeExtraData.Caster.Returns(fakeUnit1);
             fakeUnit1.GetHpPercent().Returns(0.8f);
             fakeUnit2.GetHpPercent().Returns(0.4f);

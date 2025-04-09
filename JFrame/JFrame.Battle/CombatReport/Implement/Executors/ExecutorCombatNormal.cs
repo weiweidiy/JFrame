@@ -76,8 +76,12 @@ namespace JFrame
                 if (formula != null)
                 {
                     var miss = !formula.IsHit(data);
+                    data.IsMiss = miss;
                     if (miss)
+                    {
                         data.Value = 0;
+                    }
+
                     else
                         data.Value = formula.GetHitValue(data);
                 } 

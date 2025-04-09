@@ -53,7 +53,7 @@ namespace JFrame
                 if (groupData == null)
                     throw new ArgumentNullException("teamdata 不能為null");
 
-                CommonCombatTeam group = groupType == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
+                CommonCombatTeam group = CreateTeam(groupType);
                 group.Initialize(0, context, groupData);
                 if (groupData.Count > 0)
                     AddTeam(0, group); //1 = 隊伍id
@@ -67,7 +67,7 @@ namespace JFrame
                 if (groupData == null)
                     throw new ArgumentNullException("teamdata 不能為null");
 
-                CommonCombatTeam group = groupType == CombatTeamType.Combine ? new SpecialCombatTeam() : new CommonCombatTeam();
+                CommonCombatTeam group = CreateTeam(groupType);
                 group.Initialize(1, context, groupData);
                 if (groupData.Count > 0)
                     AddTeam(1, group);
@@ -75,6 +75,21 @@ namespace JFrame
 
             //预加载所有buffers
             bufferFactory.PreloadBuffers(bufferInfos, context);
+        }
+
+        CommonCombatTeam CreateTeam(CombatTeamType teamType)
+        {
+            switch(teamType)
+            {
+                case CombatTeamType.Single:
+                    return new CommonCombatTeam();
+                case CombatTeamType.Combine:
+                    return new SpecialCombatTeam();
+                case CombatTeamType.Remix:
+                    return new RemixCombatTeam();
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         /// <summary>
