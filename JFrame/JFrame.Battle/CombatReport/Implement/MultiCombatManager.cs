@@ -1,7 +1,9 @@
-﻿using JFrame.Common.Interface;
+﻿//using Cysharp.Threading.Tasks;
+using JFrame.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using static JFrame.PVPBattleManager;
 
 namespace JFrame
@@ -117,9 +119,9 @@ namespace JFrame
         /// </summary>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public override CombatReport GetResult()
+        public override async Task<CombatReport> GetResult()
         {
-            var report = base.GetResult();
+            var report = await base.GetResult();
             var result = NextGroup(report.winner);
             isCombatOver = !result;
             return report;

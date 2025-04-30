@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace JFrame
@@ -8,12 +9,24 @@ namespace JFrame
         List<ICombatReportData> report = new List<ICombatReportData>();
         public CombatReprotParser(List<ICombatReportData> report)
         {
+            //foreach (var data in report)
+            //{
+            //    this.report.Add(data.Clone() as ICombatReportData);
+            //}
+
+            //this.report.Reverse();
+        }
+
+        public Task LoadData(List<ICombatReportData> report)
+        {
             foreach (var data in report)
             {
                 this.report.Add(data.Clone() as ICombatReportData);
             }
 
             this.report.Reverse();
+
+            return Task.CompletedTask;
         }
 
         public List<ICombatReportData> GetData(float escapeTime)

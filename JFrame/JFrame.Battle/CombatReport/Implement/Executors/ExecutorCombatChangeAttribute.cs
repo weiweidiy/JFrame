@@ -8,9 +8,9 @@ namespace JFrame
     /// </summary>
     public class ExecutorCombatChangeAttribute : ExecutorCombatNormal
     {
-        string uid = "ExecutorCombatChangeAttribute";
+        protected string uid = "ExecutorCombatChangeAttribute";
 
-        List<KeyValuePair<CombatUnit, double>> targets = new List<KeyValuePair<CombatUnit, double>>();
+        protected List<KeyValuePair<CombatUnit, double>> targets = new List<KeyValuePair<CombatUnit, double>>();
 
         public override int GetValidArgsCount()
         {
@@ -22,7 +22,7 @@ namespace JFrame
             return (int)GetCurArg(1);
         }
 
-        protected float GetRateArg()
+        protected virtual float GetRateArg()
         {
             return GetCurArg(2);
         }
@@ -55,12 +55,14 @@ namespace JFrame
         {
             base.OnStop();
 
-            foreach(var item in targets)
+            foreach (var item in targets)
             {
                 var target = item.Key;
                 var value = item.Value;
                 target.MinusExtraValue((CombatAttribute)GetAttrIdArg(), uid, value);
             }
+
+            targets.Clear();
         }
 
         protected override void SetValueType(CombatExtraData data)

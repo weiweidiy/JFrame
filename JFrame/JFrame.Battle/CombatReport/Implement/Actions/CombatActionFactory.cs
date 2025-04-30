@@ -379,6 +379,11 @@ namespace JFrame
                         executor = new ExecutorCombatTurnBackDamage(finder, formula);
                     }
                     break;
+                case 11:
+                    {
+                        executor = new ExecutorCombatChangeAttrByLevel(finder,formula);
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現executor組件類型 " + componentInfo.id);
             }

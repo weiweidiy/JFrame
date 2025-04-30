@@ -1,6 +1,8 @@
-﻿using JFrame.Common.Interface;
+﻿//using Cysharp.Threading.Tasks;
+using JFrame.Common.Interface;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static JFrame.PVPBattleManager;
 
 namespace JFrame
@@ -49,39 +51,49 @@ namespace JFrame
                 team.Stop();
             }
         }
-        public virtual CombatReport GetResult()
+        public virtual async Task<CombatReport> GetResult()
         {
-            var attackers = GetTeamData(0);
-            var defencers = GetTeamData(1);
-
-            frame.ResetFrame();
-
-            combatJudge = new CombatJudge(GetTeam(0), GetTeam(1));
-
-            Reporter = new CombatReporter(frame, GetTeams());
-
-            //开始战斗
-            Start();
-
-            //更新战斗 如果战斗没有决出胜负，则继续战斗
-            while (!combatJudge.IsOver() && !frame.IsMaxFrame())
+            CombatReport r = await Task.Run(() =>
             {
-                Update();
+                // 模拟一个耗时操作
+                var attackers = GetTeamData(0);
+                var defencers = GetTeamData(1);
 
-                frame.NextFrame();
-            }
+                frame.ResetFrame();
 
-            var winner = combatJudge.GetWinner().TeamId == 0 ? 1 : 0; //1:挑战成功 0：挑战失败
+                combatJudge = new CombatJudge(GetTeam(0), GetTeam(1));
 
-            report.report = Reporter.GetAllReportData();
-            report.winner = winner;
-            report.deltaTime = frame.DeltaTime;
-            report.attacker = attackers;
-            report.defence = defencers;
+                Reporter = new CombatReporter(frame, GetTeams());
 
-            Stop();
+                //开始战斗
+                Start();
+
+                //更新战斗 如果战斗没有决出胜负，则继续战斗
+                while (!combatJudge.IsOver() && !frame.IsMaxFrame())
+                {
+                    Update();
+
+                    frame.NextFrame();
+                }
+
+                var winner = combatJudge.GetWinner().TeamId == 0 ? 1 : 0; //1:挑战成功 0：挑战失败
+
+                report.report = Reporter.GetAllReportData();
+                report.winner = winner;
+                report.deltaTime = frame.DeltaTime;
+                report.attacker = attackers;
+                report.defence = defencers;
+
+                Stop();
+
+                return report;
+            });
+
+
+
             //Debug.Log("战斗结束 " + frame.FrameCount);
-            return report;
+            //await UniTask.Delay(5000);
+            return r;
         }
 
         public abstract void ClearResult();

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿//using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JFrame
 {
@@ -10,7 +12,7 @@ namespace JFrame
 
         void Stop();
 
-        TResult GetResult();
+        Task<TResult> GetResult();
 
         /// <summary>
         /// 战斗是否完全结束了

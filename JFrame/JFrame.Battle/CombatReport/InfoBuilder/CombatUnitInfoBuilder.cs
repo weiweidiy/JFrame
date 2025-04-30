@@ -58,6 +58,9 @@ namespace JFrame
             unitInfo.targetPosition = DataSource.GetTargetPosition();
             var actionIds = DataSource.GetActions();
             var actionsData = CreateActions(actionIds);
+
+
+           // UnityEngine.Debug.LogError("unity " + unitInfo.id + "  pos: " + unitInfo.position.x);
             unitInfo.actionsData = actionsData;
             return unitInfo;
         }

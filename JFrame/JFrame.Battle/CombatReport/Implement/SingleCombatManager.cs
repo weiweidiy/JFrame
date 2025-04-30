@@ -1,7 +1,9 @@
-﻿using JFrame.Common.Interface;
+﻿//using Cysharp.Threading.Tasks;
+using JFrame.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace JFrame
 {
@@ -129,7 +131,7 @@ namespace JFrame
             return teamsData[teamId];
         }
 
-        public override CombatReport GetResult()
+        public override Task<CombatReport> GetResult()
         {
             isCombatOver = true;
             return base.GetResult();

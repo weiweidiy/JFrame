@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -188,6 +189,12 @@ namespace JFrame
                         unit.SetSpeed(unitInfo.moveSpeed);
                         unit.SetTargetPosition(unitInfo.targetPosition);
                         Add(unit);
+
+                        //foreach(var action in unitInfo.actionsData.Keys)
+                        //{
+                        //    UnityEngine.Debug.LogError("team:" + team + " 創建unit " + unitInfo.id + "   actionId: " + action);
+                        //}
+                        
                     }
                     catch(Exception ex)
                     {

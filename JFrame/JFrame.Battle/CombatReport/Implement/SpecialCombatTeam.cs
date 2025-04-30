@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -50,6 +52,23 @@ namespace JFrame
                 unit.SetSpeed(unitInfo.moveSpeed);
                 unit.SetTargetPosition(unitInfo.targetPosition);
                 Add(unit);
+
+    //            foreach (var action in unitInfo.actionsData.Keys)
+    //            {
+    //                try
+    //                {
+    //                    UnityEngine.Debug.LogError("team:" + TeamId + " 創建unit " + unitInfo.id + "   actionId: " + action + "position " + unitInfo.position.x
+    //+ /*"  tarPos: " + unitInfo.targetPosition.x +*/ "  speed:" + unitInfo.moveSpeed.x);
+    //                } catch (Exception e)
+    //                {
+    //                    UnityEngine.Debug.Assert(unitInfo.position != null, unitInfo.id + "  unitInfo.position is null");
+    //                    UnityEngine.Debug.Assert(unitInfo.targetPosition != null, unitInfo.id + "  unitInfo.targetPosition is null");
+    //                    UnityEngine.Debug.Assert(unitInfo.moveSpeed != null, unitInfo.id + "  unitInfo.moveSpeed is null");
+
+    //                }
+                                        
+
+    //            }
             }
 
             return GetAll();

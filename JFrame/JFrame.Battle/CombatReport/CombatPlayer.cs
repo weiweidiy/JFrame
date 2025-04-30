@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 
@@ -45,10 +46,11 @@ namespace JFrame
         /// 加载战报
         /// </summary>
         /// <param name="report"></param>
-        public virtual void LoadReport(CombatReport report)
+        public virtual async Task LoadReport(CombatReport report)
         {
             this.report = report;
             parser = new CombatReprotParser(report.report);
+            await parser.LoadData(report.report);
         }
 
         public virtual void Release() { }
