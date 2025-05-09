@@ -8,6 +8,8 @@ namespace JFrame
         
         public virtual CombatBufferFactory CombatBufferFactory { get; set; }
 
+        public CombatBulletManager combatBulletManager = new CombatBulletManager();
+
         public ILogger Logger { get; set; }
 
 

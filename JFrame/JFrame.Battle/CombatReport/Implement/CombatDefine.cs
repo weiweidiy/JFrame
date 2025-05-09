@@ -5,6 +5,7 @@ namespace JFrame
 {
     public enum ActionComponentType
     {
+        ReadyCdTrigger,
         ConditionFinder,
         ConditionTrigger,
         DelayTrigger,
@@ -60,6 +61,7 @@ namespace JFrame
         public ActionMode mode;
         public int groupId; //技能組id，覺醒后都是同一組
         public int sortId; //技能排序ID
+        public float bulletSpeed; //子彈飛行速度
         public Dictionary<ActionComponentType, List<ActionComponentInfo>> componentInfo;
     }
 
@@ -101,6 +103,7 @@ namespace JFrame
         public CombatVector targetPosition;//目标点
 
         public CombatUnitInfo parent;//父亲单位
+        public float readyCd; //預置cd
 
 
         public bool HasAction(int actionId)

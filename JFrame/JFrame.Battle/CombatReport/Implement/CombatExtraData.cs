@@ -144,6 +144,9 @@ namespace JFrame
         {
             var result = new List<string>();
 
+            if (Targets == null)
+                return result;
+
             foreach(var target in Targets)
             {
                 result.Add(target.Uid);

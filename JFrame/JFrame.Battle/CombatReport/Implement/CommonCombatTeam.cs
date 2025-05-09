@@ -175,10 +175,12 @@ namespace JFrame
                 var attrFactory = new CombatAttributeFactory();
                 var buffFactory = new CombatBufferFactory();
                 //創建並初始化隊伍
-                foreach (var unitInfo in teamData)
+                //foreach (var unitInfo in teamData)
+                for(int i = 0; i < teamData.Count;i ++)
                 {
+                    var unitInfo = teamData[i];
                     try
-                    {
+                    {                 
                         //創建並初始化戰鬥單位
                         var unit = new CombatUnit();
                         var attributes = attrFactory.CreateAllAttributes(unitInfo);

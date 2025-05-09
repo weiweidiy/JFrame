@@ -26,7 +26,7 @@ namespace JFrame
         /// <summary>
         /// 上下文
         /// </summary>
-        protected CombatContext context;
+        public CombatContext context;
 
         /// <summary>
         /// 是否启动了
@@ -78,6 +78,12 @@ namespace JFrame
                 throw new Exception("原始参数列表长度和当前参数列表长度不一致，无法赋值！" + GetType().Name);
 
             Array.Copy(args, curArgs, args.Length);
+        }
+
+        public void SetOrginArgs(float[] args)
+        {
+            originArgs = args;
+            SetCurArgs(originArgs);
         }
 
         public void SetCurArg(int index, float arg)

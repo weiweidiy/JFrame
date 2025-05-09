@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace JFrame
 {
     [Serializable]
@@ -15,6 +16,13 @@ namespace JFrame
             result.y = vec1.y + vec2.y;
             return result;
         }
+
+        public static CombatVector operator -(CombatVector a, CombatVector b)
+        => new CombatVector { x = a.x - b.x, y = a.y - b.y };
+
+        public float Magnitude()
+        => (float)Math.Sqrt(x * x + y * y);
+
     }
 
 

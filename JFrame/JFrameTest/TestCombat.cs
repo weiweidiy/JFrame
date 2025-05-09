@@ -5,7 +5,7 @@ using NUnit.Framework;
 using NSubstitute;
 using System.Collections.Generic;
 using System;
-using System.Runtime.Remoting.Contexts;
+//using System.Runtime.Remoting.Contexts;
 using static JFrame.PVPBattleManager;
 
 namespace JFrameTest

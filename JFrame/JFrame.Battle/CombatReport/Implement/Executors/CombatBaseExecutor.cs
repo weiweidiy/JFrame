@@ -71,7 +71,7 @@ namespace JFrame
         /// 獲取執行周期
         /// </summary>
         /// <returns></returns>
-        public float GetDuration()
+        public virtual float GetDuration()
         {
             return GetCurArg(0);
         }

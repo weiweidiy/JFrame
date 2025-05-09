@@ -6,7 +6,7 @@ using NSubstitute;
 using System.Collections.Generic;
 using System;
 using static System.Collections.Specialized.BitVector32;
-using System.Runtime.Remoting.Contexts;
+//using System.Runtime.Remoting.Contexts;
 using static JFrame.PVPBattleManager;
 
 namespace JFrameTest

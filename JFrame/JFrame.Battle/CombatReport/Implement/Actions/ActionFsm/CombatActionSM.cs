@@ -8,6 +8,7 @@ namespace JFrame
     {
         ActionInitState actionInitState;
         ActionDisableState actionDisableState;
+        ActionReadyState actionReadyState;
         ActionStandbyState actionStandbyState;
         ActionExecutingState actionExecutingState;
         ActionCdingState actionCdingState;
@@ -19,6 +20,7 @@ namespace JFrame
 
             actionInitState = new ActionInitState();
             actionDisableState = new ActionDisableState();
+            actionReadyState = new ActionReadyState();
             actionStandbyState = new ActionStandbyState();
             actionExecutingState = new ActionExecutingState();
             actionCdingState = new ActionCdingState();
@@ -27,6 +29,7 @@ namespace JFrame
 
             states.Add(actionInitState);
             states.Add(actionDisableState);
+            states.Add(actionReadyState);
             states.Add(actionStandbyState);
             states.Add(actionExecutingState);
             states.Add(actionCdingState);
@@ -53,8 +56,20 @@ namespace JFrame
             disableConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
             disableConfig.dicPermit.Add(ActionSMTrigger.Standby, actionStandbyState);  //disable -> standby 开始
             disableConfig.dicPermit.Add(ActionSMTrigger.Cd, actionCdingState);         //disable -> cding  复活
+            disableConfig.dicPermit.Add(ActionSMTrigger.ReadyCd, actionReadyState);
             //disableConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
             configs.Add(disableName, disableConfig);
+
+
+            //預置CD
+            var readyName = actionReadyState.Name;
+            var readyConfig = new SMConfig();
+            readyConfig.state = actionReadyState;
+            readyConfig.dicPermit = new Dictionary<ActionSMTrigger, BaseActionState>();
+            readyConfig.dicPermit.Add(ActionSMTrigger.Standby, actionStandbyState);
+            readyConfig.dicPermit.Add(ActionSMTrigger.Disable, actionDisableState);
+            configs.Add(readyName, readyConfig);
+
 
             //等待状态，等待触发条件满足（触发器触发 + 触发队列空闲）（触发器触发）
             var standbyName = actionStandbyState.Name; 
@@ -104,6 +119,11 @@ namespace JFrame
         public void SwitchToDisable()
         {
             machine.Fire(ActionSMTrigger.Disable);
+        }
+
+        public void SwitchToReady()
+        {
+            machine.Fire(ActionSMTrigger.ReadyCd);
         }
 
         public void SwitchToStandby()

@@ -166,5 +166,10 @@ namespace JFrame
         {
             throw new System.NotImplementedException();
         }
+
+        public override float GetBulletSpeed()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

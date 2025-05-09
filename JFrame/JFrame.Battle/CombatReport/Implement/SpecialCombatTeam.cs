@@ -47,7 +47,17 @@ namespace JFrame
                 var unitInfo = teamData[i];
                 //創建並初始化戰鬥單位
                 var unit = new CombatUnit();
-                unit.Initialize(unitInfo, context, actionFactory.CreateActions(unitInfo.actionsData, unit, context), null,/*buffFactory.CreateBuffers(unitInfo.buffersData),*/ attrManager);
+
+                var readyCd = unitInfo.readyCd;
+                //if (unitInfo.mainType == UnitMainType.Hero)
+                //{
+                //    readyCd = unitInfo.readyCd;
+                //   // UnityEngine.Debug.LogError("cd " + readyCd);
+                //}                
+
+                var actions = actionFactory.CreateActions(unitInfo.actionsData, unit, context, readyCd);
+
+                unit.Initialize(unitInfo, context, actions, null,/*buffFactory.CreateBuffers(unitInfo.buffersData),*/ attrManager, readyCd);
                 unit.SetPosition(unitInfo.position);
                 unit.SetSpeed(unitInfo.moveSpeed);
                 unit.SetTargetPosition(unitInfo.targetPosition);

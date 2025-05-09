@@ -4,6 +4,7 @@
     {
         Init,
         Disable,
+        ReadyCd,
         Standby,
         Execute,
         Cd,

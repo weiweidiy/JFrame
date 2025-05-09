@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace JFrame
 {
-
     /// <summary>
     /// 管理所有action to do:可以增加线程组概念，允许某些技能使用一个线程组
     /// </summary>
@@ -42,6 +41,16 @@ namespace JFrame
             }
         }
 
+        public void AddActions(List<CombatAction> actions)
+        {
+            AddRange(actions);
+
+            foreach(var action in actions)
+            {
+                action.ActionManager = this;
+            }
+        }
+
         public void Release()
         {
             Clear();
@@ -64,7 +73,9 @@ namespace JFrame
                 action.Start();
                 //切换到不可用状态
                 action.SwitchToDisable();
-                action.SwitchToTrigging();
+                action.SwitchToReady();
+
+                //action.SwitchToTrigging();
             }
         }
 
@@ -111,6 +122,8 @@ namespace JFrame
             //更新等待添加删除更新的item
             UpdateWaitingItems();
         }
+
+  
 
         /// <summary>
         /// 更新释放时间

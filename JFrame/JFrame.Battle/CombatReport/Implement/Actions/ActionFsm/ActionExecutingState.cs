@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace JFrame
 {
@@ -16,10 +17,29 @@ namespace JFrame
         protected override void OnEnter()
         {
             base.OnEnter();
-            context.ResetExecutors(); 
+            context.ResetExecutors();
             context.ResetDelayTrigger();
             context.NotifyStartExecuting();
             executingDuration = context.GetExecutingDuration();
+
+            var hasTarget = context.ExtraData.Target != null ? true : context.ExtraData.Targets.Count > 0;
+
+            if (hasTarget)
+            {
+                var bulletSpeed = context.BulletSpeed;
+                if (bulletSpeed > 0f)
+                {
+                    //設置delaytrigger新參數
+                    var startPos = context.ExtraData.Caster.GetPosition();
+                    var target = context.ExtraData.Target != null ? context.ExtraData.Target : context.ExtraData.Targets[0];
+                    var endPos = target.GetPosition();
+                    var p = endPos - startPos;
+                    var distance = p.Magnitude();
+                    var duration = distance / bulletSpeed;
+
+                    context.SetDelayTriggerOriginArgs(new float[] { duration });
+                }
+            }
         }
 
         public override void OnExit()
@@ -32,7 +52,7 @@ namespace JFrame
             base.Update(frame);
 
             context.UpdateDelayTrigger(frame);
-            if(context.IsDelayTriggerOn())
+            if (context.IsDelayTriggerOn())
             {
                 context.DoExecutors();
                 context.UpdateExecutors(frame);

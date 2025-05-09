@@ -13,7 +13,7 @@ namespace JFrame
         /// <param name="owner"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public List<CombatAction> CreateActions(Dictionary<int, ActionInfo> actionsInfo, IActionOwner owner, CombatContext context)
+        public List<CombatAction> CreateActions(Dictionary<int, ActionInfo> actionsInfo, IActionOwner owner, CombatContext context, float readyCd = 0f)
         {
             if (actionsInfo == null)
                 return null;
@@ -30,6 +30,7 @@ namespace JFrame
                     var actionUid = actionData.uid;
                     var actionGroupId = actionData.groupId;
                     var actionSortId = actionData.sortId;
+                    var actionBulletSpeed = actionData.bulletSpeed;
 
                     var dic = actionData.componentInfo;
                     var conditionFinders = dic[ActionComponentType.ConditionFinder]; //条件查找器
@@ -49,15 +50,20 @@ namespace JFrame
                     var executorFinder = executorfinders.Count > 0 ? executorfinders[0] : null;
                     var executorFormula = executorFormulas.Count > 0 ? executorFormulas[0] : null;
 
+                    //UnityEngine.Debug.LogError("readycd = " + readyCd);
+                    var readyCdTrigger = readyCd == 0f ? null : CreateReadyTrigger(context, new float[] { readyCd });
+                    //UnityEngine.Debug.LogError("readycd = " + readyCd);
+
                     unitAction.Initialize(context, actionId, actionUid, actionType, actionMode, actionGroupId, actionSortId
+                                , readyCdTrigger
                                 , CreateConditionTriggers(conditionTriggers, CreateFinders(conditionFinders, context, unitAction), context, unitAction) //条件触发器
                                 , CreateTrigger(delayTrigger, null, context, unitAction) //延迟触发器
                                 , CreateExecutors(executors, CreateFinder(executorFinder, context, unitAction), CreateFormula(executorFormula, context, unitAction), context, unitAction) //执行器
-                                , CreateCdTriggers(cdTriggers, context, unitAction), sm); //cd触发器
+                                , CreateCdTriggers(cdTriggers, context, unitAction), sm, actionBulletSpeed); //cd触发器
 
                     result.Add(unitAction);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (context.Logger != null)
                         context.Logger.LogError(ex.Message + $" 创建action失败 检查配置 actionId:{action.Key}");
@@ -66,6 +72,13 @@ namespace JFrame
                 }
             }
             return result;
+        }
+
+        CombatBaseTrigger CreateReadyTrigger(CombatContext context, float[] args)
+        {
+            var trigger = new TriggerTime(null);
+            trigger.Initialize(context, args);
+            return trigger;
         }
 
         /// <summary>
@@ -381,7 +394,12 @@ namespace JFrame
                     break;
                 case 11:
                     {
-                        executor = new ExecutorCombatChangeAttrByLevel(finder,formula);
+                        executor = new ExecutorCombatChangeAttrByLevel(finder, formula);
+                    }
+                    break;
+                case 12:
+                    {
+                        executor = new ExecutorCombatSingleThreadDamage(finder, formula);
                     }
                     break;
                 default:

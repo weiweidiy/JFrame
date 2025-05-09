@@ -116,7 +116,7 @@ namespace JFrame
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<BaseCombatBuffer> buffers, CombatAttributeManger attributeManager)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<BaseCombatBuffer> buffers, CombatAttributeManger attributeManager,float readyCd = 0f)
         {
             Clear();
 
@@ -136,11 +136,12 @@ namespace JFrame
             _extraData.Caster = this;//释放者
             _extraData.FoldCount = 1;
             _extraData.Uid = Guid.NewGuid().ToString();
+            _extraData.CdDuration = readyCd;
             //_extraData.Value = (double)GetAttributeCurValue(CombatAttribute.ATK); // to do: 移动到action里去定义
 
             if (actions != null)
             {
-                actionManager.AddRange(actions);
+                actionManager.AddActions(actions);
                 actionManager.Initialize(this);
             }
 

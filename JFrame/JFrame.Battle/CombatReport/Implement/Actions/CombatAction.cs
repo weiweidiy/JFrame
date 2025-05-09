@@ -10,6 +10,7 @@ namespace JFrame
         public event Action<CombatExtraData> onTriggerOn;
         public event Action<CombatExtraData> onStartExecuting;
         public event Action<CombatExtraData> onStartCD;
+        public event Action<CombatExtraData> onCDChanged; //當前cd變化了
         public event Action<CombatExtraData> onHittingTargets; //动作命中之前（单次所有目标）
         public event Action<CombatExtraData> onTargetsHittedComplete; //动作命中之后（单个目标）
         public event Action<CombatExtraData> onHittingTarget;
@@ -28,6 +29,11 @@ namespace JFrame
         public void NotifyStartCD()
         {
             onStartCD?.Invoke(ExtraData);
+        }
+
+        public void NotifyCDChanged()
+        {
+            onCDChanged?.Invoke(ExtraData);
         }
 
         public void NotifyHittingTargets(CombatExtraData extraData)
@@ -71,7 +77,11 @@ namespace JFrame
 
         public int GroupId { get; private set; }
 
-        public int SortId {  get; private set; }
+        public int SortId { get; private set; }
+
+        public float BulletSpeed { get; private set; }
+
+        public CombatActionManager ActionManager { get; set; }
 
         /// <summary>
         /// 透傳對象
@@ -79,13 +89,14 @@ namespace JFrame
         CombatExtraData _extraData;
         public CombatExtraData ExtraData
         {
-            get => _extraData; 
+            get => _extraData;
             set
             {
                 _extraData = value;
                 _extraData.Action = this;
 
-                if(conditionTriggers != null)
+
+                if (conditionTriggers != null)
                 {
                     foreach (var trigger in conditionTriggers)
                     {
@@ -94,10 +105,10 @@ namespace JFrame
                 }
 
 
-                if(delayTrigger != null)
+                if (delayTrigger != null)
                     delayTrigger.ExtraData = _extraData.Clone() as CombatExtraData;
 
-                if(cdTriggers != null)
+                if (cdTriggers != null)
                 {
                     foreach (var trigger in cdTriggers)
                     {
@@ -107,6 +118,8 @@ namespace JFrame
 
             }
         }
+
+        CombatBaseTrigger readyTrigger;
 
         /// <summary>
         /// 觸發器列表
@@ -128,10 +141,13 @@ namespace JFrame
         /// <param name="finder"></param>
         /// <param name="executors"></param>
         /// <param name="cdTriggers"></param>
-        public void Initialize(CombatContext context, int id, string uid, ActionType type, ActionMode mode, int groupId, int sortId, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm)
+        public void Initialize(CombatContext context, int id, string uid, ActionType type, ActionMode mode, int groupId, int sortId, CombatBaseTrigger readyCdTrigger, List<CombatBaseTrigger> conditionTriggers, CombatBaseTrigger delayTrigger, List<CombatBaseExecutor> executors, List<CombatBaseTrigger> cdTriggers, CombatActionSM sm, float bulletSpeed = 0f)
         {
             this.context = context;
             Uid = uid;
+            this.readyTrigger = readyCdTrigger;
+            //if (readyCdTrigger != null)
+            //    UnityEngine.Debug.LogError("readyCdTrigger != null " + id);
             this.conditionTriggers = conditionTriggers;
             this.delayTrigger = delayTrigger;
             this.executors = executors;
@@ -143,18 +159,25 @@ namespace JFrame
             this.Mode = mode;
             this.GroupId = groupId;
             this.SortId = sortId;
+            this.BulletSpeed = bulletSpeed;
 
-            if(conditionTriggers != null)
+            if (readyCdTrigger != null)
+            {
+                readyCdTrigger.OnAttach(this);
+            }
+
+
+            if (conditionTriggers != null)
             {
                 foreach (var trigger in conditionTriggers)
                     trigger.OnAttach(this);
             }
 
-            if(delayTrigger != null)
+            if (delayTrigger != null)
                 delayTrigger.OnAttach(this);
 
             //监听执行器命中等消息
-            if(executors != null)
+            if (executors != null)
             {
                 foreach (var executor in executors)
                 {
@@ -162,12 +185,13 @@ namespace JFrame
                     executor.onTargetsHittedComplete += Executor_onTargetsHittedComplete;
                     executor.onHittingTarget += Executor_onHittingTarget;
                     executor.onTargetHittedComplete += Executor_onTargetHittedComplete;
+                    executor.OnAttach(this);
                 }
             }
 
-            if(cdTriggers != null)
+            if (cdTriggers != null)
             {
-                foreach(var trigger in cdTriggers)
+                foreach (var trigger in cdTriggers)
                     trigger.OnAttach(this);
             }
         }
@@ -194,6 +218,8 @@ namespace JFrame
 
         public void Start()
         {
+            readyTrigger?.OnStart();
+
             foreach (var trigger in conditionTriggers)
             {
                 trigger.OnStart();
@@ -206,7 +232,7 @@ namespace JFrame
                 executor.OnStart();
             }
 
-            foreach(var cdTrigger in cdTriggers)
+            foreach (var cdTrigger in cdTriggers)
             {
                 cdTrigger.OnStart();
             }
@@ -214,6 +240,8 @@ namespace JFrame
 
         public void Stop()
         {
+            readyTrigger?.OnStop();
+
             foreach (var trigger in conditionTriggers)
             {
                 trigger.OnStop();
@@ -237,13 +265,24 @@ namespace JFrame
             try
             {
                 sm.Update(frame);
+                context.combatBulletManager.Update(frame);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (context != null && context.Logger != null)
                     context.Logger.LogError(e.Message + $"  action执行失败，检查配置 actionID: {Id}");
             }
 
+        }
+
+        public void AddBullet(CombatBullet bullet)
+        {
+            context.combatBulletManager.AddItem(bullet);
+        }
+
+        public void RemvoeBullet(CombatBullet bullet)
+        {
+            context.combatBulletManager.RemoveItem(bullet);
         }
 
         #region 给状态机调用的接口
@@ -325,6 +364,44 @@ namespace JFrame
         {
             delayTrigger?.Reset();
         }
+
+        public void SetDelayTriggerOriginArgs(float[] args)
+        {
+            delayTrigger?.SetOrginArgs(args);
+            if (context.Logger != null)
+                context.Logger.Log("SetDelayTriggerOriginArgs " + args[0]);
+        }
+
+        #region 準備狀態，開始戰鬥的前置CD
+        public void UpdateReadyCdTrigger(CombatFrame frame)
+        {
+            readyTrigger?.Update(frame);
+        }
+
+        public bool IsReadyCdTriggerOn()
+        {
+            return readyTrigger == null ? true : readyTrigger.IsOn();
+        }
+
+        public void ResetReadyCdTrigger()
+        {
+            readyTrigger?.Reset();
+        }
+
+        public void EnterReadyCdTriggers()
+        {
+            if (readyTrigger == null)
+                return;
+            readyTrigger.OnEnterState();
+        }
+
+        public void ExitReadyCdTriggers()
+        {
+            if (readyTrigger == null)
+                return;
+            readyTrigger.OnExitState();
+        }
+        #endregion
 
         public void DoExecutors()
         {
@@ -430,6 +507,11 @@ namespace JFrame
             sm.SwitchToStandby();
         }
 
+        public void SwitchToReady()
+        {
+            sm.SwitchToReady();
+        }
+
         public float SwitchToExecuting()
         {
             var duration = GetExecutingDuration();
@@ -497,6 +579,16 @@ namespace JFrame
             return 0f;
         }
 
+        public float GetReadyCdTriggerDuration()
+        {
+            if (readyTrigger is TriggerTime)
+            {
+                var triggerTime = readyTrigger as TriggerTime;
+                return triggerTime.GetDuration();
+            }
+            return 0f;
+        }
+
         ///// <summary>
         ///// 设置cd时常
         ///// </summary>
@@ -528,7 +620,7 @@ namespace JFrame
 
             var trigger = cdTriggers[triggerIndex];
             var argCount = trigger.GetValidArgsCount();
-            if(argIndex >= argCount)
+            if (argIndex >= argCount)
                 throw new ArgumentOutOfRangeException($"设置cd触发器时， argIndex {argIndex} 越界 , 检查cd触发器参数个数配置 actionId {Id}");
 
             trigger.SetCurArg(argIndex, argValue);
@@ -553,6 +645,8 @@ namespace JFrame
 
             return trigger.GetCurArg(argIndex);
         }
+
+
 
 
         public void Update(IUpdateable value)

@@ -182,7 +182,7 @@ namespace JFrameTest
             unit2.IsAlive().Returns(true);
             extraData.Action = new CombatAction();
             extraData.FoldCount = 1;
-            extraData.Action.Initialize(null, 1, "action", ActionType.All, ActionMode.Active, 1, 0, null, null, null, null, null);
+            extraData.Action.Initialize(null, 1, "action", ActionType.All, ActionMode.Active, 1, 0,null, null, null, null, null, null);
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);
             var executor = new ExecutorCombatChangeAttribute(null, null);
@@ -206,7 +206,7 @@ namespace JFrameTest
             unit2.IsAlive().Returns(true);
             extraData.Action = new CombatAction();
             extraData.FoldCount = 1;
-            extraData.Action.Initialize(null,1, "action", ActionType.All, ActionMode.Active,1, 0, null, null, null, null, null);
+            extraData.Action.Initialize(null,1, "action", ActionType.All, ActionMode.Active,1, 0,null, null, null, null, null, null);
 
             //hpAttr = new CombatAttributeDouble(PVPAttribute.HP.ToString(), 90, double.MaxValue);
             unit1.GetAttribute(CombatAttribute.MaxHP).Returns(maxHpAttr);

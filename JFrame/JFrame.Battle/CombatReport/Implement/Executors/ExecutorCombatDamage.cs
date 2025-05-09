@@ -1,10 +1,15 @@
 ﻿namespace JFrame
 {
+
     /// <summary>
     /// type 1 普通傷害執行器 只能打1次 type = 1 參數：0：执行時間 1：傷害加成 2: 类型（0：无  1：普通伤害， 100：灼烧伤害 ）
     /// </summary>
     public class ExecutorCombatDamage : ExecutorCombatNormal
     {
+        public ExecutorCombatDamage(CombatBaseFinder combinFinder, CombatBaseFormula formulua) : base(combinFinder, formulua)
+        {
+        }
+
         public override int GetValidArgsCount()
         {
             return 3;
@@ -20,9 +25,7 @@
             return (int)GetCurArg(2);
         }
 
-        public ExecutorCombatDamage(CombatBaseFinder combinFinder, CombatBaseFormula formulua) : base(combinFinder, formulua)
-        {
-        }
+
 
         protected override double GetExecutorValue()
         {
@@ -31,6 +34,10 @@
 
         protected override void DoHit(CombatUnit target, CombatExtraData data)
         {
+
+            //var bullet = new CombatBullet(this, target , data); 
+            //Owner.AddBullet(bullet);
+
             target.OnDamage(data);
             StealHp(data);
         }

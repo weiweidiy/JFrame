@@ -6,6 +6,11 @@ namespace JFrame
     public abstract class CombatActionArgSource
     {
         /// <summary>
+        /// 獲取子彈飛行速度，如果是0，則使用延遲參數
+        /// </summary>
+        /// <returns></returns>
+        public abstract float GetBulletSpeed();
+        /// <summary>
         /// 获取action类型：0：普通，1：技能
         /// </summary>
         /// <param name="actionId"></param>
