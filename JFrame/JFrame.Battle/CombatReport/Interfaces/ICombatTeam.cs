@@ -39,6 +39,7 @@ namespace JFrame
         event Action<int, CombatExtraData> onBufferRemoved;
         event Action<int, CombatExtraData> onBufferCast;
         event Action<int, CombatExtraData> onBufferUpdate;
+        event Action<int, CombatExtraData> onActionCdChange;
 
 
         int TeamId { get; }

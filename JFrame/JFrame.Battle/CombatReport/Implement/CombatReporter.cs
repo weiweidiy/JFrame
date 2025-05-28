@@ -51,9 +51,12 @@ namespace JFrame
                     team.onUnitSpeedChanged += Team_onUnitSpeedChanged;
                     team.onUnitEndMove += Team_onUnitEndMove;
                     team.onShootTargetChanged += Team_onShootTargetChanged;
+                    team.onActionCdChange += Team_onActionCdChange;
                 }
             }
         }
+
+
 
 
         /// <summary>
@@ -311,7 +314,16 @@ namespace JFrame
             AddReportData(ReportType.Miss, reportData);
         }
 
-
+        /// <summary>
+        /// cd 發生變更了
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Team_onActionCdChange(int arg1, CombatExtraData arg2)
+        {
+            //throw new NotImplementedException();
+        }
 
 
         public List<ICombatReportData> GetAllReportData()

@@ -27,6 +27,7 @@ namespace JFrame
         //public event Action<ICombatUnit, ICombatBuffer, int, float[]> onBufferUpdate;
         public event Action<CombatExtraData> onActionCast;
         public event Action<CombatExtraData> onActionStartCD;
+        public event Action<CombatExtraData> onActionCdChanged;
         public event Action<CombatExtraData> onHittingTarget;
         public event Action<CombatExtraData> onHittedTarget; //命中完成后
         public event Action<CombatExtraData> onDamaging;
@@ -154,6 +155,7 @@ namespace JFrame
             actionManager.onTriggerOn += ActionManager_onTriggerOn;
             actionManager.onStartExecuting += ActionManager_onStartExecuting;
             actionManager.onStartCD += ActionManager_onStartCD;
+            actionManager.onCdChanged += ActionManager_onCdChanged;
             actionManager.onHittingTarget += ActionManager_onHittingTarget;
             actionManager.onTargetHittedComplete += ActionManager_onTargetHittedComplete;
 
@@ -162,6 +164,8 @@ namespace JFrame
             bufferManager.onItemRemoved += BufferManager_onItemRemoved;
             bufferManager.onItemUpdated += BufferManager_onItemUpdated;
         }
+
+
 
 
 
@@ -625,6 +629,8 @@ namespace JFrame
         /// </summary>
         /// <param name="extraData"></param>
         private void ActionManager_onTargetHittedComplete(CombatExtraData extraData) => onHittedTarget?.Invoke(extraData);
+
+        private void ActionManager_onCdChanged(CombatExtraData extraData) => onActionCdChanged?.Invoke(extraData);
 
         #endregion
 

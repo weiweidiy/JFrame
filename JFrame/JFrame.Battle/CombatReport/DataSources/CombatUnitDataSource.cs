@@ -19,6 +19,8 @@
     {
         public abstract string GetUid();
         public abstract int GetId();
+
+        public abstract int GetLevel();
         public abstract UnitMainType GetUnitMainType();
         public abstract UnitSubType GetUnitSubType();
         public abstract long GetHp();

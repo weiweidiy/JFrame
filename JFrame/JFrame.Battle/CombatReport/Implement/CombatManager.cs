@@ -22,7 +22,7 @@ namespace JFrame
 
         protected bool isCombatOver = false;
 
-        protected ILogger logger = null;
+        public ILogger logger = null;
 
         public CombatManager(float limitTime, float deltaTime, ILogger logger = null)
         {
@@ -36,7 +36,9 @@ namespace JFrame
         public void Update()
         {
             Update(frame);
+   
         }
+
         public void Start()
         {
             foreach (var team in GetTeams())
@@ -210,7 +212,7 @@ namespace JFrame
             return result;
         }
 
-        protected void Update(CombatFrame frame)
+        protected virtual void Update(CombatFrame frame)
         {
             foreach (var team in GetTeams())
             {

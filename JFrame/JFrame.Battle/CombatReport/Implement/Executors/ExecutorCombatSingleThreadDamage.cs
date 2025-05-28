@@ -5,9 +5,15 @@
     /// </summary>
     public class ExecutorCombatSingleThreadDamage : ExecutorCombatDamage
     {
+        float delay = 0f;
         public ExecutorCombatSingleThreadDamage(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
+           
+        }
 
+        public void SetDelay(float delay)
+        {
+            this.delay = delay;
         }
 
         public override float GetDuration()
@@ -28,12 +34,20 @@
         protected override void DoHit(CombatUnit target, CombatExtraData data)
         {
 
-            var bullet = new CombatBullet(this, target, data, GetDelay());
+            var bullet = new CombatBullet(this, target, data, delay);
             Owner.AddBullet(bullet);
 
+            //if(Owner.Id == 121)
+            //context.CombatManager.logger?.Log("add bullet " + bullet.GetHashCode() + "  frame:" + context.CombatManager.Frame.CurFrame);
             //target.OnDamage(data);
             StealHp(data);
         }
 
+        public override void OnAttach(CombatAction target)
+        {
+            base.OnAttach(target);
+
+            delay = GetDelay();
+        }
     }
 }

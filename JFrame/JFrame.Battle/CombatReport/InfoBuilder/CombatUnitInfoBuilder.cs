@@ -29,6 +29,7 @@ namespace JFrame
             var unitInfo = new CombatUnitInfo();
             unitInfo.uid = DataSource.GetUid();
             unitInfo.id = DataSource.GetId();
+            unitInfo.level = DataSource.GetLevel();
             unitInfo.mainType = DataSource.GetUnitMainType();
             unitInfo.unitSubType = DataSource.GetUnitSubType();
             unitInfo.hp = DataSource.GetHp();

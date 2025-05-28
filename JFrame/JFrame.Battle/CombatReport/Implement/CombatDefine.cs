@@ -72,6 +72,7 @@ namespace JFrame
     {
         public string uid;
         public int id;
+        public int level;
         public Dictionary<int, ActionInfo> actionsData;
         public Dictionary<int, Dictionary<ActionComponentType, List<ActionComponentInfo>>> buffersData;
         public UnitMainType mainType;

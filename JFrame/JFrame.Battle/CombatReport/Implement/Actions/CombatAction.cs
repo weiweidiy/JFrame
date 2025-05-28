@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Framework.Extension;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -265,7 +266,10 @@ namespace JFrame
             try
             {
                 sm.Update(frame);
-                context.combatBulletManager.Update(frame);
+
+                //context.combatBulletManager.Update(frame);
+
+                //context.CombatManager.logger?.Log("frame : " + frame.CurFrame);
             }
             catch (Exception e)
             {
@@ -368,8 +372,9 @@ namespace JFrame
         public void SetDelayTriggerOriginArgs(float[] args)
         {
             delayTrigger?.SetOrginArgs(args);
-            if (context.Logger != null)
-                context.Logger.Log("SetDelayTriggerOriginArgs " + args[0]);
+
+            //if (context.Logger != null)
+            //    context.Logger.Log("SetDelayTriggerOriginArgs " + args[0]);
         }
 
         #region 準備狀態，開始戰鬥的前置CD
@@ -432,6 +437,11 @@ namespace JFrame
             {
                 executor.Reset();
             }
+        }
+
+        public CombatBaseExecutor GetExecutor(int index)
+        {
+            return executors[index];
         }
 
         public void UpdateCdTriggers(CombatFrame frame)

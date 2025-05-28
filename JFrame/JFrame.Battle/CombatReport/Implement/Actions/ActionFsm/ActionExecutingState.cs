@@ -37,7 +37,16 @@ namespace JFrame
                     var distance = p.Magnitude();
                     var duration = distance / bulletSpeed;
 
-                    context.SetDelayTriggerOriginArgs(new float[] { duration });
+                    var executor = context.GetExecutor(0) as ExecutorCombatSingleThreadDamage;
+                    if (executor == null)
+                        context.SetDelayTriggerOriginArgs(new float[] { duration });
+                    else
+                    {
+                        //修改子彈的delta
+                        //if (context.Id == 121)
+                        //    executor.context.Logger?.Log("duration =" + duration + " frame: " + executor.context.CombatManager.Frame.CurFrame);
+                        executor.SetDelay(duration);
+                    }
                 }
             }
         }

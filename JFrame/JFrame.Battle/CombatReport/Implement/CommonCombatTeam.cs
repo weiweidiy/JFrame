@@ -39,6 +39,8 @@ namespace JFrame
         public event Action<int, CombatExtraData> onUnitSpeedChanged;
         public event Action<int, CombatExtraData> onUnitEndMove;
         public event Action<int, CombatExtraData> onShootTargetChanged;
+        public event Action<int, CombatExtraData> onActionCdChange;
+        
 
 
         int team;
@@ -121,6 +123,7 @@ namespace JFrame
                 //unit.onActionTriggerOn += Unit_onActionTriggerOn;
                 unit.onActionCast += Unit_onActionCast;
                 unit.onActionStartCD += Unit_onActionStartCD;
+                unit.onActionCdChanged += Unit_onActionCdChanged;
                 //unit.onActionHitTarget += Unit_onActionDone;
                 unit.onMiss += Unit_onMiss;
                 unit.onDamaged += Unit_onDamage;
@@ -294,6 +297,11 @@ namespace JFrame
         private void Unit_onMiss(CombatExtraData extraData)
         {
             onMiss?.Invoke(team, extraData);
+        }
+
+        private void Unit_onActionCdChanged(CombatExtraData extraData)
+        {
+            onActionCdChange?.Invoke(team, extraData);
         }
         #endregion
     }

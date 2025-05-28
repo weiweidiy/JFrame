@@ -16,6 +16,7 @@ namespace JFrame
         public event Action<CombatExtraData> onTargetsHittedComplete; //动作命中之后（所有目标）
         public event Action<CombatExtraData> onHittingTarget; //动作命中之前（单目标）
         public event Action<CombatExtraData> onTargetHittedComplete; //动作命中之后（单目标）
+        public event Action<CombatExtraData> onCdChanged;
 
         bool isBusy;
         float curDuration = 0f;
@@ -34,12 +35,15 @@ namespace JFrame
                 action.onTargetsHittedComplete += Action_onTargetsHittedComplete;
                 action.onHittingTarget += Action_onHittingTarget;
                 action.onTargetHittedComplete += Action_onTargetHittedComplete;
+                action.onCDChanged += Action_onCDChanged;
 
                 //把unit上的extraData 传递给 action
                 action.ExtraData = actionOwner.ExtraData.Clone() as CombatExtraData;
                 //action.ExtraData.Owner = actionOwner;
             }
         }
+
+
 
         public void AddActions(List<CombatAction> actions)
         {
@@ -169,7 +173,10 @@ namespace JFrame
         {
             onStartCD?.Invoke(extraData);
         }
-
+        private void Action_onCDChanged(CombatExtraData extraData)
+        {
+            onCdChanged?.Invoke(extraData);
+        }
 
         /// <summary>
         /// 满足触发条件了

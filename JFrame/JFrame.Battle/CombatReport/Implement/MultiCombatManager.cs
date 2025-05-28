@@ -324,7 +324,12 @@ namespace JFrame
 
 
 
+        protected override void Update(CombatFrame frame)
+        {
+            base.Update(frame);
 
+            context.combatBulletManager.Update(frame);
+        }
 
 
 
