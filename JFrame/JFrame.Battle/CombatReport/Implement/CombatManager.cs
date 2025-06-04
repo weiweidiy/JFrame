@@ -85,6 +85,7 @@ namespace JFrame
                 report.deltaTime = frame.DeltaTime;
                 report.attacker = attackers;
                 report.defence = defencers;
+                report.damageStatistics = Reporter.DamageStatistics;
 
                 Stop();
 

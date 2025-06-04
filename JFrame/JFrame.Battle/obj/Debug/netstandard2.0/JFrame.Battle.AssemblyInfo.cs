@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JFrame.Battle")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59383ed3c92490be8e33cf58843f9426ba84bab9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e52ad4aa5a0e9e1145ec6bfcc513f762172f193d")]
 [assembly: System.Reflection.AssemblyProductAttribute("JFrame.Battle")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JFrame.Battle")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -31,6 +31,8 @@ namespace JFrame
         MonsterAdd = 224, // 对小怪伤害加成
         BossAdd = 225, // 对BOSS伤害加成
         HpSteal = 226, // 吸血
+        CounterAnti = 227, //反击概率抵抗
+        FightBackAnti = 228, //反伤系数见面
     }
 
     public class CombatAttributeFactory

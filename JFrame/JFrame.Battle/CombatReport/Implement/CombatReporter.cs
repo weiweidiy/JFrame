@@ -26,6 +26,9 @@ namespace JFrame
 
         List<CommonCombatTeam> teams;
 
+        Dictionary<string, long> damageStatistics = new Dictionary<string, long>();
+        public Dictionary<string, long> DamageStatistics { get; }
+
         public CombatReporter(CombatFrame frame, List<CommonCombatTeam> teams)
         {
             this.frame = frame;
@@ -122,6 +125,19 @@ namespace JFrame
             reportData.IsCri = data.IsCri;
             reportData.IsBlock = data.IsBlock;
             AddReportData(ReportType.Damage, reportData);
+
+            //统计伤害
+            StatisticsDamage(data.Owner.Uid, data.Target.Uid, (long)reportData.Value);
+        }
+
+        private void StatisticsDamage(string caster, string target, long value)
+        {
+            if(!damageStatistics.ContainsKey(caster))
+            {
+                damageStatistics.Add(caster, 0);
+            }
+
+            damageStatistics[caster] += value;
         }
 
 
