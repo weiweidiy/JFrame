@@ -1,8 +1,8 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 1 ： 参数1：来源（0=释放者，1=目标）    吃命中 

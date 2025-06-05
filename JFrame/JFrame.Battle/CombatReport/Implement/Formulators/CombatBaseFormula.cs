@@ -1,9 +1,9 @@
 ﻿
 
-using JFrame.Common;
+using JFramework.Common;
 using System;
 
-namespace JFrame
+namespace JFramework
 {
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// 待机状态（冷却已经完成）

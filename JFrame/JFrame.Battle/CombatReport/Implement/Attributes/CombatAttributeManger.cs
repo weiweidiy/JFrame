@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// 屬性管理器

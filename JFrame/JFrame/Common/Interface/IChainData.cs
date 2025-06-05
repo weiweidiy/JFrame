@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace JFrame.Common.Interface
+namespace JFramework.Common.Interface
 {
     /// <summary>
     /// 链式访问数据接口 json, xml等

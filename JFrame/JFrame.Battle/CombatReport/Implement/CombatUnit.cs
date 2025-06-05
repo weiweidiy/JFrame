@@ -1,4 +1,4 @@
-﻿using JFrame.BattleReportSystem;
+﻿using JFramework.BattleReportSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatUnit : ICombatUnit, ICombatUpdatable, ICombatMovable, IActionOwner, IUpdateable //放容器里需要
     {

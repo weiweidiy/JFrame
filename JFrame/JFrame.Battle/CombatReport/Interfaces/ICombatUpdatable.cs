@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     public interface ICombatUpdatable
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 主动动作，会排队释放

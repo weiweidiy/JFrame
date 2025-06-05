@@ -1,9 +1,9 @@
-﻿using JFrame.BattleReportSystem;
-using JFrame.Common;
+﻿using JFramework.BattleReportSystem;
+using JFramework.Common;
 using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatBuffer : BaseCombatBuffer
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace JFrame
+namespace JFramework
 {
     public class ActionDisable : ActionState
     {

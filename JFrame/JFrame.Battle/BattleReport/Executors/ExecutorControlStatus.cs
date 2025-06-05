@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 伤害效果 参数  1：执行段数，2：延迟执行 3: 段数间隔  4 ：状态类型 1 眩晕， 2缴械 type

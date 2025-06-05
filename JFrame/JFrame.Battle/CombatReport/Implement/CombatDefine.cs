@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace JFrame
+namespace JFramework
 {
     public enum ActionComponentType
     {
@@ -82,6 +82,7 @@ namespace JFrame
         public long atk;
         public float bpDamage;
         public float bpDamageAnti;
+        public float missileRate;
         public float atkSpeed;//废弃
         public float cri; //暴击率 0~1的值 百分比
         public float criAnti;

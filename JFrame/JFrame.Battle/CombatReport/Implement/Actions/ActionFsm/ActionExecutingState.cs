@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 执行中状态

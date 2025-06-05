@@ -1,6 +1,6 @@
 ﻿//using JFrame.UI;
 //using NUnit.Framework;
-using JFrame;
+using JFramework;
 using NUnit.Framework;
 using NSubstitute;
 using System.Collections.Generic;

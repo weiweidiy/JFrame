@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace JFrame
+namespace JFramework
 {
     public class BaseBufferManager : IBufferManager
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 自己添加buff前触发

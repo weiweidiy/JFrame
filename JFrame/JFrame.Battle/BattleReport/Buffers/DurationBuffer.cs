@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 周期buffer 参数 1：持续时间

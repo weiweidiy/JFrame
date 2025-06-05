@@ -1,8 +1,8 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
 
     public abstract class CombatBaseFinder : BaseActionComponent, ICombatFinder

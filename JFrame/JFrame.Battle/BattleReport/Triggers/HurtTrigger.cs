@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 6  立即触发型，自己受到伤害 0: 触发概率， 1： 0自己，1队友

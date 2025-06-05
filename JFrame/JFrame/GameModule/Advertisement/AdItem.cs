@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace JFrame
+namespace JFramework
 {
     public abstract class AdItem : IAdItem
     {

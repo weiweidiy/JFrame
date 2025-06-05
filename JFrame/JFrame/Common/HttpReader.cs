@@ -1,4 +1,4 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     /// <summary>
     /// 远程Http加载配置 to do: 添加httpRequest类 负责实际的请求
@@ -20,7 +20,7 @@ namespace JFrame.Common
 
         public HttpReader(IHttpRequest webRequest) : this(webRequest, null) { }
 
-        public HttpReader(IHttpRequest webRequest , ProcesserManager processer) : base(processer)
+        public HttpReader(IHttpRequest webRequest , JFrameProcesserManager processer) : base(processer)
         {
             _webRequest = webRequest;
         }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type = 10, 直接使用trigger中的目标

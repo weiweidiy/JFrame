@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 根據時間觸發  type = 3 參數0：時長

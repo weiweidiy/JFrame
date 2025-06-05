@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using static System.Collections.Specialized.BitVector32;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 20:非自己死亡时触发

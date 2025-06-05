@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
-using JFrame.Common;
+using JFramework.Common.Interface;
+using JFramework.Common;
 
-namespace JFrame.Configuration
+namespace JFramework.Configuration
 {
     /// <summary>
     /// 配置表管理器

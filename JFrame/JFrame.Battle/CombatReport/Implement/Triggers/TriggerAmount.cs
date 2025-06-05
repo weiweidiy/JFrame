@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 直接触发 type = 2 参数0： 次数 

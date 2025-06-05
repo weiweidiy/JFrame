@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
 
     public class RijndaelEncrypter : IEncrypter , IProcesser

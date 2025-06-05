@@ -1,9 +1,9 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 2 查找距离最近的N个单位    参数：0=队伍(0友军，1敌军，2所有)   1=主类型  2=子类型  3模式(0模式单位， 1逻辑单位) 4=个数 5=距离

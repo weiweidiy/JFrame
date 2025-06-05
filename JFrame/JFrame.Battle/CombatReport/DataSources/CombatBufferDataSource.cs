@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// buffer数据源

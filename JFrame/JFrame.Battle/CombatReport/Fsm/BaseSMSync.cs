@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 游戏状态机-> Login , Game 等等 

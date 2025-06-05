@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 11 需要立即生效

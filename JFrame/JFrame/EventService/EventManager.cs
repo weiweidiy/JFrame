@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 事件管理器：

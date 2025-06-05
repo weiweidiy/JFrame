@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatBufferFactory : BaseContainer<CombatBufferInfo>
     {

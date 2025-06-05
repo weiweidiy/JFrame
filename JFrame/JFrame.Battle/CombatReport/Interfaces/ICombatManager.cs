@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JFrame
+namespace JFramework
 {
     public interface ICombatManager<TResult, TTeam, TUnit>
     {

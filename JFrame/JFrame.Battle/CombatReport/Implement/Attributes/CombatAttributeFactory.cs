@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     public enum CombatAttribute
     {
@@ -11,6 +11,8 @@ namespace JFrame
 
         BPDamage = 202, //臂炮伤害加成
         BPDamageAnit = 203,
+
+        MissileRate = 205, //飞弹连射概率
 
         Critical = 206, //暴击率
         CriticalAnti = 207, //暴击抵抗
@@ -32,7 +34,7 @@ namespace JFrame
         BossAdd = 225, // 对BOSS伤害加成
         HpSteal = 226, // 吸血
         CounterAnti = 227, //反击概率抵抗
-        FightBackAnti = 228, //反伤系数见面
+        FightBackAnti = 228, //反伤系数减免
     }
 
     public class CombatAttributeFactory
@@ -51,6 +53,8 @@ namespace JFrame
 
             var bpDamage = new CombatAttributeDouble(CombatAttribute.BPDamage.ToString(), unitInfo.bpDamage, double.MaxValue);
             var bpDamageAnit = new CombatAttributeDouble(CombatAttribute.BPDamageAnit.ToString(), unitInfo.bpDamageAnti, double.MaxValue);
+
+            var missile = new CombatAttributeDouble(CombatAttribute.MissileRate.ToString(), unitInfo.missileRate, double.MaxValue);
 
             var cri = new CombatAttributeDouble(CombatAttribute.Critical.ToString(), unitInfo.cri, double.MaxValue); //暴击率
             var criAnti = new CombatAttributeDouble(CombatAttribute.CriticalAnti.ToString(), unitInfo.criAnti, double.MaxValue);
@@ -79,6 +83,7 @@ namespace JFrame
             result.Add(maxHp);
             result.Add(bpDamage);
             result.Add(bpDamageAnit);
+            result.Add(missile);
             result.Add(cri);
             result.Add(criAnti);
             result.Add(criDmgRate);

@@ -1,8 +1,8 @@
-﻿using JFrame.BattleReportSystem;
+﻿using JFramework.BattleReportSystem;
 using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
 
     public abstract class BaseCombatBuffer : ICombatUpdatable, IUnique, IActionOwner, ICombatAttachable<CombatUnit>, IUpdateable//, IUpdate<BaseCombatBuffer>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace JFrame
+namespace JFramework
 {
 
     /// <summary>

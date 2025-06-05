@@ -1,11 +1,11 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class XmlParaser : IParaser
     {

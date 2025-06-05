@@ -1,7 +1,7 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 7 參數0：actionGroupId 参数1：sortid:  参数2: 概率  参数3：hp小于百分比  参数4：数值类型  参数5：倍率

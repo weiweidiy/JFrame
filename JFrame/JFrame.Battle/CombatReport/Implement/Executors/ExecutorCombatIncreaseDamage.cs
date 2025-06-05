@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// type 8 : 普通傷害執行器 只能打1次 type = 1 參數：0：执行時間 1：傷害加成 2：类型 3: 递增倍率 4 递增最大次数

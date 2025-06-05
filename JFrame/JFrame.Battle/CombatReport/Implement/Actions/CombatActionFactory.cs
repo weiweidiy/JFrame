@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatActionFactory
     {

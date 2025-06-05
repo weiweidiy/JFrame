@@ -1,12 +1,12 @@
 ﻿//using JFrame.UI;
 //using NUnit.Framework;
-using JFrame;
+using JFramework;
 using NUnit.Framework;
 using NSubstitute;
 using System.Collections.Generic;
 using System;
 //using System.Runtime.Remoting.Contexts;
-using static JFrame.PVPBattleManager;
+using static JFramework.PVPBattleManager;
 
 namespace JFrameTest
 {

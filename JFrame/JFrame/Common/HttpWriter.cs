@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class HttpWriter : Writer
     {
@@ -18,7 +18,7 @@ namespace JFrame.Common
         /// </summary>
         string _response = null;
 
-        public HttpWriter(IHttpRequest httpRequest, ProcesserManager processer = null) : base(processer)
+        public HttpWriter(IHttpRequest httpRequest, JFrameProcesserManager processer = null) : base(processer)
         {
             _webRequest = httpRequest;
         }

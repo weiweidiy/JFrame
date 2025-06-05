@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 獲取所有單位時，只會返回特殊的單位

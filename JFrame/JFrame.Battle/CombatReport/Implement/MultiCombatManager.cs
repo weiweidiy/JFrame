@@ -1,12 +1,12 @@
 ﻿//using Cysharp.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using static JFrame.PVPBattleManager;
+using static JFramework.PVPBattleManager;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 多波战斗

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// pvp战报对象
@@ -27,7 +27,7 @@ namespace JFrame
         List<CommonCombatTeam> teams;
 
         Dictionary<string, long> damageStatistics = new Dictionary<string, long>();
-        public Dictionary<string, long> DamageStatistics { get; }
+        public Dictionary<string, long> DamageStatistics => damageStatistics;
 
         public CombatReporter(CombatFrame frame, List<CommonCombatTeam> teams)
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 广告项目接口

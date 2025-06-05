@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 免疫buff type 18

@@ -1,8 +1,8 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using Newtonsoft.Json.Linq;
 
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class JsonNetParaser : IParaser
     {

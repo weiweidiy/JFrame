@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace JFrame
+namespace JFramework
 {
     public enum ReportType
     {

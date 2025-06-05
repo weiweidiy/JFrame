@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class LocalWriter : Writer
     {
@@ -19,7 +19,7 @@ namespace JFrame.Common
         /// 构造函数
         /// </summary>
         /// <param name="processer"></param>
-        public LocalWriter(ProcesserManager processer) : base(processer) { }
+        public LocalWriter(JFrameProcesserManager processer) : base(processer) { }
 
 
         /// <summary>

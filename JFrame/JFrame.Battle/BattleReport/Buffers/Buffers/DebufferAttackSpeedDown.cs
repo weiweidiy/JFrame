@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 攻击速度下降（只对普通攻击生效）： arg[1] ：百分比

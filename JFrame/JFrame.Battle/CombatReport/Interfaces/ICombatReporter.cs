@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static JFrame.CombatReporter;
+using static JFramework.CombatReporter;
 
-namespace JFrame
+namespace JFramework
 {
     public interface ICombatReporter
     {

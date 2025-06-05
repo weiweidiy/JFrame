@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
 
     public class CombatBulletManager : UpdateableContainer<CombatBullet>, ICombatUpdatable

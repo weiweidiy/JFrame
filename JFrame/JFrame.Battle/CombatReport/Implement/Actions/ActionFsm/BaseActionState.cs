@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 技能状态基类

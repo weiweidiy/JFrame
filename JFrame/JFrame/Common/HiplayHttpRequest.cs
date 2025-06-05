@@ -4,9 +4,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class HiplayHttpRequest : IHttpRequest
     {

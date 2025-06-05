@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// type 7   参数：0=队伍(0友军，1敌军，2所有, 3不包含自己的友军)   1=主类型  2=子类型  3模式(0模式单位， 1逻辑单位) 4=个数  , 參數5：actionGroupId 参数6：sortID 

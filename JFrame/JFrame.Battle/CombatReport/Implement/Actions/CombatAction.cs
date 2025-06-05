@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace JFrame
+namespace JFramework
 {
 
     public class CombatAction : ICombatAction, ICombatUpdatable, IUnique, IActionOwner, IUpdateable

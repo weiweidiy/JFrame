@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 9 更改action参数 参数0：执行周期， 参数1：组件类型（0:conditionFinder, 1:conditionTrigger，2：delayTrigger, 3:executorFinder , 4,formula, 5: executor, 6: cdTrigger）  参数2：组件索引    参数3： 参数索引   参数4： 加成值 参数5：计算模式（0：加法，1乘法)

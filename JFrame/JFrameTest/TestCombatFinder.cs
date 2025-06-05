@@ -2,7 +2,7 @@
 //using NUnit.Framework;
 using NUnit.Framework;
 using NSubstitute;
-using JFrame;
+using JFramework;
 using System.Collections.Generic;
 
 namespace JFrameTest

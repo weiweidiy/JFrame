@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public class Utility
     {

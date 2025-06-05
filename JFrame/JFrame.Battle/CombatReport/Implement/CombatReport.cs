@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatReport
     {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 管理容器接口

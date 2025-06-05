@@ -1,7 +1,7 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using System.Collections.Generic;
 
-namespace JFrame.Configuration
+namespace JFramework.Configuration
 {
     public class Configuration : IChainData
     {

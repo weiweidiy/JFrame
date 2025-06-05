@@ -1,9 +1,9 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// action 组件基类 0:攻擊距離 1:查找數量

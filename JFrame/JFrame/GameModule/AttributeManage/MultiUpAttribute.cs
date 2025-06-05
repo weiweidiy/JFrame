@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     public class MultiUpAttribute : ValueAttribute //乘属性
     {

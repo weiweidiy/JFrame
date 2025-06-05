@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Linq;
 
-namespace JFrame
+namespace JFramework
 {
     public abstract class Buffer : IBuffer
     {

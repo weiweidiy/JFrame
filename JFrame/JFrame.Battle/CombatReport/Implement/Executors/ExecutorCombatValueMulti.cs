@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     ///  type 8 数值加成加成 参数0：执行周期 参数1：数值类型（1=伤害， 2=治疗） 参数2：加成倍率

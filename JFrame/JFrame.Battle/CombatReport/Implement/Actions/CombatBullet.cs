@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatBullet : IUnique, IUpdateable, ICombatUpdatable
     {

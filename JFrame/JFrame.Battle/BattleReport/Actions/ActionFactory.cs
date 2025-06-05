@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace JFrame
+namespace JFramework
 {
     public class ActionFactory
     {

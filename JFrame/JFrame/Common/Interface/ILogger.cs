@@ -1,4 +1,4 @@
-﻿namespace JFrame.Common.Interface
+﻿namespace JFramework.Common.Interface
 {
     public interface ILogger
     {

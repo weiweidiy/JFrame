@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static JFrame.PVPBattleManager;
+using static JFramework.PVPBattleManager;
 
-namespace JFrame
+namespace JFramework
 {
     public interface IPVPBattleManager
     {

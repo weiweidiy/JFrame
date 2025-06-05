@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Timers;
 
-namespace JFrame
+namespace JFramework
 {
     public enum PETimeUnit
     {

@@ -1,7 +1,7 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 动作战报数据，谁什么时间向谁使用了什么动作

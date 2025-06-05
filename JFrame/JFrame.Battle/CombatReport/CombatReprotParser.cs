@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatReprotParser
     {

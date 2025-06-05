@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
-namespace JFrame
+namespace JFramework
 {
 
     /// <summary>

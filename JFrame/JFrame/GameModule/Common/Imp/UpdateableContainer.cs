@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 可更新帧的容器，避免在update过程中，插入删除单位

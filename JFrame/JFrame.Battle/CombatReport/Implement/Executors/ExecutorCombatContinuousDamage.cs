@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// 连续傷害执行器，可以打多次 type = 2 參數0：持續時間 1：傷害加成  2: 类型   3：間隔  4：次數
@@ -42,7 +42,7 @@
             }
                 
             delta += frame.DeltaTime;
-            if (delta >= GetIntervalArg())
+            if (delta >= GetIntervalArg()) //每次间隔都要重新找一次目标（executorfinders)
             {
                 delta = 0f;
                 

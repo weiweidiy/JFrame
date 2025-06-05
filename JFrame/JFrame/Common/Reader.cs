@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 using System.Linq;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     public abstract class Reader : IReader
     {
@@ -15,7 +15,7 @@ namespace JFrame.Common
         /// <summary>
         /// 数据加工处理器
         /// </summary>
-        private ProcesserManager _processer;
+        private JFrameProcesserManager _processer;
 
         /// <summary>
         /// 无参构造器
@@ -26,7 +26,7 @@ namespace JFrame.Common
         /// 构造器
         /// </summary>
         /// <param name="processer">数据加工处理器</param>
-        public Reader(ProcesserManager processer)
+        public Reader(JFrameProcesserManager processer)
         {
             _processer = processer;
         }

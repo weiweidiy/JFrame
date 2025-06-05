@@ -1,6 +1,6 @@
-﻿using JFrame;
+﻿using JFramework;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 普通攻击时候触发，type = 5

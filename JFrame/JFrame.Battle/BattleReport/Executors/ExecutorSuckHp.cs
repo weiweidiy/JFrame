@@ -1,5 +1,5 @@
 ﻿
-namespace JFrame
+namespace JFramework
 {
  
     /// <summary>

@@ -1,8 +1,8 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace JFrame
+namespace JFramework
 {
 
     /// <summary>

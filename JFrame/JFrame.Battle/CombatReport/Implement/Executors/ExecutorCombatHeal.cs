@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// 加血执行器type = 3：参数：0 执行周期 , 1 : 加成

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     /// <summary>
     /// 本地文件删除器

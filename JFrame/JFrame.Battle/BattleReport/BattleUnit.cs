@@ -1,10 +1,10 @@
-﻿using JFrame.BattleReportSystem;
+﻿using JFramework.BattleReportSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace JFrame
+namespace JFramework
 {
     public class BattleUnit : IBattleUnit
     {

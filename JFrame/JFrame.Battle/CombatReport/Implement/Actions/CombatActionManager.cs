@@ -1,8 +1,8 @@
-﻿using JFrame.BattleReportSystem;
+﻿using JFramework.BattleReportSystem;
 using System;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 管理所有action to do:可以增加线程组概念，允许某些技能使用一个线程组

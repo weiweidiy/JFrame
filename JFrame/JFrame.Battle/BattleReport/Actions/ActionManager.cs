@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Diagnostics;
-using JFrame.BattleReportSystem;
+using JFramework.BattleReportSystem;
 
 
-namespace JFrame
+namespace JFramework
 {
     public enum ActionType
     {

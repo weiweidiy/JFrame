@@ -1,6 +1,6 @@
 ﻿
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 次数冷却：arg = 可触发次数 type = 2

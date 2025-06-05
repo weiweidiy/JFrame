@@ -1,6 +1,6 @@
 ﻿using static System.Collections.Specialized.BitVector32;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 12

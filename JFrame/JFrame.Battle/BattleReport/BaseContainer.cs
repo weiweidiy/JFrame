@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 
 
-namespace JFrame
+namespace JFramework
 {
     //public class BaseContainer<T> : IContainer<T> where T : IUnique
     //{

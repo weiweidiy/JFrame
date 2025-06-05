@@ -1,7 +1,7 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
 
     /// <summary>

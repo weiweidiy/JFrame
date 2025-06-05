@@ -1,7 +1,7 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System.Collections.Generic;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type8 參數0：actionGroupId 参数1：sortID  参数2: 概率

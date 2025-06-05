@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace JFrame
+namespace JFramework
 {
     public class CombatActionSM : BaseSMSync<CombatAction, BaseActionState, ActionSMTrigger>
     {

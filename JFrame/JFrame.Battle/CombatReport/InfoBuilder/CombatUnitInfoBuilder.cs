@@ -1,6 +1,6 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 构建combatunit builder
@@ -37,6 +37,7 @@ namespace JFrame
             unitInfo.maxHp = DataSource.GetMaxHp();
             unitInfo.bpDamage = DataSource.GetBpDamage();
             unitInfo.bpDamageAnti = DataSource.GetBpDamageAnti();
+            unitInfo.missileRate = DataSource.GetMissileRate();
             unitInfo.cri = DataSource.GetCri();
             unitInfo.criAnti = DataSource.GetCriAnti();
             unitInfo.criDamage = DataSource.GetCriDamage();

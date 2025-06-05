@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// 时间触发器：时间到了触发1次 arg = CD周期 type = 1

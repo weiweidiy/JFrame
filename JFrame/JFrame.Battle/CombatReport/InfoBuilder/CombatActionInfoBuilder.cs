@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 
-namespace JFrame
+namespace JFramework
 {
     public abstract class CombatActionInfoBuilder<T>
     {

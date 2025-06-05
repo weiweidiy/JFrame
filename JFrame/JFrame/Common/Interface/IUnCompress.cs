@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace JFrame.Common.Interface
+namespace JFramework.Common.Interface
 {
     public interface IUnCompress
     {

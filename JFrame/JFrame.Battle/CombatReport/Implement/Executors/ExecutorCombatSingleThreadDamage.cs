@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     /// <summary>
     /// 獨立綫程執行器，執行后會立即進入冷卻 只能打1次 type = 12 參數：0：执行時間 1：傷害加成 2: 类型（0：无  1：普通伤害， 100：灼烧伤害 ）3:延遲

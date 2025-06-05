@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 using System.Linq;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
-    public class ProcesserManager
+    public class JFrameProcesserManager
     {
         /// <summary>
         /// 数据加工处理器列表
         /// </summary>
         protected List<IProcesser> _lstProcessers = new List<IProcesser>();
 
-        public ProcesserManager(List<IProcesser> processers)
+        public JFrameProcesserManager(List<IProcesser> processers)
         {
             _lstProcessers = processers ?? _lstProcessers;
         }
 
-        public ProcesserManager(params IProcesser[] processers)
+        public JFrameProcesserManager(params IProcesser[] processers)
         {
             _lstProcessers = processers.ToList();
         }
@@ -28,7 +27,7 @@ namespace JFrame.Common
         /// </summary>
         /// <param name="processer"></param>
         /// <returns></returns>
-        public ProcesserManager AddProcesser(IProcesser processer)
+        public JFrameProcesserManager AddProcesser(IProcesser processer)
         {
             _lstProcessers.Add(processer);
             return this;

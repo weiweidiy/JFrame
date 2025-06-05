@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     // xx 普通攻击了 yy 和 zz, 造成了 yy 10点伤害， zz 20点伤害
     // xx 特殊攻击了 yy 和 zz, 造成了 yy 10点伤害，并添加了a buff, 造成了 zz 20点伤害

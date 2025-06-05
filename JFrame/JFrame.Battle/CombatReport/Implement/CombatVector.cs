@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace JFrame
+namespace JFramework
 {
     [Serializable]
     public class CombatVector

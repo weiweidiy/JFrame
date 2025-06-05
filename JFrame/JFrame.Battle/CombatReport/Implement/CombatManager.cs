@@ -1,11 +1,11 @@
 ﻿//using Cysharp.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static JFrame.PVPBattleManager;
+using static JFramework.PVPBattleManager;
 
-namespace JFrame
+namespace JFramework
 {
     public abstract class CombatManager : ICombatManager<CombatReport, CommonCombatTeam, CombatUnit>
     {

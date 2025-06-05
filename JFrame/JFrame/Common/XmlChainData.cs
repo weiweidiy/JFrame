@@ -1,11 +1,11 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Linq;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     /// <summary>
     /// 有问题，数组索引会报错

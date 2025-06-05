@@ -1,4 +1,4 @@
-﻿using JFrame.Common.Interface;
+﻿using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace JFrame.Common
+namespace JFramework.Common
 {
     /// <summary>
     /// 本地文件加载器
@@ -22,7 +22,7 @@ namespace JFrame.Common
         /// 构造函数
         /// </summary>
         /// <param name="processer"></param>
-        public LocalReader(ProcesserManager processer) : base(processer) { }
+        public LocalReader(JFrameProcesserManager processer) : base(processer) { }
 
         /// <summary>
         /// 同步读取路径文件

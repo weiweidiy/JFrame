@@ -1,24 +1,27 @@
-﻿using JFrame.Common;
+﻿using JFramework.Common;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
-    /// type 4  参数0: 概率  参数1：目标（0：受击者  1：攻击者） 参数2：反击伤害触发（0=不触发 1=触发）
+    /// type 4  参数0: 概率  参数1：目标（0：受击者  1：攻击者） 参数2：反击伤害触发（0=不触发 1=触发） 参数3：累计伤害量 参数4：暴击筛选（0=不过滤 ， 1=过滤）
     /// </summary>
     public class TriggerUnitHurt : CombatBaseTrigger
     {
         List<CombatUnit> unitList = new List<CombatUnit>();
 
         Utility utility = new Utility();
+
+        double damageAmout = 0;
+
         public TriggerUnitHurt(List<CombatBaseFinder> finders) : base(finders)
         {
         }
 
         public override int GetValidArgsCount()
         {
-            return 3;
+            return 5;
         }
 
         protected float GetRandomArg()
@@ -36,10 +39,21 @@ namespace JFrame
             return (int)GetCurArg(2);
         }
 
+        protected int GetDamageAmount()
+        {
+            return (int)GetCurArg(3);
+        }
+
+        protected bool GetIsCri()
+        {
+            return GetCurArg(4) == 1;
+        }
+
         public override void OnEnterState()
         {
             base.OnEnterState();
             unitList.Clear();
+            damageAmout = 0;
 
             if (finders != null && finders.Count > 0)
             {
@@ -90,20 +104,34 @@ namespace JFrame
             else
             {
                 var targetType = GetTargetType();
-                if (targetType == 0)
+                if (targetType == 0) //受伤的作为目标
                     ExtraData.Targets = unitList;
                 else
                 {
+                    //发起者作为目标（反射伤害用）
                     ExtraData.Targets = new List<CombatUnit>() { data.Caster };
                     ExtraData.Target = ExtraData.Targets[0];
                     ExtraData.ExtraArg = data.Value; //受到的伤害
                 }
             }
 
+            //是否触发反击
             if (GetTriggerType() == 0 && data.ValueType == CombatValueType.TurnBackDamage)
                 return;
 
-            SetOn(true);
+            //过滤非暴击
+            if (GetIsCri() && !data.IsCri)
+                return;
+
+            damageAmout += data.Value;
+
+            if (damageAmout >= GetDamageAmount())
+            {
+                SetOn(true);
+                damageAmout = 0;
+            }
+
+
         }
 
 

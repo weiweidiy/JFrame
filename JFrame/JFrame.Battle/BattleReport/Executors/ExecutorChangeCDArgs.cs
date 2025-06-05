@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace JFrame
+namespace JFramework
 {
     /// <summary>
     /// type 13 参数1：类型 0 直接设置，1 乘法 2 减法  参数2：值

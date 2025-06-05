@@ -1,11 +1,11 @@
 ﻿//using Cysharp.Threading.Tasks;
-using JFrame.Common.Interface;
+using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JFrame
+namespace JFramework
 {
     public class SingleCombatManager : CombatManager
     {

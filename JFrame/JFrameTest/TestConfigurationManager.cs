@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using JFrame.Configuration;
+using JFramework.Configuration;
 using System.Text;
 using System;
-using JFrame.Common;
+using JFramework.Common;
 using System.Collections.Generic;
 
 namespace JFrameTest

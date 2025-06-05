@@ -1,9 +1,9 @@
 ﻿//using JFrame.UI;
 //using NUnit.Framework;
-using JFrame;
+using JFramework;
 using NSubstitute;
 using NUnit.Framework;
-using static JFrame.PVPBattleManager;
+using static JFramework.PVPBattleManager;
 using System.Collections.Generic;
 using System;
 using static System.Collections.Specialized.BitVector32;

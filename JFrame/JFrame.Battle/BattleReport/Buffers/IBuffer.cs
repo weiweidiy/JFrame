@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JFrame
+namespace JFramework
 {
     //public interface INewBuffer : IUnique , IAttachOwner , IAttachable
     //{

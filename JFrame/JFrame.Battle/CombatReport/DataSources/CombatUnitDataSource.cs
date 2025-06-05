@@ -1,4 +1,4 @@
-﻿namespace JFrame
+﻿namespace JFramework
 {
     //    ATK = 101,
     //MaxHP = 102,
@@ -28,6 +28,7 @@
         public abstract long GetAtk();
         public abstract float GetBpDamage();
         public abstract float GetBpDamageAnti();
+        public abstract float GetMissileRate();
         public abstract float GetCri();
         public abstract float GetCriAnti();
         public abstract float GetCriDamage();

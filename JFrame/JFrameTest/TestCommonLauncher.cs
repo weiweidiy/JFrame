@@ -1,6 +1,6 @@
 ﻿//using JFrame.UI;
 //using NUnit.Framework;
-using JFrame;
+using JFramework;
 using NSubstitute;
 using NSubstitute.Extensions;
 using NUnit.Framework;

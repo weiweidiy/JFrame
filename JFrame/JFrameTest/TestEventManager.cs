@@ -1,4 +1,4 @@
-﻿using JFrame;
+﻿using JFramework;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
