@@ -1,7 +1,8 @@
 ﻿namespace JFramework.Common
 {
-    public class JFrameworkNetMessage : IUnique
+    public abstract class JFrameworkNetMessage : IUnique
     {
-        public string Uid { get; }
+        public abstract string Uid { get; }
+        public string MessageType => GetType().Name;
     }
 }
