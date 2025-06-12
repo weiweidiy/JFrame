@@ -20,7 +20,7 @@ namespace JFramework.Common
 
         public HttpReader(IHttpRequest webRequest) : this(webRequest, null) { }
 
-        public HttpReader(IHttpRequest webRequest , JFrameProcesserManager processer) : base(processer)
+        public HttpReader(IHttpRequest webRequest , JDataProcesserManager processer) : base(processer)
         {
             _webRequest = webRequest;
         }

@@ -15,7 +15,7 @@ namespace JFramework.Common
         /// <summary>
         /// 数据加工处理器
         /// </summary>
-        private JFrameProcesserManager _processer;
+        private JDataProcesserManager _processer;
 
         /// <summary>
         /// 无参构造器
@@ -26,7 +26,7 @@ namespace JFramework.Common
         /// 构造器
         /// </summary>
         /// <param name="processer">数据加工处理器</param>
-        public Reader(JFrameProcesserManager processer)
+        public Reader(JDataProcesserManager processer)
         {
             _processer = processer;
         }

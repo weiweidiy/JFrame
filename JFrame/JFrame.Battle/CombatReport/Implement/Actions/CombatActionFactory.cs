@@ -268,6 +268,11 @@ namespace JFramework
                         finder = new FinderFindUnitsActions();
                     }
                     break;
+                case 8:
+                    {
+                        finder = new FinderFindSelfActions();
+                    }
+                    break;
                 default:
                     throw new NotImplementedException("沒有實現finder組件類型 " + componentInfo.id);
             }

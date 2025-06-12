@@ -22,7 +22,7 @@ namespace JFramework.Common
         /// 构造函数
         /// </summary>
         /// <param name="processer"></param>
-        public LocalReader(JFrameProcesserManager processer) : base(processer) { }
+        public LocalReader(JDataProcesserManager processer) : base(processer) { }
 
         /// <summary>
         /// 同步读取路径文件

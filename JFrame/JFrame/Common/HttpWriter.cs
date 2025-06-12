@@ -18,7 +18,7 @@ namespace JFramework.Common
         /// </summary>
         string _response = null;
 
-        public HttpWriter(IHttpRequest httpRequest, JFrameProcesserManager processer = null) : base(processer)
+        public HttpWriter(IHttpRequest httpRequest, JDataProcesserManager processer = null) : base(processer)
         {
             _webRequest = httpRequest;
         }

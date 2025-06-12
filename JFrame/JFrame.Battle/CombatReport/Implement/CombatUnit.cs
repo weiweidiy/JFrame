@@ -110,6 +110,7 @@ namespace JFramework
 
         CombatUnitInfo unitInfo;
 
+        bool isStart;
         /// <summary>
         /// 初始化
         /// </summary>
@@ -117,7 +118,7 @@ namespace JFramework
         /// <param name="actions"></param>
         /// <param name="buffers"></param>
         /// <param name="attributes"></param>
-        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<BaseCombatBuffer> buffers, CombatAttributeManger attributeManager,float readyCd = 0f)
+        public void Initialize(CombatUnitInfo unitInfo, CombatContext context, List<CombatAction> actions, List<BaseCombatBuffer> buffers, CombatAttributeManger attributeManager, float readyCd = 0f)
         {
             Clear();
 
@@ -197,6 +198,7 @@ namespace JFramework
         {
             StartMove();
             StartAction();
+            isStart = true;
         }
 
         /// <summary>
@@ -206,6 +208,7 @@ namespace JFramework
         {
             StopMove();
             StopAction();
+            isStart = false;
         }
 
 
@@ -216,8 +219,16 @@ namespace JFramework
         /// <param name="frame"></param>
         public void Update(CombatFrame frame)
         {
-            actionManager.Update(frame);
-            bufferManager.Update(frame);
+            if (IsAlive())
+            {
+                actionManager.Update(frame);
+                bufferManager.Update(frame);
+            }
+            else
+            {
+                if (isStart)
+                    Stop();
+            }
         }
 
         /// <summary>
@@ -719,7 +730,7 @@ namespace JFramework
             // onDamaging?.Invoke(hitter, action, this, damage);
             onDamaging?.Invoke(extraData);
 
-            if(extraData.IsMiss)
+            if (extraData.IsMiss)
             {
                 onMiss?.Invoke(extraData);
                 return;

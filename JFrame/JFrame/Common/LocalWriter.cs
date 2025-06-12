@@ -19,7 +19,7 @@ namespace JFramework.Common
         /// 构造函数
         /// </summary>
         /// <param name="processer"></param>
-        public LocalWriter(JFrameProcesserManager processer) : base(processer) { }
+        public LocalWriter(JDataProcesserManager processer) : base(processer) { }
 
 
         /// <summary>
