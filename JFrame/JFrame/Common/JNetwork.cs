@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Net.WebSockets;
 //using System.Reactive.Linq;
 //using System.Reactive.Subjects;
@@ -13,17 +14,8 @@ using JFramework.Common.Interface;
 
 namespace JFramework.Common
 {
-    //public class MessageEvent<TMessage> where TMessage : JFrameworkNetMessage
-    //{
-    //    public event Action<TMessage> OnMessage;
 
-    //    public void Invoke(TMessage message)
-    //    {
-    //        OnMessage?.Invoke(message);
-    //    }
-    //}
-
-    public class JNetwork<TSocket> : IJNetwork where TSocket : IJSocket, new()
+    public abstract class JNetwork : IJNetwork
     {
         /// <summary>
         /// 接口事件
@@ -33,78 +25,15 @@ namespace JFramework.Common
         public event Action<string> onMessage;
         public event Action<string> onError;
 
-        //public string MessageNamespace { get; set; }
-        /// <summary>
-        /// 加密解密工具
-        /// </summary>
-        JDataProcesserManager msgEncode = null;
-        JDataProcesserManager msgDecode = null;
-
-        /// <summary>
-        /// 请求返回的任务线程
-        /// </summary>
-        ConcurrentDictionary<string, TaskCompletionSource<string>> pendingResponses = new ConcurrentDictionary<string, TaskCompletionSource<string>>();
-
-        /// <summary>
-        /// 序列化工具
-        /// </summary>
-        ISerializer serializer;
-
         /// <summary>
         /// socket对象
         /// </summary>
-        TSocket socket;
+        IJSocket socket;
 
-        //private readonly Subject<JFrameworkNetMessage> _messageStream = new Subject<JFrameworkNetMessage>();
-
-        //public IObservable<TMessage> GetMessageStream<TMessage>() where TMessage : JFrameworkNetMessage
-        //{
-        //    return _messageStream.OfType<TMessage>();
-        //}
-
-        //private void Socket_OnBinary(IJFrameworkSocket s, byte[] data)
-        //{
-        //    var json = serializer.ToJson(data);
-        //    var message = serializer.ToObject<JFrameworkNetMessage>(json);
-        //    _messageStream.OnNext(message);
-        //}
-
-
-        //// 存储不同消息类型的事件
-        //private readonly Dictionary<Type, object> messageEvents = new Dictionary<Type, object>();
-
-        //// 注册事件
-        //public void RegisterMessageHandler<TMessage>(Action<TMessage> handler) where TMessage : JFrameworkNetMessage
-        //{
-        //    if (!messageEvents.TryGetValue(typeof(TMessage), out var eventObj))
-        //    {
-        //        eventObj = new MessageEvent<TMessage>();
-        //        messageEvents[typeof(TMessage)] = eventObj;
-        //    }
-
-        //    ((MessageEvent<TMessage>)eventObj).OnMessage += handler;
-        //}
-
-        //// 取消注册
-        //public void UnregisterMessageHandler<TMessage>(Action<TMessage> handler)
-        //    where TMessage : JFrameworkNetMessage
-        //{
-        //    if (messageEvents.TryGetValue(typeof(TMessage), out var eventObj))
-        //    {
-        //        ((MessageEvent<TMessage>)eventObj).OnMessage -= handler;
-        //    }
-        //}
-
-        //// 触发事件
-        //private void InvokeMessage<TMessage>(TMessage message)
-        //    where TMessage : JFrameworkNetMessage
-        //{
-        //    if (messageEvents.TryGetValue(typeof(TMessage), out var eventObj))
-        //    {
-        //        ((MessageEvent<TMessage>)eventObj).Invoke(message);
-        //    }
-        //}
-
+        /// <summary>
+        /// 任务管理器
+        /// </summary>
+        TaskManager<IUnique> taskManager = null;
 
 
         #region 公开接口
@@ -122,31 +51,22 @@ namespace JFramework.Common
 
             var tcs = new TaskCompletionSource<bool>();
             //创建并初始化
-            socket = new TSocket();
-            socket.Init(url);
-
-
-            //监听事件
-            socket.onOpen += (s) => { Socket_OnOpen(s, tcs); };
-            socket.onClosed += (s, code, message) => { Socket_OnClose(s, code, message); };
-            socket.onBinary += (s, data) => { Socket_OnBinary(s, data); };
-            //socket.onMessage += (s, message) => { Socket_OnMessage(s, message); };
-            socket.onError += (s, message) => { Scoket_OnError(s, message, tcs); };
-
+            InitSocket(url, tcs);
             //链接
-            socket.Open();
+            GetSocket().Open();
 
             //等待链接成功：等待tcs.setresult(true)
             await tcs.Task;
         }
 
-
         public void Disconnect()
         {
+            var socket = GetSocket();
             try
             {
                 if (socket == null || !socket.IsOpen)
                     return;
+
 
                 socket.Close();
             }
@@ -158,6 +78,8 @@ namespace JFramework.Common
 
         public bool IsConnecting()
         {
+            var socket = GetSocket();
+
             if (socket == null)
                 return false;
 
@@ -165,58 +87,55 @@ namespace JFramework.Common
         }
 
         /// <summary>
-        /// 发送消息， RPC风格调用
+        /// 发送消息， RPC风格调用， 如果像protobuf这种无法实现接口的，可以自己定义个适配器，实现iunique接口即可
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="pMsg"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<TResponse> SendMessage<TResponse>(JNetMessage pMsg, TimeSpan? timeout = null) where TResponse : JNetMessage
+        public async Task<TResponse> SendMessage<TResponse>(IUnique pMsg, TimeSpan? timeout = null) where TResponse : class, IUnique 
         {
+            var socket = GetSocket();
+
             if (socket == null || !socket.IsOpen)
                 throw new Exception("链接已断开，无法发送消息 socket");
 
-            var tcs = new TaskCompletionSource<string>();
-            if (!pendingResponses.TryAdd(pMsg.Uid, tcs)) // 使用 TryAdd 避免冲突
+            //创建任务
+            var tcs = AddTask(pMsg.Uid);
+            if (tcs == null) 
                 throw new Exception("Duplicate UID detected.");
 
             try
             {
                 //转json->byte[]
-                var json = serializer.ToJson(pMsg);
-                var byteMsg = Encoding.UTF8.GetBytes(json);
+                var byteMsg = Serlialize(pMsg);
 
-                //可能加密
-                if (msgEncode != null)
-                    byteMsg = msgEncode.GetResult(byteMsg);
+                //数据处理（比如加密，编码等）
+                byteMsg = GetDataOutProcesser() != null ? GetDataOutProcesser().GetResult(byteMsg) : byteMsg;
 
                 //发送
                 socket.Send(byteMsg);
 
-                // 使用 Task.WhenAny 实现超时
-                var timeoutTask = Task.Delay(timeout ?? TimeSpan.FromSeconds(10));
-                var completedTask = await Task.WhenAny(tcs.Task, timeoutTask);
+                //等待任务完成或者超时
+                var result = await WaitingTask(pMsg.Uid, timeout); //可能超时
 
-                if (completedTask == timeoutTask)
-                    throw new TimeoutException("Request timed out.");
-
-                var resJson = await tcs.Task; // 等待直到 OnWebSocketMessage 调用 TrySetResult
-                return serializer.ToObject<TResponse>(resJson);
+                return result as TResponse; // 等待直到 OnWebSocketMessage 调用 TrySetResult
             }
             catch (Exception ex)
             {
-                tcs.TrySetException(ex);
+                SetTaskException(pMsg.Uid, ex);
                 throw ex;
             }
             finally
             {
-                pendingResponses.TryRemove(pMsg.Uid, out _);
-                //pendingResponses.Remove(pMsg.Uid); // 清理
-                //cts.Dispose();
+                var result = RemoveTask(pMsg.Uid);
             }
 
         }
+
+
+
         #endregion
 
         #region 响应事件
@@ -231,10 +150,10 @@ namespace JFramework.Common
 
         private void Socket_OnBinary(IJSocket s, byte[] data)
         {
-            //数据加工
-            if (msgDecode != null)
-                data = msgDecode.GetResult(data);
+            //数据加工           
+            data = GetDataComingProcesser() != null? GetDataComingProcesser().GetResult(data) : data;
 
+            //处理接收的数据=>反序列化等
             string msg;
             try
             {
@@ -246,14 +165,15 @@ namespace JFramework.Common
             }
 
 
-            var obj = serializer.ToObject<JNetMessage>(msg);
+            var obj = Deserialize(data);
 
             try
             {
                 //如果没有tcs，那可能是一个推送消息
-                if (pendingResponses.TryGetValue(obj.Uid, out var tcs))
+                var tcs = GetTask(obj.Uid);
+                if (tcs != null)
                 {
-                    tcs.TrySetResult(msg); // 完成等待的任务
+                    tcs.TrySetResult(obj); // 完成等待的任务
                 }
             }
             catch (Exception ex)
@@ -264,54 +184,8 @@ namespace JFramework.Common
 
             onMessage?.Invoke(msg);
 
-            //try
-            //{
-            //    // 解码数据
-            //    if (msgDecode != null)
-            //        data = msgDecode.GetResult(data);
-
-            //    string json = Encoding.UTF8.GetString(data);
-            //    var baseMsg = serializer.ToObject<JFrameworkNetMessage>(json);
-
-            //    // (1) 如果是请求-响应消息
-            //    if (pendingResponses.TryGetValue(baseMsg.Uid, out var tcs))
-            //    {
-            //        tcs.TrySetResult(json);
-            //    }
-            //    // (2) 否则尝试解析为结构化消息
-            //    else
-            //    {
-            //        // 动态调用 InvokeMessage<T>
-            //        // 这里需要反射或类型推断（简化版示例）
-            //        try
-            //        {
-            //            // 假设消息类型可以从 JSON 的某个字段获取（例如 "MessageType"）
-            //            var messageType = GetMessageTypeFromJson(json); // 需实现
-            //            var method = typeof(JFrameNetwork<T>)
-            //                .GetMethod(nameof(InvokeMessage), BindingFlags.NonPublic | BindingFlags.Instance)
-            //                .MakeGenericMethod(messageType);
-
-            //            var structuredMsg = serializer.ToObject(json, messageType);
-            //            method.Invoke(this, new[] { structuredMsg });
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            onError?.Invoke($"Failed to parse pushed message: {ex.Message}");
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    onError?.Invoke($"Failed to process binary data: {ex.Message}");
-            //}
-
         }
 
-        //Type GetMessageTypeFromJson(string json)
-        //{
-        //    var baseMsg = serializer.ToObject<JFrameworkNetMessage>(json);
-        //    return Type.GetType($"{MessageNamespace}.{baseMsg.MessageType}");
-        //}
 
         private void Socket_OnClose(IJSocket s, SocketStatusCodes code, string message)
         {
@@ -327,20 +201,150 @@ namespace JFramework.Common
         }
         #endregion
 
-        #region 构造方法
         /// <summary>
-        /// 构造
+        /// 序列化对象
         /// </summary>
-        /// <param name="serializer">序列化器：用作对象转json</param>
-        public JNetwork(ISerializer serializer, JDataProcesserManager msgEncode, JDataProcesserManager msgDecode)
+        /// <param name="pMsg"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        byte[] Serlialize(IUnique pMsg)
         {
-            this.serializer = serializer;
-            this.msgEncode = msgEncode;
-            this.msgDecode = msgDecode;
+            if (GetSerializer() == null)
+                throw new Exception("Serialize 为空，无法序列化");
+
+            var json = GetSerializer().ToJson(pMsg);
+            var byteMsg = Encoding.UTF8.GetBytes(json);
+            return byteMsg;
         }
 
-        public JNetwork(ISerializer serializer) : this(serializer, null, null) { }
+        //to do:
+        IUnique Deserialize(byte[] data)
+        {
+            string msg;
+            try
+            {
+                msg = Encoding.UTF8.GetString(data);
+            }
+            catch (DecoderFallbackException)
+            {
+                throw new Exception("Invalid UTF-8 data received.");
+            }
+
+
+            return GetSerializer().ToObject<JNetMessage>(msg);
+        }
+
+        /// <summary>
+        /// 获取序列化工具，子类实现
+        /// </summary>
+        /// <returns></returns>
+        public abstract ISerializer GetSerializer();
+
+        /// <summary>
+        /// 数据出去前的处理工具
+        /// </summary>
+        /// <returns></returns>
+        public virtual JDataProcesserManager GetDataOutProcesser() => null;
+
+        /// <summary>
+        /// 数据进来时候的处理工具
+        /// </summary>
+        /// <returns></returns>
+        public virtual JDataProcesserManager GetDataComingProcesser() => null;
+
+        #region task管理相关
+        /// <summary>
+        /// 添加一个任务到缓存
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="tcs"></param>
+        /// <returns></returns>
+        protected TaskCompletionSource<IUnique> AddTask(string uid)
+        {
+            return taskManager.AddTask(uid);
+        }
+
+        /// <summary>
+        /// 移除一个任务
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        protected bool RemoveTask(string uid)
+        {
+            return taskManager.RemoveTask(uid);
+        }
+
+        /// <summary>
+        /// 获取缓存中的任务
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        protected TaskCompletionSource<IUnique> GetTask(string uid)
+        {
+            TaskCompletionSource<IUnique> result = taskManager.GetTask(uid);
+            return result;
+        }
+
+        /// <summary>
+        /// 等待任务
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        protected Task<IUnique> WaitingTask(string uid, TimeSpan? timeout = null)
+        {
+            return taskManager.WaitingTask(uid, timeout);
+        }
+
+        /// <summary>
+        /// 设置任务异常
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="exception"></param>
+        protected void SetTaskException(string uid, Exception exception)
+        {
+            taskManager.SetException(uid, exception);
+        }
+
+        /// <summary>
+        /// 设置任务结果
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="result"></param>
+        protected void SetTaskResult(string uid, IUnique result)
+        {
+            taskManager.SetResult(uid, result);
+        }
         #endregion
+
+
+        public JNetwork(IJSocket socket, TaskManager<IUnique> taskManager)
+        {
+            this.socket = socket;
+            this.taskManager = taskManager;
+        }
+
+
+        /// <summary>
+        /// 创建socket
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="tcs"></param>
+        /// <returns></returns>
+        void InitSocket(string url, TaskCompletionSource<bool> tcs)
+        {
+            var socket = GetSocket();
+            socket.Init(url);
+
+            //监听事件
+            socket.onOpen += (s) => { Socket_OnOpen(s, tcs); };
+            socket.onClosed += (s, code, message) => { Socket_OnClose(s, code, message); };
+            socket.onBinary += (s, data) => { Socket_OnBinary(s, data); };
+            //socket.onMessage += (s, message) => { Socket_OnMessage(s, message); };
+            socket.onError += (s, message) => { Scoket_OnError(s, message, tcs); };
+        }
+
+        IJSocket GetSocket() => socket;
 
     }
 }

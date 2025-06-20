@@ -12,7 +12,7 @@ namespace JFramework
     /// <typeparam name="T"></typeparam>
     public interface IContainer<T> where T :  IUpdateable
     {
-        event Action<List<T>> onItemAdded;
+        event Action<IEnumerable<T>> onItemAdded;
 
         event Action<T> onItemRemoved;
 

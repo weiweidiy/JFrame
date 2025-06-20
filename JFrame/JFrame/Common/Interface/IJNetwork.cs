@@ -21,7 +21,7 @@ namespace JFramework.Common.Interface
 
         void Disconnect();
 
-        Task<TResponse> SendMessage<TResponse>(JNetMessage pMsg, TimeSpan? timeout = null) where TResponse : JNetMessage;
+        Task<TResponse> SendMessage<TResponse>(IUnique pMsg, TimeSpan? timeout = null) where TResponse : class, IUnique;
 
         bool IsConnecting();
     }

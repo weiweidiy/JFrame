@@ -596,7 +596,7 @@ namespace JFramework
             //throw new NotImplementedException();
         }
 
-        private void ActionManager_onItemAdded(List<CombatAction> obj)
+        private void ActionManager_onItemAdded(IEnumerable<CombatAction> obj)
         {
             //throw new NotImplementedException();
         }
@@ -694,7 +694,7 @@ namespace JFramework
             return result;
         }
 
-        private void BufferManager_onItemAdded(List<BaseCombatBuffer> buffer)
+        private void BufferManager_onItemAdded(IEnumerable<BaseCombatBuffer> buffer)
         {
             foreach (var buf in buffer)
             {

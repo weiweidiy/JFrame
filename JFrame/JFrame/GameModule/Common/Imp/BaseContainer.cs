@@ -9,7 +9,7 @@ namespace JFramework
 {
     public class BaseContainer<T> : IContainer<T> where T : IUnique, IUpdateable
     {
-        public event Action<List<T>> onItemAdded;
+        public event Action<IEnumerable<T>> onItemAdded;
         public event Action<T> onItemRemoved;
         public event Action<T> onItemUpdated;
 
