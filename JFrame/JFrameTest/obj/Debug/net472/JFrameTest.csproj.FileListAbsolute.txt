@@ -145,3 +145,8 @@ C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\bin\Debug\net472\Syst
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.SuggestedBindingRedirects.cache
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll.config
+E:\UnityProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrameTest.dll.config
+E:\UnityProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Reactive.dll
+E:\UnityProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Runtime.CompilerServices.Unsafe.dll
+E:\UnityProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.SuggestedBindingRedirects.cache
+E:\UnityProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll.config
