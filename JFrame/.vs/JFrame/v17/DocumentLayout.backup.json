@@ -3,12 +3,92 @@
   "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\combatrealactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\combatrealactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\common\\basecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\common\\basecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\common\\jtaskmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\common\\jtaskmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\combatjframefakeactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\combatjframefakeactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\ijnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\ijnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\jsonnetchaindata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\jsonnetchaindata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\ihttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\ihttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\hiplayhttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\hiplayhttprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\ijsocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\ijsocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jbasesocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jbasesocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\file\\httpdeleter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\file\\httpdeleter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\data\\xmlparaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\data\\xmlparaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\data\\xmlchaindata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\data\\xmlchaindata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\common\\updateablecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\common\\updateablecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\file\\idelete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\file\\idelete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\file\\ideleteasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\file\\ideleteasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\file\\ireader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\file\\ireader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\data\\iparaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\data\\iparaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\common\\iobjectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\common\\iobjectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\data\\iprocesser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\data\\iprocesser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\combatrealactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\combatrealactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\datasources\\combatactionargsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,24 +190,120 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CombatRealActionArgSource.cs",
-              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
-              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
-              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
-              "RelativeToolTip": "JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "JsonNetChainData.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JsonNetChainData.cs",
+              "RelativeDocumentMoniker": "JFrame\\JsonNetChainData.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JsonNetChainData.cs",
+              "RelativeToolTip": "JFrame\\JsonNetChainData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:57:49.698Z",
+              "WhenOpened": "2025-06-20T15:17:06.232Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IJSocket.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IJSocket.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\IJSocket.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IJSocket.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\IJSocket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:15:17.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IJNetwork.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IJNetwork.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\IJNetwork.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IJNetwork.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\IJNetwork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:15:04.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IHttpRequest.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IHttpRequest.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\IHttpRequest.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IHttpRequest.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\IHttpRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:14:52.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HiplayHttpRequest.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\HiplayHttpRequest.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\HiplayHttpRequest.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\HiplayHttpRequest.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\HiplayHttpRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:11:50.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JNetwork.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetwork.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetwork.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetwork.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\JNetwork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T14:51:05.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BaseContainer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\BaseContainer.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Common\\BaseContainer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\BaseContainer.cs",
+              "RelativeToolTip": "JFrame\\Core\\Common\\BaseContainer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:01:06.888Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "JTaskManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\JTaskManager.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Common\\JTaskManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\JTaskManager.cs",
+              "RelativeToolTip": "JFrame\\Core\\Common\\JTaskManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T14:51:20.417Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "JNetMessage.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessage.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetMessage.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessage.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\JNetMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:15:41.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CombatJFrameFakeActionArgSource.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatJFrameFakeActionArgSource.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatJFrameFakeActionArgSource.cs",
@@ -135,12 +311,155 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\CombatJFrameFakeActionArgSource.cs",
               "ViewState": "AgIAAI0AAAAAAAAAAAAuwAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:57:31.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:57:31.445Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
+              "Title": "JBaseSocket.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JBaseSocket.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JBaseSocket.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JBaseSocket.cs",
+              "RelativeToolTip": "JFrame\\Core\\Network\\JBaseSocket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:12:03.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "HttpDeleter.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\HttpDeleter.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\File\\HttpDeleter.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\HttpDeleter.cs",
+              "RelativeToolTip": "JFrame\\Core\\File\\HttpDeleter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:11:44.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "XmlParaser.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlParaser.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Data\\XmlParaser.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlParaser.cs",
+              "RelativeToolTip": "JFrame\\Core\\Data\\XmlParaser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:14:23.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "XmlChainData.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlChainData.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Data\\XmlChainData.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlChainData.cs",
+              "RelativeToolTip": "JFrame\\Core\\Data\\XmlChainData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:13:26.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IDeleteAsync.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDeleteAsync.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\File\\IDeleteAsync.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDeleteAsync.cs",
+              "RelativeToolTip": "JFrame\\Core\\File\\IDeleteAsync.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:08:42.223Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IReader.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IReader.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\File\\IReader.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IReader.cs",
+              "RelativeToolTip": "JFrame\\Core\\File\\IReader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:08:36.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IDelete.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDelete.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\File\\IDelete.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDelete.cs",
+              "RelativeToolTip": "JFrame\\Core\\File\\IDelete.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:07:06.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UpdateableContainer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\UpdateableContainer.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Common\\UpdateableContainer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\UpdateableContainer.cs",
+              "RelativeToolTip": "JFrame\\Core\\Common\\UpdateableContainer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:01:05.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IParaser.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IParaser.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IParaser.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IParaser.cs",
+              "RelativeToolTip": "JFrame\\Core\\Data\\IParaser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:08:13.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IObjectPool.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\IObjectPool.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Common\\IObjectPool.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\IObjectPool.cs",
+              "RelativeToolTip": "JFrame\\Core\\Common\\IObjectPool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:08:03.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IProcesser.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IProcesser.cs",
+              "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IProcesser.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IProcesser.cs",
+              "RelativeToolTip": "JFrame\\Core\\Data\\IProcesser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T15:07:48.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CombatRealActionArgSource.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
+              "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
+              "RelativeToolTip": "JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-23T09:57:49.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "CombatActionArgSource.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\DataSources\\CombatActionArgSource.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\DataSources\\CombatActionArgSource.cs",
@@ -148,12 +467,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\DataSources\\CombatActionArgSource.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:56:42.831Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:56:42.831Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 23,
               "Title": "CombatActionInfoBuilder.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\InfoBuilder\\CombatActionInfoBuilder.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\InfoBuilder\\CombatActionInfoBuilder.cs",
@@ -161,12 +479,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\InfoBuilder\\CombatActionInfoBuilder.cs",
               "ViewState": "AgIAACIAAAAAAAAAAIAwwDYAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:56:09.772Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:56:09.772Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 24,
               "Title": "CombatDefine.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\CombatDefine.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\CombatDefine.cs",
@@ -174,12 +491,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\CombatDefine.cs",
               "ViewState": "AgIAACAAAAAAAAAAAIAwwDgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:54:59.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:54:59.886Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 28,
               "Title": "TriggerActionCast.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionCast.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionCast.cs",
@@ -187,12 +503,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionCast.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAkwD0AAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:38:30.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:38:30.477Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 32,
               "Title": "CombatUnit.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\CombatUnit.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\CombatUnit.cs",
@@ -200,12 +515,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\CombatUnit.cs",
               "ViewState": "AgIAAC4CAAAAAAAAAAAAADgCAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:31:32.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:31:32.047Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 33,
               "Title": "CombatActionManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionManager.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionManager.cs",
@@ -213,12 +527,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionManager.cs",
               "ViewState": "AgIAAGoAAAAAAAAAAAAawH0AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:31:17.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:31:17.864Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 26,
               "Title": "CombatAction.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatAction.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatAction.cs",
@@ -226,12 +539,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatAction.cs",
               "ViewState": "AgIAAFgAAAAAAAAAAAD4v2cAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:30:49.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:30:49.947Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 30,
               "Title": "TriggerUnitHurt.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerUnitHurt.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerUnitHurt.cs",
@@ -239,12 +551,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerUnitHurt.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:27:15.893Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:27:15.893Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 27,
               "Title": "TriggerActionHitted.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionHitted.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionHitted.cs",
@@ -252,12 +563,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionHitted.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAUwDUAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:27:05.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:27:05.386Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 29,
               "Title": "TriggerAmount.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerAmount.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerAmount.cs",
@@ -265,12 +575,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerAmount.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:27:34.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:27:34.061Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 25,
               "Title": "CombatActionFactory.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionFactory.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionFactory.cs",
@@ -278,12 +587,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionFactory.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAIAwwA8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T05:59:38.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T05:59:38.9Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 34,
               "Title": "CombatBaseExecutor.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\CombatBaseExecutor.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\CombatBaseExecutor.cs",
@@ -291,12 +599,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\CombatBaseExecutor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:30:10.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:30:10.238Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 31,
               "Title": "TriggerFinder.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerFinder.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerFinder.cs",
@@ -304,12 +611,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerFinder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:27:35.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:27:35.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 35,
               "Title": "ExecutorCombatNormal.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatNormal.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatNormal.cs",
@@ -317,12 +623,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatNormal.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAA5wEcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T05:59:54.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T05:59:54.807Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 36,
               "Title": "TriggerTime.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerTime.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerTime.cs",
@@ -330,12 +635,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerTime.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:27:35.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:27:35.941Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 37,
               "Title": "ExecutorCombatHeal.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatHeal.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatHeal.cs",
@@ -343,12 +647,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatHeal.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:26:59.046Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:26:59.046Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 38,
               "Title": "ExecutorCombatDamage.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatDamage.cs",
@@ -356,12 +659,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatDamage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:24:38.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:24:38.108Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 39,
               "Title": "ExecutorCombatContinuousDamage.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatContinuousDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatContinuousDamage.cs",
@@ -369,12 +671,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatContinuousDamage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:26:57.1Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:26:57.1Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 40,
               "Title": "ExecutorCombatChangeAttribute.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatChangeAttribute.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatChangeAttribute.cs",
@@ -382,12 +683,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatChangeAttribute.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:26:56.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:26:56.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 42,
               "Title": "ICombatUnit.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Interfaces\\ICombatUnit.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Interfaces\\ICombatUnit.cs",
@@ -395,12 +695,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Interfaces\\ICombatUnit.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAUwEgAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:17:49.214Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:17:49.214Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 41,
               "Title": "TestCombatExecutor.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCombatExecutor.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestCombatExecutor.cs",
@@ -408,12 +707,11 @@
               "RelativeToolTip": "JFrameTest\\TestCombatExecutor.cs",
               "ViewState": "AgIAAHoAAAAAAAAAAAAAAIkAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T09:17:24.115Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T09:17:24.115Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 43,
               "Title": "FormulaSingleAttr.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaSingleAttr.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaSingleAttr.cs",
@@ -421,12 +719,11 @@
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaSingleAttr.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T05:20:16.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-23T05:20:16.015Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 44,
               "Title": "FinderFindHpLessThanPercent.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Finders\\FinderFindHpLessThanPercent.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Finders\\FinderFindHpLessThanPercent.cs",
