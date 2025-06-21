@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace JFramework.Common
 {
 
-    public class JTaskCompletionSourceManager<T>
+    public class JTaskCompletionSourceManager<T> : IJTaskCompletionSourceManager<T>
     {
 
 

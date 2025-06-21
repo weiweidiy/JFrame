@@ -17,7 +17,7 @@ namespace JFramework
     {
         event Action onOpen;
         event Action<SocketStatusCodes, string> onClose;
-        event Action<string> onMessage;
+        event Action<IUnique> onMessage;
         //event Action<byte[]> onBinary;
         event Action<string> onError;
 
