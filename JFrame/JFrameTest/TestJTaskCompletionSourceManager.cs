@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NSubstitute;
-using JFramework.Common;
 using NSubstitute.ExceptionExtensions;
+using JFramework;
 
 namespace JFrameTest
 {

@@ -1,6 +1,4 @@
-﻿using JFramework.Common;
-
-namespace JFramework
+﻿namespace JFramework
 {
     /// <summary>
     ///  type=7 参数0： 执行周期 ， 参数1: bufftype(0=buffer，1=debuffer, 2=所有) , 参数2： 概率

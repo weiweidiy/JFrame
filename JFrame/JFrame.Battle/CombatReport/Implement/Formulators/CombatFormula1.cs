@@ -1,5 +1,4 @@
-﻿using JFramework.Common;
-using System;
+﻿using System;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace JFramework

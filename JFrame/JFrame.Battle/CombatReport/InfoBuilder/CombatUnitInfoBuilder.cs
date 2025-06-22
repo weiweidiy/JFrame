@@ -1,6 +1,4 @@
-﻿using JFramework.Common.Interface;
-
-namespace JFramework
+﻿namespace JFramework
 {
     /// <summary>
     /// 构建combatunit builder

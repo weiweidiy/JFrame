@@ -1,7 +1,4 @@
-﻿
-
-using JFramework.Common;
-using System;
+﻿using System;
 
 namespace JFramework
 {

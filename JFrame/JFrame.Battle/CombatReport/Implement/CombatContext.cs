@@ -1,6 +1,4 @@
-﻿using JFramework.Common.Interface;
-
-namespace JFramework
+﻿namespace JFramework
 {
     public class CombatContext
     {

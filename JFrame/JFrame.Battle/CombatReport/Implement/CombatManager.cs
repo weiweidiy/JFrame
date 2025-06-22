@@ -1,5 +1,4 @@
 ﻿//using Cysharp.Threading.Tasks;
-using JFramework.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

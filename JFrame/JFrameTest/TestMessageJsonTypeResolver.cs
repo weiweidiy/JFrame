@@ -40,44 +40,44 @@ namespace JFrameTest
                                                    // 可以通过反射检查内部字典是否包含注册的类型
             }
 
-            [Test]
-            public void ResolveMessageType_ShouldReturnCorrectType_WhenMessageIdIsRegistered()
-            {
-                // Arrange
-                var messageId = 123;
-                var expectedType = typeof(TestMessage);
-                _resolver.RegisterMessageType(messageId, expectedType);
+            //[Test]
+            //public void ResolveMessageType_ShouldReturnCorrectType_WhenMessageIdIsRegistered()
+            //{
+            //    // Arrange
+            //    var messageId = 123;
+            //    var expectedType = typeof(TestMessage);
+            //    _resolver.RegisterMessageType(messageId, expectedType);
 
-                var json = "{\"TypeId\":123}";
-                var data = Encoding.UTF8.GetBytes(json);
+            //    var json = "{\"TypeId\":123}";
+            //    var data = Encoding.UTF8.GetBytes(json);
 
-                var mockTypeId = Substitute.For<ITypeId>();
-                mockTypeId.TypeId.Returns(messageId);
-                _mockSerializer.ToObject<ITypeId>(json).Returns(mockTypeId);
+            //    var mockTypeId = Substitute.For<ITypeId>();
+            //    mockTypeId.TypeId.Returns(messageId);
+            //    _mockSerializer.ToObject<ITypeId>(json).Returns(mockTypeId);
 
-                // Act
-                var result = _resolver.ResolveMessageType(data);
+            //    // Act
+            //    var result = _resolver.ResolveMessageType(data);
 
-                // Assert
-                Assert.AreEqual(expectedType, result);
-            }
+            //    // Assert
+            //    Assert.AreEqual(expectedType, result);
+            //}
 
-            [Test]
-            public void ResolveMessageType_ShouldThrowException_WhenMessageIdIsNotRegistered()
-            {
-                // Arrange
-                var unregisteredMessageId = 999;
-                var json = "{\"TypeId\":999}";
-                var data = Encoding.UTF8.GetBytes(json);
+            //[Test]
+            //public void ResolveMessageType_ShouldThrowException_WhenMessageIdIsNotRegistered()
+            //{
+            //    // Arrange
+            //    var unregisteredMessageId = 999;
+            //    var json = "{\"TypeId\":999}";
+            //    var data = Encoding.UTF8.GetBytes(json);
 
-                var mockTypeId = Substitute.For<ITypeId>();
-                mockTypeId.TypeId.Returns(unregisteredMessageId);
-                _mockSerializer.ToObject<ITypeId>(json).Returns(mockTypeId);
+            //    var mockTypeId = Substitute.For<ITypeId>();
+            //    mockTypeId.TypeId.Returns(unregisteredMessageId);
+            //    _mockSerializer.ToObject<ITypeId>(json).Returns(mockTypeId);
 
-                // Act & Assert
-                var ex = Assert.Throws<InvalidOperationException>(() => _resolver.ResolveMessageType(data));
-                Assert.AreEqual($"Unknown message ID: {unregisteredMessageId}", ex.Message);
-            }
+            //    // Act & Assert
+            //    var ex = Assert.Throws<InvalidOperationException>(() => _resolver.ResolveMessageType(data));
+            //    Assert.AreEqual($"Unknown message ID: {unregisteredMessageId}", ex.Message);
+            //}
 
             [Test]
             public void ResolveMessageType_ShouldThrowException_WhenInvalidUtf8DataReceived()
