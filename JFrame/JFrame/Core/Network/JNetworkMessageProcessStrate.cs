@@ -1,6 +1,4 @@
 ﻿using System;
-using JFramework.Common;
-using Newtonsoft.Json;
 
 namespace JFramework
 {

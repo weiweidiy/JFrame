@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessagejsontyperesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessagejsontyperesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessagejsonserializerstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessagejsonserializerstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testmessagejsontyperesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetworkmessageprocessstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetworkmessageprocessstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessagejsonserializerstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessagejsonserializerstrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -234,21 +230,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "JNetMessage.cs",
-              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessage.cs",
-              "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetMessage.cs",
-              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessage.cs",
-              "RelativeToolTip": "JFrame\\Core\\Network\\JNetMessage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T04:35:29.433Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -259,12 +242,11 @@
               "RelativeToolTip": "JFrameTest\\TestJNetwork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAJkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T04:32:59.677Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T04:32:59.677Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "JNetMessageJsonSerializerStrate.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessageJsonSerializerStrate.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetMessageJsonSerializerStrate.cs",
@@ -272,18 +254,17 @@
               "RelativeToolTip": "JFrame\\Core\\Network\\JNetMessageJsonSerializerStrate.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAkwB8AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T04:31:01.664Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T04:31:01.664Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "JNetMessageJsonTypeResolver.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
               "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
               "RelativeToolTip": "JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAkwCYAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwCAAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-22T04:24:37.979Z",
               "EditorCaption": ""
@@ -298,12 +279,11 @@
               "RelativeToolTip": "JFrameTest\\TestMessageJsonTypeResolver.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAmwGgAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T03:13:01.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T03:13:01.298Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "JsonNetParaser.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JsonNetParaser.cs",
               "RelativeDocumentMoniker": "JFrame\\JsonNetParaser.cs",
@@ -323,12 +303,11 @@
               "RelativeToolTip": "JFrame\\Core\\Network\\JNetworkMessageProcessStrate.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAmwBYAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T14:35:46.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-21T14:35:46.335Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "JNetwork.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetwork.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetwork.cs",
@@ -340,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "IJsonSerializer.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IJsonSerializer.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IJsonSerializer.cs",
@@ -352,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "IJSocket.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IJSocket.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\IJSocket.cs",
@@ -364,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "JDataProcesserManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\JDataProcesserManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\JDataProcesserManager.cs",
@@ -376,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "IMessageTypeResolver.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IMessageTypeResolver.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IMessageTypeResolver.cs",
@@ -388,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "FromBase64String.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\FromBase64String.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\FromBase64String.cs",
@@ -400,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "IUpdateable.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\IUpdateable.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\IUpdateable.cs",
@@ -412,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "JExtensions.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\JExtensions.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\JExtensions.cs",
@@ -424,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "JTaskCompletionSourceManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\JTaskCompletionSourceManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\JTaskCompletionSourceManager.cs",
@@ -436,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "BaseContainer.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\BaseContainer.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\BaseContainer.cs",
@@ -448,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "UpdateableContainer.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\UpdateableContainer.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\UpdateableContainer.cs",
@@ -460,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "IHttpRequest.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\IHttpRequest.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\IHttpRequest.cs",
@@ -472,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "HiplayHttpRequest.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\HiplayHttpRequest.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\HiplayHttpRequest.cs",
@@ -484,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 54,
               "Title": "JTaskManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\JTaskManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\JTaskManager.cs",
@@ -496,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "CombatJFrameFakeActionArgSource.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatJFrameFakeActionArgSource.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatJFrameFakeActionArgSource.cs",
@@ -508,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "JBaseSocket.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JBaseSocket.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JBaseSocket.cs",
@@ -520,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "HttpDeleter.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\HttpDeleter.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\File\\HttpDeleter.cs",
@@ -532,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "XmlParaser.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlParaser.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\XmlParaser.cs",
@@ -544,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "XmlChainData.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\XmlChainData.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\XmlChainData.cs",
@@ -556,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "IDeleteAsync.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDeleteAsync.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\File\\IDeleteAsync.cs",
@@ -568,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "IReader.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IReader.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\File\\IReader.cs",
@@ -580,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "IDelete.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\File\\IDelete.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\File\\IDelete.cs",
@@ -592,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "IParaser.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IParaser.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IParaser.cs",
@@ -604,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "IObjectPool.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Common\\IObjectPool.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\IObjectPool.cs",
@@ -616,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "IProcesser.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Data\\IProcesser.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Data\\IProcesser.cs",
@@ -628,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "CombatRealActionArgSource.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\CombatRealActionArgSource.cs",
@@ -640,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "CombatActionArgSource.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\DataSources\\CombatActionArgSource.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\DataSources\\CombatActionArgSource.cs",
@@ -652,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "CombatActionInfoBuilder.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\InfoBuilder\\CombatActionInfoBuilder.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\InfoBuilder\\CombatActionInfoBuilder.cs",
@@ -664,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "CombatDefine.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\CombatDefine.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\CombatDefine.cs",
@@ -676,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "TriggerActionCast.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionCast.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionCast.cs",
@@ -688,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 41,
               "Title": "CombatUnit.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\CombatUnit.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\CombatUnit.cs",
@@ -700,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 42,
               "Title": "CombatActionManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionManager.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionManager.cs",
@@ -712,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "CombatAction.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatAction.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatAction.cs",
@@ -724,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 39,
               "Title": "TriggerUnitHurt.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerUnitHurt.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerUnitHurt.cs",
@@ -736,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "TriggerActionHitted.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionHitted.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerActionHitted.cs",
@@ -748,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 38,
               "Title": "TriggerAmount.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerAmount.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerAmount.cs",
@@ -760,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "CombatActionFactory.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionFactory.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Actions\\CombatActionFactory.cs",
@@ -772,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 43,
               "Title": "CombatBaseExecutor.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\CombatBaseExecutor.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\CombatBaseExecutor.cs",
@@ -784,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 40,
               "Title": "TriggerFinder.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerFinder.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerFinder.cs",
@@ -796,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 44,
               "Title": "ExecutorCombatNormal.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatNormal.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatNormal.cs",
@@ -808,7 +787,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 45,
               "Title": "TriggerTime.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerTime.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Triggers\\TriggerTime.cs",
@@ -820,7 +799,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 46,
               "Title": "ExecutorCombatHeal.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatHeal.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatHeal.cs",
@@ -832,7 +811,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 47,
               "Title": "ExecutorCombatDamage.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatDamage.cs",
@@ -844,7 +823,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 48,
               "Title": "ExecutorCombatContinuousDamage.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatContinuousDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatContinuousDamage.cs",
@@ -856,7 +835,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 49,
               "Title": "ExecutorCombatChangeAttribute.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatChangeAttribute.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Executors\\ExecutorCombatChangeAttribute.cs",
@@ -868,7 +847,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 51,
               "Title": "ICombatUnit.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Interfaces\\ICombatUnit.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Interfaces\\ICombatUnit.cs",
@@ -880,7 +859,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 50,
               "Title": "TestCombatExecutor.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCombatExecutor.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestCombatExecutor.cs",
@@ -892,7 +871,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 52,
               "Title": "FormulaSingleAttr.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaSingleAttr.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaSingleAttr.cs",
@@ -904,7 +883,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 53,
               "Title": "FinderFindHpLessThanPercent.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Finders\\FinderFindHpLessThanPercent.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Finders\\FinderFindHpLessThanPercent.cs",
