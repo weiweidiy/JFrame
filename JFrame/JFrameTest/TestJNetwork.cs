@@ -34,8 +34,14 @@ namespace JFrameTest
         }
 
         // 测试辅助类
-        public class TestMessage : IUnique { public string Uid { get; set; } }
-        public class TestResponse : IUnique { public string Uid { get; set; } }
+        public class TestRequest : IJNetMessage { public string Uid { get; set; }
+
+            public int TypeId => throw new NotImplementedException();
+        }
+        public class TestResponse : IJNetMessage { public string Uid { get; set; }
+
+            public int TypeId => throw new NotImplementedException();
+        }
 
         [Test]
         public async Task Connect_WhenSuccess_ShouldInvokeOnOpen()
@@ -62,7 +68,7 @@ namespace JFrameTest
         {
             // Arrange
             _socketMock.IsOpen.Returns(true);
-            var request = new TestMessage { Uid = "req1" };
+            var request = new TestRequest { Uid = "req1"  };
             var timeout = TimeSpan.FromMilliseconds(100);
 
             // 模拟任务管理器行为
@@ -83,7 +89,7 @@ namespace JFrameTest
         {
             // Arrange
             _socketMock.IsOpen.Returns(true);
-            var request = new TestMessage { Uid = "req1" };
+            var request = new TestRequest { Uid = "req1" };
             var response = new TestResponse { Uid = "resp1" };
 
             var byteMsg = new byte[10];
@@ -111,7 +117,7 @@ namespace JFrameTest
         public void Socket_OnBinary_ShouldCompleteMatchingTask()
         {
             // Arrange
-            var response = new TestMessage { Uid = "resp1" };
+            var response = new TestResponse { Uid = "resp1" };
             var byteData = new byte[10];
             _messageProcessStrateMock.ProcessComingMessage(byteData).Returns(response);
 
@@ -138,8 +144,19 @@ namespace JFrameTest
         private INetworkMessageProcessStrate _messageProcessor;
         private JNetwork _network;
 
-        public class TestMessage : IUnique { public string Uid { get; set; } }
-        public class TestResponse : IUnique { public string Uid { get; set; } }
+        // 测试辅助类
+        public class TestRequest : IJNetMessage
+        {
+            public string Uid { get; set; }
+
+            public int TypeId => throw new NotImplementedException();
+        }
+        public class TestResponse : IJNetMessage
+        {
+            public string Uid { get; set; }
+
+            public int TypeId => throw new NotImplementedException();
+        }
 
         [SetUp]
         public void Setup()
@@ -182,7 +199,7 @@ namespace JFrameTest
         public async Task SendMessage_ShouldCompleteFullRequestResponseFlow()
         {
             // Arrange
-            var request = new TestMessage { Uid = "req_123" };
+            var request = new TestRequest { Uid = "req_123" };
             var response = new TestResponse { Uid = "resp_123" };
             var responseBytes = Encoding.UTF8.GetBytes("response_data");
 
@@ -229,7 +246,7 @@ namespace JFrameTest
         public void SendMessage_ShouldTimeoutWhenNoResponse()
         {
             // Arrange
-            var request = new TestMessage { Uid = "timeout_test" };
+            var request = new TestRequest { Uid = "timeout_test" };
             _socketMock.IsOpen.Returns(true);
             _messageProcessor.ProcessOutMessage(request).Returns(new byte[10]);
 
