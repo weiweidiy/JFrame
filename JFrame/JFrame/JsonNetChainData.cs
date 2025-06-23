@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using JFramework.Common.Interface;
 using Newtonsoft.Json;
 
 namespace JFramework.Common

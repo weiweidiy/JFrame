@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {}
+    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {}
   },
   "projects": {
-    "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
         "projectName": "JFrame",
-        "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
-        "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
-        "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\obj\\",
+        "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,7 +66,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

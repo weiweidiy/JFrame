@@ -1,5 +1,4 @@
-﻿using JFramework.Common.Interface;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 
 namespace JFramework.Common

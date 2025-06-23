@@ -1,4 +1,5 @@
-﻿using JFramework.Common;
+﻿using JFramework;
+using JFramework.Common;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
