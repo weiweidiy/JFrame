@@ -25,10 +25,10 @@ namespace JFramework.Game
             public string Path;
             public Type TableType;
             public Type ItemType;
-            public IDeserializer deserializer;
+            public IDeserializer Deserializer;
         }
 
-        public JConfigManager(IConfigLoader loader/)
+        public JConfigManager(IConfigLoader loader)
         {
             this.loader = loader;
             //this.deserializer = serializer;
@@ -41,7 +41,7 @@ namespace JFramework.Game
         /// <typeparam name="TTable"></typeparam>
         /// <typeparam name="TItem"></typeparam>
         /// <param name="path"></param>
-        public void RegisterTable<TTable, TItem>(string path)
+        public void RegisterTable<TTable, TItem>(string path, IDeserializer deserializer)
             where TTable : IConfigTable<TItem>, new()
             where TItem : IUnique
         {
@@ -49,7 +49,9 @@ namespace JFramework.Game
             {
                 Path = path,
                 TableType = typeof(TTable),
-                ItemType = typeof(TItem)
+                ItemType = typeof(TItem),
+                Deserializer = deserializer
+                
             };
 
             // 预初始化UID映射
@@ -61,7 +63,7 @@ namespace JFramework.Game
         /// </summary>
         public async Task PreloadAllAsync()
         {
-            var loadTasks = _registrations.Values.Select((tableInfo)=> LoadTableAsync(tableInfo, tableInfo.deserializer));
+            var loadTasks = _registrations.Values.Select((tableInfo)=> LoadTableAsync(tableInfo, tableInfo.Deserializer));
             await Task.WhenAll(loadTasks);
         }
 

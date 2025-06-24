@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\config\\jconfigmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\config\\jconfigmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\config\\iconfigtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\config\\iconfigtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,20 +22,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IConfigTable.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\IConfigTable.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Config\\IConfigTable.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\IConfigTable.cs",
+              "RelativeToolTip": "JFrame\\Game\\Config\\IConfigTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:37:42.955Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "JConfigManager.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\JConfigManager.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Config\\JConfigManager.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\JConfigManager.cs",
+              "RelativeToolTip": "JFrame\\Game\\Config\\JConfigManager.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEgAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T14:37:18.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "BaseModel.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\BaseModel.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\BaseModel.cs",
               "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\BaseModel.cs",
               "RelativeToolTip": "JFrame\\Game\\BaseModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T11:16:55.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T11:16:55.531Z"
             }
           ]
         }

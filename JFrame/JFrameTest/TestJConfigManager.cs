@@ -59,7 +59,7 @@ namespace JFramework.Tests
         public void Setup()
         {
             _mockLoader = Substitute.For<IConfigLoader>();
-            _configManager = new JConfigManager(_mockLoader, serializer);
+            _configManager = new JConfigManager(_mockLoader);
             var json = serializer.ToJson(dataList);
             bytesData = Encoding.UTF8.GetBytes(json);
         }
@@ -69,7 +69,7 @@ namespace JFramework.Tests
         {
             // Arrange
             _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
-            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
+            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path", serializer);
 
             // Act
             await _configManager.PreloadAllAsync();
@@ -135,7 +135,7 @@ namespace JFramework.Tests
         {
             //arrange
             _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
-            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
+            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path", serializer);
 
             // Act
             await _configManager.PreloadAllAsync();
@@ -150,7 +150,7 @@ namespace JFramework.Tests
         {
             //arrange
             _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
-            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
+            _configManager.RegisterTable<MockConfigTable, TestItem>("test_path", serializer);
 
             // Act
             await _configManager.PreloadAllAsync();
