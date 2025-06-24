@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JFramework.Game;
+using JFrameTest;
+using System.Text;
 
 namespace JFramework.Tests
 {
@@ -24,34 +26,44 @@ namespace JFramework.Tests
         {
             private readonly List<TestItem> _items = new List<TestItem>();
 
-            public void Initialize(byte[] data) => _items.AddRange(GetTestData());
+            public void Initialize(TestItem[] lst) => _items.AddRange(lst);
 
             public IEnumerator<TestItem> GetEnumerator() => _items.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            private static IEnumerable<TestItem> GetTestData() => new[]
-            {
-                new TestItem { Uid = "item1", Value = 100 },
-                new TestItem { Uid = "item2", Value = 200 }
-            };
+            //private static IEnumerable<TestItem> GetTestData() => new[]
+            //{
+            //    new TestItem { Uid = "item1", Value = 100 },
+            //    new TestItem { Uid = "item2", Value = 200 }
+            //};
         }
 
         private JConfigManager _configManager;
         private IConfigLoader _mockLoader;
+        JsonNetSerializer serializer = new JsonNetSerializer();
+
+        List<TestItem> dataList = new List<TestItem>() {
+                new TestItem() { Uid = "item1", Value = 100 },
+                new TestItem() { Uid = "item2", Value = 200 }
+            };
+
+        byte[] bytesData;
 
         [SetUp]
         public void Setup()
         {
             _mockLoader = Substitute.For<IConfigLoader>();
-            _configManager = new JConfigManager(_mockLoader);
+            _configManager = new JConfigManager(_mockLoader, serializer);
+            var json = serializer.ToJson(dataList);
+            bytesData = Encoding.UTF8.GetBytes(json);
         }
 
         [Test]
         public async Task PreloadAllAsync_ShouldLoadAllRegisteredTables()
         {
             // Arrange
-            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(new byte[0]);
+            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
             _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
 
             // Act
@@ -117,7 +129,7 @@ namespace JFramework.Tests
         public async Task GetData_ShouldCorect()
         {
             //arrange
-            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(new byte[0]);
+            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
             _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
 
             // Act
@@ -132,7 +144,7 @@ namespace JFramework.Tests
         public async Task GetDataList_ShouldCorect()
         {
             //arrange
-            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(new byte[0]);
+            _mockLoader.LoadBytesAsync(Arg.Any<string>()).Returns(bytesData);
             _configManager.RegisterTable<MockConfigTable, TestItem>("test_path");
 
             // Act

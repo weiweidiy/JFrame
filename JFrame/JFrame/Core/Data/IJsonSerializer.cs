@@ -9,5 +9,7 @@ namespace JFramework
         T ToObject<T>(string str);
 
         object ToObject(string json, Type type);
+
+        object ToObject(byte[] bytes, Type type);
     }
 }

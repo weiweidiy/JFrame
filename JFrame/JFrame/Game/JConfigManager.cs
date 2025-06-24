@@ -11,9 +11,11 @@ namespace JFramework.Game
     public class JConfigManager
     {
         private readonly Dictionary<Type, object> _tables = new Dictionary<Type, object>();
-        private readonly IConfigLoader _loader;
+        private readonly IConfigLoader loader;
         private readonly Dictionary<Type, Dictionary<string, IUnique>> _uidMaps = new Dictionary<Type, Dictionary<string, IUnique>>();
         private readonly Dictionary<Type, TableInfo> _registrations = new Dictionary<Type, TableInfo>();
+
+        IJsonSerializer serializer;
 
         public class TableInfo
         {
@@ -22,7 +24,12 @@ namespace JFramework.Game
             public Type ItemType;
         }
 
-        public JConfigManager(IConfigLoader loader) => _loader = loader;
+        public JConfigManager(IConfigLoader loader, IJsonSerializer serializer)
+        {
+            this.loader = loader;
+            this.serializer = serializer;
+        }
+
 
         /// <summary>
         /// 注册配置表
@@ -63,14 +70,14 @@ namespace JFramework.Game
             var table = Activator.CreateInstance(tableInfo.TableType);
 
             // 2. 加载原始数据
-            var data = await _loader.LoadBytesAsync(tableInfo.Path);
+            var data = await loader.LoadBytesAsync(tableInfo.Path);
 
-            // var itemList = serialize(data, tableInfo.ItemType);
+             var itemList = serializer.ToObject(data, tableInfo.ItemType.MakeArrayType());
             //to do: 序列化成
 
             // 3. 通过反射调用Initialize方法
             var initializeMethod = tableInfo.TableType.GetMethod("Initialize");
-            initializeMethod.Invoke(table, new object[] { data });
+            initializeMethod.Invoke(table, new object[] { itemList });
 
             // 4. 存储表引用
             _tables[tableInfo.ItemType] = table;

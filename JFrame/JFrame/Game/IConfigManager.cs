@@ -9,7 +9,7 @@ namespace JFramework.Game
 
     public interface IConfigTable<T> : IEnumerable<T> where T : IUnique
     {
-        void Initialize(byte[] data);
+        void Initialize(T[] lst);
     }
 
     public interface IConfigLoader

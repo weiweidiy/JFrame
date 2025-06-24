@@ -130,6 +130,11 @@ namespace JFrameTest
                 {
                     return JsonConvert.DeserializeObject(json, type);
                 }
+
+                public object ToObject(byte[] bytes, Type type)
+                {
+                    throw new NotImplementedException();
+                }
             }
 
             private class TestMessage : ITypeId
