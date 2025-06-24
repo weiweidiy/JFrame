@@ -15,19 +15,23 @@ namespace JFramework.Game
         private readonly Dictionary<Type, Dictionary<string, IUnique>> _uidMaps = new Dictionary<Type, Dictionary<string, IUnique>>();
         private readonly Dictionary<Type, TableInfo> _registrations = new Dictionary<Type, TableInfo>();
 
-        IJsonSerializer serializer;
+        /// <summary>
+        /// 反序列化
+        /// </summary>
+        //IDeserializer deserializer;
 
         public class TableInfo
         {
             public string Path;
             public Type TableType;
             public Type ItemType;
+            public IDeserializer deserializer;
         }
 
-        public JConfigManager(IConfigLoader loader, IJsonSerializer serializer)
+        public JConfigManager(IConfigLoader loader/)
         {
             this.loader = loader;
-            this.serializer = serializer;
+            //this.deserializer = serializer;
         }
 
 
@@ -57,14 +61,14 @@ namespace JFramework.Game
         /// </summary>
         public async Task PreloadAllAsync()
         {
-            var loadTasks = _registrations.Values.Select(LoadTableAsync);
+            var loadTasks = _registrations.Values.Select((tableInfo)=> LoadTableAsync(tableInfo, tableInfo.deserializer));
             await Task.WhenAll(loadTasks);
         }
 
         /// <summary>
         /// 加载单个配置表
         /// </summary>
-        private async Task LoadTableAsync(TableInfo tableInfo)
+        private async Task LoadTableAsync(TableInfo tableInfo, IDeserializer deserializer)
         {
             // 1. 创建表实例（无需强制转换）
             var table = Activator.CreateInstance(tableInfo.TableType);
@@ -72,7 +76,7 @@ namespace JFramework.Game
             // 2. 加载原始数据
             var data = await loader.LoadBytesAsync(tableInfo.Path);
 
-             var itemList = serializer.ToObject(data, tableInfo.ItemType.MakeArrayType());
+             var itemList = deserializer.ToObject(data, tableInfo.ItemType.MakeArrayType());
             //to do: 序列化成
 
             // 3. 通过反射调用Initialize方法

@@ -22,21 +22,26 @@ namespace JFramework.Tests
         }
 
         // 模拟配置表
-        public class MockConfigTable : IConfigTable<TestItem>, IEnumerable<TestItem>
+        //public class MockConfigTable : IConfigTable<TestItem>, IEnumerable<TestItem>
+        //{
+        //    private readonly List<TestItem> _items = new List<TestItem>();
+
+        //    public void Initialize(TestItem[] lst) => _items.AddRange(lst);
+
+        //    public IEnumerator<TestItem> GetEnumerator() => _items.GetEnumerator();
+
+        //    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        //    //private static IEnumerable<TestItem> GetTestData() => new[]
+        //    //{
+        //    //    new TestItem { Uid = "item1", Value = 100 },
+        //    //    new TestItem { Uid = "item2", Value = 200 }
+        //    //};
+        //}
+
+        public class MockConfigTable:BaseConfigTable<TestItem>
         {
-            private readonly List<TestItem> _items = new List<TestItem>();
 
-            public void Initialize(TestItem[] lst) => _items.AddRange(lst);
-
-            public IEnumerator<TestItem> GetEnumerator() => _items.GetEnumerator();
-
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-            //private static IEnumerable<TestItem> GetTestData() => new[]
-            //{
-            //    new TestItem { Uid = "item1", Value = 100 },
-            //    new TestItem { Uid = "item2", Value = 200 }
-            //};
         }
 
         private JConfigManager _configManager;
