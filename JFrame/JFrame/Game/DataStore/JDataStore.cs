@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace JFramework
 {
+    /// <summary>
+    /// 存档工具（可以理解为保存一张张数据表)
+    /// </summary>
     public class JDataStore : IGameDataStore, IDisposable
     {
         private readonly Dictionary<string, object> _memoryCache = new Dictionary<string, object>();
@@ -30,6 +33,12 @@ namespace JFramework
             _deleter = deleter ?? throw new ArgumentNullException(nameof(deleter));
         }
 
+        /// <summary>
+        /// 是否存在存档
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task<bool> ExistsAsync(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -43,6 +52,13 @@ namespace JFramework
             return await _reader.ExistsAsync(key);
         }
 
+        /// <summary>
+        /// 获取存档数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task<T> GetAsync<T>(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -68,6 +84,15 @@ namespace JFramework
             return data;
         }
 
+        /// <summary>
+        /// 存档，持久化
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task SaveAsync<T>(string key, T value)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -86,6 +111,12 @@ namespace JFramework
             _memoryCache[key] = value;
         }
 
+        /// <summary>
+        /// 删除存档
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task<bool> RemoveAsync(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -100,6 +131,10 @@ namespace JFramework
             return success;
         }
 
+        /// <summary>
+        /// 删除所有表
+        /// </summary>
+        /// <returns></returns>
         public async Task ClearAsync()
         {
             // 清空持久化存储
@@ -109,6 +144,10 @@ namespace JFramework
             _memoryCache.Clear();
         }
 
+        /// <summary>
+        /// 清理缓存数据
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<string>> GetAllKeysAsync()
         {
             // 获取所有持久化存储的键
