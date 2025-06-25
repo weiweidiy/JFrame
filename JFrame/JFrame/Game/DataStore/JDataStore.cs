@@ -7,30 +7,19 @@ using System.Threading.Tasks;
 
 namespace JFramework
 {
+
     /// <summary>
     /// 存档工具（可以理解为保存一张张数据表)
     /// </summary>
     public class JDataStore : IGameDataStore, IDisposable
     {
         private readonly Dictionary<string, object> _memoryCache = new Dictionary<string, object>();
-        private readonly ISerializer _serializer;
-        private readonly IDeserializer _deserializer;
-        private readonly IWriter _writer;
-        private readonly IReader _reader;
-        private readonly IDelete _deleter;
+        private readonly IDataManager dataManager;
         private bool _disposed;
 
-        public JDataStore(ISerializer serializer,
-                         IDeserializer deserializer,
-                         IWriter writer,
-                         IReader reader,
-                         IDelete deleter)
+        public JDataStore(IDataManager dataManager)
         {
-            _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
-            _deserializer = deserializer ?? throw new ArgumentNullException(nameof(deserializer));
-            _writer = writer ?? throw new ArgumentNullException(nameof(writer));
-            _reader = reader ?? throw new ArgumentNullException(nameof(reader));
-            _deleter = deleter ?? throw new ArgumentNullException(nameof(deleter));
+            this.dataManager = dataManager ?? throw new ArgumentNullException(nameof(dataManager));
         }
 
         /// <summary>
@@ -49,7 +38,7 @@ namespace JFramework
                 return true;
 
             // 然后检查持久化存储
-            return await _reader.ExistsAsync(key);
+            return await dataManager.ExistsAsync(key);
         }
 
         /// <summary>
@@ -74,7 +63,7 @@ namespace JFramework
             }
 
             // 从持久化存储读取
-            var data = await _reader.ReadAsync<T>(key, _deserializer);
+            var data = await dataManager.ReadAsync<T>(key, dataManager);
             if (data == null)
                 return default;
 
@@ -102,10 +91,10 @@ namespace JFramework
                 throw new ArgumentNullException(nameof(value));
 
             // 序列化数据
-            var serializedData = _serializer.Serialize(value);
+            var serializedData = dataManager.Serialize(value);
 
             // 写入持久化存储
-            await _writer.WriteAsync(key, serializedData);
+            await dataManager.WriteAsync(key, serializedData);
 
             // 更新内存缓存
             _memoryCache[key] = value;
@@ -123,7 +112,7 @@ namespace JFramework
                 throw new ArgumentException("Key cannot be null or whitespace", nameof(key));
 
             // 从持久化存储删除
-            var success = await _deleter.DeleteAsync(key);
+            var success = await dataManager.DeleteAsync(key);
 
             // 从内存缓存删除
             _memoryCache.Remove(key);
@@ -138,7 +127,7 @@ namespace JFramework
         public async Task ClearAsync()
         {
             // 清空持久化存储
-            await _deleter.ClearAsync();
+            await dataManager.ClearAsync();
 
             // 清空内存缓存
             _memoryCache.Clear();
@@ -172,10 +161,6 @@ namespace JFramework
 
             if (disposing)
             {
-                // 释放托管资源
-                (_writer as IDisposable)?.Dispose();
-                (_reader as IDisposable)?.Dispose();
-                (_deleter as IDisposable)?.Dispose();
 
                 _memoryCache.Clear();
             }
