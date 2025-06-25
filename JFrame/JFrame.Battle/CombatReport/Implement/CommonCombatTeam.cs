@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace JFramework
 {
-    public class CommonCombatTeam : BaseContainer<CombatUnit>, ICombatTeam<CombatUnit>, ICombatUpdatable
+    public class CommonCombatTeam : ListContainer<CombatUnit>, ICombatTeam<CombatUnit>, ICombatUpdatable
     {
         //public event Action<int, ICombatUnit, ICombatAction, List<ICombatUnit>, float> onActionCast;
         //public event Action<int, ICombatUnit, ICombatAction, float> onActionStartCD;

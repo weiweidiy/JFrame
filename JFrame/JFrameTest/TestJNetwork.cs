@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework.Interfaces;
 using System.Threading;
-using JFramework.Common.Interface;
 using System.Linq;
 
 namespace JFrameTest
@@ -23,14 +22,16 @@ namespace JFrameTest
         private IJTaskCompletionSourceManager<IUnique> _taskManagerMock;
         private INetworkMessageProcessStrate _messageProcessStrateMock;
         private JNetwork _network;
-
+        private ISocketFactory _factory;
         [SetUp]
         public void Setup()
         {
             _socketMock = Substitute.For<IJSocket>();
+            _factory = Substitute.For<ISocketFactory>();
+            _factory.Create().Returns(Substitute.For<IJSocket>());
             _taskManagerMock = Substitute.For<IJTaskCompletionSourceManager<IUnique>>();
             _messageProcessStrateMock = Substitute.For<INetworkMessageProcessStrate>();
-            _network = new JNetwork(_socketMock, _taskManagerMock, _messageProcessStrateMock);
+            _network = new JNetwork(_factory, _taskManagerMock, _messageProcessStrateMock);
         }
 
         // 测试辅助类
@@ -48,6 +49,7 @@ namespace JFrameTest
         {
             // Arrange
             _socketMock.IsOpen.Returns(true);
+            _factory.Create().Returns(_socketMock); //必须固定的socket
             _socketMock.When(x => x.Open()).Do(_ =>
             {
                 _socketMock.onOpen += Raise.Event<Action<IJSocket>>(_socketMock);
@@ -68,6 +70,7 @@ namespace JFrameTest
         {
             // Arrange
             _socketMock.IsOpen.Returns(true);
+            _network.Socket = _socketMock;
             var request = new TestRequest { Uid = "req1"  };
             var timeout = TimeSpan.FromMilliseconds(100);
 
@@ -89,6 +92,7 @@ namespace JFrameTest
         {
             // Arrange
             _socketMock.IsOpen.Returns(true);
+            _network.Socket = _socketMock;
             var request = new TestRequest { Uid = "req1" };
             var response = new TestResponse { Uid = "resp1" };
 
@@ -143,6 +147,7 @@ namespace JFrameTest
         private IJTaskCompletionSourceManager<IUnique> _taskManager;
         private INetworkMessageProcessStrate _messageProcessor;
         private JNetwork _network;
+        private ISocketFactory _factory;
 
         // 测试辅助类
         public class TestRequest : IJNetMessage
@@ -162,9 +167,11 @@ namespace JFrameTest
         public void Setup()
         {
             _socketMock = Substitute.For<IJSocket>();
+            _factory = Substitute.For<ISocketFactory>();
+            _factory.Create().Returns(Substitute.For<IJSocket>());
             _taskManager = new JTaskCompletionSourceManager<IUnique>(); // 使用真实实现
             _messageProcessor = Substitute.For<INetworkMessageProcessStrate>();
-            _network = new JNetwork(_socketMock, _taskManager, _messageProcessor);
+            _network = new JNetwork(_factory, _taskManager, _messageProcessor);
         }
 
         [Test]
@@ -176,7 +183,7 @@ namespace JFrameTest
             _network.onOpen += () => opened = true;
             _network.onClose += (s, c) => closed = true;
 
-            // Mock连接成功
+            _factory.Create().Returns(_socketMock); //必须固定的socket
             _socketMock.When(x => x.Open()).Do(_ =>
             {
                 _socketMock.onOpen += Raise.Event<Action<IJSocket>>(_socketMock);
@@ -185,9 +192,12 @@ namespace JFrameTest
             // Act
             await _network.Connect(url);
 
+            // Mock连接成功
+   
+
             // Mock连接关闭
-            _socketMock.onClosed += Raise.Event<Action<IJSocket, SocketStatusCodes, string>>(
-                _socketMock, SocketStatusCodes.NormalClosure, "Closed");
+            _network.Socket.onClosed += Raise.Event<Action<IJSocket, SocketStatusCodes, string>>(
+                _network.Socket, SocketStatusCodes.NormalClosure, "Closed");
 
             // Assert
             Assert.IsTrue(opened);
@@ -205,6 +215,7 @@ namespace JFrameTest
 
             // Mock连接状态
             _socketMock.IsOpen.Returns(true);
+            _network.Socket = _socketMock;
 
             // Mock消息处理
             _messageProcessor.ProcessOutMessage(request).Returns(new byte[10]);
@@ -247,12 +258,17 @@ namespace JFrameTest
         {
             // Arrange
             var request = new TestRequest { Uid = "timeout_test" };
+
+
+            _factory.Create().Returns(_socketMock);
             _socketMock.IsOpen.Returns(true);
+            _network.Socket = _socketMock;
+
             _messageProcessor.ProcessOutMessage(request).Returns(new byte[10]);
 
+            
             // Act & Assert
-            Assert.ThrowsAsync<TimeoutException>(() =>
-                _network.SendMessage<TestResponse>(request, TimeSpan.FromMilliseconds(100)));
+            Assert.ThrowsAsync<TimeoutException>(() =>_network.SendMessage<TestResponse>(request, TimeSpan.FromMilliseconds(100)));
         }
 
     }

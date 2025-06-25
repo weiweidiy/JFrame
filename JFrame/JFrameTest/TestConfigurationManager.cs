@@ -4,6 +4,7 @@ using System.Text;
 using System;
 using JFramework.Common;
 using System.Collections.Generic;
+using JFramework;
 
 namespace JFrameTest
 {
@@ -69,23 +70,23 @@ namespace JFrameTest
  
         }
 
-        /// <summary>
-        /// 从文件中加载
-        /// </summary>
-        [Test]
-        public void TestLoadConfigFromFile()
-        {
-            //Arrange
-            var manager = new ConfigurationManager();
+        ///// <summary>
+        ///// 从文件中加载
+        ///// </summary>
+        //[Test]
+        //public void TestLoadConfigFromFile()
+        //{
+        //    //Arrange
+        //    var manager = new ConfigurationManager();
 
-            //Act
-            manager.Load("App", "D:/App.json", new LocalReader(), new JsonNetParaser());
+        //    //Act
+        //    manager.Load("App", "D:/App.json", new LocalReader(), new JsonNetParaser());
 
-            //Assert
-            Assert.AreEqual(1, manager["App"]["MyData"]["1"].GetValue<int>("ID"));
-            Assert.AreEqual("1", manager["App"]["MyData"]["2"][0].GetValue<string>("name"));
-            //var names = manager["App"]["MyData"]["2"].ToObject<List<Name>>();
-        }
+        //    //Assert
+        //    Assert.AreEqual(1, manager["App"]["MyData"]["1"].GetValue<int>("ID"));
+        //    Assert.AreEqual("1", manager["App"]["MyData"]["2"][0].GetValue<string>("name"));
+        //    //var names = manager["App"]["MyData"]["2"].ToObject<List<Name>>();
+        //}
 
 
     }

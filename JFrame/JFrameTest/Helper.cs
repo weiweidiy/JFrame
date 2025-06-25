@@ -8,27 +8,32 @@ using System.Threading.Tasks;
 
 namespace JFrameTest
 {
-    public class JsonNetSerializer : IJsonSerializer
+    public class JsonNetSerializer : ISerializer, IDeserializer
     {
-        public string ToJson(object obj)
+        public string Serialize(object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }
 
         public T ToObject<T>(string str)
         {
-            throw new NotImplementedException();
+            return JsonConvert.DeserializeObject<T>(str);
         }
 
         public object ToObject(string json, Type type)
         {
-            throw new NotImplementedException();
+            return JsonConvert.DeserializeObject(json, type);
         }
 
         public object ToObject(byte[] bytes, Type type)
         {
             var str = Encoding.UTF8.GetString(bytes);
             return JsonConvert.DeserializeObject(str, type);
+        }
+
+        public T ToObject<T>(byte[] bytes)
+        {
+            throw new NotImplementedException();
         }
     }
 }

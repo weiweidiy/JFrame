@@ -60,7 +60,7 @@ namespace JFramework.Tests
         {
             _mockLoader = Substitute.For<IConfigLoader>();
             _configManager = new JConfigManager(_mockLoader);
-            var json = serializer.ToJson(dataList);
+            var json = serializer.Serialize(dataList);
             bytesData = Encoding.UTF8.GetBytes(json);
         }
 
