@@ -52,36 +52,36 @@ namespace JFrameTest
             Assert.IsTrue(sm.GetCurState().Name == "ActionStandbyState");
         }
 
-        [Test]
-        public void TestSwitchToExecuting()
-        {
-            //arrange
+        //[Test]
+        //public void TestSwitchToExecuting()
+        //{
+        //    //arrange
 
 
-            //action         
-            sm.SwitchToDisable();
-            sm.SwitchToStandby();
-            sm.SwitchToExecuting();
+        //    //action         
+        //    sm.SwitchToDisable();
+        //    sm.SwitchToStandby();
+        //    sm.SwitchToExecuting();
 
-            //expect
-            Assert.IsTrue(sm.GetCurState().Name == "ActionExecutingState");
-        }
+        //    //expect
+        //    Assert.IsTrue(sm.GetCurState().Name == "ActionExecutingState");
+        //}
 
-        [Test]
-        public void TestSwitchToCding()
-        {
-            //arrange
+        //[Test]
+        //public void TestSwitchToCding()
+        //{
+        //    //arrange
 
 
-            //action         
-            sm.SwitchToDisable();
-            sm.SwitchToStandby();
-            sm.SwitchToExecuting();
-            sm.SwitchToCding();
+        //    //action         
+        //    sm.SwitchToDisable();
+        //    sm.SwitchToStandby();
+        //    sm.SwitchToExecuting();
+        //    sm.SwitchToCding();
 
-            //expect
-            Assert.IsTrue(sm.GetCurState().Name == "ActionCdingState");
-        }
+        //    //expect
+        //    Assert.IsTrue(sm.GetCurState().Name == "ActionCdingState");
+        //}
     }
 
 

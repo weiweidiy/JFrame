@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFramework
 {
-    public class CombatBufferFactory : BaseContainer<CombatBufferInfo>
+    public class CombatBufferFactory : ListContainer<CombatBufferInfo>
     {
         CombatContext context;
         /// <summary>

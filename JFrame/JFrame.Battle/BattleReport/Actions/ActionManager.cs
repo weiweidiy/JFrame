@@ -25,7 +25,7 @@ namespace JFramework
     /// <summary>
     /// 动作管理器
     /// </summary>
-    public class ActionManager : BaseContainer<IBattleAction>, IActionManager
+    public class ActionManager : ListContainer<IBattleAction>, IActionManager
     {
         public event Action<IBattleAction, List<IBattleUnit>, float> onStartCast;
 

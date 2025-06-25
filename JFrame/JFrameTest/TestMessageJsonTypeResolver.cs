@@ -15,14 +15,16 @@ namespace JFrameTest
         [TestFixture]
         public class MessageJsonTypeResolverTests
         {
-            private IJsonSerializer _mockSerializer;
+            private ISerializer _mockSerializer;
+            private IDeserializer _mockDeserializer;
             private JNetMessageJsonTypeResolver _resolver;
 
             [SetUp]
             public void Setup()
             {
-                _mockSerializer = Substitute.For<IJsonSerializer>();
-                _resolver = new JNetMessageJsonTypeResolver(_mockSerializer);
+                _mockSerializer = Substitute.For<ISerializer>();
+                _mockDeserializer = Substitute.For<IDeserializer>();
+                _resolver = new JNetMessageJsonTypeResolver(_mockSerializer, _mockDeserializer);
             }
 
             [Test]
@@ -101,8 +103,8 @@ namespace JFrameTest
                 var strData = Encoding.UTF8.GetString(byteData);
                 //var obj = JsonConvert.DeserializeObject<TestMessage>(strData);
 
-                var serializer = new TestJsonSerializer();
-                var messageResolve = new JNetMessageJsonTypeResolver(serializer);
+                var serializer = new JsonNetSerializer();
+                var messageResolve = new JNetMessageJsonTypeResolver(serializer, serializer);
                 messageResolve.RegisterMessageType(1, data.GetType());
 
                 var type = messageResolve.ResolveMessageType(byteData);
@@ -114,28 +116,28 @@ namespace JFrameTest
 
             // 测试辅助类
 
-            public class TestJsonSerializer : IJsonSerializer
-            {
-                public string ToJson(object obj)
-                {
-                    return JsonConvert.SerializeObject(obj);
-                }
+            //public class TestJsonSerializer : IJsonSerializer
+            //{
+            //    public string ToJson(object obj)
+            //    {
+            //        return JsonConvert.SerializeObject(obj);
+            //    }
 
-                public T ToObject<T>(string str)
-                {
-                    return JsonConvert.DeserializeObject<T>(str);
-                }
+            //    public T ToObject<T>(string str)
+            //    {
+            //        return JsonConvert.DeserializeObject<T>(str);
+            //    }
 
-                public object ToObject(string json, Type type)
-                {
-                    return JsonConvert.DeserializeObject(json, type);
-                }
+            //    public object ToObject(string json, Type type)
+            //    {
+            //        return JsonConvert.DeserializeObject(json, type);
+            //    }
 
-                public object ToObject(byte[] bytes, Type type)
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            //    public object ToObject(byte[] bytes, Type type)
+            //    {
+            //        throw new NotImplementedException();
+            //    }
+            //}
 
             private class TestMessage : ITypeId
             {
