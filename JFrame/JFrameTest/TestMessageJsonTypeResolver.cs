@@ -24,7 +24,7 @@ namespace JFrameTest
             {
                 _mockSerializer = Substitute.For<ISerializer>();
                 _mockDeserializer = Substitute.For<IDeserializer>();
-                _resolver = new JNetMessageJsonTypeResolver(_mockSerializer, _mockDeserializer);
+                _resolver = new JNetMessageJsonTypeResolver(_mockDeserializer);
             }
 
             [Test]
@@ -104,7 +104,7 @@ namespace JFrameTest
                 //var obj = JsonConvert.DeserializeObject<TestMessage>(strData);
 
                 var serializer = new JsonNetSerializer();
-                var messageResolve = new JNetMessageJsonTypeResolver(serializer, serializer);
+                var messageResolve = new JNetMessageJsonTypeResolver(serializer);
                 messageResolve.RegisterMessageType(1, data.GetType());
 
                 var type = messageResolve.ResolveMessageType(byteData);

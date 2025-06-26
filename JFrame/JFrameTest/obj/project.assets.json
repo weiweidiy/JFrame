@@ -477,19 +477,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\weiwei\\.nuget\\packages\\": {}
+    "C:\\Users\\JiChunWei\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
       "projectName": "JFrameTest",
-      "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-      "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
-      "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\obj\\",
+      "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+      "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -503,8 +503,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
-              "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
+            "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
+              "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
             }
           }
         }
@@ -513,11 +513,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -541,7 +536,7 @@
             "version": "[3.16.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JFrameTest
 {
-    public class JsonNetSerializer : ISerializer, IDeserializer
+    public class JsonNetSerializer : IDataConverter
     {
         public string Serialize(object obj)
         {
