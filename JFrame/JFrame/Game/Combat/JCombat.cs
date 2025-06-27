@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace JFrame.Game
 {
-    public abstract class JCombat : IJCombat , IJCombatDataSource
+    public abstract class JCombat : IJCombat
     {
         IJCombatDataSource dataSource;
 
@@ -15,9 +15,9 @@ namespace JFrame.Game
 
         IJCombatResult jCombatResult;
 
-        public JCombat(IJCombatDataSource dataSource, IJCombatFrameRecorder frameRecorder, IJCombatJudger jCombatJudger, IJCombatEventRecorder eventRecorder, IJCombatResult jCombatResult)
+        public JCombat(/*IJCombatDataSource dataSource, */IJCombatFrameRecorder frameRecorder, IJCombatJudger jCombatJudger, IJCombatEventRecorder eventRecorder, IJCombatResult jCombatResult)
         {
-            this.dataSource = dataSource ?? throw new ArgumentNullException("dataSource is null");
+            //this.dataSource = dataSource ?? throw new ArgumentNullException("dataSource is null");
             this.frameRecorder = frameRecorder ?? throw new ArgumentNullException("frameRecorder is null");
             this.jCombatJudger = jCombatJudger ?? throw new ArgumentNullException("jCombatJudger is null");
             this.eventRecorder = eventRecorder ?? throw new ArgumentNullException("eventRecorder is null");
@@ -75,6 +75,6 @@ namespace JFrame.Game
         protected abstract void Update(IJCombatFrameRecorder frameRecorder);
         protected virtual void Stop() { }
 
-        public IJCombatTeam GetTeam(int teamId) => dataSource.GetTeam(teamId);
+
     }
 }

@@ -24,12 +24,12 @@ namespace JFrame.Game.Tests
             public bool StopCalled { get; private set; }
 
             public TestCombat(
-                IJCombatDataSource dataSource,
+                //IJCombatDataSource dataSource,
                 IJCombatFrameRecorder frameRecorder,
                 IJCombatJudger combatJudger,
                 IJCombatEventRecorder eventRecorder,
                 IJCombatResult combatResult)
-                : base(dataSource, frameRecorder, combatJudger, eventRecorder, combatResult)
+                : base(/*dataSource,*/ frameRecorder, combatJudger, eventRecorder, combatResult)
             {
             }
 
@@ -75,11 +75,11 @@ namespace JFrame.Game.Tests
         public void Constructor_WithNullDependencies_ShouldThrowException()
         {
             // 测试各种null依赖情况
-            Assert.Throws<ArgumentNullException>(() => new TestCombat(null, _frameRecorder, _combatJudger, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat(_dataSource, null, _combatJudger, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat(_dataSource, _frameRecorder, null, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat(_dataSource, _frameRecorder, _combatJudger, null, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, null));
+           // Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult));
+            Assert.Throws<ArgumentNullException>(() => new TestCombat( null, _combatJudger, _eventRecorder, _combatResult));
+            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, null, _eventRecorder, _combatResult));
+            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, null, _combatResult));
+            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, null));
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace JFrame.Game.Tests
         {
             // 安排
             _combatJudger.IsCombatOver().Returns(false, false, false, true); // 前3帧未结束，第4帧结束
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
             // 执行
             await combat.GetResult();
@@ -102,7 +102,7 @@ namespace JFrame.Game.Tests
         {
             // 安排
             _combatJudger.IsCombatOver().Returns(true); // 立即结束
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
             // 执行
             await combat.GetResult();
@@ -117,7 +117,7 @@ namespace JFrame.Game.Tests
         {
             // 安排
             _combatJudger.IsCombatOver().Returns(true);
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
             // 执行
             await combat.GetResult();
@@ -138,7 +138,7 @@ namespace JFrame.Game.Tests
             _combatJudger.GetWinner().Returns(winner);
             _eventRecorder.GetAllCombatEvents().Returns(events);
 
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat(_frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
             // 执行
             await combat.GetResult();
@@ -153,7 +153,7 @@ namespace JFrame.Game.Tests
         {
             // 安排
             _combatJudger.IsCombatOver().Returns(true);
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
             // 执行
             await combat.GetResult();
@@ -162,30 +162,30 @@ namespace JFrame.Game.Tests
             _frameRecorder.Received(1).ResetFrame();
         }
 
-        [Test]
-        public void GetTeam_ShouldDelegateToDataSource()
-        {
-            // 安排
-            var teamId = 1;
-            var expectedTeam = Substitute.For<IJCombatTeam>();
-            _dataSource.GetTeam(teamId).Returns(expectedTeam);
+        //[Test]
+        //public void GetTeam_ShouldDelegateToDataSource()
+        //{
+        //    // 安排
+        //    var teamId = 1;
+        //    var expectedTeam = Substitute.For<IJCombatTeam>();
+        //    _dataSource.GetTeam(teamId).Returns(expectedTeam);
 
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+        //    var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
-            // 执行
-            var result = combat.GetTeam(teamId);
+        //    // 执行
+        //    var result = combat.GetTeam(teamId);
 
-            // 断言
-            Assert.AreEqual(expectedTeam, result);
-            _dataSource.Received(1).GetTeam(teamId);
-        }
+        //    // 断言
+        //    Assert.AreEqual(expectedTeam, result);
+        //    _dataSource.Received(1).GetTeam(teamId);
+        //}
 
         [Test]
         public async Task GetResult_ShouldRunInBackgroundThread()
         {
             // 安排
             _combatJudger.IsCombatOver().Returns(true);
-            var combat = new TestCombat(_dataSource, _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
             var mainThreadId = Environment.CurrentManagedThreadId;
             int? taskThreadId = null;
 
