@@ -9,7 +9,7 @@ namespace JFrame.Game.Tests
     {
         private IJCombatFrameRecorder _frameRecorder;
         private List<IJCombatTeam> _teams;
-        private JCombatJudger _judger;
+        private JCombatQuery _judger;
 
         [SetUp]
         public void Setup()
@@ -26,7 +26,7 @@ namespace JFrame.Game.Tests
             _teams[0].IsAllDead().Returns(false);
             _teams[1].IsAllDead().Returns(false);
 
-            _judger = new JCombatJudger(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
+            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace JFrame.Game.Tests
             thirdTeam.IsAllDead().Returns(false);
 
             // Need to recreate judger with the new team list
-            _judger = new JCombatJudger(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
+            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
 
             // Act
             var result = _judger.IsCombatOver();

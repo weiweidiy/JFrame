@@ -8,17 +8,48 @@ namespace JFrame.Game
     /// <summary>
     /// 判断战斗是否结束
     /// </summary>
-    public class JCombatJudger : DictionaryContainer<IJCombatTeam>, IJCombatJudger
+    public class JCombatQuery : DictionaryContainer<IJCombatTeam>, IJCombatQuery
     {
         IJCombatFrameRecorder frameRecorder;
 
         IJCombatTeam winner;
 
-        public JCombatJudger(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : base(keySelector)
+        public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : base(keySelector)
         {
             AddRange(teams);
 
             this.frameRecorder = frameRecorder;
+        }
+
+
+        public IJCombatTeam GetTeam(string teamUid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IJCombatTeam> GetTeams()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IJCombatUnit GetUnit(string unitUid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IJCombatUnit> GetUnits()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IJCombatUnit> GetUnits(IJCombatTeam team)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<IJCombatUnit> GetUnits(Func<IJCombatUnit, bool> func)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -57,5 +88,13 @@ namespace JFrame.Game
 
             return aliveTeamCount <= 1;
         }
+
+        public bool IsMaxFrame() => frameRecorder.IsMaxFrame();
+
+        public int GetCurFrame() => frameRecorder.GetCurFrame();
+
+        public int GetMaxFrame() => frameRecorder.GetMaxFrame();
+
+
     }
 }

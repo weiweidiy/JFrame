@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\jturnbasedcombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\jturnbasedcombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\jcombatquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\jcombatquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\jcombatframerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\jcombatframerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\ijcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\ijcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\core\\network\\jnetmessagejsontyperesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\core\\network\\jnetmessagejsontyperesolver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -46,11 +62,61 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JCombatQuery.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JCombatQuery.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\JCombatQuery.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JCombatQuery.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\JCombatQuery.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T14:19:34.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "JTurnBasedCombat.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JTurnBasedCombat.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\JTurnBasedCombat.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JTurnBasedCombat.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\JTurnBasedCombat.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAUwDUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T13:33:50.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IJCombatTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\IJCombatTeam.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\IJCombatTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\IJCombatTeam.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\IJCombatTeam.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T13:04:39.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JCombatFrameRecorder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JCombatFrameRecorder.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\JCombatFrameRecorder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\JCombatFrameRecorder.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\JCombatFrameRecorder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T13:04:36.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "JNetMessageJsonTypeResolver.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
@@ -58,12 +124,11 @@
               "RelativeToolTip": "JFrame\\Core\\Network\\JNetMessageJsonTypeResolver.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T14:30:26.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-26T14:30:26.165Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "ConfigurationManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Configuration\\ConfigurationManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Configuration\\ConfigurationManager.cs",
@@ -75,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Configuration.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Core\\Configuration\\Configuration.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Configuration\\Configuration.cs",
@@ -87,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "TestBinaryInsertSort.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestBinaryInsertSort.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestBinaryInsertSort.cs",
@@ -99,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "BaseConfigTable.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\BaseConfigTable.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Config\\BaseConfigTable.cs",
@@ -111,7 +176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "TestJConfigManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestJConfigManager.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJConfigManager.cs",
@@ -123,7 +188,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "IConfigTable.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\IConfigTable.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Config\\IConfigTable.cs",
@@ -135,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "JConfigManager.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Config\\JConfigManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Config\\JConfigManager.cs",
@@ -147,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "BaseModel.cs",
               "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\BaseModel.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\BaseModel.cs",

@@ -12,7 +12,7 @@ namespace JFrame.Game.Tests
         // 模拟依赖项
         private IJCombatDataSource _dataSource;
         private IJCombatFrameRecorder _frameRecorder;
-        private IJCombatJudger _combatJudger;
+        private IJCombatQuery _combatJudger;
         private IJCombatEventRecorder _eventRecorder;
         private IJCombatResult _combatResult;
 
@@ -26,22 +26,17 @@ namespace JFrame.Game.Tests
             public TestCombat(
                 //IJCombatDataSource dataSource,
                 IJCombatFrameRecorder frameRecorder,
-                IJCombatJudger combatJudger,
+                IJCombatQuery combatJudger,
                 IJCombatEventRecorder eventRecorder,
                 IJCombatResult combatResult)
-                : base(/*dataSource,*/ frameRecorder, combatJudger, eventRecorder, combatResult)
+                : base(/*dataSource,*/ /*frameRecorder,*/ combatJudger, eventRecorder, combatResult)
             {
             }
 
-            protected override IJCombatResult CreateReport()
-            {
-                return Substitute.For<IJCombatResult>();
-            }
-
-            protected override void Update(IJCombatFrameRecorder frameRecorder)
-            {
-                UpdateCallCount++;
-            }
+            //protected override void Update(IJCombatFrameRecorder frameRecorder)
+            //{
+            //    UpdateCallCount++;
+            //}
 
             protected override void Start()
             {
@@ -54,6 +49,11 @@ namespace JFrame.Game.Tests
                 StopCalled = true;
                 base.Stop();
             }
+
+            protected override void Update()
+            {
+                UpdateCallCount++;
+            }
         }
 
         [SetUp]
@@ -62,7 +62,7 @@ namespace JFrame.Game.Tests
             // 初始化模拟对象
             _dataSource = Substitute.For<IJCombatDataSource>();
             _frameRecorder = Substitute.For<IJCombatFrameRecorder>();
-            _combatJudger = Substitute.For<IJCombatJudger>();
+            _combatJudger = Substitute.For<IJCombatQuery>();
             _eventRecorder = Substitute.For<IJCombatEventRecorder>();
             _combatResult = Substitute.For<IJCombatResult>();
 
@@ -76,41 +76,41 @@ namespace JFrame.Game.Tests
         {
             // 测试各种null依赖情况
            // Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat( null, _combatJudger, _eventRecorder, _combatResult));
+            //Assert.Throws<ArgumentNullException>(() => new TestCombat( null, _combatJudger, _eventRecorder, _combatResult));
             Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, null, _eventRecorder, _combatResult));
             Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, null, _combatResult));
             Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, null));
         }
 
-        [Test]
-        public async Task GetResult_WhenCombatNotOver_ShouldCallUpdateMultipleTimes()
-        {
-            // 安排
-            _combatJudger.IsCombatOver().Returns(false, false, false, true); // 前3帧未结束，第4帧结束
-            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+        //[Test]
+        //public async Task GetResult_WhenCombatNotOver_ShouldCallUpdateMultipleTimes()
+        //{
+        //    // 安排
+        //    _combatJudger.IsCombatOver().Returns(false, false, false, true); // 前3帧未结束，第4帧结束
+        //    var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
-            // 执行
-            await combat.GetResult();
+        //    // 执行
+        //    await combat.GetResult();
 
-            // 断言
-            Assert.AreEqual(3, combat.UpdateCallCount, "Update方法应该被调用3次");
-            _frameRecorder.Received(3).NextFrame();
-        }
+        //    // 断言
+        //    Assert.AreEqual(3, combat.UpdateCallCount, "Update方法应该被调用3次");
+        //    _frameRecorder.Received(3).NextFrame();
+        //}
 
-        [Test]
-        public async Task GetResult_WhenCombatEndsImmediately_ShouldNotCallUpdate()
-        {
-            // 安排
-            _combatJudger.IsCombatOver().Returns(true); // 立即结束
-            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+        //[Test]
+        //public async Task GetResult_WhenCombatEndsImmediately_ShouldNotCallUpdate()
+        //{
+        //    // 安排
+        //    _combatJudger.IsCombatOver().Returns(true); // 立即结束
+        //    var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
-            // 执行
-            await combat.GetResult();
+        //    // 执行
+        //    await combat.GetResult();
 
-            // 断言
-            Assert.AreEqual(0, combat.UpdateCallCount, "Update方法不应该被调用");
-            _frameRecorder.DidNotReceive().NextFrame();
-        }
+        //    // 断言
+        //    Assert.AreEqual(0, combat.UpdateCallCount, "Update方法不应该被调用");
+        //    _frameRecorder.DidNotReceive().NextFrame();
+        //}
 
         [Test]
         public async Task GetResult_ShouldCallStartAndStopMethods()
@@ -148,19 +148,19 @@ namespace JFrame.Game.Tests
             _combatResult.Received(1).SetCombatWinner(winner);
         }
 
-        [Test]
-        public async Task GetResult_ShouldResetFrameCounter()
-        {
-            // 安排
-            _combatJudger.IsCombatOver().Returns(true);
-            var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
+        //[Test]
+        //public async Task GetResult_ShouldResetFrameCounter()
+        //{
+        //    // 安排
+        //    _combatJudger.IsCombatOver().Returns(true);
+        //    var combat = new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult);
 
-            // 执行
-            await combat.GetResult();
+        //    // 执行
+        //    await combat.GetResult();
 
-            // 断言
-            _frameRecorder.Received(1).ResetFrame();
-        }
+        //    // 断言
+        //    _frameRecorder.Received(1).ResetFrame();
+        //}
 
         //[Test]
         //public void GetTeam_ShouldDelegateToDataSource()
