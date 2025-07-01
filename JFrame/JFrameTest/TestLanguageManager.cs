@@ -105,8 +105,8 @@ namespace JFramework.Tests
         public void GetLanguage_UnknownKey_ReturnsNull()
         {
             // Act & Assert
-            //Assert.IsNull();
-            var ex = Assert.Throws<KeyNotFoundException>(() => _manager.GetLanguage("unknown"));
+            Assert.IsNull(_manager.GetLanguage("unknown"));
+            //var ex = Assert.Throws<KeyNotFoundException>(() => _manager.GetLanguage("unknown"));
         }
 
         [Test]

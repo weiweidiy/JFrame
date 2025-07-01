@@ -108,7 +108,7 @@ namespace JFrameTest
         [Test]
         public void Get_WithNonExistingKey_ShouldThrow()
         {
-            Assert.Throws<KeyNotFoundException>(() => _container.Get("999"));
+            Assert.IsNull(_container.Get("999"));
         }
 
         [Test]

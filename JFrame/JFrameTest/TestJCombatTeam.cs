@@ -136,7 +136,66 @@ namespace JFrame.Game.Tests
             //var unit = _combatTeam.Get("nonexistent_key");
 
             // Assert
-            Assert.Throws<KeyNotFoundException>(() => _combatTeam.Get("nonexistent_key"));
+            Assert.IsNull(_combatTeam.Get("nonexistent_key"));
+        }
+
+        [Test]
+        public void GetUnit_WithValidUid_ShouldReturnCorrectUnit()
+        {
+            // 准备模拟数据
+            var unit1 = Substitute.For<IJCombatUnit>();
+            unit1.Uid.Returns("1");
+
+            var unit2 = Substitute.For<IJCombatUnit>();
+            unit2.Uid.Returns("2");
+
+            var units = new List<IJCombatUnit> { unit1, unit2 };
+
+            // 创建测试对象
+            var team = new JCombatTeam(units, u => u.Uid);
+
+            // 执行测试
+            var result = team.GetUnit("1");
+
+            // 验证结果
+            Assert.That(result, Is.EqualTo(unit1));
+        }
+
+        // 测试异常情况：UID不存在时返回null
+        [Test]
+        public void GetUnit_WithInvalidUid_ShouldReturnNull()
+        {
+            // 准备模拟数据
+            var unit1 = Substitute.For<IJCombatUnit>();
+            unit1.Uid.Returns("1");
+
+            var units = new List<IJCombatUnit> { unit1 };
+
+            // 创建测试对象
+            var team = new JCombatTeam(units, u => u.Uid);
+
+            // 执行测试
+            //var result = team.GetUnit("nonexistent_unit");
+
+            // 验证结果
+            Assert.IsNull( team.GetUnit("nonexistent_unit"));
+        }
+
+        // 测试边界情况：空单位列表
+        [Test]
+        public void GetUnit_WithEmptyUnitList_ShouldReturnNull()
+        {
+            // 准备空列表
+            var units = new List<IJCombatUnit>();
+
+            // 创建测试对象
+            var team = new JCombatTeam(units, u => u.Uid);
+
+            // 执行测试
+           // var result = team.GetUnit("any_unit");
+
+            // 验证结果
+            Assert.IsNull(team.GetUnit("any_unit"));
         }
     }
 }

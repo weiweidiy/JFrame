@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace JFrame.Game
 {
-
     /// <summary>
     /// 回合制游戏战报生成
     /// </summary>

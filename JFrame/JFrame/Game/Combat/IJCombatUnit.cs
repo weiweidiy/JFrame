@@ -1,6 +1,11 @@
-﻿namespace JFrame.Game
+﻿using JFramework;
+using JFramework.Game;
+using System;
+using System.Collections.Generic;
+
+namespace JFrame.Game
 {
-    public interface IJCombatUnit
+    public interface IJCombatUnit : IUnique
     {
         /// <summary>
         /// 是否已死亡
@@ -9,27 +14,39 @@
         bool IsDead();
 
         /// <summary>
-        /// 是否可行动
+        /// 获取属性对象
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uid"></param>
         /// <returns></returns>
-        bool CanAction();
-
-
-
-        /// <summary>
-        /// 开始行动
-        /// </summary>
-        /// <param name="jCombatQuery"></param>
-        void Action(IJCombatQuery jCombatQuery);
+        IUnique GetAttribute(string uid);
 
     }
 
-    public interface IJTurnBasedCombatUnit : IJCombatUnit
+
+    public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatUnit
     {
-        /// <summary>
-        /// 获取行动点，用于排序
-        /// </summary>
-        /// <returns></returns>
-        int GetActionPoint();
+        public string Uid { get; set; }
+
+        public JCombatUnit(List<IUnique> attrList,  Func<IUnique, string> keySelector) : base(keySelector)
+        {
+            AddRange(attrList);
+        }    
+
+        public IUnique GetAttribute(string uid)
+        {
+            var attr = Get(uid);
+            return attr;
+        }
+
+        public bool IsDead()
+        {
+            var attr = Get("Hp") as GameAttributeInt;
+
+            if (attr == null)
+                return true;
+
+            return attr.CurValue <= 0;
+        }
     }
 }
