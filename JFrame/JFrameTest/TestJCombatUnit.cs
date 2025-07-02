@@ -13,6 +13,7 @@ namespace JFrame.Game.Tests
         private JCombatUnit _combatUnit;
         private List<IUnique> _attributes;
         private GameAttributeInt _hpAttribute;
+        private IJCombatAttrNameQuery _jCombatAttrNameQuery;
 
         [SetUp]
         public void Setup()
@@ -27,8 +28,11 @@ namespace JFrame.Game.Tests
             // Setup attributes list
             _attributes = new List<IUnique> { _hpAttribute, strengthAttribute };
 
+            _jCombatAttrNameQuery = Substitute.For<IJCombatAttrNameQuery>();
+            _jCombatAttrNameQuery.GetHpAttrName().Returns("Hp");
+
             // Create the combat unit
-            _combatUnit = new JCombatUnit(_attributes, attr => attr.Uid);
+            _combatUnit = new JCombatUnit(_attributes, attr => attr.Uid, _jCombatAttrNameQuery);
         }
 
         [Test]
@@ -102,7 +106,7 @@ namespace JFrame.Game.Tests
             };
             attributes[0].Uid.Returns("Strength");
 
-            var unitWithoutHp = new JCombatUnit(attributes, attr => attr.Uid);
+            var unitWithoutHp = new JCombatUnit(attributes, attr => attr.Uid, _jCombatAttrNameQuery);
 
             // Act & Assert
             Assert.IsTrue(unitWithoutHp.IsDead());

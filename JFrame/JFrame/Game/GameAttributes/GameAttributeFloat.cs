@@ -76,7 +76,14 @@ namespace JFramework.Game
 
         public override float GetAllExtraValue()
         {
-            throw new NotImplementedException();
+            float result = 0;
+
+            foreach (var extraValue in extraAttributes)
+            {
+                result += extraValue.Value;
+            }
+
+            return result;
         }
 
         public override void AddExtraValue(string extraUid, float value)

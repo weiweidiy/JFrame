@@ -1,10 +1,12 @@
 ﻿using JFramework;
-using JFramework.Game;
-using System;
-using System.Collections.Generic;
 
 namespace JFrame.Game
 {
+
+
+    /// <summary>
+    /// 可战斗单位接口
+    /// </summary>
     public interface IJCombatUnit : IUnique
     {
         /// <summary>
@@ -21,32 +23,5 @@ namespace JFrame.Game
         /// <returns></returns>
         IUnique GetAttribute(string uid);
 
-    }
-
-
-    public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatUnit
-    {
-        public string Uid { get; set; }
-
-        public JCombatUnit(List<IUnique> attrList,  Func<IUnique, string> keySelector) : base(keySelector)
-        {
-            AddRange(attrList);
-        }    
-
-        public IUnique GetAttribute(string uid)
-        {
-            var attr = Get(uid);
-            return attr;
-        }
-
-        public bool IsDead()
-        {
-            var attr = Get("Hp") as GameAttributeInt;
-
-            if (attr == null)
-                return true;
-
-            return attr.CurValue <= 0;
-        }
     }
 }

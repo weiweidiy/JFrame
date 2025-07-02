@@ -31,7 +31,7 @@ namespace JFrame.Game.Tests
 
             // Create test team
             _testUnits = new List<IJCombatUnit> { _unit1, _unit2, _unit3 };
-            _combatTeam = new JCombatTeam(_testUnits, _keySelector);
+            _combatTeam = new JCombatTeam("team1", _testUnits, _keySelector);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace JFrame.Game.Tests
         public void IsAllDead_EmptyTeam_ReturnsTrue()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam(new List<IJCombatUnit>(), _keySelector);
+            var emptyTeam = new JCombatTeam("team1", new List<IJCombatUnit>(), _keySelector);
 
             // Act
             var result = emptyTeam.IsAllDead();
@@ -152,7 +152,7 @@ namespace JFrame.Game.Tests
             var units = new List<IJCombatUnit> { unit1, unit2 };
 
             // 创建测试对象
-            var team = new JCombatTeam(units, u => u.Uid);
+            var team = new JCombatTeam("team1", units, u => u.Uid);
 
             // 执行测试
             var result = team.GetUnit("1");
@@ -172,7 +172,7 @@ namespace JFrame.Game.Tests
             var units = new List<IJCombatUnit> { unit1 };
 
             // 创建测试对象
-            var team = new JCombatTeam(units, u => u.Uid);
+            var team = new JCombatTeam("team1", units, u => u.Uid);
 
             // 执行测试
             //var result = team.GetUnit("nonexistent_unit");
@@ -189,7 +189,7 @@ namespace JFrame.Game.Tests
             var units = new List<IJCombatUnit>();
 
             // 创建测试对象
-            var team = new JCombatTeam(units, u => u.Uid);
+            var team = new JCombatTeam("team1", units, u => u.Uid);
 
             // 执行测试
            // var result = team.GetUnit("any_unit");

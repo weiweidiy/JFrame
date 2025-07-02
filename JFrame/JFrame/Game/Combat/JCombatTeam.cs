@@ -6,9 +6,10 @@ namespace JFrame.Game
 {
     public class JCombatTeam : DictionaryContainer<IJCombatUnit>, IJCombatTeam
     {
-        public JCombatTeam(List<IJCombatUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
+        public JCombatTeam(string uid, List<IJCombatUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
         {
             AddRange(units);
+            this.Uid = uid;
         }
 
         public string Uid { get; set; }
