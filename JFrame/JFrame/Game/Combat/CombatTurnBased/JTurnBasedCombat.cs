@@ -49,7 +49,6 @@ namespace JFrame.Game
         protected void DoUpdate(IJCombatFrameRecorder frameRecorder)
         {
             var actionUnit = actionSelector.PopActionUnit();
-
             actionUnit.Action(jCombatQuery);
         }
     }

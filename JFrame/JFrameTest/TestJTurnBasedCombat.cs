@@ -27,6 +27,21 @@ namespace JFrameTest
             }
         }
 
+        public class FakeAttrFacotry2 : IJCombatUnitAttrFactory
+        {
+            public List<IUnique> Create()
+            {
+                var result = new List<IUnique>();
+
+                var hp = new GameAttributeInt("Hp", 200, 200);
+                var speed = new GameAttributeInt("Speed", 60, 60);
+                result.Add(hp);
+                result.Add(speed);
+
+                return result;
+            }
+        }
+
         public class FakeAttrNameQuery : IJCombatTurnBasedAttrNameQuery
         {
             public string GetActionPointName()
@@ -63,6 +78,18 @@ namespace JFrameTest
             }
         }
 
+        public class FakeJCombatAction : JCombatActionBase
+        {
+            public FakeJCombatAction(string uid) : base(uid)
+            {
+            }
+
+            public override void Run(IJCombatQuery query)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         [Test]
         public async Task TestInitialize()
         {
@@ -74,14 +101,15 @@ namespace JFrameTest
             var actionSelector = new JCombatSpeedBasedActionSelector(funcUnit);
             var frameRecorder = new JCombatFrameRecorder(20);
             var attrFactory = new FakeAttrFacotry();
+            var attrFactory2 = new FakeAttrFacotry2();
 
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1") });
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             var team1 = new JCombatTeam("team1", lst1, funcUnit);
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1") });
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             var team2 = new JCombatTeam("team2", lst2, funcUnit);
@@ -100,7 +128,10 @@ namespace JFrameTest
 
             //expect
             Assert.AreEqual(20, frameRecorder.GetCurFrame());
-
+            var hpAttr1 = jcombatQuery.GetUnit("unit1").GetAttribute("Hp") as GameAttributeInt;
+            var hpAttr2 = jcombatQuery.GetUnit("unit2").GetAttribute("Hp") as GameAttributeInt;
+            Assert.AreEqual(100, hpAttr1.CurValue);
+            Assert.AreEqual(200, hpAttr2.CurValue);
         }
     }
 }
