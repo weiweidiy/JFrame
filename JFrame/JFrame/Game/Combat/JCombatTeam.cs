@@ -12,7 +12,7 @@ namespace JFrame.Game
             this.Uid = uid;
         }
 
-        public string Uid { get; set; }
+        public string Uid { get; protected set; }
 
         public List<IJCombatUnit> GetAllUnit()
         {

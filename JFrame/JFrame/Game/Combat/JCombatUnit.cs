@@ -8,15 +8,16 @@ namespace JFrame.Game
 
     public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatUnit
     {
-        public string Uid { get; set; }
+        public string Uid { get; private set; }
 
-        IJCombatAttrNameQuery combatAttrNameQuery;
+        protected IJCombatAttrNameQuery combatAttrNameQuery;
 
-        public JCombatUnit(List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery) : base(keySelector)
+        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery) : base(keySelector)
         {
             AddRange(attrList);
 
             this.combatAttrNameQuery = combatAttrNameQuery;
+            this.Uid = uid;
         }    
 
         public IUnique GetAttribute(string uid)

@@ -19,14 +19,21 @@ namespace JFrameTest
                 var result = new List<IUnique>();
 
                 var hp = new GameAttributeInt("Hp", 100, 100);
+                var speed = new GameAttributeInt("Speed", 50, 50);
                 result.Add(hp);
+                result.Add(speed);
 
                 return result;
             }
         }
 
-        public class FakeAttrNameQuery : IJCombatAttrNameQuery
+        public class FakeAttrNameQuery : IJCombatTurnBasedAttrNameQuery
         {
+            public string GetActionPointName()
+            {
+                return "Speed";
+            }
+
             public string GetHpAttrName()
             {
                 return "Hp";
@@ -69,12 +76,12 @@ namespace JFrameTest
             var attrFactory = new FakeAttrFacotry();
 
             //队伍1
-            var unit1 = new JCombatUnit(attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             var team1 = new JCombatTeam("team1", lst1, funcUnit);
             //队伍2
-            var unit2 = new JCombatUnit(attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory.Create(), funcAttr, new FakeAttrNameQuery());
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             var team2 = new JCombatTeam("team2", lst2, funcUnit);

@@ -32,7 +32,7 @@ namespace JFrame.Game.Tests
             _jCombatAttrNameQuery.GetHpAttrName().Returns("Hp");
 
             // Create the combat unit
-            _combatUnit = new JCombatUnit(_attributes, attr => attr.Uid, _jCombatAttrNameQuery);
+            _combatUnit = new JCombatUnit("unit1", _attributes, attr => attr.Uid, _jCombatAttrNameQuery);
         }
 
         [Test]
@@ -106,23 +106,23 @@ namespace JFrame.Game.Tests
             };
             attributes[0].Uid.Returns("Strength");
 
-            var unitWithoutHp = new JCombatUnit(attributes, attr => attr.Uid, _jCombatAttrNameQuery);
+            var unitWithoutHp = new JCombatUnit("unit1", attributes, attr => attr.Uid, _jCombatAttrNameQuery);
 
             // Act & Assert
             Assert.IsTrue(unitWithoutHp.IsDead());
         }
 
-        [Test]
-        public void Uid_Property_CanBeSetAndGet()
-        {
-            // Arrange
-            const string testUid = "TestUID123";
+        //[Test]
+        //public void Uid_Property_CanBeSetAndGet()
+        //{
+        //    // Arrange
+        //    const string testUid = "TestUID123";
 
-            // Act
-            _combatUnit.Uid = testUid;
+        //    // Act
+        //    _combatUnit.Uid = testUid;
 
-            // Assert
-            Assert.AreEqual(testUid, _combatUnit.Uid);
-        }
+        //    // Assert
+        //    Assert.AreEqual(testUid, _combatUnit.Uid);
+        //}
     }
 }

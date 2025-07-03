@@ -18,6 +18,6 @@
         /// 开始行动
         /// </summary>
         /// <param name="jCombatQuery"></param>
-        void Action(IJCombatQuery jCombatQuery);
+        void Action(IJCombatQuery query);
     }
 }
