@@ -1,6 +1,6 @@
 ﻿namespace JFrame.Game
 {
-    public interface IJTurnBasedCombatUnit : IJCombatUnit
+    public interface IJCombatTurnBasedUnit : IJCombatUnit
     {
         /// <summary>
         /// 是否可行动
@@ -18,6 +18,6 @@
         /// 开始行动
         /// </summary>
         /// <param name="jCombatQuery"></param>
-        void Action(IJCombatQuery query);
+        void Act();
     }
 }

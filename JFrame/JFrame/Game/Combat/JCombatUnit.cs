@@ -35,5 +35,23 @@ namespace JFrame.Game
 
             return attr.CurValue <= 0;
         }
+
+        public virtual void Start(IJCombatQuery query) { }
+
+
+        public virtual void Stop() { }
+
+
+        public int OnDamage(IJCombatDamageData damageData)
+        {
+            var attrHp = Get(combatAttrNameQuery.GetHpAttrName()) as GameAttributeInt;
+            var preValue = attrHp.CurValue;
+
+            var damage = damageData.GetDamage();
+
+            var curValue = attrHp.Minus(damage);
+
+            return preValue - curValue;
+        }
     }
 }

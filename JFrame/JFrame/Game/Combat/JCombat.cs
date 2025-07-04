@@ -49,14 +49,36 @@ namespace JFrame.Game
             return r;
         }
 
-        protected virtual void Start()
-        {
-        }
+
 
         protected abstract void Update();
 
+        protected virtual void Start()
+        {
+            var units = jCombatQuery.GetUnits();
+            if(units != null)
+            {
+                foreach (var unit in units)
+                {
+                    unit.Start(jCombatQuery);
+                }
+            }
 
-        protected virtual void Stop() { }
+        }
+
+
+        protected virtual void Stop()
+        {
+            var units = jCombatQuery.GetUnits();
+            if (units != null)
+            {
+                foreach (var unit in units)
+                {
+                    unit.Stop();
+                }
+            }
+
+        }
 
 
     }

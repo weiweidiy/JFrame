@@ -1,11 +1,12 @@
 ﻿using JFramework;
 using JFramework.Game;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace JFrame.Game
 {
-    public class JCombatTurnBasedUnit : JCombatUnit, IJTurnBasedCombatUnit
+    public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
     {
         List<IJCombatAction> actions;
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions) : base(uid, attrList, keySelector, combatAttrNameQuery)
@@ -13,14 +14,38 @@ namespace JFrame.Game
             this.actions = actions;
         }
 
-        public void Action(IJCombatQuery query)
+        public override void Start(IJCombatQuery query)
+        {
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action.Start(query);
+                }
+            }
+
+        }
+
+        public override void Stop()
+        {
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action.Stop();
+                }
+            }
+        }
+
+
+        public void Act()
         {
             if (actions == null)
                 return;
 
-            foreach(var action in actions)
+            foreach (var action in actions)
             {
-                action.Run(query);
+                action.Act();
             }
         }
 
@@ -36,5 +61,7 @@ namespace JFrame.Game
             var attrInt = attr as GameAttributeInt;
             return attrInt.CurValue;
         }
+
+
     }
 }

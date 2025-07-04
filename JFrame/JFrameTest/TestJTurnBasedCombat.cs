@@ -80,13 +80,8 @@ namespace JFrameTest
 
         public class FakeJCombatAction : JCombatActionBase
         {
-            public FakeJCombatAction(string uid) : base(uid)
+            public FakeJCombatAction(string uid, List<IJCombatExecutor> executors) : base(uid,null,executors)
             {
-            }
-
-            public override void Run(IJCombatQuery query)
-            {
-                throw new NotImplementedException();
             }
         }
 
@@ -98,18 +93,23 @@ namespace JFrameTest
             Func<IUnique, string> funcAttr = (attr) => attr.Uid;
             Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
 
-            var actionSelector = new JCombatSpeedBasedActionSelector(funcUnit);
-            var frameRecorder = new JCombatFrameRecorder(20);
+            var actionSelector = new JCombatTurnBasedActionSelector(funcUnit);
+            var frameRecorder = new JCombatTurnBasedFrameRecorder(20);
             var attrFactory = new FakeAttrFacotry();
             var attrFactory2 = new FakeAttrFacotry2();
 
+            //执行器
+            var executor = new JCombatExecutorDamage(null);
+            var lstExecutor = new List<IJCombatExecutor>();
+            lstExecutor.Add(executor);
+
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1") });
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor) });
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             var team1 = new JCombatTeam("team1", lst1, funcUnit);
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1") });
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor) });
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             var team2 = new JCombatTeam("team2", lst2, funcUnit);

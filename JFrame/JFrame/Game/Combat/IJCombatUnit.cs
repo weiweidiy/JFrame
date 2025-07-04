@@ -3,12 +3,15 @@
 namespace JFrame.Game
 {
 
-
     /// <summary>
     /// 可战斗单位接口
     /// </summary>
     public interface IJCombatUnit : IUnique
     {
+        void Start(IJCombatQuery query);
+
+        void Stop();
+
         /// <summary>
         /// 是否已死亡
         /// </summary>
@@ -22,6 +25,12 @@ namespace JFrame.Game
         /// <param name="uid"></param>
         /// <returns></returns>
         IUnique GetAttribute(string uid);
+
+        /// <summary>
+        /// 收到伤害
+        /// </summary>
+        /// <param name="damageData"></param>
+        int OnDamage(IJCombatDamageData damageData);
 
     }
 }

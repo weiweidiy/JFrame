@@ -1,7 +1,11 @@
-﻿namespace JFrame.Game
+﻿using JFramework;
+using System;
+using System.Collections.Generic;
+
+namespace JFrame.Game
 {
-    public interface IJCombatExecutor
+    public interface IJCombatExecutor : IJCombatLifeCycle
     {
-        void Execute(IJCombatQuery query);
+        void Execute( List<IJCombatUnit> targets);
     }
 }

@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 namespace JFrame.Game
 {
-    public class JCombatSpeedBasedActionSelector : DictionaryContainer<IJTurnBasedCombatUnit>, ITurnBasedCombatActionSelector
+    public class JCombatTurnBasedActionSelector : DictionaryContainer<IJCombatTurnBasedUnit>, IJCombatTurnBasedActionSelector
     {
         /// <summary>
         /// 排序后的行动顺序列表
         /// </summary>
-        List<IJTurnBasedCombatUnit> actionList = new List<IJTurnBasedCombatUnit>();
+        List<IJCombatTurnBasedUnit> actionList = new List<IJCombatTurnBasedUnit>();
 
-        public JCombatSpeedBasedActionSelector(Func<IJCombatUnit, string> keySelector) : base(keySelector)
+        public JCombatTurnBasedActionSelector(Func<IJCombatUnit, string> keySelector) : base(keySelector)
         {
             ///to do:需要监听ijcombatUnit属性变化，比如速度变化，要动态调整序列
         }
 
-        public List<IJTurnBasedCombatUnit> GetActionUnits()
+        public List<IJCombatTurnBasedUnit> GetActionUnits()
         {
             return actionList;
         }
@@ -36,7 +36,7 @@ namespace JFrame.Game
         /// <exception cref="System.NotImplementedException"></exception>
         public bool IsAllComplete()
         {
-            foreach (IJTurnBasedCombatUnit unit in actionList)
+            foreach (IJCombatTurnBasedUnit unit in actionList)
             {
                 if (unit.CanAction())
                     return false;
@@ -50,7 +50,7 @@ namespace JFrame.Game
         /// </summary>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IJTurnBasedCombatUnit PopActionUnit()
+        public IJCombatTurnBasedUnit PopActionUnit()
         {
             return actionList.PopFirst();
         }
@@ -59,7 +59,7 @@ namespace JFrame.Game
         /// 设置unit列表，并重置action列表
         /// </summary>
         /// <param name="units"></param>
-        public void SetUnits(List<IJTurnBasedCombatUnit> units)
+        public void SetUnits(List<IJCombatTurnBasedUnit> units)
         {
             AddRange(units);
 
@@ -67,9 +67,9 @@ namespace JFrame.Game
         }
 
         
-        class Compare : IComparer<IJTurnBasedCombatUnit>
+        class Compare : IComparer<IJCombatTurnBasedUnit>
         {
-            int IComparer<IJTurnBasedCombatUnit>.Compare(IJTurnBasedCombatUnit x, IJTurnBasedCombatUnit y)
+            int IComparer<IJCombatTurnBasedUnit>.Compare(IJCombatTurnBasedUnit x, IJCombatTurnBasedUnit y)
             {
 
                 if(x.GetActionPoint() > y.GetActionPoint())
