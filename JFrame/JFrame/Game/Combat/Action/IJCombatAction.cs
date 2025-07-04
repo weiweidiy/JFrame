@@ -21,10 +21,16 @@ namespace JFrame.Game
         /// <param name="query"></param>
         void Act();
 
-        ///// <summary>
-        ///// 直接执行action效果
-        ///// </summary>
-        ///// <param name="targets"></param>
-        //void Execute(List<IJCombatUnit> targets);
+        /// <summary>
+        /// 设置归属
+        /// </summary>
+        /// <param name="casterQuery"></param>
+        void SetCaster(IJcombatUnitCasterQuery casterQuery);
+
+        /// <summary>
+        /// 获取释放者
+        /// </summary>
+        /// <returns></returns>
+        string GetCaster();
     }
 }

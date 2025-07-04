@@ -2,7 +2,8 @@
 
 namespace JFrame.Game
 {
-    public abstract class JCombatExecutorBase : IJCombatExecutor
+
+    public abstract class JCombatExecutorBase : JCombatActionComponent, IJCombatExecutor
     {
         IJCombatTargetsFinder finder;
 
@@ -34,5 +35,12 @@ namespace JFrame.Game
         }
 
         protected abstract void DoExecute(List<IJCombatUnit> finalTargets);
+
+        public override void SetOwner(IJCombatAction owner)
+        {
+            base.SetOwner(owner);
+            if(finder != null)
+                finder.SetOwner(owner);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace JFrame.Game
     /// <summary>
     /// 可战斗单位接口
     /// </summary>
-    public interface IJCombatUnit : IUnique
+    public interface IJCombatUnit : IUnique 
     {
         void Start(IJCombatQuery query);
 

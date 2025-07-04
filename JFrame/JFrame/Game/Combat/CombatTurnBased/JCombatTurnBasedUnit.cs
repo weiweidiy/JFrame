@@ -12,6 +12,11 @@ namespace JFrame.Game
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions) : base(uid, attrList, keySelector, combatAttrNameQuery)
         {
             this.actions = actions;
+            if(this.actions != null)
+            {
+                foreach(var  action in actions)
+                    action.SetCaster(new JCombatUnitCasterQuery(this));
+            }
         }
 
         public override void Start(IJCombatQuery query)
@@ -20,6 +25,7 @@ namespace JFrame.Game
             {
                 foreach (var action in actions)
                 {
+                    
                     action.Start(query);
                 }
             }

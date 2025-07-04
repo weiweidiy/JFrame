@@ -15,6 +15,7 @@ namespace JFrame.Game
         List<IJCombatTrigger> triggers;
         List<IJCombatExecutor> executors;
 
+        IJcombatUnitCasterQuery casterQuery;
         public JCombatActionBase(string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
         {
             this.Uid = uid;
@@ -25,6 +26,7 @@ namespace JFrame.Game
                 foreach (IJCombatTrigger trigger in triggers)
                 {
                     //设置父节点
+                    trigger.SetOwner(this);
                 }
             }
 
@@ -33,6 +35,7 @@ namespace JFrame.Game
                 foreach(IJCombatExecutor executor in executors)
                 {
                     //设置父节点
+                    executor.SetOwner(this);
                 }
             }
 
@@ -101,5 +104,17 @@ namespace JFrame.Game
                 }
             }
         }
+
+        /// <summary>
+        /// 设置actin释放者查询器
+        /// </summary>
+        /// <param name="casterQuery"></param>
+        public void SetCaster(IJcombatUnitCasterQuery casterQuery) => this.casterQuery = casterQuery;
+
+        /// <summary>
+        /// 获取action释放者uid
+        /// </summary>
+        /// <returns></returns>
+        public string GetCaster() => casterQuery.GetUnitUid();
     }
 }

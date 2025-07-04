@@ -2,7 +2,7 @@
 
 namespace JFrame.Game
 {
-    public interface IJCombatTargetsFinder
+    public interface IJCombatTargetsFinder : IJCombatActionComponent
     {
         List<IJCombatUnit> GetTargets(IJCombatQuery query);
     }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace JFrame.Game
 {
-
     public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatUnit
     {
         public string Uid { get; private set; }

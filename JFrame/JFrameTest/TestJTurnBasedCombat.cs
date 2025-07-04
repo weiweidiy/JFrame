@@ -34,7 +34,7 @@ namespace JFrameTest
                 var result = new List<IUnique>();
 
                 var hp = new GameAttributeInt("Hp", 200, 200);
-                var speed = new GameAttributeInt("Speed", 60, 60);
+                var speed = new GameAttributeInt("Speed", 40, 60);
                 result.Add(hp);
                 result.Add(speed);
 
@@ -99,17 +99,25 @@ namespace JFrameTest
             var attrFactory2 = new FakeAttrFacotry2();
 
             //执行器
-            var executor = new JCombatExecutorDamage(null);
-            var lstExecutor = new List<IJCombatExecutor>();
-            lstExecutor.Add(executor);
+            var finder1 = new JCombatDefaultFinder();
+            var executor1 = new JCombatExecutorDamage(finder1);
+            var lstExecutor1 = new List<IJCombatExecutor>();
+            lstExecutor1.Add(executor1);
 
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor) });
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor1) });
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             var team1 = new JCombatTeam("team1", lst1, funcUnit);
+
+
+            //var finder1 = new JCombatDefaultFinder();
+            //var executor1 = new JCombatExecutorDamage(finder1);
+            //var lstExecutor1 = new List<IJCombatExecutor>();
+            //lstExecutor1.Add(executor1);
+
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor) });
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action2", null) });
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             var team2 = new JCombatTeam("team2", lst2, funcUnit);
