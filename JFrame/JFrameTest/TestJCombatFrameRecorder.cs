@@ -7,12 +7,12 @@ namespace JFrame.Game.Tests
     public class JCombatFrameRecorderTests
     {
         private const int TestMaxFrame = 100;
-        private JCombatFrameRecorder _recorder;
+        private JCombatTurnBasedFrameRecorder _recorder;
 
         [SetUp]
         public void Setup()
         {
-            _recorder = new JCombatFrameRecorder(TestMaxFrame);
+            _recorder = new JCombatTurnBasedFrameRecorder(TestMaxFrame);
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace JFrame.Game.Tests
             const int expectedMaxFrame = 50;
 
             // Act
-            var recorder = new JCombatFrameRecorder(expectedMaxFrame);
+            var recorder = new JCombatTurnBasedFrameRecorder(expectedMaxFrame);
 
             // Assert
             Assert.AreEqual(expectedMaxFrame, recorder.GetMaxFrame());
