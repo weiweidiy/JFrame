@@ -1,12 +1,14 @@
 ﻿using JFrame.Game;
 using JFramework;
 using JFramework.Game;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static NUnit.Framework.Constraints.Tolerance;
 
 namespace JFrameTest
 {
@@ -80,13 +82,13 @@ namespace JFrameTest
 
         public class FakeJCombatAction : JCombatActionBase
         {
-            public FakeJCombatAction(string uid, List<IJCombatExecutor> executors) : base(uid,null,executors)
+            public FakeJCombatAction(string uid, List<IJCombatExecutor> executors) : base(uid, null, executors)
             {
             }
         }
 
         [Test]
-        public async Task  TestDefaultFinder()
+        public async Task TestDefaultFinder()
         {
             //arrange
             Func<IJCombatUnit, string> funcUnit = (unit) => unit.Uid;
@@ -124,7 +126,7 @@ namespace JFrameTest
             var team2 = new JCombatTeam("team2", lst2, funcUnit);
 
             var lstTeams = new List<IJCombatTeam>();
-            lstTeams.Add(team1); 
+            lstTeams.Add(team1);
             lstTeams.Add(team2);
 
 
@@ -133,14 +135,15 @@ namespace JFrameTest
             var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult());
 
             //act
-            var result =  await turnbasedCombat.GetResult();
+            var result = await turnbasedCombat.GetResult();
 
             //expect
-            Assert.AreEqual(19, frameRecorder.GetCurFrame());
+            Assert.AreEqual(9, frameRecorder.GetCurFrame());
             var hpAttr1 = jcombatQuery.GetUnit("unit1").GetAttribute("Hp") as GameAttributeInt;
             var hpAttr2 = jcombatQuery.GetUnit("unit2").GetAttribute("Hp") as GameAttributeInt;
             Assert.AreEqual(100, hpAttr1.CurValue);
-            Assert.AreEqual(80, hpAttr2.CurValue);
+            Assert.AreEqual(0, hpAttr2.CurValue);
+            Assert.AreEqual(team1, jcombatQuery.GetWinner());
         }
 
 
@@ -203,3 +206,4 @@ namespace JFrameTest
 
     }
 }
+
