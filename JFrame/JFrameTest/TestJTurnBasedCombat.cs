@@ -86,15 +86,16 @@ namespace JFrameTest
         }
 
         [Test]
-        public async Task TestInitialize()
+        public async Task  TestDefaultFinder()
         {
             //arrange
             Func<IJCombatUnit, string> funcUnit = (unit) => unit.Uid;
             Func<IUnique, string> funcAttr = (attr) => attr.Uid;
             Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
+            Func<string, int> funcSeat = (unitUid) => 1;
 
             var actionSelector = new JCombatTurnBasedActionSelector(funcUnit);
-            var frameRecorder = new JCombatTurnBasedFrameRecorder(20);
+            var frameRecorder = new JCombatTurnBasedFrameRecorder(19); //从0开始，共20回合
             var attrFactory = new FakeAttrFacotry();
             var attrFactory2 = new FakeAttrFacotry2();
 
@@ -127,7 +128,7 @@ namespace JFrameTest
             lstTeams.Add(team2);
 
 
-            var jcombatQuery = new JCombatQuery(lstTeams, funcTeam, frameRecorder);
+            var jcombatQuery = new JCombatSeatBasedQuery(funcSeat, lstTeams, funcTeam, funcUnit, frameRecorder);
 
             var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult());
 
@@ -135,11 +136,70 @@ namespace JFrameTest
             var result =  await turnbasedCombat.GetResult();
 
             //expect
-            Assert.AreEqual(20, frameRecorder.GetCurFrame());
+            Assert.AreEqual(19, frameRecorder.GetCurFrame());
+            var hpAttr1 = jcombatQuery.GetUnit("unit1").GetAttribute("Hp") as GameAttributeInt;
+            var hpAttr2 = jcombatQuery.GetUnit("unit2").GetAttribute("Hp") as GameAttributeInt;
+            Assert.AreEqual(100, hpAttr1.CurValue);
+            Assert.AreEqual(80, hpAttr2.CurValue);
+        }
+
+
+        [Test]
+        public async Task TestInitialize()
+        {
+            //arrange
+            Func<IJCombatUnit, string> funcUnit = (unit) => unit.Uid;
+            Func<IUnique, string> funcAttr = (attr) => attr.Uid;
+            Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
+
+            var actionSelector = new JCombatTurnBasedActionSelector(funcUnit);
+            var frameRecorder = new JCombatTurnBasedFrameRecorder(19);
+            var attrFactory = new FakeAttrFacotry();
+            var attrFactory2 = new FakeAttrFacotry2();
+
+            //执行器
+            var finder1 = new JCombatDefaultFinder();
+            var executor1 = new JCombatExecutorDamage(finder1);
+            var lstExecutor1 = new List<IJCombatExecutor>();
+            lstExecutor1.Add(executor1);
+
+            //队伍1
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action1", lstExecutor1) });
+            var lst1 = new List<IJCombatUnit>();
+            lst1.Add(unit1);
+            var team1 = new JCombatTeam("team1", lst1, funcUnit);
+
+
+            //var finder1 = new JCombatDefaultFinder();
+            //var executor1 = new JCombatExecutorDamage(finder1);
+            //var lstExecutor1 = new List<IJCombatExecutor>();
+            //lstExecutor1.Add(executor1);
+
+            //队伍2
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action2", null) });
+            var lst2 = new List<IJCombatUnit>();
+            lst2.Add(unit2);
+            var team2 = new JCombatTeam("team2", lst2, funcUnit);
+
+            var lstTeams = new List<IJCombatTeam>();
+            lstTeams.Add(team1);
+            lstTeams.Add(team2);
+
+
+            var jcombatQuery = new JCombatQuery(lstTeams, funcTeam, frameRecorder);
+
+            var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult());
+
+            //act
+            var result = await turnbasedCombat.GetResult();
+
+            //expect
+            Assert.AreEqual(19, frameRecorder.GetCurFrame());
             var hpAttr1 = jcombatQuery.GetUnit("unit1").GetAttribute("Hp") as GameAttributeInt;
             var hpAttr2 = jcombatQuery.GetUnit("unit2").GetAttribute("Hp") as GameAttributeInt;
             Assert.AreEqual(100, hpAttr1.CurValue);
             Assert.AreEqual(200, hpAttr2.CurValue);
         }
+
     }
 }
