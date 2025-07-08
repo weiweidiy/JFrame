@@ -27,6 +27,7 @@ namespace JFrame.Game.Tests
             _teams[1].IsAllDead().Returns(false);
 
             _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
+
         }
 
         [Test]

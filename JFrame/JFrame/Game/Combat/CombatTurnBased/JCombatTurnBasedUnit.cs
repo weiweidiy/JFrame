@@ -26,7 +26,7 @@ namespace JFrame.Game
                 foreach (var action in actions)
                 {
                     
-                    action.Start(query);
+                    action.OnStart(/*query*/);
                 }
             }
 
@@ -38,7 +38,7 @@ namespace JFrame.Game
             {
                 foreach (var action in actions)
                 {
-                    action.Stop();
+                    action.OnStop();
                 }
             }
         }

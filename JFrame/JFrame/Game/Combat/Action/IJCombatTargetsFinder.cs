@@ -4,6 +4,6 @@ namespace JFrame.Game
 {
     public interface IJCombatTargetsFinder : IJCombatActionComponent
     {
-        List<IJCombatUnit> GetTargets(IJCombatQuery query);
+        List<IJCombatUnit> GetTargets(/*IJCombatQuery query*/);
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace JFrame.Game
 {
 
-    public interface IJCombatTrigger : IJCombatActionComponent, IJCombatLifeCycle
+    public interface IJCombatTrigger : IJCombatActionComponent/*, IJCombatLifeCycle*/
     {
         event Action<List<IJCombatUnit>> onTriggerOn;
 

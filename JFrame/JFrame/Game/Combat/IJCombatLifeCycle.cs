@@ -4,7 +4,7 @@ namespace JFramework
 {
     public interface IJCombatLifeCycle
     {
-        void OnStart(IJCombatQuery query);
+        void OnStart(/*IJCombatQuery query*/);
 
         void OnStop();
     }

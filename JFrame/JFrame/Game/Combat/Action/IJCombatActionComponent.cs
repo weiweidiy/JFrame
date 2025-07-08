@@ -1,6 +1,8 @@
-﻿namespace JFrame.Game
+﻿using JFramework;
+
+namespace JFrame.Game
 {
-    public interface IJCombatActionComponent
+    public interface IJCombatActionComponent : IJCombatLifeCycle
     {
         void SetOwner(IJCombatAction owner);
 

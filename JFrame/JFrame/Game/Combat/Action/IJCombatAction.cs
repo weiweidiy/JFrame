@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace JFrame.Game
 {
-    public interface IJCombatAction : IUnique
+    public interface IJCombatAction : IUnique , IJCombatLifeCycle
     {
-        /// <summary>
-        /// action 开始激活了，一般用于监听事件
-        /// </summary>
-        void Start(IJCombatQuery query);
+        ///// <summary>
+        ///// action 开始激活了，一般用于监听事件
+        ///// </summary>
+        //void Start(/*IJCombatQuery query*/);
         
-        /// <summary>
-        /// action 无效了，一般用于移除监听事件
-        /// </summary>
-        void Stop();
+        ///// <summary>
+        ///// action 无效了，一般用于移除监听事件
+        ///// </summary>
+        //void Stop();
 
         /// <summary>
         /// 执行一次动作（触发，攻击）

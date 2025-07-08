@@ -15,11 +15,14 @@ namespace JFrame.Game
 
         IJCombatTeam winner;
 
-        public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : base(keySelector)
+        public JCombatQuery( Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : base(keySelector)
+        {
+            this.frameRecorder = frameRecorder;
+        }
+
+        public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : this(keySelector, frameRecorder) 
         {
             AddRange(teams);
-
-            this.frameRecorder = frameRecorder;
         }
 
         #region 查找战斗结果
