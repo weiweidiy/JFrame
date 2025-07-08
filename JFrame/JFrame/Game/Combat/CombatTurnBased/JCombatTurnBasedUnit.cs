@@ -21,6 +21,7 @@ namespace JFramework.Game
 
         public override void OnStart()
         {
+            base.OnStart();
             if (actions != null)
             {
                 foreach (var action in actions)
@@ -32,26 +33,28 @@ namespace JFramework.Game
 
         }
 
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            if (actions == null)
+                return;
+
+            foreach (var action in actions)
+            {
+                action.OnUpdate();
+            }
+        }
+
         public override void OnStop()
         {
+            base.OnStop();
             if (actions != null)
             {
                 foreach (var action in actions)
                 {
                     action.OnStop();
                 }
-            }
-        }
-
-
-        public void Act()
-        {
-            if (actions == null)
-                return;
-
-            foreach (var action in actions)
-            {
-                action.Act();
             }
         }
 

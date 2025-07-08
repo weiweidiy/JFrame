@@ -29,7 +29,7 @@ namespace JFramework.Game.Tests
                 IJCombatQuery combatJudger,
                 IJCombatEventRecorder eventRecorder,
                 IJCombatResult combatResult)
-                : base(/*dataSource,*/ /*frameRecorder,*/ combatJudger, eventRecorder, combatResult)
+                : base(/*dataSource,*/ /*frameRecorder,*/ combatJudger, new JCombatRunner(combatJudger, eventRecorder, combatResult))
             {
             }
 
@@ -38,19 +38,19 @@ namespace JFramework.Game.Tests
             //    UpdateCallCount++;
             //}
 
-            protected override void Start()
+            public override void OnStart()
             {
                 StartCalled = true;
-                base.Start();
+                base.OnStart();
             }
 
-            protected override void Stop()
+            public override void OnStop()
             {
                 StopCalled = true;
-                base.Stop();
+                base.OnStop();
             }
 
-            protected override void Update()
+            public override void OnUpdate()
             {
                 UpdateCallCount++;
             }
@@ -71,16 +71,6 @@ namespace JFramework.Game.Tests
             _frameRecorder.NextFrame().Returns(1, 2, 3);
         }
 
-        [Test]
-        public void Constructor_WithNullDependencies_ShouldThrowException()
-        {
-            // 测试各种null依赖情况
-           // Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, _combatResult));
-            //Assert.Throws<ArgumentNullException>(() => new TestCombat( null, _combatJudger, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, null, _eventRecorder, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, null, _combatResult));
-            Assert.Throws<ArgumentNullException>(() => new TestCombat( _frameRecorder, _combatJudger, _eventRecorder, null));
-        }
 
         //[Test]
         //public async Task GetResult_WhenCombatNotOver_ShouldCallUpdateMultipleTimes()

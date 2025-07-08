@@ -44,6 +44,7 @@ namespace JFramework.Game
 
         public virtual void OnStart() { }
 
+        public virtual void OnUpdate() { }
 
         public virtual void OnStop() { }
 

@@ -16,5 +16,7 @@
         public virtual void SetOwner(IJCombatAction owner) => this.owner = owner;
         public virtual void OnStart() { }
         public virtual void OnStop() { }
+
+        public virtual void OnUpdate() { }
     }
 }

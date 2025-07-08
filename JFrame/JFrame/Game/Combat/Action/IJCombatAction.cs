@@ -15,11 +15,11 @@ namespace JFramework.Game
         ///// </summary>
         //void Stop();
 
-        /// <summary>
-        /// 执行一次动作（触发，攻击）
-        /// </summary>
-        /// <param name="query"></param>
-        void Act();
+        ///// <summary>
+        ///// 执行一次动作（触发，攻击）
+        ///// </summary>
+        ///// <param name="query"></param>
+        //void Act();
 
         /// <summary>
         /// 设置归属

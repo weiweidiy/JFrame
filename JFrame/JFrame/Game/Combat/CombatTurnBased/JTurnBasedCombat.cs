@@ -18,7 +18,7 @@ namespace JFramework.Game
         /// </summary>
         IJCombatFrameRecorder frameRecorder;
 
-        public JTurnBasedCombat(IJCombatTurnBasedActionSelector actionSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, IJCombatEventRecorder eventRecorder, IJCombatResult jCombatResult) : base(jCombatQuery, eventRecorder, jCombatResult)
+        public JTurnBasedCombat(IJCombatTurnBasedActionSelector actionSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, IJCombatRunner jCombatRunner) : base(jCombatQuery, jCombatRunner)
         {
             this.actionSelector = actionSelector;
             this.frameRecorder = frameRecorder;
@@ -27,7 +27,7 @@ namespace JFramework.Game
             actionSelector.SetUnits(allUnit);
         }
 
-        protected override void Update()
+        public override void OnUpdate()
         {
             //更新战斗 如果战斗没有决出胜负，则继续战斗
             while (!jCombatQuery.IsCombatOver())
@@ -47,10 +47,13 @@ namespace JFramework.Game
         /// 一次行动一个单位
         /// </summary>
         /// <param name="frameRecorder"></param>
-        protected void DoUpdate(IJCombatFrameRecorder frameRecorder)
+        protected virtual void DoUpdate(IJCombatFrameRecorder frameRecorder)
         {
+            //子类重写：可以实现队伍技能更新
+
+            //行动单位
             var actionUnit = actionSelector.PopActionUnit();
-            actionUnit.Act();
+            actionUnit.OnUpdate();
         }
 
 

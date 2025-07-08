@@ -65,6 +65,11 @@ namespace JFramework.Game
             }
         }
 
+        public void OnUpdate()
+        {
+            Execute(null);
+        }
+
         public void OnStop()
         {
             if (triggers != null)
@@ -91,10 +96,10 @@ namespace JFramework.Game
             Execute(targets);
         }
 
-        public void Act()
-        {
-            Execute(null);
-        }
+        //public void Act()
+        //{
+            
+        //}
 
         public void Execute(List<IJCombatUnit> targets)
         {

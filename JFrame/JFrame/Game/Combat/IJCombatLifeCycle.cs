@@ -6,6 +6,8 @@ namespace JFramework
     {
         void OnStart(/*IJCombatQuery query*/);
 
+        void OnUpdate();
+
         void OnStop();
     }
 }

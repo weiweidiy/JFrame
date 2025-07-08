@@ -134,7 +134,7 @@ namespace JFrameTest
 
             jcombatQuery.AddRange(lstTeams);
 
-             var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult());
+             var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new JCombatRunner(jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult()));
 
             //act
             var result = await turnbasedCombat.GetResult();
@@ -195,7 +195,7 @@ namespace JFrameTest
             jcombatQuery.AddRange(lstTeams);
 
 
-            var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult());
+            var turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new JCombatRunner(jcombatQuery, new FakeEventRecorder(), new FakeJCombatResult()));
 
             //act
             var result = await turnbasedCombat.GetResult();
