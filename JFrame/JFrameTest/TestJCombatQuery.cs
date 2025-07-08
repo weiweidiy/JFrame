@@ -2,7 +2,7 @@
 using NSubstitute;
 using System.Collections.Generic;
 using JFramework;
-using JFrame.Game;
+using JFramework.Game;
 using static JFramework.PVPBattleManager;
 
 namespace JFrameTest

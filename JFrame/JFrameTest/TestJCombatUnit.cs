@@ -5,7 +5,7 @@ using JFramework.Game;
 using JFramework;
 using System.Runtime.InteropServices;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatUnitTests

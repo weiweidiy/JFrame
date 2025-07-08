@@ -2,7 +2,7 @@
 using NSubstitute;
 using System.Collections.Generic;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatJudgerTests

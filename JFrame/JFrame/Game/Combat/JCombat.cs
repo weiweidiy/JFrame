@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
 
     public abstract class JCombat : IJCombat
@@ -60,7 +60,7 @@ namespace JFrame.Game
             {
                 foreach (var unit in units)
                 {
-                    unit.Start(jCombatQuery);
+                    unit.OnStart();
                 }
             }
 
@@ -74,7 +74,7 @@ namespace JFrame.Game
             {
                 foreach (var unit in units)
                 {
-                    unit.Stop();
+                    unit.OnStop();
                 }
             }
 

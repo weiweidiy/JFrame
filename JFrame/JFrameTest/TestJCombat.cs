@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatTests

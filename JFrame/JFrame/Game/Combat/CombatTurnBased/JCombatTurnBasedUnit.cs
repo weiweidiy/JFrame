@@ -4,12 +4,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
     {
         List<IJCombatAction> actions;
-        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions) : base(uid, attrList, keySelector, combatAttrNameQuery)
+        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatQuery query, List<IJCombatAction> actions) : base(uid, attrList, keySelector, combatAttrNameQuery, query)
         {
             this.actions = actions;
             if(this.actions != null)
@@ -19,7 +19,7 @@ namespace JFrame.Game
             }
         }
 
-        public override void Start(IJCombatQuery query)
+        public override void OnStart()
         {
             if (actions != null)
             {
@@ -32,7 +32,7 @@ namespace JFrame.Game
 
         }
 
-        public override void Stop()
+        public override void OnStop()
         {
             if (actions != null)
             {

@@ -4,7 +4,7 @@ using JFramework;
 using System.Collections.Generic;
 using System;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatSpeedBasedActionSelectorTests

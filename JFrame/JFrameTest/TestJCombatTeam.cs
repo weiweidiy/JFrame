@@ -1,12 +1,12 @@
 ﻿using JFramework;
-using JFrame.Game;
+using JFramework.Game;
 using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using JFrameTest;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatTeamTests

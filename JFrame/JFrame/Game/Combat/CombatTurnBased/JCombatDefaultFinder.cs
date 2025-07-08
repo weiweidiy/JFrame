@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     /// <summary>
     /// 基于战位的查找器, 基础查找器，深度找

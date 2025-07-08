@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
 
     public abstract class JCombatExecutorBase : JCombatActionComponent, IJCombatExecutor

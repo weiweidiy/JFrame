@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     /// <summary>
     /// 回合制游戏战报生成

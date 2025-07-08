@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using JFrame.Game;
+using JFramework.Game;
 
-namespace JFrame.Game.Tests
+namespace JFramework.Game.Tests
 {
     [TestFixture]
     public class JCombatFrameRecorderTests

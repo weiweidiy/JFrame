@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     /// <summary>
     /// 判断战斗是否结束

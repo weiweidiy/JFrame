@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     /// <summary>
     /// 战报式战斗对象

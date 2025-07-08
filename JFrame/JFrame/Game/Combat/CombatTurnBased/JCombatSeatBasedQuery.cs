@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JFrame.Game
+namespace JFramework.Game
 {
     public class JCombatSeatBasedQuery : JCombatQuery, IJCombatSeatBasedQuery
     {
@@ -35,15 +35,5 @@ namespace JFrame.Game
 
             return null;
         }
-
-        //public List<IJCombatUnit> GetUnits(IJCombatTeam team, List<int> seats)
-        //{
-        //    var units = GetUnits(_keySelector(team));
-        //    foreach(var unit in units)
-        //    {
-        //        var seat = seatSelector(unitSelector(unit));
-        //        if(seats.Contains)
-        //    }
-        //}
     }
 }
