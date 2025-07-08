@@ -8,8 +8,7 @@ namespace JFramework
     public abstract class JObjectPool : IObjectPool
     {
         // 存储类型对应的委托三元组
-        private readonly Dictionary<Type, (Action<object>, Action<object>, Action<object>)> _delegates
-            = new Dictionary<Type, (Action<object>, Action<object>, Action<object>)>();
+        private readonly Dictionary<Type, (Action<object>, Action<object>, Action<object>)> _delegates = new Dictionary<Type, (Action<object>, Action<object>, Action<object>)>();
 
         // 修改构造函数以接收委托工厂
         public JObjectPool(ITypeRegister typeRegister,
@@ -66,9 +65,7 @@ namespace JFramework
         }
 
 
-        protected abstract void Regist<T>(Action<T> onRent, Action<T> onReturn, Action<T> onRelease)
-            where T : class, new();
-
+        protected abstract void Regist<T>(Action<T> onRent, Action<T> onReturn, Action<T> onRelease) where T : class, new();
         public abstract T Rent<T>(Action<T> onGet = null);
         public abstract void Return<T>(T obj);
     }
