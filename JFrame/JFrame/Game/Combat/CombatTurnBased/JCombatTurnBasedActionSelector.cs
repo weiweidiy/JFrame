@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatTurnBasedActionSelector : DictionaryContainer<IJCombatTurnBasedUnit>, IJCombatTurnBasedActionSelector
+    public class JCombatTurnBasedActionSelector : DictionaryContainer<IJCombatTurnBasedUnit>, IJCombatTurnBasedCasterSelector
     {
         /// <summary>
         /// 排序后的行动顺序列表
         /// </summary>
         List<IJCombatTurnBasedUnit> actionList = new List<IJCombatTurnBasedUnit>();
 
-        public JCombatTurnBasedActionSelector(List<IJCombatTurnBasedUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
+        public JCombatTurnBasedActionSelector(List<IJCombatTurnBasedUnit> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
         {
             ///to do:需要监听ijcombatUnit属性变化，比如速度变化，要动态调整序列
             AddRange(units);
@@ -40,7 +40,7 @@ namespace JFramework.Game
         {
             foreach (IJCombatTurnBasedUnit unit in actionList)
             {
-                if (unit.CanAction())
+                if (unit.CanCast())
                     return false;
 
             }

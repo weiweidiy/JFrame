@@ -5,9 +5,9 @@ namespace JFramework.Game
 {
     public interface IJCombatTeam : IUnique
     {
-        List<IJCombatUnit> GetAllUnit();
+        List<IJCombatOperatable> GetAllUnit();
 
-        IJCombatUnit GetUnit(string uid);
+        IJCombatOperatable GetUnit(string uid);
 
         bool IsAllDead();
     }

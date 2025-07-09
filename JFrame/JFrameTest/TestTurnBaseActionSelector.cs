@@ -10,7 +10,7 @@ namespace JFramework.Game.Tests
     public class JCombatSpeedBasedActionSelectorTests
     {
         private JCombatTurnBasedActionSelector _selector;
-        private Func<IJCombatUnit, string> _keySelector;
+        private Func<IJCombatOperatable, string> _keySelector;
         private IJCombatTurnBasedUnit _unit1;
         private IJCombatTurnBasedUnit _unit2;
         private IJCombatTurnBasedUnit _unit3;
@@ -24,17 +24,17 @@ namespace JFramework.Game.Tests
             _unit1 = Substitute.For<IJCombatTurnBasedUnit>();
             //_unit1.GetHashCode().Returns(1);
             _unit1.GetActionPoint().Returns(10);
-            _unit1.CanAction().Returns(true);
+            _unit1.CanCast().Returns(true);
 
             _unit2 = Substitute.For<IJCombatTurnBasedUnit>();
             //_unit2.GetHashCode().Returns(2);
             _unit2.GetActionPoint().Returns(20);
-            _unit2.CanAction().Returns(true);
+            _unit2.CanCast().Returns(true);
 
             _unit3 = Substitute.For<IJCombatTurnBasedUnit>();
             //_unit3.GetHashCode().Returns(3);
             _unit3.GetActionPoint().Returns(15);
-            _unit3.CanAction().Returns(true);
+            _unit3.CanCast().Returns(true);
 
             _selector = new JCombatTurnBasedActionSelector(new List<IJCombatTurnBasedUnit>() { },  _keySelector);
         }
@@ -89,9 +89,9 @@ namespace JFramework.Game.Tests
         public void IsAllComplete_ShouldReturnTrue_WhenNoUnitCanAction()
         {
             // Arrange
-            _unit1.CanAction().Returns(false);
-            _unit2.CanAction().Returns(false);
-            _unit3.CanAction().Returns(false);
+            _unit1.CanCast().Returns(false);
+            _unit2.CanCast().Returns(false);
+            _unit3.CanCast().Returns(false);
 
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
             _selector.AddUnits(units);

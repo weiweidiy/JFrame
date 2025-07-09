@@ -11,26 +11,26 @@ namespace JFramework.Game.Tests
     [TestFixture]
     public class JCombatTeamTests
     {
-        private IJCombatUnit _unit1;
-        private IJCombatUnit _unit2;
-        private IJCombatUnit _unit3;
-        private List<IJCombatUnit> _testUnits;
-        private Func<IJCombatUnit, string> _keySelector;
+        private IJCombatOperatable _unit1;
+        private IJCombatOperatable _unit2;
+        private IJCombatOperatable _unit3;
+        private List<IJCombatOperatable> _testUnits;
+        private Func<IJCombatOperatable, string> _keySelector;
         private JCombatTeam _combatTeam;
 
         [SetUp]
         public void SetUp()
         {
             // Create mock units
-            _unit1 = Substitute.For<IJCombatUnit>();
-            _unit2 = Substitute.For<IJCombatUnit>();
-            _unit3 = Substitute.For<IJCombatUnit>();
+            _unit1 = Substitute.For<IJCombatOperatable>();
+            _unit2 = Substitute.For<IJCombatOperatable>();
+            _unit3 = Substitute.For<IJCombatOperatable>();
 
             // Setup key selector (using unit's hash code as key for testing)
             _keySelector = unit => unit.GetHashCode().ToString();
 
             // Create test team
-            _testUnits = new List<IJCombatUnit> { _unit1, _unit2, _unit3 };
+            _testUnits = new List<IJCombatOperatable> { _unit1, _unit2, _unit3 };
             _combatTeam = new JCombatTeam("team1", _testUnits, _keySelector);
         }
 
@@ -107,7 +107,7 @@ namespace JFramework.Game.Tests
         public void IsAllDead_EmptyTeam_ReturnsTrue()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam("team1", new List<IJCombatUnit>(), _keySelector);
+            var emptyTeam = new JCombatTeam("team1", new List<IJCombatOperatable>(), _keySelector);
 
             // Act
             var result = emptyTeam.IsAllDead();
@@ -143,13 +143,13 @@ namespace JFramework.Game.Tests
         public void GetUnit_WithValidUid_ShouldReturnCorrectUnit()
         {
             // 准备模拟数据
-            var unit1 = Substitute.For<IJCombatUnit>();
+            var unit1 = Substitute.For<IJCombatOperatable>();
             unit1.Uid.Returns("1");
 
-            var unit2 = Substitute.For<IJCombatUnit>();
+            var unit2 = Substitute.For<IJCombatOperatable>();
             unit2.Uid.Returns("2");
 
-            var units = new List<IJCombatUnit> { unit1, unit2 };
+            var units = new List<IJCombatOperatable> { unit1, unit2 };
 
             // 创建测试对象
             var team = new JCombatTeam("team1", units, u => u.Uid);
@@ -166,10 +166,10 @@ namespace JFramework.Game.Tests
         public void GetUnit_WithInvalidUid_ShouldReturnNull()
         {
             // 准备模拟数据
-            var unit1 = Substitute.For<IJCombatUnit>();
+            var unit1 = Substitute.For<IJCombatOperatable>();
             unit1.Uid.Returns("1");
 
-            var units = new List<IJCombatUnit> { unit1 };
+            var units = new List<IJCombatOperatable> { unit1 };
 
             // 创建测试对象
             var team = new JCombatTeam("team1", units, u => u.Uid);
@@ -186,7 +186,7 @@ namespace JFramework.Game.Tests
         public void GetUnit_WithEmptyUnitList_ShouldReturnNull()
         {
             // 准备空列表
-            var units = new List<IJCombatUnit>();
+            var units = new List<IJCombatOperatable>();
 
             // 创建测试对象
             var team = new JCombatTeam("team1", units, u => u.Uid);

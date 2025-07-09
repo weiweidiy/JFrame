@@ -6,7 +6,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战报式战斗对象
     /// </summary>
-    public interface IJCombat : IJCombatLifeCycle
+    public interface IJCombatReportable 
     {
         Task<IJCombatResult> GetResult();
     }

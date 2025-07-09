@@ -7,7 +7,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗行动的选择器 
     /// </summary>
-    public interface IJCombatTurnBasedActionSelector
+    public interface IJCombatTurnBasedCasterSelector
     {
         /// <summary>
         /// 获取出手序列（已排序）

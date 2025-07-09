@@ -4,9 +4,9 @@ namespace JFramework.Game
 {
 
     /// <summary>
-    /// 可战斗单位接口
+    /// 可进行战斗操作的单位
     /// </summary>
-    public interface IJCombatUnit : IUnique , IJCombatLifeCycle
+    public interface IJCombatOperatable : IUnique, IJCombatLifeCycle
     {
         /// <summary>
         /// 是否已死亡

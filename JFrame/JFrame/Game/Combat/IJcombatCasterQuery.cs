@@ -3,8 +3,8 @@
     /// <summary>
     /// 可以查询unitUid;
     /// </summary>
-    public interface IJcombatUnitCasterQuery
+    public interface IJcombatCasterQuery
     {
-        string GetUnitUid();
+        string GetCasterUid();
     }
 }

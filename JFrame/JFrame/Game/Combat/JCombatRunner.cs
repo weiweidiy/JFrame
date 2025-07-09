@@ -21,7 +21,7 @@ namespace JFramework.Game
             this.jCombatResult = jCombatResult;
         }
 
-        public void SetCombat(IJCombat combat)
+        public void SetCombat(IJCombatLifeCycle combat)
         {
             jCombat = combat;
         }

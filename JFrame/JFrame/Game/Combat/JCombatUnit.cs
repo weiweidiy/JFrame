@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatUnit
+    public class JCombatUnit : DictionaryContainer<IUnique>, IJCombatOperatable, IJCombatCastable
     {
         public string Uid { get; private set; }
 
@@ -29,6 +29,7 @@ namespace JFramework.Game
             this.Uid = uid;
         }
 
+        #region 可操作战斗属性接口
         public IUnique GetAttribute(string uid)
         {
             var attr = Get(uid);
@@ -45,13 +46,6 @@ namespace JFramework.Game
             return attr.CurValue <= 0;
         }
 
-        public virtual void OnStart() { }
-
-        public virtual void OnUpdate() { }
-
-        public virtual void OnStop() { }
-
-
         public int OnDamage(IJCombatDamageData damageData)
         {
             var attrHp = Get(combatAttrNameQuery.GetHpAttrName()) as GameAttributeInt;
@@ -65,5 +59,25 @@ namespace JFramework.Game
 
             return preValue - curValue;
         }
+        #endregion
+
+        #region 可释放技能接口
+        public virtual void Cast() { }
+
+        public virtual bool CanCast()
+        {
+            return !IsDead();
+        }
+        #endregion
+
+        #region 可生命周期运行接口
+        public virtual void OnStart() { }
+
+        public virtual void OnUpdate() { }
+
+        public virtual void OnStop() { }
+
+
+        #endregion
     }
 }

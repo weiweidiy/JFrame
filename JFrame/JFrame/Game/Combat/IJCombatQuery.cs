@@ -28,13 +28,13 @@ namespace JFramework.Game
         List<IJCombatTeam> GetOppoTeams(string unitUid);
 
 
-        IJCombatUnit GetUnit(string unitUid);
+        IJCombatOperatable GetUnit(string unitUid);
 
-        List<IJCombatUnit> GetUnits();
+        List<IJCombatOperatable> GetUnits();
 
-        List<IJCombatUnit> GetUnits(Func<IJCombatUnit, bool> func);
+        List<IJCombatOperatable> GetUnits(Func<IJCombatOperatable, bool> func);
 
-        List<IJCombatUnit> GetUnits(string teamUid);
+        List<IJCombatOperatable> GetUnits(string teamUid);
         #endregion
 
         #region 查询帧

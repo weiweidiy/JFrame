@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatTeam : DictionaryContainer<IJCombatUnit>, IJCombatTeam
+    public class JCombatTeam : DictionaryContainer<IJCombatOperatable>, IJCombatTeam
     {
-        public JCombatTeam(string uid, List<IJCombatUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
+        public JCombatTeam(string uid, List<IJCombatOperatable> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
         {
             AddRange(units);
             this.Uid = uid;
@@ -14,12 +14,12 @@ namespace JFramework.Game
 
         public string Uid { get; protected set; }
 
-        public List<IJCombatUnit> GetAllUnit()
+        public List<IJCombatOperatable> GetAllUnit()
         {
             return GetAll();
         }
 
-        public IJCombatUnit GetUnit(string uid)
+        public IJCombatOperatable GetUnit(string uid)
         {
             return Get(uid);
         }

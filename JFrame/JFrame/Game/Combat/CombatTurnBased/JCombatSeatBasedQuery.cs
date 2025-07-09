@@ -6,8 +6,8 @@ namespace JFramework.Game
     public class JCombatSeatBasedQuery : JCombatQuery, IJCombatSeatBasedQuery
     {
         Func<string, int> seatSelector;
-        Func<IJCombatUnit, string> unitSelector;
-        public JCombatSeatBasedQuery(Func<string,int> seatSelector, /* List<IJCombatTeam> teams,*/ Func<IJCombatTeam, string> keySelector, Func<IJCombatUnit, string> unitSelector, IJCombatFrameRecorder frameRecorder) : base(/*teams,*/ keySelector, frameRecorder)
+        Func<IJCombatOperatable, string> unitSelector;
+        public JCombatSeatBasedQuery(Func<string,int> seatSelector, /* List<IJCombatTeam> teams,*/ Func<IJCombatTeam, string> keySelector, Func<IJCombatOperatable, string> unitSelector, IJCombatFrameRecorder frameRecorder) : base(/*teams,*/ keySelector, frameRecorder)
         {
             this.seatSelector = seatSelector;
             this.unitSelector = unitSelector;
@@ -23,7 +23,7 @@ namespace JFramework.Game
             return seatSelector(unitUid);
         }
 
-        public IJCombatUnit GetUnit(IJCombatTeam team, int seat)
+        public IJCombatOperatable GetUnit(IJCombatTeam team, int seat)
         {
             var units = GetUnits(_keySelector(team));
             foreach (var unit in units)

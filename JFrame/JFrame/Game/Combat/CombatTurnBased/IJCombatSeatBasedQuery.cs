@@ -16,6 +16,6 @@ namespace JFramework.Game
         ///// <returns></returns>
         //List<IJCombatUnit> GetUnits(IJCombatTeam team, List<int> seats);
 
-        IJCombatUnit GetUnit(IJCombatTeam team, int seat);
+        IJCombatOperatable GetUnit(IJCombatTeam team, int seat);
     }
 }

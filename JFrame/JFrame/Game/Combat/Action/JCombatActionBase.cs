@@ -15,7 +15,7 @@ namespace JFramework.Game
         List<IJCombatTrigger> triggers;
         List<IJCombatExecutor> executors;
 
-        IJcombatUnitCasterQuery casterQuery;
+        IJcombatCasterQuery casterQuery;
         public JCombatActionBase(IJCombatQuery query, string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
         {
             this.Uid = uid;
@@ -67,7 +67,7 @@ namespace JFramework.Game
 
         public void OnUpdate()
         {
-            Execute(null);
+            //Execute(null);
         }
 
         public void OnStop()
@@ -91,7 +91,7 @@ namespace JFramework.Game
 
         }
 
-        private void Trigger_onTriggerOn(List<IJCombatUnit> targets)
+        private void Trigger_onTriggerOn(List<IJCombatOperatable> targets)
         {
             Execute(targets);
         }
@@ -101,7 +101,7 @@ namespace JFramework.Game
             
         //}
 
-        public void Execute(List<IJCombatUnit> targets)
+        public void Execute(List<IJCombatOperatable> targets)
         {
             if (executors != null)
             {
@@ -116,12 +116,22 @@ namespace JFramework.Game
         /// 设置actin释放者查询器
         /// </summary>
         /// <param name="casterQuery"></param>
-        public void SetCaster(IJcombatUnitCasterQuery casterQuery) => this.casterQuery = casterQuery;
+        public void SetCaster(IJcombatCasterQuery casterQuery) => this.casterQuery = casterQuery;
 
         /// <summary>
         /// 获取action释放者uid
         /// </summary>
         /// <returns></returns>
-        public string GetCaster() => casterQuery.GetUnitUid();
+        public string GetCaster() => casterQuery.GetCasterUid();
+
+        public bool CanCast()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Cast()
+        {
+            Execute(null);
+        }
     }
 }

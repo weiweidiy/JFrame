@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 
 namespace JFramework.Game
 {
-
-    public abstract class JCombat : IJCombat
+    /// <summary>
+    /// 可以战斗播报化的对象
+    /// </summary>
+    public abstract class JCombat : IJCombatReportable, IJCombatLifeCycle
     {
         protected IJCombatQuery jCombatQuery;
 
@@ -26,9 +28,9 @@ namespace JFramework.Game
             return jCombatRunner.RunCombat();
         }
 
-
-
-
+        /// <summary>
+        /// 战斗开始
+        /// </summary>
         public virtual void OnStart()
         {
             var units = jCombatQuery.GetUnits();
@@ -39,11 +41,16 @@ namespace JFramework.Game
                     unit.OnStart();
                 }
             }
-
         }
 
+        /// <summary>
+        /// 逻辑更新
+        /// </summary>
         public abstract void OnUpdate();
 
+        /// <summary>
+        /// 战斗结束
+        /// </summary>
         public virtual void OnStop()
         {
             var units = jCombatQuery.GetUnits();

@@ -31,20 +31,11 @@ namespace JFramework.Game
                     action.OnStart(/*query*/);
                 }
             }
-
         }
 
         public override void OnUpdate()
         {
-            base.OnUpdate();
-
-            if (actions == null)
-                return;
-
-            foreach (var action in actions)
-            {
-                action.OnUpdate();
-            }
+            base.OnUpdate();      
         }
 
         public override void OnStop()
@@ -59,10 +50,7 @@ namespace JFramework.Game
             }
         }
 
-        public bool CanAction()
-        {
-            return true;
-        }
+
 
         public int GetActionPoint()
         {
@@ -72,6 +60,17 @@ namespace JFramework.Game
             return attrInt.CurValue;
         }
 
+        public override void Cast()
+        {
+            base.Cast();
 
+            if (actions == null)
+                return;
+
+            foreach (var action in actions)
+            {
+                action.Cast();
+            }
+        }
     }
 }

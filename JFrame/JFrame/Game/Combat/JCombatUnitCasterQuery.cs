@@ -1,15 +1,24 @@
 ﻿namespace JFramework.Game
 {
-    public class JCombatUnitCasterQuery : IJcombatUnitCasterQuery
+    public class JCombatUnitCasterQuery : IJcombatCasterQuery
     {
-        IJCombatUnit caster;
-        public JCombatUnitCasterQuery(IJCombatUnit caster)
+        IJCombatOperatable caster;
+        public JCombatUnitCasterQuery(IJCombatOperatable caster)
         {
             this.caster = caster;
         }
-        public string GetUnitUid()
+        public string GetCasterUid()
         {
             return caster.Uid;
+        }
+    }
+
+    //在buffer的构造函数中创建，返回的是Buffer的Caster
+    public class JCombatBufferCasterQuery : IJcombatCasterQuery
+    {
+        public string GetCasterUid()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

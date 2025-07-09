@@ -11,20 +11,17 @@ namespace JFramework.Game
         /// <summary>
         /// 负责获取行动单位的接口
         /// </summary>
-        IJCombatTurnBasedActionSelector actionSelector;
+        IJCombatTurnBasedCasterSelector casterSelector;
 
         /// <summary>
         /// 帧记录器
         /// </summary>
         IJCombatFrameRecorder frameRecorder;
 
-        public JTurnBasedCombat(IJCombatTurnBasedActionSelector actionSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, IJCombatRunner jCombatRunner) : base(jCombatQuery, jCombatRunner)
+        public JTurnBasedCombat(IJCombatTurnBasedCasterSelector casterSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, IJCombatRunner jCombatRunner) : base(jCombatQuery, jCombatRunner)
         {
-            this.actionSelector = actionSelector;
+            this.casterSelector = casterSelector;
             this.frameRecorder = frameRecorder;
-
-            //var allUnit = jCombatQuery.GetUnits().OfType<IJCombatTurnBasedUnit>().ToList();
-            //actionSelector.SetUnits(allUnit);
         }
 
         public override void OnUpdate()
@@ -33,14 +30,14 @@ namespace JFramework.Game
             while (!jCombatQuery.IsCombatOver())
             {
                 //如果没有行动者了，回合数+1
-                if (actionSelector.IsAllComplete())
+                if (casterSelector.IsAllComplete())
                 {
                     frameRecorder.NextFrame();
-                    actionSelector.ResetActionUnits();
+                    casterSelector.ResetActionUnits();
                     continue;
                 }
 
-                DoUpdate(frameRecorder);
+                DoUpdate();
             }
         }
 
@@ -48,13 +45,12 @@ namespace JFramework.Game
         /// 一次行动一个单位
         /// </summary>
         /// <param name="frameRecorder"></param>
-        protected virtual void DoUpdate(IJCombatFrameRecorder frameRecorder)
+        protected virtual void DoUpdate()
         {
             //子类重写：可以实现队伍技能更新
-
             //行动单位
-            var actionUnit = actionSelector.PopActionUnit();
-            actionUnit.OnUpdate();
+            var actionUnit = casterSelector.PopActionUnit();
+            actionUnit.Cast();
         }
 
 
