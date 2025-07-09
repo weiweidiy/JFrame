@@ -122,7 +122,7 @@ namespace JFramework.Game.Tests
         {
             // 安排
             var winner = Substitute.For<IJCombatTeam>();
-            var events = new List<IJCombatEvent> { Substitute.For<IJCombatEvent>() };
+            var events = new List<CombatEvent> { new CombatEvent() };
 
             _combatJudger.IsCombatOver().Returns(true);
             _combatJudger.GetWinner().Returns(winner);

@@ -36,7 +36,7 @@ namespace JFramework.Game.Tests
             _unit3.GetActionPoint().Returns(15);
             _unit3.CanAction().Returns(true);
 
-            _selector = new JCombatTurnBasedActionSelector(_keySelector);
+            _selector = new JCombatTurnBasedActionSelector(new List<IJCombatTurnBasedUnit>() { },  _keySelector);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace JFramework.Game.Tests
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
 
             // Act
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
             var actionUnits = _selector.GetActionUnits();
 
             // Assert
@@ -61,7 +61,7 @@ namespace JFramework.Game.Tests
         {
             // Arrange
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
 
             // Act
             var firstUnit = _selector.PopActionUnit();
@@ -79,7 +79,7 @@ namespace JFramework.Game.Tests
         {
             // Arrange
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
 
             // Act & Assert
             Assert.IsFalse(_selector.IsAllComplete());
@@ -94,7 +94,7 @@ namespace JFramework.Game.Tests
             _unit3.CanAction().Returns(false);
 
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
 
             // Act & Assert
             Assert.IsTrue(_selector.IsAllComplete());
@@ -105,7 +105,7 @@ namespace JFramework.Game.Tests
         {
             // Arrange
             var emptyList = new List<IJCombatTurnBasedUnit>();
-            _selector.SetUnits(emptyList);
+            _selector.AddUnits(emptyList);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => _selector.PopActionUnit());
@@ -116,7 +116,7 @@ namespace JFramework.Game.Tests
         {
             // Arrange
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
 
             // 修改单位行动点以改变排序顺序
             _unit1.GetActionPoint().Returns(30); // 现在 unit1 应该排在最前面
@@ -142,7 +142,7 @@ namespace JFramework.Game.Tests
         {
             // Arrange
             var emptyList = new List<IJCombatTurnBasedUnit>();
-            _selector.SetUnits(emptyList);
+            _selector.AddUnits(emptyList);
 
             // Act
             _selector.ResetActionUnits();
@@ -161,7 +161,7 @@ namespace JFramework.Game.Tests
             _unit3.GetActionPoint().Returns(10);
 
             var units = new List<IJCombatTurnBasedUnit> { _unit1, _unit2, _unit3 };
-            _selector.SetUnits(units);
+            _selector.AddUnits(units);
 
             // 改变actionList状态
             _selector.PopActionUnit();

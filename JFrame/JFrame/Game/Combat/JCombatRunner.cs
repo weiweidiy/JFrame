@@ -2,6 +2,9 @@
 
 namespace JFramework.Game
 {
+    /// <summary>
+    /// 基于单帧运行的战报
+    /// </summary>
     public class JCombatRunner : IJCombatRunner
     {
         IJCombatLifeCycle jCombat;

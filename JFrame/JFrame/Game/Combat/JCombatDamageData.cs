@@ -4,7 +4,7 @@
     {
         int damage;
         int damageType;
-        public JCombatDamageData(string sourceUnitUid, string actionUid, int damage, int damageType) : base(sourceUnitUid, actionUid)
+        public JCombatDamageData(string uid, string sourceUnitUid, string actionUid, int damage, int damageType, string targetUid) : base(uid, sourceUnitUid, actionUid, targetUid)
         {
             this.damage = damage;
             this.damageType = damageType;

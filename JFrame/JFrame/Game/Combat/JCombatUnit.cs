@@ -13,9 +13,12 @@ namespace JFramework.Game
 
         protected IJCombatQuery query;
 
-        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, IJCombatQuery query) : this(uid, attrList,keySelector, combatAttrNameQuery)
+        protected IJCombatEventListener eventListener;
+
+        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, IJCombatQuery query, IJCombatEventListener eventListener = null) : this(uid, attrList,keySelector, combatAttrNameQuery)
         {
             this.query = query;
+            this.eventListener = eventListener;
         }
 
         public JCombatUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery) : base(keySelector)
@@ -57,6 +60,8 @@ namespace JFramework.Game
             var damage = damageData.GetDamage();
 
             var curValue = attrHp.Minus(damage);
+
+            eventListener?.OnDamage(damageData);
 
             return preValue - curValue;
         }

@@ -29,7 +29,7 @@ namespace JFramework.Game
         /// 设置列表（未排序）
         /// </summary>
         /// <param name="units"></param>
-        void SetUnits(List<IJCombatTurnBasedUnit> units);
+        void AddUnits(List<IJCombatTurnBasedUnit> units);
 
         /// <summary>
         /// 是否全部完成了

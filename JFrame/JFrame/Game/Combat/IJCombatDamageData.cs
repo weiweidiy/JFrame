@@ -1,6 +1,6 @@
 ﻿namespace JFramework.Game
 {
-    public interface IJCombatDamageData 
+    public interface IJCombatDamageData : IJCombatExtraData
     {
         /// <summary>
         /// 获取伤害值

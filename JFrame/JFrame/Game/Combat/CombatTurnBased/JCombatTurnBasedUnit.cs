@@ -9,7 +9,8 @@ namespace JFramework.Game
     public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
     {
         List<IJCombatAction> actions;
-        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatQuery query, List<IJCombatAction> actions) : base(uid, attrList, keySelector, combatAttrNameQuery, query)
+        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatQuery query, List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
+            : base(uid, attrList, keySelector, combatAttrNameQuery, query, eventListener)
         {
             this.actions = actions;
             if(this.actions != null)

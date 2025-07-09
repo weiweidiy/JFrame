@@ -7,6 +7,6 @@ namespace JFramework.Game
     /// </summary>
     public interface IJCombatEventRecorder
     {
-        List<IJCombatEvent> GetAllCombatEvents();
+        List<CombatEvent> GetAllCombatEvents();
     }
 }

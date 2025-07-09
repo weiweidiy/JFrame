@@ -37,7 +37,7 @@ namespace JFramework.Game
                 foreach(var seat in targetsSeats)
                 {
                     var targetsUnit = q.GetUnit(targetTeam, seat);
-                    if(targetsUnit != null)
+                    if(targetsUnit != null && !targetsUnit.IsDead())
                     {
                         result.Add(targetsUnit);
                         return result;

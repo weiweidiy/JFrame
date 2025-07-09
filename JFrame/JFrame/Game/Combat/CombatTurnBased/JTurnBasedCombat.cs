@@ -4,7 +4,7 @@ using System.Linq;
 namespace JFramework.Game
 {
     /// <summary>
-    /// 回合制游戏战报生成
+    /// 回合制游戏的逻辑帧（回合）更新逻辑
     /// </summary>
     public class JTurnBasedCombat : JCombat
     {
@@ -23,8 +23,8 @@ namespace JFramework.Game
             this.actionSelector = actionSelector;
             this.frameRecorder = frameRecorder;
 
-            var allUnit = jCombatQuery.GetUnits().OfType<IJCombatTurnBasedUnit>().ToList();
-            actionSelector.SetUnits(allUnit);
+            //var allUnit = jCombatQuery.GetUnits().OfType<IJCombatTurnBasedUnit>().ToList();
+            //actionSelector.SetUnits(allUnit);
         }
 
         public override void OnUpdate()
@@ -37,6 +37,7 @@ namespace JFramework.Game
                 {
                     frameRecorder.NextFrame();
                     actionSelector.ResetActionUnits();
+                    continue;
                 }
 
                 DoUpdate(frameRecorder);
