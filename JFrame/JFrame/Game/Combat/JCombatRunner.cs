@@ -5,54 +5,66 @@ namespace JFramework.Game
     /// <summary>
     /// 基于单帧运行的战报
     /// </summary>
-    public class JCombatRunner : IJCombatRunner
+    public class JCombatRunner : IJCombatReporter, IRunner
     {
-        IJCombatLifeCycle jCombat;
+        IRunable jCombat;
 
-        IJCombatResult jCombatResult;
+        IJCombatReport jCombatReport;
 
         IJCombatEventRecorder eventRecorder;
 
         IJCombatQuery jCombatQuery;
 
-        public JCombatRunner(IJCombatQuery jCombatQuery, IJCombatEventRecorder eventRecorder, IJCombatResult jCombatResult) { 
+        public JCombatRunner(IRunable combat, IJCombatQuery jCombatQuery, IJCombatEventRecorder eventRecorder, IJCombatReport jCombatResult) { 
             this.eventRecorder = eventRecorder;
             this.jCombatQuery = jCombatQuery;
-            this.jCombatResult = jCombatResult;
+            this.jCombatReport = jCombatResult;
+            this.jCombat = combat;
         }
 
-        public void SetCombat(IJCombatLifeCycle combat)
+        /// <summary>
+        /// 设置可执行对象
+        /// </summary>
+        /// <param name="combat"></param>
+        public void SetRunable(IRunable combat)
         {
             jCombat = combat;
         }
 
-        public async Task<IJCombatResult> RunCombat()
-        {
-            if (jCombat == null)
-                throw new System.Exception("CombatRunner 没有设置 Combat 请调用 JCombatRunner.SetCombat(IJCombat combat) 方法");
 
-            IJCombatResult r = await Task.Run(() =>
+        /// <summary>
+        /// 获取运行结果
+        /// </summary>
+        /// <returns></returns>
+        public IJCombatReport GetReport()
+        {
+            return jCombatReport;
+        }
+
+        /// <summary>
+        /// 运行：这里是多线程方式运行一次
+        /// </summary>
+        /// <returns></returns>
+        public async Task Run()
+        {
+            IJCombatReport r = await Task.Run(() =>
             {
                 //开始战斗
-                jCombat.OnStart();
+                jCombat.Start(null);
 
-                jCombat.OnUpdate();
+                jCombat.Update(null);
+
+                jCombat.Stop();
 
                 //获取胜利者
                 var winner = jCombatQuery.GetWinner();
 
                 //设置结果
-                jCombatResult.SetCombatEvents(eventRecorder.GetAllCombatEvents());
-                jCombatResult.SetCombatWinner(winner);
+                jCombatReport.SetCombatEvents(eventRecorder.GetAllCombatEvents());
+                jCombatReport.SetCombatWinner(winner);
 
-                jCombat.OnStop();
-
-                return jCombatResult;
+                return jCombatReport;
             });
-
-            return r;
         }
-
-
     }
 }

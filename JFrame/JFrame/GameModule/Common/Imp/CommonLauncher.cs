@@ -24,9 +24,9 @@ namespace JFramework
         /// <summary>
         /// 运行
         /// </summary>
-        protected override void OnRun(RunableExtraData extraData = null)
+        protected override void OnStart(RunableExtraData extraData = null)
         {
-            base.OnRun(extraData);
+            base.OnStart(extraData);
 
             RunNext(extraData);
         }
@@ -42,13 +42,13 @@ namespace JFramework
 
             if(internalRunables.Count == 0)
             {
-                NotifyComplete(this);
+                Stop();
                 return;
             }
 
             var runable = internalRunables.Dequeue();
             runable.onComplete += InternalRunable_onComplte;
-            runable.Run(extraData);
+            runable.Start(extraData);
         }
 
         /// <summary>

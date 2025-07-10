@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JFramework.Game
@@ -18,13 +19,16 @@ namespace JFramework.Game
         /// </summary>
         IJCombatFrameRecorder frameRecorder;
 
-        public JTurnBasedCombat(IJCombatTurnBasedCasterSelector casterSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, IJCombatRunner jCombatRunner) : base(jCombatQuery, jCombatRunner)
+        IJCombatQuery jCombatQuery;
+
+        public JTurnBasedCombat(IJCombatTurnBasedCasterSelector casterSelector, IJCombatFrameRecorder frameRecorder, IJCombatQuery jCombatQuery, List<IRunable> runables) : base(runables)
         {
             this.casterSelector = casterSelector;
             this.frameRecorder = frameRecorder;
+            this.jCombatQuery = jCombatQuery;
         }
 
-        public override void OnUpdate()
+        protected override void OnUpdate(RunableExtraData extraData)
         {
             //更新战斗 如果战斗没有决出胜负，则继续战斗
             while (!jCombatQuery.IsCombatOver())

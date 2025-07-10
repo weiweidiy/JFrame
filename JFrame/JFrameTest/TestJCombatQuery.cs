@@ -109,8 +109,8 @@ namespace JFrameTest
             var units1 = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>() };
             var units2 = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>(), Substitute.For<IJCombatOperatable>() };
 
-            mockTeam1.GetAllUnit().Returns(units1);
-            mockTeam2.GetAllUnit().Returns(units2);
+            mockTeam1.GetAllUnits().Returns(units1);
+            mockTeam2.GetAllUnits().Returns(units2);
             mockTeam1.Uid.Returns("team1");
             mockTeam2.Uid.Returns("team2");
             _teams.AddRange(new[] { mockTeam1, mockTeam2 });
@@ -131,7 +131,7 @@ namespace JFrameTest
             var expectedUnits = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>() };
 
             mockTeam.Uid.Returns("team1");
-            mockTeam.GetAllUnit().Returns(expectedUnits);
+            mockTeam.GetAllUnits().Returns(expectedUnits);
             _teams.Add(mockTeam);
 
             // 执行
@@ -154,7 +154,7 @@ namespace JFrameTest
             unit2.IsDead().Returns(true);
             unit1.Uid.Returns("1");
             unit2.Uid.Returns("2");
-            mockTeam.GetAllUnit().Returns(new List<IJCombatOperatable> { unit1, unit2 });
+            mockTeam.GetAllUnits().Returns(new List<IJCombatOperatable> { unit1, unit2 });
             mockTeam.Uid.Returns("team");
             _teams.Add(mockTeam);
             

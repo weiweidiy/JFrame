@@ -8,6 +8,6 @@ namespace JFramework.Game
     /// </summary>
     public interface IJCombatReportable 
     {
-        Task<IJCombatResult> GetResult();
+        Task<IJCombatReport> GetResult();
     }
 }

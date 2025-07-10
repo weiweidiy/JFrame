@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace JFramework
 {
@@ -21,7 +22,7 @@ namespace JFramework
 
         bool IsRunning { get; set; }
 
-        void Run(RunableExtraData extraData);
+        void Start(RunableExtraData extraData);
 
         void Update(RunableExtraData extraData);
 

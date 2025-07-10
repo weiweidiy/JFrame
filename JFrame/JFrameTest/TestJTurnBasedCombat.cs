@@ -64,7 +64,7 @@ namespace JFrameTest
             }
         }
 
-        public class FakeJCombatResult : IJCombatResult
+        public class FakeJCombatResult : IJCombatReport
         {
             public void SetCombatEvents(List<CombatEvent> events)
             {
@@ -94,6 +94,9 @@ namespace JFrameTest
         JCombatTurnBasedActionSelector actionSelector;
 
         Func<IUnique, string> funcAttr = (attr) => attr.Uid;
+
+        JCombatRunner combatRunner;
+
 
         [SetUp]
         public void Setup()
@@ -158,17 +161,26 @@ namespace JFrameTest
 
             actionSelector = new JCombatTurnBasedActionSelector(jcombatQuery.GetUnits().OfType<IJCombatTurnBasedUnit>().ToList(), funcUnit);
 
-            turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, new JCombatRunner(jcombatQuery, eventRecorder, new FakeJCombatResult()));
+            var runables = new List<IRunable>();
+            runables.Add(team1);
+            runables.Add(team2);
+
+            turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, runables);
+
+            combatRunner = new JCombatRunner(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
+            //combatRunner.SetRunable(turnbasedCombat);
         }
 
         [Test]
         public async Task TestDefaultFinder()
         {
             //arrange
-           
+
 
             //act
-            var result = await turnbasedCombat.GetResult();
+            await combatRunner.Run();
+
+            var result = combatRunner.GetReport();
 
             //expect
             Assert.AreEqual(3, frameRecorder.GetCurFrame());
@@ -178,6 +190,7 @@ namespace JFrameTest
             Assert.AreEqual(0, hpAttr2.CurValue);
             Assert.AreEqual(team1, jcombatQuery.GetWinner());
             Assert.AreEqual(4, eventRecorder.Count());
+
 
         }
 
@@ -191,7 +204,9 @@ namespace JFrameTest
             actionSelector.AddUnits(new List<IJCombatTurnBasedUnit> { unit3 });
 
             //act
-            var result = await turnbasedCombat.GetResult();
+
+            await combatRunner.Run();
+            var result = combatRunner.GetReport();
 
             //expect
             Assert.AreEqual(7, frameRecorder.GetCurFrame());

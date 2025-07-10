@@ -11,13 +11,13 @@ namespace JFramework
             throw new System.NotImplementedException();
         }
 
-        protected override void OnRun(RunableExtraData extraData)
+        protected override void OnStart(RunableExtraData extraData)
         {
             var routeRequest = (RouteRequest)extraData.Data;
 
             var routeReponse = GetHotFixAddress(routeRequest);
 
-            NotifyComplete(this);
+            Stop();
         }
     }
 

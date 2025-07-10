@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace JFramework.Game
@@ -6,60 +7,46 @@ namespace JFramework.Game
     /// <summary>
     /// 可以战斗播报化的对象
     /// </summary>
-    public abstract class JCombat : IJCombatReportable, IJCombatLifeCycle
+    public abstract class JCombat : BaseRunable
     {
-        protected IJCombatQuery jCombatQuery;
-
-        IJCombatRunner jCombatRunner;
-        public JCombat(IJCombatQuery jCombatQuery, IJCombatRunner jCombatRunner)
-        {
-            this.jCombatQuery = jCombatQuery;
-            this.jCombatRunner = jCombatRunner;
-            jCombatRunner.SetCombat(this);
-        }
-
         /// <summary>
-        /// 计算战斗结果并返回
+        /// 可运行列表，这里应该是combatTeam
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public Task<IJCombatResult> GetResult()
+        List<IRunable> runables; 
+
+        public JCombat(List<IRunable> runables)
         {
-            return jCombatRunner.RunCombat();
+            this.runables = runables;
         }
 
         /// <summary>
         /// 战斗开始
         /// </summary>
-        public virtual void OnStart()
+        protected override void OnStart(RunableExtraData extraData)
         {
-            var units = jCombatQuery.GetUnits();
-            if (units != null)
+            base.OnStart(extraData);
+
+            foreach(var runable in runables)
             {
-                foreach (var unit in units)
-                {
-                    unit.OnStart();
-                }
+                runable.Start(null);
             }
         }
 
         /// <summary>
         /// 逻辑更新
         /// </summary>
-        public abstract void OnUpdate();
+        protected override abstract void OnUpdate(RunableExtraData extraData);
 
         /// <summary>
         /// 战斗结束
         /// </summary>
-        public virtual void OnStop()
+        protected override void OnStop()
         {
-            var units = jCombatQuery.GetUnits();
-            if (units != null)
+            base.OnStop();
+
+            foreach (var runable in runables)
             {
-                foreach (var unit in units)
-                {
-                    unit.OnStop();
-                }
+                runable.Stop();
             }
 
         }

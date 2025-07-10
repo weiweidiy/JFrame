@@ -5,7 +5,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗结果，player就是读取这个对象
     /// </summary>
-    public interface IJCombatResult
+    public interface IJCombatReport
     {
         /// <summary>
         /// 设置所有战斗事件

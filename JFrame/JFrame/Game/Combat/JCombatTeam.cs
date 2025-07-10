@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatTeam : DictionaryContainer<IJCombatOperatable>, IJCombatTeam
+    public class JCombatTeam : RunableDictionaryContainer<IJCombatOperatable>, IJCombatTeam
     {
         public JCombatTeam(string uid, List<IJCombatOperatable> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
         {
@@ -14,7 +14,8 @@ namespace JFramework.Game
 
         public string Uid { get; protected set; }
 
-        public List<IJCombatOperatable> GetAllUnit()
+
+        public List<IJCombatOperatable> GetAllUnits()
         {
             return GetAll();
         }
@@ -26,7 +27,7 @@ namespace JFramework.Game
 
         public bool IsAllDead()
         {
-            var allUnits = GetAllUnit();
+            var allUnits = GetAllUnits();
 
             foreach (var unit in allUnits)
             {
@@ -35,6 +36,33 @@ namespace JFramework.Game
             }
 
             return true;
+        }
+
+        protected override void OnStart(RunableExtraData extraData)
+        {
+            base.OnStart(extraData);
+            var units = GetAllUnits();
+            if (units != null)
+            {
+                foreach (var unit in units)
+                {
+                    unit.OnStart();
+                }
+            }
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+
+            var units = GetAllUnits();
+            if (units != null)
+            {
+                foreach (var unit in units)
+                {
+                    unit.OnStop();
+                }
+            }
         }
     }
 }

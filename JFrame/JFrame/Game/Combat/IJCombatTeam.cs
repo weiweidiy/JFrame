@@ -5,7 +5,7 @@ namespace JFramework.Game
 {
     public interface IJCombatTeam : IUnique
     {
-        List<IJCombatOperatable> GetAllUnit();
+        List<IJCombatOperatable> GetAllUnits();
 
         IJCombatOperatable GetUnit(string uid);
 

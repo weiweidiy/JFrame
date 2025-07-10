@@ -38,7 +38,7 @@ namespace JFramework.Game.Tests
         public void Constructor_InitializesWithUnits_AllUnitsAdded()
         {
             // Act
-            var allUnits = _combatTeam.GetAllUnit();
+            var allUnits = _combatTeam.GetAllUnits();
 
             // Assert
             Assert.AreEqual(3, allUnits.Count);
@@ -51,7 +51,7 @@ namespace JFramework.Game.Tests
         public void GetAllUnit_ReturnsAllUnits()
         {
             // Act
-            var result = _combatTeam.GetAllUnit();
+            var result = _combatTeam.GetAllUnits();
 
             // Assert
             Assert.AreEqual(_testUnits.Count, result.Count);

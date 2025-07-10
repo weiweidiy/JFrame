@@ -158,7 +158,7 @@ namespace JFramework.Game
 
             foreach(var team in GetTeams())
             {
-                result.AddRange(team.GetAllUnit());
+                result.AddRange(team.GetAllUnits());
             }
 
             return result;
@@ -167,7 +167,7 @@ namespace JFramework.Game
         public List<IJCombatOperatable> GetUnits(string teamUid)
         {
             var team = Get(teamUid);    
-            return team.GetAllUnit();   
+            return team.GetAllUnits();   
         }
 
         public List<IJCombatOperatable> GetUnits(Func<IJCombatOperatable, bool> func)

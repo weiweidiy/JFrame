@@ -2,7 +2,7 @@
 {
     public class CommonBattleManager : BaseRunable
     {
-        protected override void OnRun(RunableExtraData extraData)
+        protected override void OnStart(RunableExtraData extraData)
         {
             //初始化模型数据控制器
                 //地图模型

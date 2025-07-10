@@ -1,23 +1,21 @@
 ﻿using System;
 
-namespace JFramework
+namespace JFramework.Game
 {
-
     /// <summary>
-    /// 抽象可运行对象
+    /// 可运行的字典容器，同时实现了字典容器和可运行接口
     /// </summary>
-    public abstract class BaseRunable : IRunable
+    /// <typeparam name="T"></typeparam>
+    public class RunableDictionaryContainer<T> : DictionaryContainer<T> , IRunable
     {
+        public RunableDictionaryContainer(Func<T, string> keySelector) : base(keySelector)
+        {
+        }
+
         /// <summary>
         /// 完成通知
         /// </summary>
         public event Action<IRunable> onComplete;
-
-        /// <summary>
-        /// 通知完成
-        /// </summary>
-        /// <param name="runable"></param>
-        protected void NotifyComplete(IRunable runable)=> onComplete?.Invoke(runable);
 
         /// <summary>
         /// 透传数据
@@ -34,7 +32,7 @@ namespace JFramework
         /// </summary>
         /// <param name="extraData"></param>
         /// <exception cref="Exception"></exception>
-        public virtual void Run(RunableExtraData extraData)
+        public virtual void Start(RunableExtraData extraData)
         {
             if (IsRunning)
             {
@@ -44,23 +42,26 @@ namespace JFramework
             this.ExtraData = extraData;
             this.IsRunning = true;
 
-            OnRun(extraData);
+            OnStart(extraData);
         }
 
         /// <summary>
         /// 子类实现生命周期 OnRun （相当于OnStart）
         /// </summary>
         /// <param name="extraData"></param>
-        protected virtual void OnRun(RunableExtraData extraData) { }
+        protected virtual void OnStart(RunableExtraData extraData) { }
 
         /// <summary>
         /// 停止运行
         /// </summary>
         public virtual void Stop()
         {
-            NotifyComplete(this);
+            if (!IsRunning)
+                return;
+
             IsRunning = false;
             OnStop();
+            onComplete?.Invoke(this);
         }
 
         /// <summary>
@@ -73,7 +74,11 @@ namespace JFramework
         /// </summary>
         /// <param name="extraData"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual void Update(RunableExtraData extraData) { }
+        public virtual void Update(RunableExtraData extraData)
+        {
+            OnUpdate(extraData);
+        }
+
+        protected virtual void OnUpdate(RunableExtraData extraData) { }
     }
 }
-
