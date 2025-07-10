@@ -20,9 +20,9 @@ namespace JFramework.Game
         {
         }
 
-        public virtual List<IJCombatOperatable> GetTargets(/*IJCombatQuery query*/)
+        public virtual List<IJCombatCasterTargetableUnit> GetTargets(/*IJCombatQuery query*/)
         {
-            var result = new List<IJCombatOperatable>();
+            var result = new List<IJCombatCasterTargetableUnit>();
 
             var myUnitUid = GetOwner().GetCaster();
             var targetTeams = query.GetOppoTeams(myUnitUid);

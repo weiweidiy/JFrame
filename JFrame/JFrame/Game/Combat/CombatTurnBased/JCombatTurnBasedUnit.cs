@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
+    public class JCombatTurnBasedUnit : JCombatCasterTargetableUnit, IJCombatTurnBasedUnit
     {
 
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery,  List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
@@ -14,9 +14,6 @@ namespace JFramework.Game
         {
 
         }
-
-
-
 
 
         public int GetActionPoint()

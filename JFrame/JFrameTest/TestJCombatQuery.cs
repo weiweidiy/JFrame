@@ -69,12 +69,12 @@ namespace JFrameTest
             mockTeam1.Uid.Returns("team1");
             mockTeam2.Uid.Returns("team2");
 
-            var mockUnit1 = Substitute.For<IJCombatOperatable>();
+            var mockUnit1 = Substitute.For<IJCombatUnit>();
             mockUnit1.Uid.Returns("unit1");
             mockTeam1.GetUnit("unit1").Returns(mockUnit1);
 
 
-            var mockUnit2 = Substitute.For<IJCombatOperatable>();
+            var mockUnit2 = Substitute.For<IJCombatUnit>();
             mockUnit2.Uid.Returns("unit2");
             mockTeam2.GetUnit("unit2").Returns(mockUnit2);
 
@@ -106,8 +106,8 @@ namespace JFrameTest
             // 准备
             var mockTeam1 = Substitute.For<IJCombatTeam>();
             var mockTeam2 = Substitute.For<IJCombatTeam>();
-            var units1 = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>() };
-            var units2 = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>(), Substitute.For<IJCombatOperatable>() };
+            var units1 = new List<IJCombatUnit> { Substitute.For<IJCombatUnit>() };
+            var units2 = new List<IJCombatUnit> { Substitute.For<IJCombatUnit>(), Substitute.For<IJCombatUnit>() };
 
             mockTeam1.GetAllUnits().Returns(units1);
             mockTeam2.GetAllUnits().Returns(units2);
@@ -128,7 +128,7 @@ namespace JFrameTest
         {
             // 准备
             var mockTeam = Substitute.For<IJCombatTeam>();
-            var expectedUnits = new List<IJCombatOperatable> { Substitute.For<IJCombatOperatable>() };
+            var expectedUnits = new List<IJCombatUnit> { Substitute.For<IJCombatUnit>() };
 
             mockTeam.Uid.Returns("team1");
             mockTeam.GetAllUnits().Returns(expectedUnits);
@@ -147,14 +147,14 @@ namespace JFrameTest
         {
             // 准备
             var mockTeam = Substitute.For<IJCombatTeam>();
-            var unit1 = Substitute.For<IJCombatOperatable>();
-            var unit2 = Substitute.For<IJCombatOperatable>();
+            var unit1 = Substitute.For<IJCombatUnit>();
+            var unit2 = Substitute.For<IJCombatUnit>();
 
             unit1.IsDead().Returns(false);
             unit2.IsDead().Returns(true);
             unit1.Uid.Returns("1");
             unit2.Uid.Returns("2");
-            mockTeam.GetAllUnits().Returns(new List<IJCombatOperatable> { unit1, unit2 });
+            mockTeam.GetAllUnits().Returns(new List<IJCombatUnit> { unit1, unit2 });
             mockTeam.Uid.Returns("team");
             _teams.Add(mockTeam);
             

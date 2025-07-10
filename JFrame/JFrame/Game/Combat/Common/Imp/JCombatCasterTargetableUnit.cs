@@ -1,11 +1,10 @@
-﻿using JFramework;
-using JFramework.Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatUnit : RunableDictionaryContainer<IUnique>, IJCombatUnit, IJCombatCaster
+
+    public class JCombatCasterTargetableUnit : RunableDictionaryContainer<IUnique>, IJCombatCasterTargetableUnit
     {
         public string Uid { get; private set; }
 
@@ -16,7 +15,7 @@ namespace JFramework.Game
 
         protected List<IJCombatAction> actions;
 
-        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions,  IJCombatEventListener eventListener) : base(keySelector)
+        public JCombatCasterTargetableUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions,  IJCombatEventListener eventListener) : base(keySelector)
         {
             this.eventListener = eventListener;
 

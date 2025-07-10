@@ -1,6 +1,6 @@
 ﻿namespace JFramework.Game
 {
-    public interface IJCombatTurnBasedUnit : IJCombatOperatable, IJCombatCaster
+    public interface IJCombatTurnBasedUnit : IJCombatCasterTargetableUnit, IJCombatCaster
     {
         /// <summary>
         /// 获取行动点，用于排序

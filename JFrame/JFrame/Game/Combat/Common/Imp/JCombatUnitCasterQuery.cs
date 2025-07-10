@@ -2,8 +2,8 @@
 {
     public class JCombatUnitCasterQuery : IJcombatCasterQuery
     {
-        IJCombatOperatable caster;
-        public JCombatUnitCasterQuery(IJCombatOperatable caster)
+        IJCombatAttributeable caster;
+        public JCombatUnitCasterQuery(IJCombatAttributeable caster)
         {
             this.caster = caster;
         }

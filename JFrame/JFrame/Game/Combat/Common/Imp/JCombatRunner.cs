@@ -3,7 +3,7 @@
 namespace JFramework.Game
 {
     /// <summary>
-    /// 基于单帧运行的战报
+    /// 基于后台线程单帧运行的runner
     /// </summary>
     public class JCombatRunner : IJCombatReporter, IRunner
     {
@@ -30,7 +30,6 @@ namespace JFramework.Game
         {
             jCombat = combat;
         }
-
 
         /// <summary>
         /// 获取运行结果

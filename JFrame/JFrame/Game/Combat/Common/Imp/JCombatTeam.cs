@@ -1,5 +1,4 @@
-﻿using JFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,19 +8,25 @@ namespace JFramework.Game
     {
         public string Uid { get; protected set; }
 
-        public JCombatTeam(string uid, List<IJCombatUnit> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
+        /// <summary>
+        /// to do: 传入 IJCombatUnit, IJCombatCasterUnit, IJCombatTargetableUnit
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="units"></param>
+        /// <param name="keySelector"></param>
+        public JCombatTeam(string uid, List<IJCombatCasterTargetableUnit> units,  Func<IJCombatAttributeable, string> keySelector) : base(keySelector)
         {
             AddRange(units);
             this.Uid = uid;
         }
 
 
-        public List<IJCombatOperatable> GetAllUnits()
+        public List<IJCombatUnit> GetAllUnits()
         {
-            return GetAll().OfType<IJCombatOperatable>().ToList();
+            return GetAll(); //.OfType<IJCombatAttributeable>().ToList();
         }
 
-        public IJCombatOperatable GetUnit(string uid)
+        public IJCombatUnit GetUnit(string uid)
         {
             return Get(uid);
         }

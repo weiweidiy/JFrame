@@ -51,7 +51,7 @@ namespace JFramework.Game
             {
                 foreach (var trigger in triggers)
                 {
-                    trigger.OnStart(/*query*/);
+                    trigger.Start(extraData);
                     trigger.onTriggerOn += Trigger_onTriggerOn;
                 }
             }
@@ -60,7 +60,7 @@ namespace JFramework.Game
             {
                 foreach(var executor in executors)
                 {
-                    executor.OnStart(/*query*/);
+                    executor.Start(extraData);
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace JFramework.Game
             {
                 foreach (IJCombatTrigger trigger in triggers)
                 {
-                    trigger.OnStop();
+                    trigger.Stop();
                     trigger.onTriggerOn -= Trigger_onTriggerOn;
                 }
             }
@@ -82,19 +82,18 @@ namespace JFramework.Game
             {
                 foreach (var executor in executors)
                 {
-                    executor.OnStop();
+                    executor.Stop();
                 }
             }
-
         }
 
-        private void Trigger_onTriggerOn(List<IJCombatOperatable> targets)
+        private void Trigger_onTriggerOn(List<IJCombatCasterTargetableUnit> targets)
         {
             Execute(targets);
         }
 
 
-        public void Execute(List<IJCombatOperatable> targets)
+        public void Execute(List<IJCombatCasterTargetableUnit> targets)
         {
             if (executors != null)
             {

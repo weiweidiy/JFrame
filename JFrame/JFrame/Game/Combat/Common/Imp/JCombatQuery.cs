@@ -139,7 +139,7 @@ namespace JFramework.Game
             return GetAll();
         }
 
-        public IJCombatOperatable GetUnit(string unitUid)
+        public IJCombatUnit GetUnit(string unitUid)
         {
             var teams = GetTeams();
             foreach(var team in teams)
@@ -152,9 +152,9 @@ namespace JFramework.Game
             return null;
         }
 
-        public List<IJCombatOperatable> GetUnits()
+        public List<IJCombatUnit> GetUnits()
         {
-            var result = new List<IJCombatOperatable>();
+            var result = new List<IJCombatUnit>();
 
             foreach(var team in GetTeams())
             {
@@ -164,16 +164,16 @@ namespace JFramework.Game
             return result;
         }
 
-        public List<IJCombatOperatable> GetUnits(string teamUid)
+        public List<IJCombatUnit> GetUnits(string teamUid)
         {
             var team = Get(teamUid);    
             return team.GetAllUnits();   
         }
 
-        public List<IJCombatOperatable> GetUnits(Func<IJCombatOperatable, bool> func)
+        public List<IJCombatUnit> GetUnits(Func<IJCombatUnit, bool> func)
         {
             var units = GetUnits();
-            var result = new List<IJCombatOperatable>();
+            var result = new List<IJCombatUnit>();
 
             foreach (var item in units)
             {

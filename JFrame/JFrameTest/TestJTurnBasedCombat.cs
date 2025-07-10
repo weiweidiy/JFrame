@@ -101,7 +101,7 @@ namespace JFrameTest
         [SetUp]
         public void Setup()
         {
-            Func<IJCombatOperatable, string> funcUnit = (unit) => unit.Uid;
+            Func<IJCombatAttributeable, string> funcUnit = (unit) => unit.Uid;
             
             Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
             Func<string, int> funcSeat = (unitUid) => { 
@@ -136,7 +136,7 @@ namespace JFrameTest
 
             //队伍1
             var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action1", lstExecutor1) }, eventRecorder);
-            var lst1 = new List<IJCombatUnit>();
+            var lst1 = new List<IJCombatCasterTargetableUnit>();
             lst1.Add(unit1);
             team1 = new JCombatTeam("team1", lst1, funcUnit);
 
@@ -148,7 +148,7 @@ namespace JFrameTest
 
             //队伍2
             var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action2", null) }, eventRecorder);
-            var lst2 = new List<IJCombatUnit>();
+            var lst2 = new List<IJCombatCasterTargetableUnit>();
             lst2.Add(unit2);
             team2 = new JCombatTeam("team2", lst2, funcUnit);
 
@@ -226,7 +226,7 @@ namespace JFrameTest
         //public async Task TestInitialize()
         //{
         //    ////arrange
-        //    //Func<IJCombatUnit, string> funcUnit = (unit) => unit.Uid;
+        //    //Func<IJCombatCasterTargetableUnit, string> funcUnit = (unit) => unit.Uid;
         //    //Func<IUnique, string> funcAttr = (attr) => attr.Uid;
         //    //Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
         //    //Func<CombatEvent, string> funcEvent = (e) => e.Uid;
@@ -248,7 +248,7 @@ namespace JFrameTest
 
         //    ////队伍1
         //    //var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), jcombatQuery, new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action1", lstExecutor1) });
-        //    //var lst1 = new List<IJCombatUnit>();
+        //    //var lst1 = new List<IJCombatCasterTargetableUnit>();
         //    //lst1.Add(unit1);
         //    //var team1 = new JCombatTeam("team1", lst1, funcUnit);
 
@@ -260,7 +260,7 @@ namespace JFrameTest
 
         //    ////队伍2
         //    //var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), jcombatQuery, new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action2", null) });
-        //    //var lst2 = new List<IJCombatUnit>();
+        //    //var lst2 = new List<IJCombatCasterTargetableUnit>();
         //    //lst2.Add(unit2);
         //    //var team2 = new JCombatTeam("team2", lst2, funcUnit);
 

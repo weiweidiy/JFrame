@@ -9,7 +9,7 @@ namespace JFramework.Game
         {
         }
 
-        protected override void DoExecute(List<IJCombatOperatable> finalTargets)
+        protected override void DoExecute(List<IJCombatCasterTargetableUnit> finalTargets)
         {
             if(finalTargets != null)
             {

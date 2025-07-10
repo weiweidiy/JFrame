@@ -2,11 +2,10 @@
 
 namespace JFramework.Game
 {
-
     /// <summary>
-    /// 可进行战斗操作的单位（操作属性，状态）
+    /// 可属性化接口
     /// </summary>
-    public interface IJCombatOperatable : IUnique
+    public interface IJCombatAttributeable : IUnique
     {
         /// <summary>
         /// 是否已死亡
@@ -21,17 +20,5 @@ namespace JFramework.Game
         /// <param name="uid"></param>
         /// <returns></returns>
         IUnique GetAttribute(string uid);
-
-        /// <summary>
-        /// 收到伤害
-        /// </summary>
-        /// <param name="damageData"></param>
-        int OnDamage(IJCombatDamageData damageData);
-
-    }
-
-    public interface IJCombatUnit : IJCombatOperatable, IRunable
-    {
-
     }
 }

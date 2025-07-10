@@ -6,6 +6,6 @@ namespace JFramework.Game
 {
     public interface IJCombatExecutor : IJCombatActionComponent /*IJCombatLifeCycle*/
     {
-        void Execute( List<IJCombatOperatable> targets);
+        void Execute( List<IJCombatCasterTargetableUnit> targets);
     }
 }

@@ -4,6 +4,6 @@ namespace JFramework.Game
 {
     public interface IJCombatTargetsFinder : IJCombatActionComponent
     {
-        List<IJCombatOperatable> GetTargets(/*IJCombatQuery query*/);
+        List<IJCombatCasterTargetableUnit> GetTargets(/*IJCombatQuery query*/);
     }
 }

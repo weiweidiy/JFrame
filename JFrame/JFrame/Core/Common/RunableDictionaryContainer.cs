@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace JFramework.Game
+namespace JFramework
 {
     /// <summary>
     /// 可运行的字典容器，同时实现了字典容器和可运行接口
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class RunableDictionaryContainer<T> : DictionaryContainer<T> , IRunable
+    public class RunableDictionaryContainer<T> : DictionaryContainer<T>, IRunable
     {
         public RunableDictionaryContainer(Func<T, string> keySelector) : base(keySelector)
         {
@@ -36,11 +36,11 @@ namespace JFramework.Game
         {
             if (IsRunning)
             {
-                throw new Exception(this.GetType().ToString() + " is running , can't run again! ");
+                throw new Exception(GetType().ToString() + " is running , can't run again! ");
             }
 
-            this.ExtraData = extraData;
-            this.IsRunning = true;
+            ExtraData = extraData;
+            IsRunning = true;
 
             OnStart(extraData);
         }
