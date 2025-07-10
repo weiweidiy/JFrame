@@ -6,7 +6,7 @@ namespace JFramework.Game
     /// <summary>
     /// 可进行战斗操作的单位
     /// </summary>
-    public interface IJCombatOperatable : IUnique, IJCombatLifeCycle
+    public interface IJCombatOperatable : IUnique
     {
         /// <summary>
         /// 是否已死亡

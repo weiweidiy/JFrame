@@ -1,23 +1,24 @@
 ﻿using JFramework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JFramework.Game
 {
-    public class JCombatTeam : RunableDictionaryContainer<IJCombatOperatable>, IJCombatTeam
+    public class JCombatTeam : RunableDictionaryContainer<JCombatUnit>, IJCombatTeam
     {
-        public JCombatTeam(string uid, List<IJCombatOperatable> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
+        public string Uid { get; protected set; }
+
+        public JCombatTeam(string uid, List<JCombatUnit> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
         {
             AddRange(units);
             this.Uid = uid;
         }
 
-        public string Uid { get; protected set; }
-
 
         public List<IJCombatOperatable> GetAllUnits()
         {
-            return GetAll();
+            return GetAll().OfType<IJCombatOperatable>().ToList();
         }
 
         public IJCombatOperatable GetUnit(string uid)
@@ -41,12 +42,12 @@ namespace JFramework.Game
         protected override void OnStart(RunableExtraData extraData)
         {
             base.OnStart(extraData);
-            var units = GetAllUnits();
+            var units = GetAll();
             if (units != null)
             {
                 foreach (var unit in units)
                 {
-                    unit.OnStart();
+                    unit.Start(extraData);
                 }
             }
         }
@@ -55,12 +56,12 @@ namespace JFramework.Game
         {
             base.OnStop();
 
-            var units = GetAllUnits();
+            var units = GetAll();
             if (units != null)
             {
                 foreach (var unit in units)
                 {
-                    unit.OnStop();
+                    unit.Stop();
                 }
             }
         }

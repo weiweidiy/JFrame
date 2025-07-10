@@ -135,8 +135,8 @@ namespace JFrameTest
             lstExecutor1.Add(executor1);
 
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), jcombatQuery, new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action1", lstExecutor1) }, eventRecorder);
-            var lst1 = new List<IJCombatOperatable>();
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action1", lstExecutor1) }, eventRecorder);
+            var lst1 = new List<JCombatUnit>();
             lst1.Add(unit1);
             team1 = new JCombatTeam("team1", lst1, funcUnit);
 
@@ -147,8 +147,8 @@ namespace JFrameTest
             //lstExecutor1.Add(executor1);
 
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), jcombatQuery, new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action2", null) }, eventRecorder);
-            var lst2 = new List<IJCombatOperatable>();
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action2", null) }, eventRecorder);
+            var lst2 = new List<JCombatUnit>();
             lst2.Add(unit2);
             team2 = new JCombatTeam("team2", lst2, funcUnit);
 
@@ -199,7 +199,7 @@ namespace JFrameTest
         {
             //arrange
             var attrFactory2 = new FakeAttrFacotry2();
-            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), jcombatQuery, new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action3", null) }, eventRecorder);
+            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action3", null) }, eventRecorder);
             team2.Add(unit3);
             actionSelector.AddUnits(new List<IJCombatTurnBasedUnit> { unit3 });
 

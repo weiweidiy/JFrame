@@ -9,8 +9,8 @@ namespace JFramework.Game
     public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
     {
         List<IJCombatAction> actions;
-        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatQuery query, List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
-            : base(uid, attrList, keySelector, combatAttrNameQuery, query, eventListener)
+        public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery,  List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
+            : base(uid, attrList, keySelector, combatAttrNameQuery, eventListener)
         {
             this.actions = actions;
             if(this.actions != null)
@@ -20,9 +20,9 @@ namespace JFramework.Game
             }
         }
 
-        public override void OnStart()
+        protected override void OnStart(RunableExtraData extraData)
         {
-            base.OnStart();
+            base.OnStart(extraData);
             if (actions != null)
             {
                 foreach (var action in actions)
@@ -33,12 +33,12 @@ namespace JFramework.Game
             }
         }
 
-        public override void OnUpdate()
+        protected override void OnUpdate(RunableExtraData extraData)
         {
-            base.OnUpdate();      
+            base.OnUpdate(extraData);      
         }
 
-        public override void OnStop()
+        protected override void OnStop()
         {
             base.OnStop();
             if (actions != null)
