@@ -14,18 +14,54 @@ namespace JFramework.Game
 
         protected IJCombatEventListener eventListener;
 
-        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery,  IJCombatEventListener eventListener = null) : this(uid, attrList,keySelector, combatAttrNameQuery)
-        {
+        protected List<IJCombatAction> actions;
 
+        public JCombatUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions,  IJCombatEventListener eventListener) : base(keySelector)
+        {
             this.eventListener = eventListener;
-        }
 
-        public JCombatUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery) : base(keySelector)
-        {
             AddRange(attrList);
 
             this.combatAttrNameQuery = combatAttrNameQuery;
             this.Uid = uid;
+
+            this.actions = actions;
+            if (this.actions != null)
+            {
+                foreach (var action in actions)
+                    action.SetCaster(new JCombatUnitCasterQuery(this));
+            }
+        }
+
+
+        protected override void OnStart(RunableExtraData extraData)
+        {
+            base.OnStart(extraData);
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+
+                    action.OnStart(/*query*/);
+                }
+            }
+        }
+
+        protected override void OnUpdate(RunableExtraData extraData)
+        {
+            base.OnUpdate(extraData);
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            if (actions != null)
+            {
+                foreach (var action in actions)
+                {
+                    action.OnStop();
+                }
+            }
         }
 
         #region 可操作战斗属性接口

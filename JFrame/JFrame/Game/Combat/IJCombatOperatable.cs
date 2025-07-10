@@ -4,7 +4,7 @@ namespace JFramework.Game
 {
 
     /// <summary>
-    /// 可进行战斗操作的单位
+    /// 可进行战斗操作的单位（操作属性，状态）
     /// </summary>
     public interface IJCombatOperatable : IUnique
     {

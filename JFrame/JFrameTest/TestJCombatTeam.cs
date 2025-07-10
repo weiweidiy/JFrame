@@ -30,9 +30,9 @@ namespace JFramework.Tests.Game
 
             _mockUnits = new List<JCombatUnit>
             {
-                Substitute.For<JCombatUnit>("unit-1", new List<IUnique>(), funcAttr, mockAttrQuery),
-                Substitute.For<JCombatUnit>("unit-2", new List<IUnique>(),funcAttr, mockAttrQuery),
-                Substitute.For<JCombatUnit>("unit-3", new List<IUnique>(), funcAttr, mockAttrQuery)
+                Substitute.For<JCombatUnit>("unit-1", new List<IUnique>(), funcAttr, mockAttrQuery,null,null),
+                Substitute.For<JCombatUnit>("unit-2", new List<IUnique>(),funcAttr, mockAttrQuery,null,null),
+                Substitute.For<JCombatUnit>("unit-3", new List<IUnique>(), funcAttr, mockAttrQuery,null,null)
             };
 
             // Create test instance

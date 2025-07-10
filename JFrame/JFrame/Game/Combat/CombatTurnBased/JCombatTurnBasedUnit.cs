@@ -8,47 +8,14 @@ namespace JFramework.Game
 {
     public class JCombatTurnBasedUnit : JCombatUnit, IJCombatTurnBasedUnit
     {
-        List<IJCombatAction> actions;
+
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery,  List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
-            : base(uid, attrList, keySelector, combatAttrNameQuery, eventListener)
+            : base(uid, attrList, keySelector, combatAttrNameQuery, actions,eventListener)
         {
-            this.actions = actions;
-            if(this.actions != null)
-            {
-                foreach(var  action in actions)
-                    action.SetCaster(new JCombatUnitCasterQuery(this));
-            }
+
         }
 
-        protected override void OnStart(RunableExtraData extraData)
-        {
-            base.OnStart(extraData);
-            if (actions != null)
-            {
-                foreach (var action in actions)
-                {
-                    
-                    action.OnStart(/*query*/);
-                }
-            }
-        }
 
-        protected override void OnUpdate(RunableExtraData extraData)
-        {
-            base.OnUpdate(extraData);      
-        }
-
-        protected override void OnStop()
-        {
-            base.OnStop();
-            if (actions != null)
-            {
-                foreach (var action in actions)
-                {
-                    action.OnStop();
-                }
-            }
-        }
 
 
 
