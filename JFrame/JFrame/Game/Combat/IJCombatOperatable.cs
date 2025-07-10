@@ -29,4 +29,9 @@ namespace JFramework.Game
         int OnDamage(IJCombatDamageData damageData);
 
     }
+
+    public interface IJCombatUnit : IJCombatOperatable, IRunable
+    {
+
+    }
 }

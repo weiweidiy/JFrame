@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public interface IJCombatTeam : IUnique
+    public interface IJCombatTeam : IUnique, IRunable
     {
         List<IJCombatOperatable> GetAllUnits();
 

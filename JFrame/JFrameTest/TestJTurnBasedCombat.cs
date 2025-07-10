@@ -136,7 +136,7 @@ namespace JFrameTest
 
             //队伍1
             var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action1", lstExecutor1) }, eventRecorder);
-            var lst1 = new List<JCombatUnit>();
+            var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             team1 = new JCombatTeam("team1", lst1, funcUnit);
 
@@ -148,7 +148,7 @@ namespace JFrameTest
 
             //队伍2
             var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction(jcombatQuery, "action2", null) }, eventRecorder);
-            var lst2 = new List<JCombatUnit>();
+            var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             team2 = new JCombatTeam("team2", lst2, funcUnit);
 

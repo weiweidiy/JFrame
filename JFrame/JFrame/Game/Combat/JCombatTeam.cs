@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace JFramework.Game
 {
-    public class JCombatTeam : RunableDictionaryContainer<JCombatUnit>, IJCombatTeam
+    public class JCombatTeam : RunableDictionaryContainer<IJCombatUnit>, IJCombatTeam
     {
         public string Uid { get; protected set; }
 
-        public JCombatTeam(string uid, List<JCombatUnit> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
+        public JCombatTeam(string uid, List<IJCombatUnit> units,  Func<IJCombatOperatable, string> keySelector) : base(keySelector)
         {
             AddRange(units);
             this.Uid = uid;

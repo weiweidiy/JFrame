@@ -10,7 +10,7 @@ namespace JFramework.Tests.Game
     public class JCombatTeamTests
     {
         private JCombatTeam _combatTeam;
-        private List<JCombatUnit> _mockUnits;
+        private List<IJCombatUnit> _mockUnits;
         private const string TeamUid = "team-123";
         private RunableExtraData _extraData;
 
@@ -26,13 +26,18 @@ namespace JFramework.Tests.Game
             var mockAttrQuery = Substitute.For<IJCombatAttrNameQuery>();
             mockAttrQuery.GetHpAttrName().Returns("hp");
 
-            
+            var unit1 = Substitute.For<IJCombatUnit>(/*"unit-1", new List<IUnique>(), funcAttr, mockAttrQuery,null,null*/);
+            unit1.Uid.Returns("unit-1");
+            var unit2 = Substitute.For<IJCombatUnit>(/*"unit-2", new List<IUnique>(),funcAttr, mockAttrQuery,null,null*/);
+            unit2.Uid.Returns("unit-2");
+            var unit3 = Substitute.For<IJCombatUnit>(/*"unit-3", new List<IUnique>(), funcAttr, mockAttrQuery,null,null*/);
+            unit3.Uid.Returns("unit-3");
 
-            _mockUnits = new List<JCombatUnit>
+            _mockUnits = new List<IJCombatUnit>
             {
-                Substitute.For<JCombatUnit>("unit-1", new List<IUnique>(), funcAttr, mockAttrQuery,null,null),
-                Substitute.For<JCombatUnit>("unit-2", new List<IUnique>(),funcAttr, mockAttrQuery,null,null),
-                Substitute.For<JCombatUnit>("unit-3", new List<IUnique>(), funcAttr, mockAttrQuery,null,null)
+                unit1,
+                unit2,
+                unit3
             };
 
             // Create test instance
@@ -87,6 +92,7 @@ namespace JFramework.Tests.Game
             {
                 var hpAttr = new GameAttributeInt("hp", 0, 100);
                 unit.GetAttribute("hp").Returns(hpAttr);
+                unit.IsDead().Returns(true);
             }
 
             // Act & Assert
@@ -149,7 +155,7 @@ namespace JFramework.Tests.Game
         public void OnStart_WithEmptyTeam_DoesNotThrow()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam("empty-team", new List<JCombatUnit>(), MockKeySelector);
+            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatUnit>(), MockKeySelector);
 
             // Act & Assert
             Assert.DoesNotThrow(() => emptyTeam.Start(_extraData));
@@ -159,7 +165,7 @@ namespace JFramework.Tests.Game
         public void OnStop_WithEmptyTeam_DoesNotThrow()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam("empty-team", new List<JCombatUnit>(), MockKeySelector);
+            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatUnit>(), MockKeySelector);
 
             // Act & Assert
             Assert.DoesNotThrow(() => emptyTeam.Stop());

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatUnit : RunableDictionaryContainer<IUnique>, IJCombatOperatable, IJCombatCastable
+    public class JCombatUnit : RunableDictionaryContainer<IUnique>, IJCombatUnit, IJCombatCaster
     {
         public string Uid { get; private set; }
 
@@ -29,7 +29,7 @@ namespace JFramework.Game
             if (this.actions != null)
             {
                 foreach (var action in actions)
-                    action.SetCaster(new JCombatUnitCasterQuery(this));
+                    action.SetCaster(this);
             }
         }
 
@@ -42,7 +42,7 @@ namespace JFramework.Game
                 foreach (var action in actions)
                 {
 
-                    action.OnStart(/*query*/);
+                    action.Start(extraData);
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace JFramework.Game
             {
                 foreach (var action in actions)
                 {
-                    action.OnStop();
+                    action.Stop();
                 }
             }
         }

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public interface IJCombatAction : IUnique , IJCombatLifeCycle , IJCombatCastable
+    public interface IJCombatAction : IUnique , IRunable , IJCombatCaster, IJCombatCastable
+    {
+
+    }
+
+    public interface IJCombatCastable
     {
         /// <summary>
         /// 设置归属
         /// </summary>
         /// <param name="casterQuery"></param>
-        void SetCaster(IJcombatCasterQuery casterQuery);
+        void SetCaster(IJCombatCaster caster);
 
         /// <summary>
         /// 获取释放者
@@ -17,6 +22,4 @@ namespace JFramework.Game
         /// <returns></returns>
         string GetCaster();
     }
-
-    //public interface IJCombatCast
 }

@@ -6,7 +6,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗行为基类，触发器触发执行，
     /// </summary>
-    public abstract class JCombatActionBase : IJCombatAction
+    public abstract class JCombatActionBase : BaseRunable, IJCombatAction
     {
         public string Uid { get; private set; }
 
@@ -15,7 +15,7 @@ namespace JFramework.Game
         List<IJCombatTrigger> triggers;
         List<IJCombatExecutor> executors;
 
-        IJcombatCasterQuery casterQuery;
+        IJCombatCaster casterQuery;
         public JCombatActionBase(IJCombatQuery query, string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
         {
             this.Uid = uid;
@@ -43,9 +43,9 @@ namespace JFramework.Game
 
         }
 
-        public void OnStart(/*IJCombatQuery query*/)
+        protected override void OnStart(RunableExtraData extraData)
         {
-            //this.query = query;
+            base.OnStart(extraData);
 
             if (triggers != null)
             {
@@ -65,13 +65,10 @@ namespace JFramework.Game
             }
         }
 
-        public void OnUpdate()
+        protected override void OnStop()
         {
-            //Execute(null);
-        }
+            base.OnStop();
 
-        public void OnStop()
-        {
             if (triggers != null)
             {
                 foreach (IJCombatTrigger trigger in triggers)
@@ -96,10 +93,6 @@ namespace JFramework.Game
             Execute(targets);
         }
 
-        //public void Act()
-        //{
-            
-        //}
 
         public void Execute(List<IJCombatOperatable> targets)
         {
@@ -116,13 +109,13 @@ namespace JFramework.Game
         /// 设置actin释放者查询器
         /// </summary>
         /// <param name="casterQuery"></param>
-        public void SetCaster(IJcombatCasterQuery casterQuery) => this.casterQuery = casterQuery;
+        public void SetCaster(IJCombatCaster casterQuery) => this.casterQuery = casterQuery;
 
         /// <summary>
         /// 获取action释放者uid
         /// </summary>
         /// <returns></returns>
-        public string GetCaster() => casterQuery.GetCasterUid();
+        public string GetCaster() => casterQuery.Uid;
 
         public bool CanCast()
         {

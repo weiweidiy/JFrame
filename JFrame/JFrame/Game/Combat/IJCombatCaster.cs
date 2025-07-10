@@ -1,6 +1,6 @@
 ﻿namespace JFramework.Game
 {
-    public interface IJCombatCastable
+    public interface IJCombatCaster : IUnique
     {
         /// <summary>
         /// 是否可以释放
@@ -12,5 +12,7 @@
         /// 释放
         /// </summary>
         void Cast();
+
+
     }
 }
