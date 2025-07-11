@@ -35,9 +35,9 @@ namespace JFramework.Game
         /// 获取运行结果
         /// </summary>
         /// <returns></returns>
-        public IJCombatReport GetReport()
+        public JCombatReportData GetReport()
         {
-            return jCombatReport;
+            return jCombatReport.GetCombatReportData();
         }
 
         /// <summary>
