@@ -20,14 +20,9 @@ namespace JFramework.Game
         public int CurFrame;
 
         /// <summary>
-        /// 释放者uid: 可能是unit也可能是team, to do: 必须是ICombatCaster接口（可行动的接口）
+        /// 释放者uid: 可能是unit也可能是team , buffer等 , to do: 必须是ICombatCaster接口（可行动的接口）
         /// </summary>
         public string CasterUid;
-
-        ///// <summary>
-        ///// 目标uid
-        ///// </summary>
-        //public string TargetUid;
 
         /// <summary>
         /// 技能uid

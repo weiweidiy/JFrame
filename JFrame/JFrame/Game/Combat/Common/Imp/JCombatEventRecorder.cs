@@ -30,7 +30,7 @@ namespace JFramework.Game
             else
             {
                 combatEvent = new CombatEvent();
-                combatEvent.Uid = Guid.NewGuid().ToString();
+                combatEvent.Uid = dataUid;
                 combatEvent.CurFrame = frameRecorder.GetCurFrame();
                 combatEvent.CasterUid = damageData.GetCasterUid();
                 combatEvent.CastActionUid = damageData.GetActionSourceUid();

@@ -18,5 +18,11 @@ namespace JFramework.Game
         /// </summary>
         /// <param name="team"></param>
         void SetCombatWinner(IJCombatTeam team);
+
+        /// <summary>
+        /// 获取战报
+        /// </summary>
+        /// <returns></returns>
+        JCombatReportData GetCombatReportData();
     }
 }
