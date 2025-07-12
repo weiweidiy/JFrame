@@ -2,7 +2,7 @@
 {
     public interface IJCombatPlayer
     {
-        void Play(IJCombatReport report);
+        void Play(JCombatReportData reportData);
 
         void RePlay();
 

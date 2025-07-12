@@ -1,26 +1,88 @@
-﻿namespace JFramework.Game
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace JFramework.Game
 {
-    public abstract class JCombatPlayer : IJCombatPlayer
+    public abstract class JCombatPlayer : BaseRunable, IJCombatPlayer
     {
-        IJCombatReport report;
+        protected JCombatReportData reportData;
 
         float scale = 1f;
 
-        public void Play(IJCombatReport report)
+        protected IObjectPool pool;
+
+        public JCombatPlayer() : this(null) { }
+
+        public JCombatPlayer(IObjectPool objPool) => this.pool = objPool;
+
+        public virtual void Play(JCombatReportData report)
         {
-            this.report = report;
+            this.reportData = report;
+
+            string winner = reportData.winnerTeamUid;
+            var events = reportData.events;
+
+            OnStartPlay(events);
         }
+
+        protected abstract void OnStartPlay(List<CombatEvent> events);
+
+        protected virtual RunableExtraData GetRunableData()
+        {
+            if (pool == null)
+                return new RunableExtraData();
+
+            return pool.Rent<RunableExtraData>();
+        }
+
+        protected virtual JCombatEventRunner GetEventRunner()
+        {
+            if(pool == null)
+                return new JCombatEventRunner();
+
+            return pool.Rent<JCombatEventRunner>();
+        }
+
+        protected virtual void ReleaseRunner(JCombatEventRunner runner, RunableExtraData extraData)
+        {
+            if (pool != null)
+            {
+                runner.Dispose();
+                pool.Return(runner);
+                pool.Return(extraData);
+            }
+ 
+            else
+                runner.Dispose();        
+        }
+
+        
 
         public void RePlay()
         {
-            throw new System.NotImplementedException();
+            Play(reportData);
         }
 
         public void SetScale(float scale)=> this.scale = scale;
         public float GetScale() => scale;
-        public void Stop()
+
+
+        protected override void OnStart(RunableExtraData extraData)
         {
-            throw new System.NotImplementedException();
+            base.OnStart(extraData);
+
+            var reportData = extraData.Data as JCombatReportData;
+
+            if (reportData == null)
+                throw new ArgumentException("无效的 JCombatReportData ");
+
+            Play(reportData);
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
         }
     }
 }

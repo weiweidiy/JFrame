@@ -4,6 +4,6 @@ namespace JFramework.Game
 {
     public interface IJCombatReporter 
     {
-        JCombatReportData GetReport();
+        IJCombatReport GetReport();
     }
 }

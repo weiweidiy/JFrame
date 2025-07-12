@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace JFramework
 {
@@ -28,11 +29,16 @@ namespace JFramework
         public bool IsRunning { get; set; }
 
         /// <summary>
+        /// 运行结束
+        /// </summary>
+        TaskCompletionSource<bool> tcs = null;
+
+        /// <summary>
         /// 运行
         /// </summary>
         /// <param name="extraData"></param>
         /// <exception cref="Exception"></exception>
-        public virtual void Start(RunableExtraData extraData)
+        public virtual async Task Start(RunableExtraData extraData, TaskCompletionSource<bool> tcs = null)
         {
             if (IsRunning)
             {
@@ -43,6 +49,10 @@ namespace JFramework
             IsRunning = true;
 
             OnStart(extraData);
+
+            this.tcs = tcs == null ? new TaskCompletionSource<bool>() : tcs;
+
+            await this.tcs.Task;
         }
 
         /// <summary>
@@ -61,6 +71,8 @@ namespace JFramework
 
             IsRunning = false;
             OnStop();
+
+            tcs.SetResult(true);
             onComplete?.Invoke(this);
         }
 

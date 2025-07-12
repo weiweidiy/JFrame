@@ -22,7 +22,7 @@ namespace JFramework
 
         bool IsRunning { get; set; }
 
-        void Start(RunableExtraData extraData);
+        Task Start(RunableExtraData extraData, TaskCompletionSource<bool> tcs = null);
 
         void Update(RunableExtraData extraData);
 

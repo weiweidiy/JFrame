@@ -7,8 +7,14 @@ namespace JFramework.Game
     /// </summary>
     public class JCombatRunner : IJCombatReporter, IRunner
     {
+        /// <summary>
+        /// 可运行战斗对象
+        /// </summary>
         IRunable jCombat;
 
+        /// <summary>
+        /// 战斗战报接口
+        /// </summary>
         IJCombatReport jCombatReport;
 
         IJCombatEventRecorder eventRecorder;
@@ -35,9 +41,9 @@ namespace JFramework.Game
         /// 获取运行结果
         /// </summary>
         /// <returns></returns>
-        public JCombatReportData GetReport()
+        public IJCombatReport GetReport()
         {
-            return jCombatReport.GetCombatReportData();
+            return jCombatReport;
         }
 
         /// <summary>
