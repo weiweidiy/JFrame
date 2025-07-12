@@ -10,7 +10,7 @@ namespace JFramework.Game.Tests
     public class JCombatSpeedBasedActionSelectorTests
     {
         private JCombatTurnBasedActionSelector _selector;
-        private Func<IJCombatAttributeable, string> _keySelector;
+        private Func<IJAttributeable, string> _keySelector;
         private IJCombatTurnBasedUnit _unit1;
         private IJCombatTurnBasedUnit _unit2;
         private IJCombatTurnBasedUnit _unit3;

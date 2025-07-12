@@ -14,7 +14,7 @@ namespace JFramework.Game
         /// <param name="uid"></param>
         /// <param name="units"></param>
         /// <param name="keySelector"></param>
-        public JCombatTeam(string uid, List<IJCombatCasterTargetableUnit> units,  Func<IJCombatAttributeable, string> keySelector) : base(keySelector)
+        public JCombatTeam(string uid, List<IJCombatCasterTargetableUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
         {
             AddRange(units);
             this.Uid = uid;
@@ -23,7 +23,7 @@ namespace JFramework.Game
 
         public List<IJCombatUnit> GetAllUnits()
         {
-            return GetAll(); //.OfType<IJCombatAttributeable>().ToList();
+            return GetAll(); //.OfType<IJAttributeable>().ToList();
         }
 
         public IJCombatUnit GetUnit(string uid)

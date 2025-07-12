@@ -11,7 +11,7 @@ namespace JFramework.Game
         /// </summary>
         List<IJCombatTurnBasedUnit> actionList = new List<IJCombatTurnBasedUnit>();
 
-        public JCombatTurnBasedActionSelector(List<IJCombatTurnBasedUnit> units,  Func<IJCombatAttributeable, string> keySelector) : base(keySelector)
+        public JCombatTurnBasedActionSelector(List<IJCombatTurnBasedUnit> units,  Func<IJCombatUnit, string> keySelector) : base(keySelector)
         {
             ///to do:需要监听ijcombatUnit属性变化，比如速度变化，要动态调整序列
             AddRange(units);

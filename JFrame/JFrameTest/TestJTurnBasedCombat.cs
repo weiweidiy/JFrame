@@ -106,7 +106,7 @@ namespace JFrameTest
         [SetUp]
         public void Setup()
         {
-            Func<IJCombatAttributeable, string> funcUnit = (unit) => unit.Uid;
+            Func<IJCombatUnit, string> funcUnit = (unit) => unit.Uid;
             
             Func<IJCombatTeam, string> funcTeam = (team) => team.Uid;
             Func<string, int> funcSeat = (unitUid) => { 

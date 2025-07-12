@@ -15,7 +15,7 @@ namespace JFramework.Tests.Game
         private RunableExtraData _extraData;
 
         // Mock key selector that uses unit's UID as dictionary key
-        private string MockKeySelector(IJCombatAttributeable unit) => unit.Uid;
+        private string MockKeySelector(IJCombatUnit unit) => unit.Uid;
 
         Func<IUnique, string> funcAttr = (attr) => attr.Uid;
 

@@ -1,9 +1,9 @@
 ﻿namespace JFramework.Game
 {
     /// <summary>
-    /// 只有属性
+    /// 战斗单位（有属性）
     /// </summary>
-    public interface IJCombatUnit : IJCombatAttributeable, IRunable
+    public interface IJCombatUnit : IJAttributeableUnit, IRunable
     {
 
     }
