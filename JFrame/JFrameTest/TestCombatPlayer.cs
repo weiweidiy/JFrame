@@ -13,7 +13,7 @@ namespace JFramework.Tests
     {
         private TestCombatPlayer _player;
         private IObjectPool _mockPool;
-        private JCombatEventRunner _mockRunner;
+        private JCombatTurnBasedEventRunner _mockRunner;
         private RunableExtraData _mockExtraData;
         private JCombatReportData _testReport;
         private TaskCompletionSource<bool> _testTcs;
@@ -23,12 +23,12 @@ namespace JFramework.Tests
         {
             // 创建模拟对象
             _mockPool = Substitute.For<IObjectPool>();
-            _mockRunner = Substitute.For<JCombatEventRunner>();
+            _mockRunner = Substitute.For<JCombatTurnBasedEventRunner>();
             _mockExtraData = Substitute.For<RunableExtraData>();
             _testTcs = new TaskCompletionSource<bool>();
 
             // 配置对象池行为
-            _mockPool.Rent<JCombatEventRunner>().Returns(_mockRunner);
+            _mockPool.Rent<JCombatTurnBasedEventRunner>().Returns(_mockRunner);
             _mockPool.Rent<RunableExtraData>().Returns(_mockExtraData);
 
             // 创建测试报告数据
@@ -101,7 +101,7 @@ namespace JFramework.Tests
             await Task.Delay(100);
 
             // Assert
-            _mockPool.Received(3).Rent<JCombatEventRunner>();
+            _mockPool.Received(3).Rent<JCombatTurnBasedEventRunner>();
             _mockPool.Received(3).Rent<RunableExtraData>();
             await _mockRunner.Received(3).Start(Arg.Any<RunableExtraData>());
         }
@@ -293,7 +293,7 @@ namespace JFramework.Tests
             await Task.Delay(50); // 确保处理完成
 
             // Assert
-            _mockPool.DidNotReceive().Rent<JCombatEventRunner>();
+            _mockPool.DidNotReceive().Rent<JCombatTurnBasedEventRunner>();
             _mockPool.DidNotReceive().Rent<RunableExtraData>();
             await _mockRunner.DidNotReceive().Start(Arg.Any<RunableExtraData>());
         }
@@ -316,7 +316,7 @@ namespace JFramework.Tests
             await Task.Delay(50); // 确保处理完成
 
             // Assert
-            _mockPool.Received(1).Rent<JCombatEventRunner>();
+            _mockPool.Received(1).Rent<JCombatTurnBasedEventRunner>();
             _mockPool.Received(1).Rent<RunableExtraData>();
             await _mockRunner.Received(1).Start(Arg.Any<RunableExtraData>());
         }
@@ -343,7 +343,7 @@ namespace JFramework.Tests
         public async Task GetEventRunner_CanBeOverridden()
         {
             // Arrange
-            var customRunner = Substitute.For<JCombatEventRunner>();
+            var customRunner = Substitute.For<JCombatTurnBasedEventRunner>();
             var player = new TestCombatPlayer(_mockPool)
             {
                 OverrideGetEventRunner = true,
@@ -417,7 +417,7 @@ namespace JFramework.Tests
         {
             public int PlayCallCount { get; private set; }
             public bool PlayCalled => PlayCallCount > 0;
-            public List<JCombatEventRunner> CreatedRunners { get; } = new List<JCombatEventRunner>();
+            public List<JCombatTurnBasedEventRunner> CreatedRunners { get; } = new List<JCombatTurnBasedEventRunner>();
             public List<RunableExtraData> CreatedExtraData { get; } = new List<RunableExtraData>();
             public List<RunableExtraData> StartedRunners { get; } = new List<RunableExtraData>();
             public IObjectPool Pool => pool;
@@ -428,8 +428,8 @@ namespace JFramework.Tests
 
             // 用于测试可重写方法
             public bool OverrideGetEventRunner { get; set; }
-            public JCombatEventRunner CustomRunner { get; set; } = Substitute.For<JCombatEventRunner>();
-            public JCombatEventRunner GetEventRunnerResult { get; private set; }
+            public JCombatTurnBasedEventRunner CustomRunner { get; set; } = Substitute.For<JCombatTurnBasedEventRunner>();
+            public JCombatTurnBasedEventRunner GetEventRunnerResult { get; private set; }
 
             public bool OverrideGetRunableData { get; set; }
             public RunableExtraData CustomData { get; set; }
@@ -466,7 +466,7 @@ namespace JFramework.Tests
                 }
             }
 
-            protected override JCombatEventRunner GetEventRunner()
+            protected override JCombatTurnBasedEventRunner GetEventRunner()
             {
                 if (OverrideGetEventRunner)
                 {
@@ -498,7 +498,7 @@ namespace JFramework.Tests
                 return data;
             }
 
-            protected override void ReleaseRunner(JCombatEventRunner runner, RunableExtraData extraData)
+            protected override void ReleaseRunner(JCombatTurnBasedEventRunner runner, RunableExtraData extraData)
             {
                 if (OverrideReleaseRunner)
                 {

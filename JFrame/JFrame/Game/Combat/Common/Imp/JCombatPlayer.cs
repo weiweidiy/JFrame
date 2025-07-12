@@ -36,15 +36,15 @@ namespace JFramework.Game
             return pool.Rent<RunableExtraData>();
         }
 
-        protected virtual JCombatEventRunner GetEventRunner()
+        protected virtual JCombatTurnBasedEventRunner GetEventRunner()
         {
             if(pool == null)
-                return new JCombatEventRunner();
+                return new JCombatTurnBasedEventRunner();
 
-            return pool.Rent<JCombatEventRunner>();
+            return pool.Rent<JCombatTurnBasedEventRunner>();
         }
 
-        protected virtual void ReleaseRunner(JCombatEventRunner runner, RunableExtraData extraData)
+        protected virtual void ReleaseRunner(JCombatTurnBasedEventRunner runner, RunableExtraData extraData)
         {
             if (pool != null)
             {

@@ -90,7 +90,7 @@ namespace JFrameTest
         }
 
 
-        JTurnBasedCombat turnbasedCombat;
+        JCombatTurnBased turnbasedCombat;
         JCombatTurnBasedFrameRecorder frameRecorder;
         JCombatSeatBasedQuery jcombatQuery;
         JCombatTeam team1;
@@ -170,7 +170,7 @@ namespace JFrameTest
             runables.Add(team1);
             runables.Add(team2);
 
-            turnbasedCombat = new JTurnBasedCombat(actionSelector, frameRecorder, jcombatQuery, runables);
+            turnbasedCombat = new JCombatTurnBased(actionSelector, frameRecorder, jcombatQuery, runables);
 
             combatRunner = new JCombatRunner(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
             //combatRunner.SetRunable(turnbasedCombat);
