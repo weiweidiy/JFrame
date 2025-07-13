@@ -30,6 +30,11 @@ namespace JFramework
         TaskCompletionSource<bool> tcs = null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        protected void SetStartComplete() => tcs.SetResult(true);
+
+        /// <summary>
         /// 运行
         /// </summary>
         /// <param name="extraData"></param>
@@ -41,12 +46,12 @@ namespace JFramework
                 throw new Exception(this.GetType().ToString() + " is running , can't run again! ");
             }
 
+            this.tcs = tcs == null ? new TaskCompletionSource<bool>() : tcs;
+
             this.ExtraData = extraData;
             this.IsRunning = true;
 
-            OnStart(extraData);
-
-            this.tcs = tcs == null ? new TaskCompletionSource<bool>() : tcs;
+            OnStart(extraData);         
             await this.tcs.Task;
         }
 
@@ -66,8 +71,8 @@ namespace JFramework
 
             IsRunning = false;
             OnStop();
-
-            tcs.SetResult(true);
+             
+            tcs.TrySetResult(true);
             onComplete?.Invoke(this);
         }
 
