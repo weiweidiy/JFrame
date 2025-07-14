@@ -16,6 +16,8 @@ namespace JFramework.Game.Tests
 
             public void Lock() => IsLocked = true;
             public void Unlock() => IsLocked = false;
+
+            bool IUnlockable.IsLocked() => IsLocked;
         }
 
         public class TestModel : BaseUnlockableModel<string, TestUnlockable>
