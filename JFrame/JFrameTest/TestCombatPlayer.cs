@@ -35,11 +35,11 @@ namespace JFramework.Tests
             _testReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatTurnBasedEvent>
+                events = new List<JCombatTurnBasedEvent>
                 {
-                    new CombatTurnBasedEvent { Uid = "Attack" },
-                    new CombatTurnBasedEvent { Uid = "Defend" },
-                    new CombatTurnBasedEvent { Uid = "Heal" }
+                    new JCombatTurnBasedEvent { Uid = "Attack" },
+                    new JCombatTurnBasedEvent { Uid = "Defend" },
+                    new JCombatTurnBasedEvent { Uid = "Heal" }
                 }
             };
 
@@ -121,13 +121,13 @@ namespace JFramework.Tests
         //    // 验证每个事件的设置
         //    Received.InOrder(() => {
         //        _mockExtraData.Data = _testReport.events[0];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[0].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((JCombatTurnBasedEvent)d.Data).Uid == _testReport.events[0].Uid));
 
         //        _mockExtraData.Data = _testReport.events[1];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[1].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((JCombatTurnBasedEvent)d.Data).Uid == _testReport.events[1].Uid));
 
         //        _mockExtraData.Data = _testReport.events[2];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[2].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((JCombatTurnBasedEvent)d.Data).Uid == _testReport.events[2].Uid));
         //    });
         //}
 
@@ -285,7 +285,7 @@ namespace JFramework.Tests
             var emptyReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatTurnBasedEvent>()
+                events = new List<JCombatTurnBasedEvent>()
             };
 
             // Act
@@ -305,7 +305,7 @@ namespace JFramework.Tests
             var singleEventReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatTurnBasedEvent> { new CombatTurnBasedEvent { Uid = "Special" } }
+                events = new List<JCombatTurnBasedEvent> { new JCombatTurnBasedEvent { Uid = "Special" } }
             };
 
             // 设置模拟运行器完成任务
@@ -423,7 +423,7 @@ namespace JFramework.Tests
             public IObjectPool Pool => pool;
             public JCombatTurnBasedReportData ReportData => reportData;
             public bool OnStartPlayCalled { get; private set; }
-            public List<CombatTurnBasedEvent> ReceivedEvents { get; } = new List<CombatTurnBasedEvent>();
+            public List<JCombatTurnBasedEvent> ReceivedEvents { get; } = new List<JCombatTurnBasedEvent>();
             public TaskCompletionSource<bool> CurrentTcs { get; private set; }
 
             // 用于测试可重写方法
@@ -450,7 +450,7 @@ namespace JFramework.Tests
                 base.Play(report);
             }
 
-            protected override void OnStartPlay(List<CombatTurnBasedEvent> events)
+            protected override void OnStartPlay(List<JCombatTurnBasedEvent> events)
             {
                 if (OverrideOnStartPlay)
                 {

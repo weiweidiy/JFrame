@@ -13,13 +13,13 @@ namespace JFramework.Game.Tests
         {
             public TestableJCombatEventRecorder(
                 IJCombatFrameRecorder frameRecorder,
-                Func<CombatTurnBasedEvent, string> keySelector
+                Func<JCombatTurnBasedEvent, string> keySelector
             ) : base(frameRecorder, keySelector) { }
         }
 
         private IJCombatFrameRecorder _frameRecorder;
         private TestableJCombatEventRecorder _recorder;
-        private Func<CombatTurnBasedEvent, string> _keySelector = e => e.Uid;
+        private Func<JCombatTurnBasedEvent, string> _keySelector = e => e.Uid;
 
         [SetUp]
         public void Setup()

@@ -5,17 +5,17 @@ namespace JFramework.Game
     public class JCombatTurnBasedReportData
     {
         public string winnerTeamUid;
-        public List<CombatTurnBasedEvent> events;
+        public List<JCombatTurnBasedEvent> events;
     }
 
 
     public class JCombaTurnBasedtReport : IJCombatTurnBasedReport
     {
-        List<CombatTurnBasedEvent> events;
+        List<JCombatTurnBasedEvent> events;
 
         IJCombatTeam winner;
 
-        public void SetCombatEvents(List<CombatTurnBasedEvent> events) => this.events = events;
+        public void SetCombatEvents(List<JCombatTurnBasedEvent> events) => this.events = events;
 
         public void SetCombatWinner(IJCombatTeam team) => this.winner = team;
 

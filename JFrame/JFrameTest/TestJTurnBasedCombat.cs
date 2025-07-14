@@ -59,7 +59,7 @@ namespace JFrameTest
 
         public class FakeEventRecorder : JCombatTurnBasedEventRecorder
         {
-            public FakeEventRecorder(IJCombatFrameRecorder frameRecorder, Func<CombatTurnBasedEvent, string> keySelector) : base(frameRecorder, keySelector)
+            public FakeEventRecorder(IJCombatFrameRecorder frameRecorder, Func<JCombatTurnBasedEvent, string> keySelector) : base(frameRecorder, keySelector)
             {
             }
         }
@@ -71,7 +71,7 @@ namespace JFrameTest
                 return null;
             }
 
-            public void SetCombatEvents(List<CombatTurnBasedEvent> events)
+            public void SetCombatEvents(List<JCombatTurnBasedEvent> events)
             {
                 //throw new NotImplementedException();
             }
@@ -122,7 +122,7 @@ namespace JFrameTest
                         throw new Exception("没有定义座位 " + unitUid);
                 }
             };
-            Func<CombatTurnBasedEvent, string> funcEvent = (e) => e.Uid;
+            Func<JCombatTurnBasedEvent, string> funcEvent = (e) => e.Uid;
 
  
             frameRecorder = new JCombatTurnBasedFrameRecorder(19); //从0开始，共20回合

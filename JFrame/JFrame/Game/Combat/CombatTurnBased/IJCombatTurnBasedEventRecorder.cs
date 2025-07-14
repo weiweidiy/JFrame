@@ -7,6 +7,6 @@ namespace JFramework.Game
     /// </summary>
     public interface IJCombatTurnBasedEventRecorder
     {
-        List<CombatTurnBasedEvent> GetAllCombatEvents();
+        List<JCombatTurnBasedEvent> GetAllCombatEvents();
     }
 }

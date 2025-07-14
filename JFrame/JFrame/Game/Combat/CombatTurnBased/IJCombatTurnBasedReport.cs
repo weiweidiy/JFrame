@@ -11,7 +11,7 @@ namespace JFramework.Game
         /// 设置所有战斗事件
         /// </summary>
         /// <param name="events"></param>
-        void SetCombatEvents(List<CombatTurnBasedEvent> events);
+        void SetCombatEvents(List<JCombatTurnBasedEvent> events);
 
         /// <summary>
         /// 设置胜利队伍

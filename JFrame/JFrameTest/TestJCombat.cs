@@ -122,7 +122,7 @@
 //        {
 //            // 安排
 //            var winner = Substitute.For<IJCombatTeam>();
-//            var events = new List<CombatTurnBasedEvent> { new CombatTurnBasedEvent() };
+//            var events = new List<JCombatTurnBasedEvent> { new JCombatTurnBasedEvent() };
 
 //            _combatJudger.IsCombatOver().Returns(true);
 //            _combatJudger.GetWinner().Returns(winner);
