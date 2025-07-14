@@ -57,21 +57,21 @@ namespace JFrameTest
             }
         }
 
-        public class FakeEventRecorder : JCombatEventRecorder
+        public class FakeEventRecorder : JCombatTurnBasedEventRecorder
         {
-            public FakeEventRecorder(IJCombatFrameRecorder frameRecorder, Func<CombatEvent, string> keySelector) : base(frameRecorder, keySelector)
+            public FakeEventRecorder(IJCombatFrameRecorder frameRecorder, Func<CombatTurnBasedEvent, string> keySelector) : base(frameRecorder, keySelector)
             {
             }
         }
 
-        public class FakeJCombatResult : IJCombatReport
+        public class FakeJCombatResult : IJCombatTurnBasedReport
         {
-            public JCombatReportData GetCombatReportData()
+            public JCombatTurnBasedReportData GetCombatReportData()
             {
                 return null;
             }
 
-            public void SetCombatEvents(List<CombatEvent> events)
+            public void SetCombatEvents(List<CombatTurnBasedEvent> events)
             {
                 //throw new NotImplementedException();
             }
@@ -100,7 +100,7 @@ namespace JFrameTest
 
         Func<IUnique, string> funcAttr = (attr) => attr.Uid;
 
-        JCombatRunner combatRunner;
+        JCombatTurnBasedRunner combatRunner;
 
 
         [SetUp]
@@ -122,7 +122,7 @@ namespace JFrameTest
                         throw new Exception("没有定义座位 " + unitUid);
                 }
             };
-            Func<CombatEvent, string> funcEvent = (e) => e.Uid;
+            Func<CombatTurnBasedEvent, string> funcEvent = (e) => e.Uid;
 
  
             frameRecorder = new JCombatTurnBasedFrameRecorder(19); //从0开始，共20回合
@@ -172,7 +172,7 @@ namespace JFrameTest
 
             turnbasedCombat = new JCombatTurnBased(actionSelector, frameRecorder, jcombatQuery, runables);
 
-            combatRunner = new JCombatRunner(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
+            combatRunner = new JCombatTurnBasedRunner(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
             //combatRunner.SetRunable(turnbasedCombat);
         }
 

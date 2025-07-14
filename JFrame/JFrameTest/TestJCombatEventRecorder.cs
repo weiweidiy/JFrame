@@ -9,17 +9,17 @@ namespace JFramework.Game.Tests
     public class JCombatEventRecorderTests
     {
         // 测试专用子类（因为原类为abstract）
-        public class TestableJCombatEventRecorder : JCombatEventRecorder
+        public class TestableJCombatEventRecorder : JCombatTurnBasedEventRecorder
         {
             public TestableJCombatEventRecorder(
                 IJCombatFrameRecorder frameRecorder,
-                Func<CombatEvent, string> keySelector
+                Func<CombatTurnBasedEvent, string> keySelector
             ) : base(frameRecorder, keySelector) { }
         }
 
         private IJCombatFrameRecorder _frameRecorder;
         private TestableJCombatEventRecorder _recorder;
-        private Func<CombatEvent, string> _keySelector = e => e.Uid;
+        private Func<CombatTurnBasedEvent, string> _keySelector = e => e.Uid;
 
         [SetUp]
         public void Setup()

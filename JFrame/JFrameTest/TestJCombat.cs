@@ -13,7 +13,7 @@
 //        private IJCombatDataSource _dataSource;
 //        private IJCombatFrameRecorder _frameRecorder;
 //        private IJCombatQuery _combatJudger;
-//        private IJCombatEventRecorder _eventRecorder;
+//        private IJCombatTurnBasedEventRecorder _eventRecorder;
 //        private IJCombatResult _combatResult;
 
 //        // 测试用的具体实现类
@@ -27,9 +27,9 @@
 //                //IJCombatDataSource dataSource,
 //                IJCombatFrameRecorder frameRecorder,
 //                IJCombatQuery combatJudger,
-//                IJCombatEventRecorder eventRecorder,
+//                IJCombatTurnBasedEventRecorder eventRecorder,
 //                IJCombatResult combatResult)
-//                : base(/*dataSource,*/ /*frameRecorder,*/ combatJudger, new JCombatRunner(combatJudger, eventRecorder, combatResult))
+//                : base(/*dataSource,*/ /*frameRecorder,*/ combatJudger, new JCombatTurnBasedRunner(combatJudger, eventRecorder, combatResult))
 //            {
 //            }
 
@@ -63,7 +63,7 @@
 //            _dataSource = Substitute.For<IJCombatDataSource>();
 //            _frameRecorder = Substitute.For<IJCombatFrameRecorder>();
 //            _combatJudger = Substitute.For<IJCombatQuery>();
-//            _eventRecorder = Substitute.For<IJCombatEventRecorder>();
+//            _eventRecorder = Substitute.For<IJCombatTurnBasedEventRecorder>();
 //            _combatResult = Substitute.For<IJCombatResult>();
 
 //            // 设置帧记录器默认行为
@@ -122,7 +122,7 @@
 //        {
 //            // 安排
 //            var winner = Substitute.For<IJCombatTeam>();
-//            var events = new List<CombatEvent> { new CombatEvent() };
+//            var events = new List<CombatTurnBasedEvent> { new CombatTurnBasedEvent() };
 
 //            _combatJudger.IsCombatOver().Returns(true);
 //            _combatJudger.GetWinner().Returns(winner);

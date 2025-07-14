@@ -15,7 +15,7 @@ namespace JFramework.Tests
         private IObjectPool _mockPool;
         private JCombatTurnBasedEventRunner _mockRunner;
         private RunableExtraData _mockExtraData;
-        private JCombatReportData _testReport;
+        private JCombatTurnBasedReportData _testReport;
         private TaskCompletionSource<bool> _testTcs;
 
         [SetUp]
@@ -32,14 +32,14 @@ namespace JFramework.Tests
             _mockPool.Rent<RunableExtraData>().Returns(_mockExtraData);
 
             // 创建测试报告数据
-            _testReport = new JCombatReportData
+            _testReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatEvent>
+                events = new List<CombatTurnBasedEvent>
                 {
-                    new CombatEvent { Uid = "Attack" },
-                    new CombatEvent { Uid = "Defend" },
-                    new CombatEvent { Uid = "Heal" }
+                    new CombatTurnBasedEvent { Uid = "Attack" },
+                    new CombatTurnBasedEvent { Uid = "Defend" },
+                    new CombatTurnBasedEvent { Uid = "Heal" }
                 }
             };
 
@@ -121,13 +121,13 @@ namespace JFramework.Tests
         //    // 验证每个事件的设置
         //    Received.InOrder(() => {
         //        _mockExtraData.Data = _testReport.events[0];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatEvent)d.Data).Uid == _testReport.events[0].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[0].Uid));
 
         //        _mockExtraData.Data = _testReport.events[1];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatEvent)d.Data).Uid == _testReport.events[1].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[1].Uid));
 
         //        _mockExtraData.Data = _testReport.events[2];
-        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatEvent)d.Data).Uid == _testReport.events[2].Uid));
+        //        _mockRunner.Start(Arg.Is<RunableExtraData>(d => ((CombatTurnBasedEvent)d.Data).Uid == _testReport.events[2].Uid));
         //    });
         //}
 
@@ -282,10 +282,10 @@ namespace JFramework.Tests
         public async Task Play_WithZeroEvents_DoesNotProcessAnyEvents()
         {
             // Arrange
-            var emptyReport = new JCombatReportData
+            var emptyReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatEvent>()
+                events = new List<CombatTurnBasedEvent>()
             };
 
             // Act
@@ -302,10 +302,10 @@ namespace JFramework.Tests
         public async Task Play_WithSingleEvent_ProcessesCorrectly()
         {
             // Arrange
-            var singleEventReport = new JCombatReportData
+            var singleEventReport = new JCombatTurnBasedReportData
             {
                 winnerTeamUid = "team1",
-                events = new List<CombatEvent> { new CombatEvent { Uid = "Special" } }
+                events = new List<CombatTurnBasedEvent> { new CombatTurnBasedEvent { Uid = "Special" } }
             };
 
             // 设置模拟运行器完成任务
@@ -421,9 +421,9 @@ namespace JFramework.Tests
             public List<RunableExtraData> CreatedExtraData { get; } = new List<RunableExtraData>();
             public List<RunableExtraData> StartedRunners { get; } = new List<RunableExtraData>();
             public IObjectPool Pool => pool;
-            public JCombatReportData ReportData => reportData;
+            public JCombatTurnBasedReportData ReportData => reportData;
             public bool OnStartPlayCalled { get; private set; }
-            public List<CombatEvent> ReceivedEvents { get; } = new List<CombatEvent>();
+            public List<CombatTurnBasedEvent> ReceivedEvents { get; } = new List<CombatTurnBasedEvent>();
             public TaskCompletionSource<bool> CurrentTcs { get; private set; }
 
             // 用于测试可重写方法
@@ -444,13 +444,13 @@ namespace JFramework.Tests
             public TestCombatPlayer() { }
             public TestCombatPlayer(IObjectPool objPool) : base(objPool) { }
 
-            public override void Play(JCombatReportData report)
+            public override void Play(JCombatTurnBasedReportData report)
             {
                 PlayCallCount++;
                 base.Play(report);
             }
 
-            protected override void OnStartPlay(List<CombatEvent> events)
+            protected override void OnStartPlay(List<CombatTurnBasedEvent> events)
             {
                 if (OverrideOnStartPlay)
                 {

@@ -6,7 +6,7 @@ namespace JFramework.Game
 {
     public abstract class JCombatPlayer : BaseRunable, IJCombatPlayer
     {
-        protected JCombatReportData reportData;
+        protected JCombatTurnBasedReportData reportData;
 
         float scale = 1f;
 
@@ -16,7 +16,7 @@ namespace JFramework.Game
 
         public JCombatPlayer(IObjectPool objPool) => this.pool = objPool;
 
-        public virtual void Play(JCombatReportData report)
+        public virtual void Play(JCombatTurnBasedReportData report)
         {
             this.reportData = report;
 
@@ -26,7 +26,7 @@ namespace JFramework.Game
             OnStartPlay(events);
         }
 
-        protected abstract void OnStartPlay(List<CombatEvent> events);
+        protected abstract void OnStartPlay(List<CombatTurnBasedEvent> events);
 
         protected virtual RunableExtraData GetRunableData()
         {
@@ -72,7 +72,7 @@ namespace JFramework.Game
         {
             base.OnStart(extraData);
 
-            var reportData = extraData.Data as JCombatReportData;
+            var reportData = extraData.Data as JCombatTurnBasedReportData;
 
             if (reportData == null)
                 throw new ArgumentException("无效的 JCombatReportData ");
