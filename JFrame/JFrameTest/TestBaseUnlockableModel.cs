@@ -28,6 +28,11 @@ namespace JFramework.Game.Tests
             }
 
             public void PublicAdd(TestUnlockable item) => Add(item);
+
+            protected override void OnUpdateTData(List<TestUnlockable> unlockableDatas)
+            {
+                //throw new NotImplementedException();
+            }
         }
 
         private TestModel _model;

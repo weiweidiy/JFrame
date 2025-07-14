@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
@@ -25,6 +26,8 @@ namespace JFramework.Game
             this.eventManager = eventManager;
         }
 
+        protected abstract void OnUpdateTData(List<TUnlockableData> unlockableDatas);
+
         /// <summary>
         /// 加锁
         /// </summary>
@@ -36,9 +39,11 @@ namespace JFramework.Game
 
             data.Lock();
             Update(data);
+            OnUpdateTData(GetAll());
             return true;
 
         }
+
 
         /// <summary>
         /// 解锁指定对象
@@ -50,6 +55,7 @@ namespace JFramework.Game
             if (!data.IsLocked()) return false;
             data.Unlock();
             Update(data);
+            OnUpdateTData(GetAll());
             return true;
         }
 
