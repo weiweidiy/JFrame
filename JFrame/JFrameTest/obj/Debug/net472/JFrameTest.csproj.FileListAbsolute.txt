@@ -137,7 +137,6 @@ C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFra
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.AssemblyInfo.cs
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.CoreCompileInputs.cache
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.sourcelink.json
-C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.CopyComplete
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.pdb
 C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\bin\Debug\net472\JFrameTest.dll.config
@@ -150,3 +149,4 @@ E:\UnityProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Reactive.dll
 E:\UnityProjects\JFrame\JFrame\JFrameTest\bin\Debug\net472\System.Runtime.CompilerServices.Unsafe.dll
 E:\UnityProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.SuggestedBindingRedirects.cache
 E:\UnityProjects\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.dll.config
+C:\Users\JiChunWei\Desktop\JFrame\JFrame\JFrame\JFrameTest\obj\Debug\net472\JFrameTest.csproj.Up2Date
