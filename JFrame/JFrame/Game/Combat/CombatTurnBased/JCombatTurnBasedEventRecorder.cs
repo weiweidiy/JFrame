@@ -23,7 +23,7 @@ namespace JFramework.Game
             if (combatEvent.Uid != null && combatEvent.Uid != "")
             {
                 //合并目标和伤害
-                var lstTargetEffect = combatEvent.ActionEffect[CombatEventType.Damage];
+                var lstTargetEffect = combatEvent.ActionEffect[CombatEventType.Damage.ToString()];
                 lstTargetEffect.Add(new KeyValuePair<string, int>(damageData.GetTargetUid(), damageData.GetDamage()));
                 Update(combatEvent);
             }
@@ -34,10 +34,10 @@ namespace JFramework.Game
                 combatEvent.CurFrame = frameRecorder.GetCurFrame();
                 combatEvent.CasterUid = damageData.GetCasterUid();
                 combatEvent.CastActionUid = damageData.GetActionSourceUid();
-                combatEvent.ActionEffect = new Dictionary<CombatEventType, List<KeyValuePair<string, int>>>();
+                combatEvent.ActionEffect = new Dictionary<string, List<KeyValuePair<string, int>>>();
                 var lstTargetEffect = new List<KeyValuePair<string, int>>();
                 lstTargetEffect.Add(new KeyValuePair<string, int>(damageData.GetTargetUid(), damageData.GetDamage()));
-                combatEvent.ActionEffect.Add(CombatEventType.Damage, lstTargetEffect);
+                combatEvent.ActionEffect.Add(CombatEventType.Damage.ToString(), lstTargetEffect);
                 Add(combatEvent);
             }        
         }

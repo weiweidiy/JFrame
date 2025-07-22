@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframetest\\testjcombateventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testjcombateventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedeventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedeventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombaturnbasedtreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombaturnbasedtreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframetest\\testjturnbasedcombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testjturnbasedcombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,11 +54,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TestJCombatEventRecorder.cs",
+              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatEventRecorder.cs",
+              "RelativeDocumentMoniker": "JFrameTest\\TestJCombatEventRecorder.cs",
+              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatEventRecorder.cs",
+              "RelativeToolTip": "JFrameTest\\TestJCombatEventRecorder.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAtwFgAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T08:26:24.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JCombatTurnBasedEventRecorder.cs",
+              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
+              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAtwBkAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T08:26:04.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "JCombaTurnBasedtReport.cs",
+              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
+              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T07:44:50.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "LocalFileConfigLoader.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Config\\LocalFileConfigLoader.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Config\\LocalFileConfigLoader.cs",
@@ -58,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "BaseDictionaryModel.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Common\\BaseDictionaryModel.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Common\\BaseDictionaryModel.cs",
@@ -70,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "JConfigManager.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Config\\JConfigManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Config\\JConfigManager.cs",
@@ -78,12 +129,11 @@
               "RelativeToolTip": "JFrame\\Game\\Config\\JConfigManager.cs",
               "ViewState": "AgIAAI8AAAAAAAAAAAAAAKgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T03:00:11.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-22T03:00:11.958Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "ILanguageManager.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Language\\ILanguageManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Language\\ILanguageManager.cs",
@@ -95,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "JLanguageManager.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Language\\JLanguageManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Language\\JLanguageManager.cs",
@@ -107,20 +157,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "TestJTurnBasedCombat.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJTurnBasedCombat.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJTurnBasedCombat.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJTurnBasedCombat.cs",
               "RelativeToolTip": "JFrameTest\\TestJTurnBasedCombat.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAuwOAAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAuwNUAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T07:44:29.978Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "BaseRunable.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Core\\Common\\BaseRunable.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\Common\\BaseRunable.cs",
@@ -132,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "EventManager.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Core\\EventService\\EventManager.cs",
               "RelativeDocumentMoniker": "JFrame\\Core\\EventService\\EventManager.cs",

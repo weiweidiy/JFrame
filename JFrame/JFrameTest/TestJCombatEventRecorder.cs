@@ -53,7 +53,7 @@ namespace JFramework.Game.Tests
             Assert.That(combatEvent.CasterUid, Is.EqualTo("caster_1"));
             Assert.That(combatEvent.CastActionUid, Is.EqualTo("action_123"));
 
-            var damageEffects = combatEvent.ActionEffect[CombatEventType.Damage];
+            var damageEffects = combatEvent.ActionEffect[CombatEventType.Damage.ToString()];
             Assert.That(damageEffects, Has.Count.EqualTo(1));
             Assert.That(damageEffects[0].Key, Is.EqualTo("target_1"));
             Assert.That(damageEffects[0].Value, Is.EqualTo(100));
@@ -86,7 +86,7 @@ namespace JFramework.Game.Tests
             var events = _recorder.GetAllCombatEvents();
             Assert.That(events, Has.Count.EqualTo(1));
 
-            var damageEffects = events[0].ActionEffect[CombatEventType.Damage];
+            var damageEffects = events[0].ActionEffect[CombatEventType.Damage.ToString()];
             Assert.That(damageEffects, Has.Count.EqualTo(2));
 
             Assert.That(damageEffects, Contains.Item(new KeyValuePair<string, int>("target_1", 50)));
