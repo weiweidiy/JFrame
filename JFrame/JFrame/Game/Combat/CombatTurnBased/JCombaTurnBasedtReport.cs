@@ -4,8 +4,8 @@ namespace JFramework.Game
 {
     public class JCombatTurnBasedReportData
     {
-        public string winnerTeamUid;
-        public List<JCombatTurnBasedEvent> events;
+        public string winnerTeamUid { get; set; }
+        public List<JCombatTurnBasedEvent> events { get; set; }
     }
 
 
