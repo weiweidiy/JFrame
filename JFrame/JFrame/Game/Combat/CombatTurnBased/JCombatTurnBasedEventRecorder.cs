@@ -1,4 +1,5 @@
 ﻿using JFramework;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,8 @@ namespace JFramework.Game
     public abstract class JCombatTurnBasedEventRecorder : DictionaryContainer<JCombatTurnBasedEvent>, IJCombatTurnBasedEventRecorder , IJCombatEventListener
     {
         IJCombatFrameRecorder frameRecorder;
+        int curIndex;
+
         public JCombatTurnBasedEventRecorder(IJCombatFrameRecorder frameRecorder,  Func<JCombatTurnBasedEvent,string> keySelector):base(keySelector)
         { 
             this.frameRecorder = frameRecorder;
@@ -24,22 +27,34 @@ namespace JFramework.Game
             {
                 //合并目标和伤害
                 var lstTargetEffect = combatEvent.ActionEffect[CombatEventType.Damage.ToString()];
-                lstTargetEffect.Add(new KeyValuePair<string, int>(damageData.GetTargetUid(), damageData.GetDamage()));
+                lstTargetEffect.Add(new ActionEffectInfo() {TargetUid = damageData.GetTargetUid(), Value = damageData.GetDamage() });
                 Update(combatEvent);
             }
             else
             {
-                combatEvent = new JCombatTurnBasedEvent();
+                combatEvent = CreateEvent();
                 combatEvent.Uid = dataUid;
                 combatEvent.CurFrame = frameRecorder.GetCurFrame();
                 combatEvent.CasterUid = damageData.GetCasterUid();
                 combatEvent.CastActionUid = damageData.GetActionSourceUid();
-                combatEvent.ActionEffect = new Dictionary<string, List<KeyValuePair<string, int>>>();
-                var lstTargetEffect = new List<KeyValuePair<string, int>>();
-                lstTargetEffect.Add(new KeyValuePair<string, int>(damageData.GetTargetUid(), damageData.GetDamage()));
+                combatEvent.ActionEffect = new Dictionary<string, List<ActionEffectInfo>> ();
+                var lstTargetEffect = new List<ActionEffectInfo>();
+                lstTargetEffect.Add(new ActionEffectInfo() { TargetUid = damageData.GetTargetUid(), Value = damageData.GetDamage() });
                 combatEvent.ActionEffect.Add(CombatEventType.Damage.ToString(), lstTargetEffect);
                 Add(combatEvent);
             }        
+        }
+
+        JCombatTurnBasedEvent CreateEvent()
+        {
+            var combatEvent = new JCombatTurnBasedEvent();
+            combatEvent.SortIndex = GetIndex();
+            return combatEvent;
+        }
+
+        private int GetIndex()
+        {
+            return curIndex++;
         }
     }
 }

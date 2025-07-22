@@ -55,7 +55,7 @@ namespace JFramework.Game.Tests
 
             var damageEffects = combatEvent.ActionEffect[CombatEventType.Damage.ToString()];
             Assert.That(damageEffects, Has.Count.EqualTo(1));
-            Assert.That(damageEffects[0].Key, Is.EqualTo("target_1"));
+            Assert.That(damageEffects[0].TargetUid, Is.EqualTo("target_1"));
             Assert.That(damageEffects[0].Value, Is.EqualTo(100));
         }
 
@@ -89,8 +89,8 @@ namespace JFramework.Game.Tests
             var damageEffects = events[0].ActionEffect[CombatEventType.Damage.ToString()];
             Assert.That(damageEffects, Has.Count.EqualTo(2));
 
-            Assert.That(damageEffects, Contains.Item(new KeyValuePair<string, int>("target_1", 50)));
-            Assert.That(damageEffects, Contains.Item(new KeyValuePair<string, int>("target_2", 75)));
+            Assert.That(damageEffects, Contains.Item(new ActionEffectInfo() { TargetUid = "target_1", Value= 50}));
+            Assert.That(damageEffects, Contains.Item(new ActionEffectInfo() { TargetUid = "target_2", Value = 75 }));
         }
 
         [Test]

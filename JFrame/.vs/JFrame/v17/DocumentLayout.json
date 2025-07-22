@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatEventRecorder.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatEventRecorder.cs",
               "RelativeToolTip": "JFrameTest\\TestJCombatEventRecorder.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAtwFgAAABYAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAtwFIAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-22T08:26:24.635Z",
               "EditorCaption": ""
@@ -77,7 +77,7 @@
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedEventRecorder.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAtwBkAAABgAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAkwCoAAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-22T08:26:04.481Z",
               "EditorCaption": ""
@@ -90,7 +90,7 @@
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombaTurnBasedtReport.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-22T07:44:50.077Z",
               "EditorCaption": ""
@@ -165,8 +165,7 @@
               "RelativeToolTip": "JFrameTest\\TestJTurnBasedCombat.cs",
               "ViewState": "AgIAAMMAAAAAAAAAAAAuwNUAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T07:44:29.978Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T07:44:29.978Z"
             },
             {
               "$type": "Document",
