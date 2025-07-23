@@ -9,7 +9,7 @@ namespace JFramework.Game
     }
 
 
-    public class JCombaTurnBasedtReport : IJCombatTurnBasedReport
+    public class JCombatTurnBasedReport : IJCombatTurnBasedReport
     {
         List<JCombatTurnBasedEvent> events;
 
@@ -23,7 +23,7 @@ namespace JFramework.Game
         {
             var data = new JCombatTurnBasedReportData();
 
-            data.winnerTeamUid = winner.Uid;
+            data.winnerTeamUid = winner?.Uid ?? null;
             data.events = events;
 
             return data;

@@ -30,10 +30,10 @@ namespace JFramework.Game
                     action.SetCaster(this);
             }
         }
-        public JCombatCasterTargetableUnit(JCombatUnitInfo unitInfo,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions, IJCombatEventListener eventListener) 
-            : this(unitInfo.Uid, unitInfo.AttrList, keySelector, combatAttrNameQuery, actions, eventListener)
-        {
-        }
+        //public JCombatCasterTargetableUnit(JCombatUnitInfo unitInfo,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions, IJCombatEventListener eventListener) 
+        //    : this(unitInfo.Uid, unitInfo.AttrList, keySelector, combatAttrNameQuery, actions, eventListener)
+        //{
+        //}
 
         public void SetQuery(IJCombatQuery jCombatQuery)
         {

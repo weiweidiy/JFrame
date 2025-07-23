@@ -6,4 +6,6 @@ namespace JFramework.Game
     {
         List<JCombatFormationInfo> Build();
     }
+
+    
 }

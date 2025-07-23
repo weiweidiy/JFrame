@@ -1,5 +1,4 @@
 ﻿using JFramework;
-using System.Collections.Generic;
 
 namespace JFramework.Game
 {

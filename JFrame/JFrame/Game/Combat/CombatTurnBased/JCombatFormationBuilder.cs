@@ -6,6 +6,7 @@ namespace JFramework.Game
     {
         protected IJCombatUnitBuilder unitBuilder;
 
+        List<JCombatFormationInfo> formationInfos = new List<JCombatFormationInfo>();
         public JCombatFormationBuilder(IJCombatUnitBuilder unitBuilder)
         {
             this.unitBuilder = unitBuilder;
@@ -13,4 +14,6 @@ namespace JFramework.Game
 
         public abstract List<JCombatFormationInfo> Build();
     }
+
+
 }

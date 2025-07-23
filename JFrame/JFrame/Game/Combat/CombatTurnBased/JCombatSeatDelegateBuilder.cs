@@ -7,12 +7,9 @@ namespace JFramework.Game
     public class JCombatSeatDelegateBuilder : IJCombatSeatDelegateBuilder
     {
         List<JCombatFormationInfo> formationInfos = new List<JCombatFormationInfo>();
-        public JCombatSeatDelegateBuilder(List<IJCombatFormationBuilder> formationBuilders)
+        public JCombatSeatDelegateBuilder(List<JCombatFormationInfo> formationInfos)
         {
-            foreach(var builder in formationBuilders)
-            {
-                formationInfos.AddRange(builder.Build());
-            }       
+            this.formationInfos.AddRange(formationInfos);
         }
         public Func<string, int> Build()
         {
