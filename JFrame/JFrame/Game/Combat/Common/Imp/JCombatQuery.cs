@@ -22,7 +22,18 @@ namespace JFramework.Game
 
         public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : this(keySelector, frameRecorder) 
         {
+            SetTeams(teams);
+        }
+
+        public void SetTeams(List<IJCombatTeam> teams)
+        {
+            Clear();
             AddRange(teams);
+
+            foreach (var team in teams)
+            {
+                team.SetQuery(this);
+            }
         }
 
         #region 查找战斗结果

@@ -7,10 +7,9 @@ namespace JFramework.Game
     {
         IJCombatTargetsFinder finder;
 
-        public JCombatExecutorBase(IJCombatQuery query, IJCombatTargetsFinder finder) : base(query) 
+        public JCombatExecutorBase(/*IJCombatQuery query, */IJCombatTargetsFinder finder) //: base(query) 
         {
             this.finder = finder;
-
         }
 
         public void Execute(List<IJCombatCasterTargetableUnit> targets)
@@ -31,6 +30,14 @@ namespace JFramework.Game
             base.SetOwner(owner);
             if(finder != null)
                 finder.SetOwner(owner);
+        }
+
+        public override void SetQuery(IJCombatQuery query)
+        {
+            base.SetQuery(query);
+
+            if (finder != null)
+                finder.SetQuery(query);
         }
     }
 }

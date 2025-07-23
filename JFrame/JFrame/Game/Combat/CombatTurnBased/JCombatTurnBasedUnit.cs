@@ -15,6 +15,11 @@ namespace JFramework.Game
 
         }
 
+        public JCombatTurnBasedUnit(JCombatUnitInfo unitInfo, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
+            : base(unitInfo, keySelector, combatAttrNameQuery, actions, eventListener)
+        {
+        }
+
 
         public int GetActionPoint()
         {

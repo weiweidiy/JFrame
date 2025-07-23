@@ -5,7 +5,7 @@ namespace JFramework.Game
 {
     public class JCombatExecutorDamage : JCombatExecutorBase
     {
-        public JCombatExecutorDamage(IJCombatQuery query, IJCombatTargetsFinder finder) : base(query, finder)
+        public JCombatExecutorDamage(IJCombatTargetsFinder finder) : base(finder)
         {
         }
 

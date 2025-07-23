@@ -10,7 +10,7 @@ namespace JFramework.Tests.Game
     public class JCombatTeamTests
     {
         private JCombatTeam _combatTeam;
-        private List<IJCombatCasterTargetableUnit> _mockUnits;
+        private List<IJCombatUnit> _mockUnits;
         private const string TeamUid = "team-123";
         private RunableExtraData _extraData;
 
@@ -33,7 +33,8 @@ namespace JFramework.Tests.Game
             var unit3 = Substitute.For<IJCombatCasterTargetableUnit>(/*"unit-3", new List<IUnique>(), funcAttr, mockAttrQuery,null,null*/);
             unit3.Uid.Returns("unit-3");
 
-            _mockUnits = new List<IJCombatCasterTargetableUnit>
+
+            _mockUnits = new List<IJCombatUnit>
             {
                 unit1,
                 unit2,
@@ -155,7 +156,7 @@ namespace JFramework.Tests.Game
         public void OnStart_WithEmptyTeam_DoesNotThrow()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatCasterTargetableUnit>(), MockKeySelector);
+            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatUnit>(), MockKeySelector);
 
             // Act & Assert
             Assert.DoesNotThrow(() => emptyTeam.Start(_extraData));
@@ -165,7 +166,7 @@ namespace JFramework.Tests.Game
         public void OnStop_WithEmptyTeam_DoesNotThrow()
         {
             // Arrange
-            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatCasterTargetableUnit>(), MockKeySelector);
+            var emptyTeam = new JCombatTeam("empty-team", new List<IJCombatUnit>(), MockKeySelector);
 
             // Act & Assert
             Assert.DoesNotThrow(() => emptyTeam.Stop());
