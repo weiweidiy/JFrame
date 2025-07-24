@@ -26,8 +26,8 @@
 //        /// <summary>
 //        /// 删除成员
 //        /// </summary>
-//        /// <param name="uid"></param>
-//        bool Remove(string uid);
+//        /// <param name="Uid"></param>
+//        bool Remove(string Uid);
 
 //        /// <summary>
 //        /// 更新成员
@@ -38,9 +38,9 @@
 //        /// <summary>
 //        /// 获取指定id成员
 //        /// </summary>
-//        /// <param name="uid"></param>
+//        /// <param name="Uid"></param>
 //        /// <returns></returns>
-//        T Get(string uid);
+//        T Get(string Uid);
 
 //        /// <summary>
 //        /// 获取所有成员

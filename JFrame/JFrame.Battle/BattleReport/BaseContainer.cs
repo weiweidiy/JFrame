@@ -20,9 +20,9 @@ namespace JFramework
     //        onItemAdded?.Invoke(member); 
     //    }
 
-    //    public virtual T Get(string uid)
+    //    public virtual T Get(string Uid)
     //    {
-    //        return list.Where(i =>  i.Uid == uid).FirstOrDefault();
+    //        return list.Where(i =>  i.Uid == Uid).FirstOrDefault();
     //    }
 
     //    public virtual List<T> GetAll()
@@ -30,9 +30,9 @@ namespace JFramework
     //        return list;
     //    }
 
-    //    public virtual bool Remove(string uid)
+    //    public virtual bool Remove(string Uid)
     //    {
-    //        var item = Get(uid);
+    //        var item = Get(Uid);
     //        if(item != null)
     //        {
     //            if(list.Remove(item))
@@ -43,7 +43,7 @@ namespace JFramework
     //            return false;
     //        }
 
-    //        throw new System.Exception("没有找到要删除的item "  + uid);
+    //        throw new System.Exception("没有找到要删除的item "  + Uid);
     //    }
 
     //    public virtual void Update(T member)

@@ -408,7 +408,7 @@ namespace JFramework
             //if (attr == null)
             //    throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
 
-            //attr.AddExtraValue(uid, value);
+            //attr.AddExtraValue(Uid, value);
 
             GetAttributeManager().PlusExtraValue(attrType, uid, value);
         }
@@ -425,7 +425,7 @@ namespace JFramework
             //if (attr == null)
             //    throw new System.Exception($"AddExtraValue 时没有找到属性 {attrType.ToString()}");
 
-            //return attr.RemoveExtraValue(uid);
+            //return attr.RemoveExtraValue(Uid);
 
             return GetAttributeManager().RemoveExtraValue(attrType, uid);
         }

@@ -15,6 +15,10 @@ namespace JFramework.Game
             this.frameRecorder = frameRecorder;
         }
 
+        public JCombatTurnBasedEventRecorder(IJCombatFrameRecorder frameRecorder) : this(frameRecorder, (e) => e.Uid)
+        {
+        }
+
         public List<JCombatTurnBasedEvent> GetAllCombatEvents() => GetAll();
 
         public void OnDamage(IJCombatDamageData damageData)

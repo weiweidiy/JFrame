@@ -198,7 +198,7 @@ namespace JFramework
     /// </summary>
     public class CombatBufferInfo : IUnique , IUpdateable
     {
-        //public string uid;
+        //public string Uid;
         public int id;
         /// <summary>
         /// 可叠加最大层数

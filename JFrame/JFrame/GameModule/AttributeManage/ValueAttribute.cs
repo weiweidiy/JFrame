@@ -16,7 +16,7 @@
             //this.Type = type; // (AttributeType)cfg.Type;
             Value = value;
             //this.Id = id;
-            //this.Uid = uid;
+            //this.Uid = Uid;
             SysSource = sysSource;
             SubType = subType;
         }

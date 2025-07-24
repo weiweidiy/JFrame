@@ -18,6 +18,11 @@ namespace JFramework.Game
         {
         }
 
+        public JCombatSeatBasedQuery(IJCombatSeatDelegateBuilder delegateBuilder,IJCombatFrameRecorder frameRecorder) 
+            : this(delegateBuilder.Build(), (team) => team.Uid, (unit) => unit.Uid, frameRecorder)
+        {
+        }
+
         /// <summary>
         /// 获取指定单位的座位号
         /// </summary>

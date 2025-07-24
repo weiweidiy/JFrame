@@ -52,7 +52,7 @@ namespace JFrameTest
         //    trigger.Initialize(context, new float[] { 0.3f });
         //    var sm = new CombatActionSM();
         //    sm.Initialize(action);
-        //    action.Initialize(1, "uid",ActionType.Normal, ActionMode.Active, 101, new List<CombatBaseTrigger>() { trigger},new TriggerTime(null), new List<CombatBaseExecutor>(), new List<CombatBaseTrigger>(), sm);
+        //    action.Initialize(1, "Uid",ActionType.Normal, ActionMode.Active, 101, new List<CombatBaseTrigger>() { trigger},new TriggerTime(null), new List<CombatBaseExecutor>(), new List<CombatBaseTrigger>(), sm);
         //    bool isOn = false;
         //    CombatExtraData data = null;
         //    int count = 0;

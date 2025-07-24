@@ -2,17 +2,17 @@
 
 namespace JFramework.Game
 {
-    public abstract class JCombatFormationBuilder : IJCombatFormationBuilder
+    public abstract class JCombatFormationBuilder<T, TUnit> : IJCombatFormationBuilder<T, TUnit> where T : JCombatFormationInfo<TUnit> where TUnit : JCombatUnitInfo, new()
     {
-        protected IJCombatUnitBuilder unitBuilder;
+        protected IJCombatUnitBuilder<TUnit> unitBuilder;
 
-        List<JCombatFormationInfo> formationInfos = new List<JCombatFormationInfo>();
-        public JCombatFormationBuilder(IJCombatUnitBuilder unitBuilder)
+        List<T> formationInfos = new List<T>();
+        public JCombatFormationBuilder(IJCombatUnitBuilder<TUnit> unitBuilder)
         {
             this.unitBuilder = unitBuilder;
         }
 
-        public abstract List<JCombatFormationInfo> Build();
+        public abstract List<T> Build();
     }
 
 

@@ -41,9 +41,9 @@ namespace JFramework
         {
             //var itemAttr = target.GetAttribute((CombatAttribute)GetAttrIdArg());
             //var finalValue = data.Value * itemAttr.CurValue;
-            //uid = data.Action.Uid;
+            //Uid = data.Action.Uid;
 
-            //target.AddExtraValue((CombatAttribute)GetAttrIdArg(), uid, finalValue);
+            //target.AddExtraValue((CombatAttribute)GetAttrIdArg(), Uid, finalValue);
             uid = data.Action.Uid;
             data.Value = GetRateArg() * data.FoldCount;
             var finalValue = target.OnAttrChanged(data, (CombatAttribute)GetAttrIdArg());

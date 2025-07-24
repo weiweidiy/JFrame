@@ -328,7 +328,7 @@ namespace JFrameTest
         //    var actionInfo = new ActionInfo();
         //    actionInfo.type = ActionType.Normal;
         //    actionInfo.mode = ActionMode.Active;
-        //    actionInfo.uid = Guid.NewGuid().ToString();
+        //    actionInfo.Uid = Guid.NewGuid().ToString();
 
         //    var dicComponentInfo = new Dictionary<ActionComponentType, List<ActionComponentInfo>>();
 

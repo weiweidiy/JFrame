@@ -180,10 +180,10 @@ namespace JFramework
 ///// </summary>
 //protected int maxValue;
 
-//public Buffer(int id, string uid, BufferTriggerType bufferType, float arg, float duration, int fold, int maxValue, IBattleUnit owner = null)
+//public Buffer(int id, string Uid, BufferTriggerType bufferType, float arg, float duration, int fold, int maxValue, IBattleUnit owner = null)
 //{
 //    Id = id;
-//    Uid = uid;
+//    Uid = Uid;
 //    BufferType = bufferType;
 //    Arg = arg;
 //    FoldCount = fold;

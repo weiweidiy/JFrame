@@ -15,7 +15,7 @@ namespace JFramework.Tests
         private IObjectPool _mockPool;
         private JCombatTurnBasedEventRunner _mockRunner;
         private RunableExtraData _mockExtraData;
-        private JCombatTurnBasedReportData _testReport;
+        private JCombatTurnBasedReportData<JCombatUnitData> _testReport;
         private TaskCompletionSource<bool> _testTcs;
 
         [SetUp]
@@ -32,7 +32,7 @@ namespace JFramework.Tests
             _mockPool.Rent<RunableExtraData>().Returns(_mockExtraData);
 
             // 创建测试报告数据
-            _testReport = new JCombatTurnBasedReportData
+            _testReport = new JCombatTurnBasedReportData<JCombatUnitData>
             {
                 winnerTeamUid = "team1",
                 events = new List<JCombatTurnBasedEvent>
@@ -282,7 +282,7 @@ namespace JFramework.Tests
         public async Task Play_WithZeroEvents_DoesNotProcessAnyEvents()
         {
             // Arrange
-            var emptyReport = new JCombatTurnBasedReportData
+            var emptyReport = new JCombatTurnBasedReportData<JCombatUnitData>
             {
                 winnerTeamUid = "team1",
                 events = new List<JCombatTurnBasedEvent>()
@@ -302,7 +302,7 @@ namespace JFramework.Tests
         public async Task Play_WithSingleEvent_ProcessesCorrectly()
         {
             // Arrange
-            var singleEventReport = new JCombatTurnBasedReportData
+            var singleEventReport = new JCombatTurnBasedReportData<JCombatUnitData>
             {
                 winnerTeamUid = "team1",
                 events = new List<JCombatTurnBasedEvent> { new JCombatTurnBasedEvent { Uid = "Special" } }
@@ -413,7 +413,7 @@ namespace JFramework.Tests
         }
 
         // 测试用的具体实现类
-        private class TestCombatPlayer : JCombatTurnBasedPlayer
+        private class TestCombatPlayer : JCombatTurnBasedPlayer<JCombatUnitData>
         {
             public int PlayCallCount { get; private set; }
             public bool PlayCalled => PlayCallCount > 0;
@@ -421,7 +421,7 @@ namespace JFramework.Tests
             public List<RunableExtraData> CreatedExtraData { get; } = new List<RunableExtraData>();
             public List<RunableExtraData> StartedRunners { get; } = new List<RunableExtraData>();
             public IObjectPool Pool => pool;
-            public JCombatTurnBasedReportData ReportData => reportData;
+            public JCombatTurnBasedReportData<JCombatUnitData> ReportData => reportData;
             public bool OnStartPlayCalled { get; private set; }
             public List<JCombatTurnBasedEvent> ReceivedEvents { get; } = new List<JCombatTurnBasedEvent>();
             public TaskCompletionSource<bool> CurrentTcs { get; private set; }
@@ -444,7 +444,7 @@ namespace JFramework.Tests
             public TestCombatPlayer() { }
             public TestCombatPlayer(IObjectPool objPool) : base(objPool) { }
 
-            public override void Play(JCombatTurnBasedReportData report)
+            public override void Play(JCombatTurnBasedReportData<JCombatUnitData> report)
             {
                 PlayCallCount++;
                 base.Play(report);

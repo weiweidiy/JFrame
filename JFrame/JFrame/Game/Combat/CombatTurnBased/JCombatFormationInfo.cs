@@ -1,8 +1,8 @@
 ﻿namespace JFramework.Game
 {
-    public class JCombatFormationInfo
+    public class JCombatFormationInfo<T> where T: JCombatUnitInfo
     {
         public int Point { get; set; }
-        public JCombatUnitInfo UnitInfo { get; set; }
+        public T UnitInfo { get; set; }
     }
 }

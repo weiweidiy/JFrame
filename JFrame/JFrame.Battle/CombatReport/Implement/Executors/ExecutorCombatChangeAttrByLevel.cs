@@ -10,7 +10,7 @@ namespace JFramework
     /// </summary>
     public class ExecutorCombatChangeAttrByLevel : ExecutorCombatChangeAttribute
     {
-        //string uid = "ExecutorCombatChangeAttrByLevel";
+        //string Uid = "ExecutorCombatChangeAttrByLevel";
         public ExecutorCombatChangeAttrByLevel(CombatBaseFinder combinFinder, CombatBaseFormula formula) : base(combinFinder, formula)
         {
            // UnityEngine.Debug.LogError("ExecutorCombatChangeAttrByLevel");

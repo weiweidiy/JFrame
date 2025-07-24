@@ -8,7 +8,7 @@ namespace JFramework.Game
 {
     public class JCombatTurnBasedUnit : JCombatCasterTargetableUnit, IJCombatTurnBasedUnit
     {
-
+        JCombatUnitInfo unitInfo;
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery,  List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
             : base(uid, attrList, keySelector, combatAttrNameQuery, actions,eventListener)
         {
@@ -18,6 +18,12 @@ namespace JFramework.Game
         public JCombatTurnBasedUnit(JCombatUnitInfo unitInfo, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatEventListener eventListener = null) 
             : this(unitInfo.Uid, unitInfo.AttrList, (u)=>u.Uid, combatAttrNameQuery, unitInfo.Actions, eventListener)
         {
+            this.unitInfo = unitInfo;
+        }
+
+        public JCombatUnitInfo GetUnitInfo()
+        {
+            return unitInfo;
         }
 
 
@@ -41,5 +47,7 @@ namespace JFramework.Game
                 action.Cast();
             }
         }
+
+
     }
 }

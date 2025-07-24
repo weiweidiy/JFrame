@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public abstract class JCombatBaseUnitBuilder : IJCombatUnitBuilder
+    public abstract class JCombatBaseUnitBuilder<T> : IJCombatUnitBuilder<T> where T : JCombatUnitInfo, new()
     {
-        Dictionary<int, JCombatUnitInfo> _unitCache = new Dictionary<int, JCombatUnitInfo>();
+        Dictionary<int, T> _unitCache = new Dictionary<int, T>();
 
         bool useCache = false;
 
@@ -20,7 +20,7 @@ namespace JFramework.Game
         public bool UseCache { get => useCache; set => useCache = value; }
         
 
-        public JCombatUnitInfo Build(int key)
+        public T Build(int key)
         {
             if(useCache)
             {
@@ -33,14 +33,14 @@ namespace JFramework.Game
             return info;
         }
 
-        protected virtual JCombatUnitInfo GetFromCache(int key)
+        protected virtual T GetFromCache(int key)
         {
             return _unitCache[key];
         }
 
-        protected virtual JCombatUnitInfo Create(int key)
+        protected virtual T Create(int key)
         {
-            var info = new JCombatUnitInfo();
+            var info = new T();
             info.Uid = Guid.NewGuid().ToString();
             info.AttrList = attrBuilder.Create(key);
             info.Actions = actionBuilder.Create(key);

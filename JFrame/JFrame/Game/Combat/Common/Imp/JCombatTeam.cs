@@ -20,6 +20,10 @@ namespace JFramework.Game
             this.Uid = uid;
         }
 
+        public JCombatTeam(string uid, List<IJCombatUnit> units) : this(uid, units, (u) => u.Uid)
+        {
+        }
+
         public void SetQuery(IJCombatQuery jCombatQuery)
         {
             foreach (var unit in GetAll())
