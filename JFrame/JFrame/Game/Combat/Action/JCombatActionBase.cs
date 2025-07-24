@@ -6,7 +6,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗行为基类，触发器触发执行，
     /// </summary>
-    public abstract class JCombatActionBase : BaseRunable, IJCombatAction
+    public class JCombatActionBase : BaseRunable, IJCombatAction
     {
         public string Uid { get; private set; }
 

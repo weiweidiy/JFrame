@@ -29,7 +29,7 @@ namespace JFramework.Game
     //}
 
 
-    public abstract class JCombatTurnBasedReport : IJCombatTurnBasedReport
+    public abstract class JCombatTurnBasedReportBuilder : IJCombatTurnBasedReportBuilder
     {
         List<JCombatTurnBasedEvent> events;
 
@@ -39,7 +39,7 @@ namespace JFramework.Game
 
         protected IJCombatSeatBasedQuery seatQuery;
 
-        public JCombatTurnBasedReport(IJCombatSeatBasedQuery seatQuery)
+        public JCombatTurnBasedReportBuilder(IJCombatSeatBasedQuery seatQuery)
         {
             this.seatQuery = seatQuery ?? throw new ArgumentNullException(nameof(seatQuery));
         }

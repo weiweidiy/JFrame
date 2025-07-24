@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public abstract class JCombatTurnBasedEventRecorder : DictionaryContainer<JCombatTurnBasedEvent>, IJCombatTurnBasedEventRecorder , IJCombatEventListener
+    public class JCombatTurnBasedEventRecorder : DictionaryContainer<JCombatTurnBasedEvent>, IJCombatTurnBasedEventRecorder , IJCombatEventListener
     {
         IJCombatFrameRecorder frameRecorder;
         int curIndex;

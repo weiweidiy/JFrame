@@ -4,6 +4,6 @@ namespace JFramework.Game
 {
     public interface IJCombatTurnBasedReporter
     {
-        IJCombatTurnBasedReport GetReport();
+        IJCombatTurnBasedReportBuilder GetReport();
     }
 }

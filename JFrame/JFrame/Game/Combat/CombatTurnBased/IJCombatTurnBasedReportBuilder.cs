@@ -5,7 +5,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗结果，player就是读取这个对象
     /// </summary>
-    public interface IJCombatTurnBasedReport
+    public interface IJCombatTurnBasedReportBuilder
     {
         void SetForamtionData(List<IJCombatTeam> teams);
 

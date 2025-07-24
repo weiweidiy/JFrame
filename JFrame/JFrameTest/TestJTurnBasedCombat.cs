@@ -64,9 +64,9 @@ namespace JFrameTest
             }
         }
 
-        public class FakeJCombatResult : IJCombatTurnBasedReport
+        public class FakeJCombatResult : IJCombatTurnBasedReportBuilder
         {
-            public JCombatTurnBasedReportData<T> GetCombatReportData<T>() where T : IJCombatUnitData
+            public JCombatTurnBasedReportData<T> GetCombatReportData<T>() where T :class, IJCombatUnitData
             {
                 return null;
             }
