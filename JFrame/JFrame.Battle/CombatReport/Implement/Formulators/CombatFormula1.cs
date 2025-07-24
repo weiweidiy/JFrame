@@ -175,9 +175,9 @@ namespace JFramework
 
     //public class CombatFormula7 : CombatFormula6
     //{
-    //    public override double GetHitValue(CombatExtraData extraData)
+    //    public override double CalcHitValue(CombatExtraData extraData)
     //    {
-    //        var dmg = base.GetHitValue(extraData);
+    //        var dmg = base.CalcHitValue(extraData);
 
     //        return dmg * GetRateByHp();
     //    }

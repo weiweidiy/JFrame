@@ -14,6 +14,18 @@ namespace JFrameTest
 {
     public class TestJTurnBasedCombat
     {
+        public class NormalFormula : JCombatFormula
+        {
+            public override int CalcHitValue(IJAttributeableUnit target)
+            {
+                //伤害= 释放者攻击力 * 释放者Power - 目标防御力 * 目标Def
+                var caster = query.GetUnit(GetOwner().GetCaster());
+                var atk = caster.GetAttribute("Atk") as GameAttributeInt;
+                var targetDef = target.GetAttribute("Def") as GameAttributeInt;
+                return atk.CurValue - targetDef.CurValue;
+            }
+        }
+
         public class FakeAttrFacotry : IJCombatUnitAttrFactory
         {
             public List<IUnique> Create()
@@ -21,13 +33,18 @@ namespace JFrameTest
                 var result = new List<IUnique>();
 
                 var hp = new GameAttributeInt("Hp", 100, 100);
+                var atk = new GameAttributeInt("Atk", 70, 70);
+                var def = new GameAttributeInt("Def", 10, 10);
                 var speed = new GameAttributeInt("Speed", 50, 50);
                 result.Add(hp);
                 result.Add(speed);
+                result.Add(atk);
+                result.Add(def);
 
                 return result;
             }
         }
+
 
         public class FakeAttrFacotry2 : IJCombatUnitAttrFactory
         {
@@ -36,9 +53,13 @@ namespace JFrameTest
                 var result = new List<IUnique>();
 
                 var hp = new GameAttributeInt("Hp", 200, 200);
+                var atk = new GameAttributeInt("Atk", 60, 60);
+                var def = new GameAttributeInt("Def", 20, 20);
                 var speed = new GameAttributeInt("Speed", 40, 60);
                 result.Add(hp);
                 result.Add(speed);
+                result.Add(atk);
+                result.Add(def);
 
                 return result;
             }
@@ -140,7 +161,8 @@ namespace JFrameTest
 
             //执行器
             var finder1 = new JCombatDefaultFinder();
-            var executor1 = new JCombatExecutorDamage(finder1);
+            var formula1 = new NormalFormula();
+            var executor1 = new JCombatExecutorDamage(finder1, formula1);
             var lstExecutor1 = new List<IJCombatExecutor>();
             lstExecutor1.Add(executor1);
 
