@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public abstract class JCombatBaseUnitBuilder<T> : IJCombatUnitBuilder<T> where T : JCombatUnitInfo, new()
+    public abstract class JCombatBaseUnitBuilder : IJCombatUnitBuilder
     {
-        Dictionary<int, T> _unitCache = new Dictionary<int, T>();
+        Dictionary<int, IJCombatUnitInfo> _unitCache = new Dictionary<int, IJCombatUnitInfo>();
 
         bool useCache = false;
 
-        IJCombatAttrBuilder attrBuilder;
-        IJCombatActionBuilder actionBuilder;
+        protected IJCombatAttrBuilder attrBuilder;
+        protected IJCombatActionBuilder actionBuilder;
         public JCombatBaseUnitBuilder(IJCombatAttrBuilder attrBuilder, IJCombatActionBuilder actionBuilder)
         {
             this.actionBuilder = actionBuilder;
@@ -20,7 +20,7 @@ namespace JFramework.Game
         public bool UseCache { get => useCache; set => useCache = value; }
         
 
-        public T Build(int key)
+        public IJCombatUnitInfo Build(int key)
         {
             if(useCache)
             {
@@ -33,18 +33,18 @@ namespace JFramework.Game
             return info;
         }
 
-        protected virtual T GetFromCache(int key)
+        protected virtual IJCombatUnitInfo GetFromCache(int key)
         {
             return _unitCache[key];
         }
 
-        protected virtual T Create(int key)
-        {
-            var info = new T();
-            info.Uid = Guid.NewGuid().ToString();
-            info.AttrList = attrBuilder.Create(key);
-            info.Actions = actionBuilder.Create(key);
-            return info;
-        }
+        protected abstract IJCombatUnitInfo Create(int key);
+        //{
+        //    var info = new IJCombatUnitInfo();
+        //    info.Uid = Guid.NewGuid().ToString();
+        //    info.AttrList = attrBuilder.Create(key);
+        //    info.Actions = actionBuilder.Create(key);
+        //    return info;
+        //}
     }
 }

@@ -2,9 +2,9 @@
 
 namespace JFramework.Game
 {
-    public interface IJCombatFormationBuilder<T,TUnit> where T: JCombatFormationInfo<TUnit> where TUnit : JCombatUnitInfo
+    public interface IJCombatFormationBuilder
     {
-        List<T> Build();
+        List<JCombatFormationInfo> Build();
     }
 
     

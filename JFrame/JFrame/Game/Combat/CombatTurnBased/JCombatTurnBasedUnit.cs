@@ -8,20 +8,20 @@ namespace JFramework.Game
 {
     public class JCombatTurnBasedUnit : JCombatCasterTargetableUnit, IJCombatTurnBasedUnit
     {
-        JCombatUnitInfo unitInfo;
+        IJCombatUnitInfo unitInfo;
         public JCombatTurnBasedUnit(string uid, List<IUnique> attrList, Func<IUnique, string> keySelector, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery,  List<IJCombatAction> actions, IJCombatEventListener eventListener = null) 
             : base(uid, attrList, keySelector, combatAttrNameQuery, actions,eventListener)
         {
 
         }
 
-        public JCombatTurnBasedUnit(JCombatUnitInfo unitInfo, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatEventListener eventListener = null) 
+        public JCombatTurnBasedUnit(IJCombatUnitInfo unitInfo, IJCombatTurnBasedAttrNameQuery combatAttrNameQuery, IJCombatEventListener eventListener = null) 
             : this(unitInfo.Uid, unitInfo.AttrList, (u)=>u.Uid, combatAttrNameQuery, unitInfo.Actions, eventListener)
         {
             this.unitInfo = unitInfo;
         }
 
-        public JCombatUnitInfo GetUnitInfo()
+        public IJCombatUnitInfo GetUnitInfo()
         {
             return unitInfo;
         }

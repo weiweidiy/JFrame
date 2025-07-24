@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFramework.Game
 {
     [Serializable]
-    public class JCombatUnitInfo
+    public class JCombatUnitInfo : IJCombatUnitInfo
     {
         public string Uid { get; set; }
 

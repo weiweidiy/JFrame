@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace JFramework.Game
 {
-    public abstract class JCombatBasePlayer<T> : BaseRunable, IJCombatTurnBasedPlayer<T> where T : JCombatUnitData, new()
+    public abstract class JCombatBasePlayer<T> : BaseRunable, IJCombatTurnBasedPlayer<T> where T : IJCombatUnitData
     {
         protected JCombatTurnBasedReportData<T> reportData;
 
@@ -16,9 +16,9 @@ namespace JFramework.Game
 
         public JCombatBasePlayer(IObjectPool objPool) => this.pool = objPool;
 
-        public virtual void Play(JCombatTurnBasedReportData<T> report)
+        public virtual void Play(JCombatTurnBasedReportData<T> reportData) 
         {
-            this.reportData = report;
+            this.reportData = reportData;
 
             string winner = reportData.winnerTeamUid;
             var events = reportData.events;

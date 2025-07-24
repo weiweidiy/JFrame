@@ -5,7 +5,7 @@ namespace JFramework.Game
     /// <summary>
     /// 战斗结果，player就是读取这个对象
     /// </summary>
-    public interface IJCombatTurnBasedReport<T> where T : JCombatUnitData, new()
+    public interface IJCombatTurnBasedReport
     {
         void SetForamtionData(List<IJCombatTeam> teams);
 
@@ -25,6 +25,6 @@ namespace JFramework.Game
         /// 获取战报
         /// </summary>
         /// <returns></returns>
-        JCombatTurnBasedReportData<T> GetCombatReportData();
+        JCombatTurnBasedReportData<T> GetCombatReportData<T>() where T :class, IJCombatUnitData;
     }
 }

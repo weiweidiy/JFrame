@@ -3,14 +3,20 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatUnitData
+    public interface IJCombatUnitData
+    {
+        string Uid { get; set; }
+        int Seat { get; set; }
+    }
+
+    public class JCombatUnitData : IJCombatUnitData
     {
         public string Uid { get; set; }
         public int Seat { get; set; }
     }
 
 
-    public class JCombatTurnBasedReportData<T> where T: JCombatUnitData, new()
+    public class JCombatTurnBasedReportData<T> where T : IJCombatUnitData
     {
         public Dictionary<string, List<T>> FormationData { get; set; }
         public string winnerTeamUid { get; set; }
@@ -23,7 +29,7 @@ namespace JFramework.Game
     //}
 
 
-    public class JCombatTurnBasedReport<T> : IJCombatTurnBasedReport<T> where T: JCombatUnitData, new()
+    public abstract class JCombatTurnBasedReport : IJCombatTurnBasedReport
     {
         List<JCombatTurnBasedEvent> events;
 
@@ -44,18 +50,18 @@ namespace JFramework.Game
 
         public void SetCombatWinner(IJCombatTeam team) => this.winner = team;
 
-        public JCombatTurnBasedReportData<T> GetCombatReportData()
+        public JCombatTurnBasedReportData<T> GetCombatReportData<T>() where T : class, IJCombatUnitData
         {
             var data = new JCombatTurnBasedReportData<T>();
 
-            data.FormationData = GetFormationData();
+            data.FormationData = GetFormationData<T>();
             data.winnerTeamUid = winner?.Uid ?? null;
             data.events = events;
 
             return data;
         }
 
-        private Dictionary<string, List<T>> GetFormationData()
+        private Dictionary<string, List<T>> GetFormationData<T>() where T : class, IJCombatUnitData
         {
             var result = new Dictionary<string, List<T>>();
             foreach (var team in teams)
@@ -64,7 +70,7 @@ namespace JFramework.Game
                 var unitDataList = new List<T>();
                 foreach (var unit in units)
                 {
-                    var unitData = CreateUnitData(unit);
+                    var unitData = CreateUnitData<T>(unit);
                     unitDataList.Add(unitData);
                 }
                 result.Add(team.Uid, unitDataList);
@@ -72,14 +78,15 @@ namespace JFramework.Game
             return result;// 如果没有团队数据，返回空字典
         }
 
-        protected virtual T CreateUnitData(IJCombatUnit unit)
-        {
-            return new T
-            {
-                Uid = unit.Uid,
-                Seat = seatQuery.GetSeat(unit.Uid)
-            };
-        }
+        protected abstract T CreateUnitData<T>(IJCombatUnit unit) where T : class, IJCombatUnitData;
+
+        //{
+        //    return new T
+        //    {
+        //        Uid = unit.Uid,
+        //        Seat = seatQuery.GetSeat(unit.Uid)
+        //    };
+        //}
     }
 
 

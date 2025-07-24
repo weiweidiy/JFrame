@@ -6,7 +6,7 @@ namespace JFramework.Game
     /// <summary>
     /// 基于后台线程单帧运行的runner
     /// </summary>
-    public class JCombatTurnBasedRunner<T> : IJCombatTurnBasedReporter<T>, IRunner where T : JCombatUnitData, new()
+    public class JCombatTurnBasedRunner : IJCombatTurnBasedReporter, IRunner
     {
         /// <summary>
         /// 可运行战斗对象
@@ -16,7 +16,7 @@ namespace JFramework.Game
         /// <summary>
         /// 战斗战报接口
         /// </summary>
-        protected IJCombatTurnBasedReport<T> jCombatReport;
+        protected IJCombatTurnBasedReport jCombatReport;
 
         /// <summary>
         /// 事件记录器
@@ -28,7 +28,7 @@ namespace JFramework.Game
         /// </summary>
         protected IJCombatQuery jCombatQuery;
 
-        public JCombatTurnBasedRunner(IRunable combat, IJCombatQuery jCombatQuery, IJCombatTurnBasedEventRecorder eventRecorder, IJCombatTurnBasedReport<T> jCombatResult) { 
+        public JCombatTurnBasedRunner(IRunable combat, IJCombatQuery jCombatQuery, IJCombatTurnBasedEventRecorder eventRecorder, IJCombatTurnBasedReport jCombatResult) { 
             this.eventRecorder = eventRecorder;
             this.jCombatQuery = jCombatQuery;
             this.jCombatReport = jCombatResult;
@@ -50,7 +50,7 @@ namespace JFramework.Game
         /// 获取运行结果
         /// </summary>
         /// <returns></returns>
-        public IJCombatTurnBasedReport<T> GetReport() 
+        public IJCombatTurnBasedReport GetReport() 
         {
             return jCombatReport;
         }
@@ -61,7 +61,7 @@ namespace JFramework.Game
         /// <returns></returns>
         public async Task Run()
         {
-            IJCombatTurnBasedReport<T> r = await Task.Run(() =>
+            IJCombatTurnBasedReport r = await Task.Run(() =>
             {
                 OnBeforeStart();
                 //开始战斗

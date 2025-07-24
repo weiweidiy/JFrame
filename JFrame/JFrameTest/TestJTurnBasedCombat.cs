@@ -64,9 +64,9 @@ namespace JFrameTest
             }
         }
 
-        public class FakeJCombatResult : IJCombatTurnBasedReport<JCombatUnitData>
+        public class FakeJCombatResult : IJCombatTurnBasedReport
         {
-            public JCombatTurnBasedReportData<JCombatUnitData> GetCombatReportData()
+            public JCombatTurnBasedReportData<T> GetCombatReportData<T>() where T : IJCombatUnitData
             {
                 return null;
             }
@@ -105,7 +105,7 @@ namespace JFrameTest
 
         Func<IUnique, string> funcAttr = (attr) => attr.Uid;
 
-        JCombatTurnBasedRunner<JCombatUnitData> combatRunner;
+        JCombatTurnBasedRunner combatRunner;
 
 
         [SetUp]
@@ -177,7 +177,7 @@ namespace JFrameTest
 
             turnbasedCombat = new JCombatTurnBased(actionSelector, frameRecorder, jcombatQuery, runables);
 
-            combatRunner = new JCombatTurnBasedRunner<JCombatUnitData>(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
+            combatRunner = new JCombatTurnBasedRunner(turnbasedCombat, jcombatQuery, eventRecorder, new FakeJCombatResult());
             //combatRunner.SetRunable(turnbasedCombat);
         }
 
