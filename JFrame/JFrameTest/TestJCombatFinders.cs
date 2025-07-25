@@ -136,5 +136,19 @@ namespace JFramework.Game.Tests
             Assert.AreEqual(mockUnit3, result[1]);
             Assert.AreEqual(mockUnit5, result[2]);
         }
+
+        public void TestJCombatRandomFinder()
+        {
+            //arrange
+            var finder = new JCombatRandomFinder(2);
+            finder.SetOwner(mockAction);
+            finder.SetQuery(mockQuery as IJCombatQuery);
+            //act
+            var result = finder.GetTargets();
+            //expect    
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains(mockUnit2) || result.Contains(mockUnit3) || result.Contains(mockUnit5));
+        }
     }
 }

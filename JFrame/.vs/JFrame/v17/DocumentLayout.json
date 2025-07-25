@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testjcombatfinders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatcolfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatcolfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatrandomfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatrandomfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatbaseunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -191,14 +191,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "JCombatColFinder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatColFinder.cs",
-              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatColFinder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatColFinder.cs",
-              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatColFinder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "Title": "JCombatRandomFinder.cs",
+              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T12:05:59.439Z",
+              "WhenOpened": "2025-07-25T12:22:06.209Z",
               "EditorCaption": ""
             },
             {
@@ -209,7 +209,7 @@
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatFinders.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
               "RelativeToolTip": "JFrameTest\\TestJCombatFinders.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAUwIgAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAqwI0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T11:03:52.108Z",
               "EditorCaption": ""
