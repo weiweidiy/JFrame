@@ -364,23 +364,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\": {},
+    "C:\\Users\\weiwei\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+      "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
       "projectName": "JFrame",
-      "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
-      "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
+      "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+      "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
+      "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

@@ -34,7 +34,7 @@ namespace JFramework.Game
         public string CastActionUid { get; set; }
 
         /// <summary>
-        /// 行为效果, string=目标uid, int=值
+        /// 行为效果, string=效果类型（伤害，加血等）, int=值
         /// </summary>
         public Dictionary<string, List<ActionEffectInfo>> ActionEffect { get; set; }
 

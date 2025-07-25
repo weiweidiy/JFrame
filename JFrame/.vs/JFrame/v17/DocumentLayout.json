@@ -1,189 +1,181 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\",
+  "WorkspaceRootPath": "E:\\UnityProjects\\JFrame\\JFrame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\jcombatturnbasedeventrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\jcombatturnbasedeventrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\player\\jcombatturnbasedeventrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\jcombatturnbasedplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\player\\jcombatturnbasedplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\jcombatbaseplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\player\\jcombatbaseplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\ijcombatturnbasedplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\player\\ijcombatturnbasedplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\player\\ijcombatturnbasedplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframetest\\testjcombatfinders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testjcombatfinders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testjcombatfinders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatrandomfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatrandomfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatrandomfinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatbaseunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatbaseunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatbaseunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatformationbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatformationbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatformationbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatactionbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatactionbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\ijcombatactionbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatunitbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\jcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatexecutordamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatexecutordamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\jcombatexecutordamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\ijcombatformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombattargetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombattargetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombattargetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombatcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedattrnamequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedattrnamequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedattrnamequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\formuladamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\formuladamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\implement\\formulators\\formuladamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\combatbaseformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\combatbaseformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\implement\\formulators\\combatbaseformula.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\formulabpdamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\formulabpdamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\implement\\formulators\\formulabpdamage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\combatformula1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|e:\\unityprojects\\jframe\\jframe\\jframe.battle\\combatreport\\implement\\formulators\\combatformula1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{59A1B6E3-F71C-40DD-9280-26B7928DE874}|JFrame.Battle\\JFrame.Battle.csproj|solutionrelative:jframe.battle\\combatreport\\implement\\formulators\\combatformula1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatactionbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\jcombatactionbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\jcombatactionbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedreportbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbased.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbased.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbased.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedactionselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedactionselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedactionselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedframerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatturnbasedframerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatturnbasedframerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombateventlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombateventlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombateventlistener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatdamagedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatdamagedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombatdamagedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcasterunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcasterunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombatcasterunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatunitinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatunitinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\imp\\jcombatunitinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\imp\\jcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatextradata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatextradata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\imp\\jcombatextradata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\imp\\jcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\imp\\jcombatcastertargetableunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombattrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombattrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\ijcombattrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\action\\ijcombatexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\action\\ijcombatexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatseatfuncbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatseatfuncbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatseatfuncbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatformationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\jcombatformationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\jcombatformationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedeventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedeventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedeventrecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedcasterselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedcasterselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatturnbasedcasterselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatseatdelegatebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\ijcombatseatdelegatebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\ijcombatseatdelegatebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframetest\\testcombatplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|e:\\unityprojects\\jframe\\jframe\\jframetest\\testcombatplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DC181D1-5FD7-40BA-9394-34249EF3B322}|JFrameTest\\JFrameTest.csproj|solutionrelative:jframetest\\testcombatplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|e:\\unityprojects\\jframe\\jframe\\jframe\\game\\combat\\common\\interfaces\\ijcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\common\\interfaces\\ijcombatteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -194,80 +186,52 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "JCombatTurnBasedPlayer.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedPlayer.cs",
-              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedPlayer.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedPlayer.cs",
-              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedPlayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:02:19.317Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "JCombatTurnBasedEventRunner.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatTurnBasedEventRunner.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAkwC0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-25T13:02:17.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "JCombatBasePlayer.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatBasePlayer.cs",
-              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatBasePlayer.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatBasePlayer.cs",
-              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\JCombatBasePlayer.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAEwCMAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:02:15.95Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "IJCombatTurnBasedPlayer.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Player\\IJCombatTurnBasedPlayer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:02:11.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T13:02:11.272Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "TestJCombatFinders.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatFinders.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
               "RelativeToolTip": "JFrameTest\\TestJCombatFinders.cs",
               "ViewState": "AgIAAHkAAAAAAAAAAAAqwI8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T11:03:52.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T11:03:52.108Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "IJCombatFormationBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatFormationBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -275,11 +239,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "JCombatFormula.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\JCombatFormula.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -287,11 +251,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "IJCombatTurnBasedReportBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedReportBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -299,11 +263,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "JCombatRandomFinder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatRandomFinder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -311,11 +275,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "JCombatExecutorDamage.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\JCombatExecutorDamage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -323,11 +287,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "IJCombatUnitBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatUnitBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -335,11 +299,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "JCombatBaseUnitBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatBaseUnitBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -347,11 +311,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "IJCombatTargetable.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTargetable.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -359,11 +323,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "IJCombatActionBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\IJCombatActionBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -371,11 +335,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 18,
               "Title": "CombatBaseFormula.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatBaseFormula.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -383,11 +347,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "JCombatTurnBasedRunner.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedRunner.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAuwD8AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -395,11 +359,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 20,
               "Title": "CombatFormula1.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\CombatFormula1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -407,11 +371,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 19,
               "Title": "FormulaBpDamage.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaBpDamage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -419,11 +383,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "IJCombatFormula.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\IJCombatFormula.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -431,11 +395,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 16,
               "Title": "JCombatTurnBasedUnit.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAgwCEAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -443,11 +407,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 13,
               "Title": "IJCombatCaster.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCaster.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -455,11 +419,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 15,
               "Title": "IJCombatTurnBasedAttrNameQuery.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedAttrNameQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -467,11 +431,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 17,
               "Title": "FormulaDamage.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
               "RelativeDocumentMoniker": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
               "RelativeToolTip": "JFrame.Battle\\CombatReport\\Implement\\Formulators\\FormulaDamage.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAB8AAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -479,11 +443,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 23,
               "Title": "JCombatTurnBased.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBased.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAxwDgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -491,11 +455,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 22,
               "Title": "JCombatTurnBasedReportBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedReportBuilder.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAwwCMAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -503,11 +467,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "JCombatActionBase.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -515,11 +479,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 24,
               "Title": "JCombatTurnBasedActionSelector.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedActionSelector.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -527,11 +491,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 25,
               "Title": "JCombatTurnBasedFrameRecorder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedFrameRecorder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -539,11 +503,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 26,
               "Title": "IJCombatEventListener.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatEventListener.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -551,11 +515,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 27,
               "Title": "IJCombatDamageData.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatDamageData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -563,11 +527,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 28,
               "Title": "IJCombatCasterUnit.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -575,11 +539,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 29,
               "Title": "IJCombatCasterTargetableUnit.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatCasterTargetableUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -587,11 +551,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 30,
               "Title": "JCombatUnitInfo.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatUnitInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -599,11 +563,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 32,
               "Title": "JCombatExtraData.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatExtraData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -611,11 +575,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 33,
               "Title": "JCombatCasterTargetableUnit.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -623,11 +587,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 35,
               "Title": "IJCombatExecutor.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\IJCombatExecutor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -635,11 +599,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 34,
               "Title": "IJCombatTrigger.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Action\\IJCombatTrigger.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -647,11 +611,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 31,
               "Title": "JCombatTeam.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatTeam.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -659,11 +623,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 36,
               "Title": "JCombatSeatFuncBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatFuncBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -671,11 +635,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 37,
               "Title": "JCombatFormationInfo.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatFormationInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -683,11 +647,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 38,
               "Title": "IJCombatTurnBasedUnit.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -695,11 +659,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 39,
               "Title": "IJCombatTurnBasedEventRecorder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedEventRecorder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -707,11 +671,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 40,
               "Title": "IJCombatTurnBasedCasterSelector.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatTurnBasedCasterSelector.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -719,11 +683,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 41,
               "Title": "IJCombatSeatDelegateBuilder.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\IJCombatSeatDelegateBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -731,11 +695,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 42,
               "Title": "TestCombatPlayer.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestCombatPlayer.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCombatPlayer.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestCombatPlayer.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestCombatPlayer.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\TestCombatPlayer.cs",
               "RelativeToolTip": "JFrameTest\\TestCombatPlayer.cs",
               "ViewState": "AgIAAAUBAAAAAAAAAAAAABwBAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -743,11 +707,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 43,
               "Title": "IJCombatTeam.cs",
-              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
+              "DocumentMoniker": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
-              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
+              "ToolTip": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatTeam.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
