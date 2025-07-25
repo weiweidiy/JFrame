@@ -27,7 +27,7 @@ namespace JFramework.Game
             var dataUid = damageData.Uid;
             var combatEvent = Get(dataUid);
             //说明已经存在
-            if (combatEvent.Uid != null && combatEvent.Uid != "")
+            if (combatEvent != null && combatEvent.Uid != null && combatEvent.Uid != "")
             {
                 //合并目标和伤害
                 var lstTargetEffect = combatEvent.ActionEffect[CombatEventType.Damage.ToString()];

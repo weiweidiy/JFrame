@@ -14,6 +14,8 @@ namespace JFramework.Game
 
             var combatEvents = (JCombatTurnBasedEvent)extraData.Data;
             var casterUid = combatEvents.CasterUid; //实现了icaster接口的对象
+            var curFrame = combatEvents.CurFrame;
+            var actionUid = combatEvents.CastActionUid;
 
         }
     }
