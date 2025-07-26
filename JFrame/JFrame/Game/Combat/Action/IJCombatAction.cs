@@ -8,6 +8,8 @@ namespace JFramework.Game
         void SetQuery(IJCombatQuery jCombatQuery);
 
         List<IJCombatTrigger> GetTriggers();
+
+        IJCombatAcionInfo GetActionInfo();
     }
 
     public interface IJCombatCastable

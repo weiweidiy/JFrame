@@ -27,6 +27,21 @@ namespace JFramework.Game
             return unitInfo;
         }
 
+        public List<IJCombatAcionInfo> GetActionInfos()
+        {
+            var result = new List<IJCombatAcionInfo>();
+
+            foreach(var action in actions)
+            {
+                var actionInfo = action.GetActionInfo();
+                if (actionInfo != null)
+                {
+                    result.Add(actionInfo);
+                }
+            }
+
+            return result;
+        }
 
         public int GetActionPoint()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
+
     /// <summary>
     /// 战斗行为基类，触发器触发执行，
     /// </summary>
@@ -18,6 +19,13 @@ namespace JFramework.Game
         IJCombatCaster caster;
 
         IJCombatTurnBasedEventRecorder eventRecorder;
+
+        IJCombatAcionInfo actionInfo;
+
+        public JCombatActionBase(IJCombatAcionInfo actionInfo, IJCombatTurnBasedEventRecorder eventRecorder): this(actionInfo.Uid, actionInfo.Triggers, actionInfo.Executors, eventRecorder){
+            this.actionInfo = actionInfo;
+        }
+
         public JCombatActionBase(string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors, IJCombatTurnBasedEventRecorder eventRecorder)
         {
             this.Uid = uid;
@@ -172,6 +180,11 @@ namespace JFramework.Game
         public List<IJCombatTrigger> GetTriggers()
         {
             return triggers;
+        }
+
+        public IJCombatAcionInfo GetActionInfo()
+        {
+            return actionInfo;
         }
     }
 }
