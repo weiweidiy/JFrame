@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-    public class JCombatTurnBasedEventRecorder : DictionaryContainer<JCombatTurnBasedEvent>, IJCombatTurnBasedEventRecorder , IJCombatEventListener
+    public class JCombatTurnBasedEventRecorder : DictionaryContainer<JCombatTurnBasedEvent>, IJCombatTurnBasedEventRecorder , IJCombatUnitEventListener, IJCombatTurnBasedEventListener
     {
         IJCombatFrameRecorder frameRecorder;
         int curIndex;
@@ -21,7 +21,13 @@ namespace JFramework.Game
 
         public List<JCombatTurnBasedEvent> GetAllCombatEvents() => GetAll();
 
-        public void OnDamage(IJCombatDamageData damageData)
+        public void OnBeforeDamage(IJCombatDamageData damageData)
+        {
+            //throw new NotImplementedException();
+        }
+
+
+        public void OnAfterDamage(IJCombatDamageData damageData)
         {
             //这个UID可能已经存在了，需要合并数据
             var dataUid = damageData.Uid;
@@ -60,5 +66,9 @@ namespace JFramework.Game
         {
             return curIndex++;
         }
+
+        public void OnTurnStart(int frame) { }
+
+        public void OnTurnEnd(int frame) { }
     }
 }

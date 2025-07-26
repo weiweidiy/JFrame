@@ -15,8 +15,8 @@ namespace JFramework.Game
         List<IJCombatTrigger> triggers;
         List<IJCombatExecutor> executors;
 
-        IJCombatCaster casterQuery;
-        public JCombatActionBase(/*IJCombatQuery query, */string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
+        IJCombatCaster caster;
+        public JCombatActionBase(string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
         {
             this.Uid = uid;
             this.triggers = triggers;
@@ -109,19 +109,19 @@ namespace JFramework.Game
             }
         }
 
-        private void Trigger_onTriggerOn(List<IJCombatCasterTargetableUnit> targets)
+        private void Trigger_onTriggerOn(object args)
         {
-            Execute(targets);
+            Execute(args);
         }
 
 
-        public void Execute(List<IJCombatCasterTargetableUnit> targets)
+        public void Execute(object args)
         {
             if (executors != null)
             {
                 foreach (var executor in executors)
                 {
-                    executor.Execute(targets);
+                    executor.Execute(args);
                 }
             }
         }
@@ -130,13 +130,13 @@ namespace JFramework.Game
         /// 设置actin释放者查询器
         /// </summary>
         /// <param name="casterQuery"></param>
-        public void SetCaster(IJCombatCaster casterQuery) => this.casterQuery = casterQuery;
+        public void SetCaster(IJCombatCaster casterQuery) => this.caster = casterQuery;
 
         /// <summary>
         /// 获取action释放者uid
         /// </summary>
         /// <returns></returns>
-        public string GetCaster() => casterQuery.Uid;
+        public string GetCaster() => caster.Uid;
 
         public bool CanCast()
         {
@@ -146,9 +146,21 @@ namespace JFramework.Game
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 直接释放，不需要触发器触发
+        /// </summary>
         public void Cast()
         {
             Execute(null);
+        }
+
+        /// <summary>
+        /// 获取所有触发器
+        /// </summary>
+        /// <returns></returns>
+        public List<IJCombatTrigger> GetTriggers()
+        {
+            return triggers;
         }
     }
 }

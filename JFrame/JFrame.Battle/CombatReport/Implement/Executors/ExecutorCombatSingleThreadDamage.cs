@@ -39,7 +39,7 @@
 
             //if(Owner.Id == 121)
             //context.CombatManager.logger?.Log("add bullet " + bullet.GetHashCode() + "  frame:" + context.CombatManager.Frame.CurFrame);
-            //target.OnDamage(data);
+            //target.OnAfterDamage(data);
             StealHp(data);
         }
 

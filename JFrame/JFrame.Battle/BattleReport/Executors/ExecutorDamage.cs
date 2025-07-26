@@ -158,7 +158,7 @@ namespace JFramework
 //            //广播，可以改变这个值
 //            NotifyHitTarget(target,info);
 
-//            target.OnDamage(caster, action, info);
+//            target.OnAfterDamage(caster, action, info);
 
 //            OnTargetHit(caster, action, target, info);
 //        }

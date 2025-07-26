@@ -39,7 +39,7 @@ namespace JFramework
             if (delta >= delay)
             {
                 //if (executor.Owner.Id == 121)
-                //    executor.context.Logger?.Log("delta " + delta + " frame.DeltaTime" + frame.DeltaTime + " delay " + delay + "  OnDamage frame: " + executor.context.CombatManager.Frame.CurFrame);
+                //    executor.context.Logger?.Log("delta " + delta + " frame.DeltaTime" + frame.DeltaTime + " delay " + delay + "  OnAfterDamage frame: " + executor.context.CombatManager.Frame.CurFrame);
                 target.OnDamage(data);
 
                 //生效

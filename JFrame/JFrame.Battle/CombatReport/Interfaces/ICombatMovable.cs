@@ -23,7 +23,7 @@ namespace JFramework
 ///// 受到伤害了
 ///// </summary>
 ///// <param name="damage"></param>
-//void OnDamage(ICombatUnit caster, ICombatAction action, ExecuteInfo damage);
+//void OnAfterDamage(ICombatUnit caster, ICombatAction action, ExecuteInfo damage);
 
 ///// <summary>
 ///// 受到治疗了

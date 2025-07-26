@@ -2,39 +2,38 @@
 
 namespace JFramework.Game
 {
-
     public abstract class JCombatExecutorBase : JCombatActionComponent, IJCombatExecutor
     {
         IJCombatTargetsFinder finder;
 
         protected IJCombatFormula formulua;
 
-        public JCombatExecutorBase(IJCombatTargetsFinder finder, IJCombatFormula formulua) 
+        public JCombatExecutorBase(IJCombatTargetsFinder finder, IJCombatFormula formulua)
         {
             this.finder = finder;
             this.formulua = formulua;
         }
 
-        public void Execute(List<IJCombatCasterTargetableUnit> targets)
+        public void Execute(object args)
         {
-            var finalTargets = targets;
-            if(finder != null)
+            List<IJCombatCasterTargetableUnit> finalTargets = null;
+            if (finder != null)
             {
                 finalTargets = finder.GetTargets();
             }
 
-            DoExecute(finalTargets);
+            DoExecute(args, finalTargets);
         }
 
-        protected abstract void DoExecute(List<IJCombatCasterTargetableUnit> finalTargets);
+        protected abstract void DoExecute(object triggerArgs, List<IJCombatCasterTargetableUnit> finderTargets);
 
         public override void SetOwner(IJCombatAction owner)
         {
             base.SetOwner(owner);
-            if(finder != null)
+            if (finder != null)
                 finder.SetOwner(owner);
 
-            if(formulua != null)
+            if (formulua != null)
             {
                 formulua.SetOwner(owner);
             }

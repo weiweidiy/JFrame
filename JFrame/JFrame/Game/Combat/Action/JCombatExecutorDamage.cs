@@ -9,19 +9,37 @@ namespace JFramework.Game
         {
         }
 
-        protected override void DoExecute(List<IJCombatCasterTargetableUnit> finalTargets)
+        protected override void DoExecute(object triggerArgs, List<IJCombatCasterTargetableUnit> FinderTargets)
         {
-            if(finalTargets != null)
+            //触发器找到的目标
+            var targets = triggerArgs as List<IJCombatCasterTargetableUnit>;
+
+            if (FinderTargets != null)
             {
-                var uid = Guid.NewGuid().ToString();
-                foreach(var target in finalTargets)
-                {
-                    var hitValue = formulua.CalcHitValue(target);
-                    var sourceUnitUid = GetOwner().GetCaster();
-                    var sourceActionUid = GetOwner().Uid;
-                    var data = new JCombatDamageData(uid, sourceUnitUid, sourceActionUid, hitValue, 0, target.Uid);
-                    target.OnDamage(data);
-                }
+                DoDamage(FinderTargets);
+                return;
+            }
+
+            if(targets != null)
+            {
+                DoDamage(targets);
+            }
+            else
+            {
+                throw new Exception("JCombatExecutorDamage: No targets found for damage execution.");
+            }
+        }
+
+        void DoDamage(List<IJCombatCasterTargetableUnit> finalTargets)
+        {
+            var uid = Guid.NewGuid().ToString();
+            foreach (var target in finalTargets)
+            {
+                var hitValue = formulua.CalcHitValue(target);
+                var sourceUnitUid = GetOwner().GetCaster();
+                var sourceActionUid = GetOwner().Uid;
+                var data = new JCombatDamageData(uid, sourceUnitUid, sourceActionUid, hitValue, 0, target.Uid);
+                target.OnDamage(data);
             }
         }
     }

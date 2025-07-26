@@ -41,7 +41,7 @@ namespace JFramework.Game.Tests
             _frameRecorder.GetCurFrame().Returns(42);
 
             // 执行
-            _recorder.OnDamage(damageData);
+            _recorder.OnAfterDamage(damageData);
 
             // 验证
             var events = _recorder.GetAllCombatEvents();
@@ -77,10 +77,10 @@ namespace JFramework.Game.Tests
             newData.GetDamage().Returns(75);
 
             // 执行初始事件
-            _recorder.OnDamage(initialData);
+            _recorder.OnAfterDamage(initialData);
 
             // 执行更新事件
-            _recorder.OnDamage(newData);
+            _recorder.OnAfterDamage(newData);
 
             // 验证
             var events = _recorder.GetAllCombatEvents();
@@ -100,8 +100,8 @@ namespace JFramework.Game.Tests
             var data1 = CreateDamageData("uid1", "targetA", 10);
             var data2 = CreateDamageData("uid2", "targetB", 20);
 
-            _recorder.OnDamage(data1);
-            _recorder.OnDamage(data2);
+            _recorder.OnAfterDamage(data1);
+            _recorder.OnAfterDamage(data2);
 
             // 验证
             var events = _recorder.GetAllCombatEvents();

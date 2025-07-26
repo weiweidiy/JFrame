@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace JFramework.Game
 {
     public interface ICombatAnimationPlayer
     {
-        void PlayAcion( string casterUid, string actionUid, List<string> targets);
-        void PlayHitted(string actionUid, string targetUid, CombatEventType effectType, int value);
+        Task PlayAcion( string casterUid, string actionUid, Dictionary<string, List<ActionEffectInfo>> effect);
+
     }
 
     public class JCombatTurnBasedEventRunner : BaseRunable, IDisposable
@@ -18,7 +19,19 @@ namespace JFramework.Game
         {
         }
 
-        protected override void OnStart(RunableExtraData extraData)
+        public override async Task Start(RunableExtraData extraData, TaskCompletionSource<bool> tcs = null)
+        {
+            if (IsRunning)
+            {
+                throw new Exception(this.GetType().ToString() + " is running , can't run again! ");
+            }
+            this.ExtraData = extraData;
+            this.IsRunning = true;
+
+            await DoStart(extraData);         
+        }
+
+        protected async Task DoStart(RunableExtraData extraData)
         {
             base.OnStart(extraData);
 
@@ -34,22 +47,22 @@ namespace JFramework.Game
                 .ToList();
 
             //播放技能动画等（监听动画命中事件，然后继续）
-            AnimationPlayer?.PlayAcion(casterUid, actionUid, allTargetUids);
+            await AnimationPlayer?.PlayAcion(casterUid, actionUid, combatEvents.ActionEffect);
 
-            combatEvents.ActionEffect.ToList().ForEach(effect =>
-            {
-                var eventType = effect.Key;
-                //将eventType转换成CombatEventType类型
-                CombatEventType eventTypeEnum = (CombatEventType)Enum.Parse(typeof(CombatEventType), eventType);
+            //combatEvents.ActionEffect.ToList().ForEach(effect =>
+            //{
+            //    var eventType = effect.Key;
+            //    //将eventType转换成CombatEventType类型
+            //    CombatEventType eventTypeEnum = (CombatEventType)Enum.Parse(typeof(CombatEventType), eventType);
 
-                effect.Value.ForEach(actionEffectInfo =>
-                {
-                    var targetUid = actionEffectInfo.TargetUid;
-                    var value = actionEffectInfo.Value;
-                    //根据类型在目标对象上 播放数值变化动画等
+            //    effect.Value.ForEach(actionEffectInfo =>
+            //    {
+            //        var targetUid = actionEffectInfo.TargetUid;
+            //        var value = actionEffectInfo.Value;
+            //        //根据类型在目标对象上 播放数值变化动画等
 
-                });
-            });
+            //    });
+            //});
 
 
             Stop();
