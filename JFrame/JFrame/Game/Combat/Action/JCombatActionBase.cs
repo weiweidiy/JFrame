@@ -109,19 +109,21 @@ namespace JFramework.Game
             }
         }
 
-        private void Trigger_onTriggerOn(object args)
+        private void Trigger_onTriggerOn(IJCombatTrigger trigger, object triggerArgs)
         {
-            Execute(args);
+            Execute(triggerArgs);
+
+            trigger.Reset(); // 重置触发器状态
         }
 
 
-        public void Execute(object args)
+        public void Execute(object triggerArgs)
         {
             if (executors != null)
             {
                 foreach (var executor in executors)
                 {
-                    executor.Execute(args);
+                    executor.Execute(triggerArgs);
                 }
             }
         }

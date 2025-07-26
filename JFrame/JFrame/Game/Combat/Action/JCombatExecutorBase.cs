@@ -14,7 +14,7 @@ namespace JFramework.Game
             this.formulua = formulua;
         }
 
-        public void Execute(object args)
+        public void Execute(object triggerArgs)
         {
             List<IJCombatCasterTargetableUnit> finalTargets = null;
             if (finder != null)
@@ -22,7 +22,7 @@ namespace JFramework.Game
                 finalTargets = finder.GetTargets();
             }
 
-            DoExecute(args, finalTargets);
+            DoExecute(triggerArgs, finalTargets);
         }
 
         protected abstract void DoExecute(object triggerArgs, List<IJCombatCasterTargetableUnit> finderTargets);

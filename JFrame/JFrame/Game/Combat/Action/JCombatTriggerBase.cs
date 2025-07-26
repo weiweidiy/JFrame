@@ -2,17 +2,17 @@
 
 namespace JFramework.Game
 {
-    public abstract class JCombatTriggerBase<T> : JCombatActionComponent,  IJCombatTrigger, IJCombatUnitEventListener, IJCombatTurnBasedEventListener
+    public abstract class JCombatTriggerBase: JCombatActionComponent,  IJCombatTrigger, IJCombatUnitEventListener, IJCombatTurnBasedEventListener
     {
-        public event System.Action<object> onTriggerOn;
+        public event System.Action<IJCombatTrigger, object> onTriggerOn;
 
         bool isTriggerOn = false;
         public bool IsTriggerOn() => isTriggerOn;
         public void Reset() => isTriggerOn = false;
-        public virtual void TriggerOn(T targets)
+        public virtual void TriggerOn(object triggerArgs)
         {
             isTriggerOn = true;
-            onTriggerOn?.Invoke(targets);
+            onTriggerOn?.Invoke(this, triggerArgs);
         }
 
         public virtual void OnBeforeDamage(IJCombatDamageData damageData) { }

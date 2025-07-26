@@ -6,7 +6,7 @@ namespace JFramework.Game
 {
     public interface IJCombatExecutor : IJCombatActionComponent /*IJCombatLifeCycle*/
     {
-        void Execute( object args);
+        void Execute(object triggerArgs);
  
     }
 }

@@ -7,7 +7,7 @@ namespace JFramework.Game
 
     public interface IJCombatTrigger : IJCombatActionComponent
     {
-        event Action<object> onTriggerOn;
+        event Action<IJCombatTrigger, object> onTriggerOn;
         bool IsTriggerOn();
 
         void Reset();

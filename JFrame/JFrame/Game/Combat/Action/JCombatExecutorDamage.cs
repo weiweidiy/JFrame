@@ -11,23 +11,22 @@ namespace JFramework.Game
 
         protected override void DoExecute(object triggerArgs, List<IJCombatCasterTargetableUnit> FinderTargets)
         {
-            //触发器找到的目标
-            var targets = triggerArgs as List<IJCombatCasterTargetableUnit>;
-
+            //优先使用查找器找到的目标
             if (FinderTargets != null)
             {
                 DoDamage(FinderTargets);
                 return;
             }
 
-            if(targets != null)
+            //触发器找到的目标
+            var triggerTargets = triggerArgs as List<IJCombatCasterTargetableUnit>;
+            if (triggerTargets != null)
             {
-                DoDamage(targets);
+                DoDamage(triggerTargets);
+                return;
             }
-            else
-            {
-                throw new Exception("JCombatExecutorDamage: No targets found for damage execution.");
-            }
+
+            throw new Exception("JCombatExecutorDamage: No targets found for damage execution.");
         }
 
         void DoDamage(List<IJCombatCasterTargetableUnit> finalTargets)
