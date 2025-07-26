@@ -8,6 +8,8 @@ namespace JFramework.Game
 
         protected IJCombatFormula formulua;
 
+        protected JCombatTurnBasedEvent objEvent;
+
         public JCombatExecutorBase(IJCombatTargetsFinder finder, IJCombatFormula formulua)
         {
             this.finder = finder;
@@ -50,6 +52,11 @@ namespace JFramework.Game
             {
                 formulua.SetQuery(query);
             }
+        }
+
+        public void AddCombatEvent(JCombatTurnBasedEvent combatEvent)
+        {
+            objEvent = combatEvent;
         }
     }
 }

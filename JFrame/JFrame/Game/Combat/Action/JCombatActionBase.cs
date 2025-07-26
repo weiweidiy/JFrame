@@ -16,11 +16,14 @@ namespace JFramework.Game
         List<IJCombatExecutor> executors;
 
         IJCombatCaster caster;
-        public JCombatActionBase(string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors)
+
+        IJCombatTurnBasedEventRecorder eventRecorder;
+        public JCombatActionBase(string uid, List<IJCombatTrigger> triggers,  List<IJCombatExecutor> executors, IJCombatTurnBasedEventRecorder eventRecorder)
         {
             this.Uid = uid;
             this.triggers = triggers;
             this.executors = executors;
+            this.eventRecorder = eventRecorder;
             //this.query = query;
 
             if (triggers != null)
@@ -121,10 +124,16 @@ namespace JFramework.Game
         {
             if (executors != null)
             {
+                //创建一个空的执行日志对象，用来记录执行日志
+                var newEvent = eventRecorder.CreateActionEvent(GetCaster(), Uid);
+
                 foreach (var executor in executors)
                 {
+                    executor.AddCombatEvent(newEvent);
                     executor.Execute(triggerArgs);
                 }
+
+                eventRecorder.AddEvent(newEvent);
             }
         }
 

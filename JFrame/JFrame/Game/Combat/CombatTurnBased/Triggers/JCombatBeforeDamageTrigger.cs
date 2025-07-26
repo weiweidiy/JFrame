@@ -5,8 +5,7 @@
         public override void OnBeforeDamage(IJCombatDamageData damageData)
         {
             base.OnBeforeDamage(damageData);
-
-
+            TriggerOn(damageData);
         }
     }
 }
