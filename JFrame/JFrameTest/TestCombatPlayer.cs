@@ -415,7 +415,7 @@
 //        // 测试用的具体实现类
 //        private class TestCombatPlayer : JCombatTurnBasedPlayer<JCombatUnitData>
 //        {
-//            public TestCombatPlayer(JCombatTurnBasedReportData<JCombatUnitData> reportData, ICombatAnimationPlayer animationPlayer, IObjectPool objPool = null) : base(reportData, animationPlayer, objPool)
+//            public TestCombatPlayer(JCombatTurnBasedReportData<JCombatUnitData> reportData, IJCombatAnimationPlayer animationPlayer, IObjectPool objPool = null) : base(reportData, animationPlayer, objPool)
 //            {
 //            }
 
