@@ -71,7 +71,7 @@
 //        public void Play_SetsReportDataProperty()
 //        {
 //            // Act
-//            _player.Play(_testReport);
+//            _player.LoadReportData(_testReport);
 
 //            // Assert
 //            Assert.AreSame(_testReport, _player.ReportData);
@@ -81,7 +81,7 @@
 //        public void Play_CallsOnStartPlayWithEvents()
 //        {
 //            // Act
-//            _player.Play(_testReport);
+//            _player.LoadReportData(_testReport);
 
 //            // Assert
 //            Assert.IsTrue(_player.OnStartPlayCalled);
@@ -95,7 +95,7 @@
 //            _mockRunner.Start(Arg.Any<RunableExtraData>()).Returns(Task.CompletedTask);
 
 //            // Act
-//            _player.Play(_testReport);
+//            _player.LoadReportData(_testReport);
 
 //            // 等待事件处理完成
 //            await Task.Delay(100);
@@ -113,7 +113,7 @@
 //        //    _mockRunner.Start(Arg.Any<RunableExtraData>()).Returns(Task.CompletedTask);
 
 //        //    // Act
-//        //    _player.Play(_testReport);
+//        //    _player.LoadReportData(_testReport);
 
 //        //    // 等待事件处理完成
 //        //    await Task.Delay(100);
@@ -138,7 +138,7 @@
 //        //    var player = new TestCombatPlayer(); // 无对象池
 
 //        //    // Act
-//        //    player.Play(_testReport);
+//        //    player.LoadReportData(_testReport);
 
 //        //    // 等待事件处理完成
 //        //    await Task.Delay(100);
@@ -156,7 +156,7 @@
 //        //    _mockRunner.Start(Arg.Any<RunableExtraData>()).Returns(Task.CompletedTask);
 
 //        //    // Act
-//        //    _player.Play(_testReport);
+//        //    _player.LoadReportData(_testReport);
 
 //        //    // 等待事件处理完成
 //        //    await Task.Delay(100);
@@ -174,7 +174,7 @@
 //        //    var player = new TestCombatPlayer(); // 无对象池
 
 //        //    // Act
-//        //    player.Play(_testReport);
+//        //    player.LoadReportData(_testReport);
 
 //        //    // 等待事件处理完成
 //        //    await Task.Delay(100);
@@ -190,7 +190,7 @@
 //        public void RePlay_UsesSameReportData()
 //        {
 //            // Arrange
-//            _player.Play(_testReport);
+//            _player.LoadReportData(_testReport);
 
 //            // Act
 //            _player.RePlay();
@@ -289,7 +289,7 @@
 //            };
 
 //            // Act
-//            _player.Play(emptyReport);
+//            _player.LoadReportData(emptyReport);
 //            await Task.Delay(50); // 确保处理完成
 
 //            // Assert
@@ -312,7 +312,7 @@
 //            _mockRunner.Start(Arg.Any<RunableExtraData>()).Returns(Task.CompletedTask);
 
 //            // Act
-//            _player.Play(singleEventReport);
+//            _player.LoadReportData(singleEventReport);
 //            await Task.Delay(50); // 确保处理完成
 
 //            // Assert
@@ -330,7 +330,7 @@
 //        //        .Returns(Task.CompletedTask, Task.FromException(exception), Task.CompletedTask);
 
 //        //    // Act
-//        //    _player.Play(_testReport);
+//        //    _player.LoadReportData(_testReport);
 
 //        //    // 等待事件处理完成
 //        //    await Task.Delay(100);
@@ -351,7 +351,7 @@
 //            };
 
 //            // Act
-//            player.Play(_testReport);
+//            player.LoadReportData(_testReport);
 //            await Task.Delay(100);
 
 //            // Assert
@@ -370,7 +370,7 @@
 //            };
 
 //            // Act
-//            player.Play(_testReport);
+//            player.LoadReportData(_testReport);
 //            await Task.Delay(100);
 
 //            // Assert
@@ -387,7 +387,7 @@
 //            };
 
 //            // Act
-//            player.Play(_testReport);
+//            player.LoadReportData(_testReport);
 //            await Task.Delay(100);
 
 //            // Assert
@@ -404,7 +404,7 @@
 //            };
 
 //            // Act
-//            player.Play(_testReport);
+//            player.LoadReportData(_testReport);
 //            await Task.Delay(100);
 
 //            // Assert
@@ -447,25 +447,25 @@
 
  
 
-//            public override async Task Play(JCombatTurnBasedReportData<JCombatUnitData> report)
+//            public override async Task LoadReportData(JCombatTurnBasedReportData<JCombatUnitData> report)
 //            {
 //                PlayCallCount++;
-//                await base.Play(report);
+//                await base.LoadReportData(report);
 //            }
 
-//            protected override void OnStartPlay(List<JCombatTurnBasedEvent> events)
+//            protected override void OnStartPlayActionEvents(List<JCombatTurnBasedEvent> events)
 //            {
 //                if (OverrideOnStartPlay)
 //                {
 //                    CustomOnStartPlayCalled = true;
 //                    // 自定义实现
-//                    base.OnStartPlay(events);
+//                    base.OnStartPlayActionEvents(events);
 //                }
 //                else
 //                {
 //                    OnStartPlayCalled = true;
 //                    ReceivedEvents.AddRange(events);
-//                    base.OnStartPlay(events);
+//                    base.OnStartPlayActionEvents(events);
 //                }
 //            }
 
