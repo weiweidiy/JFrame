@@ -32,7 +32,7 @@ namespace JFramework.Game.Tests
             _jCombatAttrNameQuery.GetHpAttrName().Returns("Hp");
 
             // Create the combat unit
-            _combatUnit = new JCombatCasterTargetableUnit("unit1", _attributes, attr => attr.Uid, _jCombatAttrNameQuery,null,null);
+            _combatUnit = new JCombatCasterTargetableUnit("unit1", _attributes, attr => attr.Uid, _jCombatAttrNameQuery,null);
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace JFramework.Game.Tests
             };
             attributes[0].Uid.Returns("Strength");
 
-            var unitWithoutHp = new JCombatCasterTargetableUnit("unit1", attributes, attr => attr.Uid, _jCombatAttrNameQuery,null, null);
+            var unitWithoutHp = new JCombatCasterTargetableUnit("unit1", attributes, attr => attr.Uid, _jCombatAttrNameQuery,null);
 
             // Act & Assert
             Assert.IsTrue(unitWithoutHp.IsDead());

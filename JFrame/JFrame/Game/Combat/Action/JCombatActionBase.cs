@@ -123,7 +123,6 @@ namespace JFramework.Game
         private void Trigger_onTriggerOn(IJCombatTrigger trigger, object triggerArgs)
         {
             Execute(triggerArgs);
-
             trigger.Reset(); // 重置触发器状态
         }
 
@@ -134,6 +133,7 @@ namespace JFramework.Game
             {
                 //创建一个空的执行日志对象，用来记录执行日志
                 var newEvent = eventRecorder.CreateActionEvent(GetCaster(), Uid);
+                
 
                 foreach (var executor in executors)
                 {
@@ -141,7 +141,7 @@ namespace JFramework.Game
                     executor.Execute(triggerArgs);
                 }
 
-                eventRecorder.AddEvent(newEvent);
+                
             }
         }
 

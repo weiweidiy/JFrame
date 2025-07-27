@@ -4,8 +4,9 @@ namespace JFramework.Game
 {
     public class JCombatTurnBasedPlayer<T> : JCombatBasePlayer<T> where T : IJCombatUnitData
     {
-        public JCombatTurnBasedPlayer() : base() { }
-        public JCombatTurnBasedPlayer(IObjectPool objPool) : base(objPool) { }
+        public JCombatTurnBasedPlayer(JCombatTurnBasedReportData<T> reportData, ICombatAnimationPlayer animationPlayer, IObjectPool objPool = null) : base(reportData, animationPlayer,objPool)
+        {
+        }
 
         protected override async void OnStartPlay(List<JCombatTurnBasedEvent> events)
         {
@@ -14,6 +15,7 @@ namespace JFramework.Game
             while (que.Count > 0)
             {
                 var runner = GetEventRunner();
+                runner.AnimationPlayer = animationPlayer;
                 var combatEvent = que.Dequeue();
                 var runableData = GetRunableData();
                 runableData.Data = combatEvent;

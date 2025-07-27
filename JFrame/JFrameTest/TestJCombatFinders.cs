@@ -72,7 +72,7 @@ namespace JFramework.Game.Tests
         [Test]
         public void TestJCombatDefaultFinder()
         {
-            var finder = new JCombatDefaultFinder();
+            var finder = new JCombatDefaultFinder(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -89,7 +89,7 @@ namespace JFramework.Game.Tests
         public void TestRowFinder()
         {
             //arrange
-            var finder = new JCombatRowFinder();
+            var finder = new JCombatRowFinder(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
             
@@ -106,7 +106,7 @@ namespace JFramework.Game.Tests
         public void TestColFinder()
         {
             //arrange
-            var finder = new JCombatColFinder();
+            var finder = new JCombatColFinder(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -123,7 +123,7 @@ namespace JFramework.Game.Tests
         public void TestCrossFinder()
         {
             //arrange
-            var finder = new JCombatCrossFinder();
+            var finder = new JCombatCrossFinder(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -140,7 +140,7 @@ namespace JFramework.Game.Tests
         public void TestJCombatRandomFinder()
         {
             //arrange
-            var finder = new JCombatRandomFinder(2);
+            var finder = new JCombatRandomFinder(new float[] { 2});
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
             //act

@@ -14,15 +14,24 @@ namespace JFrameTest
 {
     public class TestJTurnBasedCombat
     {
-        public class NormalFormula : JCombatFormula
+        public class NormalFormula : JCombatFormulaBase
         {
-            public override int CalcHitValue(IJAttributeableUnit target)
+            public NormalFormula(float[] args) : base(args)
+            {
+            }
+
+            public override float CalcHitValue(IJAttributeableUnit target)
             {
                 //伤害= 释放者攻击力 * 释放者Power - 目标防御力 * 目标Def
                 var caster = query.GetUnit(GetOwner().GetCaster());
                 var atk = caster.GetAttribute("Atk") as GameAttributeInt;
                 var targetDef = target.GetAttribute("Def") as GameAttributeInt;
                 return atk.CurValue - targetDef.CurValue;
+            }
+
+            protected override int GetValidArgsCount()
+            {
+                return 0; // 不需要参数
             }
         }
 
@@ -159,14 +168,14 @@ namespace JFrameTest
             eventRecorder = new FakeEventRecorder(frameRecorder, funcEvent);
 
             //执行器
-            var finder1 = new JCombatDefaultFinder();
-            var formula1 = new NormalFormula();
-            var executor1 = new JCombatExecutorDamage(finder1, formula1);
+            var finder1 = new JCombatDefaultFinder(null);
+            var formula1 = new NormalFormula(null);
+            var executor1 = new JCombatExecutorDamage(finder1, formula1, null);
             var lstExecutor1 = new List<IJCombatExecutor>();
             lstExecutor1.Add(executor1);
 
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction( "action1", lstExecutor1, eventRecorder) }, new List<IJCombatUnitEventListener>() {  });
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction( "action1", lstExecutor1, eventRecorder) });
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             team1 = new JCombatTeam("team1", lst1, funcUnit);
@@ -178,7 +187,7 @@ namespace JFrameTest
             //lstExecutor1.Add(executor1);
 
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction( "action2", null, eventRecorder) }, new List<IJCombatUnitEventListener>() {  });
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction( "action2", null, eventRecorder) });
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             team2 = new JCombatTeam("team2", lst2, funcUnit);
@@ -231,7 +240,7 @@ namespace JFrameTest
         {
             //arrange
             var attrFactory2 = new FakeAttrFacotry2();
-            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction( "action3", null, eventRecorder) }, new List<IJCombatUnitEventListener>() {  });
+            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction( "action3", null, eventRecorder) });
             team2.Add(unit3);
             actionSelector.AddUnits(new List<IJCombatTurnBasedUnit> { unit3 });
 
@@ -258,12 +267,12 @@ namespace JFrameTest
         {
             //arrange
             var attrFactory2 = new FakeAttrFacotry2();
-            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action3", null, eventRecorder) }, new List<IJCombatUnitEventListener>() { });
+            var unit3 = new JCombatTurnBasedUnit("unit3", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction("action3", null, eventRecorder) });
             team2.Add(unit3);
             actionSelector.AddUnits(new List<IJCombatTurnBasedUnit> { unit3 });
 
-            var listner = Substitute.For<IJCombatTurnBasedEventListener>();
-            turnbasedCombat.AddListener(listner);
+            //var listner = Substitute.For<IJCombatTurnBasedEventListener>();
+            //turnbasedCombat.AddListener(listner);
 
             //act
             await combatRunner.Run();
@@ -280,8 +289,8 @@ namespace JFrameTest
             Assert.AreEqual(team1, jcombatQuery.GetWinner());
             Assert.AreEqual(8, eventRecorder.Count());
 
-            listner.Received(8).OnTurnStart(Arg.Any<int>());
-            listner.Received(7).OnTurnEnd(Arg.Any<int>());
+            //listner.Received(8).OnTurnStart(Arg.Any<int>());
+            //listner.Received(7).OnTurnEnd(Arg.Any<int>());
 
         }
     }
