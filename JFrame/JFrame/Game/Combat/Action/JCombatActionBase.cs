@@ -169,11 +169,11 @@ namespace JFramework.Game
                     targets = triggerArgs?.GetTargets();
                 }
 
-                if (targets == null || targets.Count == 0)
-                {
-                    context.Logger.LogError($"JCombatActionBase: No targets found for action {Uid}. Action will not be executed.");
-                    return;
-                }               
+                //if (targets == null || targets.Count == 0)
+                //{
+                //    context.Logger?.LogError($"JCombatActionBase: No targets found for action {Uid}. Action will not be executed.");
+                //    return;
+                //}               
 
                 //创建一个空的执行日志对象，用来记录执行日志
                 var newActionEvent = eventRecorder.CreateActionEvent(GetCaster(), Uid);
@@ -182,15 +182,26 @@ namespace JFramework.Game
                     executor.AddCombatEvent(newActionEvent);
                 }
 
-
-                foreach (var target in targets)
+                if (targets != null)
+                {
+                    foreach (var target in targets)
+                    {
+                        IJCombatExecutorArgs args = null;
+                        foreach (var executor in executors)
+                        {
+                            args = executor.Execute(triggerArgs, args, target);
+                        }
+                    }
+                }
+                else
                 {
                     IJCombatExecutorArgs args = null;
                     foreach (var executor in executors)
                     {
-                        args = executor.Execute(triggerArgs, args, target);
+                        args = executor.Execute(triggerArgs, args, null);
                     }
                 }
+
 
             }
         }

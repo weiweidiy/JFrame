@@ -40,18 +40,18 @@ namespace JFramework.Game
 
         protected List<IJCombatAction> actions;
 
-        protected List<IUnique> originAttrs;
+        protected List<GameAttributeInt> originAttrs;
 
         public JCombatCasterTargetableUnit(string uid, List<IUnique> attrList,  Func<IUnique, string> keySelector, IJCombatAttrNameQuery combatAttrNameQuery, List<IJCombatAction> actions) : base(keySelector)
         {
             Utility utility = new Utility();
             try
             {
-                originAttrs = utility.DeepClone(attrList);
+                originAttrs = utility.DeepClone(attrList.OfType<GameAttributeInt>().ToList());
             }
             catch(Exception ex)
             {
-                originAttrs = new List<IUnique>();
+                originAttrs = new List<GameAttributeInt>();
             }
   
 
