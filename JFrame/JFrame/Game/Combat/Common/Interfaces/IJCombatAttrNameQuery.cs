@@ -6,5 +6,7 @@
     public interface IJCombatAttrNameQuery
     {
         string GetHpAttrName();
+
+        string GetMaxHpAttrName();
     }
 }

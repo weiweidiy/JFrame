@@ -1,12 +1,15 @@
-﻿using System;
-
-namespace JFramework.Game
+﻿namespace JFramework.Game
 {
-    public class JCombatBeforeDamageTrigger : JCombatTriggerBase
+    /// <summary>
+    /// 受伤之前触发
+    /// </summary>
+    public class JCombatBeforeHurtTrigger : JCombatTriggerBase
     {
         IJCombatTargetable targetable;
 
-        public JCombatBeforeDamageTrigger(float[] args) : base(args)
+        DamageTriggerArgs args = new DamageTriggerArgs();
+
+        public JCombatBeforeHurtTrigger(float[] args) : base(args)
         {
         }
 
@@ -22,12 +25,13 @@ namespace JFramework.Game
             var casterUid = GetOwner().GetCaster();
             var caster = query.GetUnit(casterUid);
             targetable = caster as IJCombatTargetable;
-            targetable.onBeforeDamage += OnBeforeDamage;
+            targetable.onBeforeHurt += OnBeforeHurt;
         }
 
-        private void OnBeforeDamage(IJCombatTargetable targetable, IJCombatDamageData data)
+        private void OnBeforeHurt(IJCombatTargetable targetable, IJCombatDamageData data)
         {
-            TriggerOn(data);
+            args.DamageData = data;
+            TriggerOn(args);
         }
 
         protected override void OnStop()
@@ -36,7 +40,7 @@ namespace JFramework.Game
 
             if (targetable != null)
             {
-                targetable.onBeforeDamage -= OnBeforeDamage;
+                targetable.onBeforeHurt -= OnBeforeHurt;
                 targetable = null;
             }
         }

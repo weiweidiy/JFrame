@@ -1,18 +1,45 @@
 ﻿namespace JFramework.Game
 {
+    /// <summary>
+    /// 执行器会使用 CalcHitValue 方法来计算最终值
+    /// </summary>
     public class JCombatFormulaDamageDataChange : JCombatFormulaBase
     {
         public JCombatFormulaDamageDataChange(float[] args) : base(args)
         {
         }
-        public override float CalcHitValue(IJAttributeableUnit target)
-        {
-            return GetArg(0);
-        }
 
         protected override int GetValidArgsCount()
         {
-            return 1;
+            return 2;
         }
+
+        int GetCalcMode()
+        {
+            return (int)GetArg(0);
+        }
+
+        float GetCalcValueArg()
+        {
+            return GetArg(1);
+        }
+
+        public override void CalcHitValue(IJAttributeableUnit target, ref float value)
+        {
+            if(GetCalcMode() == 0) 
+            {
+                value =  value * GetCalcValueArg(); // 计算伤害提升百分比
+            }
+            else if(GetCalcMode() == 1)
+            {
+                value = value + GetCalcValueArg(); // 计算伤害提升绝对值
+            }
+            else
+            {
+                throw new System.Exception("JCombatFormulaDamageDataChange: Invalid calculation mode.");
+            }
+        }
+
+
     }
 }

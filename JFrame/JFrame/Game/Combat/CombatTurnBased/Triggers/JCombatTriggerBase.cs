@@ -4,7 +4,7 @@ namespace JFramework.Game
 {
     public abstract class JCombatTriggerBase: JCombatActionComponent,  IJCombatTrigger/*, IJCombatUnitEventListener, IJCombatTurnBasedEventListener*/
     {
-        public event System.Action<IJCombatTrigger, object> onTriggerOn;
+        public event System.Action<IJCombatTrigger, IJCombatTriggerArgs> onTriggerOn;
 
         bool isTriggerOn = false;
 
@@ -14,13 +14,13 @@ namespace JFramework.Game
 
         public bool IsTriggerOn() => isTriggerOn;
         public void Reset() => isTriggerOn = false;
-        public virtual void TriggerOn(object triggerArgs)
+        public virtual void TriggerOn(IJCombatTriggerArgs triggerArgs)
         {
             isTriggerOn = true;
             onTriggerOn?.Invoke(this, triggerArgs);
         }
 
-        //public virtual void OnBeforeDamage(IJCombatDamageData damageData) { }
+        //public virtual void OnBeforeHurt(IJCombatDamageData damageData) { }
         //public virtual void OnAfterDamage(IJCombatDamageData damageData) { }
         //public virtual void OnTurnStart(int frame) { }
         //public virtual void OnTurnEnd(int frame) { }

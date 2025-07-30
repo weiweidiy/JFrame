@@ -3,36 +3,50 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
+
+
     public abstract class JCombatExecutorBase : JCombatActionComponent, IJCombatExecutor
     {
-        IJCombatTargetsFinder finder;
+        protected IJCombatTargetsFinder finder;
 
         protected IJCombatFormula formulua;
 
         protected JCombatTurnBasedEvent objEvent;
 
+        public IJCombatFilter filter;
 
-        public JCombatExecutorBase(IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args = null):base(args)
+        public class ExecutorFilterArgs : IJCombatFilterArgs
+        {
+
+        }
+
+        ExecutorFilterArgs executorFilterArgs = new ExecutorFilterArgs();
+
+        public JCombatExecutorBase(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args = null) : base(args)
         {
             this.finder = finder;
-            this.formulua = formulua;    
+            this.formulua = formulua;
+            this.filter = filter;
         }
 
-        
 
-
-        public void Execute(object triggerArgs)
+        public IJCombatExecutorArgs Execute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target)
         {
-            List<IJCombatCasterTargetableUnit> finalTargets = null;
-            if (finder != null)
+            var needExecutor = true;
+            if(filter != null)
             {
-                finalTargets = finder.GetTargets();
+                //executorFilterArgs.xx = triggerArgs;
+                needExecutor = filter.Filter(executorFilterArgs);
             }
+                
 
-            DoExecute(triggerArgs, finalTargets);
+            if (needExecutor)
+                return DoExecute(triggerArgs, executorArgs, target);
+            else
+                return executorArgs;
         }
 
-        protected abstract void DoExecute(object triggerArgs, List<IJCombatCasterTargetableUnit> finderTargets);
+        protected abstract IJCombatExecutorArgs DoExecute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target);
 
         public override void SetOwner(IJCombatAction owner)
         {
@@ -44,6 +58,9 @@ namespace JFramework.Game
             {
                 formulua.SetOwner(owner);
             }
+
+            if(filter != null)
+                filter.SetOwner(owner);
         }
 
         public override void SetQuery(IJCombatQuery query)
@@ -57,11 +74,46 @@ namespace JFramework.Game
             {
                 formulua.SetQuery(query);
             }
+
+            if(filter != null)
+                filter.SetQuery(query);
         }
 
         public void AddCombatEvent(JCombatTurnBasedEvent combatEvent)
         {
             objEvent = combatEvent;
+        }
+
+        protected override void OnStart(RunableExtraData extraData)
+        {
+            base.OnStart(extraData);
+
+            if (finder != null)
+                finder.Start(extraData);
+
+            if (formulua != null)
+            {
+                formulua.Start(extraData);
+            }
+
+            if (filter != null)
+                filter.Start(extraData);
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+
+            if (finder != null)
+                finder.Stop();
+
+            if (formulua != null)
+            {
+                formulua.Stop();
+            }
+
+            if (filter != null)
+                filter.Stop();
         }
     }
 }
