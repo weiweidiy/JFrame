@@ -8,10 +8,7 @@ namespace JFramework.Game
     /// </summary>
     public class JCombatExecutorDamageDataChange : JCombatExecutorBase
     {
-        public class ExecutorArgs : IJCombatExecutorArgs
-        {
-            // 可以添加一些额外的参数，如果需要的话
-        }
+
         public JCombatExecutorDamageDataChange(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) : base(filter,finder, formulua, args)
         {
         }
@@ -22,18 +19,18 @@ namespace JFramework.Game
         }
 
 
-        protected override IJCombatExecutorArgs DoExecute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target)
+        protected override IJCobmatExecuteArgsHistroy DoExecute(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target)
         {
-            var damageData = triggerArgs as DamageTriggerArgs;
+            var damageData = executeArgs.DamageData;
             if (damageData == null)
             {
-                return new ExecutorArgs();
+                return new JCombatExecutorExecuteArgsHistroy();
             }
 
-            var value = (float)damageData.DamageData.GetDamage();
+            var value = (float)damageData.GetDamage();
             formulua.CalcHitValue(null, ref value); // 假设伤害提升20%
-            damageData.DamageData.SetDamage((int)value);
-            return new ExecutorArgs();
+            damageData.SetDamage((int)value);
+            return new JCombatExecutorExecuteArgsHistroy() { DamageData = damageData};
         }
     }
 }

@@ -39,7 +39,7 @@ namespace JFramework
 ///// </summary>
 //public class ExecutorSelfAddBuffer : ExecutorTargetAddBuffer
 //{
-//    public ExecutorSelfAddBuffer(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+//    public ExecutorSelfAddBuffer(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs)
 //    {
 //    }
 

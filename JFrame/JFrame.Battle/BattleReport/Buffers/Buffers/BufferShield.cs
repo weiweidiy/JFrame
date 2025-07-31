@@ -9,9 +9,9 @@
 //    public class BufferShield : DurationBuffer
 //    {
 //        int amount;
-//        public BufferShield(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, UID, id, foldCount, args, trigger, finder, exutors)
+//        public BufferShield(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] executeArgs, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, UID, id, foldCount, executeArgs, trigger, finder, exutors)
 //        {
-//            if (args.Length < 2)
+//            if (executeArgs.Length < 2)
 //                throw new System.Exception("BufferShield 参数不能少于2个");
 //        }
 

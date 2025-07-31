@@ -40,7 +40,7 @@ namespace JFramework
 ///// </summary>
 //public class ExecutorHeal : ExecutorDamage
 //{
-//    public ExecutorHeal(FormulaManager formulaManager, float[] args) : base(formulaManager, args) { }
+//    public ExecutorHeal(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs) { }
 
 //    public override float GetValue(IBattleUnit caster, IBattleAction action, IBattleUnit target)
 //    {

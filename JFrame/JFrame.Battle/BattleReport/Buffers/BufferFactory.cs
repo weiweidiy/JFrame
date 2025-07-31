@@ -59,6 +59,6 @@ namespace JFramework
 
 
 //var type = Type.GetType("JFrame.BufferAttackDown");
-//object[] args = new object[4] { Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId) };
-//var buff = (Buffer) Activator.CreateInstance(type, args);
+//object[] executeArgs = new object[4] { Guid.NewGuid().ToString(), buffId, foldCount, dataSource.GetArgs(buffId) };
+//var buff = (Buffer) Activator.CreateInstance(type, executeArgs);
 //return buff;

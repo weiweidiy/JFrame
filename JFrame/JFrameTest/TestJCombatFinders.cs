@@ -72,16 +72,16 @@ namespace JFramework.Game.Tests
         [Test]
         public void TestJCombatDefaultFinder()
         {
-            var finder = new JCombatDefaultFinder(null);
+            var finder = new JCombatOppoDefaultFinder(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
             //act
-            var result = finder.GetTargets();
+            var result = finder.GetTargetsData();
 
             //expect
             Assert.IsNotNull(result);
-            Assert.AreEqual(mockUnit2, result[0]);
+            Assert.AreEqual(mockUnit2, result.TargetUnits[0]);
         }
 
 
@@ -94,12 +94,12 @@ namespace JFramework.Game.Tests
             finder.SetQuery(mockQuery as IJCombatQuery);
             
             //act
-            var result = finder.GetTargets();
+            var result = finder.GetTargetsData();
 
             //expect    
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(mockUnit2, result[0]);
-            Assert.AreEqual(mockUnit3, result[1]);
+            Assert.AreEqual(2, result.TargetUnits.Count);
+            Assert.AreEqual(mockUnit2, result.TargetUnits[0]);
+            Assert.AreEqual(mockUnit3, result.TargetUnits[1]);
         }
 
         [Test]
@@ -111,12 +111,12 @@ namespace JFramework.Game.Tests
             finder.SetQuery(mockQuery as IJCombatQuery);
 
             //act
-            var result = finder.GetTargets();
+            var result = finder.GetTargetsData();
 
             //expect    
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(mockUnit2, result[0]);
-            Assert.AreEqual(mockUnit5, result[1]);
+            Assert.AreEqual(2, result.TargetUnits.Count);
+            Assert.AreEqual(mockUnit2, result.TargetUnits[0]);
+            Assert.AreEqual(mockUnit5, result.TargetUnits[1]);
         }
 
         [Test]
@@ -128,13 +128,13 @@ namespace JFramework.Game.Tests
             finder.SetQuery(mockQuery as IJCombatQuery);
 
             //act
-            var result = finder.GetTargets();
+            var result = finder.GetTargetsData();
 
             //expect    
-            Assert.AreEqual(3, result.Count);
-            Assert.AreEqual(mockUnit2, result[0]);
-            Assert.AreEqual(mockUnit3, result[1]);
-            Assert.AreEqual(mockUnit5, result[2]);
+            Assert.AreEqual(3, result.TargetUnits.Count);
+            Assert.AreEqual(mockUnit2, result.TargetUnits[0]);
+            Assert.AreEqual(mockUnit3, result.TargetUnits[1]);
+            Assert.AreEqual(mockUnit5, result.TargetUnits[2]);
         }
 
         public void TestJCombatRandomFinder()
@@ -144,11 +144,11 @@ namespace JFramework.Game.Tests
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
             //act
-            var result = finder.GetTargets();
+            var result = finder.GetTargetsData();
             //expect    
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count);
-            Assert.IsTrue(result.Contains(mockUnit2) || result.Contains(mockUnit3) || result.Contains(mockUnit5));
+            Assert.AreEqual(2, result.TargetUnits.Count);
+            Assert.IsTrue(result.TargetUnits.Contains(mockUnit2) || result.TargetUnits.Contains(mockUnit3) || result.TargetUnits.Contains(mockUnit5));
         }
     }
 }

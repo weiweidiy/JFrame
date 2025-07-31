@@ -191,7 +191,7 @@ namespace JFrameTest
             eventRecorder = new FakeEventRecorder(frameRecorder, funcEvent);
 
             //执行器
-            var finder1 = new JCombatDefaultFinder(null);
+            var finder1 = new JCombatOppoDefaultFinder(null);
             var formula1 = new NormalFormula(null);
             var executor1 = new JCombatExecutorDamage(null,finder1, formula1, null);
             var lstExecutor1 = new List<IJCombatExecutor>();

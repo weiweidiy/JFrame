@@ -374,7 +374,7 @@ namespace JFramework
             delayTrigger?.SetOrginArgs(args);
 
             //if (context.Logger != null)
-            //    context.Logger.Log("SetDelayTriggerOriginArgs " + args[0]);
+            //    context.Logger.Log("SetDelayTriggerOriginArgs " + executeArgs[0]);
         }
 
         #region 準備狀態，開始戰鬥的前置CD

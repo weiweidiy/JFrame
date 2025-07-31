@@ -8,9 +8,9 @@
 //    public class BufferCriUp : DurationBuffer
 //    {
 //        float value;
-//        public BufferCriUp(IBattleUnit caster, bool isBuff, int buffType, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, buffType, UID, id, foldCount, args, trigger, finder, exutors)
+//        public BufferCriUp(IBattleUnit caster, bool isBuff, int buffType, string UID, int id, int foldCount, float[] executeArgs, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster, isBuff, buffType, UID, id, foldCount, executeArgs, trigger, finder, exutors)
 //        {
-//            if (args.Length < 2)
+//            if (executeArgs.Length < 2)
 //                throw new System.Exception("BufferCriUp 参数不能少于2个");
 //        }
 //        public virtual float GetValue()

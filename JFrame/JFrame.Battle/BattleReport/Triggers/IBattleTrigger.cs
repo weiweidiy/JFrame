@@ -92,7 +92,7 @@ namespace JFramework
     //    /// </summary>
     //    /// <param name="cd"></param>
     //    /// <exception cref="NotImplementedException"></exception>
-    //    void SetArgs(float[] args);
+    //    void SetArgs(float[] executeArgs);
 
     //    /// <summary>
     //    /// 设置无效

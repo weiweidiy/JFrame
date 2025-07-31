@@ -1,7 +1,7 @@
 ﻿namespace JFramework.Game
 {
-    public interface IJCombatFilterArgs
-    {
+    //public interface IJCombatFilterArgs
+    //{
 
-    }
+    //}
 }

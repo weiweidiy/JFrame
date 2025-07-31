@@ -27,14 +27,13 @@ namespace JFramework.Game
             }
         }
 
-        public IJCombatExecutorArgs Execute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target)
+        public IJCombatExecutorExecuteArgs Execute(IJCombatExecutorExecuteArgs executorArgs)
         {
-            IJCombatExecutorArgs args = executorArgs;
             foreach (var executor in executors)
             {
-                args = executor.Execute(triggerArgs, args, target);
+                executorArgs = executor.Execute(executorArgs);
             }
-            return args;
+            return executorArgs;
         }
 
         public override void SetOwner(IJCombatAction owner)

@@ -73,12 +73,12 @@ namespace JFramework
 //    /// </summary>
 //    int curCount = 0;
 
-//    public ExecutorIncrementalDamage(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+//    public ExecutorIncrementalDamage(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs)
 //    {
-//        if(args.Length >= 6)
+//        if(executeArgs.Length >= 6)
 //        {
-//            incrementCount = (int)args[4];
-//            incrementRate = args[5];
+//            incrementCount = (int)executeArgs[4];
+//            incrementRate = executeArgs[5];
 //        }
 //    }
 

@@ -58,16 +58,16 @@ namespace JFramework
 //    /// <summary>
 //    /// 参数：1：执行段数，2：延迟执行 3: 段数间隔
 //    /// </summary>
-//    /// <param name="args"></param>
-//    public BaseExecutor(FormulaManager formulaManager, float[] args) {
+//    /// <param name="executeArgs"></param>
+//    public BaseExecutor(FormulaManager formulaManager, float[] executeArgs) {
 
 //        this.formulaManager = formulaManager;
 
-//        if (args != null && args.Length >= 3)
+//        if (executeArgs != null && executeArgs.Length >= 3)
 //        {
-//            count = args[0];
-//            delay = args[1];
-//            interval = args[2];
+//            count = executeArgs[0];
+//            delay = executeArgs[1];
+//            interval = executeArgs[2];
 //        }
 //        else
 //        {

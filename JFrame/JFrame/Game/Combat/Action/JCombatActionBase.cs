@@ -146,61 +146,56 @@ namespace JFramework.Game
             }
         }
 
-        private void Trigger_onTriggerOn(IJCombatTrigger trigger, IJCombatTriggerArgs triggerArgs)
+        private void Trigger_onTriggerOn(IJCombatTrigger trigger, IJCombatExecutorExecuteArgs executeArgs)
         {
-            Execute(triggerArgs);
+            Execute(executeArgs);
             trigger.Reset(); // 重置触发器状态
         }
 
 
-        public void Execute(IJCombatTriggerArgs triggerArgs = null)
+        public void Execute(IJCombatExecutorExecuteArgs executeArgs = null)
         {
             if (executors != null)
             {
-                var targets = new List<IJCombatCasterTargetableUnit>();
                 if (finder != null)
                 {
                     //使用查找器找到的目标
-                    targets = finder.GetTargets();
-                }
-                else
-                {
-                    //如果没有查找器，使用触发器找到的目标
-                    targets = triggerArgs?.GetTargets();
-                }
+                    executeArgs = finder.GetTargetsData();
+                }      
 
-                //if (targets == null || targets.Count == 0)
-                //{
-                //    context.Logger?.LogError($"JCombatActionBase: No targets found for action {Uid}. Action will not be executed.");
-                //    return;
-                //}               
+                if(executeArgs == null)
+                {
+                    return;
+                }
 
                 //创建一个空的执行日志对象，用来记录执行日志
                 var newActionEvent = eventRecorder.CreateActionEvent(GetCaster(), Uid);
                 foreach (var executor in executors)
                 {
+                    context.Logger?.Log($"{caster.Uid} Executing action {Uid} with executor {executor.GetType().Name}");
                     executor.AddCombatEvent(newActionEvent);
+                    executeArgs = executor.Execute(executeArgs);
                 }
 
-                if (targets != null)
-                {
-                    foreach (var target in targets)
-                    {
-                        IJCombatExecutorArgs args = null;
-                        foreach (var executor in executors)
-                        {
-                            args = executor.Execute(triggerArgs, args, target);
-                        }
-                    }
-                }
-                else
-                {
-                    IJCombatExecutorArgs args = null;
-                    foreach (var executor in executors)
-                    {
-                        args = executor.Execute(triggerArgs, args, null);
-                    }
-                }
+                //if (targets != null)
+                //{
+                //    foreach (var target in targets)
+                //    {
+                //        IJCombatExecutorExecuteArgs args = null;
+                //        foreach (var executor in executors)
+                //        {
+                //            args = executor.Execute(executeArgs, args, target);
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    IJCombatExecutorExecuteArgs args = null;
+                //    foreach (var executor in executors)
+                //    {
+                //        args = executor.Execute(executeArgs, args, null);
+                //    }
+                //}
 
 
             }

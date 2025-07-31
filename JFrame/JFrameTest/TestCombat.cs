@@ -335,12 +335,12 @@ namespace JFrameTest
 
         //    //条件触发器
         //    var conditionTriggers = new List<ActionComponentInfo>();
-        //    var conditionTrigger = new ActionComponentInfo() { id = 1, args = new float[] { 1, 1, range } }; //查找最近单位触发器 攻击距离， 查找个数
+        //    var conditionTrigger = new ActionComponentInfo() { id = 1, executeArgs = new float[] { 1, 1, range } }; //查找最近单位触发器 攻击距离， 查找个数
         //    conditionTriggers.Add(conditionTrigger);
         //    dicComponentInfo.Add(ActionComponentType.ConditionTrigger, conditionTriggers);
         //    //延迟触发器
         //    var delayTriggers = new List<ActionComponentInfo>();
-        //    var delayTrigger = new ActionComponentInfo() { id = 3, args = new float[] { 0.1f } }; //时间触发器， 时长
+        //    var delayTrigger = new ActionComponentInfo() { id = 3, executeArgs = new float[] { 0.1f } }; //时间触发器， 时长
         //    delayTriggers.Add(delayTrigger);
         //    dicComponentInfo.Add(ActionComponentType.DelayTrigger, delayTriggers);
         //    //查找器
@@ -350,12 +350,12 @@ namespace JFrameTest
 
         //    //执行器
         //    var executors = new List<ActionComponentInfo>();
-        //    var executor = new ActionComponentInfo() { id = 1, args = new float[] { 0.1f, 1f } };//伤害触发器， 时长， 伤害倍率
+        //    var executor = new ActionComponentInfo() { id = 1, executeArgs = new float[] { 0.1f, 1f } };//伤害触发器， 时长， 伤害倍率
         //    executors.Add(executor);
         //    dicComponentInfo.Add(ActionComponentType.Executor, executors);
         //    //cd触发器
         //    var cdTriggers = new List<ActionComponentInfo>();
-        //    var cdTrigger = new ActionComponentInfo() { id = 3, args = new float[] { 0.1f } };//时间触发器， 时长
+        //    var cdTrigger = new ActionComponentInfo() { id = 3, executeArgs = new float[] { 0.1f } };//时间触发器， 时长
         //    cdTriggers.Add(cdTrigger);
         //    dicComponentInfo.Add(ActionComponentType.CdTrigger, cdTriggers);
 

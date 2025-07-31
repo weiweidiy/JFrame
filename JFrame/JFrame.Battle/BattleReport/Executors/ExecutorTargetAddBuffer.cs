@@ -104,14 +104,14 @@ namespace JFramework
 //    /// <summary>
 //    /// 第四个参数是bufferID, 第5个参数是buffer值
 //    /// </summary>
-//    /// <param name="args"></param>
-//    public ExecutorTargetAddBuffer(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+//    /// <param name="executeArgs"></param>
+//    public ExecutorTargetAddBuffer(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs)
 //    {
-//        if (args != null && args.Length >= 6)
+//        if (executeArgs != null && executeArgs.Length >= 6)
 //        {
-//            bufferId = (int)args[3];
-//            foldCount = (int)args[4];
-//            rate = (float)args[5];
+//            bufferId = (int)executeArgs[3];
+//            foldCount = (int)executeArgs[4];
+//            rate = (float)executeArgs[5];
 //        }
 //        else
 //        {

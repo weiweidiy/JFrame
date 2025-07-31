@@ -7,7 +7,7 @@ namespace JFramework.Game
     /// </summary>
     public class JCombatTriggerCombatStart : JCombatTriggerBase
     {
-        public JCombatTriggerCombatStart(float[] args) : base(args)
+        public JCombatTriggerCombatStart(float[] args, IJCombatTargetsFinder finder) : base(args, finder)
         {
         }
 

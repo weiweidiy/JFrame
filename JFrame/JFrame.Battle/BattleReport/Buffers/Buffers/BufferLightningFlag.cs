@@ -21,9 +21,9 @@
 
 //        IBattleExecutor executor;
 
-//        public BufferLightningFlag(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster,isBuff, UID, id, foldCount, args, trigger, finder, exutors)
+//        public BufferLightningFlag(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] executeArgs, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster,isBuff, UID, id, foldCount, executeArgs, trigger, finder, exutors)
 //        {
-//            if (args.Length < 2)
+//            if (executeArgs.Length < 2)
 //                throw new System.Exception("BufferLightningFlag 参数不能少于2个");
 //        }
 
@@ -90,13 +90,13 @@
 //                        var cdTimeTrigger = cdTrigger as CDTimeTrigger;
 //                        if (cdTimeTrigger != null)
 //                        {
-//                            var args = cdTimeTrigger.GetArgs();
-//                            var originValue = args[0];
+//                            var executeArgs = cdTimeTrigger.GetArgs();
+//                            var originValue = executeArgs[0];
 
 //                            var cd = CalcCD(originValue);
 //                            value = value + (originValue - cd);
-//                            args[0] = cd;
-//                            cdTimeTrigger.SetArgs(args);
+//                            executeArgs[0] = cd;
+//                            cdTimeTrigger.SetArgs(executeArgs);
 
 //                            //Debug.LogError(target.Name + "OnAttach new cd " + cdTimeTrigger.GetArgs()[0]);
 //                        }
@@ -118,10 +118,10 @@
 //                    var cdTimeTrigger = cdTrigger as CDTimeTrigger;
 //                    if (cdTimeTrigger != null)
 //                    {
-//                        var args = cdTimeTrigger.GetArgs();
-//                        args[0] += value;
+//                        var executeArgs = cdTimeTrigger.GetArgs();
+//                        executeArgs[0] += value;
 
-//                        cdTimeTrigger.SetArgs(args);
+//                        cdTimeTrigger.SetArgs(executeArgs);
 
 //                        //Debug.LogError(target.Name + " OnDettach new cd " + cdTimeTrigger.GetArgs()[0]);
 //                    }
@@ -162,13 +162,13 @@
 //        //                var cdTimeTrigger = cdTrigger as CDTimeTrigger;
 //        //                if (cdTimeTrigger != null)
 //        //                {
-//        //                    var args = cdTimeTrigger.GetArgs();
-//        //                    var originValue = args[0];
+//        //                    var executeArgs = cdTimeTrigger.GetArgs();
+//        //                    var originValue = executeArgs[0];
 
 //        //                    var cd = CalcCD(originValue);
 //        //                    value = value + (originValue - cd);
-//        //                    args[0] = cd;
-//        //                    cdTimeTrigger.SetArgs(args);
+//        //                    executeArgs[0] = cd;
+//        //                    cdTimeTrigger.SetArgs(executeArgs);
 
 //        //                    //Debug.LogError(target.Name + "OnAttach new cd " + cdTimeTrigger.GetArgs()[0]);
 //        //                }

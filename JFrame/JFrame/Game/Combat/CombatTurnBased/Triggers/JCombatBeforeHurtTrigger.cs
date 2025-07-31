@@ -1,4 +1,6 @@
-﻿namespace JFramework.Game
+﻿using System.Collections.Generic;
+
+namespace JFramework.Game
 {
     /// <summary>
     /// 受伤之前触发
@@ -7,9 +9,7 @@
     {
         IJCombatTargetable targetable;
 
-        DamageTriggerArgs args = new DamageTriggerArgs();
-
-        public JCombatBeforeHurtTrigger(float[] args) : base(args)
+        public JCombatBeforeHurtTrigger(float[] args, IJCombatTargetsFinder finder) : base(args, finder)
         {
         }
 
@@ -30,8 +30,9 @@
 
         private void OnBeforeHurt(IJCombatTargetable targetable, IJCombatDamageData data)
         {
-            args.DamageData = data;
-            TriggerOn(args);
+            executeArgs.DamageData = data;
+            executeArgs.TargetUnits = new List<IJCombatCasterTargetableUnit> { targetable as IJCombatCasterTargetableUnit };
+            TriggerOn(executeArgs);
         }
 
         protected override void OnStop()

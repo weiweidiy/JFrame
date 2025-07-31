@@ -146,7 +146,7 @@ namespace JFramework
         ///// 搜索目标
         ///// </summary>
         ///// <returns></returns>
-        //List<ICombatUnit> FindTargets(object[] args);
+        //List<ICombatUnit> FindTargets(object[] executeArgs);
 
         ///// <summary>
         ///// 准备执行效果
@@ -172,11 +172,11 @@ namespace JFramework
         ///// <summary>
         ///// 修改参数
         ///// </summary>
-        ///// <param name="args"></param>
-        //void SetConditionTriggerArgs(float[] args);
-        //void SetFinderArgs(float[] args);
-        //void SetExecutorArgs(float[] args);
-        //void SetCdArgs(float[] args);
+        ///// <param name="executeArgs"></param>
+        //void SetConditionTriggerArgs(float[] executeArgs);
+        //void SetFinderArgs(float[] executeArgs);
+        //void SetExecutorArgs(float[] executeArgs);
+        //void SetCdArgs(float[] executeArgs);
         ///// <summary>
         ///// 获取参数
         ///// </summary>
@@ -189,11 +189,11 @@ namespace JFramework
         ///// <summary>
         ///// 重置参数
         ///// </summary>
-        ///// <param name="args"></param>
-        //void ResetConditionTriggerArgs(float[] args);
-        //void ResetFinderArgs(float[] args);
-        //void ResetExecutorArgs(float[] args);
-        //void ResetCdArgs(float[] args);
+        ///// <param name="executeArgs"></param>
+        //void ResetConditionTriggerArgs(float[] executeArgs);
+        //void ResetFinderArgs(float[] executeArgs);
+        //void ResetExecutorArgs(float[] executeArgs);
+        //void ResetCdArgs(float[] executeArgs);
         //#endregion
     }
 

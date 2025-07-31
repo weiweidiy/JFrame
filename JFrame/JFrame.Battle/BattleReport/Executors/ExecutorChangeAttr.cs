@@ -299,13 +299,13 @@ namespace JFramework
         //            var cdTimeTrigger = cdTrigger as CDTimeTrigger;
         //            if (cdTimeTrigger != null)
         //            {
-        //                var args = cdTimeTrigger.GetArgs();
-        //                var originValue = args[0];
+        //                var executeArgs = cdTimeTrigger.GetArgs();
+        //                var originValue = executeArgs[0];
 
         //                var cd = CalcCD(originValue);
         //                result = originValue - cd;
-        //                args[0] = cd;
-        //                cdTimeTrigger.SetArgs(args);
+        //                executeArgs[0] = cd;
+        //                cdTimeTrigger.SetArgs(executeArgs);
 
         //                //Debug.LogError(target.Name + "OnAttach new cd " + cdTimeTrigger.GetArgs()[0]);
         //            }
@@ -332,12 +332,12 @@ namespace JFramework
 //    /// <summary>
 //    /// 伤害效果，1：执行段数，2：延迟执行 3: 段数间隔 4：伤害倍率
 //    /// </summary>
-//    /// <param name="args"></param>
-//    public ExecutorDamage(FormulaManager formulaManager, float[] args):base(formulaManager, args)
+//    /// <param name="executeArgs"></param>
+//    public ExecutorDamage(FormulaManager formulaManager, float[] executeArgs):base(formulaManager, executeArgs)
 //    {
-//        if (args != null && args.Length >= 4)
+//        if (executeArgs != null && executeArgs.Length >= 4)
 //        {
-//            arg = args[3];
+//            arg = executeArgs[3];
 //        }
 //        else
 //        {

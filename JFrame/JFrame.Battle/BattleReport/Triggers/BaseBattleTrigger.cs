@@ -214,7 +214,7 @@ namespace JFramework
     //    /// <summary>
     //    /// 参数
     //    /// </summary>
-    //    protected float[] args;
+    //    protected float[] executeArgs;
 
     //    /// <summary>
     //    /// 延迟触发
@@ -241,10 +241,10 @@ namespace JFramework
     //    bool isEnable = true;
 
 
-    //    public BaseBattleTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0)
+    //    public BaseBattleTrigger(IPVPBattleManager battleManager, float[] executeArgs, float delay = 0)
     //    {
     //        this.battleManager = battleManager;
-    //        this.args = args;
+    //        this.executeArgs = executeArgs;
     //        this.delay = delay;
     //        this.delayed = delay == 0f; //如果延迟为0，视为已经延迟过了
     //        this.isOn = false;
@@ -334,7 +334,7 @@ namespace JFramework
     //    /// <returns></returns>
     //    public float[] GetArgs()
     //    {
-    //        return args;
+    //        return executeArgs;
     //    }
 
     //    /// <summary>
@@ -342,9 +342,9 @@ namespace JFramework
     //    /// </summary>
     //    /// <param name="cd"></param>
     //    /// <exception cref="NotImplementedException"></exception>
-    //    public void SetArgs(float[] args)
+    //    public void SetArgs(float[] executeArgs)
     //    {
-    //        this.args = args;
+    //        this.executeArgs = executeArgs;
     //    }
     //}
 }

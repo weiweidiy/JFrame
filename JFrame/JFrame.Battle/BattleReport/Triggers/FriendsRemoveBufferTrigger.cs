@@ -61,12 +61,12 @@ namespace JFramework
 //public class ActionCastTrigger : BaseBattleTrigger
 //{
 //    int targetAciontId;
-//    public ActionCastTrigger(IPVPBattleManager battleManager, float[] args, float delay = 0) : base(battleManager, args, delay)
+//    public ActionCastTrigger(IPVPBattleManager battleManager, float[] executeArgs, float delay = 0) : base(battleManager, executeArgs, delay)
 //    {
-//        if (args.Length < 1)
+//        if (executeArgs.Length < 1)
 //            throw new Exception("ActionCastTrigger 需要1个参数");
 
-//        targetAciontId = (int)args[0];
+//        targetAciontId = (int)executeArgs[0];
 //    }
 
 //    public override void OnAttach(IBattleAction action)

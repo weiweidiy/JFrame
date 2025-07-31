@@ -8,9 +8,9 @@
 //    public class BufferDebuffAntiUpgrade : DurationBuffer
 //    {
 //        float value;
-//        public BufferDebuffAntiUpgrade(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] args, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster,isBuff, UID, id, foldCount, args, trigger, finder, exutors)
+//        public BufferDebuffAntiUpgrade(IBattleUnit caster, bool isBuff, string UID, int id, int foldCount, float[] executeArgs, IBattleTrigger trigger, IBattleTargetFinder finder, List<IBattleExecutor> exutors) : base(caster,isBuff, UID, id, foldCount, executeArgs, trigger, finder, exutors)
 //        {
-//            if (args.Length < 2)
+//            if (executeArgs.Length < 2)
 //                throw new System.Exception("BufferDebuffAntiUpgrade 参数不能少于2个");
 //        }
 

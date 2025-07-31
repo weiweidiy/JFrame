@@ -2,6 +2,6 @@
 {
     public interface IJCombatFilter : IJCombatActionComponent
     {
-        bool Filter(IJCombatFilterArgs filterArgs/*object triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target*/);
+        bool Filter(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target);
     }
 }

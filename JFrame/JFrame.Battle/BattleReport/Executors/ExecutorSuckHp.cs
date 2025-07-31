@@ -38,11 +38,11 @@ namespace JFramework
 //public class ExecutorSuckHp : ExecutorDamage
 //{
 //    float suckRate;
-//    public ExecutorSuckHp(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+//    public ExecutorSuckHp(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs)
 //    {
-//        if (args.Length >= 5)
+//        if (executeArgs.Length >= 5)
 //        {
-//            suckRate = args[4];
+//            suckRate = executeArgs[4];
 //        }
 //        else
 //            throw new System.Exception("SuckHp 执行器参数数量不对");

@@ -306,7 +306,7 @@ namespace JFramework
         public void SetCdArgs(float[] args)
         {
             //if (cdTrigger != null)
-            //    cdTrigger.SetArgs(args);
+            //    cdTrigger.SetArgs(executeArgs);
         }
 
         public bool IsBuff()

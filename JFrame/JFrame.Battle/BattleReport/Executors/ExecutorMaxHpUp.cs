@@ -70,7 +70,7 @@ namespace JFramework
 //{
 //    int hpValue;
 
-//    public ExecutorMaxHpUp(FormulaManager formulaManager, float[] args) : base(formulaManager, args)
+//    public ExecutorMaxHpUp(FormulaManager formulaManager, float[] executeArgs) : base(formulaManager, executeArgs)
 //    {
 //    }
 

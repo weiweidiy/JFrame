@@ -87,12 +87,12 @@ namespace JFramework
 //    /// <summary>
 //    /// 伤害效果，1：执行段数，2：延迟执行 3: 段数间隔 4：伤害倍率
 //    /// </summary>
-//    /// <param name="args"></param>
-//    public ExecutorDamage(FormulaManager formulaManager, float[] args):base(formulaManager, args)
+//    /// <param name="executeArgs"></param>
+//    public ExecutorDamage(FormulaManager formulaManager, float[] executeArgs):base(formulaManager, executeArgs)
 //    {
-//        if (args != null && args.Length >= 4)
+//        if (executeArgs != null && executeArgs.Length >= 4)
 //        {
-//            arg = args[3];
+//            arg = executeArgs[3];
 //        }
 //        else
 //        {

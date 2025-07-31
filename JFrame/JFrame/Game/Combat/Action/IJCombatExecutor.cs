@@ -14,7 +14,7 @@ namespace JFramework.Game
         /// <param name="triggerArgs">触发器传入的参数，不同触发器传入的类型不同</param>
         /// <param name="executorArgs">上一个执行器处理的结果参数，可能为空，不同的执行器传入的参数不同</param>
         /// <param name="target">执行的目标</param>
-        IJCombatExecutorArgs Execute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target);
+        IJCombatExecutorExecuteArgs Execute(IJCombatExecutorExecuteArgs executorArgs);
  
     }
 }

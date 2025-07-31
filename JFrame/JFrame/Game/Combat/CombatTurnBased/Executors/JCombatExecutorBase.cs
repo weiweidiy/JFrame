@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static JFramework.Game.JCombatExecutorDamageDataChange;
 
 namespace JFramework.Game
 {
@@ -15,12 +16,7 @@ namespace JFramework.Game
 
         public IJCombatFilter filter;
 
-        public class ExecutorFilterArgs : IJCombatFilterArgs
-        {
-
-        }
-
-        ExecutorFilterArgs executorFilterArgs = new ExecutorFilterArgs();
+        Dictionary<string, IJCobmatExecuteArgsHistroy> executeArgsHistroy = new Dictionary<string, IJCobmatExecuteArgsHistroy>();
 
         public JCombatExecutorBase(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args = null) : base(args)
         {
@@ -30,23 +26,46 @@ namespace JFramework.Game
         }
 
 
-        public IJCombatExecutorArgs Execute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target)
+        public IJCombatExecutorExecuteArgs Execute(IJCombatExecutorExecuteArgs executeArgs)
         {
-            var needExecutor = true;
-            if(filter != null)
-            {
-                //executorFilterArgs.xx = triggerArgs;
-                needExecutor = filter.Filter(executorFilterArgs);
-            }
-                
+            executeArgsHistroy.Clear();
 
-            if (needExecutor)
-                return DoExecute(triggerArgs, executorArgs, target);
-            else
-                return executorArgs;
+            if (executeArgs == null)
+            {
+                return executeArgs;
+            }
+
+            var targets = executeArgs.TargetUnits;
+            if (targets == null || targets.Count == 0)
+            {
+                return executeArgs;
+            }
+
+            foreach (var target in targets)
+            {
+                if (target == null)
+                {
+                    throw new ArgumentNullException(nameof(target), "Target unit cannot be null.");
+                }
+
+                var needExecutor = true;
+                if (filter != null)
+                {
+                    needExecutor = filter.Filter(executeArgs, target);
+                }
+
+                if (needExecutor)
+                {
+                    executeArgsHistroy.Add(target.Uid, DoExecute(executeArgs, target));
+                }
+            }
+
+            executeArgs.ExecuteArgsHistroy = executeArgsHistroy;
+
+            return executeArgs;
         }
 
-        protected abstract IJCombatExecutorArgs DoExecute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target);
+        protected abstract IJCobmatExecuteArgsHistroy DoExecute(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target);
 
         public override void SetOwner(IJCombatAction owner)
         {
@@ -59,7 +78,7 @@ namespace JFramework.Game
                 formulua.SetOwner(owner);
             }
 
-            if(filter != null)
+            if (filter != null)
                 filter.SetOwner(owner);
         }
 
@@ -75,7 +94,7 @@ namespace JFramework.Game
                 formulua.SetQuery(query);
             }
 
-            if(filter != null)
+            if (filter != null)
                 filter.SetQuery(query);
         }
 

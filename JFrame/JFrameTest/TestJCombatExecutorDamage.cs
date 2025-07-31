@@ -29,10 +29,12 @@ namespace JFrameTest
             {
                 target
             };
-            finder.GetTargets().Returns(targets);
+            var finderResp = Substitute.For<IJCombatExecutorExecuteArgs>();
+            finderResp.TargetUnits = targets;
+            finder.GetTargetsData().Returns(finderResp);
 
             // Act
-            executor.Execute(triggerArgs,null, target);
+            executor.Execute(finderResp);
 
             // Assert
             Assert.IsTrue(executor is JCombatExecutorDamage);

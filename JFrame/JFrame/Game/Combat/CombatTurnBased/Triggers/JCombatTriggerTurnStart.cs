@@ -13,7 +13,7 @@ namespace JFramework.Game
         /// 触发模式 0:每回合都触发，1:只在特定回合触发 2: 奇偶数触发
         /// </summary>
         int turnMode;
-        public JCombatTriggerTurnStart(int triggerMode, int triggerTurn, float[] args) : base(args)
+        public JCombatTriggerTurnStart(int triggerMode, int triggerTurn, float[] args, IJCombatTargetsFinder finder) : base(args, finder)
         {
             this.turnMode = triggerMode;
             this.triggerTurn = triggerTurn;

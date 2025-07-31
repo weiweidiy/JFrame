@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace JFramework.Game
 {
+
     /// <summary>
     /// 伤害执行器
     /// </summary>
     public class JCombatExecutorDamage : JCombatExecutorBase
     {
-        public class ExecutorArgs : IJCombatExecutorArgs
-        {
-            public JCombatDamageData DamageData { get; set; }
-            //public int TargetBeforExecuteHp { get; set; } //执行之前的Hp
-        }
 
-        ExecutorArgs args = new ExecutorArgs();
 
         public JCombatExecutorDamage(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) : base(filter,finder, formulua, args)
         {
@@ -24,19 +20,20 @@ namespace JFramework.Game
             return 0; // 只需要一个参数，通常是伤害值或相关系数
         }
 
-        protected override IJCombatExecutorArgs DoExecute(IJCombatTriggerArgs triggerArgs, IJCombatExecutorArgs executorArgs, IJCombatCasterTargetableUnit target)
+        protected override IJCobmatExecuteArgsHistroy DoExecute(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target)
         {          
             //优先使用查找器找到的目标
             if (target != null)
             {
-                DoDamage(target);
-                return args;
+                return DoDamage(target);              
             }
             throw new Exception("JCombatExecutorDamage: No targets found for damage execution.");
         }
 
-        void DoDamage(IJCombatCasterTargetableUnit target)
+        IJCobmatExecuteArgsHistroy DoDamage(IJCombatCasterTargetableUnit target)
         {
+            var executeArgsHistroy = new JCombatExecutorExecuteArgsHistroy();
+
             var uid = Guid.NewGuid().ToString();
             
             if(objEvent != null)
@@ -53,7 +50,8 @@ namespace JFramework.Game
             var sourceUnitUid = GetOwner().GetCaster();
             var sourceActionUid = GetOwner().Uid;
             var data = new JCombatDamageData(uid, sourceUnitUid, sourceActionUid, (int)hitValue, 0, target.Uid);
-            args.DamageData = data;
+            //设置执行历史记录
+            executeArgsHistroy.DamageData = data;
 
             var sourceUnit = query.GetUnit(sourceUnitUid);
             var caster = sourceUnit as IJCombatCasterUnit;
@@ -83,6 +81,8 @@ namespace JFramework.Game
                     CasterMaxHp = casterTargetUnit.GetMaxHp()
                 });
             }
+
+            return executeArgsHistroy;
         }
     }
 }

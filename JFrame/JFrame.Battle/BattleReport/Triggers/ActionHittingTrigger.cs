@@ -18,7 +18,7 @@ namespace JFramework
             if (args.Length < 1)
                 throw new Exception("KillTrigger 需要至少1个参数");
 
-            //targetAciontId = (int)args[0];
+            //targetAciontId = (int)executeArgs[0];
         }
 
         //public override void OnAttach(IAttachOwner owner)

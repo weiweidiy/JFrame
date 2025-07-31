@@ -243,9 +243,9 @@ namespace JFramework
         //    AddReportData(target.Uid, ReportType.RemoveBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id });
         //}
 
-        //private void Team_onBufferUpdate(PVPBattleManager.Team arg1, ICombatUnit target, IBuffer buffer, int foldCount, float[] args)
+        //private void Team_onBufferUpdate(PVPBattleManager.Team arg1, ICombatUnit target, IBuffer buffer, int foldCount, float[] executeArgs)
         //{
-        //    AddReportData(target.Uid, ReportType.UpdateBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id, foldCount, args });
+        //    AddReportData(target.Uid, ReportType.UpdateBuffer, target.Uid, new object[] { buffer.Uid, buffer.Id, foldCount, executeArgs });
         //}
 
         //private void Team_onDebuffAnti(PVPBattleManager.Team team, ICombatUnit caster, CombatAction action, ICombatUnit target, int debuffId)

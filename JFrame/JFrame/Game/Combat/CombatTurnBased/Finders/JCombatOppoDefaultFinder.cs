@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
-
     /// <summary>
     /// 基于战位的查找器, 基础查找器，深度找
     /// </summary>
-    public class JCombatDefaultFinder : JCombatActionComponent, IJCombatTargetsFinder
+    public class JCombatOppoDefaultFinder : JCombatFinderBase
     {
 
         protected int[,] seats = new int[3, 3]
@@ -17,8 +16,10 @@ namespace JFramework.Game
            { 6,7,8 }
         };
 
-        public JCombatDefaultFinder(float[] args) : base(args)
+
+        public JCombatOppoDefaultFinder(float[] args) : base(args)
         {
+
         }
 
         protected override int GetValidArgsCount()
@@ -26,7 +27,13 @@ namespace JFramework.Game
             return 0;
         }
 
-        public virtual List<IJCombatCasterTargetableUnit> GetTargets()
+        public override IJCombatExecutorExecuteArgs GetTargetsData()
+        {
+            executeArgs.TargetUnits = GetTargets();
+            return executeArgs;
+        }
+
+        protected virtual List<IJCombatCasterTargetableUnit> GetTargets()
         {
             var result = new List<IJCombatCasterTargetableUnit>();
 

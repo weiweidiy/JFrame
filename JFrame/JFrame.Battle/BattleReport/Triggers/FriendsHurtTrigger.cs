@@ -95,7 +95,7 @@ namespace JFramework
 //    /// <returns></returns>
 //    int GetTriggerHurtCount()
 //    {
-//        return (int)args[0];
+//        return (int)executeArgs[0];
 //    }
 
 //    public List<IBattleUnit> FindTargets()

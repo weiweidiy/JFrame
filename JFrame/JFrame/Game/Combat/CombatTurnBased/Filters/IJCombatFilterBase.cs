@@ -11,6 +11,6 @@
             return 0;
         }
 
-        public abstract bool Filter(IJCombatFilterArgs filterArgs);
+        public abstract bool Filter(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target);
     }
 }
