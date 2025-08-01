@@ -65,5 +65,8 @@ namespace JFramework.Game
 
         #endregion
 
+        void SetCombat(JCombat combat);
+        JCombat GetCombat();
+
     }
 }

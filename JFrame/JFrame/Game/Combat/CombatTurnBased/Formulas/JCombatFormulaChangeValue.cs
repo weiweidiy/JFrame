@@ -1,5 +1,6 @@
 ﻿namespace JFramework.Game
 {
+
     /// <summary>
     /// 执行器会使用 CalcHitValue 方法来计算最终值
     /// </summary>
@@ -19,7 +20,7 @@
             return (int)GetArg(0);
         }
 
-        float GetCalcValueArg()
+        protected virtual float GetCalcValueArg()
         {
             return GetArg(1);
         }

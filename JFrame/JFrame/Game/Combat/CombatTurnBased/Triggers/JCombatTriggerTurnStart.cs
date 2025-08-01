@@ -2,50 +2,68 @@
 
 namespace JFramework.Game
 {
+    /// <summary>
+    /// 回合开始触发器
+    /// </summary>
     public class JCombatTriggerTurnStart : JCombatTriggerBase
     {
-        /// <summary>
-        /// 触发的回合数 
-        /// </summary>
-        int triggerTurn;
 
-        /// <summary>
-        /// 触发模式 0:每回合都触发，1:只在特定回合触发 2: 奇偶数触发
-        /// </summary>
-        int turnMode;
-        public JCombatTriggerTurnStart(int triggerMode, int triggerTurn, float[] args, IJCombatTargetsFinder finder) : base(args, finder)
+        public JCombatTriggerTurnStart(float[] args, IJCombatTargetsFinder finder) : base(args, finder)
         {
-            this.turnMode = triggerMode;
-            this.triggerTurn = triggerTurn;
+
         }
 
         protected override int GetValidArgsCount()
         {
-            return 0; // 不需要参数
+            return 2;
         }
 
-        //public override void OnTurnStart(int frame)
-        //{
-        //    base.OnTurnStart(frame);
+        int GetTurnMode()
+        {
+            return (int)GetArg(0);
+        }
 
-        //    if (turnMode == 0)
-        //    {
-        //        TriggerOn(null);
-        //        return;
-        //    }
+        int GetTargetTurn()
+        {
+            return (int)GetArg(1);
+        }
 
-        //    if (turnMode == 1 && frame == triggerTurn)
-        //    {
-        //        TriggerOn(null);
-        //        return;
-        //    }
+        protected override void OnStart(RunableExtraData extraData)
+        {
+            base.OnStart(extraData);
 
-        //    if (turnMode == 2 && frame % 2 == triggerTurn) //riggerTurn为1时，奇数回合触发，为0时偶数回合触发
-        //    {
-        //        TriggerOn(null);
-        //        return;
-        //    }
+            var combat = query.GetCombat() as JCombatTurnBased;
+            combat.onCombatTurnStart += Combat_onCombatTurnStart;
+        }
 
-        //}
+        protected override void OnStop()
+        {
+            base.OnStop();
+            var combat = query.GetCombat() as JCombatTurnBased;
+            combat.onCombatTurnStart -= Combat_onCombatTurnStart;
+        }
+
+        private void Combat_onCombatTurnStart(int frame)
+        {
+            var needTrigger = false;
+            if (GetTurnMode() == 0) // 0表示每回合都触发
+                needTrigger = true;
+
+
+            if (GetTurnMode() == 1 && frame == GetTargetTurn()) // 1表示在指定回合触发
+                needTrigger = true;
+
+
+            if (GetTurnMode() == 2 && frame % 2 == GetTargetTurn()) //GetTargetTurn为1时，奇数回合触发，为0时偶数回合触发
+                needTrigger = true;
+
+            if (!needTrigger)
+                return;
+
+            if (finder != null)
+                TriggerOn(finder.GetTargetsData());
+            else
+                TriggerOn(null);
+        }
     }
 }

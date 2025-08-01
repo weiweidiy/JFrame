@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\executors\\executorexecuteargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\executors\\executorexecuteargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|c:\\users\\jichunwei\\desktop\\jframe\\jframe\\jframe\\jframe\\game\\combat\\combatturnbased\\executors\\jcombatexecutorattributedatachange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C63B9A0-86A2-4FF0-B023-C68C9DA36247}|JFrame\\JFrame.csproj|solutionrelative:jframe\\game\\combat\\combatturnbased\\executors\\jcombatexecutorattributedatachange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -138,11 +142,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
+              "Title": "ExecutorExecuteArgs.cs",
+              "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\ExecutorExecuteArgs.cs",
+              "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\ExecutorExecuteArgs.cs",
+              "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\ExecutorExecuteArgs.cs",
+              "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\ExecutorExecuteArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T10:22:24.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "JCombatFindRow.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRow.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRow.cs",
@@ -150,12 +167,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T03:24:25.637Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T03:24:25.637Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "JCombatFindRandom.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRandom.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRandom.cs",
@@ -163,12 +179,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindRandom.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T02:19:49.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-01T02:19:49.885Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "JCombatFindSelf.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindSelf.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindSelf.cs",
@@ -176,12 +191,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindSelf.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T05:22:18.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-01T05:22:18.416Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "JCombatBeforeHurtTrigger.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatBeforeHurtTrigger.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatBeforeHurtTrigger.cs",
@@ -189,12 +203,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatBeforeHurtTrigger.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T03:06:59.581Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T03:06:59.581Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "JCombatExecutorDamage.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorDamage.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorDamage.cs",
@@ -202,12 +215,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorDamage.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAAAAoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T04:35:06.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T04:35:06.957Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "JCombatFormulaChangeValue.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Formulas\\JCombatFormulaChangeValue.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Formulas\\JCombatFormulaChangeValue.cs",
@@ -215,25 +227,24 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Formulas\\JCombatFormulaChangeValue.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAA0wBEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T08:05:41.712Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T08:05:41.712Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "JCombatExecutorAttributeDataChange.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorAttributeDataChange.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorAttributeDataChange.cs",
               "ToolTip": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorAttributeDataChange.cs",
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorAttributeDataChange.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-31T09:41:29.8Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "JCombatExecutorDamageDataChange.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorDamageDataChange.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorDamageDataChange.cs",
@@ -246,7 +257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "JCombatFindOppoDefault.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindOppoDefault.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindOppoDefault.cs",
@@ -254,12 +265,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindOppoDefault.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T09:12:37.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T09:12:37.401Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "JCombatFinderBase.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFinderBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFinderBase.cs",
@@ -267,12 +277,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFinderBase.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T08:05:49.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T08:05:49.661Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "JCombatFindCross.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCross.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCross.cs",
@@ -280,12 +289,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCross.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T03:09:17.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T03:09:17.386Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "JCombatFindCol.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCol.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCol.cs",
@@ -293,12 +301,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Finders\\JCombatFindCol.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T03:09:13.815Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T03:09:13.815Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "IJCombatFilter.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Filters\\IJCombatFilter.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Filters\\IJCombatFilter.cs",
@@ -306,12 +313,11 @@
               "RelativeToolTip": "JFrame\\Game\\Combat\\CombatTurnBased\\Filters\\IJCombatFilter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T05:24:20.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-01T05:24:20.736Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "TestJCombatFinders.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatFinders.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatFinders.cs",
@@ -323,7 +329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "IJCombatFilterBase.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Filters\\IJCombatFilterBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Filters\\IJCombatFilterBase.cs",
@@ -335,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "JCombatQuery.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatQuery.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatQuery.cs",
@@ -347,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "IJCombatQuery.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatQuery.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatQuery.cs",
@@ -359,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "JCombatFormulaBase.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Formulas\\JCombatFormulaBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Formulas\\JCombatFormulaBase.cs",
@@ -371,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "JCombatExecutorBase.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatExecutorBase.cs",
@@ -383,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "JCombatActionComponent.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionComponent.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\JCombatActionComponent.cs",
@@ -395,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "JCombatSeatBasedQuery.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatBasedQuery.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatSeatBasedQuery.cs",
@@ -407,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "TestJCombatJudger.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatJudger.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatJudger.cs",
@@ -419,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "TestJCombatQuery.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatQuery.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatQuery.cs",
@@ -431,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "IJCombatAttrNameQuery.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatAttrNameQuery.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Interfaces\\IJCombatAttrNameQuery.cs",
@@ -443,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "TestJTurnBasedCombat.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJTurnBasedCombat.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJTurnBasedCombat.cs",
@@ -455,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "JCombatActionBase.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Action\\JCombatActionBase.cs",
@@ -467,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "JCombatTriggerCombatStart.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatTriggerCombatStart.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatTriggerCombatStart.cs",
@@ -479,7 +485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "JCombatTriggerTurnStart.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatTriggerTurnStart.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Triggers\\JCombatTriggerTurnStart.cs",
@@ -491,7 +497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "JCombatMacroExecutor.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatMacroExecutor.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\Executors\\JCombatMacroExecutor.cs",
@@ -503,7 +509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "TestJCombatExecutorDamage.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\TestJCombatExecutorDamage.cs",
               "RelativeDocumentMoniker": "JFrameTest\\TestJCombatExecutorDamage.cs",
@@ -515,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "JCombatCasterTargetableUnit.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\Common\\Imp\\JCombatCasterTargetableUnit.cs",
@@ -527,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "JCombatTurnBasedUnit.cs",
               "DocumentMoniker": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",
               "RelativeDocumentMoniker": "JFrame\\Game\\Combat\\CombatTurnBased\\JCombatTurnBasedUnit.cs",

@@ -17,6 +17,8 @@ namespace JFramework.Game
 
         IJCombatAttrNameQuery attrNameQuery;
 
+        protected JCombat combat;
+
         public JCombatQuery( Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder, IJCombatAttrNameQuery attrNameQuery) : base(keySelector)
         {
             this.frameRecorder = frameRecorder;
@@ -208,10 +210,18 @@ namespace JFramework.Game
 
         public string GetAttrName(int nameId) => attrNameQuery.GetAttrName(nameId);
 
-
-
-
         #endregion
+
+        public void SetCombat(JCombat combat)
+        {
+            this.combat = combat;
+        }
+
+        public JCombat GetCombat()
+        {
+            return combat;
+        }
+
 
 
     }
