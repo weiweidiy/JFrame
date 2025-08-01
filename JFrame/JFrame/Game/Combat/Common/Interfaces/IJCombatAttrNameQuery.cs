@@ -8,5 +8,7 @@
         string GetHpAttrName();
 
         string GetMaxHpAttrName();
+
+        string GetAttrName(int nameId);
     }
 }

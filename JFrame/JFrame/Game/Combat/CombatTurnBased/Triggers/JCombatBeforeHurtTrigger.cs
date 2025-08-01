@@ -7,7 +7,6 @@ namespace JFramework.Game
     /// </summary>
     public class JCombatBeforeHurtTrigger : JCombatTriggerBase
     {
-        IJCombatTargetable targetable;
 
         public JCombatBeforeHurtTrigger(float[] args, IJCombatTargetsFinder finder) : base(args, finder)
         {
@@ -22,14 +21,24 @@ namespace JFramework.Game
         {
             base.OnStart(extraData);
 
-            var casterUid = GetOwner().GetCaster();
-            var caster = query.GetUnit(casterUid);
-            targetable = caster as IJCombatTargetable;
-            targetable.onBeforeHurt += OnBeforeHurt;
+            if(finder == null)
+            {
+                throw new System.Exception("JCombatBeforeHurtTrigger requires a finder to be set.");
+            }
+
+            var executeArgs = finder.GetTargetsData();
+            var targets = executeArgs.TargetUnits;
+
+            foreach (var target in targets)
+            {
+                target.onBeforeHurt += OnBeforeHurt;
+            }
+ 
         }
 
         private void OnBeforeHurt(IJCombatTargetable targetable, IJCombatDamageData data)
         {
+            executeArgs.Clear();
             executeArgs.DamageData = data;
             executeArgs.TargetUnits = new List<IJCombatCasterTargetableUnit> { targetable as IJCombatCasterTargetableUnit };
             TriggerOn(executeArgs);
@@ -39,11 +48,11 @@ namespace JFramework.Game
         {
             base.OnStop();
 
-            if (targetable != null)
-            {
-                targetable.onBeforeHurt -= OnBeforeHurt;
-                targetable = null;
-            }
+            //if (targetable != null)
+            //{
+            //    targetable.onBeforeHurt -= OnBeforeHurt;
+            //    targetable = null;
+            //}
         }
 
 

@@ -3,9 +3,9 @@
     /// <summary>
     /// 执行器会使用 CalcHitValue 方法来计算最终值
     /// </summary>
-    public class JCombatFormulaDamageDataChange : JCombatFormulaBase
+    public class JCombatFormulaChangeValue : JCombatFormulaBase
     {
-        public JCombatFormulaDamageDataChange(float[] args) : base(args)
+        public JCombatFormulaChangeValue(float[] args) : base(args)
         {
         }
 

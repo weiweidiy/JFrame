@@ -26,7 +26,7 @@ namespace JFramework.Game.Tests
             _teams[0].IsAllDead().Returns(false);
             _teams[1].IsAllDead().Returns(false);
 
-            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
+            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder, null);
 
         }
 
@@ -109,7 +109,7 @@ namespace JFramework.Game.Tests
             thirdTeam.IsAllDead().Returns(false);
 
             // Need to recreate judger with the new team list
-            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder);
+            _judger = new JCombatQuery(_teams, team => team.GetHashCode().ToString(), _frameRecorder, null);
 
             // Act
             var result = _judger.IsCombatOver();

@@ -15,6 +15,8 @@ namespace JFramework.Game
         {
             DamageData = null;
             TargetUnits = null;
+            ExecuteArgsHistroy?.Clear();
+            ExecuteArgsHistroy = null;
         }
     }
 }

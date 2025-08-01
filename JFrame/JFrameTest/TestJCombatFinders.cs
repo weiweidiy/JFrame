@@ -29,7 +29,7 @@ namespace JFramework.Game.Tests
 
             mockTeam = Substitute.For<IJCombatTeam>();
             mockQuery = Substitute.For<IJCombatSeatBasedQuery, IJCombatQuery>();
-            (mockQuery as IJCombatQuery).GetOppoTeams("caster1").Returns(new List<IJCombatTeam> { mockTeam });
+            (mockQuery as IJCombatQuery).GetOppoTeamsByUnit("caster1").Returns(new List<IJCombatTeam> { mockTeam });
             mockQuery.GetSeat("caster1").Returns(1);
 
             mockUnit = Substitute.For<IJCombatCasterTargetableUnit>();
@@ -72,7 +72,7 @@ namespace JFramework.Game.Tests
         [Test]
         public void TestJCombatDefaultFinder()
         {
-            var finder = new JCombatOppoDefaultFinder(null);
+            var finder = new JCombatFindOppoDefault(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -89,7 +89,7 @@ namespace JFramework.Game.Tests
         public void TestRowFinder()
         {
             //arrange
-            var finder = new JCombatRowFinder(null);
+            var finder = new JCombatFindRow(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
             
@@ -106,7 +106,7 @@ namespace JFramework.Game.Tests
         public void TestColFinder()
         {
             //arrange
-            var finder = new JCombatColFinder(null);
+            var finder = new JCombatFindCol(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -123,7 +123,7 @@ namespace JFramework.Game.Tests
         public void TestCrossFinder()
         {
             //arrange
-            var finder = new JCombatCrossFinder(null);
+            var finder = new JCombatFindCross(null);
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
 
@@ -140,7 +140,7 @@ namespace JFramework.Game.Tests
         public void TestJCombatRandomFinder()
         {
             //arrange
-            var finder = new JCombatRandomFinder(new float[] { 2});
+            var finder = new JCombatFindRandom(new float[] { 2});
             finder.SetOwner(mockAction);
             finder.SetQuery(mockQuery as IJCombatQuery);
             //act

@@ -15,16 +15,19 @@ namespace JFramework.Game
 
         IJCombatTeam winner;
 
-        public JCombatQuery( Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : base(keySelector)
+        IJCombatAttrNameQuery attrNameQuery;
+
+        public JCombatQuery( Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder, IJCombatAttrNameQuery attrNameQuery) : base(keySelector)
         {
             this.frameRecorder = frameRecorder;
+            this.attrNameQuery = attrNameQuery;
         }
 
-        public JCombatQuery(IJCombatFrameRecorder frameRecorder) : this((team) => team.Uid, frameRecorder)
+        public JCombatQuery(IJCombatFrameRecorder frameRecorder, IJCombatAttrNameQuery attrNameQuery) : this((team) => team.Uid, frameRecorder, attrNameQuery)
         {
         }
 
-        public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder) : this(keySelector, frameRecorder) 
+        public JCombatQuery(List<IJCombatTeam> teams, Func<IJCombatTeam, string> keySelector, IJCombatFrameRecorder frameRecorder, IJCombatAttrNameQuery attrNameQuery) : this(keySelector, frameRecorder, attrNameQuery) 
         {
             SetTeams(teams);
         }
@@ -139,7 +142,7 @@ namespace JFramework.Game
         /// </summary>
         /// <param name="unitUid"></param>
         /// <returns></returns>
-        public List<IJCombatTeam> GetOppoTeams(string unitUid)
+        public List<IJCombatTeam> GetOppoTeamsByUnit(string unitUid)
         {
             var myTeam = GetTeamByUnit(unitUid);
             return GetOppoTeams(myTeam);
@@ -199,7 +202,15 @@ namespace JFramework.Game
             return result;
         }
 
-  
+        public string GetHpAttrName() => attrNameQuery.GetHpAttrName();
+
+        public string GetMaxHpAttrName() => attrNameQuery.GetMaxHpAttrName();
+
+        public string GetAttrName(int nameId) => attrNameQuery.GetAttrName(nameId);
+
+
+
+
         #endregion
 
 

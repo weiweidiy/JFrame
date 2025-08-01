@@ -20,7 +20,10 @@ namespace JFramework.Game
         {
             base.OnStart(extraData);
 
-            TriggerOn(null); // 战斗开始时触发一次
+            if (finder != null)
+                TriggerOn(finder.GetTargetsData()); // 战斗开始时触发一次
+            else
+                TriggerOn(null);
         }
     }
 

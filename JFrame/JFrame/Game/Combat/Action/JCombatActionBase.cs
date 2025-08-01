@@ -172,7 +172,12 @@ namespace JFramework.Game
                 var newActionEvent = eventRecorder.CreateActionEvent(GetCaster(), Uid);
                 foreach (var executor in executors)
                 {
-                    context.Logger?.Log($"{caster.Uid} Executing action {Uid} with executor {executor.GetType().Name}");
+                    if(context != null && context.Logger != null)
+                    {
+                        // 记录执行日志
+                        context.Logger.Log($"{caster.Uid} Executing action {Uid} with executor {executor.GetType().Name}");
+                    }
+                    
                     executor.AddCombatEvent(newActionEvent);
                     executeArgs = executor.Execute(executeArgs);
                 }

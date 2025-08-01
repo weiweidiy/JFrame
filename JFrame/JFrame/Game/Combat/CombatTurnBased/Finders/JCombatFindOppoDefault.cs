@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace JFramework.Game
 {
+
     /// <summary>
     /// 基于战位的查找器, 基础查找器，深度找
     /// </summary>
-    public class JCombatOppoDefaultFinder : JCombatFinderBase
+    public class JCombatFindOppoDefault : JCombatFinderBase
     {
 
         protected int[,] seats = new int[3, 3]
@@ -17,7 +18,7 @@ namespace JFramework.Game
         };
 
 
-        public JCombatOppoDefaultFinder(float[] args) : base(args)
+        public JCombatFindOppoDefault(float[] args) : base(args)
         {
 
         }
@@ -83,7 +84,7 @@ namespace JFramework.Game
         protected virtual IJCombatTeam GetTargetTeam()
         {
             var myUnitUid = GetOwner().GetCaster();
-            var targetTeams = query.GetOppoTeams(myUnitUid);
+            var targetTeams = query.GetOppoTeamsByUnit(myUnitUid);
             var targetTeam = targetTeams[0];
             return targetTeam;
         }

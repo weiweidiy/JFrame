@@ -18,11 +18,6 @@ namespace JFramework.Game
         IJCombatDamageData DamageData { get; set; }
 
         /// <summary>
-        /// 属性
-        /// </summary>
-        GameAttributeInt Attribute { get; set; }
-
-        /// <summary>
         /// 执行参数历史
         /// </summary>
         Dictionary<string, IJCobmatExecuteArgsHistroy> ExecuteArgsHistroy { get; set; }

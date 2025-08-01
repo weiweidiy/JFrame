@@ -85,6 +85,11 @@ namespace JFrameTest
                 return "Speed";
             }
 
+            public string GetAttrName(int nameId)
+            {
+                throw new NotImplementedException();
+            }
+
             public string GetHpAttrName()
             {
                 return "Hp";
@@ -181,17 +186,19 @@ namespace JFrameTest
                 }
             };
             Func<JCombatTurnBasedEvent, string> funcEvent = (e) => e.Uid;
+            var attrNameQuery = new FakeAttrNameQuery();
 
- 
+
+
             frameRecorder = new JCombatTurnBasedFrameRecorder(19); //从0开始，共20回合
             var attrFactory = new FakeAttrFacotry();
             var attrFactory2 = new FakeAttrFacotry2();
 
-            jcombatQuery = new JCombatSeatBasedQuery(funcSeat, /*lstTeams,*/ funcTeam, funcUnit, frameRecorder);
+            jcombatQuery = new JCombatSeatBasedQuery(funcSeat, funcTeam, funcUnit, frameRecorder, attrNameQuery);
             eventRecorder = new FakeEventRecorder(frameRecorder, funcEvent);
 
             //执行器
-            var finder1 = new JCombatOppoDefaultFinder(null);
+            var finder1 = new JCombatFindOppoDefault(null);
             var formula1 = new NormalFormula(null);
             var executor1 = new JCombatExecutorDamage(null,finder1, formula1, null);
             var lstExecutor1 = new List<IJCombatExecutor>();
@@ -200,7 +207,7 @@ namespace JFrameTest
             context = new FakeContext(eventRecorder);
 
             //队伍1
-            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, new FakeAttrNameQuery(), new List<IJCombatAction>() { new FakeJCombatAction( "action1",  lstExecutor1, finder1, context) });
+            var unit1 = new JCombatTurnBasedUnit("unit1", attrFactory.Create(), funcAttr, attrNameQuery, new List<IJCombatAction>() { new FakeJCombatAction( "action1",  lstExecutor1, finder1, context) });
             var lst1 = new List<IJCombatUnit>();
             lst1.Add(unit1);
             team1 = new JCombatTeam("team1", lst1, funcUnit);
@@ -209,7 +216,7 @@ namespace JFrameTest
    
 
             //队伍2
-            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, new FakeAttrNameQuery(),  new List<IJCombatAction>() { new FakeJCombatAction( "action2", null, null ,context) });
+            var unit2 = new JCombatTurnBasedUnit("unit2", attrFactory2.Create(), funcAttr, attrNameQuery,  new List<IJCombatAction>() { new FakeJCombatAction( "action2", null, null ,context) });
             var lst2 = new List<IJCombatUnit>();
             lst2.Add(unit2);
             team2 = new JCombatTeam("team2", lst2, funcUnit);

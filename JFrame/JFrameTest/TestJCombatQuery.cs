@@ -22,7 +22,7 @@ namespace JFrameTest
         {
             _frameRecorder = Substitute.For<IJCombatFrameRecorder>();
             _teams = new List<IJCombatTeam>();
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
         }
 
         [TearDown] 
@@ -39,7 +39,7 @@ namespace JFrameTest
             var mockTeam = Substitute.For<IJCombatTeam>();
             mockTeam.Uid.Returns("team1");
             _teams.Add(mockTeam);
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
 
             // 执行
             var result = _combatQuery.GetTeam("team1");
@@ -79,7 +79,7 @@ namespace JFrameTest
             mockTeam2.GetUnit("unit2").Returns(mockUnit2);
 
             _teams.AddRange(new[] { mockTeam1, mockTeam2 });
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
 
             // 执行
             var result = _combatQuery.GetUnit("unit1");
@@ -114,7 +114,7 @@ namespace JFrameTest
             mockTeam1.Uid.Returns("team1");
             mockTeam2.Uid.Returns("team2");
             _teams.AddRange(new[] { mockTeam1, mockTeam2 });
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
 
             // 执行
             var result = _combatQuery.GetUnits();
@@ -135,7 +135,7 @@ namespace JFrameTest
             _teams.Add(mockTeam);
 
             // 执行
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
             var result = _combatQuery.GetUnits("team1");
 
             // 验证
@@ -158,7 +158,7 @@ namespace JFrameTest
             mockTeam.Uid.Returns("team");
             _teams.Add(mockTeam);
             
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
 
             // 执行
             var result = _combatQuery.GetUnits(u => !u.IsDead());
@@ -213,7 +213,7 @@ namespace JFrameTest
             _teams.AddRange(new[] { deadTeam, aliveTeam });
 
             // 执行
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
             var result = _combatQuery.IsCombatOver();
 
             // 验证
@@ -235,7 +235,7 @@ namespace JFrameTest
             _teams.AddRange(new[] { team1, team2 });
 
             // 执行
-            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder);
+            _combatQuery = new JCombatQuery(_teams, t => t.Uid, _frameRecorder, null);
             var result = _combatQuery.IsCombatOver();
 
             // 验证
