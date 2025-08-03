@@ -453,19 +453,19 @@
 //                await base.LoadReportData(report);
 //            }
 
-//            protected override void OnStartPlayActionEvents(List<JCombatTurnBasedEvent> events)
+//            protected override void PlayEvents(List<JCombatTurnBasedEvent> events)
 //            {
 //                if (OverrideOnStartPlay)
 //                {
 //                    CustomOnStartPlayCalled = true;
 //                    // 自定义实现
-//                    base.OnStartPlayActionEvents(events);
+//                    base.PlayEvents(events);
 //                }
 //                else
 //                {
 //                    OnStartPlayCalled = true;
 //                    ReceivedEvents.AddRange(events);
-//                    base.OnStartPlayActionEvents(events);
+//                    base.PlayEvents(events);
 //                }
 //            }
 

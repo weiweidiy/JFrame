@@ -61,6 +61,12 @@ namespace JFramework.Game
             // 受伤
             var minusHp = target.OnHurt(data);
 
+            var logger = query.GetLogger();
+            if (logger != null)
+            {
+                logger.Log( $"Frame: {query.GetCurFrame()}, Damage: {data.GetDamage()} from {sourceUnitUid} to {target.Uid}, hitValue: {hitValue}, minusHp: {minusHp}");
+            }
+
             caster.NotifyAfterHitted(data);
             target.NotifyAfterHurt(data);
 

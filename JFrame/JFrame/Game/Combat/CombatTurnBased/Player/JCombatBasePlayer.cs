@@ -15,11 +15,14 @@ namespace JFramework.Game
 
         protected IJCombatAnimationPlayer animationPlayer;
 
-        public JCombatBasePlayer( JCombatTurnBasedReportData<T> reportData, IJCombatAnimationPlayer animationPlayer, IObjectPool objPool = null)
+        protected ILogger loger;
+
+        public JCombatBasePlayer( JCombatTurnBasedReportData<T> reportData, IJCombatAnimationPlayer animationPlayer, IObjectPool objPool = null, ILogger loger = null)
         {
             this.pool = objPool;
             this.reportData = reportData;
             this.animationPlayer = animationPlayer;
+            this.loger = loger;
         }
 
         /// <summary>
@@ -38,17 +41,35 @@ namespace JFramework.Game
         /// <returns></returns>
         public async Task Play()
         {
+            await Start(new RunableExtraData() { Data = reportData });         
+        }
+
+        protected override async void OnStart(RunableExtraData extraData)
+        {
+            base.OnStart(extraData);
+
+            var reportData = extraData.Data as JCombatTurnBasedReportData<T>;
+            if (reportData == null)
+                throw new ArgumentException("无效的 JCombatReportData ");
+
             string winner = reportData.winnerTeamUid;
-            var events = reportData.events;
+            //var events = reportData.events;
             var teams = reportData.FormationData;
             //根据战报数据中的队伍信息，初始化游戏对象
             await animationPlayer.Initialize(reportData);
             //用event中的SortIndex字段做升序排序
-            events.Sort((x, y) => x.SortIndex.CompareTo(y.SortIndex));
-            await OnStartPlayActionEvents(events);
+            reportData.events.Sort((x, y) => x.SortIndex.CompareTo(y.SortIndex));
+
+            if(loger != null)
+            {
+                loger.Log($"开始播放战报，胜利队伍: {winner}, 事件数量: {reportData.events.Count} , 第一个战报sortIndex, {reportData.events[0].SortIndex} , 第一个战报castertUid, {reportData.events[0].CastActionUid}");
+            }
+
+            await PlayEvents(reportData.events);
         }
 
-        protected abstract Task OnStartPlayActionEvents(List<JCombatTurnBasedEvent> events);
+        protected abstract Task PlayEvents(List<JCombatTurnBasedEvent> events);
+
 
         protected virtual RunableExtraData GetRunableData()
         {
@@ -79,28 +100,16 @@ namespace JFramework.Game
                 runner.Dispose();        
         }
 
-        
-
+       
         public void RePlay()
         {
             LoadReportData(reportData);
+            Play();
         }
 
         public void SetScale(float scale)=> this.scale = scale;
         public float GetScale() => scale;
 
-
-        protected override void OnStart(RunableExtraData extraData)
-        {
-            base.OnStart(extraData);
-
-            var reportData = extraData.Data as JCombatTurnBasedReportData<T>;
-
-            if (reportData == null)
-                throw new ArgumentException("无效的 JCombatReportData ");
-
-            LoadReportData(reportData);
-        }
 
         protected override void OnStop()
         {

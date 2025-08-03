@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {}
+    "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
+    "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
+        "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
         "projectName": "JFrame.Battle",
-        "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
-        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\obj\\",
+        "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
+        "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
+        "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
-                "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+              "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+                "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
               }
             }
           }
@@ -76,20 +76,20 @@
         }
       }
     },
-    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
+    "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+        "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
         "projectName": "JFrameTest",
-        "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
-        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrameTest\\obj\\",
+        "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\JFrameTest.csproj",
+        "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
+        "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrameTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -104,8 +104,8 @@
           "net472": {
             "targetAlias": "net472",
             "projectReferences": {
-              "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
-                "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
+              "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj": {
+                "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj"
               }
             }
           }
@@ -147,20 +147,20 @@
         }
       }
     },
-    "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+    "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
         "projectName": "JFrame",
-        "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
-        "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\obj\\",
+        "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj",
+        "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
+        "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
