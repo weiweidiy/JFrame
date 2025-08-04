@@ -64,7 +64,8 @@ namespace JFramework.Game
             var logger = query.GetLogger();
             if (logger != null)
             {
-                logger.Log( $"Frame: {query.GetCurFrame()}, Damage: {data.GetDamage()} from {sourceUnitUid} to {target.Uid}, hitValue: {hitValue}, minusHp: {minusHp}");
+                logger.Log( $"Frame: {query.GetCurFrame()}, Damage: {data.GetDamage()} from {sourceUnitUid} to {target.Uid}" +
+                    $", hitValue: {hitValue}, minusHp: {minusHp} , targetHp: {target.GetCurHp()}");
             }
 
             caster.NotifyAfterHitted(data);
