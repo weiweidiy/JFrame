@@ -61,7 +61,6 @@ namespace JFramework.Game
                     casterSelector.ResetActionUnits();
                     continue;
                 }
-
                 DoUpdate();
             }
         }
