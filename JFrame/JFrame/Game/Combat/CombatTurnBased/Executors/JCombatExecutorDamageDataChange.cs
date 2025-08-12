@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace JFramework.Game
 {
     /// <summary>
-    /// 伤害提升执行器，一定是JCombatBeforeDamageTrigger触发的
+    /// 伤害提升执行器，一定是伤害执行前，比如JCombatBeforeHurtTrigger触发
     /// </summary>
     public class JCombatExecutorDamageDataChange : JCombatExecutorBase
     {
