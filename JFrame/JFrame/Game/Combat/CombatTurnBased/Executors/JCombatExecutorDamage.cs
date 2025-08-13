@@ -12,7 +12,8 @@ namespace JFramework.Game
     {
 
 
-        public JCombatExecutorDamage(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) : base(filter,finder, formulua, args)
+        public JCombatExecutorDamage(IJCombatContext context, IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) 
+            : base(context, filter, finder, formulua, args)
         {
         }
         protected override int GetValidArgsCount()
@@ -36,13 +37,13 @@ namespace JFramework.Game
 
             var uid = Guid.NewGuid().ToString();
             
-            if(objEvent != null)
-            {
-                if (!objEvent.ActionEffect.ContainsKey(CombatEventType.Damage.ToString()))
-                {
-                    objEvent.ActionEffect.Add(CombatEventType.Damage.ToString(), new List<ActionEffectInfo>());
-                }
-            }
+            //if(objEvent != null)
+            //{
+            //    if (!objEvent.ActionEffect.ContainsKey(CombatEventActionType.Damage.ToString()))
+            //    {
+            //        objEvent.ActionEffect.Add(CombatEventActionType.Damage.ToString(), new List<ActionEffectInfo>());
+            //    }
+            //}
 
             float hitValue = 0;
             formulua.CalcHitValue(target, ref hitValue);
@@ -73,21 +74,21 @@ namespace JFramework.Game
 
             var casterTargetUnit = caster as IJCombatCasterTargetableUnit;
 
-            if (objEvent != null)
-            {
-                var actionEffectInfos = objEvent.ActionEffect[CombatEventType.Damage.ToString()];
-                actionEffectInfos.Add(new ActionEffectInfo()
-                {
-                    TargetUid = target.Uid,
-                    Value = data.GetDamage()
-                    ,
-                    TargetHp = target.GetCurHp(),
-                    TargetMaxHp = target.GetMaxHp()
-                    ,
-                    CasterHp = casterTargetUnit.GetCurHp(),
-                    CasterMaxHp = casterTargetUnit.GetMaxHp()
-                });
-            }
+            //if (objEvent != null)
+            //{
+            //    var actionEffectInfos = objEvent.ActionEffect[CombatEventActionType.Damage.ToString()];
+            //    actionEffectInfos.Add(new ActionEffectInfo()
+            //    {
+            //        TargetUid = target.Uid,
+            //        Value = data.GetDamage()
+            //        ,
+            //        TargetHp = target.GetCurHp(),
+            //        TargetMaxHp = target.GetMaxHp()
+            //        ,
+            //        CasterHp = casterTargetUnit.GetCurHp(),
+            //        CasterMaxHp = casterTargetUnit.GetMaxHp()
+            //    });
+            //}
 
             return executeArgsHistroy;
         }

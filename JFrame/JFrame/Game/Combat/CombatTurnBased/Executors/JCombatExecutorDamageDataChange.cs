@@ -9,7 +9,7 @@ namespace JFramework.Game
     public class JCombatExecutorDamageDataChange : JCombatExecutorBase
     {
 
-        public JCombatExecutorDamageDataChange(IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) : base(filter,finder, formulua, args)
+        public JCombatExecutorDamageDataChange(IJCombatContext context, IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) : base(context,filter, finder, formulua, args)
         {
         }
 
