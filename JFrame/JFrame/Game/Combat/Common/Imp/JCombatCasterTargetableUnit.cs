@@ -180,7 +180,7 @@ namespace JFramework.Game
             if (actions == null || actions.Count == 0)
                 return;
 
-            context.EventRecorder.CreateActionEvent(Uid);
+            context?.EventRecorder.CreateActionEvent(Uid);
 
             foreach (var action in actions)
             {

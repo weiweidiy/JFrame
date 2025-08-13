@@ -15,7 +15,7 @@ namespace JFrameTest
             // Arrange
             var finder = Substitute.For<IJCombatTargetsFinder>();
             var formula = Substitute.For<IJCombatFormula>();
-            var executor = new JCombatExecutorDamage(null,finder, formula, new float[] { });
+            var executor = new JCombatExecutorDamage(null,null,finder, formula, new float[] { });
             var mockAction = Substitute.For<IJCombatAction>();
             var mockQuery = Substitute.For<IJCombatQuery>();
             mockAction.GetCaster().Returns("casterUid");

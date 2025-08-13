@@ -382,23 +382,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\JiChunWei\\.nuget\\packages\\": {},
+    "C:\\Users\\weiwei\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
+      "projectUniqueName": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
       "projectName": "JFrame.Battle",
-      "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
-      "packagesPath": "C:\\Users\\JiChunWei\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame.Battle\\obj\\",
+      "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\JFrame.Battle.csproj",
+      "packagesPath": "C:\\Users\\weiwei\\.nuget\\packages\\",
+      "outputPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame.Battle\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\JiChunWei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\weiwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -413,8 +413,8 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "projectReferences": {
-            "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
-              "projectPath": "C:\\Users\\JiChunWei\\Desktop\\JFrame\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
+            "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj": {
+              "projectPath": "E:\\UnityProjects\\JFrame\\JFrame\\JFrame\\JFrame.csproj"
             }
           }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace JFramework.Game
@@ -12,7 +13,7 @@ namespace JFramework.Game
     {
 
 
-        public JCombatExecutorDamage(IJCombatContext context, IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args) 
+        public JCombatExecutorDamage(IJCombatContext context, IJCombatFilter filter, IJCombatTargetsFinder finder, IJCombatFormula formulua, float[] args)
             : base(context, filter, finder, formulua, args)
         {
         }
@@ -22,11 +23,11 @@ namespace JFramework.Game
         }
 
         protected override IJCobmatExecuteArgsHistroy DoExecute(IJCombatExecutorExecuteArgs executeArgs, IJCombatCasterTargetableUnit target)
-        {          
+        {
             //优先使用查找器找到的目标
             if (target != null)
             {
-                return DoDamage(target);              
+                return DoDamage(target);
             }
             throw new Exception("JCombatExecutorDamage: No targets found for damage execution.");
         }
@@ -36,7 +37,7 @@ namespace JFramework.Game
             var executeArgsHistroy = new JCombatExecutorExecuteArgsHistroy();
 
             var uid = Guid.NewGuid().ToString();
-            
+
             //if(objEvent != null)
             //{
             //    if (!objEvent.ActionEffect.ContainsKey(CombatEventActionType.Damage.ToString()))
@@ -44,6 +45,7 @@ namespace JFramework.Game
             //        objEvent.ActionEffect.Add(CombatEventActionType.Damage.ToString(), new List<ActionEffectInfo>());
             //    }
             //}
+            var objEvent = context?.EventRecorder.GetCurrentActionEvent();
 
             float hitValue = 0;
             formulua.CalcHitValue(target, ref hitValue);
@@ -65,7 +67,7 @@ namespace JFramework.Game
             var logger = query.GetLogger();
             if (logger != null)
             {
-                logger.Log( $"Frame: {query.GetCurFrame()}, Damage: {data.GetDamage()} from {sourceUnitUid} to {target.Uid}" +
+                logger.Log($"Frame: {query.GetCurFrame()}, Damage: {data.GetDamage()} from {sourceUnitUid} to {target.Uid}" +
                     $", hitValue: {hitValue}, minusHp: {minusHp} , targetHp: {target.GetCurHp()}");
             }
 
@@ -74,21 +76,28 @@ namespace JFramework.Game
 
             var casterTargetUnit = caster as IJCombatCasterTargetableUnit;
 
-            //if (objEvent != null)
-            //{
-            //    var actionEffectInfos = objEvent.ActionEffect[CombatEventActionType.Damage.ToString()];
-            //    actionEffectInfos.Add(new ActionEffectInfo()
-            //    {
-            //        TargetUid = target.Uid,
-            //        Value = data.GetDamage()
-            //        ,
-            //        TargetHp = target.GetCurHp(),
-            //        TargetMaxHp = target.GetMaxHp()
-            //        ,
-            //        CasterHp = casterTargetUnit.GetCurHp(),
-            //        CasterMaxHp = casterTargetUnit.GetMaxHp()
-            //    });
-            //}
+            if (objEvent != null)
+            {
+                var actionEvent = objEvent.ActionEvents.Where(e => e.ActionUid == GetOwner().Uid).SingleOrDefault();
+                if(actionEvent == null)
+                {
+                    actionEvent = new ActionEvent();
+                    actionEvent.CasterUid = casterTargetUnit.Uid;
+                    actionEvent.ActionUid = GetOwner().Uid;
+                    objEvent.ActionEvents.Add(actionEvent);
+                }
+                actionEvent.ActionEffect.Add(new ActionEffectInfo()
+                {
+                    TargetUid = target.Uid,
+                    Value = data.GetDamage(),
+                    TargetHp = target.GetCurHp(),
+                    TargetMaxHp = target.GetMaxHp(),
+                    CasterHp = casterTargetUnit.GetCurHp(),
+                    CasterMaxHp = casterTargetUnit.GetMaxHp()
+                });
+                
+
+            }
 
             return executeArgsHistroy;
         }

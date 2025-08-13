@@ -67,7 +67,7 @@ namespace JFramework.Game
     {
         public string ActionUid { get; set; }
         public string CasterUid { get; set; }
-        public List<ActionEffectInfo> ActionEffect { get; set; }
+        public List<ActionEffectInfo> ActionEffect { get; set; } = new List<ActionEffectInfo>();
     }
 
 
