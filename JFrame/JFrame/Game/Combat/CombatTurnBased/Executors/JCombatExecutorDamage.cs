@@ -45,7 +45,7 @@ namespace JFramework.Game
             //        objEvent.ActionEffect.Add(CombatEventActionType.Damage.ToString(), new List<ActionEffectInfo>());
             //    }
             //}
-            var objEvent = context?.EventRecorder.GetCurrentActionEvent();
+            
 
             float hitValue = 0;
             formulua.CalcHitValue(target, ref hitValue);
@@ -76,6 +76,7 @@ namespace JFramework.Game
 
             var casterTargetUnit = caster as IJCombatCasterTargetableUnit;
 
+            var objEvent = context?.EventRecorder.GetCurrentActionEvent();
             if (objEvent != null)
             {
                 var actionEvent = objEvent.ActionEvents.Where(e => e.ActionUid == GetOwner().Uid).SingleOrDefault();
@@ -95,8 +96,6 @@ namespace JFramework.Game
                     CasterHp = casterTargetUnit.GetCurHp(),
                     CasterMaxHp = casterTargetUnit.GetMaxHp()
                 });
-                
-
             }
 
             return executeArgsHistroy;

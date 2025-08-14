@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JFrameTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7df94fdf2691857dc63ae6cdec68c412eae5b5c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d991f8b7988e66b6812d938939ecf4b0ecd09eda")]
 [assembly: System.Reflection.AssemblyProductAttribute("JFrameTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JFrameTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

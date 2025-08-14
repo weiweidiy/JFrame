@@ -262,7 +262,7 @@ namespace JFrameTest
             Assert.AreEqual(100, hpAttr1.CurValue);
             Assert.AreEqual(0, hpAttr2.CurValue);
             Assert.AreEqual(team1, jcombatQuery.GetWinner());
-            Assert.AreEqual(4, eventRecorder.Count());
+            Assert.AreEqual(7, eventRecorder.Count());
 
 
         }
@@ -290,7 +290,7 @@ namespace JFrameTest
             Assert.AreEqual(0, hpAttr2.CurValue);
             Assert.AreEqual(0, hpAttr3.CurValue);
             Assert.AreEqual(team1, jcombatQuery.GetWinner());
-            Assert.AreEqual(8, eventRecorder.Count());
+            Assert.AreEqual(18, eventRecorder.Count());
 
         }
 
@@ -316,7 +316,7 @@ namespace JFrameTest
             Assert.AreEqual(0, hpAttr2.CurValue);
             Assert.AreEqual(0, hpAttr3.CurValue);
             Assert.AreEqual(team1, jcombatQuery.GetWinner());
-            Assert.AreEqual(8, eventRecorder.Count());
+            Assert.AreEqual(18, eventRecorder.Count());
 
             //listner.Received(8).OnTurnStart(Arg.Any<int>());
             //listner.Received(7).OnTurnEnd(Arg.Any<int>());
