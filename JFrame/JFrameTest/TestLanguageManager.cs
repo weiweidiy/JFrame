@@ -28,10 +28,12 @@ namespace JFramework.Tests
             _languages = new List<ILanguage> { _english, _chinese };
 
             // Create manager with key selector that returns "en" for English, "zh" for Chinese
-            _manager = new JLanguageManager(_languages, lang =>
+            _manager = new JLanguageManager(lang =>
                 lang == _english ? EnglishKey :
                 lang == _chinese ? ChineseKey :
                 throw new ArgumentException("Unknown language"));
+
+            _manager.Initialize(_languages.ToArray());
         }
 
         [Test]
