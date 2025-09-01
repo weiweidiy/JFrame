@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 namespace JFramework
 {
-
     /// <summary>
     /// 抽象可运行对象
     /// </summary>
@@ -27,7 +26,7 @@ namespace JFramework
         /// <summary>
         /// 运行结束
         /// </summary>
-        TaskCompletionSource<bool> tcs = null;
+        protected TaskCompletionSource<bool> tcs = null;
 
         /// <summary>
         /// 
