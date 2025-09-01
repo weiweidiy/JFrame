@@ -7,6 +7,9 @@ Assembly-CSharp.csproj
 
 Assets/.DS_Store
 JFrame/.vs/
+JFrame/JFrameTest/obj/
+JFrame/JFrame.Battle/obj
+JFrame/JFrame/obj
 Bin/
 
 HotUpdate.csproj
