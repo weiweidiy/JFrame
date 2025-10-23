@@ -50,7 +50,7 @@ namespace JFramework.Game
 
             var sourceUnit = query.GetUnit(sourceUnitUid);
             var caster = sourceUnit as IJCombatCasterUnit;
-            caster.NotifyBeforeHitting(data);
+            caster.NotifyBeforeHitting(data,target);
             target.NotifyBeforeHurt(data);
 
             // 受伤

@@ -3,14 +3,12 @@
 namespace JFramework.Game
 {
     /// <summary>
-    /// 受伤之前触发
+    /// 单位命中之前触发，可以改变伤害数据
     /// </summary>
-    public class JCombatBeforeHurtTrigger : JCombatTriggerBase
+    public class JCombatBeforeHittingTrigger : JCombatTriggerBase
     {
         List<IJCombatCasterTargetableUnit> targets;
-        public JCombatBeforeHurtTrigger(float[] args, IJCombatTargetsFinder finder) : base(args, finder)
-        {
-        }
+        public JCombatBeforeHittingTrigger(float[] args, IJCombatTargetsFinder finder) : base(args, finder) { }
 
         protected override int GetValidArgsCount()
         {
@@ -20,18 +18,15 @@ namespace JFramework.Game
         protected override void OnStart(RunableExtraData extraData)
         {
             base.OnStart(extraData);
-
             if(finder == null)
             {
-                throw new System.Exception("JCombatBeforeHurtTrigger requires a finder to be set.");
+                throw new System.Exception("JCombatBeforeHittingTrigger requires a finder to be set.");
             }
-
             var executeArgs = finder.GetTargetsData();
             targets = executeArgs.TargetUnits;
-
             foreach (var target in targets)
             {
-                target.onBeforeHurt += OnBeforeHurt;
+                target.onBeforeHitting += Target_onBeforeHitting;
             }
         }
 
@@ -45,21 +40,19 @@ namespace JFramework.Game
             {
                 if (targetable != null)
                 {
-                    targetable.onBeforeHurt -= OnBeforeHurt;
+                    targetable.onBeforeHitting -= Target_onBeforeHitting;
                 }
             }
             targets.Clear();
         }
 
-        private void OnBeforeHurt(IJCombatTargetable targetable, IJCombatDamageData data)
+        private void Target_onBeforeHitting(IJCombatCasterUnit caster, IJCombatDamageData data, IJCombatTargetable target)
         {
             //executeArgs.Clear();
             executeArgs.DamageData = data;
-            executeArgs.TargetUnits = new List<IJCombatCasterTargetableUnit> { targetable as IJCombatCasterTargetableUnit };
+            executeArgs.TargetUnits = new List<IJCombatCasterTargetableUnit> { target as IJCombatCasterTargetableUnit };
             TriggerOn(executeArgs);
         }
-
-
 
 
     }
