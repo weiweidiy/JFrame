@@ -46,7 +46,7 @@ namespace JFramework.Game
             targets.Clear();
         }
 
-        private void Target_onBeforeHitting(IJCombatCasterUnit caster, IJCombatDamageData data, IJCombatTargetable target)
+        protected virtual void Target_onBeforeHitting(IJCombatCasterUnit caster, IJCombatDamageData data, IJCombatTargetable target)
         {
             //executeArgs.Clear();
             executeArgs.DamageData = data;

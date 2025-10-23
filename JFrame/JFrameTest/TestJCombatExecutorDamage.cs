@@ -40,7 +40,7 @@ namespace JFrameTest
             // Assert
             Assert.IsTrue(executor is JCombatExecutorDamage);
             float hitValue = 0f;
-            formula.Received(1).CalcHitValue(target, ref hitValue);
+            formula.Received(1).CalcHitValue(target, ref hitValue, finderResp);
             caster.Received(1).NotifyBeforeHitting(Arg.Any<IJCombatDamageData>(),target);
             caster.Received(1).NotifyAfterHitted(Arg.Any<IJCombatDamageData>());
             target.Received(1).OnHurt(Arg.Any<IJCombatDamageData>());

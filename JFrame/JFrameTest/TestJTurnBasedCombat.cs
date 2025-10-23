@@ -20,7 +20,7 @@ namespace JFrameTest
             {
             }
 
-            public override void CalcHitValue(IJAttributeableUnit target, ref float value)
+            public override void CalcHitValue(IJAttributeableUnit target, ref float value, IJCombatExecutorExecuteArgs executeArgs)
             {
                 //伤害= 释放者攻击力 * 释放者Power - 目标防御力 * 目标Def
                 var caster = query.GetUnit(GetOwner().GetCaster());
