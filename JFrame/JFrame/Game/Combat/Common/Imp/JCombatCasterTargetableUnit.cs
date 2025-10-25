@@ -8,8 +8,8 @@ namespace JFramework.Game
     public class JCombatCasterTargetableUnit : RunableDictionaryContainer<IUnique>, IJCombatCasterTargetableUnit
     {
         public event Action<IJCombatCasterUnit, IJCombatAction> onCast;
-        public event Action<IJCombatTargetable, IJCombatDamageData> onBeforeHurt;
-        public event Action<IJCombatTargetable, IJCombatDamageData> onAfterHurt;
+        public event Action<IJCombatTargetable, IJCombatDamageData, IJCombatCasterUnit> onBeforeHurt;
+        public event Action<IJCombatTargetable, IJCombatDamageData, IJCombatCasterUnit> onAfterHurt;
         public event Action<IJCombatCasterUnit, IJCombatDamageData, IJCombatTargetable> onBeforeHitting;
         public event Action<IJCombatCasterUnit, IJCombatDamageData> onAfterHitted;
 
@@ -23,14 +23,14 @@ namespace JFramework.Game
             onAfterHitted?.Invoke(this, data);
         }
 
-        public void NotifyBeforeHurt( IJCombatDamageData data)
+        public void NotifyBeforeHurt( IJCombatDamageData data, IJCombatCasterUnit caster)
         {
-            onBeforeHurt?.Invoke(this, data);
+            onBeforeHurt?.Invoke(this, data, caster);
         }
 
-        public void NotifyAfterHurt( IJCombatDamageData data)
+        public void NotifyAfterHurt( IJCombatDamageData data, IJCombatCasterUnit caster)
         {
-            onAfterHurt?.Invoke(this, data);
+            onAfterHurt?.Invoke(this, data, caster);
         }
 
 
