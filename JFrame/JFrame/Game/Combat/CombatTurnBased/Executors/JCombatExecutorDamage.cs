@@ -51,7 +51,7 @@ namespace JFramework.Game
             var sourceUnit = query.GetUnit(sourceUnitUid);
             var caster = sourceUnit as IJCombatCasterUnit;
             caster.NotifyBeforeHitting(data,target);
-            target.NotifyBeforeHurt(data, caster);
+            target.NotifyBeforeHurt(data, caster, executeArgs);
 
             // 受伤
             var minusHp = target.OnHurt(data);
@@ -64,7 +64,7 @@ namespace JFramework.Game
             }
 
             caster.NotifyAfterHitted(data);
-            target.NotifyAfterHurt(data, caster);
+            target.NotifyAfterHurt(data, caster, executeArgs);
 
             var casterTargetUnit = caster as IJCombatCasterTargetableUnit;
 

@@ -44,8 +44,8 @@ namespace JFrameTest
             caster.Received(1).NotifyBeforeHitting(Arg.Any<IJCombatDamageData>(),target);
             caster.Received(1).NotifyAfterHitted(Arg.Any<IJCombatDamageData>());
             target.Received(1).OnHurt(Arg.Any<IJCombatDamageData>());
-            target.Received(1).NotifyBeforeHurt(Arg.Any<IJCombatDamageData>(), Arg.Any<IJCombatCasterUnit>());
-            target.Received(1).NotifyAfterHurt(Arg.Any<IJCombatDamageData>(), Arg.Any<IJCombatCasterUnit>());
+            target.Received(1).NotifyBeforeHurt(Arg.Any<IJCombatDamageData>(), Arg.Any<IJCombatCasterUnit>(), finderResp);
+            target.Received(1).NotifyAfterHurt(Arg.Any<IJCombatDamageData>(), Arg.Any<IJCombatCasterUnit>(), finderResp);
         }
 
 
