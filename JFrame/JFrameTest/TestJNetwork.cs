@@ -31,7 +31,7 @@ namespace JFrameTest
             _factory.Create().Returns(Substitute.For<IJSocket>());
             _taskManagerMock = Substitute.For<IJTaskCompletionSourceManager<IUnique>>();
             _messageProcessStrateMock = Substitute.For<INetworkMessageProcessStrate>();
-            _network = new JNetwork(_factory, _taskManagerMock, _messageProcessStrateMock);
+            _network = new JNetwork(_factory, _taskManagerMock, _messageProcessStrateMock,null);
         }
 
         // 测试辅助类
@@ -171,7 +171,7 @@ namespace JFrameTest
             _factory.Create().Returns(Substitute.For<IJSocket>());
             _taskManager = new JTaskCompletionSourceManager<IUnique>(); // 使用真实实现
             _messageProcessor = Substitute.For<INetworkMessageProcessStrate>();
-            _network = new JNetwork(_factory, _taskManager, _messageProcessor);
+            _network = new JNetwork(_factory, _taskManager, _messageProcessor,null);
         }
 
         [Test]
