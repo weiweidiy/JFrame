@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace JFramework
 {
+
     public interface ISocketListenerFactory
     {
         IJSocketListener Create();
@@ -19,7 +20,7 @@ namespace JFramework
         /// </summary>
         public event Action onOpen;
         public event Action<SocketStatusCodes, string> onClose;
-        public event Action<IJNetMessage> onMessage;
+        public event Action<string, IJNetMessage> onMessage;
         public event Action<string> onError;
 
         /// <summary>
@@ -42,6 +43,11 @@ namespace JFramework
         /// 处理服务器消息的处理器，处理业务逻辑
         /// </summary>
         INetworkServerMessageHandler messageServerMessageHandler = null;
+
+        /// <summary>
+        /// token管理器，负责生成和验证token，维护token和accountId的映射关系
+        /// </summary>
+        ITokenManager tokenManager;
 
         /// <summary>
         /// 开始监听指定端口，等待客户端连接
@@ -70,7 +76,7 @@ namespace JFramework
             //监听事件
             socketListener.onListening += (s) => { Socket_OnOpen(s); };
             socketListener.onClosed += (s, code, message) => { Socket_OnClose(s, code, message); };
-            socketListener.onBinary += async (s, data) => {await Socket_OnBinary(s, data); };
+            socketListener.onBinary += async (s, clientId, data) => { await Socket_OnBinary(s, clientId, data); };
             //socketListener.onMessage += (s, message) => { Socket_OnMessage(s, message); };
             socketListener.onError += (s, message) => { Scoket_OnError(s, message); };
         }
@@ -87,17 +93,31 @@ namespace JFramework
         /// </summary>
         /// <param name="s"></param>
         /// <param name="data"></param>
-        public async Task Socket_OnBinary(IJSocketListener s, byte[] data)
+        public async Task Socket_OnBinary(IJSocketListener s, string clientId, byte[] data)
         {
             var message = GetNetworkMessageProcessStrate().ProcessComingMessage(data);
+
+            var token = message.Token;
+            if (!tokenManager.ValidateToken(token, out var accountId))
+            {
+                //token无效，直接丢弃消息并返回错误响应
+                var errorResponse = new JNetMessageError
+                {
+                    ErrorMessage = "Invalid token"
+                };
+                var errorMsg = GetNetworkMessageProcessStrate().ProcessOutMessage(errorResponse);
+                Send(clientId, errorMsg);
+                return;
+
+            }
+
             //优先处理消息
             var responseMessage = await messageServerMessageHandler?.Handle(message);
 
             var buffer = GetNetworkMessageProcessStrate().ProcessOutMessage(responseMessage);
+            Send(clientId, buffer);
 
-            Send(buffer);
-
-            onMessage?.Invoke(message);
+            onMessage?.Invoke(clientId, message);
 
         }
 
@@ -143,6 +163,11 @@ namespace JFramework
         /// <returns></returns>
         public INetworkMessageProcessStrate GetNetworkMessageProcessStrate() => messageProcessStrate;
 
+        /// <summary>
+        /// 给所有客户端发送消息
+        /// </summary>
+        /// <param name="data"></param>
+        /// <exception cref="Exception"></exception>
         public void Send(byte[] data)
         {
             var socket = GetSocket();
@@ -152,20 +177,28 @@ namespace JFramework
             socket.Send(data);
         }
 
+        /// <summary>
+        /// 给指定客户端发送消息
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool Send(string clientId, byte[] data)
         {
             var socket = GetSocket();
             if (socket == null)
                 throw new Exception("Socket is not open or initialized.");
 
-            return socket.Send(clientId,data);
+            return socket.Send(clientId, data);
         }
 
-        public JNetworkServer(ISocketListenerFactory socketFactory, INetworkMessageProcessStrate messageProcessStrate, INetworkServerMessageHandler messageHandler)
+        public JNetworkServer(ISocketListenerFactory socketFactory, INetworkMessageProcessStrate messageProcessStrate, INetworkServerMessageHandler messageHandler,ITokenManager tokenManager)
         {
             this.socketFactory = socketFactory;
             this.messageProcessStrate = messageProcessStrate;
             this.messageServerMessageHandler = messageHandler;
+            this.tokenManager = tokenManager;
         }
     }
 

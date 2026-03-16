@@ -18,12 +18,13 @@ namespace JFramework
         void Send(byte[] data);
     }
 
+
     public interface IJSocketListener  :  ICloneable
     {
         event Action<IJSocketListener> onListening;
         event Action<IJSocketListener, SocketStatusCodes, string> onClosed;
         event Action<IJSocketListener, string> onError;
-        event Action<IJSocketListener, byte[]> onBinary;
+        event Action<IJSocketListener, string, byte[]> onBinary;
 
         void StartListening(ushort port, CancellationToken stoppingToken);
         void StopListening();

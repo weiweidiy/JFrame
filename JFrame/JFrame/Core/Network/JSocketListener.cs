@@ -14,10 +14,13 @@ namespace JFramework
         public event Action<IJSocketListener> onListening;
         public event Action<IJSocketListener, SocketStatusCodes, string> onClosed;
         public event Action<IJSocketListener, string> onError;
-        public event Action<IJSocketListener, byte[]> onBinary;
+        public event Action<IJSocketListener, string, byte[]> onBinary;
 
         TcpListener listener;
         readonly ConcurrentDictionary<string, TcpClient> clients = new ConcurrentDictionary<string, TcpClient>();
+        // 新增字段
+        //readonly ConcurrentDictionary<string, string> tokenToAccountId = new ConcurrentDictionary<string, string>();
+
         CancellationTokenSource internalCts;
         bool isListening;
 
@@ -194,7 +197,7 @@ namespace JFramework
 
                     try
                     {
-                        onBinary?.Invoke(this, data);
+                        onBinary?.Invoke(this, clientId, data);
                     }
                     catch (Exception ex)
                     {

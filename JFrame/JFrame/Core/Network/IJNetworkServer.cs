@@ -8,7 +8,7 @@ namespace JFramework
     {
         event Action onOpen;
         event Action<SocketStatusCodes, string> onClose;
-        event Action<IJNetMessage> onMessage;
+        event Action<string, IJNetMessage> onMessage;
         //event Action<byte[]> onBinary;
         event Action<string> onError;
         IJSocketListener SocketListener { get; }

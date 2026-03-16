@@ -22,6 +22,8 @@
 
         ITypeRegister protocolRegister;
 
+        ITokenManager tokenManager;
+
         public IJNetworkServer Build()
         {
             if (socket == null)
@@ -74,7 +76,12 @@
                 throw new System.Exception("Network message handler is required. Please set it using SetMessageHandler method.");
             }
 
-            var network = new JNetworkServer(socketFactory, networkMessageProcessStrate, networkMessageHandler);
+            if(tokenManager == null)
+            {
+                tokenManager = new JTokenManager();
+            }
+
+            var network = new JNetworkServer(socketFactory, networkMessageProcessStrate, networkMessageHandler, tokenManager);
             return network;
         }
 

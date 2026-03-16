@@ -38,10 +38,14 @@ namespace JFrameTest
         public class TestRequest : IJNetMessage { public string Uid { get; set; }
 
             public int TypeId => throw new NotImplementedException();
+
+            public string Token => throw new NotImplementedException();
         }
         public class TestResponse : IJNetMessage { public string Uid { get; set; }
 
             public int TypeId => throw new NotImplementedException();
+
+            public string Token => throw new NotImplementedException();
         }
 
         [Test]
@@ -155,12 +159,16 @@ namespace JFrameTest
             public string Uid { get; set; }
 
             public int TypeId => throw new NotImplementedException();
+
+            public string Token => throw new NotImplementedException();
         }
         public class TestResponse : IJNetMessage
         {
             public string Uid { get; set; }
 
             public int TypeId => throw new NotImplementedException();
+
+            public string Token => throw new NotImplementedException();
         }
 
         [SetUp]
