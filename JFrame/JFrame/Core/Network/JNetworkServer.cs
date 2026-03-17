@@ -97,19 +97,19 @@ namespace JFramework
         {
             var message = GetNetworkMessageProcessStrate().ProcessComingMessage(data);
 
-            var token = message.Token;
-            if (!tokenManager.ValidateToken(token, out var accountId))
-            {
-                //token无效，直接丢弃消息并返回错误响应
-                var errorResponse = new JNetMessageError
-                {
-                    ErrorMessage = "Invalid token"
-                };
-                var errorMsg = GetNetworkMessageProcessStrate().ProcessOutMessage(errorResponse);
-                Send(clientId, errorMsg);
-                return;
+            //var token = message.Token;
+            //if (!tokenManager.ValidateToken(token, out var accountId))
+            //{
+            //    //token无效，直接丢弃消息并返回错误响应
+            //    var errorResponse = new JNetMessageError
+            //    {
+            //        ErrorMessage = "Invalid token"
+            //    };
+            //    var errorMsg = GetNetworkMessageProcessStrate().ProcessOutMessage(errorResponse);
+            //    Send(clientId, errorMsg);
+            //    return;
 
-            }
+            //}
 
             //优先处理消息
             var responseMessage = await messageServerMessageHandler?.Handle(message);
